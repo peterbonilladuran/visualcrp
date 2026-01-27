@@ -6,13 +6,13 @@
     <title>Visual CRP | Operational Control Architecture | Formalizing Existing Control</title>
     
     <!-- SEO Meta Tags -->
-    <meta name="description" content="Visual CRP formalizes manual document control that already exists on construction projects. Coexists with Procore, BIM 360, Aconex. Eliminates duplicate work while maintaining 100% contractual compliance.">
-    <meta name="keywords" content="construction document control, Procore alternative, BIM 360 integration, construction software, document management, operational control">
-    <meta name="author" content="Ing. Piter J. Bonilla D. - CODIA 17378">
+    <meta name="description" content="Visual CRP formalizes manual document control that already exists on construction projects. Coexists with contractual platforms. Eliminates duplicate work while maintaining 100% contractual compliance.">
+    <meta name="keywords" content="construction document control, operational document control, construction software, document management, operational control">
+    <meta name="author" content="Document Control Systems Specialist">
     
     <!-- Open Graph -->
     <meta property="og:title" content="Visual CRP - Formalizing Control That Already Exists">
-    <meta property="og:description" content="Platforms transfer. Visual CRP formalizes control. Coexists with Procore, BIM 360, Aconex while eliminating $1.6M+ in duplicate work.">
+    <meta property="og:description" content="Contractual platforms transfer. Visual CRP formalizes control. Coexists while eliminating $1.6M+ in duplicate work.">
     <meta property="og:type" content="website">
     <meta property="og:image" content="https://visualcrp.com/images/og-architecture.jpg">
     
@@ -269,6 +269,145 @@
             100% { transform: translateX(-50%); }
         }
         
+        /* Reality Section - NEW */
+        .reality-section {
+            background: white;
+            padding: 80px 0;
+        }
+        
+        .reality-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        @media (max-width: 768px) {
+            .reality-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .reality-card {
+            padding: 30px;
+            border-radius: 12px;
+            height: 100%;
+        }
+        
+        .reality-card.platform {
+            background: #f0f9ff;
+            border-left: 4px solid #3b82f6;
+        }
+        
+        .reality-card.manual {
+            background: #f0fdf4;
+            border-left: 4px solid #10b981;
+        }
+        
+        .reality-card h3 {
+            color: #1e293b;
+            margin-bottom: 20px;
+            font-size: 1.4em;
+        }
+        
+        .reality-card ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .reality-card li {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+            color: #475569;
+        }
+        
+        .reality-card li:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+        
+        .platform li:before {
+            color: #3b82f6;
+        }
+        
+        .manual li:before {
+            color: #10b981;
+        }
+        
+        .reality-insight {
+            background: #fef3c7;
+            border: 2px solid #d97706;
+            border-radius: 10px;
+            padding: 25px;
+            margin-top: 40px;
+        }
+        
+        .reality-insight h4 {
+            color: #92400e;
+            margin-bottom: 15px;
+        }
+        
+        .reality-insight p {
+            color: #92400e;
+        }
+        
+        /* Day-to-Day Reality - NEW */
+        .day-to-day-section {
+            background: #f8fafc;
+            padding: 80px 0;
+        }
+        
+        .flow-diagram {
+            max-width: 900px;
+            margin: 40px auto;
+        }
+        
+        .flow-step {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        .step-number-circle {
+            width: 50px;
+            height: 50px;
+            background: #3b82f6;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+        
+        .flow-content {
+            flex: 1;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #3b82f6;
+        }
+        
+        .flow-step.manual .step-number-circle {
+            background: #10b981;
+        }
+        
+        .flow-step.manual .flow-content {
+            border-left-color: #10b981;
+        }
+        
+        .flow-comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
         /* Section Styles */
         .section {
             padding: 80px 0;
@@ -292,7 +431,7 @@
             margin-right: auto;
         }
         
-        /* Architecture Section */
+        /* Architecture Section - REVISED */
         .architecture-section {
             background: white;
         }
@@ -307,6 +446,7 @@
             grid-template-columns: 1fr auto 1fr;
             gap: 20px;
             align-items: center;
+            margin-bottom: 30px;
         }
         
         @media (max-width: 768px) {
@@ -325,6 +465,11 @@
         
         .platform-layer {
             border-color: #3b82f6;
+        }
+        
+        .duplicate-layer {
+            border-color: #ef4444;
+            background: #fef2f2;
         }
         
         .control-layer {
@@ -362,6 +507,10 @@
             left: 0;
             color: #3b82f6;
             font-weight: bold;
+        }
+        
+        .duplicate-layer li:before {
+            color: #ef4444;
         }
         
         .control-layer li:before {
@@ -422,10 +571,6 @@
             display: flex;
             align-items: center;
             gap: 10px;
-        }
-        
-        .problem-card h3:before {
-            font-size: 1.5em;
         }
         
         /* Advanced Calculator */
@@ -931,6 +1076,42 @@
             color: white;
         }
         
+        /* Legal Reality Section - NEW */
+        .legal-reality-section {
+            background: white;
+            border-top: 2px solid #e2e8f0;
+            padding: 60px 0;
+        }
+        
+        .legal-reality-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .legal-card {
+            background: #f8fafc;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .legal-card.platform {
+            border-left: 4px solid #3b82f6;
+        }
+        
+        .legal-card.operational {
+            border-left: 4px solid #10b981;
+        }
+        
+        .legal-card.legal {
+            border-left: 4px solid #f59e0b;
+        }
+        
+        .legal-card h4 {
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+        
         .legal-disclaimer {
             background: #0f172a;
             padding: 30px 0;
@@ -986,6 +1167,20 @@
             .results-comparison {
                 flex-direction: column;
             }
+            
+            .flow-step {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .step-number-circle {
+                margin-bottom: 10px;
+                margin-right: 0;
+            }
+            
+            .flow-content {
+                width: 100%;
+            }
         }
         
         /* Animations */
@@ -1036,12 +1231,13 @@
         <div class="container header-content">
             <div class="hero-subtitle">Operational Control Architecture</div>
             <h1 class="hero-main-title">
-                Platforms Transfer.<br>
-                <span style="color: #10b981">We Formalize Control That Already Exists.</span>
+                The Operational Reality Every Construction Project Faces:<br>
+                <span style="color: #10b981">Platforms Transfer. Real Control Is Always Manual.</span>
             </h1>
             <p class="hero-tagline">
-                <strong>21+ years validated:</strong> Visual CRP doesn't replace Procore/BIM 360. 
-                <span class="info-tooltip" data-tooltip="Visual CRP coexists with contractual platforms to eliminate duplicate work while maintaining 100% compliance">Coexists</span> with them to eliminate duplicate work while maintaining 100% contractual compliance.
+                <strong>21+ years validation:</strong> Every project with contractual platforms also maintains 
+                manual control in Excel. Visual CRP <strong>IS</strong> that manual control formalized into a 
+                system everyone can use—eliminating duplicate work while platforms handle contractual transfer.
             </p>
             
             <div class="hero-cta-box">
@@ -1064,8 +1260,8 @@
                     <a href="#calculator" class="role-btn" style="background: #10b981; color: white;">
                         🧮 Calculate Your Specific Savings
                     </a>
-                    <a href="#architecture" class="role-btn" style="background: #3b82f6; color: white;">
-                        🏗️ See Hybrid Architecture
+                    <a href="#reality" class="role-btn" style="background: #3b82f6; color: white;">
+                        🔍 See Operational Reality
                     </a>
                     <a href="#validation" class="role-btn" style="background: #f59e0b; color: white;">
                         ✅ View 8-Year Validation
@@ -1082,8 +1278,8 @@
                 <span>Visual CRP</span>
             </a>
             <div class="nav-links">
+                <a href="#reality">Reality</a>
                 <a href="#architecture">Architecture</a>
-                <a href="#problem">The Problem</a>
                 <a href="#calculator">Cost Analysis</a>
                 <a href="#validation">Validation</a>
                 <a href="#objections">Q&A</a>
@@ -1097,11 +1293,11 @@
         <div class="nav-pathway">
             <div class="pathway-step active">
                 <span class="step-number">1</span>
-                <span class="step-label">Identify Problem</span>
+                <span class="step-label">See Reality</span>
             </div>
             <div class="pathway-step">
                 <span class="step-number">2</span>
-                <span class="step-label">See Solution</span>
+                <span class="step-label">Understand Architecture</span>
             </div>
             <div class="pathway-step">
                 <span class="step-number">3</span>
@@ -1121,9 +1317,9 @@
     <!-- Next Step CTA -->
     <div class="next-step-cta">
         <div>
-            <strong>Recommended next step:</strong> See how hybrid architecture works
+            <strong>Recommended next step:</strong> Understand the operational reality platforms don't address
         </div>
-        <a href="#architecture" class="next-step-btn">🏗️ View Architecture →</a>
+        <a href="#reality" class="next-step-btn">🔍 See Operational Reality →</a>
     </div>
 
     <!-- Social Proof Ticker -->
@@ -1131,48 +1327,204 @@
         <div class="ticker-content">
             <span class="ticker-item">✅ Independently audited on $500M+ project</span>
             <span class="ticker-item">⚡ 2000x faster than cloud platform searches</span>
-            <span class="ticker-item">🏗️ 8+ years coexistence with CONSTRUMANAGER proven</span>
+            <span class="ticker-item">🏗️ 8+ years coexistence with contractual platforms proven</span>
             <span class="ticker-item">💼 21+ years document control experience</span>
-            <span class="ticker-item">🔗 Coexists with Procore, BIM 360, Aconex, SharePoint</span>
+            <span class="ticker-item">🔗 Coexists with all contractual platforms</span>
         </div>
     </div>
 
-    <!-- Architecture Section -->
-    <section id="architecture" class="section architecture-section">
+    <!-- Reality Section -->
+    <section id="reality" class="section reality-section">
         <div class="container">
-            <h2 class="section-title">Hybrid Architecture: The Best of Both Worlds</h2>
-            <p class="section-subtitle">Not replacement. Smart coexistence.</p>
+            <h2 class="section-title">The Unavoidable Reality: Dual Systems Are Inevitable</h2>
+            <p class="section-subtitle">Why every construction project maintains manual control alongside contractual platforms</p>
             
-            <div class="architecture-diagram">
-                <div class="arch-layer">
-                    <div class="arch-card platform-layer">
-                        <h3>📋 Contractual Layer (Required)</h3>
-                        <h4>Procore • BIM 360 • CONSTRUMANAGER</h4>
-                        <ul>
-                            <li><strong>Function:</strong> Formal transfer and compliance</li>
-                            <li><strong>Users:</strong> 2-5 people (document control)</li>
-                            <li><strong>Cost:</strong> $1,200/user/year</li>
-                            <li><strong>Result:</strong> Contractual requirement fulfilled</li>
-                        </ul>
+            <div class="reality-grid">
+                <div class="reality-card platform">
+                    <h3>What Contractual Platforms Actually Do</h3>
+                    <ul>
+                        <li>✅ File upload/download</li>
+                        <li>✅ Automatic email notifications</li>
+                        <li>✅ Contractual compliance trail</li>
+                        <li>❌ No operational control</li>
+                        <li>❌ No dynamic reorganization</li>
+                        <li>❌ No multi-coding system support</li>
+                    </ul>
+                    <div style="margin-top:20px; padding:15px; background:#dbeafe; border-radius:6px;">
+                        <strong>Result:</strong> 2-5 people use the platform for compliance.<br>
+                        <strong>Everyone else</strong> creates manual control systems.
                     </div>
-                    <div class="arch-connector">↕️ Intentional Manual Integration</div>
-                    <div class="arch-card control-layer">
-                        <h3>⚡ Operational Layer (Visual CRP)</h3>
-                        <h4>Effective Control for Entire Team</h4>
-                        <ul>
-                            <li><strong>Function:</strong> Operational control and productivity</li>
-                            <li><strong>Users:</strong> 60-80 people (complete team)</li>
-                            <li><strong>Cost:</strong> $22K one-time (unlimited users)</li>
-                            <li><strong>Result:</strong> Duplicate work eliminated</li>
-                        </ul>
+                </div>
+                
+                <div class="reality-card manual">
+                    <h3>What Actually Happens Every Day</h3>
+                    <ul>
+                        <li>✅ Manual registration after platform upload</li>
+                        <li>✅ Constant reorganization by operators</li>
+                        <li>✅ Multiple parallel coding systems</li>
+                        <li>✅ Dynamic groups/subgroups creation</li>
+                        <li>✅ Conscious operator decisions for every update</li>
+                        <li>❌ Hidden in Excel/notebooks, not shared</li>
+                    </ul>
+                    <div style="margin-top:20px; padding:15px; background:#d1fae5; border-radius:6px;">
+                        <strong>Visual CRP:</strong> This IS the operational system,<br>
+                        <strong>formalized</strong> and made available to everyone.
                     </div>
                 </div>
             </div>
             
+            <div class="reality-insight">
+                <h4>🏗️ Key Operational Insight</h4>
+                <p><strong>The duplicate work isn't caused by team disorganization.</strong><br>
+                It's caused by a fundamental architectural mismatch: Platforms are designed for 
+                file transfer. Construction document control requires dynamic, multi-coded, 
+                constantly reorganizing systems with human judgment at every step.</p>
+                <p style="margin-top:15px;">
+                    Visual CRP doesn't create new control—it <strong>formalizes the control that 
+                    already exists</strong> and eliminates the duplicate manual entry.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Day-to-Day Reality Section -->
+    <section class="section day-to-day-section">
+        <div class="container">
+            <h2 class="section-title">The Day-to-Day Reality: How Document Control Actually Works</h2>
+            <p class="section-subtitle">From designer issuance to field request - the manual reality behind every platform transaction</p>
+            
+            <div class="flow-diagram">
+                <!-- Step 1 -->
+                <div class="flow-step">
+                    <div class="step-number-circle">1</div>
+                    <div class="flow-content">
+                        <h4>Designer Issues Document</h4>
+                        <p>With their internal coding system (GD-1234 Rev A)</p>
+                    </div>
+                </div>
+                
+                <!-- Step 2 -->
+                <div class="flow-step">
+                    <div class="step-number-circle">2</div>
+                    <div class="flow-content">
+                        <h4>Platform Upload (1-2 people only)</h4>
+                        <p>File transfer + automatic email to project team</p>
+                        <p style="font-size:0.9em; color:#64748b; margin-top:5px;">
+                            <strong>Platform completes its function here.</strong><br>
+                            Everything after this point is manual.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Step 3 -->
+                <div class="flow-step manual">
+                    <div class="step-number-circle">3</div>
+                    <div class="flow-content">
+                        <h4>Manual Registration Begins (Real Work)</h4>
+                        <p>Document controller must manually decide:</p>
+                        <ul style="margin-top:10px; padding-left:20px;">
+                            <li>Is this relevant?</li>
+                            <li>How should it be coded? (client, supervision, internal systems)</li>
+                            <li>Who needs to review it?</li>
+                            <li>What status should it have?</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Step 4 -->
+                <div class="flow-step manual">
+                    <div class="step-number-circle">4</div>
+                    <div class="flow-content">
+                        <h4>Field Request Hours/Days Later</h4>
+                        <p>Engineer asks: "Where's the latest revision of..."</p>
+                        <div class="flow-comparison">
+                            <div style="padding:15px; background:#fef2f2; border-radius:6px;">
+                                <strong>Platform Search:</strong> 8-12 minute wait
+                            </div>
+                            <div style="padding:15px; background:#f0fdf4; border-radius:6px;">
+                                <strong>Visual CRP:</strong> <30 seconds
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align:center; margin-top:40px;">
+                <div style="display:inline-block; padding:20px 30px; background:#1e293b; color:white; border-radius:10px;">
+                    <strong>Operational Truth:</strong> The platform provides a file.<br>
+                    <strong>Human judgment</strong> provides the control. Visual CRP makes that control shared.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Architecture Section -->
+    <section id="architecture" class="section architecture-section">
+        <div class="container">
+            <h2 class="section-title">Architectural Reality: Why Both Systems Are Necessary</h2>
+            <p class="section-subtitle">Not complement. Two different systems solving two different problems.</p>
+            
+            <div class="architecture-diagram">
+                <!-- Layer 1 -->
+                <div class="arch-layer">
+                    <div class="arch-card platform-layer">
+                        <h3>📋 Layer 1: Contractual Transfer (Platforms)</h3>
+                        <h4>Web-based Platforms • Cloud Storage Platforms</h4>
+                        <ul>
+                            <li><strong>Function:</strong> Formal file transfer + email notifications</li>
+                            <li><strong>Automation:</strong> Zero after upload/download</li>
+                            <li><strong>Users:</strong> 2-5 people (compliance only)</li>
+                            <li><strong>Cost:</strong> $1,200/user/year (for transfer)</li>
+                            <li><strong>Operational Reality:</strong> Manual control STILL required</li>
+                        </ul>
+                    </div>
+                    <div class="arch-connector">📧 Email Notification → Manual Registration Required</div>
+                </div>
+                
+                <!-- Layer 2 -->
+                <div class="arch-layer">
+                    <div class="arch-card duplicate-layer">
+                        <h3>❌ Current Reality: Hidden Duplicate Work</h3>
+                        <h4>Parallel Manual Systems (Excel, Notebooks, Local Knowledge)</h4>
+                        <ul>
+                            <li><strong>Function:</strong> Actual operational control (what platforms can't do)</li>
+                            <li><strong>Users:</strong> 60-80 people (entire team)</li>
+                            <li><strong>Time Cost:</strong> 10+ hours/week/person duplicating</li>
+                            <li><strong>Hidden Cost:</strong> $1.6M+ over 5 years</li>
+                            <li><strong>Result:</strong> Control exists but isn't shared/consistent</li>
+                        </ul>
+                    </div>
+                    <div class="arch-connector" style="color: #ef4444;">💸 $1.6M+ Operational Waste</div>
+                </div>
+                
+                <!-- Layer 3 -->
+                <div class="arch-layer">
+                    <div class="arch-card control-layer">
+                        <h3>⚡ Layer 2: Operational Control (Visual CRP)</h3>
+                        <h4>The Control System That Already Exists, Formalized</h4>
+                        <ul>
+                            <li><strong>Function:</strong> Makes manual control shared and effective</li>
+                            <li><strong>Users:</strong> 60-80 people (entire team - same as manual)</li>
+                            <li><strong>Cost:</strong> $22K one-time (vs $1.6M duplicate work)</li>
+                            <li><strong>Result:</strong> Duplicate work eliminated, control preserved</li>
+                            <li><strong>Integration:</strong> Manual import when administrator decides</li>
+                        </ul>
+                    </div>
+                    <div class="arch-connector" style="color: #10b981;">🎯 Operational Reality Solved</div>
+                </div>
+            </div>
+            
             <div class="architecture-insight">
-                <h4>💡 Key Insight</h4>
-                <p>The "manual integration" of 5-10 minutes daily is <strong>intentional</strong>. 
-                It maintains human judgment as the critical element while ensuring consistency between systems.</p>
+                <h4>💡 Critical Architecture Insight</h4>
+                <p>Platforms and Visual CRP solve <strong>fundamentally different problems</strong>:</p>
+                <ul>
+                    <li><strong>Platforms:</strong> File transfer with audit trail (what contracts require)</li>
+                    <li><strong>Visual CRP:</strong> Operational control with constant human judgment (what projects need)</li>
+                </ul>
+                <p style="margin-top:15px; font-weight:600;">
+                    Trying to make one system do both creates the duplicate work problem.<br>
+                    Using both systems for what they do best eliminates it.
+                </p>
             </div>
         </div>
     </section>
@@ -1222,9 +1574,9 @@
                     <div class="input-group">
                         <label>Current contractual platform:</label>
                         <select id="platformSelect">
-                            <option value="1200">Procore / BIM 360 ($1,200/user/year)</option>
-                            <option value="1100">Aconex ($1,100)</option>
-                            <option value="1000">CONSTRUMANAGER ($1,000)</option>
+                            <option value="1200">Premium Cloud Platform (~$1,200/user/year)</option>
+                            <option value="1100">Enterprise Platform (~$1,100/user/year)</option>
+                            <option value="1000">Specialized Local System (~$1,000/user/year)</option>
                         </select>
                     </div>
                 </div>
@@ -1323,7 +1675,7 @@
                     </div>
                     <div class="score-item">
                         <span>Current platform: <strong>+20 points</strong></span>
-                        <span>(Procore/BIM 360)</span>
+                        <span>(Cloud Platform)</span>
                     </div>
                     <div class="score-item">
                         <span>Project duration: <strong>+18 points</strong></span>
@@ -1359,7 +1711,7 @@
                         </div>
                         <div class="metric-pair">
                             <span class="metric-label">Contractual platform:</span>
-                            <span class="metric-value">CONSTRUMANAGER</span>
+                            <span class="metric-value">Local Document System</span>
                         </div>
                         <div class="metric-pair">
                             <span class="metric-label">Visual CRP users:</span>
@@ -1371,7 +1723,7 @@
                         </div>
                     </div>
                     <blockquote class="validation-quote">
-                        "Auditors accepted our hybrid model: CONSTRUMANAGER for contractual transfer, 
+                        "Auditors accepted our hybrid model: contractual platform for transfer, 
                         Visual CRP for operational control. The team used Visual CRP daily; 
                         the platform only for compliance."
                     </blockquote>
@@ -1384,14 +1736,14 @@
                 <div class="validation-card">
                     <div class="validation-badge">✅ Validated</div>
                     <h3>Palomino Hydroelectric ($400M+)</h3>
-                    <p><strong>Coexistence with:</strong> CITADON (5 years)</p>
+                    <p><strong>Coexistence with:</strong> Web-based Platform (5 years)</p>
                     <p><strong>Result:</strong> Project successfully completed with hybrid architecture.</p>
                 </div>
                 
                 <div class="validation-card">
                     <div class="validation-badge">🔗 In Operation</div>
                     <h3>Santiago Monorail ($1B+)</h3>
-                    <p><strong>Coexistence with:</strong> Procore</p>
+                    <p><strong>Coexistence with:</strong> Cloud Platform</p>
                     <p><strong>Status:</strong> Active implementation and continuous validation.</p>
                 </div>
             </div>
@@ -1399,9 +1751,9 @@
             <div class="validation-legal">
                 <h4>📋 Professional Validation</h4>
                 <div class="professional-badge">
-                    <strong>Ing. Piter J. Bonilla D.</strong><br>
-                    CODIA 17378 • Civil Engineer (Dominican Republic)<br>
-                    21+ years document control experience
+                    <strong>Document Control Systems Specialist</strong><br>
+                    21+ years document control experience<br>
+                    Civil Engineering background (non-practice jurisdiction)
                 </div>
                 <p class="small-note">
                     *Calculations based on real operational data from referenced projects. 
@@ -1418,11 +1770,11 @@
             
             <div class="objection-grid">
                 <div class="objection-card">
-                    <h4>❓ "Does this replace our investment in Procore/BIM 360?"</h4>
+                    <h4>❓ "Does this replace our investment in contractual platforms?"</h4>
                     <div class="objection-answer">
-                        <p><strong>No, and it shouldn't attempt to.</strong> Visual CRP coexists with contractual platforms. You reduce licenses from 80 to 20 users, maintaining compliance while the team uses Visual CRP for daily work.</p>
+                        <p><strong>No, and it shouldn't attempt to.</strong> Visual CRP coexists with contractual platforms. You reduce platform licenses from 80 to 20 users, maintaining compliance while the team uses Visual CRP for daily work.</p>
                         <div class="objection-proof">
-                            <strong>Proof:</strong> Montegrande Dam uses CONSTRUMANAGER (2 people) + Visual CRP (60+ people) for 8+ years.
+                            <strong>Proof:</strong> Montegrande Dam uses contractual platform (2 people) + Visual CRP (60+ people) for 8+ years.
                         </div>
                     </div>
                 </div>
@@ -1445,6 +1797,36 @@
                             <strong>Advantage:</strong> Human control preserved, consistency ensured.
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Legal Reality Section -->
+    <section class="section legal-reality-section">
+        <div class="container">
+            <div class="legal-reality-content">
+                <h2 class="section-title">Operational & Legal Reality Statement</h2>
+                
+                <div class="legal-card platform">
+                    <h4>Platform Reality Acknowledgment</h4>
+                    <p>Visual CRP recognizes that contractual platforms serve a critical function: <strong>contractual file transfer with audit trail</strong>.</p>
+                    <p style="margin-top:10px;">These platforms excel at what they were designed for. They are not designed for—and cannot perform—the operational document control that construction projects require daily.</p>
+                </div>
+                
+                <div class="legal-card operational">
+                    <h4>Operational Reality Statement</h4>
+                    <p>Every construction project with a contractual platform also maintains <strong>manual control systems</strong> (Excel, notebooks, local knowledge). This isn't optional—it's necessary because platforms handle transfer, not control.</p>
+                    <p style="margin-top:10px;">Visual CRP <strong>IS</strong> that manual control formalized into a system everyone can use, eliminating duplicate work while preserving the human judgment essential to construction document control.</p>
+                </div>
+                
+                <div class="legal-card legal">
+                    <h4>Legal & Contractual Position</h4>
+                    <p><strong>Visual CRP does not replace contractual platform requirements.</strong> Projects remain responsible for fulfilling all contractual obligations regarding platform usage.</p>
+                    <p style="margin-top:10px;"><strong>Visual CRP eliminates the duplicate work</strong> that platforms inevitably create by providing the operational control system that projects need and already create manually.</p>
+                    <p style="margin-top:10px; font-size:0.9em; color:#64748b;">
+                        <em>Implementation services constitute technical consulting for document control systems, not professional engineering practice.</em>
+                    </p>
                 </div>
             </div>
         </div>
@@ -1516,9 +1898,9 @@
                     </ul>
                     <div style="margin-top: 20px;">
                         <p style="color: #cbd5e1; font-size: 0.9em;">
-                            <strong>Ing. Piter J. Bonilla D.</strong><br>
-                            CODIA 17378 • Civil Engineer<br>
-                            Greensboro, NC, USA & Santo Domingo, DR
+                            <strong>Document Control Systems Specialist</strong><br>
+                            21+ Years Construction Experience<br>
+                            Technical Consulting Services
                         </p>
                     </div>
                 </div>
@@ -1526,8 +1908,8 @@
                 <div class="footer-section">
                     <h3>Links</h3>
                     <ul class="footer-links">
-                        <li><a href="#architecture">Hybrid Architecture</a></li>
-                        <li><a href="#problem">Common Challenges</a></li>
+                        <li><a href="#reality">Operational Reality</a></li>
+                        <li><a href="#architecture">Architecture</a></li>
                         <li><a href="#calculator">Cost Analysis</a></li>
                         <li><a href="#validation">Case Studies</a></li>
                         <li><a href="#objections">Q&A</a></li>
@@ -1537,7 +1919,7 @@
             </div>
             
             <div class="legal-disclaimer">
-                <p><strong>Legal Notice:</strong> Visual CRP is a specialized document control system. Savings mentioned are estimates based on real implementations and may vary according to specific project conditions. Visual CRP is designed to coexist with existing contractual platforms (Procore, BIM 360, CONSTRUMANAGER, etc.) and does not intend to replace them where contractually required. All implementations are specialized consulting tailored to each project. © 2005-2026 Ing. Piter J. Bonilla D. All rights reserved.</p>
+                <p><strong>Legal Notice:</strong> Visual CRP is a specialized document control system. Savings mentioned are estimates based on real implementations and may vary according to specific project conditions. Visual CRP is designed to coexist with existing contractual platforms and does not intend to replace them where contractually required. All implementations are specialized consulting tailored to each project. Implementation services constitute technical consulting for document control systems, not professional engineering practice. Clients remain responsible for contractual compliance with platform requirements. © 2005-2026 All rights reserved.</p>
             </div>
         </div>
     </footer>
@@ -1567,7 +1949,7 @@
         // Update pathway steps based on scroll position
         function updatePathway() {
             const steps = document.querySelectorAll('.pathway-step');
-            const sections = ['#', '#architecture', '#calculator', '#validation', '#contact'];
+            const sections = ['#', '#reality', '#architecture', '#calculator', '#validation', '#contact'];
             const scrollPos = window.scrollY;
             const windowHeight = window.innerHeight;
             
