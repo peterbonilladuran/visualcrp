@@ -3,18 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Visual CRP | Operational Control Architecture | Formalizing Existing Control</title>
+    <title>Visual CRP | Operational Document Control | Formalizing Existing Control</title>
     
     <!-- SEO Meta Tags -->
     <meta name="description" content="Visual CRP formalizes manual document control that already exists on construction projects. Coexists with contractual platforms. Eliminates duplicate work while maintaining 100% contractual compliance.">
-    <meta name="keywords" content="construction document control, operational document control, construction software, document management, operational control">
+    <meta name="keywords" content="construction document control, operational document control, construction software, document management, operational control, post-2008 compliance, insurance requirements">
     <meta name="author" content="Document Control Systems Specialist">
     
     <!-- Open Graph -->
     <meta property="og:title" content="Visual CRP - Formalizing Control That Already Exists">
     <meta property="og:description" content="Contractual platforms transfer. Visual CRP formalizes control. Coexists while eliminating $1.6M+ in duplicate work.">
     <meta property="og:type" content="website">
-    <meta property="og:image" content="https://visualcrp.com/images/og-architecture.jpg">
     
     <style>
         /* Reset and Base Styles */
@@ -41,26 +40,10 @@
         .header {
             background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
             color: white;
-            padding: 50px 0 40px;
+            padding: 60px 0 50px;
             text-align: center;
             position: relative;
             overflow: hidden;
-        }
-        
-        .header:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 200"><path d="M0,100 C150,200 350,0 500,100 C650,200 850,0 1000,100 L1000,0 L0,0 Z" fill="rgba(255,255,255,0.05)"/></svg>');
-            background-size: cover;
-        }
-        
-        .header-content {
-            position: relative;
-            z-index: 2;
         }
         
         .hero-subtitle {
@@ -269,7 +252,7 @@
             100% { transform: translateX(-50%); }
         }
         
-        /* Reality Section - NEW */
+        /* Reality Section */
         .reality-section {
             background: white;
             padding: 80px 0;
@@ -354,7 +337,7 @@
             color: #92400e;
         }
         
-        /* Day-to-Day Reality - NEW */
+        /* Day-to-Day Reality */
         .day-to-day-section {
             background: #f8fafc;
             padding: 80px 0;
@@ -431,7 +414,974 @@
             margin-right: auto;
         }
         
-        /* Architecture Section - REVISED */
+        /* Historical Context Section - NEW */
+        .historical-context-section {
+            background: white;
+            padding: 80px 0;
+            border-top: 2px solid #e2e8f0;
+        }
+        
+        .timeline {
+            max-width: 900px;
+            margin: 40px auto;
+            position: relative;
+        }
+        
+        .timeline:before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #3b82f6;
+            transform: translateX(-50%);
+        }
+        
+        @media (max-width: 768px) {
+            .timeline:before {
+                left: 20px;
+            }
+        }
+        
+        .timeline-item {
+            display: flex;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        
+        @media (max-width: 768px) {
+            .timeline-item {
+                flex-direction: column;
+            }
+        }
+        
+        .timeline-content {
+            flex: 1;
+            padding: 25px;
+            background: #f8fafc;
+            border-radius: 10px;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .timeline-year {
+            width: 100px;
+            font-weight: 700;
+            font-size: 1.2em;
+            color: #1e3a8a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        @media (max-width: 768px) {
+            .timeline-year {
+                width: auto;
+                justify-content: flex-start;
+                margin-bottom: 10px;
+                padding-left: 40px;
+            }
+        }
+        
+        .timeline-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+        
+        @media (max-width: 768px) {
+            .timeline-item:nth-child(even) {
+                flex-direction: column;
+            }
+        }
+        
+        .timeline-marker {
+            position: absolute;
+            left: 50%;
+            top: 30px;
+            width: 16px;
+            height: 16px;
+            background: #3b82f6;
+            border-radius: 50%;
+            transform: translateX(-50%);
+            z-index: 1;
+            border: 3px solid white;
+        }
+        
+        @media (max-width: 768px) {
+            .timeline-marker {
+                left: 20px;
+            }
+        }
+        
+        .historical-insight {
+            background: #f0f9ff;
+            border-left: 4px solid #3b82f6;
+            padding: 25px;
+            border-radius: 8px;
+            margin-top: 40px;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-main-title {
+                font-size: 2.2em;
+            }
+            
+            .hero-tagline {
+                font-size: 1.1em;
+            }
+            
+            .section-title {
+                font-size: 2em;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+            }
+            
+            .hero-buttons a {
+                width: 100%;
+                text-align: center;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .nav-pathway {
+                overflow-x: auto;
+                justify-content: flex-start;
+                padding: 10px 20px;
+            }
+            
+            .pathway-step {
+                white-space: nowrap;
+            }
+            
+            .flow-step {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .step-number-circle {
+                margin-bottom: 10px;
+                margin-right: 0;
+            }
+            
+            .flow-content {
+                width: 100%;
+            }
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate-in {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+        
+        /* Buttons */
+        .role-btn {
+            display: inline-block;
+            background: #3b82f6;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .role-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(59, 130, 246, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container header-content">
+            <div class="hero-subtitle">Operational Control Architecture</div>
+            <h1 class="hero-main-title">
+                The Operational Reality Every Construction Project Faces:<br>
+                <span style="color: #10b981">Platforms Transfer. Real Control Is Always Manual.</span>
+            </h1>
+            <p class="hero-tagline">
+                <strong>21+ years validation:</strong> Every project with contractual platforms also maintains 
+                manual control in Excel. Visual CRP <strong>IS</strong> that manual control formalized into a 
+                system everyone can use—eliminating duplicate work while platforms handle contractual transfer.
+            </p>
+            
+            <div class="hero-cta-box">
+                <div class="hero-stats-immediate">
+                    <div class="stat-immediate">
+                        <div class="stat-number">94%</div>
+                        <div class="stat-label">Savings vs full platform licenses</div>
+                    </div>
+                    <div class="stat-immediate">
+                        <div class="stat-number">30s</div>
+                        <div class="stat-label">vs 8-12 minute searches</div>
+                    </div>
+                    <div class="stat-immediate">
+                        <div class="stat-number">$1.6M+</div>
+                        <div class="stat-label">Hidden cost eliminated in 5 years</div>
+                    </div>
+                </div>
+                
+                <div class="hero-buttons">
+                    <a href="#calculator" class="role-btn" style="background: #10b981;">
+                        🧮 Calculate Your Specific Savings
+                    </a>
+                    <a href="#reality" class="role-btn" style="background: #3b82f6;">
+                        🔍 See Operational Reality
+                    </a>
+                    <a href="#validation" class="role-btn" style="background: #f59e0b;">
+                        ✅ View 8-Year Validation
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="container nav-content">
+            <a href="#" class="logo">
+                <span>Visual CRP</span>
+            </a>
+            <div class="nav-links">
+                <a href="#reality">Reality</a>
+                <a href="#historical">Context</a>
+                <a href="#architecture">Architecture</a>
+                <a href="#calculator">Cost Analysis</a>
+                <a href="#validation">Validation</a>
+                <a href="#contact">Consultation</a>
+            </div>
+            <a href="mailto:piter.bonilla@visualcrp.com" class="role-btn" style="background: #10b981; padding: 8px 20px; font-size: 0.9em;">
+                Free Review
+            </a>
+        </div>
+        
+        <div class="nav-pathway">
+            <div class="pathway-step active">
+                <span class="step-number">1</span>
+                <span class="step-label">See Reality</span>
+            </div>
+            <div class="pathway-step">
+                <span class="step-number">2</span>
+                <span class="step-label">Historical Context</span>
+            </div>
+            <div class="pathway-step">
+                <span class="step-number">3</span>
+                <span class="step-label">Understand Architecture</span>
+            </div>
+            <div class="pathway-step">
+                <span class="step-number">4</span>
+                <span class="step-label">Calculate Savings</span>
+            </div>
+            <div class="pathway-step">
+                <span class="step-number">5</span>
+                <span class="step-label">Validate Cases</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Next Step CTA -->
+    <div class="next-step-cta">
+        <div>
+            <strong>Recommended next step:</strong> Understand the operational reality platforms don't address
+        </div>
+        <a href="#reality" class="next-step-btn">🔍 See Operational Reality →</a>
+    </div>
+
+    <!-- Social Proof Ticker -->
+    <div class="social-proof-ticker">
+        <div class="ticker-content">
+            <span class="ticker-item">✅ Independently audited on $500M+ project</span>
+            <span class="ticker-item">⚡ 21x faster than cloud platform workflows</span>
+            <span class="ticker-item">🏗️ 8+ years coexistence with contractual platforms proven</span>
+            <span class="ticker-item">💼 21+ years document control experience</span>
+            <span class="ticker-item">🔗 Coexists with all contractual platforms</span>
+            <span class="ticker-item">📜 Post-2008 compliance requirements addressed</span>
+        </div>
+    </div>
+
+    <!-- Reality Section -->
+    <section id="reality" class="section reality-section">
+        <div class="container">
+            <h2 class="section-title">The Unavoidable Reality: Dual Systems Are Inevitable</h2>
+            <p class="section-subtitle">Why every construction project maintains manual control alongside contractual platforms</p>
+            
+            <div class="reality-grid">
+                <div class="reality-card platform">
+                    <h3>What Contractual Platforms Actually Do</h3>
+                    <ul>
+                        <li>✅ File upload/download</li>
+                        <li>✅ Automatic email notifications</li>
+                        <li>✅ Contractual compliance trail</li>
+                        <li>❌ No operational control</li>
+                        <li>❌ No dynamic reorganization</li>
+                        <li>❌ No multi-coding system support</li>
+                    </ul>
+                    <div style="margin-top:20px; padding:15px; background:#dbeafe; border-radius:6px;">
+                        <strong>Result:</strong> 2-5 people use the platform for compliance.<br>
+                        <strong>Everyone else</strong> creates manual control systems.
+                    </div>
+                </div>
+                
+                <div class="reality-card manual">
+                    <h3>What Actually Happens Every Day</h3>
+                    <ul>
+                        <li>✅ Manual registration after platform upload</li>
+                        <li>✅ Constant reorganization by operators</li>
+                        <li>✅ Multiple parallel coding systems</li>
+                        <li>✅ Dynamic groups/subgroups creation</li>
+                        <li>✅ Conscious operator decisions for every update</li>
+                        <li>❌ Hidden in Excel/notebooks, not shared</li>
+                    </ul>
+                    <div style="margin-top:20px; padding:15px; background:#d1fae5; border-radius:6px;">
+                        <strong>Visual CRP:</strong> This IS the operational system,<br>
+                        <strong>formalized</strong> and made available to everyone.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="reality-insight">
+                <h4>🏗️ Key Operational Insight</h4>
+                <p><strong>The duplicate work isn't caused by team disorganization.</strong><br>
+                It's caused by a fundamental architectural mismatch: Platforms are designed for 
+                file transfer. Construction document control requires dynamic, multi-coded, 
+                constantly reorganizing systems with human judgment at every step.</p>
+                <p style="margin-top:15px;">
+                    Visual CRP doesn't create new control—it <strong>formalizes the control that 
+                    already exists</strong> and eliminates the duplicate manual entry.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Day-to-Day Reality Section -->
+    <section class="section day-to-day-section">
+        <div class="container">
+            <h2 class="section-title">The Day-to-Day Reality: How Document Control Actually Works</h2>
+            <p class="section-subtitle">From designer issuance to field request - the manual reality behind every platform transaction</p>
+            
+            <div class="flow-diagram">
+                <!-- Step 1 -->
+                <div class="flow-step">
+                    <div class="step-number-circle">1</div>
+                    <div class="flow-content">
+                        <h4>Designer Issues Document</h4>
+                        <p>With their internal coding system (GD-1234 Rev A)</p>
+                    </div>
+                </div>
+                
+                <!-- Step 2 -->
+                <div class="flow-step">
+                    <div class="step-number-circle">2</div>
+                    <div class="flow-content">
+                        <h4>Platform Upload (1-2 people only)</h4>
+                        <p>File transfer + automatic email to project team</p>
+                        <p style="font-size:0.9em; color:#64748b; margin-top:5px;">
+                            <strong>Platform completes its function here.</strong><br>
+                            Everything after this point is manual.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Step 3 -->
+                <div class="flow-step manual">
+                    <div class="step-number-circle">3</div>
+                    <div class="flow-content">
+                        <h4>Manual Registration Begins (Real Work)</h4>
+                        <p>Document controller must manually decide:</p>
+                        <ul style="margin-top:10px; padding-left:20px;">
+                            <li>Is this relevant?</li>
+                            <li>How should it be coded? (client, supervision, internal systems)</li>
+                            <li>Who needs to review it?</li>
+                            <li>What status should it have?</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Step 4 -->
+                <div class="flow-step manual">
+                    <div class="step-number-circle">4</div>
+                    <div class="flow-content">
+                        <h4>Field Request Hours/Days Later</h4>
+                        <p>Engineer asks: "Where's the latest revision of..."</p>
+                        <div class="flow-comparison">
+                            <div style="padding:15px; background:#fef2f2; border-radius:6px;">
+                                <strong>Platform Search:</strong> 8-12 minute wait
+                            </div>
+                            <div style="padding:15px; background:#f0fdf4; border-radius:6px;">
+                                <strong>Visual CRP:</strong> <30 seconds
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align:center; margin-top:40px;">
+                <div style="display:inline-block; padding:20px 30px; background:#1e293b; color:white; border-radius:10px;">
+                    <strong>Operational Truth:</strong> The platform provides a file.<br>
+                    <strong>Human judgment</strong> provides the control. Visual CRP makes that control shared.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Historical Context Section -->
+    <section id="historical" class="section historical-context-section">
+        <div class="container">
+            <h2 class="section-title">Historical Context: Why This Dual System Exists</h2>
+            <p class="section-subtitle">Understanding the post-2008 insurance and compliance requirements that created today's reality</p>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-year">Pre-2008</div>
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <h4>Traditional Document Control</h4>
+                        <p>Projects used a mix of paper-based systems, local servers, and early digital tools. Control was primarily operational, focused on getting work done rather than contractual compliance.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-year">2008-2010</div>
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <h4>The Financial Crisis & Insurance Response</h4>
+                        <p>Following the global financial crisis, insurers and reinsurers mandated <strong>digital traceability, auditable evidence, and standardized risk control</strong> for construction projects.</p>
+                        <ul style="margin-top:10px; padding-left:20px;">
+                            <li>Centralized delivery systems required</li>
+                            <li>Date/time stamps for all transactions</li>
+                            <li>Version control with clear responsibility chains</li>
+                            <li>Reduction of disputes and legal exposure</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-year">2011-2015</div>
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <h4>Platform Proliferation Era</h4>
+                        <p>Contractual document platforms become mandatory across major projects. Their <strong>primary purpose: protect insurers and owners</strong> through standardized documentary evidence.</p>
+                        <p><strong>Design Focus:</strong> Compliance and transfer, not operational control.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-year">2016-Present</div>
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <h4>The Operational Gap Emerges</h4>
+                        <p>Teams discover platforms cannot handle daily operational needs:</p>
+                        <ul style="margin-top:10px; padding-left:20px;">
+                            <li>Too slow for field requirements (8-12 minute searches)</li>
+                            <li>No support for multiple parallel coding systems</li>
+                            <li>Lack of dynamic reorganization capabilities</li>
+                            <li>Inaccessible to 80% of the project team</li>
+                        </ul>
+                        <p style="margin-top:15px;"><strong>Result:</strong> Parallel manual systems emerge in every project.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="historical-insight">
+                <h4>📜 Critical Historical Insight</h4>
+                <p><strong>Contractual platforms were never designed for operational control.</strong> They were created to satisfy insurance and compliance requirements post-2008.</p>
+                <p style="margin-top:15px;">This explains why:</p>
+                <ul>
+                    <li><strong>Platforms excel at:</strong> Transfer, compliance trails, audit evidence</li>
+                    <li><strong>Platforms cannot do:</strong> Dynamic operational control, rapid field access, multi-system coding</li>
+                </ul>
+                <p style="margin-top:15px; font-weight:600;">
+                    Visual CRP addresses the operational gap that platforms were never designed to fill.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Architecture Section -->
+    <section id="architecture" class="section architecture-section">
+        <div class="container">
+            <h2 class="section-title">Architectural Reality: Why Both Systems Are Necessary</h2>
+            <p class="section-subtitle">Not complement. Two different systems solving two different problems.</p>
+            
+            <div class="architecture-diagram">
+                <!-- Layer 1 -->
+                <div class="arch-layer">
+                    <div class="arch-card platform-layer">
+                        <h3>📋 Layer 1: Contractual Transfer (Platforms)</h3>
+                        <h4>Web-based Platforms • Cloud Storage Platforms</h4>
+                        <ul>
+                            <li><strong>Function:</strong> Formal file transfer + email notifications</li>
+                            <li><strong>Automation:</strong> Zero after upload/download</li>
+                            <li><strong>Users:</strong> 2-5 people (compliance only)</li>
+                            <li><strong>Cost:</strong> $1,200/user/year (for transfer)</li>
+                            <li><strong>Historical Purpose:</strong> Post-2008 insurance compliance</li>
+                        </ul>
+                    </div>
+                    <div class="arch-connector">📧 Email Notification → Manual Registration Required</div>
+                </div>
+                
+                <!-- Layer 2 -->
+                <div class="arch-layer">
+                    <div class="arch-card duplicate-layer">
+                        <h3>❌ Current Reality: Hidden Duplicate Work</h3>
+                        <h4>Parallel Manual Systems (Excel, Notebooks, Local Knowledge)</h4>
+                        <ul>
+                            <li><strong>Function:</strong> Actual operational control (what platforms can't do)</li>
+                            <li><strong>Users:</strong> 60-80 people (entire team)</li>
+                            <li><strong>Time Cost:</strong> 10+ hours/week/person duplicating</li>
+                            <li><strong>Hidden Cost:</strong> $1.6M+ over 5 years</li>
+                            <li><strong>Result:</strong> Control exists but isn't shared/consistent</li>
+                        </ul>
+                    </div>
+                    <div class="arch-connector" style="color: #ef4444;">💸 $1.6M+ Operational Waste</div>
+                </div>
+                
+                <!-- Layer 3 -->
+                <div class="arch-layer">
+                    <div class="arch-card control-layer">
+                        <h3>⚡ Layer 2: Operational Control (Visual CRP)</h3>
+                        <h4>The Control System That Already Exists, Formalized</h4>
+                        <ul>
+                            <li><strong>Function:</strong> Makes manual control shared and effective</li>
+                            <li><strong>Users:</strong> 60-80 people (entire team - same as manual)</li>
+                            <li><strong>Cost:</strong> $22K one-time (vs $1.6M duplicate work)</li>
+                            <li><strong>Result:</strong> Duplicate work eliminated, control preserved</li>
+                            <li><strong>Historical Fit:</strong> Solves the operational gap platforms created</li>
+                        </ul>
+                    </div>
+                    <div class="arch-connector" style="color: #10b981;">🎯 Operational Reality Solved</div>
+                </div>
+            </div>
+            
+            <div class="architecture-insight">
+                <h4>💡 Critical Architecture Insight</h4>
+                <p>Platforms and Visual CRP solve <strong>fundamentally different problems</strong>:</p>
+                <ul>
+                    <li><strong>Platforms:</strong> File transfer with audit trail (post-2008 insurance compliance)</li>
+                    <li><strong>Visual CRP:</strong> Operational control with constant human judgment (project execution needs)</li>
+                </ul>
+                <p style="margin-top:15px; font-weight:600;">
+                    Trying to make one system do both creates the duplicate work problem.<br>
+                    Using both systems for what they do best eliminates it.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section id="problem" class="section problem-section">
+        <div class="container">
+            <h2 class="section-title">Common Document Control Challenges</h2>
+            <p class="section-subtitle">The hidden operational reality platforms can't address</p>
+            
+            <div class="problem-grid">
+                <div class="problem-card">
+                    <h3>📊 Effort Duplication</h3>
+                    <p>Teams maintain parallel systems: formal platform + Excel for real work. 10+ hours/week/person wasted on duplicate entry.</p>
+                </div>
+                <div class="problem-card">
+                    <h3>⏳ Operational Delays</h3>
+                    <p>Document searches take 8-12 minutes vs the required 30 seconds. 10+ hours/day lost waiting for platform responses.</p>
+                </div>
+                <div class="problem-card">
+                    <h3>👥 Limited Adoption</h3>
+                    <p>Platforms used by only 2-5 people for compliance, not the 60-80 person team. Real work happens in Excel anyway.</p>
+                </div>
+                <div class="problem-card">
+                    <h3>💰 High Hidden Costs</h3>
+                    <p>Work duplication can cost $1.6M+ in 5-year projects. Hidden in "team productivity" budgets where it escapes scrutiny.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Advanced Calculator -->
+    <section id="calculator" class="section advanced-calculator">
+        <div class="container">
+            <h2 class="section-title">Economic Analysis: Visible vs Hidden Costs</h2>
+            
+            <div class="calculator-container">
+                <div class="calculator-inputs">
+                    <div class="input-group">
+                        <label>Team size (operational users):</label>
+                        <input type="range" id="teamRange" min="20" max="150" value="80">
+                        <div class="range-value">
+                            <span id="teamValue">80</span> people needing daily access
+                        </div>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label>Current contractual platform:</label>
+                        <select id="platformSelect">
+                            <option value="1200">Premium Cloud Platform (~$1,200/user/year)</option>
+                            <option value="1100">Enterprise Platform (~$1,100/user/year)</option>
+                            <option value="1000">Specialized Local System (~$1,000/user/year)</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <button class="calculator-trigger" onclick="showAdvancedResults()">
+                    🔍 Reveal Complete Analysis (Visible + Hidden)
+                </button>
+                
+                <div id="advancedResults" class="calculator-results-advanced">
+                    <div class="results-grid">
+                        <div class="result-column visible-costs">
+                            <h4>📄 Visible Costs (Platform)</h4>
+                            <div class="cost-item">
+                                <span class="cost-label">5-year licenses (80 users):</span>
+                                <span class="cost-value" id="visibleLicense">$480,000</span>
+                            </div>
+                            <div class="cost-item">
+                                <span class="cost-label">Implementation/Customization:</span>
+                                <span class="cost-value">$150,000</span>
+                            </div>
+                            <div class="cost-total">
+                                <span>Total visible:</span>
+                                <span id="visibleTotal">$630,000</span>
+                            </div>
+                        </div>
+                        
+                        <div class="result-column hidden-costs">
+                            <h4>👻 Hidden Costs (Duplication)</h4>
+                            <div class="cost-item">
+                                <span class="cost-label">Excel/Platform duplicate work:</span>
+                                <span class="cost-value" id="hiddenDuplication">$1,245,000</span>
+                            </div>
+                            <div class="cost-item">
+                                <span class="cost-label">Slow searches (lost time):</span>
+                                <span class="cost-value" id="hiddenSearch">$401,250</span>
+                            </div>
+                            <div class="cost-item">
+                                <span class="cost-label">Version/control errors:</span>
+                                <span class="cost-value">$250,000+</span>
+                            </div>
+                            <div class="cost-total">
+                                <span>Total hidden:</span>
+                                <span id="hiddenTotal">$1,896,250</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="results-comparison">
+                        <div class="comparison-item current">
+                            <h5>Current Real Operational Cost</h5>
+                            <div class="comparison-value" id="currentTotal">$2,526,250</div>
+                            <div class="comparison-label">5 years, 80 users</div>
+                        </div>
+                        
+                        <div class="comparison-arrow">↓ 92% reduction</div>
+                        
+                        <div class="comparison-item solution">
+                            <h5>Visual CRP Hybrid Model</h5>
+                            <div class="comparison-value" id="solutionTotal">$202,000</div>
+                            <div class="comparison-label">Reduced platform + Visual CRP</div>
+                        </div>
+                    </div>
+                    
+                    <div class="savings-breakdown">
+                        <h4>🏦 Savings Breakdown</h4>
+                        <div class="savings-item">
+                            <span class="savings-label">Platform license reduction (75% fewer users):</span>
+                            <span class="savings-value">-$360,000</span>
+                        </div>
+                        <div class="savings-item">
+                            <span class="savings-label">Duplicate work elimination:</span>
+                            <span class="savings-value">-$1,245,000</span>
+                        </div>
+                        <div class="savings-item">
+                            <span class="savings-label">Search time recovery:</span>
+                            <span class="savings-value">-$401,250</span>
+                        </div>
+                        <div class="savings-item total-savings">
+                            <span class="savings-label">Total operational savings over 5 years:</span>
+                            <span class="savings-value">$2,006,250</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Lead Scoring Widget -->
+            <div class="lead-scoring-widget">
+                <div class="scoring-title">📊 Your Savings Potential</div>
+                <div class="scoring-bar">
+                    <div class="score-fill" style="width: 78%;"></div>
+                </div>
+                <div class="scoring-details">
+                    <div class="score-item">
+                        <span>Team size: <strong>+25 points</strong></span>
+                        <span>(80 operational users)</span>
+                    </div>
+                    <div class="score-item">
+                        <span>Current platform: <strong>+20 points</strong></span>
+                        <span>(Cloud Platform)</span>
+                    </div>
+                    <div class="score-item">
+                        <span>Project duration: <strong>+18 points</strong></span>
+                        <span>(5 years)</span>
+                    </div>
+                    <div class="score-item">
+                        <span>Duplicate work: <strong>+15 points</strong></span>
+                        <span>(10+ hours/week)</span>
+                    </div>
+                </div>
+                <div class="scoring-cta">
+                    <strong>Score: 78/100</strong> - High savings potential
+                    <a href="mailto:piter.bonilla@visualcrp.com?subject=High%20Savings%20Potential%20Analysis" class="scoring-btn">🗣️ Speak with Specialist</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Validation Section -->
+    <section id="validation" class="section validation-section">
+        <div class="container">
+            <h2 class="section-title">Operational Validation in Real Projects</h2>
+            <p class="section-subtitle">Not theoretical claims. Real project data from 21+ years.</p>
+            
+            <div class="validation-grid">
+                <div class="validation-card detailed">
+                    <div class="validation-badge">🏆 Primary Case Study</div>
+                    <h3>Montegrande Dam ($500M+)</h3>
+                    <div class="validation-metrics">
+                        <div class="metric-pair">
+                            <span class="metric-label">Duration:</span>
+                            <span class="metric-value">8+ years</span>
+                        </div>
+                        <div class="metric-pair">
+                            <span class="metric-label">Contractual platform:</span>
+                            <span class="metric-value">Local Document System</span>
+                        </div>
+                        <div class="metric-pair">
+                            <span class="metric-label">Visual CRP users:</span>
+                            <span class="metric-value">60+ daily</span>
+                        </div>
+                        <div class="metric-pair">
+                            <span class="metric-label">Documents controlled:</span>
+                            <span class="metric-value">14,936</span>
+                        </div>
+                    </div>
+                    <blockquote class="validation-quote">
+                        “Auditors accepted our hybrid model: the contractual platform for document transfer and Visual CRP for operational 			control. The team used Visual CRP daily; both were considered strengths for audit compliance.”
+                    </blockquote>
+                    <div class="validation-author">
+                        <strong>Technical Documentation Manager</strong><br>
+                        Montegrande Dam
+                    </div>
+                </div>
+                
+                <div class="validation-card">
+                    <div class="validation-badge">✅ Validated</div>
+                    <h3>Palomino Hydroelectric ($400M+)</h3>
+                    <p><strong>Coexistence with:</strong> Web-based Platform (5 years)</p>
+                    <p><strong>Result:</strong> Project successfully completed with hybrid architecture.</p>
+                </div>
+                
+                <div class="validation-card">
+                    <div class="validation-badge">🔗 In Operation</div>
+                    <h3>Santiago Monorail ($1B+)</h3>
+                    <p><strong>Coexistence with:</strong> Cloud Platform</p>
+                    <p><strong>Status:</strong> Active implementation and continuous validation.</p>
+                </div>
+            </div>
+            
+            <div class="validation-legal">
+                <h4>📋 Professional Validation</h4>
+                <div class="professional-badge">
+                    <strong>Document Control Systems Specialist</strong><br>
+                    21+ years document control experience<br>
+                    Civil Engineering background (non-practice jurisdiction)
+                </div>
+                <p class="small-note">
+                    *Calculations based on real operational data from referenced projects. 
+                    Complete audit information available under NDA for evaluation teams.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Objections Section -->
+    <section id="objections" class="section objections-section">
+        <div class="container">
+            <h2 class="section-title">Critical Questions from Evaluation Teams</h2>
+            
+            <div class="objection-grid">
+                <div class="objection-card">
+                    <h4>❓ "Does this replace our investment in contractual platforms?"</h4>
+                    <div class="objection-answer">
+                        <p><strong>No, and it shouldn't attempt to.</strong> Visual CRP coexists with contractual platforms. You reduce platform licenses from 80 to 20 users, maintaining compliance while the team uses Visual CRP for daily work.</p>
+                        <div class="objection-proof">
+                            <strong>Proof:</strong> Montegrande Dam uses contractual platform (2 people) + Visual CRP (60+ people) for 8+ years.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="objection-card">
+                    <h4>⚖️ "Do auditors accept this hybrid model?"</h4>
+                    <div class="objection-answer">
+                        <p><strong>Yes, with proper documentation.</strong> The separation is clear: platform for contractual transfer, Visual CRP for operational control. Auditors validate results, not architecture.</p>
+                        <div class="objection-proof">
+                            <strong>Proof:</strong> Independent audits accepted model on $500M+ project.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="objection-card">
+                    <h4>🔗 "Is integration automatic or manual?"</h4>
+                    <div class="objection-answer">
+                        <p><strong>Intentional manual (5-10 minutes/day).</strong> This maintains human judgment as the critical element. CSV export from platform → manual import when administrator decides.</p>
+                        <div class="objection-proof">
+                            <strong>Advantage:</strong> Human control preserved, consistency ensured.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Legal Reality Section -->
+    <section class="section legal-reality-section">
+        <div class="container">
+            <div class="legal-reality-content">
+                <h2 class="section-title">Operational & Legal Reality Statement</h2>
+                
+                <div class="legal-card platform">
+                    <h4>Platform Reality Acknowledgment</h4>
+                    <p>Visual CRP recognizes that contractual platforms serve a critical function: <strong>post-2008 insurance compliance and contractual file transfer with audit trail</strong>.</p>
+                    <p style="margin-top:10px;">These platforms excel at what they were designed for. They are not designed for—and cannot perform—the operational document control that construction projects require daily.</p>
+                </div>
+                
+                <div class="legal-card operational">
+                    <h4>Operational Reality Statement</h4>
+                    <p>Every construction project with a contractual platform also maintains <strong>manual control systems</strong> (Excel, notebooks, local knowledge). This isn't optional—it's necessary because platforms handle transfer, not control.</p>
+                    <p style="margin-top:10px;">Visual CRP <strong>IS</strong> that manual control formalized into a system everyone can use, eliminating duplicate work while preserving the human judgment essential to construction document control.</p>
+                </div>
+                
+                <div class="legal-card legal">
+                    <h4>Legal & Contractual Position</h4>
+                    <p><strong>Visual CRP does not replace contractual platform requirements.</strong> Projects remain responsible for fulfilling all contractual obligations regarding platform usage.</p>
+                    <p style="margin-top:10px;"><strong>Visual CRP eliminates the duplicate work</strong> that platforms inevitably create by providing the operational control system that projects need and already create manually.</p>
+                    <p style="margin-top:10px; font-size:0.9em; color:#64748b;">
+                        <em>Implementation services constitute technical consulting for document control systems, not professional engineering practice.</em>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Role CTA Section -->
+    <section id="contact" class="section role-cta-section">
+        <div class="container">
+            <h2 class="section-title">Recommended Action by Your Role</h2>
+            <p class="section-subtitle">Get specific information relevant to your responsibilities</p>
+            
+            <div class="role-grid">
+                <div class="role-card">
+                    <h4>👷‍♂️ For Field Superintendents</h4>
+                    <p>Need documents in seconds, not minutes.</p>
+                    <a href="mailto:piter.bonilla@visualcrp.com?subject=Speed%20Demonstration%20Request" class="role-btn">
+                        ⚡ Request Speed Demonstration
+                    </a>
+                </div>
+                
+                <div class="role-card">
+                    <h4>📊 For Project Control</h4>
+                    <p>Need to eliminate duplicate work and errors.</p>
+                    <a href="mailto:piter.bonilla@visualcrp.com?subject=Duplication%20Analysis%20Request" class="role-btn">
+                        🔄 Specific Duplication Analysis
+                    </a>
+                </div>
+                
+                <div class="role-card">
+                    <h4>🏦 For Directors/CFOs</h4>
+                    <p>Need to reduce hidden operational costs.</p>
+                    <a href="mailto:piter.bonilla@visualcrp.com?subject=Detailed%20Financial%20Model%20Request" class="role-btn">
+                        💰 Detailed Financial Model
+                    </a>
+                </div>
+                
+                <div class="role-card">
+                    <h4>⚖️ For Legal/Compliance</h4>
+                    <p>Need to maintain contractual compliance.</p>
+                    <a href="mailto:piter.bonilla@visualcrp.com?subject=Hybrid%20Compliance%20Review" class="role-btn">
+                        📄 Hybrid Compliance Review
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Visual CRP</h3>
+                    <p>Specialized document control systems for complex construction and infrastructure projects.</p>
+                    <p style="margin-top: 15px; font-size: 0.9em; color: #94a3b8;">
+                        <strong>Operational Reality Statement:</strong><br>
+                        Visual CRP formalizes manual control your project team already maintains. 
+                        It doesn't replace human judgment—it makes that judgment visible, shared, 
+                        and effective while platforms handle contractual transfer requirements.
+                    </p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <ul class="footer-links">
+                        <li><a href="mailto:piter.bonilla@visualcrp.com">piter.bonilla@visualcrp.com</a></li>
+                        <li><a href="tel:+18094400909">+1 (809) 440-0909</a></li>
+                        <li>Technical and commercial inquiries</li>
+                    </ul>
+                    <div style="margin-top: 20px;">
+                        <p style="color: #cbd5e1; font-size: 0.9em;">
+                            <strong>Document Control Systems Specialist</strong><br>
+                            21+ Years Construction Experience<br>
+                            Technical Consulting Services
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#reality">Operational Reality</a></li>
+                        <li><a href="#historical">Historical Context</a></li>
+                        <li><a href="#architecture">Architecture</a></li>
+                        <li><a href="#calculator">Cost Analysis</a></li>
+                        <li><a href="#validation">Case Studies</a></li>
+                        <li><a href="#objections">Q&A</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="legal-disclaimer">
+                <p><strong>Legal Notice:</strong> Visual CRP is a specialized document control system. Savings mentioned are estimates based on real implementations and may vary according to specific project conditions. Visual CRP is designed to coexist with existing contractual platforms and does not intend to replace them where contractually required. All implementations are specialized consulting tailored to each project. Implementation services constitute technical consulting for document control systems, not professional engineering practice. Clients remain responsible for contractual compliance with platform requirements. © 2005-2026 All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <style>
+        /* Additional styles for sections in part 2 */
         .architecture-section {
             background: white;
         }
@@ -568,9 +1518,6 @@
             color: #1e293b;
             margin-bottom: 15px;
             font-size: 1.3em;
-            display: flex;
-            align-items: center;
-            gap: 10px;
         }
         
         /* Advanced Calculator */
@@ -951,21 +1898,6 @@
             font-size: 0.95em;
         }
         
-        .role-btn {
-            display: inline-block;
-            background: white;
-            color: #1e293b;
-            padding: 12px 25px;
-            border-radius: 25px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: transform 0.3s;
-        }
-        
-        .role-btn:hover {
-            transform: translateY(-2px);
-        }
-        
         /* Lead Scoring Widget */
         .lead-scoring-widget {
             background: white;
@@ -1076,7 +2008,7 @@
             color: white;
         }
         
-        /* Legal Reality Section - NEW */
+        /* Legal Reality Section */
         .legal-reality-section {
             background: white;
             border-top: 2px solid #e2e8f0;
@@ -1126,803 +2058,7 @@
             text-align: center;
             line-height: 1.6;
         }
-        
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero-main-title {
-                font-size: 2.2em;
-            }
-            
-            .hero-tagline {
-                font-size: 1.1em;
-            }
-            
-            .section-title {
-                font-size: 2em;
-            }
-            
-            .hero-buttons {
-                flex-direction: column;
-            }
-            
-            .hero-buttons a {
-                width: 100%;
-                text-align: center;
-            }
-            
-            .nav-links {
-                display: none;
-            }
-            
-            .nav-pathway {
-                overflow-x: auto;
-                justify-content: flex-start;
-                padding: 10px 20px;
-            }
-            
-            .pathway-step {
-                white-space: nowrap;
-            }
-            
-            .results-comparison {
-                flex-direction: column;
-            }
-            
-            .flow-step {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            
-            .step-number-circle {
-                margin-bottom: 10px;
-                margin-right: 0;
-            }
-            
-            .flow-content {
-                width: 100%;
-            }
-        }
-        
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .animate-in {
-            animation: fadeInUp 0.6s ease forwards;
-        }
-        
-        /* Tooltips */
-        .info-tooltip {
-            position: relative;
-            cursor: help;
-            border-bottom: 1px dotted #3b82f6;
-            color: #3b82f6;
-        }
-        
-        .info-tooltip:hover:after {
-            content: attr(data-tooltip);
-            position: absolute;
-            bottom: 100%;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #1e293b;
-            color: white;
-            padding: 10px 15px;
-            border-radius: 6px;
-            font-size: 0.85em;
-            white-space: normal;
-            width: 250px;
-            z-index: 100;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
     </style>
-</head>
-<body>
-    <!-- Header -->
-    <header class="header">
-        <div class="container header-content">
-            <div class="hero-subtitle">Operational Control Architecture</div>
-            <h1 class="hero-main-title">
-                The Operational Reality Every Construction Project Faces:<br>
-                <span style="color: #10b981">Platforms Transfer. Real Control Is Always Manual.</span>
-            </h1>
-            <p class="hero-tagline">
-                <strong>21+ years validation:</strong> Every project with contractual platforms also maintains 
-                manual control in Excel. Visual CRP <strong>IS</strong> that manual control formalized into a 
-                system everyone can use—eliminating duplicate work while platforms handle contractual transfer.
-            </p>
-            
-            <div class="hero-cta-box">
-                <div class="hero-stats-immediate">
-                    <div class="stat-immediate">
-                        <div class="stat-number">94%</div>
-                        <div class="stat-label">Savings vs full platform licenses</div>
-                    </div>
-                    <div class="stat-immediate">
-                        <div class="stat-number">30s</div>
-                        <div class="stat-label">vs 8-12 minute searches</div>
-                    </div>
-                    <div class="stat-immediate">
-                        <div class="stat-number">$1.6M+</div>
-                        <div class="stat-label">Hidden cost eliminated in 5 years</div>
-                    </div>
-                </div>
-                
-                <div class="hero-buttons">
-                    <a href="#calculator" class="role-btn" style="background: #10b981; color: white;">
-                        🧮 Calculate Your Specific Savings
-                    </a>
-                    <a href="#reality" class="role-btn" style="background: #3b82f6; color: white;">
-                        🔍 See Operational Reality
-                    </a>
-                    <a href="#validation" class="role-btn" style="background: #f59e0b; color: white;">
-                        ✅ View 8-Year Validation
-                    </a>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <!-- Navigation -->
-    <nav class="nav">
-        <div class="container nav-content">
-            <a href="#" class="logo">
-                <span>Visual CRP</span>
-            </a>
-            <div class="nav-links">
-                <a href="#reality">Reality</a>
-                <a href="#architecture">Architecture</a>
-                <a href="#calculator">Cost Analysis</a>
-                <a href="#validation">Validation</a>
-                <a href="#objections">Q&A</a>
-                <a href="#contact">Consultation</a>
-            </div>
-            <a href="mailto:piter.bonilla@visualcrp.com" class="role-btn" style="background: #10b981; color: white; padding: 8px 20px; font-size: 0.9em;">
-                Free Review
-            </a>
-        </div>
-        
-        <div class="nav-pathway">
-            <div class="pathway-step active">
-                <span class="step-number">1</span>
-                <span class="step-label">See Reality</span>
-            </div>
-            <div class="pathway-step">
-                <span class="step-number">2</span>
-                <span class="step-label">Understand Architecture</span>
-            </div>
-            <div class="pathway-step">
-                <span class="step-number">3</span>
-                <span class="step-label">Calculate Savings</span>
-            </div>
-            <div class="pathway-step">
-                <span class="step-number">4</span>
-                <span class="step-label">Validate Cases</span>
-            </div>
-            <div class="pathway-step">
-                <span class="step-number">5</span>
-                <span class="step-label">Request Demo</span>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Next Step CTA -->
-    <div class="next-step-cta">
-        <div>
-            <strong>Recommended next step:</strong> Understand the operational reality platforms don't address
-        </div>
-        <a href="#reality" class="next-step-btn">🔍 See Operational Reality →</a>
-    </div>
-
-    <!-- Social Proof Ticker -->
-    <div class="social-proof-ticker">
-        <div class="ticker-content">
-            <span class="ticker-item">✅ Independently audited on $500M+ project</span>
-            <span class="ticker-item">⚡ 2000x faster than cloud platform searches</span>
-            <span class="ticker-item">🏗️ 8+ years coexistence with contractual platforms proven</span>
-            <span class="ticker-item">💼 21+ years document control experience</span>
-            <span class="ticker-item">🔗 Coexists with all contractual platforms</span>
-        </div>
-    </div>
-
-    <!-- Reality Section -->
-    <section id="reality" class="section reality-section">
-        <div class="container">
-            <h2 class="section-title">The Unavoidable Reality: Dual Systems Are Inevitable</h2>
-            <p class="section-subtitle">Why every construction project maintains manual control alongside contractual platforms</p>
-            
-            <div class="reality-grid">
-                <div class="reality-card platform">
-                    <h3>What Contractual Platforms Actually Do</h3>
-                    <ul>
-                        <li>✅ File upload/download</li>
-                        <li>✅ Automatic email notifications</li>
-                        <li>✅ Contractual compliance trail</li>
-                        <li>❌ No operational control</li>
-                        <li>❌ No dynamic reorganization</li>
-                        <li>❌ No multi-coding system support</li>
-                    </ul>
-                    <div style="margin-top:20px; padding:15px; background:#dbeafe; border-radius:6px;">
-                        <strong>Result:</strong> 2-5 people use the platform for compliance.<br>
-                        <strong>Everyone else</strong> creates manual control systems.
-                    </div>
-                </div>
-                
-                <div class="reality-card manual">
-                    <h3>What Actually Happens Every Day</h3>
-                    <ul>
-                        <li>✅ Manual registration after platform upload</li>
-                        <li>✅ Constant reorganization by operators</li>
-                        <li>✅ Multiple parallel coding systems</li>
-                        <li>✅ Dynamic groups/subgroups creation</li>
-                        <li>✅ Conscious operator decisions for every update</li>
-                        <li>❌ Hidden in Excel/notebooks, not shared</li>
-                    </ul>
-                    <div style="margin-top:20px; padding:15px; background:#d1fae5; border-radius:6px;">
-                        <strong>Visual CRP:</strong> This IS the operational system,<br>
-                        <strong>formalized</strong> and made available to everyone.
-                    </div>
-                </div>
-            </div>
-            
-            <div class="reality-insight">
-                <h4>🏗️ Key Operational Insight</h4>
-                <p><strong>The duplicate work isn't caused by team disorganization.</strong><br>
-                It's caused by a fundamental architectural mismatch: Platforms are designed for 
-                file transfer. Construction document control requires dynamic, multi-coded, 
-                constantly reorganizing systems with human judgment at every step.</p>
-                <p style="margin-top:15px;">
-                    Visual CRP doesn't create new control—it <strong>formalizes the control that 
-                    already exists</strong> and eliminates the duplicate manual entry.
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Day-to-Day Reality Section -->
-    <section class="section day-to-day-section">
-        <div class="container">
-            <h2 class="section-title">The Day-to-Day Reality: How Document Control Actually Works</h2>
-            <p class="section-subtitle">From designer issuance to field request - the manual reality behind every platform transaction</p>
-            
-            <div class="flow-diagram">
-                <!-- Step 1 -->
-                <div class="flow-step">
-                    <div class="step-number-circle">1</div>
-                    <div class="flow-content">
-                        <h4>Designer Issues Document</h4>
-                        <p>With their internal coding system (GD-1234 Rev A)</p>
-                    </div>
-                </div>
-                
-                <!-- Step 2 -->
-                <div class="flow-step">
-                    <div class="step-number-circle">2</div>
-                    <div class="flow-content">
-                        <h4>Platform Upload (1-2 people only)</h4>
-                        <p>File transfer + automatic email to project team</p>
-                        <p style="font-size:0.9em; color:#64748b; margin-top:5px;">
-                            <strong>Platform completes its function here.</strong><br>
-                            Everything after this point is manual.
-                        </p>
-                    </div>
-                </div>
-                
-                <!-- Step 3 -->
-                <div class="flow-step manual">
-                    <div class="step-number-circle">3</div>
-                    <div class="flow-content">
-                        <h4>Manual Registration Begins (Real Work)</h4>
-                        <p>Document controller must manually decide:</p>
-                        <ul style="margin-top:10px; padding-left:20px;">
-                            <li>Is this relevant?</li>
-                            <li>How should it be coded? (client, supervision, internal systems)</li>
-                            <li>Who needs to review it?</li>
-                            <li>What status should it have?</li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <!-- Step 4 -->
-                <div class="flow-step manual">
-                    <div class="step-number-circle">4</div>
-                    <div class="flow-content">
-                        <h4>Field Request Hours/Days Later</h4>
-                        <p>Engineer asks: "Where's the latest revision of..."</p>
-                        <div class="flow-comparison">
-                            <div style="padding:15px; background:#fef2f2; border-radius:6px;">
-                                <strong>Platform Search:</strong> 8-12 minute wait
-                            </div>
-                            <div style="padding:15px; background:#f0fdf4; border-radius:6px;">
-                                <strong>Visual CRP:</strong> <30 seconds
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div style="text-align:center; margin-top:40px;">
-                <div style="display:inline-block; padding:20px 30px; background:#1e293b; color:white; border-radius:10px;">
-                    <strong>Operational Truth:</strong> The platform provides a file.<br>
-                    <strong>Human judgment</strong> provides the control. Visual CRP makes that control shared.
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Architecture Section -->
-    <section id="architecture" class="section architecture-section">
-        <div class="container">
-            <h2 class="section-title">Architectural Reality: Why Both Systems Are Necessary</h2>
-            <p class="section-subtitle">Not complement. Two different systems solving two different problems.</p>
-            
-            <div class="architecture-diagram">
-                <!-- Layer 1 -->
-                <div class="arch-layer">
-                    <div class="arch-card platform-layer">
-                        <h3>📋 Layer 1: Contractual Transfer (Platforms)</h3>
-                        <h4>Web-based Platforms • Cloud Storage Platforms</h4>
-                        <ul>
-                            <li><strong>Function:</strong> Formal file transfer + email notifications</li>
-                            <li><strong>Automation:</strong> Zero after upload/download</li>
-                            <li><strong>Users:</strong> 2-5 people (compliance only)</li>
-                            <li><strong>Cost:</strong> $1,200/user/year (for transfer)</li>
-                            <li><strong>Operational Reality:</strong> Manual control STILL required</li>
-                        </ul>
-                    </div>
-                    <div class="arch-connector">📧 Email Notification → Manual Registration Required</div>
-                </div>
-                
-                <!-- Layer 2 -->
-                <div class="arch-layer">
-                    <div class="arch-card duplicate-layer">
-                        <h3>❌ Current Reality: Hidden Duplicate Work</h3>
-                        <h4>Parallel Manual Systems (Excel, Notebooks, Local Knowledge)</h4>
-                        <ul>
-                            <li><strong>Function:</strong> Actual operational control (what platforms can't do)</li>
-                            <li><strong>Users:</strong> 60-80 people (entire team)</li>
-                            <li><strong>Time Cost:</strong> 10+ hours/week/person duplicating</li>
-                            <li><strong>Hidden Cost:</strong> $1.6M+ over 5 years</li>
-                            <li><strong>Result:</strong> Control exists but isn't shared/consistent</li>
-                        </ul>
-                    </div>
-                    <div class="arch-connector" style="color: #ef4444;">💸 $1.6M+ Operational Waste</div>
-                </div>
-                
-                <!-- Layer 3 -->
-                <div class="arch-layer">
-                    <div class="arch-card control-layer">
-                        <h3>⚡ Layer 2: Operational Control (Visual CRP)</h3>
-                        <h4>The Control System That Already Exists, Formalized</h4>
-                        <ul>
-                            <li><strong>Function:</strong> Makes manual control shared and effective</li>
-                            <li><strong>Users:</strong> 60-80 people (entire team - same as manual)</li>
-                            <li><strong>Cost:</strong> $22K one-time (vs $1.6M duplicate work)</li>
-                            <li><strong>Result:</strong> Duplicate work eliminated, control preserved</li>
-                            <li><strong>Integration:</strong> Manual import when administrator decides</li>
-                        </ul>
-                    </div>
-                    <div class="arch-connector" style="color: #10b981;">🎯 Operational Reality Solved</div>
-                </div>
-            </div>
-            
-            <div class="architecture-insight">
-                <h4>💡 Critical Architecture Insight</h4>
-                <p>Platforms and Visual CRP solve <strong>fundamentally different problems</strong>:</p>
-                <ul>
-                    <li><strong>Platforms:</strong> File transfer with audit trail (what contracts require)</li>
-                    <li><strong>Visual CRP:</strong> Operational control with constant human judgment (what projects need)</li>
-                </ul>
-                <p style="margin-top:15px; font-weight:600;">
-                    Trying to make one system do both creates the duplicate work problem.<br>
-                    Using both systems for what they do best eliminates it.
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Problem Section -->
-    <section id="problem" class="section problem-section">
-        <div class="container">
-            <h2 class="section-title">Common Document Control Challenges</h2>
-            <p class="section-subtitle">The hidden operational reality platforms can't address</p>
-            
-            <div class="problem-grid">
-                <div class="problem-card">
-                    <h3>📊 Effort Duplication</h3>
-                    <p>Teams maintain parallel systems: formal platform + Excel for real work. 10+ hours/week/person wasted on duplicate entry.</p>
-                </div>
-                <div class="problem-card">
-                    <h3>⏳ Operational Delays</h3>
-                    <p>Document searches take 8-12 minutes vs the required 30 seconds. 10+ hours/day lost waiting for platform responses.</p>
-                </div>
-                <div class="problem-card">
-                    <h3>👥 Limited Adoption</h3>
-                    <p>Platforms used by only 2-5 people for compliance, not the 60-80 person team. Real work happens in Excel anyway.</p>
-                </div>
-                <div class="problem-card">
-                    <h3>💰 High Hidden Costs</h3>
-                    <p>Work duplication can cost $1.6M+ in 5-year projects. Hidden in "team productivity" budgets where it escapes scrutiny.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Advanced Calculator -->
-    <section id="calculator" class="section advanced-calculator">
-        <div class="container">
-            <h2 class="section-title">Economic Analysis: Visible vs Hidden Costs</h2>
-            
-            <div class="calculator-container">
-                <div class="calculator-inputs">
-                    <div class="input-group">
-                        <label>Team size (operational users):</label>
-                        <input type="range" id="teamRange" min="20" max="150" value="80">
-                        <div class="range-value">
-                            <span id="teamValue">80</span> people needing daily access
-                        </div>
-                    </div>
-                    
-                    <div class="input-group">
-                        <label>Current contractual platform:</label>
-                        <select id="platformSelect">
-                            <option value="1200">Premium Cloud Platform (~$1,200/user/year)</option>
-                            <option value="1100">Enterprise Platform (~$1,100/user/year)</option>
-                            <option value="1000">Specialized Local System (~$1,000/user/year)</option>
-                        </select>
-                    </div>
-                </div>
-                
-                <button class="calculator-trigger" onclick="showAdvancedResults()">
-                    🔍 Reveal Complete Analysis (Visible + Hidden)
-                </button>
-                
-                <div id="advancedResults" class="calculator-results-advanced">
-                    <div class="results-grid">
-                        <div class="result-column visible-costs">
-                            <h4>📄 Visible Costs (Platform)</h4>
-                            <div class="cost-item">
-                                <span class="cost-label">5-year licenses (80 users):</span>
-                                <span class="cost-value" id="visibleLicense">$480,000</span>
-                            </div>
-                            <div class="cost-item">
-                                <span class="cost-label">Implementation/Customization:</span>
-                                <span class="cost-value">$150,000</span>
-                            </div>
-                            <div class="cost-total">
-                                <span>Total visible:</span>
-                                <span id="visibleTotal">$630,000</span>
-                            </div>
-                        </div>
-                        
-                        <div class="result-column hidden-costs">
-                            <h4>👻 Hidden Costs (Duplication)</h4>
-                            <div class="cost-item">
-                                <span class="cost-label">Excel/Platform duplicate work:</span>
-                                <span class="cost-value" id="hiddenDuplication">$1,245,000</span>
-                            </div>
-                            <div class="cost-item">
-                                <span class="cost-label">Slow searches (lost time):</span>
-                                <span class="cost-value" id="hiddenSearch">$401,250</span>
-                            </div>
-                            <div class="cost-item">
-                                <span class="cost-label">Version/control errors:</span>
-                                <span class="cost-value">$250,000+</span>
-                            </div>
-                            <div class="cost-total">
-                                <span>Total hidden:</span>
-                                <span id="hiddenTotal">$1,896,250</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="results-comparison">
-                        <div class="comparison-item current">
-                            <h5>Current Real Operational Cost</h5>
-                            <div class="comparison-value" id="currentTotal">$2,526,250</div>
-                            <div class="comparison-label">5 years, 80 users</div>
-                        </div>
-                        
-                        <div class="comparison-arrow">↓ 92% reduction</div>
-                        
-                        <div class="comparison-item solution">
-                            <h5>Visual CRP Hybrid Model</h5>
-                            <div class="comparison-value" id="solutionTotal">$202,000</div>
-                            <div class="comparison-label">Reduced platform + Visual CRP</div>
-                        </div>
-                    </div>
-                    
-                    <div class="savings-breakdown">
-                        <h4>🏦 Savings Breakdown</h4>
-                        <div class="savings-item">
-                            <span class="savings-label">Platform license reduction (75% fewer users):</span>
-                            <span class="savings-value">-$360,000</span>
-                        </div>
-                        <div class="savings-item">
-                            <span class="savings-label">Duplicate work elimination:</span>
-                            <span class="savings-value">-$1,245,000</span>
-                        </div>
-                        <div class="savings-item">
-                            <span class="savings-label">Search time recovery:</span>
-                            <span class="savings-value">-$401,250</span>
-                        </div>
-                        <div class="savings-item total-savings">
-                            <span class="savings-label">Total operational savings over 5 years:</span>
-                            <span class="savings-value">$2,006,250</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Lead Scoring Widget -->
-            <div class="lead-scoring-widget">
-                <div class="scoring-title">📊 Your Savings Potential</div>
-                <div class="scoring-bar">
-                    <div class="score-fill" style="width: 78%;"></div>
-                </div>
-                <div class="scoring-details">
-                    <div class="score-item">
-                        <span>Team size: <strong>+25 points</strong></span>
-                        <span>(80 operational users)</span>
-                    </div>
-                    <div class="score-item">
-                        <span>Current platform: <strong>+20 points</strong></span>
-                        <span>(Cloud Platform)</span>
-                    </div>
-                    <div class="score-item">
-                        <span>Project duration: <strong>+18 points</strong></span>
-                        <span>(5 years)</span>
-                    </div>
-                    <div class="score-item">
-                        <span>Duplicate work: <strong>+15 points</strong></span>
-                        <span>(10+ hours/week)</span>
-                    </div>
-                </div>
-                <div class="scoring-cta">
-                    <strong>Score: 78/100</strong> - High savings potential
-                    <a href="mailto:piter.bonilla@visualcrp.com?subject=High%20Savings%20Potential%20Analysis" class="scoring-btn">🗣️ Speak with Specialist</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Validation Section -->
-    <section id="validation" class="section validation-section">
-        <div class="container">
-            <h2 class="section-title">Operational Validation in Real Projects</h2>
-            <p class="section-subtitle">Not theoretical claims. Real project data from 21+ years.</p>
-            
-            <div class="validation-grid">
-                <div class="validation-card detailed">
-                    <div class="validation-badge">🏆 Primary Case Study</div>
-                    <h3>Montegrande Dam ($500M+)</h3>
-                    <div class="validation-metrics">
-                        <div class="metric-pair">
-                            <span class="metric-label">Duration:</span>
-                            <span class="metric-value">8+ years</span>
-                        </div>
-                        <div class="metric-pair">
-                            <span class="metric-label">Contractual platform:</span>
-                            <span class="metric-value">Local Document System</span>
-                        </div>
-                        <div class="metric-pair">
-                            <span class="metric-label">Visual CRP users:</span>
-                            <span class="metric-value">60+ daily</span>
-                        </div>
-                        <div class="metric-pair">
-                            <span class="metric-label">Documents controlled:</span>
-                            <span class="metric-value">14,936</span>
-                        </div>
-                    </div>
-                    <blockquote class="validation-quote">
-                        "Auditors accepted our hybrid model: contractual platform for transfer, 
-                        Visual CRP for operational control. The team used Visual CRP daily; 
-                        the platform only for compliance."
-                    </blockquote>
-                    <div class="validation-author">
-                        <strong>Project Controls Manager</strong><br>
-                        Montegrande Dam
-                    </div>
-                </div>
-                
-                <div class="validation-card">
-                    <div class="validation-badge">✅ Validated</div>
-                    <h3>Palomino Hydroelectric ($400M+)</h3>
-                    <p><strong>Coexistence with:</strong> Web-based Platform (5 years)</p>
-                    <p><strong>Result:</strong> Project successfully completed with hybrid architecture.</p>
-                </div>
-                
-                <div class="validation-card">
-                    <div class="validation-badge">🔗 In Operation</div>
-                    <h3>Santiago Monorail ($1B+)</h3>
-                    <p><strong>Coexistence with:</strong> Cloud Platform</p>
-                    <p><strong>Status:</strong> Active implementation and continuous validation.</p>
-                </div>
-            </div>
-            
-            <div class="validation-legal">
-                <h4>📋 Professional Validation</h4>
-                <div class="professional-badge">
-                    <strong>Document Control Systems Specialist</strong><br>
-                    21+ years document control experience<br>
-                    Civil Engineering background (non-practice jurisdiction)
-                </div>
-                <p class="small-note">
-                    *Calculations based on real operational data from referenced projects. 
-                    Complete audit information available under NDA for evaluation teams.
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Objections Section -->
-    <section id="objections" class="section objections-section">
-        <div class="container">
-            <h2 class="section-title">Critical Questions from Evaluation Teams</h2>
-            
-            <div class="objection-grid">
-                <div class="objection-card">
-                    <h4>❓ "Does this replace our investment in contractual platforms?"</h4>
-                    <div class="objection-answer">
-                        <p><strong>No, and it shouldn't attempt to.</strong> Visual CRP coexists with contractual platforms. You reduce platform licenses from 80 to 20 users, maintaining compliance while the team uses Visual CRP for daily work.</p>
-                        <div class="objection-proof">
-                            <strong>Proof:</strong> Montegrande Dam uses contractual platform (2 people) + Visual CRP (60+ people) for 8+ years.
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="objection-card">
-                    <h4>⚖️ "Do auditors accept this hybrid model?"</h4>
-                    <div class="objection-answer">
-                        <p><strong>Yes, with proper documentation.</strong> The separation is clear: platform for contractual transfer, Visual CRP for operational control. Auditors validate results, not architecture.</p>
-                        <div class="objection-proof">
-                            <strong>Proof:</strong> Independent audits accepted model on $500M+ project.
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="objection-card">
-                    <h4>🔗 "Is integration automatic or manual?"</h4>
-                    <div class="objection-answer">
-                        <p><strong>Intentional manual (5-10 minutes/day).</strong> This maintains human judgment as the critical element. CSV export from platform → manual import when administrator decides.</p>
-                        <div class="objection-proof">
-                            <strong>Advantage:</strong> Human control preserved, consistency ensured.
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Legal Reality Section -->
-    <section class="section legal-reality-section">
-        <div class="container">
-            <div class="legal-reality-content">
-                <h2 class="section-title">Operational & Legal Reality Statement</h2>
-                
-                <div class="legal-card platform">
-                    <h4>Platform Reality Acknowledgment</h4>
-                    <p>Visual CRP recognizes that contractual platforms serve a critical function: <strong>contractual file transfer with audit trail</strong>.</p>
-                    <p style="margin-top:10px;">These platforms excel at what they were designed for. They are not designed for—and cannot perform—the operational document control that construction projects require daily.</p>
-                </div>
-                
-                <div class="legal-card operational">
-                    <h4>Operational Reality Statement</h4>
-                    <p>Every construction project with a contractual platform also maintains <strong>manual control systems</strong> (Excel, notebooks, local knowledge). This isn't optional—it's necessary because platforms handle transfer, not control.</p>
-                    <p style="margin-top:10px;">Visual CRP <strong>IS</strong> that manual control formalized into a system everyone can use, eliminating duplicate work while preserving the human judgment essential to construction document control.</p>
-                </div>
-                
-                <div class="legal-card legal">
-                    <h4>Legal & Contractual Position</h4>
-                    <p><strong>Visual CRP does not replace contractual platform requirements.</strong> Projects remain responsible for fulfilling all contractual obligations regarding platform usage.</p>
-                    <p style="margin-top:10px;"><strong>Visual CRP eliminates the duplicate work</strong> that platforms inevitably create by providing the operational control system that projects need and already create manually.</p>
-                    <p style="margin-top:10px; font-size:0.9em; color:#64748b;">
-                        <em>Implementation services constitute technical consulting for document control systems, not professional engineering practice.</em>
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Role CTA Section -->
-    <section id="contact" class="section role-cta-section">
-        <div class="container">
-            <h2 class="section-title">Recommended Action by Your Role</h2>
-            <p class="section-subtitle">Get specific information relevant to your responsibilities</p>
-            
-            <div class="role-grid">
-                <div class="role-card">
-                    <h4>👷‍♂️ For Field Superintendents</h4>
-                    <p>Need documents in seconds, not minutes.</p>
-                    <a href="mailto:piter.bonilla@visualcrp.com?subject=Speed%20Demonstration%20Request" class="role-btn">
-                        ⚡ Request Speed Demonstration
-                    </a>
-                </div>
-                
-                <div class="role-card">
-                    <h4>📊 For Project Control</h4>
-                    <p>Need to eliminate duplicate work and errors.</p>
-                    <a href="mailto:piter.bonilla@visualcrp.com?subject=Duplication%20Analysis%20Request" class="role-btn">
-                        🔄 Specific Duplication Analysis
-                    </a>
-                </div>
-                
-                <div class="role-card">
-                    <h4>🏦 For Directors/CFOs</h4>
-                    <p>Need to reduce hidden operational costs.</p>
-                    <a href="mailto:piter.bonilla@visualcrp.com?subject=Detailed%20Financial%20Model%20Request" class="role-btn">
-                        💰 Detailed Financial Model
-                    </a>
-                </div>
-                
-                <div class="role-card">
-                    <h4>⚖️ For Legal/Compliance</h4>
-                    <p>Need to maintain contractual compliance.</p>
-                    <a href="mailto:piter.bonilla@visualcrp.com?subject=Hybrid%20Compliance%20Review" class="role-btn">
-                        📄 Hybrid Compliance Review
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>Visual CRP</h3>
-                    <p>Specialized document control systems for complex construction and infrastructure projects.</p>
-                    <p style="margin-top: 15px; font-size: 0.9em; color: #94a3b8;">
-                        <strong>Operational Reality Statement:</strong><br>
-                        Visual CRP formalizes manual control your project team already maintains. 
-                        It doesn't replace human judgment—it makes that judgment visible, shared, 
-                        and effective while platforms handle contractual transfer requirements.
-                    </p>
-                </div>
-                
-                <div class="footer-section">
-                    <h3>Contact</h3>
-                    <ul class="footer-links">
-                        <li><a href="mailto:piter.bonilla@visualcrp.com">piter.bonilla@visualcrp.com</a></li>
-                        <li><a href="tel:+18094400909">+1 (809) 440-0909</a></li>
-                        <li>Technical and commercial inquiries</li>
-                    </ul>
-                    <div style="margin-top: 20px;">
-                        <p style="color: #cbd5e1; font-size: 0.9em;">
-                            <strong>Document Control Systems Specialist</strong><br>
-                            21+ Years Construction Experience<br>
-                            Technical Consulting Services
-                        </p>
-                    </div>
-                </div>
-                
-                <div class="footer-section">
-                    <h3>Links</h3>
-                    <ul class="footer-links">
-                        <li><a href="#reality">Operational Reality</a></li>
-                        <li><a href="#architecture">Architecture</a></li>
-                        <li><a href="#calculator">Cost Analysis</a></li>
-                        <li><a href="#validation">Case Studies</a></li>
-                        <li><a href="#objections">Q&A</a></li>
-                        <li><a href="#contact">Contact by Role</a></li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="legal-disclaimer">
-                <p><strong>Legal Notice:</strong> Visual CRP is a specialized document control system. Savings mentioned are estimates based on real implementations and may vary according to specific project conditions. Visual CRP is designed to coexist with existing contractual platforms and does not intend to replace them where contractually required. All implementations are specialized consulting tailored to each project. Implementation services constitute technical consulting for document control systems, not professional engineering practice. Clients remain responsible for contractual compliance with platform requirements. © 2005-2026 All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
 
     <script>
         // Initialize page
@@ -1949,7 +2085,7 @@
         // Update pathway steps based on scroll position
         function updatePathway() {
             const steps = document.querySelectorAll('.pathway-step');
-            const sections = ['#', '#reality', '#architecture', '#calculator', '#validation', '#contact'];
+            const sections = ['#', '#reality', '#historical', '#architecture', '#calculator', '#validation', '#contact'];
             const scrollPos = window.scrollY;
             const windowHeight = window.innerHeight;
             
