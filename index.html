@@ -1,13 +1,7 @@
 <!DOCTYPE html>
-<!--
-VISUAL CRP - SINGLE HTML MULTILINGUAL SOLUTION
-Versión: 2.4 Multilenguaje (Corregida)
-Fecha: Enero 2026
-Sistema: Single HTML con traducción dinámica JSON
--->
-<html lang="en" data-current-lang="en">
-<head>
-    <meta charset="UTF-8">
+<!-- saved from url=(0022)https://visualcrp.com/ -->
+<html lang="en" data-current-lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- Meta Tags SEO Multilenguaje -->
@@ -23,9 +17,9 @@ Sistema: Single HTML con traducción dinámica JSON
     <meta property="og:locale" content="en_US">
     
     <!-- SEO Hreflang -->
-    <link rel="alternate" hreflang="en" href="https://visualcrp.com" />
-    <link rel="alternate" hreflang="es" href="https://visualcrp.com/?lang=es" />
-    <link rel="canonical" href="https://visualcrp.com" />
+    <link rel="alternate" hreflang="en" href="https://visualcrp.com/">
+    <link rel="alternate" hreflang="es" href="https://visualcrp.com/?lang=es">
+    <link rel="canonical" href="https://visualcrp.com/">
     
     <!-- Schema.org Multilenguaje -->
     <script type="application/ld+json">
@@ -64,6 +58,104 @@ Sistema: Single HTML con traducción dinámica JSON
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
+        }
+        
+        /* PROFESSIONAL ACCESS MODAL */
+        .professional-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 10001;
+            backdrop-filter: blur(10px);
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .professional-modal.active {
+            display: flex;
+        }
+        
+        .professional-modal-content {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 800px;
+            width: 90%;
+            position: relative;
+            animation: modalFadeIn 0.4s ease;
+        }
+        
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 1.5em;
+            cursor: pointer;
+            color: #64748b;
+        }
+        
+        .modal-title {
+            font-size: 2em;
+            color: #1e3a8a;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .access-grid-modal {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+        
+        .access-card-modal {
+            background: #f8fafc;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            border: 2px solid #e2e8f0;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .access-card-modal:hover {
+            transform: translateY(-5px);
+            border-color: #3b82f6;
+            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.1);
+        }
+        
+        .access-icon-modal {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+        
+        .access-card-modal h3 {
+            color: #1e293b;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+        
+        .access-card-modal p {
+            color: #64748b;
+            font-size: 0.95em;
+            margin-bottom: 20px;
         }
         
         /* LANGUAGE SWITCHER */
@@ -192,6 +284,49 @@ Sistema: Single HTML con traducción dinámica JSON
             flex-wrap: wrap;
         }
         
+        /* Professional Access Mini Bar */
+        .professional-mini-bar {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .professional-mini-bar h4 {
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            opacity: 0.9;
+            text-align: center;
+        }
+        
+        .mini-access-grid {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .mini-access-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9em;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .mini-access-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+        
         /* NAVIGATION */
         .nav {
             background: white;
@@ -221,6 +356,7 @@ Sistema: Single HTML con traducción dinámica JSON
         .nav-links {
             display: flex;
             gap: 25px;
+            align-items: center;
         }
         
         .nav-links a {
@@ -233,6 +369,47 @@ Sistema: Single HTML con traducción dinámica JSON
         
         .nav-links a:hover {
             color: #3b82f6;
+        }
+        
+        /* Professional Buttons in Nav */
+        .nav-professional-btns {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        .nav-professional-btn {
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9em;
+            text-decoration: none;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .nav-professional-btn.cv {
+            background: #1e3a8a;
+            color: white;
+        }
+        
+        .nav-professional-btn.cv:hover {
+            background: #1e40af;
+            transform: translateY(-2px);
+        }
+        
+        .nav-professional-btn.portfolio {
+            background: #10b981;
+            color: white;
+        }
+        
+        .nav-professional-btn.portfolio:hover {
+            background: #059669;
+            transform: translateY(-2px);
         }
         
         /* NAVIGATION PATHWAY */
@@ -669,6 +846,15 @@ Sistema: Single HTML con traducción dinámica JSON
             .lang-btn.active .lang-text {
                 display: inline;
             }
+            
+            .nav-professional-btns {
+                display: none;
+            }
+            
+            .mini-access-grid {
+                flex-direction: column;
+                align-items: center;
+            }
         }
         
         @media (max-width: 480px) {
@@ -729,6 +915,39 @@ Sistema: Single HTML con traducción dinámica JSON
 </head>
 
 <body>
+    <!-- PROFESSIONAL ACCESS MODAL -->
+    <div id="professionalModal" class="professional-modal">
+        <div class="professional-modal-content">
+            <button class="modal-close" onclick="closeProfessionalModal()">×</button>
+            <h2 class="modal-title" data-key="modal.title">Professional Document Access</h2>
+            <p style="text-align: center; color: #64748b; margin-bottom: 30px;" data-key="modal.subtitle">Complete professional documentation and project portfolio</p>
+            
+            <div class="access-grid-modal">
+                <div class="access-card-modal" onclick="window.open('resume.html', '_blank')">
+                    <div class="access-icon-modal">📄</div>
+                    <h3 data-key="modal.cv.title">Professional CV</h3>
+                    <p data-key="modal.cv.text">Complete professional history, 21+ years experience in document control systems for complex infrastructure projects.</p>
+                    <div style="margin-top: 20px;">
+                        <span class="btn" style="background: #1e3a8a; color: white; padding: 10px 25px; border-radius: 20px; display: inline-block;" data-key="modal.cv.button">View CV</span>
+                    </div>
+                </div>
+                
+                <div class="access-card-modal" onclick="window.open('portfolio.html', '_blank')">
+                    <div class="access-icon-modal">📊</div>
+                    <h3 data-key="modal.portfolio.title">Project Portfolio</h3>
+                    <p data-key="modal.portfolio.text">Detailed case studies from $400M+ infrastructure projects including dams, hydroelectric plants, and transportation systems.</p>
+                    <div style="margin-top: 20px;">
+                        <span class="btn" style="background: #10b981; color: white; padding: 10px 25px; border-radius: 20px; display: inline-block;" data-key="modal.portfolio.button">View Portfolio</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #e2e8f0; text-align: center;">
+                <p style="color: #64748b; font-size: 0.9em;" data-key="modal.contact">For specific project references or system demonstrations: <a href="mailto:piter.bonilla@visualcrp.com" style="color: #3b82f6;">piter.bonilla@visualcrp.com</a></p>
+            </div>
+        </div>
+    </div>
+
     <!-- LANGUAGE SWITCHER -->
     <div class="language-switcher">
         <button class="lang-btn active" data-lang="en">
@@ -745,15 +964,8 @@ Sistema: Single HTML con traducción dinámica JSON
     <header class="header">
         <div class="container header-content">
             <div class="hero-subtitle" data-key="header.subtitle">Operational Control Architecture</div>
-            <h1 class="hero-main-title" data-key="header.title">
-                The Operational Reality Every Construction Project Faces:<br>
-                <span style="color: #10b981">Platforms Transfer. Real Control Is Always Manual.</span>
-            </h1>
-            <p class="hero-tagline" data-key="header.tagline">
-                <strong>21+ years validation:</strong> Every project with contractual platforms also maintains 
-                manual control in Excel. Visual CRP <strong>is</strong> that manual control formalized into a 
-                system everyone can use—eliminating duplicate work while platforms handle contractual transfer.
-            </p>
+            <h1 class="hero-main-title" data-key="header.title">The Operational Reality Every Construction Project Faces:<br><span style="color: #10b981">Platforms Transfer. Real Control Is Always Manual.</span></h1>
+            <p class="hero-tagline" data-key="header.tagline"><strong>21+ years validation:</strong> Every project with contractual platforms also maintains manual control in Excel. Visual CRP <strong>is</strong> that manual control formalized into a system everyone can use—eliminating duplicate work while platforms handle contractual transfer.</p>
             
             <div class="hero-cta-box">
                 <div class="hero-stats-immediate">
@@ -772,15 +984,34 @@ Sistema: Single HTML con traducción dinámica JSON
                 </div>
                 
                 <div class="hero-buttons">
-                    <a href="#calculator" class="role-btn" style="background: #10b981;">
+                    <a href="https://visualcrp.com/#calculator" class="role-btn" style="background: #10b981;">
                         🧮 <span data-key="buttons.calculator">Calculate Your Specific Savings</span>
                     </a>
-                    <a href="#reality" class="role-btn" style="background: #3b82f6;">
+                    <a href="https://visualcrp.com/#reality" class="role-btn" style="background: #3b82f6;">
                         🔍 <span data-key="buttons.reality">See Operational Reality</span>
                     </a>
-                    <a href="#validation" class="role-btn" style="background: #f59e0b;">
+                    <a href="https://visualcrp.com/#validation" class="role-btn" style="background: #f59e0b;">
                         ✅ <span data-key="buttons.validation">View 8-Year Validation</span>
                     </a>
+                    <button class="role-btn" style="background: #1e3a8a;" onclick="openProfessionalModal()">
+                        📄 <span data-key="buttons.professional">Professional Documents</span>
+                    </button>
+                </div>
+                
+                <!-- Professional Access Mini Bar -->
+                <div class="professional-mini-bar">
+                    <h4 data-key="mini.access">Quick Professional Access:</h4>
+                    <div class="mini-access-grid">
+                        <a href="resume.html" class="mini-access-btn">
+                            📄 <span data-key="mini.cv">Professional CV</span>
+                        </a>
+                        <a href="portfolio.html" class="mini-access-btn">
+                            📊 <span data-key="mini.portfolio">Project Portfolio</span>
+                        </a>
+                        <a href="mailto:piter.bonilla@visualcrp.com" class="mini-access-btn">
+                            📧 <span data-key="mini.contact">Contact Specialist</span>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -789,20 +1020,28 @@ Sistema: Single HTML con traducción dinámica JSON
     <!-- NAVIGATION -->
     <nav class="nav">
         <div class="container nav-content">
-            <a href="#" class="logo">
+            <a href="https://visualcrp.com/#" class="logo">
                 <span>Visual CRP</span>
             </a>
             <div class="nav-links">
-                <a href="#reality" data-key="nav.reality">Reality</a>
-                <a href="#historical" data-key="nav.historical">Context</a>
-                <a href="#architecture" data-key="nav.architecture">Architecture</a>
-                <a href="#calculator" data-key="nav.calculator">Cost Analysis</a>
-                <a href="#validation" data-key="nav.validation">Validation</a>
-                <a href="#contact" data-key="nav.contact">Consultation</a>
+                <a href="https://visualcrp.com/#reality" data-key="nav.reality">Reality</a>
+                <a href="https://visualcrp.com/#historical" data-key="nav.historical">Context</a>
+                <a href="https://visualcrp.com/#architecture" data-key="nav.architecture">Architecture</a>
+                <a href="https://visualcrp.com/#calculator" data-key="nav.calculator">Cost Analysis</a>
+                <a href="https://visualcrp.com/#validation" data-key="nav.validation">Validation</a>
+                <a href="https://visualcrp.com/#contact" data-key="nav.contact">Consultation</a>
+                <div class="nav-professional-btns">
+                    <a href="resume.html" class="nav-professional-btn cv">
+                        📄 <span data-key="nav.cv">CV</span>
+                    </a>
+                    <a href="portfolio.html" class="nav-professional-btn portfolio">
+                        📊 <span data-key="nav.portfolio">Portfolio</span>
+                    </a>
+                </div>
+                <a href="mailto:piter.bonilla@visualcrp.com" class="role-btn" style="background: #10b981; padding: 8px 20px; font-size: 0.9em;">
+                    <span data-key="nav.freereview">Free Review</span>
+                </a>
             </div>
-            <a href="mailto:piter.bonilla@visualcrp.com" class="role-btn" style="background: #10b981; padding: 8px 20px; font-size: 0.9em;">
-                <span data-key="nav.freereview">Free Review</span>
-            </a>
         </div>
         
         <div class="nav-pathway">
@@ -826,15 +1065,17 @@ Sistema: Single HTML con traducción dinámica JSON
                 <span class="step-number">5</span>
                 <span class="step-label" data-key="pathway.5">Validate Cases</span>
             </div>
+            <div class="pathway-step" onclick="openProfessionalModal()" style="cursor: pointer;">
+                <span class="step-number">📄</span>
+                <span class="step-label" data-key="pathway.6">Professional Docs</span>
+            </div>
         </div>
     </nav>
 
     <!-- NEXT STEP CTA -->
     <div class="next-step-cta">
-        <div data-key="nextstep.title">
-            <strong>Recommended next step:</strong> Understand the operational reality platforms don't address
-        </div>
-        <a href="#reality" class="next-step-btn">
+        <div data-key="nextstep.title"><strong>Recommended next step:</strong> Understand the operational reality platforms don't address</div>
+        <a href="https://visualcrp.com/#reality" class="next-step-btn">
             🔍 <span data-key="nextstep.button">See Operational Reality →</span>
         </a>
     </div>
@@ -848,6 +1089,7 @@ Sistema: Single HTML con traducción dinámica JSON
             <span class="ticker-item">💼 <span data-key="ticker.4">21+ years document control experience</span></span>
             <span class="ticker-item">🔗 <span data-key="ticker.5">Coexists with all contractual platforms</span></span>
             <span class="ticker-item">📜 <span data-key="ticker.6">Post-2008 compliance requirements addressed</span></span>
+            <span class="ticker-item">📄 <span data-key="ticker.7">Professional CV and Portfolio available</span></span>
         </div>
     </div>
 
@@ -893,16 +1135,8 @@ Sistema: Single HTML con traducción dinámica JSON
             
             <div class="reality-insight">
                 <h4 data-key="reality.insight.title">🏗️ Key Operational Insight</h4>
-                <p data-key="reality.insight.text1">
-                    <strong>The duplicate work isn't caused by team disorganization.</strong><br>
-                    It's caused by a fundamental architectural mismatch: Platforms are designed for 
-                    file transfer. Construction document control requires dynamic, multi-coded, 
-                    constantly reorganizing systems with human judgment at every step.
-                </p>
-                <p style="margin-top:15px;" data-key="reality.insight.text2">
-                    Visual CRP doesn't create new control—it <strong>formalizes the control that 
-                    already exists</strong> and eliminates the duplicate manual entry.
-                </p>
+                <p data-key="reality.insight.text1"><strong>The duplicate work isn't caused by team disorganization.</strong><br>It's caused by a fundamental architectural mismatch: Platforms are designed for file transfer. Construction document control requires dynamic, multi-coded, constantly reorganizing systems with human judgment at every step.</p>
+                <p style="margin-top:15px;" data-key="reality.insight.text2">Visual CRP doesn't create new control—it <strong>formalizes the control that already exists</strong> and eliminates the duplicate manual entry.</p>
             </div>
         </div>
     </section>
@@ -962,7 +1196,7 @@ Sistema: Single HTML con traducción dinámica JSON
                                 <strong data-key="daytoday.comparison1">Platform Search:</strong> <span data-key="daytoday.comparison1time">8-12 minute wait</span>
                             </div>
                             <div style="padding:15px; background:#f0fdf4; border-radius:6px;">
-                                <strong data-key="daytoday.comparison2">Visual CRP:</strong> <span data-key="daytoday.comparison2time"><30 seconds</span>
+                                <strong data-key="daytoday.comparison2">Visual CRP:</strong> <span data-key="daytoday.comparison2time">&lt;30 seconds</span>
                             </div>
                         </div>
                     </div>
@@ -998,7 +1232,7 @@ Sistema: Single HTML con traducción dinámica JSON
                     <div class="timeline-year">2008-2010</div>
                     <div class="timeline-marker"></div>
                     <div class="timeline-content">
-                        <h4 data-key="historical.period2.title">The Financial Crisis & Insurance Response</h4>
+                        <h4 data-key="historical.period2.title">The Financial Crisis &amp; Insurance Response</h4>
                         <p data-key="historical.period2.text">Following the global financial crisis, insurers and reinsurers mandated <strong>digital traceability, auditable evidence, and standardized risk control</strong> for construction projects.</p>
                         <ul style="margin-top:10px; padding-left:20px;">
                             <li data-key="historical.period2.list1">Centralized delivery systems required</li>
@@ -1038,17 +1272,13 @@ Sistema: Single HTML con traducción dinámica JSON
             
             <div class="historical-insight">
                 <h4 data-key="historical.insight.title">📜 Critical Historical Insight</h4>
-                <p data-key="historical.insight.text1">
-                    <strong>Contractual platforms were never designed for operational control.</strong> They were created to satisfy insurance and compliance requirements post-2008.
-                </p>
+                <p data-key="historical.insight.text1"><strong>Contractual platforms were never designed for operational control.</strong> They were created to satisfy insurance and compliance requirements post-2008.</p>
                 <p style="margin-top:15px;" data-key="historical.insight.text2">This explains why:</p>
                 <ul>
                     <li><strong data-key="historical.insight.platformstrength">Platforms excel at:</strong> <span data-key="historical.insight.platformstrengthlist">Transfer, compliance trails, audit evidence</span></li>
                     <li><strong data-key="historical.insight.platformweakness">Platforms cannot do:</strong> <span data-key="historical.insight.platformweaknesslist">Dynamic operational control, rapid field access, multi-system coding</span></li>
                 </ul>
-                <p style="margin-top:15px; font-weight:600;" data-key="historical.insight.conclusion">
-                    Visual CRP addresses the operational gap that platforms were never designed to fill.
-                </p>
+                <p style="margin-top:15px; font-weight:600;" data-key="historical.insight.conclusion">Visual CRP addresses the operational gap that platforms were never designed to fill.</p>
             </div>
         </div>
     </section>
@@ -1081,13 +1311,8 @@ Sistema: Single HTML con traducción dinámica JSON
                             <span class="metric-value">14,936</span>
                         </div>
                     </div>
-                    <blockquote class="validation-quote" data-key="validation.montegrande.quote">
-                        "Auditors accepted our hybrid model: the contractual platform for document transfer and Visual CRP for operational control. The team used Visual CRP daily; both were considered strengths for audit compliance."
-                    </blockquote>
-                    <div class="validation-author" data-key="validation.montegrande.author">
-                        <strong>Technical Documentation Manager</strong><br>
-                        Montegrande Dam
-                    </div>
+                    <blockquote class="validation-quote" data-key="validation.montegrande.quote">"Auditors accepted our hybrid model: the contractual platform for document transfer and Visual CRP for operational control. The team used Visual CRP daily; both were considered strengths for audit compliance."</blockquote>
+                    <div class="validation-author" data-key="validation.montegrande.author"><strong>Technical Documentation Manager</strong><br>Montegrande Dam</div>
                 </div>
                 
                 <div class="validation-card">
@@ -1112,10 +1337,11 @@ Sistema: Single HTML con traducción dinámica JSON
                     <span data-key="validation.legal.experience">21+ years document control experience</span><br>
                     <span data-key="validation.legal.background">Civil Engineering background (non-practice jurisdiction)</span>
                 </div>
-                <p class="small-note" data-key="validation.legal.note">
-                    *Calculations based on real operational data from referenced projects. 
-                    Complete audit information available under NDA for evaluation teams.
-                </p>
+                <p class="small-note" data-key="validation.legal.note">*Complete professional CV and project portfolio available for evaluation teams.</p>
+                <div style="margin-top: 20px; display: flex; gap: 15px; justify-content: center;">
+                    <a href="resume.html" class="btn" style="background: #1e3a8a; color: white; padding: 10px 20px; border-radius: 20px; text-decoration: none;" data-key="validation.viewcv">View Professional CV</a>
+                    <a href="portfolio.html" class="btn" style="background: #10b981; color: white; padding: 10px 20px; border-radius: 20px; text-decoration: none;" data-key="validation.viewportfolio">View Project Portfolio</a>
+                </div>
             </div>
         </div>
     </section>
@@ -1183,10 +1409,7 @@ Sistema: Single HTML con traducción dinámica JSON
                     <li><strong data-key="architecture.insight.platforms">Platforms:</strong> <span data-key="architecture.insight.platformstext">File transfer with audit trail (post-2008 insurance compliance)</span></li>
                     <li><strong data-key="architecture.insight.vcrp">Visual CRP:</strong> <span data-key="architecture.insight.vcrptext">Operational control with constant human judgment (project execution needs)</span></li>
                 </ul>
-                <p style="margin-top:15px; font-weight:600;" data-key="architecture.insight.conclusion">
-                    Trying to make one system do both creates the duplicate work problem.<br>
-                    Using both systems for what they do best eliminates it.
-                </p>
+                <p style="margin-top:15px; font-weight:600;" data-key="architecture.insight.conclusion">Trying to make one system do both creates the duplicate work problem.<br>Using both systems for what they do best eliminates it.</p>
             </div>
         </div>
     </section>
@@ -1243,9 +1466,7 @@ Sistema: Single HTML con traducción dinámica JSON
                     </div>
                 </div>
                 
-                <button class="calculator-trigger" onclick="showAdvancedResults()" data-key="calculator.button">
-                    🔍 Reveal Complete Analysis (Visible + Hidden)
-                </button>
+                <button class="calculator-trigger" onclick="showAdvancedResults()" data-key="calculator.button">🔍 Reveal Complete Analysis (Visible + Hidden)</button>
                 
                 <div id="advancedResults" class="calculator-results-advanced">
                     <div class="results-grid">
@@ -1391,6 +1612,20 @@ Sistema: Single HTML con traducción dinámica JSON
                         </div>
                     </div>
                 </div>
+                
+                <div class="objection-card">
+                    <h4 data-key="objection.4.title">📄 "Can we review the specialist's credentials and project experience?"</h4>
+                    <div class="objection-answer">
+                        <p data-key="objection.4.answer"><strong>Yes, complete professional documentation available.</strong> Full CV with 21+ years experience and detailed project portfolio with case studies.</p>
+                        <div class="objection-proof">
+                            <strong data-key="objection.4.prooflabel">Available:</strong> <span data-key="objection.4.prooftext">Professional CV and Project Portfolio accessible from any page.</span>
+                        </div>
+                        <div style="margin-top: 15px; display: flex; gap: 10px; flex-wrap: wrap;">
+                            <a href="resume.html" class="btn" style="background: #1e3a8a; color: white; padding: 8px 15px; border-radius: 20px; font-size: 0.9em; text-decoration: none;" data-key="objection.viewcv">View CV</a>
+                            <a href="portfolio.html" class="btn" style="background: #10b981; color: white; padding: 8px 15px; border-radius: 20px; font-size: 0.9em; text-decoration: none;" data-key="objection.viewportfolio">View Portfolio</a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -1400,7 +1635,7 @@ Sistema: Single HTML con traducción dinámica JSON
     <section class="section legal-reality-section">
         <div class="container">
             <div class="legal-reality-content">
-                <h2 class="section-title" data-key="legal.title">Operational & Legal Reality Statement</h2>
+                <h2 class="section-title" data-key="legal.title">Operational &amp; Legal Reality Statement</h2>
                 
                 <div class="legal-card platform">
                     <h4 data-key="legal.platform.title">Platform Reality Acknowledgment</h4>
@@ -1415,7 +1650,7 @@ Sistema: Single HTML con traducción dinámica JSON
                 </div>
                 
                 <div class="legal-card legal">
-                    <h4 data-key="legal.legal.title">Legal & Contractual Position</h4>
+                    <h4 data-key="legal.legal.title">Legal &amp; Contractual Position</h4>
                     <p data-key="legal.legal.text1"><strong>Visual CRP does not replace contractual platform requirements.</strong> Projects remain responsible for fulfilling all contractual obligations regarding platform usage.</p>
                     <p style="margin-top:10px;" data-key="legal.legal.text2"><strong>Visual CRP eliminates the duplicate work</strong> that platforms inevitably create by providing the operational control system that projects need and already create manually.</p>
                     <p style="margin-top:10px; font-size:0.9em; color:#64748b;">
@@ -1436,33 +1671,31 @@ Sistema: Single HTML con traducción dinámica JSON
                 <div class="role-card">
                     <h4 data-key="role.1.title">👷‍♂️ For Field Superintendents</h4>
                     <p data-key="role.1.text">Need documents in seconds, not minutes.</p>
-                    <a href="mailto:piter.bonilla@visualcrp.com?subject=Speed%20Demonstration%20Request" class="role-btn" data-key="role.1.button">
-                        ⚡ Request Speed Demonstration
-                    </a>
+                    <a href="mailto:piter.bonilla@visualcrp.com?subject=Speed%20Demonstration%20Request" class="role-btn" data-key="role.1.button">⚡ Request Speed Demonstration</a>
                 </div>
                 
                 <div class="role-card">
                     <h4 data-key="role.2.title">📊 For Project Control</h4>
                     <p data-key="role.2.text">Need to eliminate duplicate work and errors.</p>
-                    <a href="mailto:piter.bonilla@visualcrp.com?subject=Duplication%20Analysis%20Request" class="role-btn" data-key="role.2.button">
-                        🔄 Specific Duplication Analysis
-                    </a>
+                    <a href="mailto:piter.bonilla@visualcrp.com?subject=Duplication%20Analysis%20Request" class="role-btn" data-key="role.2.button">🔄 Specific Duplication Analysis</a>
                 </div>
                 
                 <div class="role-card">
                     <h4 data-key="role.3.title">🏦 For Directors/CFOs</h4>
                     <p data-key="role.3.text">Need to reduce hidden operational costs.</p>
-                    <a href="mailto:piter.bonilla@visualcrp.com?subject=Detailed%20Financial%20Model%20Request" class="role-btn" data-key="role.3.button">
-                        💰 Detailed Financial Model
-                    </a>
+                    <a href="mailto:piter.bonilla@visualcrp.com?subject=Detailed%20Financial%20Model%20Request" class="role-btn" data-key="role.3.button">💰 Detailed Financial Model</a>
                 </div>
                 
                 <div class="role-card">
                     <h4 data-key="role.4.title">⚖️ For Legal/Compliance</h4>
                     <p data-key="role.4.text">Need to maintain contractual compliance.</p>
-                    <a href="mailto:piter.bonilla@visualcrp.com?subject=Hybrid%20Compliance%20Review" class="role-btn" data-key="role.4.button">
-                        📄 Hybrid Compliance Review
-                    </a>
+                    <a href="mailto:piter.bonilla@visualcrp.com?subject=Hybrid%20Compliance%20Review" class="role-btn" data-key="role.4.button">📄 Hybrid Compliance Review</a>
+                </div>
+                
+                <div class="role-card">
+                    <h4 data-key="role.5.title">👨‍💼 For HR/Evaluation Teams</h4>
+                    <p data-key="role.5.text">Need to verify credentials and experience.</p>
+                    <a href="#" class="role-btn" onclick="openProfessionalModal(); return false;" data-key="role.5.button">📄 Review Professional Documents</a>
                 </div>
             </div>
         </div>
@@ -1477,19 +1710,17 @@ Sistema: Single HTML con traducción dinámica JSON
                     <p data-key="footer.text1">Specialized document control systems for complex construction and infrastructure projects.</p>
                     <p style="margin-top: 15px; font-size: 0.9em; color: #94a3b8;">
                         <strong data-key="footer.disclaimerlabel">Operational Reality Statement:</strong><br>
-                        <span data-key="footer.disclaimertext">
-                            Visual CRP formalizes manual control your project team already maintains. 
-                            It doesn't replace human judgment—it makes that judgment visible, shared, 
-                            and effective while platforms handle contractual transfer requirements.
-                        </span>
+                        <span data-key="footer.disclaimertext">Visual CRP formalizes manual control your project team already maintains. It doesn't replace human judgment—it makes that judgment visible, shared, and effective while platforms handle contractual transfer requirements.</span>
                     </p>
                 </div>
                 
                 <div class="footer-section">
-                    <h3 data-key="footer.title2">Contact</h3>
+                    <h3 data-key="footer.title2">Contact & Professional Access</h3>
                     <ul class="footer-links">
                         <li><a href="mailto:piter.bonilla@visualcrp.com">piter.bonilla@visualcrp.com</a></li>
                         <li><a href="tel:+18094400909">+1 (809) 440-0909</a></li>
+                        <li><a href="resume.html">📄 Professional CV</a></li>
+                        <li><a href="portfolio.html">📊 Project Portfolio</a></li>
                         <li data-key="footer.contacttext">Technical and commercial inquiries</li>
                     </ul>
                     <div style="margin-top: 20px;">
@@ -1504,20 +1735,19 @@ Sistema: Single HTML con traducción dinámica JSON
                 <div class="footer-section">
                     <h3 data-key="footer.title3">Links</h3>
                     <ul class="footer-links">
-                        <li><a href="#reality" data-key="footer.link1">Operational Reality</a></li>
-                        <li><a href="#historical" data-key="footer.link2">Historical Context</a></li>
-                        <li><a href="#architecture" data-key="footer.link3">Architecture</a></li>
-                        <li><a href="#calculator" data-key="footer.link4">Cost Analysis</a></li>
-                        <li><a href="#validation" data-key="footer.link5">Case Studies</a></li>
-                        <li><a href="#objections" data-key="footer.link6">Q&A</a></li>
+                        <li><a href="https://visualcrp.com/#reality" data-key="footer.link1">Operational Reality</a></li>
+                        <li><a href="https://visualcrp.com/#historical" data-key="footer.link2">Historical Context</a></li>
+                        <li><a href="https://visualcrp.com/#architecture" data-key="footer.link3">Architecture</a></li>
+                        <li><a href="https://visualcrp.com/#calculator" data-key="footer.link4">Cost Analysis</a></li>
+                        <li><a href="https://visualcrp.com/#validation" data-key="footer.link5">Case Studies</a></li>
+                        <li><a href="https://visualcrp.com/#objections" data-key="footer.link6">Q&amp;A</a></li>
+                        <li><a href="#" onclick="openProfessionalModal(); return false;" data-key="footer.link7">Professional Documents</a></li>
                     </ul>
                 </div>
             </div>
             
             <div class="legal-disclaimer">
-                <p data-key="footer.legal">
-                    <strong>Legal Notice:</strong> Visual CRP is a specialized document control system. Savings mentioned are estimates based on real implementations and may vary according to specific project conditions. Visual CRP is designed to coexist with existing contractual platforms and does not intend to replace them where contractually required. All implementations are specialized consulting tailored to each project. Implementation services constitute technical consulting for document control systems, not professional engineering practice. Clients remain responsible for contractual compliance with platform requirements. © 2005-2026 All rights reserved.
-                </p>
+                <p data-key="footer.legal"><strong>Legal Notice:</strong> Visual CRP is a specialized document control system. Savings mentioned are estimates based on real implementations and may vary according to specific project conditions. Visual CRP is designed to coexist with existing contractual platforms and does not intend to replace them where contractually required. All implementations are specialized consulting tailored to each project. Implementation services constitute technical consulting for document control systems, not professional engineering practice. Clients remain responsible for contractual compliance with platform requirements. © 2005-2026 All rights reserved.</p>
             </div>
         </div>
     </footer>
@@ -2199,7 +2429,47 @@ Sistema: Single HTML con traducción dinámica JSON
                 this.currentLang = 'en';
                 this.translationData = {
                     en: {
-                        // Meta tags
+                        // Nuevas claves para acceso profesional
+                        'modal.title': 'Professional Document Access',
+                        'modal.subtitle': 'Complete professional documentation and project portfolio',
+                        'modal.cv.title': 'Professional CV',
+                        'modal.cv.text': 'Complete professional history, 21+ years experience in document control systems for complex infrastructure projects.',
+                        'modal.cv.button': 'View CV',
+                        'modal.portfolio.title': 'Project Portfolio',
+                        'modal.portfolio.text': 'Detailed case studies from $400M+ infrastructure projects including dams, hydroelectric plants, and transportation systems.',
+                        'modal.portfolio.button': 'View Portfolio',
+                        'modal.contact': 'For specific project references or system demonstrations:',
+                        
+                        'buttons.professional': 'Professional Documents',
+                        'mini.access': 'Quick Professional Access:',
+                        'mini.cv': 'Professional CV',
+                        'mini.portfolio': 'Project Portfolio',
+                        'mini.contact': 'Contact Specialist',
+                        
+                        'nav.cv': 'CV',
+                        'nav.portfolio': 'Portfolio',
+                        
+                        'pathway.6': 'Professional Docs',
+                        
+                        'ticker.7': 'Professional CV and Portfolio available',
+                        
+                        'validation.viewcv': 'View Professional CV',
+                        'validation.viewportfolio': 'View Project Portfolio',
+                        
+                        'objection.4.title': '📄 "Can we review the specialist\'s credentials and project experience?"',
+                        'objection.4.answer': '<strong>Yes, complete professional documentation available.</strong> Full CV with 21+ years experience and detailed project portfolio with case studies.',
+                        'objection.4.prooflabel': 'Available:',
+                        'objection.4.prooftext': 'Professional CV and Project Portfolio accessible from any page.',
+                        'objection.viewcv': 'View CV',
+                        'objection.viewportfolio': 'View Portfolio',
+                        
+                        'role.5.title': '👨‍💼 For HR/Evaluation Teams',
+                        'role.5.text': 'Need to verify credentials and experience.',
+                        'role.5.button': '📄 Review Professional Documents',
+                        
+                        'footer.link7': 'Professional Documents',
+                        
+                        // Meta tags originales
                         'meta.title': 'Visual CRP | Operational Document Control | Formalizing Existing Control',
                         'meta.description': 'Visual CRP formalizes manual document control that already exists on construction projects. Coexists with contractual platforms. Eliminates duplicate work while maintaining 100% contractual compliance.',
                         'og.title': 'Visual CRP - Formalizing Control That Already Exists',
@@ -2360,7 +2630,7 @@ Sistema: Single HTML con traducción dinámica JSON
                         'validation.legal.specialist': 'Document Control Systems Specialist',
                         'validation.legal.experience': '21+ years document control experience',
                         'validation.legal.background': 'Civil Engineering background (non-practice jurisdiction)',
-                        'validation.legal.note': '*Calculations based on real operational data from referenced projects. Complete audit information available under NDA for evaluation teams.',
+                        'validation.legal.note': '*Complete professional CV and project portfolio available for evaluation teams.',
                         
                         // Architecture
                         'architecture.title': 'Architectural Reality: Why Both Systems Are Necessary',
@@ -2513,7 +2783,7 @@ Sistema: Single HTML con traducción dinámica JSON
                         'footer.text1': 'Specialized document control systems for complex construction and infrastructure projects.',
                         'footer.disclaimerlabel': 'Operational Reality Statement:',
                         'footer.disclaimertext': 'Visual CRP formalizes manual control your project team already maintains. It doesn\'t replace human judgment—it makes that judgment visible, shared, and effective while platforms handle contractual transfer requirements.',
-                        'footer.title2': 'Contact',
+                        'footer.title2': 'Contact & Professional Access',
                         'footer.contacttext': 'Technical and commercial inquiries',
                         'footer.specialist': 'Document Control Systems Specialist',
                         'footer.experience': '21+ Years Construction Experience',
@@ -2528,7 +2798,47 @@ Sistema: Single HTML con traducción dinámica JSON
                         'footer.legal': '<strong>Legal Notice:</strong> Visual CRP is a specialized document control system. Savings mentioned are estimates based on real implementations and may vary according to specific project conditions. Visual CRP is designed to coexist with existing contractual platforms and does not intend to replace them where contractually required. All implementations are specialized consulting tailored to each project. Implementation services constitute technical consulting for document control systems, not professional engineering practice. Clients remain responsible for contractual compliance with platform requirements. © 2005-2026 All rights reserved.'
                     },
                     es: {
-                        // Meta tags
+                        // Nuevas claves para acceso profesional
+                        'modal.title': 'Acceso a Documentos Profesionales',
+                        'modal.subtitle': 'Documentación profesional completa y portafolio de proyectos',
+                        'modal.cv.title': 'CV Profesional',
+                        'modal.cv.text': 'Historial profesional completo, 21+ años de experiencia en sistemas de control documental para proyectos complejos de infraestructura.',
+                        'modal.cv.button': 'Ver CV',
+                        'modal.portfolio.title': 'Portafolio de Proyectos',
+                        'modal.portfolio.text': 'Casos de estudio detallados de proyectos de infraestructura de $400M+ incluyendo represas, plantas hidroeléctricas y sistemas de transporte.',
+                        'modal.portfolio.button': 'Ver Portafolio',
+                        'modal.contact': 'Para referencias específicas de proyectos o demostraciones del sistema:',
+                        
+                        'buttons.professional': 'Documentos Profesionales',
+                        'mini.access': 'Acceso Rápido Profesional:',
+                        'mini.cv': 'CV Profesional',
+                        'mini.portfolio': 'Portafolio de Proyectos',
+                        'mini.contact': 'Contactar Especialista',
+                        
+                        'nav.cv': 'CV',
+                        'nav.portfolio': 'Portafolio',
+                        
+                        'pathway.6': 'Docs Profesionales',
+                        
+                        'ticker.7': 'CV Profesional y Portafolio disponibles',
+                        
+                        'validation.viewcv': 'Ver CV Profesional',
+                        'validation.viewportfolio': 'Ver Portafolio de Proyectos',
+                        
+                        'objection.4.title': '📄 "¿Podemos revisar las credenciales y experiencia del especialista?"',
+                        'objection.4.answer': '<strong>Sí, documentación profesional completa disponible.</strong> CV completo con 21+ años de experiencia y portafolio detallado de proyectos con casos de estudio.',
+                        'objection.4.prooflabel': 'Disponible:',
+                        'objection.4.prooftext': 'CV Profesional y Portafolio de Proyectos accesibles desde cualquier página.',
+                        'objection.viewcv': 'Ver CV',
+                        'objection.viewportfolio': 'Ver Portafolio',
+                        
+                        'role.5.title': '👨‍💼 Para Equipos de HR/Evaluación',
+                        'role.5.text': 'Necesitan verificar credenciales y experiencia.',
+                        'role.5.button': '📄 Revisar Documentos Profesionales',
+                        
+                        'footer.link7': 'Documentos Profesionales',
+                        
+                        // Meta tags originales
                         'meta.title': 'Visual CRP | Control Documental Operacional | Formalizando el Control Existente',
                         'meta.description': 'Visual CRP formaliza el control documental manual que ya existe en proyectos de construcción. Coexiste con plataformas de gestión documental contractual. Elimina trabajo duplicado manteniendo 100% cumplimiento contractual.',
                         'og.title': 'Visual CRP - Formalizando el Control que Ya Existe',
@@ -2689,7 +2999,7 @@ Sistema: Single HTML con traducción dinámica JSON
                         'validation.legal.specialist': 'Especialista en Sistemas de Control Documental',
                         'validation.legal.experience': '21+ años experiencia en control documental',
                         'validation.legal.background': 'Formación en Ingeniería Civil (jurisdicción no práctica)',
-                        'validation.legal.note': '*Cálculos basados en datos operativos reales de proyectos referenciados. Información completa de auditoría disponible bajo NDA para equipos de evaluación.',
+                        'validation.legal.note': '*CV profesional completo y portafolio de proyectos disponibles para equipos de evaluación.',
                         
                         // Architecture
                         'architecture.title': 'Realidad Arquitectónica: Por Qué Ambos Sistemas Son Necesarios',
@@ -2842,7 +3152,7 @@ Sistema: Single HTML con traducción dinámica JSON
                         'footer.text1': 'Sistemas especializados de control documental para proyectos complejos de construcción e infraestructura.',
                         'footer.disclaimerlabel': 'Declaración de Realidad Operativa:',
                         'footer.disclaimertext': 'Visual CRP formaliza el control manual que tu equipo de proyecto ya mantiene. No reemplaza el juicio humano—lo hace visible, compartido y efectivo mientras las plataformas manejan requisitos de transferencia contractual.',
-                        'footer.title2': 'Contacto',
+                        'footer.title2': 'Contacto y Acceso Profesional',
                         'footer.contacttext': 'Consultas técnicas y comerciales',
                         'footer.specialist': 'Especialista en Sistemas de Control Documental',
                         'footer.experience': '21+ Años Experiencia en Construcción',
@@ -3081,6 +3391,31 @@ Sistema: Single HTML con traducción dinámica JSON
             }
         }
 
+        // Funciones para el modal profesional
+        function openProfessionalModal() {
+            document.getElementById('professionalModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeProfessionalModal() {
+            document.getElementById('professionalModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Cerrar modal al hacer clic fuera del contenido
+        document.getElementById('professionalModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeProfessionalModal();
+            }
+        });
+
+        // Cerrar modal con ESC
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeProfessionalModal();
+            }
+        });
+
         // Inicializar página
         document.addEventListener('DOMContentLoaded', function() {
             // Inicializar range input
@@ -3148,5 +3483,5 @@ Sistema: Single HTML con traducción dinámica JSON
             updatePathway();
         });
     </script>
-</body>
-</html>
+
+</body></html>
