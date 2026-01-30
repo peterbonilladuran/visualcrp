@@ -1,0 +1,2520 @@
+<!DOCTYPE html>
+<html lang="es" data-current-lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-key="meta.title">Portfolio Premium | Civil Engineering & Geospatial Solutions</title>
+    <meta name="description" data-key="meta.description" content="Professional portfolio documenting 25+ years in mega-infrastructure projects with validated technical solutions and proprietary systems.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', system-ui, sans-serif; }
+        :root {
+            --primary: #1a365d; --secondary: #2d6bc9; --accent: #e63946; --success: #2e7d32;
+            --light: #f8f9fa; --dark: #212529; --gray: #6c757d; --light-gray: #e9ecef;
+            --transition: all 0.3s ease; --shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+            --radius: 16px;
+        }
+        body { 
+            background-color: #f5f7fa; 
+            color: var(--dark); 
+            line-height: 1.6; 
+            transition: opacity 0.3s ease;
+        }
+        body.changing-language { opacity: 0.7; }
+        .container { max-width: 1400px; margin: 0 auto; padding: 20px; }
+        
+        /* Language Switcher */
+        .language-switcher {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 10000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 50px;
+            padding: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            border: 1px solid rgba(26, 54, 93, 0.1);
+            display: flex;
+            gap: 5px;
+        }
+        .lang-btn {
+            padding: 10px 20px;
+            border-radius: 40px;
+            border: none;
+            background: transparent;
+            font-weight: 600;
+            font-size: 0.9em;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary);
+            font-family: inherit;
+        }
+        .lang-btn:hover {
+            background: rgba(26, 54, 93, 0.1);
+            transform: translateY(-2px);
+        }
+        .lang-btn.active {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 2px 10px rgba(26, 54, 93, 0.3);
+        }
+        .lang-flag { font-size: 1.2em; }
+        .lang-text { display: inline; }
+        
+        /* Header */
+        .portfolio-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white; 
+            padding: 3rem 2rem; 
+            border-radius: var(--radius); 
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow); 
+            position: relative; 
+            overflow: hidden;
+        }
+        .portfolio-header::before {
+            content: ""; 
+            position: absolute; 
+            top: -30%; 
+            right: -10%;
+            width: 400px; 
+            height: 400px; 
+            background: rgba(255, 255, 255, 0.05); 
+            border-radius: 50%;
+        }
+        .header-content { position: relative; z-index: 2; }
+        .portfolio-title { 
+            font-size: 2.8rem; 
+            font-weight: 800; 
+            margin-bottom: 1rem; 
+            line-height: 1.2; 
+        }
+        .portfolio-subtitle { 
+            font-size: 1.3rem; 
+            font-weight: 400; 
+            opacity: 0.9; 
+            margin-bottom: 1.5rem; 
+            max-width: 800px; 
+        }
+        .portfolio-stats { 
+            display: flex; 
+            flex-wrap: wrap; 
+            gap: 2rem; 
+            margin-top: 2rem; 
+        }
+        .stat-box {
+            background: rgba(255, 255, 255, 0.15); 
+            backdrop-filter: blur(10px); 
+            padding: 1.2rem 1.8rem;
+            border-radius: 12px; 
+            border: 1px solid rgba(255, 255, 255, 0.2); 
+            min-width: 180px;
+        }
+        .stat-value { 
+            font-size: 2.2rem; 
+            font-weight: 800; 
+            display: block; 
+            margin-bottom: 0.3rem; 
+        }
+        .stat-label { 
+            font-size: 0.9rem; 
+            opacity: 0.9; 
+        }
+        
+        /* Tabs */
+        .tabs-container { 
+            background: white; 
+            border-radius: var(--radius); 
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08); 
+            margin-bottom: 2rem; 
+            overflow: hidden; 
+        }
+        .tabs { 
+            display: flex; 
+            background-color: var(--light-gray); 
+            border-bottom: 1px solid #dee2e6; 
+            flex-wrap: wrap; 
+            padding: 0 1rem; 
+        }
+        .tab {
+            padding: 1.4rem 2rem; 
+            cursor: pointer; 
+            font-weight: 600; 
+            color: var(--gray); 
+            transition: var(--transition);
+            border-bottom: 4px solid transparent; 
+            display: flex; 
+            align-items: center; 
+            gap: 0.8rem; 
+            white-space: nowrap; 
+            font-size: 1rem;
+        }
+        .tab:hover { 
+            color: var(--primary); 
+            background-color: rgba(255, 255, 255, 0.7); 
+        }
+        .tab.active { 
+            color: var(--primary); 
+            border-bottom: 4px solid var(--accent); 
+            background-color: white; 
+        }
+        .tab-content { 
+            display: none; 
+            padding: 3rem; 
+            animation: fadeIn 0.5s ease; 
+        }
+        @keyframes fadeIn { 
+            from { opacity: 0; transform: translateY(15px); } 
+            to { opacity: 1; transform: translateY(0); } 
+        }
+        .tab-content.active { display: block; }
+        
+        /* Content Sections */
+        .section-title { 
+            font-size: 2rem; 
+            color: var(--primary); 
+            margin-bottom: 2rem; 
+            padding-bottom: 1rem; 
+            border-bottom: 2px solid var(--light-gray); 
+            display: flex; 
+            align-items: center; 
+            gap: 1rem; 
+        }
+        .section-title i { 
+            color: var(--secondary); 
+            background-color: rgba(45, 107, 201, 0.1); 
+            padding: 0.8rem; 
+            border-radius: 10px; 
+        }
+        .subsection-title { 
+            font-size: 1.5rem; 
+            color: var(--dark); 
+            margin: 2.5rem 0 1.5rem; 
+            display: flex; 
+            align-items: center; 
+            gap: 0.8rem; 
+        }
+        .subsection-title i { 
+            color: var(--accent); 
+            font-size: 1.3rem; 
+        }
+        
+        /* Overview Tab */
+        .overview-highlights { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+            gap: 2rem; 
+            margin-bottom: 3rem; 
+        }
+        .highlight-card {
+            background: white; 
+            border-radius: 12px; 
+            padding: 2rem; 
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border-top: 4px solid var(--secondary); 
+            transition: var(--transition);
+        }
+        .highlight-card:hover { 
+            transform: translateY(-5px); 
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); 
+        }
+        .highlight-card h3 { 
+            color: var(--primary); 
+            margin-bottom: 1rem; 
+            display: flex; 
+            align-items: center; 
+            gap: 0.8rem; 
+        }
+        .highlight-card p { 
+            color: var(--gray); 
+            line-height: 1.7; 
+        }
+        
+        /* Projects Tab */
+        .projects-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); 
+            gap: 2rem; 
+            margin-top: 2rem; 
+        }
+        .project-card {
+            background: white; 
+            border-radius: 12px; 
+            overflow: hidden; 
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            transition: var(--transition); 
+            height: 100%; 
+            display: flex; 
+            flex-direction: column;
+        }
+        .project-card:hover { 
+            transform: translateY(-8px); 
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15); 
+        }
+        .project-img {
+            height: 200px; 
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            color: white; 
+            font-size: 3rem;
+            position: relative; 
+            overflow: hidden;
+        }
+        .project-img::after { 
+            content: ""; 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            background: linear-gradient(transparent 50%, rgba(0,0,0,0.3)); 
+        }
+        .project-content { 
+            padding: 2rem; 
+            flex-grow: 1; 
+            display: flex; 
+            flex-direction: column; 
+        }
+        .project-title { 
+            font-size: 1.4rem; 
+            color: var(--primary); 
+            margin-bottom: 0.8rem; 
+            font-weight: 700; 
+        }
+        .project-description { 
+            color: var(--gray); 
+            margin-bottom: 1.5rem; 
+            flex-grow: 1; 
+        }
+        .project-tech { 
+            display: flex; 
+            flex-wrap: wrap; 
+            gap: 0.5rem; 
+            margin-bottom: 1.5rem; 
+        }
+        .tech-tag { 
+            background-color: var(--light-gray); 
+            color: var(--primary); 
+            padding: 0.4rem 1rem; 
+            border-radius: 20px; 
+            font-size: 0.85rem; 
+            font-weight: 500; 
+        }
+        .project-link {
+            display: inline-flex; 
+            align-items: center; 
+            gap: 0.7rem; 
+            color: var(--secondary); 
+            font-weight: 600; 
+            text-decoration: none;
+            padding: 0.8rem 1.5rem; 
+            border: 2px solid var(--secondary); 
+            border-radius: 8px; 
+            transition: var(--transition);
+            justify-content: center; 
+            margin-top: auto;
+        }
+        .project-link:hover { 
+            background-color: var(--secondary); 
+            color: white; 
+        }
+        
+        /* Technical Capabilities Tab */
+        .capabilities-container { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
+            gap: 2.5rem; 
+            margin-top: 2rem; 
+        }
+        .capability-card { 
+            background: white; 
+            border-radius: 12px; 
+            padding: 2rem; 
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05); 
+        }
+        .capability-header { 
+            display: flex; 
+            align-items: center; 
+            gap: 1rem; 
+            margin-bottom: 1.5rem; 
+        }
+        .capability-icon {
+            width: 60px; 
+            height: 60px; 
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            border-radius: 12px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            color: white; 
+            font-size: 1.8rem;
+        }
+        .capability-title { 
+            font-size: 1.4rem; 
+            color: var(--primary); 
+        }
+        .capability-list { 
+            list-style: none; 
+            margin-top: 1.5rem; 
+        }
+        .capability-list li { 
+            padding: 0.8rem 0; 
+            border-bottom: 1px solid var(--light-gray); 
+            display: flex; 
+            align-items: center; 
+            gap: 0.8rem; 
+        }
+        .capability-list li:last-child { border-bottom: none; }
+        .capability-list li i { color: var(--success); }
+        
+        /* Charts Section */
+        .charts-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); 
+            gap: 2.5rem; 
+            margin: 3rem 0; 
+        }
+        .chart-container { 
+            background: white; 
+            border-radius: 12px; 
+            padding: 2rem; 
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05); 
+        }
+        .chart-title { 
+            font-size: 1.3rem; 
+            color: var(--primary); 
+            margin-bottom: 1.5rem; 
+            text-align: center; 
+            font-weight: 600; 
+        }
+        .chart-wrapper { 
+            height: 250px; 
+            position: relative; 
+        }
+        
+        /* Technologies Tab */
+        .tech-cloud { 
+            display: flex; 
+            flex-wrap: wrap; 
+            gap: 1rem; 
+            justify-content: center; 
+            margin: 2.5rem 0; 
+        }
+        .tech-tag-lg {
+            padding: 1rem 1.8rem; 
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); 
+            color: white;
+            border-radius: 12px; 
+            font-weight: 600; 
+            font-size: 1.1rem; 
+            transition: var(--transition); 
+            cursor: default;
+            display: flex; 
+            align-items: center; 
+            gap: 0.8rem;
+        }
+        .tech-tag-lg:hover { 
+            transform: scale(1.05); 
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1); 
+        }
+        .tech-category { margin-bottom: 3rem; }
+        
+        /* Visual Portfolio Tab */
+        .portfolio-gallery { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
+            gap: 1.5rem; 
+            margin-top: 2rem; 
+        }
+        .portfolio-item {
+            border-radius: 12px; 
+            overflow: hidden; 
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05); 
+            transition: var(--transition);
+            position: relative; 
+            height: 280px; 
+            background-color: var(--light-gray);
+        }
+        .portfolio-item:hover { 
+            transform: translateY(-5px); 
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); 
+        }
+        .portfolio-overlay {
+            position: absolute; 
+            bottom: 0; 
+            left: 0; 
+            right: 0; 
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            color: white; 
+            padding: 1.5rem; 
+            transform: translateY(100%); 
+            transition: var(--transition);
+        }
+        .portfolio-item:hover .portfolio-overlay { transform: translateY(0); }
+        .portfolio-category { 
+            font-size: 0.9rem; 
+            color: var(--secondary); 
+            font-weight: 600; 
+            margin-bottom: 0.5rem; 
+        }
+        
+        /* Contact Tab */
+        .contact-container { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+            gap: 3rem; 
+            margin-top: 2rem; 
+        }
+        .contact-info { 
+            background: white; 
+            border-radius: 12px; 
+            padding: 2.5rem; 
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05); 
+        }
+        .contact-item { 
+            display: flex; 
+            align-items: center; 
+            gap: 1.2rem; 
+            margin-bottom: 1.8rem; 
+            padding-bottom: 1.8rem; 
+            border-bottom: 1px solid var(--light-gray); 
+        }
+        .contact-item:last-child { 
+            margin-bottom: 0; 
+            padding-bottom: 0; 
+            border-bottom: none; 
+        }
+        .contact-icon {
+            width: 50px; 
+            height: 50px; 
+            background-color: rgba(45, 107, 201, 0.1); 
+            border-radius: 10px;
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            color: var(--secondary); 
+            font-size: 1.3rem;
+        }
+        .contact-details h4 { color: var(--primary); margin-bottom: 0.3rem; }
+        .contact-details p { color: var(--gray); }
+        .contact-form { 
+            background: white; 
+            border-radius: 12px; 
+            padding: 2.5rem; 
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05); 
+        }
+        .form-group { margin-bottom: 1.5rem; }
+        .form-group label { 
+            display: block; 
+            margin-bottom: 0.5rem; 
+            color: var(--primary); 
+            font-weight: 500; 
+        }
+        .form-control {
+            width: 100%; 
+            padding: 1rem; 
+            border: 1px solid var(--light-gray); 
+            border-radius: 8px; 
+            font-size: 1rem; 
+            transition: var(--transition);
+        }
+        .form-control:focus { 
+            outline: none; 
+            border-color: var(--secondary); 
+            box-shadow: 0 0 0 3px rgba(45, 107, 201, 0.1); 
+        }
+        .btn-submit {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); 
+            color: white; 
+            border: none;
+            padding: 1rem 2rem; 
+            border-radius: 8px; 
+            font-weight: 600; 
+            font-size: 1rem; 
+            cursor: pointer; 
+            transition: var(--transition);
+            display: inline-flex; 
+            align-items: center; 
+            gap: 0.7rem;
+        }
+        .btn-submit:hover { 
+            transform: translateY(-3px); 
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1); 
+        }
+        
+        /* Folder Links */
+        .folder-link {
+            display: flex; 
+            align-items: center; 
+            gap: 1rem; 
+            padding: 1rem; 
+            background: var(--light-gray); 
+            border-radius: 8px;
+            text-decoration: none; 
+            color: var(--primary); 
+            border-left: 4px solid var(--secondary); 
+            transition: var(--transition);
+        }
+        .folder-link:hover { 
+            background: rgba(45, 107, 201, 0.1); 
+            transform: translateY(-2px); 
+        }
+        
+        /* Footer */
+        .portfolio-footer { 
+            text-align: center; 
+            padding: 3rem; 
+            color: var(--gray); 
+            font-size: 0.95rem; 
+            border-top: 1px solid var(--light-gray); 
+            margin-top: 4rem; 
+        }
+        .footer-links { 
+            display: flex; 
+            justify-content: center; 
+            gap: 2rem; 
+            margin: 1.5rem 0; 
+        }
+        .footer-link { 
+            color: var(--secondary); 
+            text-decoration: none; 
+            font-weight: 500; 
+            transition: var(--transition); 
+        }
+        .footer-link:hover { color: var(--accent); }
+        
+        .print-btn {
+            position: fixed; 
+            bottom: 30px; 
+            right: 30px; 
+            background-color: var(--primary); 
+            color: white; 
+            width: 60px; 
+            height: 60px;
+            border-radius: 50%; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-size: 1.5rem;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); 
+            cursor: pointer; 
+            z-index: 100; 
+            transition: var(--transition); 
+            border: none;
+        }
+        .print-btn:hover { 
+            background-color: var(--accent); 
+            transform: scale(1.1); 
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .portfolio-title { font-size: 2.3rem; }
+            .portfolio-stats { gap: 1.5rem; }
+            .stat-box { min-width: 140px; padding: 1rem 1.5rem; }
+            .stat-value { font-size: 1.8rem; }
+            .tabs { justify-content: center; }
+            .tab { padding: 1.2rem 1.5rem; }
+            .lang-text { display: none; }
+            .lang-btn.active .lang-text { display: inline; }
+        }
+        
+        @media (max-width: 768px) {
+            .portfolio-header { padding: 2rem 1.5rem; }
+            .portfolio-title { font-size: 1.9rem; }
+            .portfolio-subtitle { font-size: 1.1rem; }
+            .portfolio-stats { flex-direction: column; gap: 1rem; }
+            .stat-box { width: 100%; }
+            .tabs { flex-direction: column; }
+            .tab { 
+                justify-content: center; 
+                border-bottom: 1px solid #dee2e6; 
+                border-left: 4px solid transparent; 
+            }
+            .tab.active { 
+                border-bottom: 1px solid #dee2e6; 
+                border-left: 4px solid var(--accent); 
+            }
+            .tab-content { padding: 1.5rem; }
+            .projects-grid, .capabilities-container, .charts-grid, .portfolio-gallery, .contact-container { 
+                grid-template-columns: 1fr; 
+            }
+            .language-switcher {
+                top: 10px;
+                right: 10px;
+                left: 10px;
+                bottom: auto;
+                flex-direction: row;
+                justify-content: center;
+                padding: 8px;
+            }
+            .lang-btn { padding: 6px 10px; }
+            .print-btn { 
+                bottom: 20px; 
+                right: 20px; 
+                width: 50px; 
+                height: 50px; 
+                font-size: 1.2rem; 
+            }
+        }
+        
+        @media print {
+            .print-btn, .language-switcher { display: none; }
+            .tabs-container { box-shadow: none; }
+            .tab-content { display: block !important; padding: 0; }
+            .tabs { display: none; }
+            .portfolio-header { box-shadow: none; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Language Switcher -->
+    <div class="language-switcher">
+        <button class="lang-btn active" data-lang="es">
+            <span class="lang-flag">🇪🇸</span>
+            <span class="lang-text">Español</span>
+        </button>
+        <button class="lang-btn" data-lang="en">
+            <span class="lang-flag">🇺🇸</span>
+            <span class="lang-text">English</span>
+        </button>
+    </div>
+
+    <div class="container">
+        <!-- Header -->
+        <header class="portfolio-header">
+            <div class="header-content">
+                <h1 class="portfolio-title" data-key="header.title">Ing. Piter J. Bonilla D. - Portfolio Premium de Ingeniería Civil & Soluciones Geoespaciales</h1>
+                <p class="portfolio-subtitle" data-key="header.subtitle">Una compilación exhaustiva de proyectos, capacidades técnicas y soluciones innovadoras desarrolladas a lo largo de 25+ años en mega-proyectos de infraestructura</p>
+                <div class="portfolio-stats">
+                    <div class="stat-box">
+                        <span class="stat-value">25+</span>
+                        <span class="stat-label" data-key="header.stat1">Años de Experiencia</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-value">133</span>
+                        <span class="stat-label" data-key="header.stat2">Documentos Indexados</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-value">$2B+</span>
+                        <span class="stat-label" data-key="header.stat3">Valor de Proyectos</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-value">12</span>
+                        <span class="stat-label" data-key="header.stat4">Categorías Especializadas</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Tabs -->
+        <div class="tabs-container">
+            <div class="tabs">
+                <div class="tab active" data-tab="overview">
+                    <i class="fas fa-globe-americas"></i> 
+                    <span data-key="tabs.overview">Resumen Ejecutivo</span>
+                </div>
+                <div class="tab" data-tab="projects">
+                    <i class="fas fa-hard-hat"></i> 
+                    <span data-key="tabs.projects">Proyectos</span>
+                </div>
+                <div class="tab" data-tab="capabilities">
+                    <i class="fas fa-chart-line"></i> 
+                    <span data-key="tabs.capabilities">Capacidades Técnicas</span>
+                </div>
+                <div class="tab" data-tab="technologies">
+                    <i class="fas fa-laptop-code"></i> 
+                    <span data-key="tabs.technologies">Tecnologías</span>
+                </div>
+                <div class="tab" data-tab="portfolio">
+                    <i class="fas fa-images"></i> 
+                    <span data-key="tabs.portfolio">Portafolio</span>
+                </div>
+                <div class="tab" data-tab="contact">
+                    <i class="fas fa-envelope"></i> 
+                    <span data-key="tabs.contact">Contacto</span>
+                </div>
+            </div>
+
+            <!-- Tab Content: Overview -->
+            <div id="overview" class="tab-content active">
+                <h2 class="section-title">
+                    <i class="fas fa-chart-pie"></i> 
+                    <span data-key="overview.title">Resumen Ejecutivo del Portafolio</span>
+                </h2>
+                <div class="overview-highlights">
+                    <div class="highlight-card">
+                        <h3><i class="fas fa-bullseye"></i> <span data-key="overview.card1.title">Propósito Estratégico</span></h3>
+                        <p data-key="overview.card1.content">Este portafolio documenta soluciones de ingeniería civil y geoespaciales validadas en proyectos >$100M, transformando complejidad técnica en sistemas operativos replicables con precisión certificada y trazabilidad completa.</p>
+                    </div>
+                    <div class="highlight-card">
+                        <h3><i class="fas fa-sitemap"></i> <span data-key="overview.card2.title">Organización del Contenido</span></h3>
+                        <p data-key="overview.card2.content">Colección organizada en 12 categorías principales con 133 documentos técnicos referenciados mediante sistema de codificación único (000-916) para acceso rápido y preciso a evidencias específicas.</p>
+                    </div>
+                    <div class="highlight-card">
+                        <h3><i class="fas fa-award"></i> <span data-key="overview.card3.title">Valor Diferencial</span></h3>
+                        <p data-key="overview.card3.content">Integración única de expertise técnico tradicional con desarrollo de sistemas propios (Visual CRP, AC&P, SALT, ICOD) que automatizan y sistematizan procesos críticos de mega-proyectos.</p>
+                    </div>
+                </div>
+                <h3 class="subsection-title">
+                    <i class="fas fa-chart-bar"></i> 
+                    <span data-key="overview.charts.title">Distribución del Portafolio por Categorías</span>
+                </h3>
+                <div class="charts-grid">
+                    <div class="chart-container">
+                        <h4 class="chart-title" data-key="overview.chart1.title">Categorías Principales</h4>
+                        <div class="chart-wrapper"><canvas id="categoriesChart"></canvas></div>
+                    </div>
+                    <div class="chart-container">
+                        <h4 class="chart-title" data-key="overview.chart2.title">Tipología de Proyectos</h4>
+                        <div class="chart-wrapper"><canvas id="projectsChart"></canvas></div>
+                    </div>
+                </div>
+                <div class="highlight-card" style="margin-top: 3rem; border-top-color: var(--accent);">
+                    <h3><i class="fas fa-lightbulb"></i> <span data-key="overview.methodology.title">Metodología de Trabajo: El Triángulo de Valor</span></h3>
+                    <p data-key="overview.methodology.content">Enfoque sistémico que integra <strong>Precisión de Ejecución</strong> (datos técnicos verificables), <strong>Sistemización del Control</strong> (transformación de procesos manuales) y <strong>Evaluación Anticipatoria</strong> (identificación proactiva de riesgos) para entregar resultados cuantificables en cada fase del ciclo de vida del proyecto.</p>
+                </div>
+            </div>
+
+            <!-- Tab Content: Projects -->
+            <div id="projects" class="tab-content">
+                <h2 class="section-title">
+                    <i class="fas fa-project-diagram"></i> 
+                    <span data-key="projects.title">Proyectos Destacados</span>
+                </h2>
+                <p style="color: var(--gray); margin-bottom: 2rem; font-size: 1.1rem;" data-key="projects.subtitle">
+                    Selección de mega-proyectos que representan la evolución profesional y validación de metodologías propias.
+                </p>
+                <div class="projects-grid">
+                    <!-- Project 1 -->
+                    <div class="project-card">
+                        <div class="project-img"><i class="fas fa-dam"></i></div>
+                        <div class="project-content">
+                            <h3 class="project-title" data-key="projects.project1.title">Presa Montegrande</h3>
+                            <p class="project-description" data-key="projects.project1.description">
+                                Proyecto de presa de embalse con núcleo asfáltico (L=2.2km, H=57m) que incluye 12M m³ de excavaciones, 5M m³ de rellenos y 36,500 m³ de excavación subterránea en túneles de desvío.
+                            </p>
+                            <div class="project-tech">
+                                <span class="tech-tag">Visual CRP</span>
+                                <span class="tech-tag">Excel VBA</span>
+                                <span class="tech-tag">AutoCAD</span>
+                                <span class="tech-tag">LIDAR</span>
+                            </div>
+                            <a href="https://1drv.ms/f/c/990c860f44e7c976/IgDP3bpfmcJNRpvcIBoKtyw-ARBMbKyFo6g_54C8jEIEsjU?e=kEtzaU" 
+                               class="project-link" target="_blank">
+                                <i class="fas fa-folder-open"></i> 
+                                <span data-key="projects.link">Ver Documentación (Códigos 000-014)</span>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Project 2 -->
+                    <div class="project-card">
+                        <div class="project-img"><i class="fas fa-water"></i></div>
+                        <div class="project-content">
+                            <h3 class="project-title" data-key="projects.project2.title">Hidroeléctrico Palomino</h3>
+                            <p class="project-description" data-key="projects.project2.description">
+                                Infraestructura hidroeléctrica subterránea compleja con túnel TBM de 12.4 km, casa de máquinas con 11 túneles interconectados y presa de CCR de 60m de altura.
+                            </p>
+                            <div class="project-tech">
+                                <span class="tech-tag">SALT</span>
+                                <span class="tech-tag">Topografía</span>
+                                <span class="tech-tag">Diseño Geométrico</span>
+                                <span class="tech-tag">TBM</span>
+                            </div>
+                            <a href="https://1drv.ms/f/c/990c860f44e7c976/IgC_9YMPvk_RRbjlA3i9RbB6Ad1Yk5xJy6-kNAu9R5tEA-k?e=JU7jq8" 
+                               class="project-link" target="_blank">
+                                <i class="fas fa-folder-open"></i> 
+                                <span data-key="projects.link">Ver Documentación (Códigos 101-105)</span>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Project 3 -->
+                    <div class="project-card">
+                        <div class="project-img"><i class="fas fa-road"></i></div>
+                        <div class="project-content">
+                            <h3 class="project-title" data-key="projects.project3.title">Hidroeléctrico Las Placetas</h3>
+                            <p class="project-description" data-key="projects.project3.description">
+                                Proyecto hidroeléctrico con enfoque en diseño geométrico de vías de acceso, modelado 3D de carreteras y estudios geotécnicos avanzados con integración de datos LIDAR.
+                            </p>
+                            <div class="project-tech">
+                                <span class="tech-tag">Diseño Vial</span>
+                                <span class="tech-tag">3D Modeling</span>
+                                <span class="tech-tag">GIS</span>
+                                <span class="tech-tag">Fotogrametría</span>
+                            </div>
+                            <a href="https://1drv.ms/f/c/990c860f44e7c976/IgA6tWF8Ic2AQo2R1mYLkhWPAblJCKV5qWY9yNd77LartQ8?e=8LGkrY" 
+                               class="project-link" target="_blank">
+                                <i class="fas fa-folder-open"></i> 
+                                <span data-key="projects.link">Ver Documentación (Códigos 301-309)</span>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Project 4 -->
+                    <div class="project-card">
+                        <div class="project-img"><i class="fas fa-city"></i></div>
+                        <div class="project-content">
+                            <h3 class="project-title" data-key="projects.project4.title">Desarrollo Urbano & Vial</h3>
+                            <p class="project-description" data-key="projects.project4.description">
+                                Proyectos de infraestructura vial y desarrollo urbano incluyendo Haina, Trasvase Hatillo, Circunvalación Santiago y otros proyectos de carreteras regionales.
+                            </p>
+                            <div class="project-tech">
+                                <span class="tech-tag">AC&P</span>
+                                <span class="tech-tag">Presupuestos</span>
+                                <span class="tech-tag">Cubicaciones</span>
+                                <span class="tech-tag">Gestión de Proyectos</span>
+                            </div>
+                            <a href="https://1drv.ms/f/c/990c860f44e7c976/IgBC1TzoeE5aRoiG70X0-k4GAaXZz0EHao2WLj6xFM9jesY?e=cFHgNu" 
+                               class="project-link" target="_blank">
+                                <i class="fas fa-folder-open"></i> 
+                                <span data-key="projects.link">Ver Documentación (Códigos 801-807)</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="highlight-card" style="margin-top: 3rem; border-top-color: var(--success);">
+                    <h3><i class="fas fa-chart-line"></i> <span data-key="projects.metrics.title">Métricas de Impacto en Proyectos</span></h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-top: 1.5rem;">
+                        <div style="text-align: center;">
+                            <div style="font-size: 2.5rem; font-weight: 800; color: var(--secondary);">75%</div>
+                            <div style="color: var(--gray); font-size: 0.9rem;" data-key="projects.metrics.stat1">Reducción tiempo procesos manuales</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 2.5rem; font-weight: 800; color: var(--secondary);">98.5%</div>
+                            <div style="color: var(--gray); font-size: 0.9rem;" data-key="projects.metrics.stat2">Precisión en cubicaciones</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 2.5rem; font-weight: 800; color: var(--secondary);">$1.6M+</div>
+                            <div style="color: var(--gray); font-size: 0.9rem;" data-key="projects.metrics.stat3">Ahorro en costos operativos</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 2.5rem; font-weight: 800; color: var(--secondary);">100%</div>
+                            <div style="color: var(--gray); font-size: 0.9rem;" data-key="projects.metrics.stat4">Compliance en auditorías</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab Content: Capabilities -->
+            <div id="capabilities" class="tab-content">
+                <h2 class="section-title">
+                    <i class="fas fa-cogs"></i> 
+                    <span data-key="capabilities.title">Capacidades Técnicas Integrales</span>
+                </h2>
+                <p style="color: var(--gray); margin-bottom: 2rem; font-size: 1.1rem;" data-key="capabilities.subtitle">
+                    Competencias validadas en proyectos de alta complejidad y escala, organizadas por dominios de expertise.
+                </p>
+                <div class="capabilities-container">
+                    <!-- Capability 1 -->
+                    <div class="capability-card">
+                        <div class="capability-header">
+                            <div class="capability-icon"><i class="fas fa-mountain"></i></div>
+                            <h3 class="capability-title" data-key="capabilities.card1.title">Topografía Avanzada</h3>
+                        </div>
+                        <ul class="capability-list">
+                            <li><i class="fas fa-check-circle"></i> <span data-key="capabilities.card1.item1">Gestión de equipos de topografía (hasta 80 personas)</span></li>
+                            <li><i class="fas fa-check-circle"></i> <span data-key="capabilities.card1.item2">Control topográfico en túneles TBM y NATM</span></li>
+                            <li><i class="fas fa-check-circle"></i> <span data-key="capabilities.card1.item3">Procesamiento de datos LIDAR y fotogrametría drone</span></li>
+                            <li><i class="fas fa-check-circle"></i> <span data-key="capabilities.card1.item4">Ajuste estadístico de poligonales (Sistema SALT)</span></li>
+                            <li><i class="fas fa-check-circle"></i> <span data-key="capabilities.card1.item5">Cubicaciones precisas con múltiples métodos comparativos</span></li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Capability 2 -->
+                    <div class="capability-card">
+                        <div class="capability-header">
+                            <div class="capability-icon"><i class="fas fa-road"></i></div>
+                            <h3 class="capability-title" data-key="capabilities.card2.title">Diseño Geométrico Vial</h3>
+                        </div>
+                        <ul class="capability-list">
+                            <li><i class="fas fa-check-circle"></i> <span data-key="capabilities.card2.item1">Diseño de alineamientos verticales y horizontales</span></li>
+                            <li><i class="fas fa-check-circle"></i> <span data-key="capabilities.card2.item2">Soluciones de drenaje para vías de montaña</span></li>
+                            <li><i class="fas fa-check-circle"></i> <span data-key="capabilities.card2.item3">Revisión integral de diseños de carreteras</span></li>
+                            <li><i class="fas fa-check-circle"></i> <span data-key="capabilities.card2.item4">Modelado 3D de vías y terraplenes</span></li>
+                            <li><i class="fas fa-check-circle"></i> <span data-key="capabilities.card2.item5">Análisis de pavimentos (AASHTO 1993)</span></li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Capability 3 -->
+                    <div class="capability-card">
+                        <div class="capability-header">
+                            <div class="capability-icon"><i class="fas fa-file-contract"></i></div>
+                            <h3 class="capability-title" data-key="capabilities.card3.title">Gestión Documental Técnica</h3>
+                        </div>
+                        <ul class="capability-list">
+                            <li><i class="fas fa-check-circle"></i> <span data-key="capabilities.card3.item1">Control de 3,000+ documentos técnicos por proyecto</span></li>
+                            <li><i class="fas fa-check-circle"></i> <span data-key="capabilities.card3.item2">Implementación de sistemas de codificación multicriterio</span></li>
+                            <li><i class="fas fa-check-circle"></i> <span data-key="capabilities.card3.item3">Trazabilidad completa de revisiones y aprobaciones</span></li>
+                            <li><i class="fas fa-check-circle"></i> <span data-key="capabilities.card3.item4">Arquitectura híbrida (plataformas contractuales + operativas)</span></li>
+                            <li><i class="fas fa-check-circle"></i> <span data-key="capabilities.card3.item5">Preparación para auditorías con 100% compliance</span></li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Capability 4 -->
+                    <div class="capability-card">
+                        <div class="capability-header">
+                            <div class="capability-icon"><i class="fas fa-calculator"></i></div>
+                            <h3 class="capability-title" data-key="capabilities.card4.title">Análisis de Costos y Presupuestos</h3>
+                        </div>
+                        <ul class="capability-list">
+                            <li><i class="fas fa-check-circle"></i> <span data-key="capabilities.card4.item1">Presupuestos generales para proyectos >$500M</span></li>
+                            <li><i class="fas fa-check-circle"></i> <span data-key="capabilities.card4.item2">Análisis de precios unitarios detallados</span></li>
+                            <li><i class="fas fa-check-circle"></i> <span data-key="capabilities.card4.item3">Cálculo de costos de mano de obra factorizados</span></li>
+                            <li><i class="fas fa-check-circle"></i> <span data-key="capabilities.card4.item4">Desglose de costos directos, indirectos y seguridad social</span></li>
+                            <li><i class="fas fa-check-circle"></i> <span data-key="capabilities.card4.item5">Cuantificación automatizada de materiales y mano de obra</span></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <h3 class="subsection-title" style="margin-top: 4rem;">
+                    <i class="fas fa-chart-pie"></i> 
+                    <span data-key="capabilities.charts.title">Nivel de Dominio por Área Técnica</span>
+                </h3>
+                <div class="charts-grid">
+                    <div class="chart-container">
+                        <h4 class="chart-title" data-key="capabilities.chart1.title">Habilidades Técnicas Principales</h4>
+                        <div class="chart-wrapper"><canvas id="skillsChart"></canvas></div>
+                    </div>
+                    <div class="chart-container">
+                        <h4 class="chart-title" data-key="capabilities.chart2.title">Software y Herramientas</h4>
+                        <div class="chart-wrapper"><canvas id="softwareChart"></canvas></div>
+                    </div>
+                </div>
+                
+                <div class="highlight-card" style="margin-top: 3rem; border-top-color: var(--accent);">
+                    <h3><i class="fas fa-archive"></i> <span data-key="capabilities.folders.title">Acceso a Carpetas de Evidencia por Categoría</span></h3>
+                    <p style="margin-bottom: 1.5rem;" data-key="capabilities.folders.description">
+                        Exploración visual de +900 documentos técnicos organizados en 12 categorías especializadas. Cada enlace abre una carpeta con documentos visibles individualmente.
+                    </p>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-top: 1.5rem;">
+                        <a href="https://1drv.ms/f/c/990c860f44e7c976/IgDP3bpfmcJNRpvcIBoKtyw-ARBMbKyFo6g_54C8jEIEsjU?e=kEtzaU" 
+                           class="folder-link" target="_blank">
+                            <i class="fas fa-folder-open"></i>
+                            <div>
+                                <strong>000-014</strong><br>
+                                <small data-key="capabilities.folder1">Proyectos Principales</small>
+                            </div>
+                        </a>
+                        <a href="https://1drv.ms/f/c/990c860f44e7c976/IgC_9YMPvk_RRbjlA3i9RbB6Ad1Yk5xJy6-kNAu9R5tEA-k?e=JU7jq8" 
+                           class="folder-link" style="border-left-color: #e63946;" target="_blank">
+                            <i class="fas fa-tunnel"></i>
+                            <div>
+                                <strong>101-105</strong><br>
+                                <small data-key="capabilities.folder2">Escáner Láser Túneles</small>
+                            </div>
+                        </a>
+                        <a href="https://1drv.ms/f/c/990c860f44e7c976/IgCduUjfXYbVRpOHxSYCn3pyAYxvhuYUJuejOzF0glp3gqQ?e=04x4bP" 
+                           class="folder-link" style="border-left-color: #2e7d32;" target="_blank">
+                            <i class="fas fa-map-marked-alt"></i>
+                            <div>
+                                <strong>201-207</strong><br>
+                                <small data-key="capabilities.folder3">Aplicaciones GIS</small>
+                            </div>
+                        </a>
+                        <a href="https://1drv.ms/f/c/990c860f44e7c976/IgDfN6uUBWXfTJk60MOABxG3AQjgywKt66cpEMzy9i6GBDg?e=4x9gEr" 
+                           class="folder-link" style="border-left-color: #8a2be2;" target="_blank">
+                            <i class="fas fa-ruler-combined"></i>
+                            <div>
+                                <strong>208-223</strong><br>
+                                <small data-key="capabilities.folder4">Procesamiento Topográfico</small>
+                            </div>
+                        </a>
+                    </div>
+                    <div style="text-align: center; margin-top: 1.5rem;">
+                        <a href="#" onclick="switchToTab('portfolio')" style="color: var(--secondary); text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 0.5rem;">
+                            <i class="fas fa-arrow-right"></i> 
+                            <span data-key="capabilities.viewall">Ver todas las 12 categorías en la pestaña Portafolio</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab Content: Technologies -->
+            <div id="technologies" class="tab-content">
+                <h2 class="section-title">
+                    <i class="fas fa-microchip"></i> 
+                    <span data-key="technologies.title">Ecosistema Tecnológico</span>
+                </h2>
+                <p style="color: var(--gray); margin-bottom: 2rem; font-size: 1.1rem;" data-key="technologies.subtitle">
+                    Integración de tecnologías comerciales con sistemas propios desarrollados para optimizar flujos de trabajo en ingeniería.
+                </p>
+                
+                <div class="tech-category">
+                    <h3 class="subsection-title">
+                        <i class="fas fa-star"></i> 
+                        <span data-key="technologies.systems.title">Sistemas Propios Desarrollados</span>
+                    </h3>
+                    <div class="tech-cloud" style="margin-bottom: 3rem;">
+                        <div class="tech-tag-lg" style="background: linear-gradient(135deg, var(--primary) 0%, #1e4b8c 100%);">
+                            <i class="fas fa-eye"></i> 
+                            <span data-key="technologies.system1">Visual CRP</span>
+                        </div>
+                        <div class="tech-tag-lg" style="background: linear-gradient(135deg, var(--secondary) 0%, #1a5bb8 100%);">
+                            <i class="fas fa-calculator"></i> 
+                            <span data-key="technologies.system2">Sistema AC&P</span>
+                        </div>
+                        <div class="tech-tag-lg" style="background: linear-gradient(135deg, var(--success) 0%, #1e6b2d 100%);">
+                            <i class="fas fa-ruler-combined"></i> 
+                            <span data-key="technologies.system3">Sistema SALT</span>
+                        </div>
+                        <div class="tech-tag-lg" style="background: linear-gradient(135deg, #8a2be2 0%, #6a1bb8 100%);">
+                            <i class="fas fa-drafting-compass"></i> 
+                            <span data-key="technologies.system4">ICOD System</span>
+                        </div>
+                    </div>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem;">
+                        <div style="background: white; padding: 1.5rem; border-radius: 10px; box-shadow: 0 3px 10px rgba(0,0,0,0.05); border-left: 4px solid var(--primary);">
+                            <h4 style="color: var(--primary); margin-bottom: 1rem;" data-key="technologies.system1.name">Visual CRP</h4>
+                            <p style="color: var(--gray); font-size: 0.95rem;" data-key="technologies.system1.description">
+                                Sistema de Control Documental Operativo validado en proyectos >$500M. Arquitectura híbrida que coexiste con plataformas contractuales.
+                            </p>
+                        </div>
+                        <div style="background: white; padding: 1.5rem; border-radius: 10px; box-shadow: 0 3px 10px rgba(0,0,0,0.05); border-left: 4px solid var(--secondary);">
+                            <h4 style="color: var(--primary); margin-bottom: 1rem;" data-key="technologies.system2.name">Sistema AC&P</h4>
+                            <p style="color: var(--gray); font-size: 0.95rem;" data-key="technologies.system2.description">
+                                Análisis de Costos y Presupuestos desde 2004. Herramienta flexible para estimaciones precisas desde residencial hasta mega-proyectos.
+                            </p>
+                        </div>
+                        <div style="background: white; padding: 1.5rem; border-radius: 10px; box-shadow: 0 3px 10px rgba(0,0,0,0.05); border-left: 4px solid var(--success);">
+                            <h4 style="color: var(--primary); margin-bottom: 1rem;" data-key="technologies.system3.name">Sistema SALT</h4>
+                            <p style="color: var(--gray); font-size: 0.95rem;" data-key="technologies.system3.description">
+                                Sistema de Ajuste y Liquidación Topográfica. Automatiza procesamiento de datos topográficos con precisión certificada.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tech-category">
+                    <h3 class="subsection-title">
+                        <i class="fas fa-desktop"></i> 
+                        <span data-key="technologies.software.title">Software Comercial Especializado</span>
+                    </h3>
+                    <div class="tech-cloud">
+                        <div class="tech-tag-lg"><i class="fas fa-file-excel"></i> <span data-key="technologies.software1">Excel VBA Avanzado</span></div>
+                        <div class="tech-tag-lg"><i class="fas fa-drafting-compass"></i> <span data-key="technologies.software2">AutoCAD & Civil 3D</span></div>
+                        <div class="tech-tag-lg"><i class="fas fa-map"></i> <span data-key="technologies.software3">Global Mapper</span></div>
+                        <div class="tech-tag-lg"><i class="fas fa-satellite"></i> <span data-key="technologies.software4">Topcon Tools</span></div>
+                        <div class="tech-tag-lg"><i class="fas fa-camera"></i> <span data-key="technologies.software5">Pix4Dmapper</span></div>
+                        <div class="tech-tag-lg"><i class="fas fa-route"></i> <span data-key="technologies.software6">Eagle Point</span></div>
+                        <div class="tech-tag-lg"><i class="fas fa-chart-bar"></i> <span data-key="technologies.software7">IA Aplicada</span></div>
+                        <div class="tech-tag-lg"><i class="fas fa-database"></i> <span data-key="technologies.software8">GIS Applications</span></div>
+                    </div>
+                </div>
+                
+                <div class="tech-category">
+                    <h3 class="subsection-title">
+                        <i class="fas fa-chart-network"></i> 
+                        <span data-key="technologies.integration.title">Integración Tecnológica</span>
+                    </h3>
+                    <p style="color: var(--gray); margin-bottom: 1.5rem;" data-key="technologies.integration.description">
+                        Flujos de trabajo optimizados mediante conexiones automatizadas entre sistemas:
+                    </p>
+                    <div style="background: white; padding: 2rem; border-radius: 12px; margin-top: 1.5rem; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+                        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
+                            <div style="text-align: center; padding: 1rem;">
+                                <div style="width: 70px; height: 70px; background: var(--light-gray); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; color: var(--primary); font-size: 1.8rem;">
+                                    <i class="fas fa-satellite-dish"></i>
+                                </div>
+                                <div style="font-weight: 600; color: var(--primary);" data-key="technologies.step1">Datos LIDAR/Drone</div>
+                            </div>
+                            <div style="font-size: 2rem; color: var(--gray);">→</div>
+                            <div style="text-align: center; padding: 1rem;">
+                                <div style="width: 70px; height: 70px; background: var(--light-gray); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; color: var(--primary); font-size: 1.8rem;">
+                                    <i class="fas fa-cogs"></i>
+                                </div>
+                                <div style="font-weight: 600; color: var(--primary);" data-key="technologies.step2">Procesamiento SALT</div>
+                            </div>
+                            <div style="font-size: 2rem; color: var(--gray);">→</div>
+                            <div style="text-align: center; padding: 1rem;">
+                                <div style="width: 70px; height: 70px; background: var(--light-gray); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; color: var(--primary); font-size: 1.8rem;">
+                                    <i class="fas fa-drafting-compass"></i>
+                                </div>
+                                <div style="font-weight: 600; color: var(--primary);" data-key="technologies.step3">AutoCAD Automatizado</div>
+                            </div>
+                            <div style="font-size: 2rem; color: var(--gray);">→</div>
+                            <div style="text-align: center; padding: 1rem;">
+                                <div style="width: 70px; height: 70px; background: var(--light-gray); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; color: var(--primary); font-size: 1.8rem;">
+                                    <i class="fas fa-file-contract"></i>
+                                </div>
+                                <div style="font-weight: 600; color: var(--primary);" data-key="technologies.step4">Control Visual CRP</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab Content: Visual Portfolio -->
+            <div id="portfolio" class="tab-content">
+                <h2 class="section-title">
+                    <i class="fas fa-photo-video"></i> 
+                    <span data-key="portfolio.title">Portafolio Visual por Categorías</span>
+                </h2>
+                <p style="color: var(--gray); margin-bottom: 2rem; font-size: 1.1rem;" data-key="portfolio.subtitle">
+                    Galería organizada según el sistema de codificación del catálogo original (000-916). Cada categoría enlaza a una carpeta con documentos visibles individualmente.
+                </p>
+                
+                <div class="portfolio-gallery">
+                    <!-- Portfolio Item 1 -->
+                    <div class="portfolio-item" data-category="major">
+                        <div class="portfolio-overlay">
+                            <div class="portfolio-category">Códigos 000-014</div>
+                            <h4 style="color: white; margin-bottom: 0.5rem;" data-key="portfolio.item1.title">Proyectos Principales</h4>
+                            <p style="color: rgba(255,255,255,0.8); font-size: 0.9rem;" data-key="portfolio.item1.description">
+                                Montegrande, Palomino, Las Placetas, Haina, Trasvase Hatillo, Circunvalación Santiago
+                            </p>
+                            <a href="https://1drv.ms/f/c/990c860f44e7c976/IgDP3bpfmcJNRpvcIBoKtyw-ARBMbKyFo6g_54C8jEIEsjU?e=kEtzaU" 
+                               style="color: white; text-decoration: none; margin-top: 0.5rem; display: inline-block;" target="_blank">
+                                <i class="fas fa-external-link-alt"></i> 
+                                <span data-key="portfolio.openfolder">Abrir Carpeta</span>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Portfolio Item 2 -->
+                    <div class="portfolio-item" data-category="tunnels">
+                        <div class="portfolio-overlay">
+                            <div class="portfolio-category">Códigos 101-105</div>
+                            <h4 style="color: white; margin-bottom: 0.5rem;" data-key="portfolio.item2.title">Aplicación de Escáner Láser en Túneles</h4>
+                            <p style="color: rgba(255,255,255,0.8); font-size: 0.9rem;" data-key="portfolio.item2.description">
+                                PMG - Procesamiento de datos LIDAR para secciones transversales automáticas
+                            </p>
+                            <a href="https://1drv.ms/f/c/990c860f44e7c976/IgC_9YMPvk_RRbjlA3i9RbB6Ad1Yk5xJy6-kNAu9R5tEA-k?e=JU7jq8" 
+                               style="color: white; text-decoration: none; margin-top: 0.5rem; display: inline-block;" target="_blank">
+                                <i class="fas fa-external-link-alt"></i> 
+                                <span data-key="portfolio.openfolder">Abrir Carpeta</span>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Portfolio Item 3 -->
+                    <div class="portfolio-item" data-category="gis">
+                        <div class="portfolio-overlay">
+                            <div class="portfolio-category">Códigos 201-207</div>
+                            <h4 style="color: white; margin-bottom: 0.5rem;" data-key="portfolio.item3.title">Aplicaciones GIS & Geomáticas</h4>
+                            <p style="color: rgba(255,255,255,0.8); font-size: 0.9rem;" data-key="portfolio.item3.description">
+                                Global Mapper, LIDAR PMG, Topcon Tools - Procesamiento de datos
+                            </p>
+                            <a href="https://1drv.ms/f/c/990c860f44e7c976/IgCduUjfXYbVRpOHxSYCn3pyAYxvhuYUJuejOzF0glp3gqQ?e=04x4bP" 
+                               style="color: white; text-decoration: none; margin-top: 0.5rem; display: inline-block;" target="_blank">
+                                <i class="fas fa-external-link-alt"></i> 
+                                <span data-key="portfolio.openfolder">Abrir Carpeta</span>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Portfolio Item 4 -->
+                    <div class="portfolio-item" data-category="survey">
+                        <div class="portfolio-overlay">
+                            <div class="portfolio-category">Códigos 208-223</div>
+                            <h4 style="color: white; margin-bottom: 0.5rem;" data-key="portfolio.item4.title">Procesamiento Topográfico y Aplicaciones</h4>
+                            <p style="color: rgba(255,255,255,0.8); font-size: 0.9rem;" data-key="portfolio.item4.description">
+                                Ajuste de poligonales, cubicaciones, sistemas SALT y aplicaciones VBA
+                            </p>
+                            <a href="https://1drv.ms/f/c/990c860f44e7c976/IgDfN6uUBWXfTJk60MOABxG3AQjgywKt66cpEMzy9i6GBDg?e=4x9gEr" 
+                               style="color: white; text-decoration: none; margin-top: 0.5rem; display: inline-block;" target="_blank">
+                                <i class="fas fa-external-link-alt"></i> 
+                                <span data-key="portfolio.openfolder">Abrir Carpeta</span>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Portfolio Item 5 -->
+                    <div class="portfolio-item" data-category="roadway">
+                        <div class="portfolio-overlay">
+                            <div class="portfolio-category">Códigos 301-309</div>
+                            <h4 style="color: white; margin-bottom: 0.5rem;" data-key="portfolio.item5.title">Diseño Geométrico Vial</h4>
+                            <p style="color: rgba(255,255,255,0.8); font-size: 0.9rem;" data-key="portfolio.item5.description">
+                                Las Placetas, Palomino - Alineamientos, drenaje, pavimentos
+                            </p>
+                            <a href="https://1drv.ms/f/c/990c860f44e7c976/IgA6tWF8Ic2AQo2R1mYLkhWPAblJCKV5qWY9yNd77LartQ8?e=8LGkrY" 
+                               style="color: white; text-decoration: none; margin-top: 0.5rem; display: inline-block;" target="_blank">
+                                <i class="fas fa-external-link-alt"></i> 
+                                <span data-key="portfolio.openfolder">Abrir Carpeta</span>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Portfolio Item 6 -->
+                    <div class="portfolio-item" data-category="3d">
+                        <div class="portfolio-overlay">
+                            <div class="portfolio-category">Códigos 401-408</div>
+                            <h4 style="color: white; margin-bottom: 0.5rem;" data-key="portfolio.item6.title">Diseños 3D y Modelos</h4>
+                            <p style="color: rgba(255,255,255,0.8); font-size: 0.9rem;" data-key="portfolio.item6.description">
+                                Excavaciones, túneles, central subterránea - Visualización avanzada
+                            </p>
+                            <a href="https://1drv.ms/f/c/990c860f44e7c976/IgDxB3mRdpZWSI868GIEih4wAcTnumlVJ6x5-6RXEy7dPoE?e=kO7Ad9" 
+                               style="color: white; text-decoration: none; margin-top: 0.5rem; display: inline-block;" target="_blank">
+                                <i class="fas fa-external-link-alt"></i> 
+                                <span data-key="portfolio.openfolder">Abrir Carpeta</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="highlight-card" style="margin-top: 3rem; border-top-color: var(--secondary);">
+                    <h3><i class="fas fa-folder-open"></i> <span data-key="portfolio.folders.title">Acceso Directo a Todas las Carpetas</span></h3>
+                    <p style="margin-bottom: 1.5rem;" data-key="portfolio.folders.description">
+                        Exploración visual de documentos técnicos organizados en 12 categorías temáticas. Cada enlace abre una carpeta de OneDrive/SharePoint con documentos visibles individualmente.
+                    </p>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem; margin: 2rem 0;">
+                        <!-- Folders 1-12 -->
+                        <a href="https://1drv.ms/f/c/990c860f44e7c976/IgDP3bpfmcJNRpvcIBoKtyw-ARBMbKyFo6g_54C8jEIEsjU?e=kEtzaU" 
+                           class="folder-link" target="_blank">
+                            <i class="fas fa-folder-open"></i>
+                            <div>
+                                <strong>000-014 - <span data-key="portfolio.folder1.title">Proyectos Principales</span></strong><br>
+                                <small data-key="portfolio.folder1.desc">Montegrande, Palomino, Las Placetas, etc.</small>
+                            </div>
+                        </a>
+                        
+                        <a href="https://1drv.ms/f/c/990c860f44e7c976/IgC_9YMPvk_RRbjlA3i9RbB6Ad1Yk5xJy6-kNAu9R5tEA-k?e=JU7jq8" 
+                           class="folder-link" style="border-left-color: #e63946;" target="_blank">
+                            <i class="fas fa-tunnel"></i>
+                            <div>
+                                <strong>101-105 - <span data-key="portfolio.folder2.title">Escáner Láser en Túneles</span></strong><br>
+                                <small data-key="portfolio.folder2.desc">Procesamiento LIDAR, secciones transversales</small>
+                            </div>
+                        </a>
+                        
+                        <a href="https://1drv.ms/f/c/990c860f44e7c976/IgCduUjfXYbVRpOHxSYCn3pyAYxvhuYUJuejOzF0glp3gqQ?e=04x4bP" 
+                           class="folder-link" style="border-left-color: #2e7d32;" target="_blank">
+                            <i class="fas fa-map-marked-alt"></i>
+                            <div>
+                                <strong>201-207 - <span data-key="portfolio.folder3.title">Aplicaciones GIS & Geomáticas</span></strong><br>
+                                <small data-key="portfolio.folder3.desc">Global Mapper, LIDAR PMG, Topcon Tools</small>
+                            </div>
+                        </a>
+                        
+                        <a href="https://1drv.ms/f/c/990c860f44e7c976/IgDfN6uUBWXfTJk60MOABxG3AQjgywKt66cpEMzy9i6GBDg?e=4x9gEr" 
+                           class="folder-link" style="border-left-color: #ff9800;" target="_blank">
+                            <i class="fas fa-ruler-combined"></i>
+                            <div>
+                                <strong>208-223 - <span data-key="portfolio.folder4.title">Procesamiento Topográfico</span></strong><br>
+                                <small data-key="portfolio.folder4.desc">Ajuste poligonales, cubicaciones, sistema SALT</small>
+                            </div>
+                        </a>
+                        
+                        <a href="https://1drv.ms/f/c/990c860f44e7c976/IgA6tWF8Ic2AQo2R1mYLkhWPAblJCKV5qWY9yNd77LartQ8?e=8LGkrY" 
+                           class="folder-link" style="border-left-color: #8a2be2;" target="_blank">
+                            <i class="fas fa-road"></i>
+                            <div>
+                                <strong>301-309 - <span data-key="portfolio.folder5.title">Diseño Geométrico Vial</span></strong><br>
+                                <small data-key="portfolio.folder5.desc">Alineamientos, drenaje, pavimentos AASHTO</small>
+                            </div>
+                        </a>
+                        
+                        <a href="https://1drv.ms/f/c/990c860f44e7c976/IgDxB3mRdpZWSI868GIEih4wAcTnumlVJ6x5-6RXEy7dPoE?e=kO7Ad9" 
+                           class="folder-link" style="border-left-color: #009688;" target="_blank">
+                            <i class="fas fa-cube"></i>
+                            <div>
+                                <strong>401-408 - <span data-key="portfolio.folder6.title">Diseños 3D y Modelos</span></strong><br>
+                                <small data-key="portfolio.folder6.desc">Excavaciones, túneles, visualización avanzada</small>
+                            </div>
+                        </a>
+                        
+                        <a href="https://1drv.ms/f/c/990c860f44e7c976/IgDW-tjdrWv3TZKafQeKyZu8AVkhibzylYCwHggXQ5860Ks?e=ykiCdq" 
+                           class="folder-link" style="border-left-color: #795548;" target="_blank">
+                            <i class="fas fa-building"></i>
+                            <div>
+                                <strong>409-416 - <span data-key="portfolio.folder7.title">Desarrollo Territorial</span></strong><br>
+                                <small data-key="portfolio.folder7.desc">Modelado 3D, cubicaciones, sistemas sanitarios</small>
+                            </div>
+                        </a>
+                        
+                        <a href="https://1drv.ms/f/c/990c860f44e7c976/IgAhz-X8WApbQpI0kfRc_ri0AbhiAuKIIJnTtD_UF1jVk3o?e=78HPl5" 
+                           class="folder-link" style="border-left-color: #607d8b;" target="_blank">
+                            <i class="fas fa-file-excel"></i>
+                            <div>
+                                <strong>501-517 - <span data-key="portfolio.folder8.title">Aplicaciones Excel VBA</span></strong><br>
+                                <small data-key="portfolio.folder8.desc">Sistemas propios: Visual CRP, AC&P, SALT</small>
+                            </div>
+                        </a>
+                        
+                        <a href="https://1drv.ms/f/c/990c860f44e7c976/IgC5m_-Ffqf0SqWJIHTKSpeoATjqyz-Bd8aH2hIP5aI0gKc?e=qZVhbR" 
+                           class="folder-link" style="border-left-color: #3f51b5;" target="_blank">
+                            <i class="fas fa-file-alt"></i>
+                            <div>
+                                <strong>601-615 - <span data-key="portfolio.folder9.title">Reportes de Ingeniería</span></strong><br>
+                                <small data-key="portfolio.folder9.desc">Informes técnicos, memorias de cálculo</small>
+                            </div>
+                        </a>
+                        
+                        <a href="https://1drv.ms/f/c/990c860f44e7c976/IgDJB4DKOMdgRYQb3h36JEXgAalfW4q0TN48lX-iMJzO9hU?e=AoTD3g" 
+                           class="folder-link" style="border-left-color: #9c27b0;" target="_blank">
+                            <i class="fas fa-calculator"></i>
+                            <div>
+                                <strong>701-707 - <span data-key="portfolio.folder10.title">Cubicación de Obras</span></strong><br>
+                                <small data-key="portfolio.folder10.desc">Cálculo de volúmenes, presupuestos, costos</small>
+                            </div>
+                        </a>
+                        
+                        <a href="https://1drv.ms/f/c/990c860f44e7c976/IgBC1TzoeE5aRoiG70X0-k4GAaXZz0EHao2WLj6xFM9jesY?e=cFHgNu" 
+                           class="folder-link" style="border-left-color: #f44336;" target="_blank">
+                            <i class="fas fa-drafting-compass"></i>
+                            <div>
+                                <strong>801-807 - <span data-key="portfolio.folder11.title">Estimaciones y Dibujo</span></strong><br>
+                                <small data-key="portfolio.folder11.desc">Presupuestos, dibujo técnico, planos</small>
+                            </div>
+                        </a>
+                        
+                        <a href="https://1drv.ms/f/c/990c860f44e7c976/IgAcIow8RUvyS5fR2M25Kha_AVFoD7RQv1ZOn-jZksYC3qw?e=iDl65s" 
+                           class="folder-link" style="border-left-color: #ff9800;" target="_blank">
+                            <i class="fas fa-excavator"></i>
+                            <div>
+                                <strong>901-916 - <span data-key="portfolio.folder12.title">Avance de Excavación</span></strong><br>
+                                <small data-key="portfolio.folder12.desc">Control de avance, planificación de obras</small>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <div style="background: rgba(45, 107, 201, 0.1); padding: 1.5rem; border-radius: 8px; margin-top: 1.5rem;">
+                        <h4 style="color: var(--primary); margin-bottom: 0.5rem;">
+                            <i class="fas fa-info-circle"></i> 
+                            <span data-key="portfolio.instructions.title">Instrucciones de Navegación:</span>
+                        </h4>
+                        <p style="color: var(--gray); font-size: 0.95rem; margin: 0;" data-key="portfolio.instructions.description">
+                            Cada enlace abre una carpeta de OneDrive/SharePoint con documentos visibles (PDF, DWG, imágenes, etc.). Puede navegar por los archivos, previsualizarlos y descargarlos individualmente si lo desea. Para acceder al catálogo completo como índice, <a href="https://1drv.ms/f/c/990c860f44e7c976/EsNTzYLRpctFt8YjcwTqi9wB-XeOmREJvGoXmkrwrR34Fw?e=Lcko6u" style="color: var(--secondary); text-decoration: none;" target="_blank">abra el catálogo maestro en PDF</a>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab Content: Contact -->
+            <div id="contact" class="tab-content">
+                <h2 class="section-title">
+                    <i class="fas fa-handshake"></i> 
+                    <span data-key="contact.title">Contacto y Colaboración</span>
+                </h2>
+                <p style="color: var(--gray); margin-bottom: 2rem; font-size: 1.1rem;" data-key="contact.subtitle">
+                    Disponible para consultoría estratégica, implementación de sistemas propios y evaluaciones técnicas ex-ante para proyectos de infraestructura compleja.
+                </p>
+                
+                <div class="contact-container">
+                    <div class="contact-info">
+                        <h3 class="subsection-title">
+                            <i class="fas fa-address-card"></i> 
+                            <span data-key="contact.info.title">Información de Contacto</span>
+                        </h3>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon"><i class="fas fa-user"></i></div>
+                            <div class="contact-details">
+                                <h4 data-key="contact.name">Piter J. Bonilla D.</h4>
+                                <p data-key="contact.position">Ingeniero Civil | Especialista en Documentación Técnica</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+                            <div class="contact-details">
+                                <h4 data-key="contact.location.title">Ubicación</h4>
+                                <p data-key="contact.location.country">República Dominicana</p>
+                                <p data-key="contact.location.availability">Disponibilidad para proyectos internacionales</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon"><i class="fas fa-phone"></i></div>
+                            <div class="contact-details">
+                                <h4 data-key="contact.phone.title">Teléfono</h4>
+                                <p>+1 (809) 440-0909</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+                            <div class="contact-details">
+                                <h4 data-key="contact.email.title">Email</h4>
+                                <p>piter.bonilla@visualcrp.com</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon"><i class="fas fa-globe"></i></div>
+                            <div class="contact-details">
+                                <h4 data-key="contact.portfolio.title">Portafolio Digital</h4>
+                                <p>visualcrp.com</p>
+                                <p>linkedin.com/in/piter-bonilla-16244473</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon"><i class="fas fa-folder-open"></i></div>
+                            <div class="contact-details">
+                                <h4 data-key="contact.evidence.title">Evidencia Técnica</h4>
+                                <p data-key="contact.evidence.description">12 carpetas especializadas disponibles</p>
+                                <a href="#" onclick="switchToTab('portfolio')" style="color: var(--secondary); text-decoration: none; font-size: 0.9rem;">
+                                    <i class="fas fa-arrow-right"></i> 
+                                    <span data-key="contact.evidence.link">Explorar carpetas de documentos</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-form">
+                        <h3 class="subsection-title">
+                            <i class="fas fa-paper-plane"></i> 
+                            <span data-key="contact.form.title">Formulario de Contacto</span>
+                        </h3>
+                        <p style="color: var(--gray); margin-bottom: 2rem;" data-key="contact.form.description">
+                            Para consultas específicas sobre implementación de sistemas, evaluaciones técnicas o colaboración en proyectos.
+                        </p>
+                        
+                        <form id="contactForm">
+                            <div class="form-group">
+                                <label for="name" data-key="contact.form.name">Nombre completo *</label>
+                                <input type="text" id="name" class="form-control" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="company" data-key="contact.form.company">Empresa / Organización</label>
+                                <input type="text" id="company" class="form-control">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email" data-key="contact.form.email">Email *</label>
+                                <input type="email" id="email" class="form-control" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="projectType" data-key="contact.form.project">Tipo de Proyecto / Consulta</label>
+                                <select id="projectType" class="form-control">
+                                    <option value="" data-key="contact.form.select">Seleccionar...</option>
+                                    <option value="evaluation" data-key="contact.form.option1">Evaluación Ex-Ante</option>
+                                    <option value="implementation" data-key="contact.form.option2">Implementación Visual CRP</option>
+                                    <option value="consulting" data-key="contact.form.option3">Consultoría Técnica</option>
+                                    <option value="training" data-key="contact.form.option4">Capacitación de Equipos</option>
+                                    <option value="other" data-key="contact.form.option5">Otro</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="message" data-key="contact.form.message">Mensaje *</label>
+                                <textarea id="message" class="form-control" rows="5" required></textarea>
+                            </div>
+                            
+                            <button type="submit" class="btn-submit">
+                                <i class="fas fa-paper-plane"></i> 
+                                <span data-key="contact.form.submit">Enviar Mensaje</span>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                
+                <div class="highlight-card" style="margin-top: 3rem; border-top-color: var(--accent);">
+                    <h3><i class="fas fa-briefcase"></i> <span data-key="contact.services.title">Servicios Disponibles</span></h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 1.5rem;">
+                        <div>
+                            <h4 style="color: var(--primary); margin-bottom: 0.5rem;" data-key="contact.service1.title">Evaluación Ex-Ante</h4>
+                            <p style="color: var(--gray); font-size: 0.95rem;" data-key="contact.service1.description">
+                                Análisis de riesgos técnico-operativos en fase de diseño para proyectos >$100M.
+                            </p>
+                        </div>
+                        <div>
+                            <h4 style="color: var(--primary); margin-bottom: 0.5rem;" data-key="contact.service2.title">Implementación Visual CRP</h4>
+                            <p style="color: var(--gray); font-size: 0.95rem;" data-key="contact.service2.description">
+                                Adaptación e implementación del sistema de control documental operativo.
+                            </p>
+                        </div>
+                        <div>
+                            <h4 style="color: var(--primary); margin-bottom: 0.5rem;" data-key="contact.service3.title">Auditoría de Sistemas</h4>
+                            <p style="color: var(--gray); font-size: 0.95rem;" data-key="contact.service3.description">
+                                Diagnóstico de brechas operativas en sistemas de control técnico-documental.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="portfolio-footer">
+            <p>© 2026 Piter J. Bonilla D. | <span data-key="footer.title">Ingeniero Civil - CODIA 17378 | Portfolio Interactivo de Ingeniería Civil & Soluciones Geoespaciales</span></p>
+            <div class="footer-links">
+                <a href="https://visualcrp.com" class="footer-link" target="_blank" data-key="footer.link1">Visual CRP</a>
+                <a href="https://www.linkedin.com/in/piter-bonilla-16244473/" class="footer-link" target="_blank" data-key="footer.link2">LinkedIn</a>
+                <a href="mailto:piter.bonilla@visualcrp.com" class="footer-link" data-key="footer.link3">Contacto Directo</a>
+                <a href="https://1drv.ms/f/c/990c860f44e7c976/EsNTzYLRpctFt8YjcwTqi9wB-XeOmREJvGoXmkrwrR34Fw?e=Lcko6u" 
+                   class="footer-link" target="_blank" data-key="footer.link4">Catálogo Maestro (PDF)</a>
+                <a href="#" class="footer-link" onclick="window.print()" data-key="footer.link5">Versión Imprimible</a>
+            </div>
+            <p style="margin-top: 1rem; font-size: 0.9rem; color: var(--gray);" data-key="footer.description">
+                Este portafolio interactivo representa una compilación de evidencias técnicas validadas en proyectos reales >$100M. 133 documentos indexados en 12 carpetas especializadas disponibles para revisión visual.
+            </p>
+        </footer>
+    </div>
+
+    <button class="print-btn" title="Imprimir Portafolio" onclick="window.print()">
+        <i class="fas fa-print"></i>
+    </button>
+
+    <!-- Translation System -->
+    <script>
+        class PortfolioTranslator {
+            constructor() {
+                this.currentLang = 'es';
+                this.translationData = {
+                    es: {
+                        // Meta
+                        'meta.title': 'Portfolio Premium | Ingeniería Civil & Soluciones Geoespaciales',
+                        'meta.description': 'Portafolio profesional que documenta 25+ años en mega-proyectos de infraestructura con soluciones técnicas validadas y sistemas propios.',
+                        
+                        // Header
+                        'header.title': 'Ing. Piter J. Bonilla D. - Portfolio Premium de Ingeniería Civil & Soluciones Geoespaciales',
+                        'header.subtitle': 'Una compilación exhaustiva de proyectos, capacidades técnicas y soluciones innovadoras desarrolladas a lo largo de 25+ años en mega-proyectos de infraestructura',
+                        'header.stat1': 'Años de Experiencia',
+                        'header.stat2': 'Documentos Indexados',
+                        'header.stat3': 'Valor de Proyectos',
+                        'header.stat4': 'Categorías Especializadas',
+                        
+                        // Tabs
+                        'tabs.overview': 'Resumen Ejecutivo',
+                        'tabs.projects': 'Proyectos',
+                        'tabs.capabilities': 'Capacidades Técnicas',
+                        'tabs.technologies': 'Tecnologías',
+                        'tabs.portfolio': 'Portafolio',
+                        'tabs.contact': 'Contacto',
+                        
+                        // Overview
+                        'overview.title': 'Resumen Ejecutivo del Portafolio',
+                        'overview.card1.title': 'Propósito Estratégico',
+                        'overview.card1.content': 'Este portafolio documenta soluciones de ingeniería civil y geoespaciales validadas en proyectos >$100M, transformando complejidad técnica en sistemas operativos replicables con precisión certificada y trazabilidad completa.',
+                        'overview.card2.title': 'Organización del Contenido',
+                        'overview.card2.content': 'Colección organizada en 12 categorías principales con 133 documentos técnicos referenciados mediante sistema de codificación único (000-916) para acceso rápido y preciso a evidencias específicas.',
+                        'overview.card3.title': 'Valor Diferencial',
+                        'overview.card3.content': 'Integración única de expertise técnico tradicional con desarrollo de sistemas propios (Visual CRP, AC&P, SALT, ICOD) que automatizan y sistematizan procesos críticos de mega-proyectos.',
+                        'overview.charts.title': 'Distribución del Portafolio por Categorías',
+                        'overview.chart1.title': 'Categorías Principales',
+                        'overview.chart2.title': 'Tipología de Proyectos',
+                        'overview.methodology.title': 'Metodología de Trabajo: El Triángulo de Valor',
+                        'overview.methodology.content': 'Enfoque sistémico que integra <strong>Precisión de Ejecución</strong> (datos técnicos verificables), <strong>Sistemización del Control</strong> (transformación de procesos manuales) y <strong>Evaluación Anticipatoria</strong> (identificación proactiva de riesgos) para entregar resultados cuantificables en cada fase del ciclo de vida del proyecto.',
+                        
+                        // Charts Labels (Nuevas traducciones)
+                        // Chart Categories (12 labels)
+                        'chart.categories.label1': 'Proyectos Principales',
+                        'chart.categories.label2': 'Aplicaciones GIS',
+                        'chart.categories.label3': 'Diseño Vial',
+                        'chart.categories.label4': 'Modelos 3D',
+                        'chart.categories.label5': 'Desarrollo Territorial',
+                        'chart.categories.label6': 'Aplicaciones VBA',
+                        'chart.categories.label7': 'Reportes Técnicos',
+                        'chart.categories.label8': 'Cubicaciones',
+                        'chart.categories.label9': 'Servicios',
+                        'chart.categories.label10': 'Topografía',
+                        'chart.categories.label11': 'Estimaciones',
+                        'chart.categories.label12': 'Excavación',
+                        
+                        // Chart Projects (6 labels)
+                        'chart.projects.label1': 'Hidroeléctricos',
+                        'chart.projects.label2': 'Presas',
+                        'chart.projects.label3': 'Viales',
+                        'chart.projects.label4': 'Desarrollo Urbano',
+                        'chart.projects.label5': 'Túneles',
+                        'chart.projects.label6': 'Geoespacial',
+                        
+                        // Chart Skills (8 labels)
+                        'chart.skills.label1': 'Topografía',
+                        'chart.skills.label2': 'Diseño Vial',
+                        'chart.skills.label3': 'Gestión Documental',
+                        'chart.skills.label4': 'Cubicaciones',
+                        'chart.skills.label5': 'Análisis Costos',
+                        'chart.skills.label6': 'VBA/AutoCAD',
+                        'chart.skills.label7': 'GIS/LIDAR',
+                        'chart.skills.label8': '3D Modeling',
+                        
+                        // Chart Software (8 labels)
+                        'chart.software.label1': 'Excel VBA',
+                        'chart.software.label2': 'AutoCAD',
+                        'chart.software.label3': 'Visual CRP',
+                        'chart.software.label4': 'Global Mapper',
+                        'chart.software.label5': 'Civil 3D',
+                        'chart.software.label6': 'Pix4D',
+                        'chart.software.label7': 'Topcon Tools',
+                        'chart.software.label8': 'Eagle Point',
+                        
+                        // Chart Tooltips
+                        'chart.tooltip.documents': 'documentos',
+                        'chart.tooltip.level': 'Nivel',
+                        'chart.tooltip.projects': 'Número de Proyectos',
+                        'chart.tooltip.proficiency': 'Nivel de Dominio',
+                        'chart.tooltip.proficiencyPercent': 'Nivel de Dominio (%)',
+                        
+                        // Projects
+                        'projects.title': 'Proyectos Destacados',
+                        'projects.subtitle': 'Selección de mega-proyectos que representan la evolución profesional y validación de metodologías propias.',
+                        'projects.project1.title': 'Presa Montegrande',
+                        'projects.project1.description': 'Proyecto de presa de embalse con núcleo asfáltico (L=2.2km, H=57m) que incluye 12M m³ de excavaciones, 5M m³ de rellenos y 36,500 m³ de excavación subterránea en túneles de desvío.',
+                        'projects.project2.title': 'Hidroeléctrico Palomino',
+                        'projects.project2.description': 'Infraestructura hidroeléctrica subterránea compleja con túnel TBM de 12.4 km, casa de máquinas con 11 túneles interconectados y presa de CCR de 60m de altura.',
+                        'projects.project3.title': 'Hidroeléctrico Las Placetas',
+                        'projects.project3.description': 'Proyecto hidroeléctrico con enfoque en diseño geométrico de vías de acceso, modelado 3D de carreteras y estudios geotécnicos avanzados con integración de datos LIDAR.',
+                        'projects.project4.title': 'Desarrollo Urbano & Vial',
+                        'projects.project4.description': 'Proyectos de infraestructura vial y desarrollo urbano incluyendo Haina, Trasvase Hatillo, Circunvalación Santiago y otros proyectos de carreteras regionales.',
+                        'projects.link': 'Ver Documentación',
+                        'projects.metrics.title': 'Métricas de Impacto en Proyectos',
+                        'projects.metrics.stat1': 'Reducción tiempo procesos manuales',
+                        'projects.metrics.stat2': 'Precisión en cubicaciones',
+                        'projects.metrics.stat3': 'Ahorro en costos operativos',
+                        'projects.metrics.stat4': 'Compliance en auditorías',
+                        
+                        // Capabilities
+                        'capabilities.title': 'Capacidades Técnicas Integrales',
+                        'capabilities.subtitle': 'Competencias validadas en proyectos de alta complejidad y escala, organizadas por dominios de expertise.',
+                        'capabilities.card1.title': 'Topografía Avanzada',
+                        'capabilities.card1.item1': 'Gestión de equipos de topografía (hasta 80 personas)',
+                        'capabilities.card1.item2': 'Control topográfico en túneles TBM y NATM',
+                        'capabilities.card1.item3': 'Procesamiento de datos LIDAR y fotogrametría drone',
+                        'capabilities.card1.item4': 'Ajuste estadístico de poligonales (Sistema SALT)',
+                        'capabilities.card1.item5': 'Cubicaciones precisas con múltiples métodos comparativos',
+                        'capabilities.card2.title': 'Diseño Geométrico Vial',
+                        'capabilities.card2.item1': 'Diseño de alineamientos verticales y horizontales',
+                        'capabilities.card2.item2': 'Soluciones de drenaje para vías de montaña',
+                        'capabilities.card2.item3': 'Revisión integral de diseños de carreteras',
+                        'capabilities.card2.item4': 'Modelado 3D de vías y terraplenes',
+                        'capabilities.card2.item5': 'Análisis de pavimentos (AASHTO 1993)',
+                        'capabilities.card3.title': 'Gestión Documental Técnica',
+                        'capabilities.card3.item1': 'Control de 3,000+ documentos técnicos por proyecto',
+                        'capabilities.card3.item2': 'Implementación de sistemas de codificación multicriterio',
+                        'capabilities.card3.item3': 'Trazabilidad completa de revisiones y aprobaciones',
+                        'capabilities.card3.item4': 'Arquitectura híbrida (plataformas contractuales + operativas)',
+                        'capabilities.card3.item5': 'Preparación para auditorías con 100% compliance',
+                        'capabilities.card4.title': 'Análisis de Costos y Presupuestos',
+                        'capabilities.card4.item1': 'Presupuestos generales para proyectos >$500M',
+                        'capabilities.card4.item2': 'Análisis de precios unitarios detallados',
+                        'capabilities.card4.item3': 'Cálculo de costos de mano de obra factorizados',
+                        'capabilities.card4.item4': 'Desglose de costos directos, indirectos y seguridad social',
+                        'capabilities.card4.item5': 'Cuantificación automatizada de materiales y mano de obra',
+                        'capabilities.charts.title': 'Nivel de Dominio por Área Técnica',
+                        'capabilities.chart1.title': 'Habilidades Técnicas Principales',
+                        'capabilities.chart2.title': 'Software y Herramientas',
+                        'capabilities.folders.title': 'Acceso a Carpetas de Evidencia por Categoría',
+                        'capabilities.folders.description': 'Exploración visual de +900 documentos técnicos organizados en 12 categorías especializadas. Cada enlace abre una carpeta con documentos visibles individualmente.',
+                        'capabilities.folder1': 'Proyectos Principales',
+                        'capabilities.folder2': 'Escáner Láser Túneles',
+                        'capabilities.folder3': 'Aplicaciones GIS',
+                        'capabilities.folder4': 'Procesamiento Topográfico',
+                        'capabilities.viewall': 'Ver todas las 12 categorías en la pestaña Portafolio',
+                        
+                        // Technologies
+                        'technologies.title': 'Ecosistema Tecnológico',
+                        'technologies.subtitle': 'Integración de tecnologías comerciales con sistemas propios desarrollados para optimizar flujos de trabajo en ingeniería.',
+                        'technologies.systems.title': 'Sistemas Propios Desarrollados',
+                        'technologies.system1': 'Visual CRP',
+                        'technologies.system2': 'Sistema AC&P',
+                        'technologies.system3': 'Sistema SALT',
+                        'technologies.system4': 'ICOD System',
+                        'technologies.system1.name': 'Visual CRP',
+                        'technologies.system1.description': 'Sistema de Control Documental Operativo validado en proyectos >$500M. Arquitectura híbrida que coexiste con plataformas contractuales.',
+                        'technologies.system2.name': 'Sistema AC&P',
+                        'technologies.system2.description': 'Análisis de Costos y Presupuestos desde 2004. Herramienta flexible para estimaciones precisas desde residencial hasta mega-proyectos.',
+                        'technologies.system3.name': 'Sistema SALT',
+                        'technologies.system3.description': 'Sistema de Ajuste y Liquidación Topográfica. Automatiza procesamiento de datos topográficos con precisión certificada.',
+                        'technologies.software.title': 'Software Comercial Especializado',
+                        'technologies.software1': 'Excel VBA Avanzado',
+                        'technologies.software2': 'AutoCAD & Civil 3D',
+                        'technologies.software3': 'Global Mapper',
+                        'technologies.software4': 'Topcon Tools',
+                        'technologies.software5': 'Pix4Dmapper',
+                        'technologies.software6': 'Eagle Point',
+                        'technologies.software7': 'IA Aplicada',
+                        'technologies.software8': 'GIS Applications',
+                        'technologies.integration.title': 'Integración Tecnológica',
+                        'technologies.integration.description': 'Flujos de trabajo optimizados mediante conexiones automatizadas entre sistemas:',
+                        'technologies.step1': 'Datos LIDAR/Drone',
+                        'technologies.step2': 'Procesamiento SALT',
+                        'technologies.step3': 'AutoCAD Automatizado',
+                        'technologies.step4': 'Control Visual CRP',
+                        
+                        // Portfolio
+                        'portfolio.title': 'Portafolio Visual por Categorías',
+                        'portfolio.subtitle': 'Galería organizada según el sistema de codificación del catálogo original (000-916). Cada categoría enlaza a una carpeta con documentos visibles individualmente.',
+                        'portfolio.item1.title': 'Proyectos Principales',
+                        'portfolio.item1.description': 'Montegrande, Palomino, Las Placetas, Haina, Trasvase Hatillo, Circunvalación Santiago',
+                        'portfolio.item2.title': 'Aplicación de Escáner Láser en Túneles',
+                        'portfolio.item2.description': 'PMG - Procesamiento de datos LIDAR para secciones transversales automáticas',
+                        'portfolio.item3.title': 'Aplicaciones GIS & Geomáticas',
+                        'portfolio.item3.description': 'Global Mapper, LIDAR PMG, Topcon Tools - Procesamiento de datos',
+                        'portfolio.item4.title': 'Procesamiento Topográfico y Aplicaciones',
+                        'portfolio.item4.description': 'Ajuste de poligonales, cubicaciones, sistemas SALT y aplicaciones VBA',
+                        'portfolio.item5.title': 'Diseño Geométrico Vial',
+                        'portfolio.item5.description': 'Las Placetas, Palomino - Alineamientos, drenaje, pavimentos',
+                        'portfolio.item6.title': 'Diseños 3D y Modelos',
+                        'portfolio.item6.description': 'Excavaciones, túneles, central subterránea - Visualización avanzada',
+                        'portfolio.openfolder': 'Abrir Carpeta',
+                        'portfolio.folders.title': 'Acceso Directo a Todas las Carpetas',
+                        'portfolio.folders.description': 'Exploración visual de documentos técnicos organizados en 12 categorías temáticas. Cada enlace abre una carpeta de OneDrive/SharePoint con documentos visibles individualmente.',
+                        'portfolio.folder1.title': 'Proyectos Principales',
+                        'portfolio.folder1.desc': 'Montegrande, Palomino, Las Placetas, etc.',
+                        'portfolio.folder2.title': 'Escáner Láser en Túneles',
+                        'portfolio.folder2.desc': 'Procesamiento LIDAR, secciones transversales',
+                        'portfolio.folder3.title': 'Aplicaciones GIS & Geomáticas',
+                        'portfolio.folder3.desc': 'Global Mapper, LIDAR PMG, Topcon Tools',
+                        'portfolio.folder4.title': 'Procesamiento Topográfico',
+                        'portfolio.folder4.desc': 'Ajuste poligonales, cubicaciones, sistema SALT',
+                        'portfolio.folder5.title': 'Diseño Geométrico Vial',
+                        'portfolio.folder5.desc': 'Alineamientos, drenaje, pavimentos AASHTO',
+                        'portfolio.folder6.title': 'Diseños 3D y Modelos',
+                        'portfolio.folder6.desc': 'Excavaciones, túneles, visualización avanzada',
+                        'portfolio.folder7.title': 'Desarrollo Territorial',
+                        'portfolio.folder7.desc': 'Modelado 3D, cubicaciones, sistemas sanitarios',
+                        'portfolio.folder8.title': 'Aplicaciones Excel VBA',
+                        'portfolio.folder8.desc': 'Sistemas propios: Visual CRP, AC&P, SALT',
+                        'portfolio.folder9.title': 'Reportes de Ingeniería',
+                        'portfolio.folder9.desc': 'Informes técnicos, memorias de cálculo',
+                        'portfolio.folder10.title': 'Cubicación de Obras',
+                        'portfolio.folder10.desc': 'Cálculo de volúmenes, presupuestos, costos',
+                        'portfolio.folder11.title': 'Estimaciones y Dibujo',
+                        'portfolio.folder11.desc': 'Presupuestos, dibujo técnico, planos',
+                        'portfolio.folder12.title': 'Avance de Excavación',
+                        'portfolio.folder12.desc': 'Control de avance, planificación de obras',
+                        'portfolio.instructions.title': 'Instrucciones de Navegación:',
+                        'portfolio.instructions.description': 'Cada enlace abre una carpeta de OneDrive/SharePoint con documentos visibles (PDF, DWG, imágenes, etc.). Puede navegar por los archivos, previsualizarlos y descargarlos individualmente si lo desea. Para acceder al catálogo completo como índice, <a href="https://1drv.ms/f/c/990c860f44e7c976/EsNTzYLRpctFt8YjcwTqi9wB-XeOmREJvGoXmkrwrR34Fw?e=Lcko6u" style="color: var(--secondary); text-decoration: none;">abra el catálogo maestro en PDF</a>.',
+                        
+                        // Contact
+                        'contact.title': 'Contacto y Colaboración',
+                        'contact.subtitle': 'Disponible para consultoría estratégica, implementación de sistemas propios y evaluaciones técnicas ex-ante para proyectos de infraestructura compleja.',
+                        'contact.info.title': 'Información de Contacto',
+                        'contact.name': 'Piter J. Bonilla D.',
+                        'contact.position': 'Ingeniero Civil | Especialista en Documentación Técnica',
+                        'contact.location.title': 'Ubicación',
+                        'contact.location.country': 'República Dominicana',
+                        'contact.location.availability': 'Disponibilidad para proyectos internacionales',
+                        'contact.phone.title': 'Teléfono',
+                        'contact.email.title': 'Email',
+                        'contact.portfolio.title': 'Portafolio Digital',
+                        'contact.evidence.title': 'Evidencia Técnica',
+                        'contact.evidence.description': '12 carpetas especializadas disponibles',
+                        'contact.evidence.link': 'Explorar carpetas de documentos',
+                        'contact.form.title': 'Formulario de Contacto',
+                        'contact.form.description': 'Para consultas específicas sobre implementación de sistemas, evaluaciones técnicas o colaboración en proyectos.',
+                        'contact.form.name': 'Nombre completo *',
+                        'contact.form.company': 'Empresa / Organización',
+                        'contact.form.email': 'Email *',
+                        'contact.form.project': 'Tipo de Proyecto / Consulta',
+                        'contact.form.select': 'Seleccionar...',
+                        'contact.form.option1': 'Evaluación Ex-Ante',
+                        'contact.form.option2': 'Implementación Visual CRP',
+                        'contact.form.option3': 'Consultoría Técnica',
+                        'contact.form.option4': 'Capacitación de Equipos',
+                        'contact.form.option5': 'Otro',
+                        'contact.form.message': 'Mensaje *',
+                        'contact.form.submit': 'Enviar Mensaje',
+                        'contact.services.title': 'Servicios Disponibles',
+                        'contact.service1.title': 'Evaluación Ex-Ante',
+                        'contact.service1.description': 'Análisis de riesgos técnico-operativos en fase de diseño para proyectos >$100M.',
+                        'contact.service2.title': 'Implementación Visual CRP',
+                        'contact.service2.description': 'Adaptación e implementación del sistema de control documental operativo.',
+                        'contact.service3.title': 'Auditoría de Sistemas',
+                        'contact.service3.description': 'Diagnóstico de brechas operativas en sistemas de control técnico-documental.',
+                        
+                        // Footer
+                        'footer.title': 'Ingeniero Civil - CODIA 17378 | Portfolio Interactivo de Ingeniería Civil & Soluciones Geoespaciales',
+                        'footer.link1': 'Visual CRP',
+                        'footer.link2': 'LinkedIn',
+                        'footer.link3': 'Contacto Directo',
+                        'footer.link4': 'Catálogo Maestro (PDF)',
+                        'footer.link5': 'Versión Imprimible',
+                        'footer.description': 'Este portafolio interactivo representa una compilación de evidencias técnicas validadas en proyectos reales >$100M. 133 documentos indexados en 12 carpetas especializadas disponibles para revisión visual.'
+                    },
+                    en: {
+                        // Meta
+                        'meta.title': 'Premium Portfolio | Civil Engineering & Geospatial Solutions',
+                        'meta.description': 'Professional portfolio documenting 25+ years in mega-infrastructure projects with validated technical solutions and proprietary systems.',
+                        
+                        // Header
+                        'header.title': 'Eng. Piter J. Bonilla D. - Premium Civil Engineering & Geospatial Solutions Portfolio',
+                        'header.subtitle': 'A comprehensive compilation of projects, technical capabilities and innovative solutions developed over 25+ years in mega-infrastructure projects',
+                        'header.stat1': 'Years of Experience',
+                        'header.stat2': 'Indexed Documents',
+                        'header.stat3': 'Project Value',
+                        'header.stat4': 'Specialized Categories',
+                        
+                        // Tabs
+                        'tabs.overview': 'Executive Summary',
+                        'tabs.projects': 'Projects',
+                        'tabs.capabilities': 'Technical Capabilities',
+                        'tabs.technologies': 'Technologies',
+                        'tabs.portfolio': 'Portfolio',
+                        'tabs.contact': 'Contact',
+                        
+                        // Overview
+                        'overview.title': 'Portfolio Executive Summary',
+                        'overview.card1.title': 'Strategic Purpose',
+                        'overview.card1.content': 'This portfolio documents civil engineering and geospatial solutions validated in >$100M projects, transforming technical complexity into replicable operating systems with certified precision and complete traceability.',
+                        'overview.card2.title': 'Content Organization',
+                        'overview.card2.content': 'Collection organized in 12 main categories with 133 technical documents referenced through unique coding system (000-916) for fast and precise access to specific evidence.',
+                        'overview.card3.title': 'Differential Value',
+                        'overview.card3.content': 'Unique integration of traditional technical expertise with proprietary system development (Visual CRP, AC&P, SALT, ICOD) that automates and systematizes critical mega-project processes.',
+                        'overview.charts.title': 'Portfolio Distribution by Categories',
+                        'overview.chart1.title': 'Main Categories',
+                        'overview.chart2.title': 'Project Typology',
+                        'overview.methodology.title': 'Work Methodology: The Value Triangle',
+                        'overview.methodology.content': 'Systemic approach that integrates <strong>Execution Precision</strong> (verifiable technical data), <strong>Control Systematization</strong> (transformation of manual processes) and <strong>Anticipatory Evaluation</strong> (proactive risk identification) to deliver quantifiable results in each phase of the project life cycle.',
+                        
+                        // Charts Labels (New translations)
+                        // Chart Categories (12 labels)
+                        'chart.categories.label1': 'Main Projects',
+                        'chart.categories.label2': 'GIS Applications',
+                        'chart.categories.label3': 'Road Design',
+                        'chart.categories.label4': '3D Models',
+                        'chart.categories.label5': 'Territorial Development',
+                        'chart.categories.label6': 'VBA Applications',
+                        'chart.categories.label7': 'Technical Reports',
+                        'chart.categories.label8': 'Quantity Takeoffs',
+                        'chart.categories.label9': 'Services',
+                        'chart.categories.label10': 'Surveying',
+                        'chart.categories.label11': 'Estimates',
+                        'chart.categories.label12': 'Excavation',
+                        
+                        // Chart Projects (6 labels)
+                        'chart.projects.label1': 'Hydroelectric',
+                        'chart.projects.label2': 'Dams',
+                        'chart.projects.label3': 'Roads',
+                        'chart.projects.label4': 'Urban Development',
+                        'chart.projects.label5': 'Tunnels',
+                        'chart.projects.label6': 'Geospatial',
+                        
+                        // Chart Skills (8 labels)
+                        'chart.skills.label1': 'Surveying',
+                        'chart.skills.label2': 'Road Design',
+                        'chart.skills.label3': 'Document Management',
+                        'chart.skills.label4': 'Quantity Takeoffs',
+                        'chart.skills.label5': 'Cost Analysis',
+                        'chart.skills.label6': 'VBA/AutoCAD',
+                        'chart.skills.label7': 'GIS/LIDAR',
+                        'chart.skills.label8': '3D Modeling',
+                        
+                        // Chart Software (8 labels)
+                        'chart.software.label1': 'Excel VBA',
+                        'chart.software.label2': 'AutoCAD',
+                        'chart.software.label3': 'Visual CRP',
+                        'chart.software.label4': 'Global Mapper',
+                        'chart.software.label5': 'Civil 3D',
+                        'chart.software.label6': 'Pix4D',
+                        'chart.software.label7': 'Topcon Tools',
+                        'chart.software.label8': 'Eagle Point',
+                        
+                        // Chart Tooltips
+                        'chart.tooltip.documents': 'documents',
+                        'chart.tooltip.level': 'Level',
+                        'chart.tooltip.projects': 'Number of Projects',
+                        'chart.tooltip.proficiency': 'Proficiency Level',
+                        'chart.tooltip.proficiencyPercent': 'Proficiency Level (%)',
+                        
+                        // Projects
+                        'projects.title': 'Featured Projects',
+                        'projects.subtitle': 'Selection of mega-projects representing professional evolution and validation of proprietary methodologies.',
+                        'projects.project1.title': 'Montegrande Dam',
+                        'projects.project1.description': 'Reservoir dam project with asphalt core (L=2.2km, H=57m) including 12M m³ of excavations, 5M m³ of fills and 36,500 m³ of underground excavation in diversion tunnels.',
+                        'projects.project2.title': 'Palomino Hydroelectric',
+                        'projects.project2.description': 'Complex underground hydroelectric infrastructure with 12.4 km TBM tunnel, powerhouse with 11 interconnected tunnels and 60m high CCR dam.',
+                        'projects.project3.title': 'Las Placetas Hydroelectric',
+                        'projects.project3.description': 'Hydroelectric project focused on geometric design of access roads, 3D road modeling and advanced geotechnical studies with LIDAR data integration.',
+                        'projects.project4.title': 'Urban & Road Development',
+                        'projects.project4.description': 'Road infrastructure and urban development projects including Haina, Hatillo Diversion, Santiago Bypass and other regional road projects.',
+                        'projects.link': 'View Documentation',
+                        'projects.metrics.title': 'Project Impact Metrics',
+                        'projects.metrics.stat1': 'Manual process time reduction',
+                        'projects.metrics.stat2': 'Quantity takeoff precision',
+                        'projects.metrics.stat3': 'Operational cost savings',
+                        'projects.metrics.stat4': 'Audit compliance',
+                        
+                        // Capabilities
+                        'capabilities.title': 'Comprehensive Technical Capabilities',
+                        'capabilities.subtitle': 'Competencies validated in high complexity and scale projects, organized by expertise domains.',
+                        'capabilities.card1.title': 'Advanced Surveying',
+                        'capabilities.card1.item1': 'Surveying team management (up to 80 people)',
+                        'capabilities.card1.item2': 'Topographic control in TBM and NATM tunnels',
+                        'capabilities.card1.item3': 'LIDAR data and drone photogrammetry processing',
+                        'capabilities.card1.item4': 'Statistical traverse adjustment (SALT System)',
+                        'capabilities.card1.item5': 'Precise quantity takeoffs with multiple comparative methods',
+                        'capabilities.card2.title': 'Road Geometric Design',
+                        'capabilities.card2.item1': 'Vertical and horizontal alignment design',
+                        'capabilities.card2.item2': 'Drainage solutions for mountain roads',
+                        'capabilities.card2.item3': 'Comprehensive road design review',
+                        'capabilities.card2.item4': '3D modeling of roads and embankments',
+                        'capabilities.card2.item5': 'Pavement analysis (AASHTO 1993)',
+                        'capabilities.card3.title': 'Technical Document Management',
+                        'capabilities.card3.item1': 'Control of 3,000+ technical documents per project',
+                        'capabilities.card3.item2': 'Multi-criteria coding system implementation',
+                        'capabilities.card3.item3': 'Complete traceability of revisions and approvals',
+                        'capabilities.card3.item4': 'Hybrid architecture (contractual + operational platforms)',
+                        'capabilities.card3.item5': 'Audit preparation with 100% compliance',
+                        'capabilities.card4.title': 'Cost Analysis and Budgeting',
+                        'capabilities.card4.item1': 'General budgets for projects >$500M',
+                        'capabilities.card4.item2': 'Detailed unit price analysis',
+                        'capabilities.card4.item3': 'Factored labor cost calculation',
+                        'capabilities.card4.item4': 'Breakdown of direct, indirect and social security costs',
+                        'capabilities.card4.item5': 'Automated quantification of materials and labor',
+                        'capabilities.charts.title': 'Proficiency Level by Technical Area',
+                        'capabilities.chart1.title': 'Main Technical Skills',
+                        'capabilities.chart2.title': 'Software and Tools',
+                        'capabilities.folders.title': 'Access to Evidence Folders by Category',
+                        'capabilities.folders.description': 'Visual exploration of +900 technical documents organized in 12 specialized categories. Each link opens a folder with individually visible documents.',
+                        'capabilities.folder1': 'Main Projects',
+                        'capabilities.folder2': 'Laser Scanner Tunnels',
+                        'capabilities.folder3': 'GIS Applications',
+                        'capabilities.folder4': 'Topographic Processing',
+                        'capabilities.viewall': 'View all 12 categories in the Portfolio tab',
+                        
+                        // Technologies
+                        'technologies.title': 'Technological Ecosystem',
+                        'technologies.subtitle': 'Integration of commercial technologies with proprietary systems developed to optimize engineering workflows.',
+                        'technologies.systems.title': 'Proprietary Developed Systems',
+                        'technologies.system1': 'Visual CRP',
+                        'technologies.system2': 'AC&P System',
+                        'technologies.system3': 'SALT System',
+                        'technologies.system4': 'ICOD System',
+                        'technologies.system1.name': 'Visual CRP',
+                        'technologies.system1.description': 'Operational Document Control System validated in projects >$500M. Hybrid architecture that coexists with contractual platforms.',
+                        'technologies.system2.name': 'AC&P System',
+                        'technologies.system2.description': 'Cost Analysis and Budgeting System since 2004. Flexible tool for precise estimates from residential to mega-projects.',
+                        'technologies.system3.name': 'SALT System',
+                        'technologies.system3.description': 'Topographic Adjustment and Settlement System. Automates topographic data processing with certified precision.',
+                        'technologies.software.title': 'Specialized Commercial Software',
+                        'technologies.software1': 'Advanced Excel VBA',
+                        'technologies.software2': 'AutoCAD & Civil 3D',
+                        'technologies.software3': 'Global Mapper',
+                        'technologies.software4': 'Topcon Tools',
+                        'technologies.software5': 'Pix4Dmapper',
+                        'technologies.software6': 'Eagle Point',
+                        'technologies.software7': 'Applied AI',
+                        'technologies.software8': 'GIS Applications',
+                        'technologies.integration.title': 'Technological Integration',
+                        'technologies.integration.description': 'Optimized workflows through automated connections between systems:',
+                        'technologies.step1': 'LIDAR/Drone Data',
+                        'technologies.step2': 'SALT Processing',
+                        'technologies.step3': 'Automated AutoCAD',
+                        'technologies.step4': 'Visual CRP Control',
+                        
+                        // Portfolio
+                        'portfolio.title': 'Visual Portfolio by Categories',
+                        'portfolio.subtitle': 'Gallery organized according to the original catalog coding system (000-916). Each category links to a folder with individually visible documents.',
+                        'portfolio.item1.title': 'Main Projects',
+                        'portfolio.item1.description': 'Montegrande, Palomino, Las Placetas, Haina, Hatillo Diversion, Santiago Bypass',
+                        'portfolio.item2.title': 'Laser Scanner Application in Tunnels',
+                        'portfolio.item2.description': 'PMG - LIDAR data processing for automatic cross-sections',
+                        'portfolio.item3.title': 'GIS & Geomatics Applications',
+                        'portfolio.item3.description': 'Global Mapper, LIDAR PMG, Topcon Tools - Data processing',
+                        'portfolio.item4.title': 'Topographic Processing and Applications',
+                        'portfolio.item4.description': 'Traverse adjustment, quantity takeoffs, SALT systems and VBA applications',
+                        'portfolio.item5.title': 'Road Geometric Design',
+                        'portfolio.item5.description': 'Las Placetas, Palomino - Alignments, drainage, pavements',
+                        'portfolio.item6.title': '3D Designs and Models',
+                        'portfolio.item6.description': 'Excavations, tunnels, underground powerhouse - Advanced visualization',
+                        'portfolio.openfolder': 'Open Folder',
+                        'portfolio.folders.title': 'Direct Access to All Folders',
+                        'portfolio.folders.description': 'Visual exploration of technical documents organized in 12 thematic categories. Each link opens a OneDrive/SharePoint folder with individually visible documents.',
+                        'portfolio.folder1.title': 'Main Projects',
+                        'portfolio.folder1.desc': 'Montegrande, Palomino, Las Placetas, etc.',
+                        'portfolio.folder2.title': 'Laser Scanner in Tunnels',
+                        'portfolio.folder2.desc': 'LIDAR processing, cross-sections',
+                        'portfolio.folder3.title': 'GIS & Geomatics Applications',
+                        'portfolio.folder3.desc': 'Global Mapper, LIDAR PMG, Topcon Tools',
+                        'portfolio.folder4.title': 'Surveying Processing & Own Applications',
+                        'portfolio.folder4.desc': 'Traverse adjustment, quantity takeoffs, SALT system',
+                        'portfolio.folder5.title': 'Road Geometric Design',
+                        'portfolio.folder5.desc': 'Alignments, drainage, AASHTO pavements',
+                        'portfolio.folder6.title': '3D Designs and Models',
+                        'portfolio.folder6.desc': 'Excavations, tunnels, advanced visualization',
+                        'portfolio.folder7.title': 'Land Development',
+                        'portfolio.folder7.desc': '3D modeling, quantity takeoffs, sanitary systems',
+                        'portfolio.folder8.title': 'Excel VBA Applications',
+                        'portfolio.folder8.desc': 'Proprietary systems: Visual CRP, AC&P, SALT',
+                        'portfolio.folder9.title': 'Engineering Reports',
+                        'portfolio.folder9.desc': 'Technical reports, calculation memos',
+                        'portfolio.folder10.title': 'Work Quantity Takeoff',
+                        'portfolio.folder10.desc': 'Volume calculation, budgets, costs',
+                        'portfolio.folder11.title': 'Estimations & Drafting Service',
+                        'portfolio.folder11.desc': 'Budgets, technical drawing, plans',
+                        'portfolio.folder12.title': 'Excavation Progress',
+                        'portfolio.folder12.desc': 'Progress control, work planning',
+                        'portfolio.instructions.title': 'Navigation Instructions:',
+                        'portfolio.instructions.description': 'Each link opens a OneDrive/SharePoint folder with visible documents (PDF, DWG, images, etc.). You can navigate through files, preview them and download individually if desired. To access the complete catalog as index, <a href="https://1drv.ms/f/c/990c860f44e7c976/EsNTzYLRpctFt8YjcwTqi9wB-XeOmREJvGoXmkrwrR34Fw?e=Lcko6u" style="color: var(--secondary); text-decoration: none;">open the master catalog in PDF</a>.',
+                        
+                        // Contact
+                        'contact.title': 'Contact and Collaboration',
+                        'contact.subtitle': 'Available for strategic consulting, proprietary system implementation and ex-ante technical evaluations for complex infrastructure projects.',
+                        'contact.info.title': 'Contact Information',
+                        'contact.name': 'Piter J. Bonilla D.',
+                        'contact.position': 'Civil Engineer | Technical Documentation Specialist',
+                        'contact.location.title': 'Location',
+                        'contact.location.country': 'Dominican Republic',
+                        'contact.location.availability': 'Availability for international projects',
+                        'contact.phone.title': 'Phone',
+                        'contact.email.title': 'Email',
+                        'contact.portfolio.title': 'Digital Portfolio',
+                        'contact.evidence.title': 'Technical Evidence',
+                        'contact.evidence.description': '12 specialized folders available',
+                        'contact.evidence.link': 'Explore document folders',
+                        'contact.form.title': 'Contact Form',
+                        'contact.form.description': 'For specific queries about system implementation, technical evaluations or project collaboration.',
+                        'contact.form.name': 'Full name *',
+                        'contact.form.company': 'Company / Organization',
+                        'contact.form.email': 'Email *',
+                        'contact.form.project': 'Project Type / Inquiry',
+                        'contact.form.select': 'Select...',
+                        'contact.form.option1': 'Ex-Ante Evaluation',
+                        'contact.form.option2': 'Visual CRP Implementation',
+                        'contact.form.option3': 'Technical Consulting',
+                        'contact.form.option4': 'Team Training',
+                        'contact.form.option5': 'Other',
+                        'contact.form.message': 'Message *',
+                        'contact.form.submit': 'Send Message',
+                        'contact.services.title': 'Available Services',
+                        'contact.service1.title': 'Ex-Ante Evaluation',
+                        'contact.service1.description': 'Technical-operational risk analysis in design phase for projects >$100M.',
+                        'contact.service2.title': 'Visual CRP Implementation',
+                        'contact.service2.description': 'Adaptation and implementation of operational document control system.',
+                        'contact.service3.title': 'Systems Audit',
+                        'contact.service3.description': 'Diagnosis of operational gaps in technical-documentary control systems.',
+                        
+                        // Footer
+                        'footer.title': 'Civil Engineer - CODIA 17378 | Interactive Civil Engineering & Geospatial Solutions Portfolio',
+                        'footer.link1': 'Visual CRP',
+                        'footer.link2': 'LinkedIn',
+                        'footer.link3': 'Direct Contact',
+                        'footer.link4': 'Master Catalog (PDF)',
+                        'footer.link5': 'Printable Version',
+                        'footer.description': 'This interactive portfolio represents a compilation of technical evidence validated in real projects >$100M. 133 indexed documents in 12 specialized folders available for visual review.'
+                    }
+                };
+                
+                this.translations = {};
+                this.init();
+            }
+            
+            init() {
+                this.detectPreferredLanguage();
+                this.loadTranslations();
+                this.updatePageContent();
+                this.setupLanguageButtons();
+                this.setupPortfolioColors();
+            }
+            
+            detectPreferredLanguage() {
+                const savedLang = localStorage.getItem('portfolio-lang');
+                if (savedLang && (savedLang === 'en' || savedLang === 'es')) {
+                    this.currentLang = savedLang;
+                    return;
+                }
+                
+                const browserLang = navigator.language || navigator.userLanguage;
+                const primaryLang = browserLang.split('-')[0];
+                
+                if (primaryLang === 'en') {
+                    this.currentLang = 'en';
+                }
+                
+                const urlParams = new URLSearchParams(window.location.search);
+                const urlLang = urlParams.get('lang');
+                if (urlLang === 'es' || urlLang === 'en') {
+                    this.currentLang = urlLang;
+                }
+            }
+            
+            loadTranslations() {
+                this.translations = this.translationData[this.currentLang] || this.translationData['es'];
+            }
+            
+            updatePageContent() {
+                document.querySelectorAll('[data-key]').forEach(element => {
+                    const key = element.getAttribute('data-key');
+                    const translation = this.translations[key];
+                    
+                    if (translation !== undefined) {
+                        this.applyTranslation(element, translation);
+                    }
+                });
+                
+                document.documentElement.lang = this.currentLang;
+                document.documentElement.setAttribute('data-current-lang', this.currentLang);
+                
+                document.querySelectorAll('.lang-btn').forEach(btn => {
+                    btn.classList.toggle('active', btn.dataset.lang === this.currentLang);
+                });
+                
+                // Update charts when language changes
+                if (window.createCharts && typeof window.createCharts === 'function') {
+                    setTimeout(window.createCharts, 100);
+                }
+            }
+            
+            applyTranslation(element, translation) {
+                if (element.tagName === 'META') {
+                    if (element.name === 'description') {
+                        element.content = translation;
+                    }
+                } 
+                else if (element.tagName === 'TITLE') {
+                    element.textContent = translation;
+                }
+                else {
+                    if (translation.includes('<')) {
+                        element.innerHTML = translation;
+                    } else {
+                        element.textContent = translation;
+                    }
+                }
+            }
+            
+            setupLanguageButtons() {
+                document.querySelectorAll('.lang-btn').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const newLang = btn.dataset.lang;
+                        
+                        if (newLang !== this.currentLang) {
+                            document.body.classList.add('changing-language');
+                            
+                            this.currentLang = newLang;
+                            localStorage.setItem('portfolio-lang', newLang);
+                            this.loadTranslations();
+                            this.updatePageContent();
+                            this.updateURL();
+                            
+                            setTimeout(() => {
+                                document.body.classList.remove('changing-language');
+                            }, 300);
+                        }
+                    });
+                });
+            }
+            
+            updateURL() {
+                const url = new URL(window.location);
+                if (this.currentLang === 'es') {
+                    url.searchParams.delete('lang');
+                } else {
+                    url.searchParams.set('lang', this.currentLang);
+                }
+                window.history.replaceState({}, '', url);
+            }
+            
+            setupPortfolioColors() {
+                const colors = [
+                    'linear-gradient(135deg, #1a365d 0%, #2d6bc9 100%)', 
+                    'linear-gradient(135deg, #2d6bc9 0%, #1e5bb8 100%)',
+                    'linear-gradient(135deg, #e63946 0%, #c53030 100%)', 
+                    'linear-gradient(135deg, #2e7d32 0%, #1e6b2d 100%)',
+                    'linear-gradient(135deg, #8a2be2 0%, #6a1bb8 100%)', 
+                    'linear-gradient(135deg, #ff9800 0%, #e68900 100%)'
+                ];
+                
+                document.querySelectorAll('.portfolio-item').forEach((item, index) => {
+                    item.style.background = colors[index % colors.length];
+                });
+            }
+        }
+    </script>
+
+    <!-- Main Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize translator
+            window.portfolioTranslator = new PortfolioTranslator();
+            
+            // Tab functionality
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.addEventListener('click', () => {
+                    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                    tab.classList.add('active');
+                    const tabId = tab.getAttribute('data-tab');
+                    document.getElementById(tabId).classList.add('active');
+                    if (tabId === 'overview' || tabId === 'capabilities') {
+                        setTimeout(createCharts, 300);
+                    }
+                });
+            });
+
+            // Function to switch to specific tab
+            function switchToTab(tabName) {
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                document.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
+                document.getElementById(tabName).classList.add('active');
+                if (tabName === 'overview' || tabName === 'capabilities') setTimeout(createCharts, 300);
+                document.getElementById(tabName).scrollIntoView({ behavior: 'smooth' });
+                return false;
+            }
+
+            // Create charts with Chart.js - UPDATED WITH TRANSLATIONS
+            window.createCharts = function() {
+                // Chart 1: Portfolio Categories Distribution
+                const categoriesCtx = document.getElementById('categoriesChart');
+                if (categoriesCtx && categoriesCtx.getContext) {
+                    if (window.categoriesChartInstance) {
+                        window.categoriesChartInstance.destroy();
+                    }
+                    
+                    window.categoriesChartInstance = new Chart(categoriesCtx, {
+                        type: 'doughnut',
+                        data: {
+                            labels: [
+                                window.portfolioTranslator.translations['chart.categories.label1'],
+                                window.portfolioTranslator.translations['chart.categories.label2'],
+                                window.portfolioTranslator.translations['chart.categories.label3'],
+                                window.portfolioTranslator.translations['chart.categories.label4'],
+                                window.portfolioTranslator.translations['chart.categories.label5'],
+                                window.portfolioTranslator.translations['chart.categories.label6'],
+                                window.portfolioTranslator.translations['chart.categories.label7'],
+                                window.portfolioTranslator.translations['chart.categories.label8'],
+                                window.portfolioTranslator.translations['chart.categories.label9'],
+                                window.portfolioTranslator.translations['chart.categories.label10'],
+                                window.portfolioTranslator.translations['chart.categories.label11'],
+                                window.portfolioTranslator.translations['chart.categories.label12']
+                            ],
+                            datasets: [{
+                                data: [15, 12, 18, 10, 8, 17, 14, 12, 4, 16, 7, 16],
+                                backgroundColor: ['#1a365d', '#2d6bc9', '#e63946', '#2e7d32', '#8a2be2', '#ff9800', '#009688', '#795548', '#607d8b', '#3f51b5', '#f44336', '#ff9800'],
+                                borderWidth: 2, 
+                                borderColor: '#fff'
+                            }]
+                        },
+                        options: {
+                            responsive: true, 
+                            maintainAspectRatio: false,
+                            plugins: { 
+                                legend: { 
+                                    position: 'right', 
+                                    labels: { 
+                                        boxWidth: 12, 
+                                        padding: 15, 
+                                        font: { size: 11 } 
+                                    } 
+                                },
+                                tooltip: { 
+                                    callbacks: { 
+                                        label: function(context) { 
+                                            return `${context.label}: ${context.raw} ${window.portfolioTranslator.translations['chart.tooltip.documents']}`; 
+                                        } 
+                                    } 
+                                } 
+                            }
+                        }
+                    });
+                }
+
+                // Chart 2: Project Types
+                const projectsCtx = document.getElementById('projectsChart');
+                if (projectsCtx && projectsCtx.getContext) {
+                    if (window.projectsChartInstance) {
+                        window.projectsChartInstance.destroy();
+                    }
+                    
+                    window.projectsChartInstance = new Chart(projectsCtx, {
+                        type: 'bar',
+                        data: {
+                            labels: [
+                                window.portfolioTranslator.translations['chart.projects.label1'],
+                                window.portfolioTranslator.translations['chart.projects.label2'],
+                                window.portfolioTranslator.translations['chart.projects.label3'],
+                                window.portfolioTranslator.translations['chart.projects.label4'],
+                                window.portfolioTranslator.translations['chart.projects.label5'],
+                                window.portfolioTranslator.translations['chart.projects.label6']
+                            ],
+                            datasets: [{
+                                label: window.portfolioTranslator.translations['chart.tooltip.projects'],
+                                data: [8, 6, 12, 9, 7, 11], 
+                                backgroundColor: '#2d6bc9', 
+                                borderColor: '#1a365d', 
+                                borderWidth: 1 
+                            }]
+                        },
+                        options: {
+                            responsive: true, 
+                            maintainAspectRatio: false,
+                            scales: { 
+                                y: { 
+                                    beginAtZero: true, 
+                                    ticks: { stepSize: 2 }, 
+                                    grid: { color: 'rgba(0,0,0,0.05)' } 
+                                }, 
+                                x: { grid: { display: false } } 
+                            },
+                            plugins: { legend: { display: false } }
+                        }
+                    });
+                }
+
+                // Chart 3: Technical Skills
+                const skillsCtx = document.getElementById('skillsChart');
+                if (skillsCtx && skillsCtx.getContext) {
+                    if (window.skillsChartInstance) {
+                        window.skillsChartInstance.destroy();
+                    }
+                    
+                    window.skillsChartInstance = new Chart(skillsCtx, {
+                        type: 'radar',
+                        data: {
+                            labels: [
+                                window.portfolioTranslator.translations['chart.skills.label1'],
+                                window.portfolioTranslator.translations['chart.skills.label2'],
+                                window.portfolioTranslator.translations['chart.skills.label3'],
+                                window.portfolioTranslator.translations['chart.skills.label4'],
+                                window.portfolioTranslator.translations['chart.skills.label5'],
+                                window.portfolioTranslator.translations['chart.skills.label6'],
+                                window.portfolioTranslator.translations['chart.skills.label7'],
+                                window.portfolioTranslator.translations['chart.skills.label8']
+                            ],
+                            datasets: [{
+                                label: window.portfolioTranslator.translations['chart.tooltip.proficiency'], 
+                                data: [97, 92, 95, 96, 94, 97, 90, 88],
+                                backgroundColor: 'rgba(45, 107, 201, 0.2)', 
+                                borderColor: '#2d6bc9', 
+                                borderWidth: 2,
+                                pointBackgroundColor: '#2d6bc9', 
+                                pointBorderColor: '#fff', 
+                                pointBorderWidth: 2
+                            }]
+                        },
+                        options: {
+                            responsive: true, 
+                            maintainAspectRatio: false,
+                            scales: { 
+                                r: { 
+                                    min: 0, 
+                                    max: 100, 
+                                    ticks: { 
+                                        stepSize: 20, 
+                                        backdropColor: 'transparent' 
+                                    }, 
+                                    grid: { color: 'rgba(0,0,0,0.1)' }, 
+                                    angleLines: { color: 'rgba(0,0,0,0.1)' }, 
+                                    pointLabels: { font: { size: 11 } } 
+                                } 
+                            },
+                            plugins: { legend: { position: 'bottom' } }
+                        }
+                    });
+                }
+
+                // Chart 4: Software Proficiency
+                const softwareCtx = document.getElementById('softwareChart');
+                if (softwareCtx && softwareCtx.getContext) {
+                    if (window.softwareChartInstance) {
+                        window.softwareChartInstance.destroy();
+                    }
+                    
+                    window.softwareChartInstance = new Chart(softwareCtx, {
+                        type: 'horizontalBar',
+                        data: {
+                            labels: [
+                                window.portfolioTranslator.translations['chart.software.label1'],
+                                window.portfolioTranslator.translations['chart.software.label2'],
+                                window.portfolioTranslator.translations['chart.software.label3'],
+                                window.portfolioTranslator.translations['chart.software.label4'],
+                                window.portfolioTranslator.translations['chart.software.label5'],
+                                window.portfolioTranslator.translations['chart.software.label6'],
+                                window.portfolioTranslator.translations['chart.software.label7'],
+                                window.portfolioTranslator.translations['chart.software.label8']
+                            ],
+                            datasets: [{
+                                label: window.portfolioTranslator.translations['chart.tooltip.proficiencyPercent'], 
+                                data: [97, 95, 96, 90, 88, 85, 92, 80],
+                                backgroundColor: ['#1a365d', '#2d6bc9', '#e63946', '#2e7d32', '#8a2be2', '#ff9800', '#009688', '#795548'],
+                                borderWidth: 1, 
+                                borderColor: '#fff'
+                            }]
+                        },
+                        options: {
+                            responsive: true, 
+                            maintainAspectRatio: false, 
+                            indexAxis: 'y',
+                            scales: { 
+                                x: { 
+                                    beginAtZero: true, 
+                                    max: 100, 
+                                    grid: { color: 'rgba(0,0,0,0.05)' } 
+                                }, 
+                                y: { grid: { display: false } } 
+                            },
+                            plugins: { 
+                                legend: { display: false }, 
+                                tooltip: { 
+                                    callbacks: { 
+                                        label: function(context) { 
+                                            return `${window.portfolioTranslator.translations['chart.tooltip.level']}: ${context.raw}%`; 
+                                        } 
+                                    } 
+                                } 
+                            }
+                        }
+                    });
+                }
+            };
+
+            // Contact form submission
+            document.getElementById('contactForm').addEventListener('submit', function(e) {
+                e.preventDefault(); 
+                alert(window.portfolioTranslator.currentLang === 'es' 
+                    ? 'Gracias por su mensaje. Será contactado en las próximas 24-48 horas.' 
+                    : 'Thank you for your message. You will be contacted within the next 24-48 hours.'); 
+                this.reset();
+            });
+
+            // Initialize charts on page load
+            setTimeout(createCharts, 500);
+
+            // Set all external links to open in new tab
+            document.querySelectorAll('a[href^="http"]').forEach(link => {
+                if (!link.getAttribute('target')) {
+                    link.setAttribute('target', '_blank');
+                }
+            });
+
+            // Animation for stats on scroll
+            function animateStats() {
+                const stats = document.querySelectorAll('.stat-value');
+                stats.forEach(stat => {
+                    const finalValue = stat.textContent;
+                    const numericValue = parseFloat(finalValue.replace(/[^0-9.]/g, ''));
+                    if (!isNaN(numericValue)) {
+                        let current = 0; 
+                        const increment = numericValue / 50;
+                        const timer = setInterval(() => {
+                            current += increment;
+                            if (current >= numericValue) { 
+                                stat.textContent = finalValue; 
+                                clearInterval(timer); 
+                            }
+                            else {
+                                if (finalValue.includes('+')) stat.textContent = Math.floor(current) + '+';
+                                else if (finalValue.includes('$')) stat.textContent = '$' + Math.floor(current) + 'B+';
+                                else stat.textContent = Math.floor(current);
+                            }
+                        }, 30);
+                    }
+                });
+            }
+
+            // Trigger stats animation when overview tab is opened
+            const overviewTab = document.querySelector('[data-tab="overview"]');
+            if (overviewTab) {
+                overviewTab.addEventListener('click', animateStats);
+            }
+        });
+
+        // Make switchToTab function globally available
+        window.switchToTab = function(tabName) {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            document.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
+            document.getElementById(tabName).classList.add('active');
+            if (tabName === 'overview' || tabName === 'capabilities') setTimeout(window.createCharts, 300);
+            document.getElementById(tabName).scrollIntoView({ behavior: 'smooth' });
+            return false;
+        };
+    </script>
+</body>
+</html>

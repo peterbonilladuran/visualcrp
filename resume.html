@@ -1,0 +1,2519 @@
+<!DOCTYPE html>
+<html lang="es" data-current-lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-key="meta.title">Piter J. Bonilla D. - Arquitecto de Sistemas de Control para Mega-Proyectos</title>
+    <meta name="description" data-key="meta.description" content="Ingeniero Civil con más de 25 años transformando mega-proyectos mediante la sistematización de procesos críticos. Especialista en Documentación Técnica y Gerente de Topografía.">
+    
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:title" content="Piter J. Bonilla - Arquitecto de Sistemas para Mega-Proyectos">
+    <meta property="og:description" content="Ingeniero Civil especializado en sistematización de procesos críticos para infraestructura">
+    <meta property="og:image" content="https://visualcrp.com/og-image.jpg">
+    <meta property="og:url" content="https://visualcrp.com/cv">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="es_DO">
+    <meta property="og:locale:alternate" content="en_US">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Piter J. Bonilla D. - Arquitecto de Sistemas de Control">
+    <meta name="twitter:description" content="Transformando mega-proyectos mediante sistematización de procesos críticos">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* RESET Y VARIABLES */
+        :root {
+            --primary: #1a365d;
+            --secondary: #2d6bc9;
+            --accent: #e63946;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+            --transition: all 0.3s ease;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --radius: 12px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: var(--dark);
+            line-height: 1.6;
+            transition: opacity 0.3s ease;
+        }
+
+        body.changing-language {
+            opacity: 0.7;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* LANGUAGE SWITCHER */
+        .language-switcher {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 10000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 50px;
+            padding: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            border: 1px solid rgba(26, 54, 93, 0.1);
+            display: flex;
+            gap: 5px;
+        }
+
+        .lang-btn {
+            padding: 10px 20px;
+            border-radius: 40px;
+            border: none;
+            background: transparent;
+            font-weight: 600;
+            font-size: 0.9em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary);
+            font-family: inherit;
+        }
+
+        .lang-btn:hover {
+            background: rgba(26, 54, 93, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .lang-btn.active {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 2px 10px rgba(26, 54, 93, 0.3);
+        }
+
+        .lang-flag {
+            font-size: 1.2em;
+        }
+
+        /* HEADER */
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 2.5rem 2rem;
+            border-radius: var(--radius);
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .name {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            line-height: 1.1;
+        }
+
+        .title {
+            font-size: 1.5rem;
+            font-weight: 400;
+            opacity: 0.9;
+            margin-bottom: 0.5rem;
+        }
+
+        .headline {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .contact-item i {
+            color: var(--accent);
+        }
+
+        .badge {
+            display: inline-block;
+            background-color: rgba(255, 255, 255, 0.15);
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        .contact-item a {
+            color: white;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .contact-item a:hover {
+            color: var(--accent);
+            text-decoration: underline;
+        }
+
+        /* TABS */
+        .tabs-container {
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+
+        .tabs {
+            display: flex;
+            background-color: var(--light-gray);
+            border-bottom: 1px solid #dee2e6;
+            flex-wrap: wrap;
+        }
+
+        .tab {
+            padding: 1.2rem 2rem;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--gray);
+            transition: var(--transition);
+            border-bottom: 3px solid transparent;
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            white-space: nowrap;
+        }
+
+        .tab:hover {
+            color: var(--primary);
+            background-color: rgba(255, 255, 255, 0.7);
+        }
+
+        .tab.active {
+            color: var(--primary);
+            border-bottom: 3px solid var(--accent);
+            background-color: white;
+        }
+
+        .tab-content {
+            display: none;
+            padding: 2.5rem;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* CONTENT SECTIONS */
+        .section-title {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.7rem;
+            border-bottom: 2px solid var(--light-gray);
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .section-title i {
+            color: var(--secondary);
+        }
+
+        .subsection-title {
+            font-size: 1.4rem;
+            color: var(--dark);
+            margin: 2rem 0 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+        }
+
+        .subsection-title i {
+            color: var(--accent);
+            font-size: 1.2rem;
+        }
+
+        .profile-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+        }
+
+        .highlight {
+            background-color: rgba(41, 128, 185, 0.1);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--secondary);
+            margin: 1.5rem 0;
+        }
+
+        /* TIMELINE */
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+            margin-top: 1.5rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 7px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background-color: var(--secondary);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -33px;
+            top: 5px;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background-color: var(--secondary);
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px var(--secondary);
+        }
+
+        .timeline-date {
+            font-weight: 600;
+            color: var(--secondary);
+            margin-bottom: 0.3rem;
+        }
+
+        .timeline-title {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-subtitle {
+            color: var(--gray);
+            font-style: italic;
+            margin-bottom: 0.8rem;
+        }
+
+        .timeline-content {
+            color: var(--dark);
+        }
+
+        .tag {
+            display: inline-block;
+            background-color: var(--light-gray);
+            color: var(--primary);
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            margin: 0.3rem 0.3rem 0.3rem 0;
+            font-weight: 500;
+        }
+
+        /* SKILLS */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 1.5rem;
+        }
+
+        .skill-category {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+            border-top: 4px solid var(--secondary);
+        }
+
+        .skill-category h4 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .skill-item {
+            margin-bottom: 1rem;
+        }
+
+        .skill-name {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .skill-bar {
+            height: 10px;
+            background-color: var(--light-gray);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .skill-level {
+            height: 100%;
+            background-color: var(--secondary);
+            border-radius: 5px;
+            width: 0;
+            transition: width 1s ease;
+        }
+
+        /* CHARTS */
+        .charts-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .chart-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .chart-title {
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .chart {
+            height: 250px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            gap: 15px;
+            padding: 1rem;
+        }
+
+        .chart-bar {
+            width: 45px;
+            background-color: var(--secondary);
+            border-radius: 5px 5px 0 0;
+            position: relative;
+            transition: var(--transition);
+            height: 0;
+            transition: height 1s ease;
+        }
+
+        .chart-bar:hover {
+            background-color: var(--accent);
+            transform: scale(1.05);
+        }
+
+        .chart-label {
+            position: absolute;
+            bottom: -25px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--gray);
+            font-weight: 500;
+        }
+
+        .chart-value {
+            position: absolute;
+            top: -25px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        /* PROJECT CARDS */
+        .project-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 2rem;
+            transition: var(--transition);
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .project-header {
+            background-color: var(--primary);
+            color: white;
+            padding: 1.5rem;
+        }
+
+        .project-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-subtitle {
+            opacity: 0.9;
+            font-size: 0.95rem;
+        }
+
+        .project-body {
+            padding: 1.5rem;
+        }
+
+        .project-stats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .stat {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--secondary);
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--secondary);
+            font-weight: 600;
+            text-decoration: none;
+            margin-top: 1rem;
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--secondary);
+            border-radius: 4px;
+            transition: var(--transition);
+        }
+
+        .project-link:hover {
+            background-color: var(--secondary);
+            color: white;
+        }
+
+        /* TESTIMONIALS */
+        .testimonial {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 4px solid var(--accent);
+            margin: 1.5rem 0;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .testimonial-author {
+            text-align: right;
+            color: var(--gray);
+            font-weight: 500;
+        }
+
+        /* FOOTER */
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--gray);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--light-gray);
+            margin-top: 3rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--secondary);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+            text-decoration: underline;
+        }
+
+        /* PRINT BUTTON */
+        .print-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--primary);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            z-index: 100;
+            transition: var(--transition);
+            border: none;
+        }
+
+        .print-btn:hover {
+            background-color: var(--accent);
+            transform: scale(1.1);
+        }
+
+        /* GRID LAYOUTS */
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .grid-item {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .center-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        /* UL STYLES */
+        ul {
+            margin-left: 1.5rem;
+            margin-top: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        ul li {
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        /* SERVICES STYLES */
+        .service-card {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border-left: 4px solid var(--secondary);
+        }
+
+        .service-card h4 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+        }
+
+        .service-card h4 i {
+            color: var(--accent);
+        }
+
+        .service-features {
+            margin: 1rem 0;
+        }
+
+        .service-features li {
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .service-action {
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--light-gray);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 992px) {
+            .name {
+                font-size: 2.4rem;
+            }
+            
+            .title {
+                font-size: 1.3rem;
+            }
+            
+            .charts-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .name {
+                font-size: 2rem;
+            }
+            
+            .title {
+                font-size: 1.2rem;
+            }
+            
+            .headline {
+                font-size: 1rem;
+            }
+            
+            .tabs {
+                flex-direction: column;
+            }
+            
+            .tab {
+                justify-content: center;
+                border-bottom: 1px solid #dee2e6;
+                border-left: 3px solid transparent;
+            }
+            
+            .tab.active {
+                border-bottom: 1px solid #dee2e6;
+                border-left: 3px solid var(--accent);
+            }
+            
+            .tab-content {
+                padding: 1.5rem;
+            }
+            
+            .skills-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .project-stats {
+                gap: 1rem;
+            }
+            
+            .stat-value {
+                font-size: 1.5rem;
+            }
+            
+            .contact-info {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .language-switcher {
+                top: 10px;
+                right: 10px;
+                padding: 5px;
+            }
+            
+            .lang-btn {
+                padding: 8px 12px;
+                font-size: 0.8em;
+            }
+            
+            .print-btn {
+                bottom: 20px;
+                right: 20px;
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .name {
+                font-size: 1.8rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+            
+            .language-switcher {
+                top: 5px;
+                right: 5px;
+                left: 5px;
+                bottom: auto;
+                flex-direction: row;
+                justify-content: center;
+                padding: 8px;
+            }
+            
+            .lang-btn {
+                padding: 6px 10px;
+            }
+            
+            .lang-text {
+                display: none;
+            }
+            
+            .lang-btn.active .lang-text {
+                display: inline;
+            }
+        }
+
+        @media print {
+            .print-btn, .language-switcher {
+                display: none;
+            }
+            
+            .tabs-container {
+                box-shadow: none;
+            }
+            
+            .tab-content {
+                display: block !important;
+                padding: 0;
+            }
+            
+            .tabs {
+                display: none;
+            }
+            
+            body {
+                font-size: 12pt;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- LANGUAGE SWITCHER -->
+    <div class="language-switcher">
+        <button class="lang-btn active" data-lang="es">
+            <span class="lang-flag">🇪🇸</span>
+            <span class="lang-text">Español</span>
+        </button>
+        <button class="lang-btn" data-lang="en">
+            <span class="lang-flag">🇺🇸</span>
+            <span class="lang-text">English</span>
+        </button>
+    </div>
+
+    <div class="container">
+        <!-- HEADER -->
+        <header class="header">
+            <div class="header-content">
+                <h1 class="name">PITER J. BONILLA D.</h1>
+                <h2 class="title" data-key="header.title">Ingeniero Civil | Especialista en Documentación Técnica | Gerente de Topografía</h2>
+                <div class="headline" data-key="header.headline">Proyectos de Infraestructura Compleja</div>
+                <div class="badge" data-key="header.badge">CODIA 17378</div>
+                
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span data-key="contact.location">República Dominicana</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>+1 (809) 440-0909</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <a href="mailto:piter.bonilla@visualcrp.com">piter.bonilla@visualcrp.com</a>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fab fa-linkedin"></i>
+                        <a href="https://www.linkedin.com/in/piter-bonilla-16244473" target="_blank" aria-label="LinkedIn Profile">linkedin.com/in/piter-bonilla-16244473</a>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-globe"></i>
+                        <a href="https://visualcrp.com" target="_blank" aria-label="Visual CRP Website">visualcrp.com</a>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- TABS -->
+        <div class="tabs-container">
+            <nav class="tabs" role="navigation" aria-label="Navegación principal del CV">
+                <div class="tab active" data-tab="profile">
+                    <i class="fas fa-user"></i> <span data-key="tabs.profile">Perfil</span>
+                </div>
+                <div class="tab" data-tab="experience">
+                    <i class="fas fa-briefcase"></i> <span data-key="tabs.experience">Trayectoria</span>
+                </div>
+                <div class="tab" data-tab="skills">
+                    <i class="fas fa-chart-bar"></i> <span data-key="tabs.skills">Competencias</span>
+                </div>
+                <div class="tab" data-tab="projects">
+                    <i class="fas fa-project-diagram"></i> <span data-key="tabs.projects">Casos de Éxito</span>
+                </div>
+                <div class="tab" data-tab="systems">
+                    <i class="fas fa-laptop-code"></i> <span data-key="tabs.systems">Sistemas Propios</span>
+                </div>
+                <div class="tab" data-tab="services">
+                    <i class="fas fa-handshake"></i> <span data-key="tabs.services">Servicios</span>
+                </div>
+                <div class="tab" data-tab="education">
+                    <i class="fas fa-graduation-cap"></i> <span data-key="tabs.education">Formación</span>
+                </div>
+            </nav>
+
+            <!-- TAB CONTENT: PROFILE -->
+            <main role="main">
+                <div id="profile" class="tab-content active">
+                    <h2 class="section-title"><i class="fas fa-user-circle"></i> <span data-key="profile.title">Propuesta de Valor</span></h2>
+                    <p class="profile-text" data-key="profile.text1">
+                        <strong>Ingeniero Civil | Especialista en Documentación Técnica | Gerente de Topografía</strong> con más de 25 años transformando mega-proyectos de infraestructura mediante la <strong>sistematización de procesos críticos</strong>. Mi enfoque convierte conocimiento tácito en sistemas operativos replicables que entregan <strong>precisión, trazabilidad y robustez técnica</strong>.
+                    </p>
+                    
+                    <div class="highlight">
+                        <h3 class="subsection-title"><i class="fas fa-bullseye"></i> <span data-key="profile.evolution">Evolución Profesional</span></h3>
+                        <div class="grid-3">
+                            <div class="grid-item" style="border-top: 4px solid #1a365d;">
+                                <h4 style="color: var(--primary); margin-bottom: 0.5rem;">2004-2011</h4>
+                                <p data-key="profile.period1"><strong>Experto Técnico</strong><br>Topografía avanzada, diseño geométrico, cubicaciones en proyectos hidroeléctricos.</p>
+                            </div>
+                            <div class="grid-item" style="border-top: 4px solid #2d6bc9;">
+                                <h4 style="color: var(--primary); margin-bottom: 0.5rem;">2011-2021</h4>
+                                <p data-key="profile.period2"><strong>Arquitecto de Sistemas</strong><br>Análisis de Costos y Presupuestos, SALT, Desarrollo e implementación de Visual CRP, automatización VBA-AutoCAD.</p>
+                            </div>
+                            <div class="grid-item" style="border-top: 4px solid #e63946;">
+                                <h4 style="color: var(--primary); margin-bottom: 0.5rem;">2022-Presente</h4>
+                                <p data-key="profile.period3"><strong>Estratega de Evaluación</strong><br>Análisis ex-ante, modelado financiero, consultoría sistémica.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="charts-container">
+                        <div class="chart-card">
+                            <h3 class="chart-title" data-key="profile.chart1">Impacto en el Ciclo de Vida del Proyecto</h3>
+                            <div class="chart">
+                                <div class="chart-bar" data-height="85">
+                                    <span class="chart-value">+85%</span>
+                                    <span class="chart-label" data-key="profile.chart1.label1">Diseño</span>
+                                </div>
+                                <div class="chart-bar" data-height="95">
+                                    <span class="chart-value">+95%</span>
+                                    <span class="chart-label" data-key="profile.chart1.label2">Control</span>
+                                </div>
+                                <div class="chart-bar" data-height="90">
+                                    <span class="chart-value">+90%</span>
+                                    <span class="chart-label" data-key="profile.chart1.label3">Evaluación</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="chart-card">
+                            <h3 class="chart-title" data-key="profile.chart2">ROI de Implementación Sistémica</h3>
+                            <div class="chart">
+                                <div class="chart-bar" data-height="75" style="background-color: #1a365d;">
+                                    <span class="chart-value">75%</span>
+                                    <span class="chart-label" data-key="profile.chart2.label1">Tiempo</span>
+                                </div>
+                                <div class="chart-bar" data-height="60" style="background-color: #2d6bc9;">
+                                    <span class="chart-value">$1.6M</span>
+                                    <span class="chart-label" data-key="profile.chart2.label2">Ahorro</span>
+                                </div>
+                                <div class="chart-bar" data-height="90" style="background-color: #e63946;">
+                                    <span class="chart-value">90%</span>
+                                    <span class="chart-label" data-key="profile.chart2.label3">Precisión</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="testimonial">
+                        <p class="testimonial-text" data-key="profile.testimonial">"La implementación de Visual CRP transformó nuestro control documental operativo. El enfoque híbrido nos produjo un ahorro estimado en $1.6M con una capa operativa única de trazabilidad completa y <strong>altos honores</strong> en evaluaciones de auditoría."</p>
+                        <p class="testimonial-author" data-key="profile.testimonial.author">— Gerente de Ingeniería, Presa Montegrande</p>
+                    </div>
+                </div>
+
+                <!-- TAB CONTENT: EXPERIENCE -->
+                <div id="experience" class="tab-content">
+                    <h2 class="section-title"><i class="fas fa-history"></i> <span data-key="experience.title">Trayectoria Profesional</span></h2>
+                    
+                    <div class="timeline">
+                        <!-- Current -->
+                        <div class="timeline-item">
+                            <div class="timeline-date">2022 - Presente</div>
+                            <h3 class="timeline-title" data-key="experience.job1.title">Arquitecto de Sistemas & Consultor Estratégico</h3>
+                            <div class="timeline-subtitle" data-key="experience.job1.subtitle">Consultoría Independiente | Proyectos >$100M</div>
+                            <div class="timeline-content">
+                                <p data-key="experience.job1.desc1"><strong>Línea 3 Metro Santo Domingo (2025-2026):</strong> Evaluación técnica ex-ante que identificó déficit operativo del 30-50% y proyectó diferencial de $2,308M entre alternativas.</p>
+                                <p data-key="experience.job1.desc2"><strong>Consultoría Visual CRP:</strong> Adaptación e implementación para Monorriel Santiago y Presa Guayubín.</p>
+                                <div class="tags">
+                                    <span class="tag" data-key="experience.tag1">Evaluación Ex-Ante</span>
+                                    <span class="tag" data-key="experience.tag2">Modelado Financiero</span>
+                                    <span class="tag" data-key="experience.tag3">Benchmarking</span>
+                                    <span class="tag" data-key="experience.tag4">Implementación Sistemas</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Montegrande -->
+                        <div class="timeline-item">
+                            <div class="timeline-date">2018 - 2021</div>
+                            <h3 class="timeline-title" data-key="experience.job2.title">Gerente de Topografía y Control Documental</h3>
+                            <div class="timeline-subtitle" data-key="experience.job2.subtitle">Andrade Gutierrez S.A. – Presa Montegrande ($500M+)</div>
+                            <div class="timeline-content">
+                                <p data-key="experience.job2.desc1"><strong>Caso de Éxito Visual CRP:</strong> Implementación que gestionó 15,000+ registros en 4,000+ documentos, citado como referencia de eficiencia híbrida.</p>
+                                <p data-key="experience.job2.desc2"><strong>Automatización VBA-AutoCAD:</strong> Sistema que generó 2,800 secciones transversales automáticas, reduciendo tiempo manual en 75%.</p>
+                                <div class="tags">
+                                    <span class="tag">Visual CRP</span>
+                                    <span class="tag">Excel VBA</span>
+                                    <span class="tag">AutoCAD</span>
+                                    <span class="tag" data-key="experience.tag5">Automatización</span>
+                                    <span class="tag" data-key="experience.tag6">Gestión Documental</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Palomino -->
+                        <div class="timeline-item">
+                            <div class="timeline-date">2006 - 2011</div>
+                            <h3 class="timeline-title" data-key="experience.job3.title">Gerente de Topografía</h3>
+                            <div class="timeline-subtitle" data-key="experience.job3.subtitle">Odebrecht – Hidroeléctrico Palomino ($400M+)</div>
+                            <div class="timeline-content">
+                                <p data-key="experience.job3.desc1">Dirección de topografía para complejo subterráneo: túnel TBM 12.4 km, casa de máquinas con 11 túneles.</p>
+                                <p data-key="experience.job3.desc2">Diseño geométrico de vías de acceso y revisión integral de carretera de 18.2 km.</p>
+                                <div class="tags">
+                                    <span class="tag" data-key="experience.tag7">Topografía</span>
+                                    <span class="tag" data-key="experience.tag8">Túneles</span>
+                                    <span class="tag" data-key="experience.tag9">Diseño Geométrico</span>
+                                    <span class="tag" data-key="experience.tag10">Hidroeléctricas</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Early Experience -->
+                        <div class="timeline-item">
+                            <div class="timeline-date">2000 - 2005</div>
+                            <h3 class="timeline-title" data-key="experience.job4.title">Ingeniero de Proyecto</h3>
+                            <div class="timeline-subtitle" data-key="experience.job4.subtitle">Proyectos de Infraestructura Varios</div>
+                            <div class="timeline-content">
+                                <p data-key="experience.job4.desc1">Participación en proyectos como Presa Guaigüí, Hidroeléctrica Pinalito, Circunvalación Santiago, y otros proyectos de infraestructura.</p>
+                                <p data-key="experience.job4.desc2">Desarrollo inicial de metodologías de control técnico que evolucionaron hacia sistemas propios.</p>
+                                <div class="tags">
+                                    <span class="tag" data-key="experience.tag11">Infraestructura Vial</span>
+                                    <span class="tag" data-key="experience.tag12">Control Técnico</span>
+                                    <span class="tag" data-key="experience.tag13">Desarrollo Metodologías</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB CONTENT: SKILLS -->
+                <div id="skills" class="tab-content">
+                    <h2 class="section-title"><i class="fas fa-star"></i> <span data-key="skills.title">Competencias Técnicas</span></h2>
+                    
+                    <div class="skills-container">
+                        <div class="skill-category">
+                            <h4><i class="fas fa-hard-hat"></i> <span data-key="skills.category1">Gestión Técnica en Infraestructura</span></h4>
+                            <div class="skill-item">
+                                <div class="skill-name">
+                                    <span data-key="skills.skill1">Gestión de Topografía y Cubicaciones</span>
+                                    <span>96%</span>
+                                </div>
+                                <div class="skill-bar"><div class="skill-level" data-width="96"></div></div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-name">
+                                    <span data-key="skills.skill2">Diseño Geométrico de Vías</span>
+                                    <span>92%</span>
+                                </div>
+                                <div class="skill-bar"><div class="skill-level" data-width="92"></div></div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-name">
+                                    <span data-key="skills.skill3">Control Técnico Integral de Obra</span>
+                                    <span>94%</span>
+                                </div>
+                                <div class="skill-bar"><div class="skill-level" data-width="94"></div></div>
+                            </div>
+                        </div>
+                        
+                        <div class="skill-category">
+                            <h4><i class="fas fa-laptop-code"></i> <span data-key="skills.category2">Arquitectura de Sistemas</span></h4>
+                            <div class="skill-item">
+                                <div class="skill-name">
+                                    <span data-key="skills.skill4">Desarrollo Excel VBA Avanzado</span>
+                                    <span>97%</span>
+                                </div>
+                                <div class="skill-bar"><div class="skill-level" data-width="97"></div></div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-name">
+                                    <span data-key="skills.skill5">Integración con AutoCAD</span>
+                                    <span>90%</span>
+                                </div>
+                                <div class="skill-bar"><div class="skill-level" data-width="90"></div></div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-name">
+                                    <span data-key="skills.skill6">Sistemas de Control Documental</span>
+                                    <span>95%</span>
+                                </div>
+                                <div class="skill-bar"><div class="skill-level" data-width="95"></div></div>
+                            </div>
+                        </div>
+                        
+                        <div class="skill-category">
+                            <h4><i class="fas fa-chart-line"></i> <span data-key="skills.category3">Evaluación Estratégica</span></h4>
+                            <div class="skill-item">
+                                <div class="skill-name">
+                                    <span data-key="skills.skill7">Análisis Ex-Ante y Benchmarking</span>
+                                    <span>90%</span>
+                                </div>
+                                <div class="skill-bar"><div class="skill-level" data-width="90"></div></div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-name">
+                                    <span data-key="skills.skill8">Modelado Financiero de Ciclo de Vida</span>
+                                    <span>88%</span>
+                                </div>
+                                <div class="skill-bar"><div class="skill-level" data-width="88"></div></div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-name">
+                                    <span data-key="skills.skill9">Identificación de Riesgos Técnico-Operativos</span>
+                                    <span>92%</span>
+                                </div>
+                                <div class="skill-bar"><div class="skill-level" data-width="92"></div></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="highlight" style="margin-top: 2rem;">
+                        <h3 class="subsection-title"><i class="fas fa-sitemap"></i> <span data-key="skills.methodology">Metodología: El Triángulo de Valor</span></h3>
+                        <div class="grid-3">
+                            <div style="text-align: center; padding: 1.5rem; background: white; border-radius: 8px; box-shadow: 0 3px 10px rgba(0,0,0,0.05);">
+                                <div class="center-icon">
+                                    <i class="fas fa-bullseye"></i>
+                                </div>
+                                <h4 style="color: var(--primary); margin-bottom: 0.5rem;" data-key="skills.method1.title">Precisión de Ejecución</h4>
+                                <p style="font-size: 0.9rem;" data-key="skills.method1.desc">Datos técnicos verificables, cubicaciones exactas, control riguroso.</p>
+                            </div>
+                            <div style="text-align: center; padding: 1.5rem; background: white; border-radius: 8px; box-shadow: 0 3px 10px rgba(0,0,0,0.05);">
+                                <div class="center-icon" style="background: #2d6bc9;">
+                                    <i class="fas fa-cogs"></i>
+                                </div>
+                                <h4 style="color: var(--primary); margin-bottom: 0.5rem;" data-key="skills.method2.title">Sistemización del Control</h4>
+                                <p style="font-size: 0.9rem;" data-key="skills.method2.desc">Transformación de procesos manuales en sistemas estructurados y accesibles.</p>
+                            </div>
+                            <div style="text-align: center; padding: 1.5rem; background: white; border-radius: 8px; box-shadow: 0 3px 10px rgba(0,0,0,0.05);">
+                                <div class="center-icon" style="background: #e63946;">
+                                    <i class="fas fa-binoculars"></i>
+                                </div>
+                                <h4 style="color: var(--primary); margin-bottom: 0.5rem;" data-key="skills.method3.title">Evaluación Anticipatoria</h4>
+                                <p style="font-size: 0.9rem;" data-key="skills.method3.desc">Identificación y documentación de riesgos antes de la fase de construcción.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB CONTENT: PROJECTS -->
+                <div id="projects" class="tab-content">
+                    <h2 class="section-title"><i class="fas fa-trophy"></i> <span data-key="projects.title">Casos de Éxito</span></h2>
+                    
+                    <div class="project-card">
+                        <div class="project-header">
+                            <h3 class="project-title" data-key="projects.project1.title">Evaluación Ex-Ante Línea 3 Metro Santo Domingo</h3>
+                            <div class="project-subtitle" data-key="projects.project1.subtitle">Análisis Técnico-Financiero Independiente | Estableciendo precedente metodológico</div>
+                        </div>
+                        <div class="project-body">
+                            <p data-key="projects.project1.challenge"><strong>RETO:</strong> Evaluar riesgos operativos y financieros identificables en fase de diseño, donde tradicionalmente no se realizan análisis de capacidad real.</p>
+                            <p data-key="projects.project1.solution"><strong>SOLUCIÓN:</strong> Cross-check del estudio base METI con data operativa de 8 sistemas GoA4 internacionales, desarrollando modelo financiero a 60 años.</p>
+                            
+                            <div class="project-stats">
+                                <div class="stat">
+                                    <span class="stat-value">$2,308M</span>
+                                    <span class="stat-label" data-key="projects.project1.stat1">Diferencial proyectado</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-value">30-50%</span>
+                                    <span class="stat-label" data-key="projects.project1.stat2">Déficit capacidad inicial</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-value">12 pg.</span>
+                                    <span class="stat-label" data-key="projects.project1.stat3">Informe técnico</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-value">6</span>
+                                    <span class="stat-label" data-key="projects.project1.stat4">Videos análisis</span>
+                                </div>
+                            </div>
+                            
+                            <p data-key="projects.project1.impact"><strong>IMPACTO:</strong> Estableció marco metodológico para evaluaciones ex-ante en proyectos de transporte masivo, validado por la comunidad técnica.</p>
+                            
+                            <a href="https://www.linkedin.com/posts/piter-bonilla-16244473_microsoft-onedrive-activity-7415232766835171328-9dTX" class="project-link" target="_blank" rel="noopener">
+                                <i class="fab fa-linkedin"></i> <span data-key="projects.link1">Ver publicación y análisis completo</span>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card">
+                        <div class="project-header" style="background-color: #1a365d;">
+                            <h3 class="project-title" data-key="projects.project2.title">Implementación Visual CRP - Presa Montegrande</h3>
+                            <div class="project-subtitle" data-key="projects.project2.subtitle">Caso de Estudio de Eficiencia Híbrida | Transformación documental operativa</div>
+                        </div>
+                        <div class="project-body">
+                            <p data-key="projects.project2.challenge"><strong>RETO:</strong> Duplicidad de sistemas (plataforma contractual + Excel oculto) con pérdidas operativas estimadas >$1.6M y falta de trazabilidad.</p>
+                            <p data-key="projects.project2.solution"><strong>SOLUCIÓN:</strong> Implementación de Visual CRP como capa operativa única, coexistente con plataforma contractual, con clasificación multicódigo dinámica.</p>
+                            
+                            <div class="project-stats">
+                                <div class="stat">
+                                    <span class="stat-value">15K+</span>
+                                    <span class="stat-label" data-key="projects.project2.stat1">Registros gestionados</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-value">4K+</span>
+                                    <span class="stat-label" data-key="projects.project2.stat2">Documentos controlados</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-value">75%</span>
+                                    <span class="stat-label" data-key="projects.project2.stat3">↓ tiempo gestión</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-value">100%</span>
+                                    <span class="stat-label" data-key="projects.project2.stat4">Compliance auditorías</span>
+                                </div>
+                            </div>
+                            
+                            <p data-key="projects.project2.impact"><strong>IMPACTO:</strong> Sistema citado como caso de estudio de eficiencia híbrida, con ahorros cuantificados y aceptación completa en auditorías internas y externas.</p>
+                            
+                            <a href="https://visualcrp.com" class="project-link" target="_blank" rel="noopener">
+                                <i class="fas fa-external-link-alt"></i> <span data-key="projects.link2">Explorar caso de estudio completo</span>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card">
+                        <div class="project-header" style="background-color: #2d6bc9;">
+                            <h3 class="project-title" data-key="projects.project3.title">Hidroeléctrico Palomino - Automatización Técnica</h3>
+                            <div class="project-subtitle" data-key="projects.project3.subtitle">Infraestructura Subterránea Compleja | Innovación en procesos técnicos</div>
+                        </div>
+                        <div class="project-body">
+                            <p data-key="projects.project3.challenge"><strong>RETO:</strong> Gestión de topografía para complejo subterráneo masivo con requerimientos de precisión milimétrica en ambiente dinámico.</p>
+                            <p data-key="projects.project3.solution"><strong>SOLUCIÓN:</strong> Desarrollo de metodologías propias para control topográfico en túneles TBM, Túneles NATM y automatización de reportes técnicos.</p>
+                            
+                            <div class="project-stats">
+                                <div class="stat">
+                                    <span class="stat-value">12.4 km</span>
+                                    <span class="stat-label" data-key="projects.project3.stat1">Túnel TBM</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-value">11</span>
+                                    <span class="stat-label" data-key="projects.project3.stat2">Túneles interconectados</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-value">98.5%</span>
+                                    <span class="stat-label" data-key="projects.project3.stat3">Precisión cubicaciones</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-value">18.2 km</span>
+                                    <span class="stat-label" data-key="projects.project3.stat4">Vía de acceso diseñada</span>
+                                </div>
+                            </div>
+                            
+                            <p data-key="projects.project3.impact"><strong>IMPACTO:</strong> Establecimiento de estándares de precisión que se convirtieron en referencia para proyectos posteriores en la región.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB CONTENT: SYSTEMS -->
+                <div id="systems" class="tab-content">
+                    <h2 class="section-title"><i class="fas fa-cogs"></i> <span data-key="systems.title">Portafolio de Sistemas Propios</span></h2>
+                    
+                    <!-- Visual CRP -->
+                    <div class="project-card">
+                        <div class="project-header">
+                            <h3 class="project-title">Visual CRP</h3>
+                            <div class="project-subtitle" data-key="systems.system1.subtitle">Sistema de Control Documental Operativo | Validado en proyectos >$500M</div>
+                        </div>
+                        <div class="project-body">
+                            <p data-key="systems.system1.desc"><strong>PROPÓSITO:</strong> Formalizar el control documental operativo que los equipos realizan manualmente, transformándolo en sistema estructurado y accesible para todo el equipo de proyecto.</p>
+                            
+                            <div class="project-stats">
+                                <div class="stat">
+                                    <span class="stat-value">94%</span>
+                                    <span class="stat-label" data-key="systems.system1.stat1">Ahorro vs licencias</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-value">30s</span>
+                                    <span class="stat-label" data-key="systems.system1.stat2">Búsqueda documento</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-value">$1.6M+</span>
+                                    <span class="stat-label" data-key="systems.system1.stat3">Costo evitado</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-value">21+</span>
+                                    <span class="stat-label" data-key="systems.system1.stat4">Años validación</span>
+                                </div>
+                            </div>
+                            
+                            <p data-key="systems.system1.architecture"><strong>ARQUITECTURA HÍBRIDA:</strong> Coexiste con plataformas contractuales (Procore, Aconex) resolviendo la brecha operativa: clasificación multicódigo, reorganización dinámica y acceso compartido para todo el equipo.</p>
+                            
+                            <div class="tags">
+                                <span class="tag" data-key="systems.tag1">Control Documental</span>
+                                <span class="tag">Excel VBA</span>
+                                <span class="tag" data-key="systems.tag2">Arquitectura Híbrida</span>
+                                <span class="tag" data-key="systems.tag3">Gestión Operativa</span>
+                                <span class="tag" data-key="systems.tag4">Caso de Estudio Validado</span>
+                            </div>
+                            
+                            <a href="https://visualcrp.com" class="project-link" target="_blank" rel="noopener">
+                                <i class="fas fa-external-link-alt"></i> <span data-key="systems.link1">Explorar sistema y casos de implementación</span>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Sistema AC&P -->
+                    <div class="project-card">
+                        <div class="project-header" style="background-color: #1a365d;">
+                            <h3 class="project-title" data-key="systems.system2.title">Sistema AC&P</h3>
+                            <div class="project-subtitle" data-key="systems.system2.subtitle">Sistema Integral de Análisis de Costos y Presupuestos | Desde 2004</div>
+                        </div>
+                        <div class="project-body">
+                            <p data-key="systems.system2.desc"><strong>PROPÓSITO:</strong> Herramienta flexible y precisa para análisis de costos, presupuestos y valoraciones en proyectos de construcción de cualquier escala.</p>
+                            
+                            <p data-key="systems.system2.features"><strong>FUNCIONALIDADES CLAVE:</strong></p>
+                            <ul>
+                                <li data-key="systems.system2.feature1"><strong>Presupuesto general</strong> y análisis de precios unitarios detallado</li>
+                                <li data-key="systems.system2.feature2"><strong>Cálculo de costos de mano de obra</strong> (base y factorizados según normativa)</li>
+                                <li data-key="systems.system2.feature3"><strong>Desglose completo de costos</strong> (directos, indirectos, seguridad social)</li>
+                                <li data-key="systems.system2.feature4"><strong>Cuantificación automatizada</strong> de materiales y mano de obra</li>
+                                <li data-key="systems.system2.feature5"><strong>Análisis comparativo</strong> de alternativas y escenarios</li>
+                            </ul>
+                            
+                            <div class="tags">
+                                <span class="tag" data-key="systems.tag5">Análisis de Costos</span>
+                                <span class="tag" data-key="systems.tag6">Presupuestos</span>
+                                <span class="tag">Excel Avanzado</span>
+                                <span class="tag" data-key="systems.tag7">Valoraciones</span>
+                                <span class="tag" data-key="systems.tag8">Modelado Financiero</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Sistema SALT -->
+                    <div class="project-card">
+                        <div class="project-header" style="background-color: #2d6bc9;">
+                            <h3 class="project-title" data-key="systems.system3.title">Sistema SALT</h3>
+                            <div class="project-subtitle" data-key="systems.system3.subtitle">Sistema de Ajuste de Levantamientos Topográficos | Desde 2004</div>
+                        </div>
+                        <div class="project-body">
+                            <p data-key="systems.system3.desc"><strong>PROPÓSITO:</strong> Sistema para ajuste de levantamientos topográficos realizados con Estación Total. Permite ajuste por 3 métodos de cierre sobre puntos GPS de control.</p>
+                            
+                            <p data-key="systems.system3.applications"><strong>FUNCIONALIDADES PRINCIPALES:</strong></p>
+                            <ul>
+                                <li data-key="systems.system3.application1"><strong>Ajuste por 3 métodos</strong> de cierre poligonal sobre puntos GPS</li>
+                                <li data-key="systems.system3.application2"><strong>Transformación de coordenadas</strong> (mover, rotar, escalar)</li>
+                                <li data-key="systems.system3.application3"><strong>Distribución de errores</strong> de cierre automática</li>
+                                <li data-key="systems.system3.application4"><strong>Factor de escala UTM</strong> integrado</li>
+                                <li data-key="systems.system3.application5"><strong>Exportación directa a AutoCAD</strong> mediante DDE/COM</li>
+                            </ul>
+                            
+                            <div class="tags">
+                                <span class="tag" data-key="systems.tag9">Topografía</span>
+                                <span class="tag" data-key="systems.tag10">Ajuste de Datos</span>
+                                <span class="tag" data-key="systems.tag11">Excel VBA</span>
+                                <span class="tag" data-key="systems.tag12">AutoCAD Integration</span>
+                                <span class="tag" data-key="systems.tag13">Precisión Certificada</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Sistema ICOD -->
+                    <div class="project-card">
+                        <div class="project-header" style="background-color: #2d6bc9;">
+                            <h3 class="project-title" data-key="systems.system4.title">Sistema ICOD</h3>
+                            <div class="project-subtitle" data-key="systems.system4.subtitle">Sistema para Dibujo de Secciones Transversales de Túneles | 2020</div>
+                        </div>
+                        <div class="project-body">
+                            <p data-key="systems.system4.desc"><strong>PROPÓSITO:</strong> Sistema especializado para dibujar secciones transversales de túneles levantados con escáner láser LIDAR, procesando hasta 4,000 puntos por sección.</p>
+                            
+                            <p data-key="systems.system4.features"><strong>FUNCIONALIDADES PRINCIPALES:</strong></p>
+                            <ul>
+                                <li data-key="systems.system4.feature1"><strong>Procesamiento LIDAR masivo</strong> de datos de escáner láser</li>
+                                <li data-key="systems.system4.feature2"><strong>Ordenamiento automático</strong> de puntos en sentido horario</li>
+                                <li data-key="systems.system4.feature3"><strong>Cálculo de secciones transversales</strong> desde coordenadas XYZ</li>
+                                <li data-key="systems.system4.feature4"><strong>Integración con AutoCAD</strong> mediante conexión DDE desde Excel</li>
+                                <li data-key="systems.system4.feature5"><strong>Dibujo sucesivo automático</strong> de perfiles complejos</li>
+                            </ul>
+                            
+                            <div class="project-stats">
+                                <div class="stat">
+                                    <span class="stat-value">4,000+</span>
+                                    <span class="stat-label" data-key="systems.system4.stat1">Puntos por sección</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-value">75%</span>
+                                    <span class="stat-label" data-key="systems.system4.stat2">↓ tiempo manual</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-value">2,800</span>
+                                    <span class="stat-label" data-key="systems.system4.stat3">Secciones generadas</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-value">100%</span>
+                                    <span class="stat-label" data-key="systems.system4.stat4">Precisión garantizada</span>
+                                </div>
+                            </div>
+                            
+                            <div class="tags">
+                                <span class="tag" data-key="systems.tag14">Procesamiento LIDAR</span>
+                                <span class="tag" data-key="systems.tag15">Secciones de Túnel</span>
+                                <span class="tag" data-key="systems.tag16">Excel VBA</span>
+                                <span class="tag" data-key="systems.tag17">Integración AutoCAD</span>
+                                <span class="tag" data-key="systems.tag18">Automatización</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB CONTENT: SERVICES -->
+                <div id="services" class="tab-content">
+                    <h2 class="section-title"><i class="fas fa-concierge-bell"></i> <span data-key="services.title">Servicios Estratégicos Disponibles</span></h2>
+                    
+                    <div class="service-card">
+                        <h4><i class="fas fa-search"></i> <span data-key="services.service1.title">1. EVALUACIÓN EX-ANTE BÁSICA</span></h4>
+                        <p data-key="services.service1.description">Análisis profesional independiente de riesgos técnico-operativos en fase de diseño de proyectos de infraestructura.</p>
+                        
+                        <div class="service-features">
+                            <ul>
+                                <li data-key="services.service1.feature1">Análisis inicial de riesgos técnico-operativos</li>
+                                <li data-key="services.service1.feature2">Benchmarking contra data operativa internacional</li>
+                                <li data-key="services.service1.feature3">Reporte ejecutivo con hallazgos críticos priorizados</li>
+                                <li data-key="services.service1.feature4">Identificación de brechas de capacidad operativa</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="service-action">
+                            <p><strong data-key="services.applicable">Aplicable a:</strong> Proyectos de transporte masivo, infraestructura vial, hidroeléctricas, presas.</p>
+                            <p><strong data-key="services.deliverable">Entregable:</strong> Informe técnico ejecutivo + Presentación de hallazgos.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="service-card">
+                        <h4><i class="fas fa-rocket"></i> <span data-key="services.service2.title">2. IMPLEMENTACIÓN VISUAL CRP EXPRESS</span></h4>
+                        <p data-key="services.service2.description">Adaptación e implementación acelerada del sistema Visual CRP para control documental operativo en proyectos específicos.</p>
+                        
+                        <div class="service-features">
+                            <ul>
+                                <li data-key="services.service2.feature1">Adaptación del sistema a criterios específicos del proyecto</li>
+                                <li data-key="services.service2.feature2">Capacitación del equipo operativo (4-8 horas)</li>
+                                <li data-key="services.service2.feature3">Soporte técnico durante fase de adopción (30 días)</li>
+                                <li data-key="services.service2.feature4">Configuración inicial de clasificación multicódigo</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="service-action">
+                            <p><strong data-key="services.applicable">Aplicable a:</strong> Cualquier proyecto con >100 documentos mensuales y múltiples stakeholders.</p>
+                            <p><strong data-key="services.deliverable">Entregable:</strong> Sistema operativo + Equipo capacitado + Manual de procedimientos.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="service-card">
+                        <h4><i class="fas fa-clipboard-check"></i> <span data-key="services.service3.title">3. AUDITORÍA DE SISTEMAS DE CONTROL</span></h4>
+                        <p data-key="services.service3.description">Diagnóstico y optimización de sistemas existentes de control técnico y documental en proyectos en ejecución.</p>
+                        
+                        <div class="service-features">
+                            <ul>
+                                <li data-key="services.service3.feature1">Diagnóstico de brechas operativas y riesgos sistémicos</li>
+                                <li data-key="services.service3.feature2">Recomendaciones de optimización sistémica priorizadas</li>
+                                <li data-key="services.service3.feature3">Plan de implementación por fases (roadmap)</li>
+                                <li data-key="services.service3.feature4">Benchmarking contra mejores prácticas del sector</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="service-action">
+                            <p><strong data-key="services.applicable">Aplicable a:</strong> Proyectos con pérdidas operativas identificadas o baja trazabilidad documental.</p>
+                            <p><strong data-key="services.deliverable">Entregable:</strong> Reporte de auditoría + Plan de optimización + Sesión de presentación ejecutiva.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="highlight">
+                        <h3 class="subsection-title"><i class="fas fa-chart-line"></i> <span data-key="services.metrics">Métricas de Impacto Cuantificado</span></h3>
+                        <div class="grid-3">
+                            <div style="text-align: center; padding: 1.5rem;">
+                                <div class="stat-value" style="color: #1a365d;">75%</div>
+                                <div class="stat-label" data-key="services.metric1">Reducción en tiempo de procesos manuales</div>
+                            </div>
+                            <div style="text-align: center; padding: 1.5rem;">
+                                <div class="stat-value" style="color: #2d6bc9;">90-98%</div>
+                                <div class="stat-label" data-key="services.metric2">Precisión en cubicaciones y controles técnicos</div>
+                            </div>
+                            <div style="text-align: center; padding: 1.5rem;">
+                                <div class="stat-value" style="color: #e63946;">100%</div>
+                                <div class="stat-label" data-key="services.metric3">Compliance en auditorías con sistemas implementados</div>
+                            </div>
+                        </div>
+                        
+                        <div class="grid-3" style="margin-top: 1rem;">
+                            <div style="text-align: center; padding: 1.5rem;">
+                                <div class="stat-value" style="color: #1a365d;">$1.6M+</div>
+                                <div class="stat-label" data-key="services.metric4">Costos evitados por implementación sistémica</div>
+                            </div>
+                            <div style="text-align: center; padding: 1.5rem;">
+                                <div class="stat-value" style="color: #2d6bc9;">94%</div>
+                                <div class="stat-label" data-key="services.metric5">Ahorro vs licencias de software comercial</div>
+                            </div>
+                            <div style="text-align: center; padding: 1.5rem;">
+                                <div class="stat-value" style="color: #e63946;">15K+</div>
+                                <div class="stat-label" data-key="services.metric6">Registros gestionados en sistema único</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB CONTENT: EDUCATION -->
+                <div id="education" class="tab-content">
+                    <h2 class="section-title"><i class="fas fa-university"></i> <span data-key="education.title">Formación y Contribuciones</span></h2>
+                    
+                    <div class="project-card">
+                        <div class="project-body">
+                            <h3 class="subsection-title"><i class="fas fa-graduation-cap"></i> <span data-key="education.formal">Educación Formal</span></h3>
+                            
+                            <div style="margin-bottom: 2rem;">
+                                <h4 style="color: var(--primary); margin-bottom: 0.5rem;" data-key="education.degree">Grado en Ingeniería Civil</h4>
+                                <p style="color: var(--gray); margin-bottom: 0.5rem;">Universidad Tecnológica del Cibao (UTECI), La Vega</p>
+                                <p style="color: var(--dark);"><strong data-key="education.graduation">Año de Graduación:</strong> 1999</p>
+                            </div>
+                            
+                            <div>
+                                <h4 style="color: var(--primary); margin-bottom: 0.5rem;" data-key="education.technical">Técnico en Informática</h4>
+                                <p style="color: var(--gray); margin-bottom: 0.5rem;">Universidad Nacional Pedro Henríquez Ureña (UNPHU), La Vega</p>
+                                <p style="color: var(--dark);"><strong data-key="education.graduation">Año de Graduación:</strong> 1992</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card">
+                        <div class="project-body">
+                            <h3 class="subsection-title"><i class="fas fa-certificate"></i> <span data-key="education.certifications">Certificaciones y Reconocimientos</span></h3>
+                            
+                            <div style="margin-bottom: 1.5rem;">
+                                <h4 style="color: var(--primary); margin-bottom: 0.5rem;" data-key="education.cert1.title">Colegiado Activo - CODIA</h4>
+                                <p style="color: var(--gray); margin-bottom: 0.5rem;">Colegio Dominicano de Ingenieros, Arquitectos y Agrimensores</p>
+                                <p style="color: var(--dark);"><strong data-key="education.exequatur">Exequátur No.:</strong> 17378 (2001) | <strong data-key="education.status">Estado:</strong> Activo</p>
+                            </div>
+                            
+                            <div style="margin-bottom: 1.5rem;">
+                                <h4 style="color: var(--primary); margin-bottom: 0.5rem;" data-key="education.cert2.title">Programa de Intercambio Académico Internacional</h4>
+                                <p style="color: var(--gray); margin-bottom: 0.5rem;">Universidad Autónoma del Estado de México (UAEM)</p>
+                                <p style="color: var(--dark);"><strong data-key="education.year">Año:</strong> 1998 | <strong data-key="education.conference">Conferencia:</strong> "Facilities Offered by Computer Use in Highway Design"</p>
+                            </div>
+                            
+                            <div>
+                                <h4 style="color: var(--primary); margin-bottom: 0.5rem;" data-key="education.cert3.title">Reconocimiento por Dedicación y Rendimiento Académico</h4>
+                                <p style="color: var(--gray); margin-bottom: 0.5rem;">Fundación Universitaria Dominicana, Inc.</p>
+                                <p style="color: var(--dark);"><strong data-key="education.year">Año:</strong> 1997</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="highlight">
+                        <h3 class="subsection-title"><i class="fas fa-file-contract"></i> <span data-key="education.publications">Publicaciones Técnicas y Contribuciones</span></h3>
+                        <div style="margin-bottom: 1rem;">
+                            <h4 style="color: var(--primary); margin-bottom: 0.5rem;" data-key="education.publication1.title">Informe de Riesgo Técnico-Financiero Ex Ante – Línea 3 Metro de Santo Domingo</h4>
+                            <p style="color: var(--dark); margin-bottom: 0.5rem;" data-key="education.publication1.desc"><strong>Piter J. Bonilla D. (2026)</strong> - Análisis profesional independiente que establece marco metodológico para evaluaciones ex-ante en proyectos de transporte masivo. Documenta metodología, hallazgos sobre capacidad operativa, brechas de diseño y riesgo financiero proyectado.</p>
+                            <a href="https://www.linkedin.com/posts/piter-bonilla-16244473_microsoft-onedrive-activity-7415232766835171328-9dTX" style="color: var(--secondary); font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem;" target="_blank" rel="noopener">
+                                <i class="fab fa-linkedin"></i> <span data-key="education.link1">Acceder a la publicación completa</span>
+                            </a>
+                        </div>
+                        
+                        <div style="margin-top: 1.5rem;">
+                            <h4 style="color: var(--primary); margin-bottom: 0.5rem;" data-key="education.publication2.title">Caso de Estudio: Sistema Visual CRP en Presa Montegrande</h4>
+                            <p style="color: var(--dark); margin-bottom: 0.5rem;" data-key="education.publication2.desc">Implementación documentada como referencia de arquitectura híbrida para control documental operativo en mega-proyectos de infraestructura.</p>
+                            <a href="https://visualcrp.com" style="color: var(--secondary); font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem;" target="_blank" rel="noopener">
+                                <i class="fas fa-external-link-alt"></i> <span data-key="education.link2">Explorar caso de estudio</span>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial" style="margin-top: 2rem;">
+                        <p class="testimonial-text" data-key="education.testimonial">"La metodología de evaluación ex ante presentada por el ingeniero Bonilla establece un nuevo estándar para el análisis técnico en la fase de diseño. Destaca por su capacidad para integrar el análisis de estudios existentes, la evaluación comparada de problemáticas internacionales y el estudio riguroso de tecnologías aplicables, articulándolos mediante modelado técnico-financiero avanzado."</p>
+                        <p class="testimonial-author" data-key="education.testimonial.author">— Ing. Carlos Sully Bonnelly Ginebra, Phd | Consultor Internacional en APP y Economía del Transporte | Docente</p>
+                    </div>
+                </div>
+            </main>
+        </div>
+
+        <footer class="footer">
+            <p>© 2026 Piter J. Bonilla D. | <span data-key="footer.title">Ingeniero Civil - CODIA 17378 | Especialista en Documentación Técnica | Gerente de Topografía</span></p>
+            <p style="margin-top: 0.5rem; font-size: 0.85rem;" data-key="footer.tagline">CV interactivo que representa mi visión integral: transformar complejidad técnica en sistemas operativos robustos para proyectos >$100M.</p>
+            <div class="footer-links">
+                <a href="https://visualcrp.com" target="_blank" rel="noopener">Visual CRP</a> • 
+                <a href="https://www.linkedin.com/in/piter-bonilla-16244473/" target="_blank" rel="noopener">LinkedIn</a> • 
+                <a href="mailto:piter.bonilla@visualcrp.com">Contacto</a>
+            </div>
+        </footer>
+    </div>
+
+    <!-- PRINT BUTTON -->
+    <button class="print-btn" title="Imprimir CV" onclick="window.print()" aria-label="Imprimir curriculum">
+        <i class="fas fa-print"></i>
+    </button>
+
+    <!-- SISTEMA DE TRADUCCIÓN COMPLETO -->
+    <script>
+        class Translator {
+            constructor() {
+                this.currentLang = 'es';
+                this.translationData = {
+                    es: {
+                        // Meta
+                        'meta.title': 'Piter J. Bonilla D. - Arquitecto de Sistemas de Control para Mega-Proyectos',
+                        'meta.description': 'Ingeniero Civil con más de 25 años transformando mega-proyectos mediante la sistematización de procesos críticos. Especialista en Documentación Técnica y Gerente de Topografía.',
+                        
+                        // Header
+                        'header.title': 'Ingeniero Civil | Especialista en Documentación Técnica | Gerente de Topografía',
+                        'header.headline': 'Proyectos de Infraestructura Compleja',
+                        'header.badge': 'CODIA 17378',
+                        
+                        // Contact
+                        'contact.location': 'República Dominicana',
+                        
+                        // Tabs
+                        'tabs.profile': 'Perfil',
+                        'tabs.experience': 'Trayectoria',
+                        'tabs.skills': 'Competencias',
+                        'tabs.projects': 'Casos de Éxito',
+                        'tabs.systems': 'Sistemas Propios',
+                        'tabs.services': 'Servicios',
+                        'tabs.education': 'Formación',
+                        
+                        // Profile
+                        'profile.title': 'Propuesta de Valor',
+                        'profile.text1': '<strong>Ingeniero Civil | Especialista en Documentación Técnica | Gerente de Topografía</strong> con más de 25 años transformando mega-proyectos de infraestructura mediante la <strong>sistematización de procesos críticos</strong>. Mi enfoque convierte conocimiento tácito en sistemas operativos replicables que entregan <strong>precisión, trazabilidad y robustez técnica</strong>.',
+                        'profile.evolution': 'Evolución Profesional',
+                        'profile.period1': '<strong>Experto Técnico</strong><br>Topografía avanzada, diseño geométrico, cubicaciones en proyectos hidroeléctricos.',
+                        'profile.period2': '<strong>Arquitecto de Sistemas</strong><br>Análisis de Costos y Presupuestos, SALT, Desarrollo e implementación de Visual CRP, automatización VBA-AutoCAD.',
+                        'profile.period3': '<strong>Estratega de Evaluación</strong><br>Análisis ex-ante, modelado financiero, consultoría sistémica.',
+                        'profile.chart1': 'Impacto en el Ciclo de Vida del Proyecto',
+                        'profile.chart1.label1': 'Diseño',
+                        'profile.chart1.label2': 'Control',
+                        'profile.chart1.label3': 'Evaluación',
+                        'profile.chart2': 'ROI de Implementación Sistémica',
+                        'profile.chart2.label1': 'Tiempo',
+                        'profile.chart2.label2': 'Ahorro',
+                        'profile.chart2.label3': 'Precisión',
+                        'profile.testimonial': '"La implementación de Visual CRP transformó nuestro control documental operativo. El enfoque híbrido nos produjo un ahorro estimado en $1.6M con una capa operativa única de trazabilidad completa y altos honores en evaluaciones de auditoría."',
+                        'profile.testimonial.author': '— Gerente de Ingeniería, Presa Montegrande',
+                        
+                        // Experience
+                        'experience.title': 'Trayectoria Profesional',
+                        'experience.job1.title': 'Arquitecto de Sistemas & Consultor Estratégico',
+                        'experience.job1.subtitle': 'Consultoría Independiente | Proyectos >$100M',
+                        'experience.job1.desc1': '<strong>Línea 3 Metro Santo Domingo (2025-2026):</strong> Evaluación técnica ex-ante que identificó déficit operativo del 30-50% y proyectó diferencial de $2,308M entre alternativas.',
+                        'experience.job1.desc2': '<strong>Consultoría Visual CRP:</strong> Adaptación e implementación para Monorriel Santiago y Presa Guayubín.',
+                        'experience.tag1': 'Evaluación Ex-Ante',
+                        'experience.tag2': 'Modelado Financiero',
+                        'experience.tag3': 'Benchmarking',
+                        'experience.tag4': 'Implementación Sistemas',
+                        'experience.job2.title': 'Gerente de Topografía y Control Documental',
+                        'experience.job2.subtitle': 'Andrade Gutierrez S.A. – Presa Montegrande ($500M+)',
+                        'experience.job2.desc1': '<strong>Caso de Éxito Visual CRP:</strong> Implementación que gestionó 15,000+ registros en 4,000+ documentos, citado como referencia de eficiencia híbrida.',
+                        'experience.job2.desc2': '<strong>Automatización VBA-AutoCAD:</strong> Sistema que generó 2,800 secciones transversales automáticas, reduciendo tiempo manual en 75%.',
+                        'experience.tag5': 'Automatización',
+                        'experience.tag6': 'Gestión Documental',
+                        'experience.job3.title': 'Gerente de Topografía',
+                        'experience.job3.subtitle': 'Odebrecht – Hidroeléctrico Palomino ($400M+)',
+                        'experience.job3.desc1': 'Dirección de topografía para complejo subterráneo: túnel TBM 12.4 km, casa de máquinas con 11 túneles.',
+                        'experience.job3.desc2': 'Diseño geométrico de vías de acceso y revisión integral de carretera de 18.2 km.',
+                        'experience.tag7': 'Topografía',
+                        'experience.tag8': 'Túneles',
+                        'experience.tag9': 'Diseño Geométrico',
+                        'experience.tag10': 'Hidroeléctricas',
+                        'experience.job4.title': 'Ingeniero de Proyecto',
+                        'experience.job4.subtitle': 'Proyectos de Infraestructura Varios',
+                        'experience.job4.desc1': 'Participación en proyectos como Presa Guaigüí, Hidroeléctrica Pinalito, Circunvalación Santiago, y otros proyectos de infraestructura.',
+                        'experience.job4.desc2': 'Desarrollo inicial de metodologías de control técnico que evolucionaron hacia sistemas propios.',
+                        'experience.tag11': 'Infraestructura Vial',
+                        'experience.tag12': 'Control Técnico',
+                        'experience.tag13': 'Desarrollo Metodologías',
+                        
+                        // Skills
+                        'skills.title': 'Competencias Técnicas',
+                        'skills.category1': 'Gestión Técnica en Infraestructura',
+                        'skills.skill1': 'Gestión de Topografía y Cubicaciones',
+                        'skills.skill2': 'Diseño Geométrico de Vías',
+                        'skills.skill3': 'Control Técnico Integral de Obra',
+                        'skills.category2': 'Arquitectura de Sistemas',
+                        'skills.skill4': 'Desarrollo Excel VBA Avanzado',
+                        'skills.skill5': 'Integración con AutoCAD',
+                        'skills.skill6': 'Sistemas de Control Documental',
+                        'skills.category3': 'Evaluación Estratégica',
+                        'skills.skill7': 'Análisis Ex-Ante y Benchmarking',
+                        'skills.skill8': 'Modelado Financiero de Ciclo de Vida',
+                        'skills.skill9': 'Identificación de Riesgos Técnico-Operativos',
+                        'skills.methodology': 'Metodología: El Triángulo de Valor',
+                        'skills.method1.title': 'Precisión de Ejecución',
+                        'skills.method1.desc': 'Datos técnicos verificables, cubicaciones exactas, control riguroso.',
+                        'skills.method2.title': 'Sistemización del Control',
+                        'skills.method2.desc': 'Transformación de procesos manuales en sistemas estructurados y accesibles.',
+                        'skills.method3.title': 'Evaluación Anticipatoria',
+                        'skills.method3.desc': 'Identificación y documentación de riesgos antes de la fase de construcción.',
+                        
+                        // Projects
+                        'projects.title': 'Casos de Éxito',
+                        'projects.project1.title': 'Evaluación Ex-Ante Línea 3 Metro Santo Domingo',
+                        'projects.project1.subtitle': 'Análisis Técnico-Financiero Independiente | Estableciendo precedente metodológico',
+                        'projects.project1.challenge': '<strong>RETO:</strong> Evaluar riesgos operativos y financieros identificables en fase de diseño, donde tradicionalmente no se realizan análisis de capacidad real.',
+                        'projects.project1.solution': '<strong>SOLUCIÓN:</strong> Cross-check del estudio base METI con data operativa de 8 sistemas GoA4 internacionales, desarrollando modelo financiero a 60 años.',
+                        'projects.project1.stat1': 'Diferencial proyectado',
+                        'projects.project1.stat2': 'Déficit capacidad inicial',
+                        'projects.project1.stat3': 'Informe técnico',
+                        'projects.project1.stat4': 'Videos análisis',
+                        'projects.project1.impact': '<strong>IMPACTO:</strong> Estableció marco metodológico para evaluaciones ex-ante en proyectos de transporte masivo, validado por la comunidad técnica.',
+                        'projects.link1': 'Ver publicación y análisis completo',
+                        'projects.project2.title': 'Implementación Visual CRP - Presa Montegrande',
+                        'projects.project2.subtitle': 'Caso de Estudio de Eficiencia Híbrida | Transformación documental operativa',
+                        'projects.project2.challenge': '<strong>RETO:</strong> Duplicidad de sistemas (plataforma contractual + Excel oculto) con pérdidas operativas estimadas >$1.6M y falta de trazabilidad.',
+                        'projects.project2.solution': '<strong>SOLUCIÓN:</strong> Implementación de Visual CRP como capa operativa única, coexistente con plataforma contractual, con clasificación multicódigo dinámica.',
+                        'projects.project2.stat1': 'Registros gestionados',
+                        'projects.project2.stat2': 'Documentos controlados',
+                        'projects.project2.stat3': '↓ tiempo gestión',
+                        'projects.project2.stat4': 'Compliance auditorías',
+                        'projects.project2.impact': '<strong>IMPACTO:</strong> Sistema citado como caso de estudio de eficiencia híbrida, con ahorros cuantificados y aceptación completa en auditorías internas y externas.',
+                        'projects.link2': 'Explorar caso de estudio completo',
+                        'projects.project3.title': 'Hidroeléctrico Palomino - Automatización Técnica',
+                        'projects.project3.subtitle': 'Infraestructura Subterránea Compleja | Innovación en procesos técnicos',
+                        'projects.project3.challenge': '<strong>RETO:</strong> Gestión de topografía para complejo subterráneo masivo con requerimientos de precisión milimétrica en ambiente dinámico.',
+                        'projects.project3.solution': '<strong>SOLUCIÓN:</strong> Desarrollo de metodologías propias para control topográfico en túneles TBM, Túneles NATM y automatización de reportes técnicos.',
+                        'projects.project3.stat1': 'Túnel TBM',
+                        'projects.project3.stat2': 'Túneles interconectados',
+                        'projects.project3.stat3': 'Precisión cubicaciones',
+                        'projects.project3.stat4': 'Vía de acceso diseñada',
+                        'projects.project3.impact': '<strong>IMPACTO:</strong> Establecimiento de estándares de precisión que se convirtieron en referencia para proyectos posteriores en la región.',
+                        
+                        // Systems
+                        'systems.title': 'Portafolio de Sistemas Propios',
+                        'systems.system1.subtitle': 'Sistema de Control Documental Operativo | Validado en proyectos >$500M',
+                        'systems.system1.desc': '<strong>PROPÓSITO:</strong> Formalizar el control documental operativo que los equipos realizan manualmente, transformándolo en sistema estructurado y accesible para todo el equipo de proyecto.',
+                        'systems.system1.stat1': 'Ahorro vs licencias',
+                        'systems.system1.stat2': 'Búsqueda documento',
+                        'systems.system1.stat3': 'Costo evitado',
+                        'systems.system1.stat4': 'Años validación',
+                        'systems.system1.architecture': '<strong>ARQUITECTURA HÍBRIDA:</strong> Coexiste con plataformas contractuales (Procore, Aconex) resolviendo la brecha operativa: clasificación multicódigo, reorganización dinámica y acceso compartido para todo el equipo.',
+                        'systems.tag1': 'Control Documental',
+                        'systems.tag2': 'Arquitectura Híbrida',
+                        'systems.tag3': 'Gestión Operativa',
+                        'systems.tag4': 'Caso de Estudio Validado',
+                        'systems.link1': 'Explorar sistema y casos de implementación',
+                        'systems.system2.title': 'Sistema AC&P',
+                        'systems.system2.subtitle': 'Sistema Integral de Análisis de Costos y Presupuestos | Desde 2004',
+                        'systems.system2.desc': '<strong>PROPÓSITO:</strong> Herramienta flexible y precisa para análisis de costos, presupuestos y valoraciones en proyectos de construcción de cualquier escala.',
+                        'systems.system2.features': '<strong>FUNCIONALIDADES CLAVE:</strong>',
+                        'systems.system2.feature1': '<strong>Presupuesto general</strong> y análisis de precios unitarios detallado',
+                        'systems.system2.feature2': '<strong>Cálculo de costos de mano de obra</strong> (base y factorizados según normativa)',
+                        'systems.system2.feature3': '<strong>Desglose completo de costos</strong> (directos, indirectos, seguridad social)',
+                        'systems.system2.feature4': '<strong>Cuantificación automatizada</strong> de materiales y mano de obra',
+                        'systems.system2.feature5': '<strong>Análisis comparativo</strong> de alternativas y escenarios',
+                        'systems.tag5': 'Análisis de Costos',
+                        'systems.tag6': 'Presupuestos',
+                        'systems.tag7': 'Valoraciones',
+                        'systems.tag8': 'Modelado Financiero',
+                        'systems.system3.title': 'Sistema SALT',
+                        'systems.system3.subtitle': 'Sistema de Ajuste de Levantamientos Topográficos | Desde 2004',
+                        'systems.system3.desc': '<strong>PROPÓSITO:</strong> Sistema para ajuste de levantamientos topográficos realizados con Estación Total. Permite ajuste por 3 métodos de cierre sobre puntos GPS de control.',
+                        'systems.system3.applications': '<strong>FUNCIONALIDADES PRINCIPALES:</strong>',
+                        'systems.system3.application1': '<strong>Ajuste por 3 métodos</strong> de cierre poligonal sobre puntos GPS',
+                        'systems.system3.application2': '<strong>Transformación de coordenadas</strong> (mover, rotar, escalar)',
+                        'systems.system3.application3': '<strong>Distribución de errores</strong> de cierre automática',
+                        'systems.system3.application4': '<strong>Factor de escala UTM</strong> integrado',
+                        'systems.system3.application5': '<strong>Exportación directa a AutoCAD</strong> mediante DDE/COM',
+                        'systems.tag9': 'Topografía',
+                        'systems.tag10': 'Ajuste de Datos',
+                        'systems.tag11': 'Excel VBA',
+                        'systems.tag12': 'AutoCAD Integration',
+                        'systems.tag13': 'Precisión Certificada',
+                        'systems.system4.title': 'Sistema ICOD',
+                        'systems.system4.subtitle': 'Sistema para Dibujo de Secciones Transversales de Túneles | 2020',
+                        'systems.system4.desc': '<strong>PROPÓSITO:</strong> Sistema especializado para dibujar secciones transversales de túneles levantados con escáner láser LIDAR, procesando hasta 4,000 puntos por sección.',
+                        'systems.system4.features': '<strong>FUNCIONALIDADES PRINCIPALES:</strong>',
+                        'systems.system4.feature1': '<strong>Procesamiento LIDAR masivo</strong> de datos de escáner láser',
+                        'systems.system4.feature2': '<strong>Ordenamiento automático</strong> de puntos en sentido horario',
+                        'systems.system4.feature3': '<strong>Cálculo de secciones transversales</strong> desde coordenadas XYZ',
+                        'systems.system4.feature4': '<strong>Integración con AutoCAD</strong> mediante conexión DDE desde Excel',
+                        'systems.system4.feature5': '<strong>Dibujo sucesivo automático</strong> de perfiles complejos',
+                        'systems.system4.stat1': 'Puntos por sección',
+                        'systems.system4.stat2': '↓ tiempo manual',
+                        'systems.system4.stat3': 'Secciones generadas',
+                        'systems.system4.stat4': 'Precisión garantizada',
+                        'systems.tag14': 'Procesamiento LIDAR',
+                        'systems.tag15': 'Secciones de Túnel',
+                        'systems.tag16': 'Excel VBA',
+                        'systems.tag17': 'Integración AutoCAD',
+                        'systems.tag18': 'Automatización',
+                        
+                        // Services
+                        'services.title': 'Servicios Estratégicos Disponibles',
+                        'services.service1.title': '1. EVALUACIÓN EX-ANTE BÁSICA',
+                        'services.service1.description': 'Análisis profesional independiente de riesgos técnico-operativos en fase de diseño de proyectos de infraestructura.',
+                        'services.service1.feature1': 'Análisis inicial de riesgos técnico-operativos',
+                        'services.service1.feature2': 'Benchmarking contra data operativa internacional',
+                        'services.service1.feature3': 'Reporte ejecutivo con hallazgos críticos priorizados',
+                        'services.service1.feature4': 'Identificación de brechas de capacidad operativa',
+                        'services.service2.title': '2. IMPLEMENTACIÓN VISUAL CRP EXPRESS',
+                        'services.service2.description': 'Adaptación e implementación acelerada del sistema Visual CRP para control documental operativo en proyectos específicos.',
+                        'services.service2.feature1': 'Adaptación del sistema a criterios específicos del proyecto',
+                        'services.service2.feature2': 'Capacitación del equipo operativo (4-8 horas)',
+                        'services.service2.feature3': 'Soporte técnico durante fase de adopción (30 días)',
+                        'services.service2.feature4': 'Configuración inicial de clasificación multicódigo',
+                        'services.service3.title': '3. AUDITORÍA DE SISTEMAS DE CONTROL',
+                        'services.service3.description': 'Diagnóstico y optimización de sistemas existentes de control técnico y documental en proyectos en ejecución.',
+                        'services.service3.feature1': 'Diagnóstico de brechas operativas y riesgos sistémicos',
+                        'services.service3.feature2': 'Recomendaciones de optimización sistémica priorizadas',
+                        'services.service3.feature3': 'Plan de implementación por fases (roadmap)',
+                        'services.service3.feature4': 'Benchmarking contra mejores prácticas del sector',
+                        'services.applicable': 'Aplicable a:',
+                        'services.deliverable': 'Entregable:',
+                        'services.metrics': 'Métricas de Impacto Cuantificado',
+                        'services.metric1': 'Reducción en tiempo de procesos manuales',
+                        'services.metric2': 'Precisión en cubicaciones y controles técnicos',
+                        'services.metric3': 'Compliance en auditorías con sistemas implementados',
+                        'services.metric4': 'Costos evitados por implementación sistémica',
+                        'services.metric5': 'Ahorro vs licencias de software comercial',
+                        'services.metric6': 'Registros gestionados en sistema único',
+                        
+                        // Education
+                        'education.title': 'Formación y Contribuciones',
+                        'education.formal': 'Educación Formal',
+                        'education.degree': 'Grado en Ingeniería Civil',
+                        'education.technical': 'Técnico en Informática',
+                        'education.graduation': 'Año de Graduación:',
+                        'education.certifications': 'Certificaciones y Reconocimientos',
+                        'education.cert1.title': 'Colegiado Activo - CODIA',
+                        'education.exequatur': 'Exequátur No.:',
+                        'education.status': 'Estado:',
+                        'education.cert2.title': 'Programa de Intercambio Académico Internacional',
+                        'education.year': 'Año:',
+                        'education.conference': 'Conferencia:',
+                        'education.cert3.title': 'Reconocimiento por Dedicación y Rendimiento Académico',
+                        'education.publications': 'Publicaciones Técnicas y Contribuciones',
+                        'education.publication1.title': 'Informe de Riesgo Técnico-Financiero Ex Ante – Línea 3 Metro de Santo Domingo',
+                        'education.publication1.desc': '<strong>Piter J. Bonilla D. (2026)</strong> - Análisis profesional independiente que establece marco metodológico para evaluaciones ex-ante en proyectos de transporte masivo. Documenta metodología, hallazgos sobre capacidad operativa, brechas de diseño y riesgo financiero proyectado.',
+                        'education.link1': 'Acceder a la publicación completa',
+                        'education.publication2.title': 'Caso de Estudio: Sistema Visual CRP en Presa Montegrande',
+                        'education.publication2.desc': 'Implementación documentada como referencia de arquitectura híbrida para control documental operativo en mega-proyectos de infraestructura.',
+                        'education.link2': 'Explorar caso de estudio',
+                        'education.testimonial': '"La metodología de evaluación ex ante presentada por el ingeniero Bonilla establece un nuevo estándar para el análisis técnico en la fase de diseño. Destaca por su capacidad para integrar el análisis de estudios existentes, la evaluación comparada de problemáticas internacionales y el estudio riguroso de tecnologías aplicables, articulándolos mediante modelado técnico-financiero avanzado."',
+                        'education.testimonial.author': '— Ing. Carlos Sully Bonnelly Ginebra, Phd | Consultor Internacional en APP y Economía del Transporte | Docente',
+                        
+                        // Footer
+                        'footer.title': 'Ingeniero Civil - CODIA 17378 | Especialista en Documentación Técnica | Gerente de Topografía',
+                        'footer.tagline': 'CV interactivo que representa mi visión integral: transformar complejidad técnica en sistemas operativos robustos para proyectos >$100M.'
+                    },
+                    en: {
+                        // Meta
+                        'meta.title': 'Piter J. Bonilla D. - Control Systems Architect for Mega-Projects',
+                        'meta.description': 'Civil Engineer with over 25 years transforming mega-projects through systematization of critical processes. Technical Documentation Specialist and Surveying Manager.',
+                        
+                        // Header
+                        'header.title': 'Civil Engineer | Technical Documentation Specialist | Surveying Manager',
+                        'header.headline': 'Complex Infrastructure Projects',
+                        'header.badge': 'CODIA 17378',
+                        
+                        // Contact
+                        'contact.location': 'Dominican Republic',
+                        
+                        // Tabs
+                        'tabs.profile': 'Profile',
+                        'tabs.experience': 'Experience',
+                        'tabs.skills': 'Skills',
+                        'tabs.projects': 'Success Cases',
+                        'tabs.systems': 'Own Systems',
+                        'tabs.services': 'Services',
+                        'tabs.education': 'Education',
+                        
+                        // Profile
+                        'profile.title': 'Value Proposition',
+                        'profile.text1': '<strong>Civil Engineer | Technical Documentation Specialist | Surveying Manager</strong> with over 25 years transforming infrastructure mega-projects through <strong>systematization of critical processes</strong>. My approach converts tacit knowledge into replicable operating systems that deliver <strong>precision, traceability and technical robustness</strong>.',
+                        'profile.evolution': 'Professional Evolution',
+                        'profile.period1': '<strong>Technical Expert</strong><br>Advanced surveying, geometric design, quantity takeoffs in hydroelectric projects.',
+                        'profile.period2': '<strong>Systems Architect</strong><br>Cost Analysis and Budgeting, SALT, Development and implementation of Visual CRP, VBA-AutoCAD automation.',
+                        'profile.period3': '<strong>Evaluation Strategist</strong><br>Ex-ante analysis, financial modeling, systemic consulting.',
+                        'profile.chart1': 'Impact on Project Life Cycle',
+                        'profile.chart1.label1': 'Design',
+                        'profile.chart1.label2': 'Control',
+                        'profile.chart1.label3': 'Evaluation',
+                        'profile.chart2': 'Systemic Implementation ROI',
+                        'profile.chart2.label1': 'Time',
+                        'profile.chart2.label2': 'Savings',
+                        'profile.chart2.label3': 'Precision',
+                        'profile.testimonial': '"The implementation of Visual CRP transformed our operational document control. The hybrid approach produced estimated savings of $1.6M with a single operational layer of complete traceability and high honors in audit evaluations."',
+                        'profile.testimonial.author': '— Engineering Manager, Montegrande Dam',
+                        
+                        // Experience
+                        'experience.title': 'Professional Trajectory',
+                        'experience.job1.title': 'Systems Architect & Strategic Consultant',
+                        'experience.job1.subtitle': 'Independent Consulting | Projects >$100M',
+                        'experience.job1.desc1': '<strong>Santo Domingo Metro Line 3 (2025-2026):</strong> Technical ex-ante evaluation that identified 30-50% operational deficit and projected $2,308M differential between alternatives.',
+                        'experience.job1.desc2': '<strong>Visual CRP Consulting:</strong> Adaptation and implementation for Santiago Monorail and Guayubín Dam.',
+                        'experience.tag1': 'Ex-Ante Evaluation',
+                        'experience.tag2': 'Financial Modeling',
+                        'experience.tag3': 'Benchmarking',
+                        'experience.tag4': 'Systems Implementation',
+                        'experience.job2.title': 'Surveying and Document Control Manager',
+                        'experience.job2.subtitle': 'Andrade Gutierrez S.A. – Montegrande Dam ($500M+)',
+                        'experience.job2.desc1': '<strong>Visual CRP Success Case:</strong> Implementation that managed 15,000+ records in 4,000+ documents, cited as hybrid efficiency reference.',
+                        'experience.job2.desc2': '<strong>VBA-AutoCAD Automation:</strong> System that generated 2,800 automatic cross-sections, reducing manual time by 75%.',
+                        'experience.tag5': 'Automation',
+                        'experience.tag6': 'Document Management',
+                        'experience.job3.title': 'Surveying Manager',
+                        'experience.job3.subtitle': 'Odebrecht – Palomino Hydroelectric ($400M+)',
+                        'experience.job3.desc1': 'Surveying direction for underground complex: 12.4 km TBM tunnel, powerhouse with 11 tunnels.',
+                        'experience.job3.desc2': 'Geometric design of access roads and comprehensive review of 18.2 km roadway.',
+                        'experience.tag7': 'Surveying',
+                        'experience.tag8': 'Tunnels',
+                        'experience.tag9': 'Geometric Design',
+                        'experience.tag10': 'Hydroelectric',
+                        'experience.job4.title': 'Project Engineer',
+                        'experience.job4.subtitle': 'Various Infrastructure Projects',
+                        'experience.job4.desc1': 'Participation in projects like Guaigüí Dam, Pinalito Hydroelectric, Santiago Bypass, and other infrastructure projects.',
+                        'experience.job4.desc2': 'Initial development of technical control methodologies that evolved into own systems.',
+                        'experience.tag11': 'Road Infrastructure',
+                        'experience.tag12': 'Technical Control',
+                        'experience.tag13': 'Methodology Development',
+                        
+                        // Skills
+                        'skills.title': 'Technical Competencies',
+                        'skills.category1': 'Technical Management in Infrastructure',
+                        'skills.skill1': 'Surveying and Quantity Takeoff Management',
+                        'skills.skill2': 'Road Geometric Design',
+                        'skills.skill3': 'Comprehensive Technical Construction Control',
+                        'skills.category2': 'Systems Architecture',
+                        'skills.skill4': 'Advanced Excel VBA Development',
+                        'skills.skill5': 'AutoCAD Integration',
+                        'skills.skill6': 'Document Control Systems',
+                        'skills.category3': 'Strategic Evaluation',
+                        'skills.skill7': 'Ex-Ante Analysis and Benchmarking',
+                        'skills.skill8': 'Life Cycle Financial Modeling',
+                        'skills.skill9': 'Technical-Operational Risk Identification',
+                        'skills.methodology': 'Methodology: The Value Triangle',
+                        'skills.method1.title': 'Execution Precision',
+                        'skills.method1.desc': 'Verifiable technical data, exact quantity takeoffs, rigorous control.',
+                        'skills.method2.title': 'Control Systematization',
+                        'skills.method2.desc': 'Transformation of manual processes into structured and accessible systems.',
+                        'skills.method3.title': 'Anticipatory Evaluation',
+                        'skills.method3.desc': 'Risk identification and documentation before construction phase.',
+                        
+                        // Projects
+                        'projects.title': 'Success Cases',
+                        'projects.project1.title': 'Ex-Ante Evaluation Santo Domingo Metro Line 3',
+                        'projects.project1.subtitle': 'Independent Technical-Financial Analysis | Establishing methodological precedent',
+                        'projects.project1.challenge': '<strong>CHALLENGE:</strong> Evaluate identifiable operational and financial risks in design phase, where capacity analysis is traditionally not performed.',
+                        'projects.project1.solution': '<strong>SOLUTION:</strong> Cross-check of base METI study with operational data from 8 international GoA4 systems, developing 60-year financial model.',
+                        'projects.project1.stat1': 'Projected differential',
+                        'projects.project1.stat2': 'Initial capacity deficit',
+                        'projects.project1.stat3': 'Technical report',
+                        'projects.project1.stat4': 'Analysis videos',
+                        'projects.project1.impact': '<strong>IMPACT:</strong> Established methodological framework for ex-ante evaluations in mass transit projects, validated by technical community.',
+                        'projects.link1': 'View publication and complete analysis',
+                        'projects.project2.title': 'Visual CRP Implementation - Montegrande Dam',
+                        'projects.project2.subtitle': 'Hybrid Efficiency Case Study | Operational documental transformation',
+                        'projects.project2.challenge': '<strong>CHALLENGE:</strong> System duplication (contractual platform + hidden Excel) with estimated operational losses >$1.6M and lack of traceability.',
+                        'projects.project2.solution': '<strong>SOLUTION:</strong> Visual CRP implementation as single operational layer, coexisting with contractual platform, with dynamic multi-code classification.',
+                        'projects.project2.stat1': 'Records managed',
+                        'projects.project2.stat2': 'Documents controlled',
+                        'projects.project2.stat3': '↓ management time',
+                        'projects.project2.stat4': 'Audit compliance',
+                        'projects.project2.impact': '<strong>IMPACT:</strong> System cited as hybrid efficiency case study, with quantified savings and complete acceptance in internal and external audits.',
+                        'projects.link2': 'Explore complete case study',
+                        'projects.project3.title': 'Palomino Hydroelectric - Technical Automation',
+                        'projects.project3.subtitle': 'Complex Underground Infrastructure | Innovation in technical processes',
+                        'projects.project3.challenge': '<strong>CHALLENGE:</strong> Surveying management for massive underground complex with millimeter precision requirements in dynamic environment.',
+                        'projects.project3.solution': '<strong>SOLUTION:</strong> Development of own methodologies for topographic control in TBM tunnels, NATM tunnels and automation of technical reports.',
+                        'projects.project3.stat1': 'TBM tunnel',
+                        'projects.project3.stat2': 'Interconnected tunnels',
+                        'projects.project3.stat3': 'Quantity takeoff precision',
+                        'projects.project3.stat4': 'Access road designed',
+                        'projects.project3.impact': '<strong>IMPACT:</strong> Establishment of precision standards that became reference for subsequent projects in the region.',
+                        
+                        // Systems
+                        'systems.title': 'Own Systems Portfolio',
+                        'systems.system1.subtitle': 'Operational Document Control System | Validated in projects >$500M',
+                        'systems.system1.desc': '<strong>PURPOSE:</strong> Formalize the operational document control that teams perform manually, transforming it into structured system accessible to entire project team.',
+                        'systems.system1.stat1': 'Savings vs licenses',
+                        'systems.system1.stat2': 'Document search',
+                        'systems.system1.stat3': 'Cost avoided',
+                        'systems.system1.stat4': 'Years validation',
+                        'systems.system1.architecture': '<strong>HYBRID ARCHITECTURE:</strong> Coexists with contractual platforms (Procore, Aconex) solving operational gap: multi-code classification, dynamic reorganization and shared access for entire team.',
+                        'systems.tag1': 'Document Control',
+                        'systems.tag2': 'Hybrid Architecture',
+                        'systems.tag3': 'Operational Management',
+                        'systems.tag4': 'Validated Case Study',
+                        'systems.link1': 'Explore system and implementation cases',
+                        'systems.system2.title': 'AC&P System',
+                        'systems.system2.subtitle': 'Comprehensive Cost Analysis and Budgeting System | Since 2004',
+                        'systems.system2.desc': '<strong>PURPOSE:</strong> Flexible and precise tool for cost analysis, budgets and valuations in construction projects of any scale.',
+                        'systems.system2.features': '<strong>KEY FUNCTIONALITIES:</strong>',
+                        'systems.system2.feature1': '<strong>General budget</strong> and detailed unit price analysis',
+                        'systems.system2.feature2': '<strong>Labor cost calculation</strong> (base and factored according to regulations)',
+                        'systems.system2.feature3': '<strong>Complete cost breakdown</strong> (direct, indirect, social security)',
+                        'systems.system2.feature4': '<strong>Automated quantification</strong> of materials and labor',
+                        'systems.system2.feature5': '<strong>Comparative analysis</strong> of alternatives and scenarios',
+                        'systems.tag5': 'Cost Analysis',
+                        'systems.tag6': 'Budgets',
+                        'systems.tag7': 'Valuations',
+                        'systems.tag8': 'Financial Modeling',
+                        'systems.system3.title': 'SALT System',
+                        'systems.system3.subtitle': 'Topographic Survey Adjustment System | Since 2004',
+                        'systems.system3.desc': '<strong>PURPOSE:</strong> System for adjusting topographic surveys performed with Total Station. Allows adjustment by 3 closure methods over GPS control points.',
+                        'systems.system3.applications': '<strong>MAIN FUNCTIONALITIES:</strong>',
+                        'systems.system3.application1': '<strong>Adjustment by 3 methods</strong> of polygonal closure over GPS points',
+                        'systems.system3.application2': '<strong>Coordinate transformation</strong> (move, rotate, scale)',
+                        'systems.system3.application3': '<strong>Automatic error distribution</strong> of closure',
+                        'systems.system3.application4': '<strong>UTM scale factor</strong> integrated',
+                        'systems.system3.application5': '<strong>Direct export to AutoCAD</strong> via DDE/COM',
+                        'systems.tag9': 'Surveying',
+                        'systems.tag10': 'Data Adjustment',
+                        'systems.tag11': 'Excel VBA',
+                        'systems.tag12': 'AutoCAD Integration',
+                        'systems.tag13': 'Certified Precision',
+                        'systems.system4.title': 'ICOD System',
+                        'systems.system4.subtitle': 'Tunnel Cross-Section Drawing System | 2020',
+                        'systems.system4.desc': '<strong>PURPOSE:</strong> Specialized system for drawing cross-sections of tunnels surveyed with LIDAR laser scanner, processing up to 4,000 points per section.',
+                        'systems.system4.features': '<strong>MAIN FUNCTIONALITIES:</strong>',
+                        'systems.system4.feature1': '<strong>Massive LIDAR processing</strong> of laser scanner data',
+                        'systems.system4.feature2': '<strong>Automatic ordering</strong> of points in clockwise direction',
+                        'systems.system4.feature3': '<strong>Cross-section calculation</strong> from XYZ coordinates',
+                        'systems.system4.feature4': '<strong>AutoCAD integration</strong> via DDE connection from Excel',
+                        'systems.system4.feature5': '<strong>Automatic successive drawing</strong> of complex profiles',
+                        'systems.system4.stat1': 'Points per section',
+                        'systems.system4.stat2': '↓ manual time',
+                        'systems.system4.stat3': 'Sections generated',
+                        'systems.system4.stat4': 'Guaranteed precision',
+                        'systems.tag14': 'LIDAR Processing',
+                        'systems.tag15': 'Tunnel Sections',
+                        'systems.tag16': 'Excel VBA',
+                        'systems.tag17': 'AutoCAD Integration',
+                        'systems.tag18': 'Automation',
+                        
+                        // Services
+                        'services.title': 'Available Strategic Services',
+                        'services.service1.title': '1. BASIC EX-ANTE EVALUATION',
+                        'services.service1.description': 'Independent professional analysis of technical-operational risks in infrastructure project design phase.',
+                        'services.service1.feature1': 'Initial analysis of technical-operational risks',
+                        'services.service1.feature2': 'Benchmarking against international operational data',
+                        'services.service1.feature3': 'Executive report with prioritized critical findings',
+                        'services.service1.feature4': 'Identification of operational capacity gaps',
+                        'services.service2.title': '2. VISUAL CRP EXPRESS IMPLEMENTATION',
+                        'services.service2.description': 'Accelerated adaptation and implementation of Visual CRP system for operational document control in specific projects.',
+                        'services.service2.feature1': 'System adaptation to project specific criteria',
+                        'services.service2.feature2': 'Operational team training (4-8 hours)',
+                        'services.service2.feature3': 'Technical support during adoption phase (30 days)',
+                        'services.service2.feature4': 'Initial multi-code classification configuration',
+                        'services.service3.title': '3. CONTROL SYSTEMS AUDIT',
+                        'services.service3.description': 'Diagnosis and optimization of existing technical and document control systems in ongoing projects.',
+                        'services.service3.feature1': 'Diagnosis of operational gaps and systemic risks',
+                        'services.service3.feature2': 'Prioritized systemic optimization recommendations',
+                        'services.service3.feature3': 'Phased implementation plan (roadmap)',
+                        'services.service3.feature4': 'Benchmarking against sector best practices',
+                        'services.applicable': 'Applicable to:',
+                        'services.deliverable': 'Deliverable:',
+                        'services.metrics': 'Quantified Impact Metrics',
+                        'services.metric1': 'Reduction in manual process time',
+                        'services.metric2': 'Precision in quantity takeoffs and technical controls',
+                        'services.metric3': 'Compliance in audits with implemented systems',
+                        'services.metric4': 'Costs avoided through systemic implementation',
+                        'services.metric5': 'Savings vs commercial software licenses',
+                        'services.metric6': 'Records managed in single system',
+                        
+                        // Education
+                        'education.title': 'Education and Contributions',
+                        'education.formal': 'Formal Education',
+                        'education.degree': 'Bachelor in Civil Engineering',
+                        'education.technical': 'Computer Technician',
+                        'education.graduation': 'Graduation Year:',
+                        'education.certifications': 'Certifications and Recognitions',
+                        'education.cert1.title': 'Active Member - CODIA',
+                        'education.exequatur': 'Exequátur No.:',
+                        'education.status': 'Status:',
+                        'education.cert2.title': 'International Academic Exchange Program',
+                        'education.year': 'Year:',
+                        'education.conference': 'Conference:',
+                        'education.cert3.title': 'Recognition for Dedication and Academic Performance',
+                        'education.publications': 'Technical Publications and Contributions',
+                        'education.publication1.title': 'Ex Ante Technical-Financial Risk Report – Santo Domingo Metro Line 3',
+                        'education.publication1.desc': '<strong>Piter J. Bonilla D. (2026)</strong> - Independent professional analysis establishing methodological framework for ex-ante evaluations in mass transit projects. Documents methodology, findings on operational capacity, design gaps and projected financial risk.',
+                        'education.link1': 'Access complete publication',
+                        'education.publication2.title': 'Case Study: Visual CRP System in Montegrande Dam',
+                        'education.publication2.desc': 'Documented implementation as hybrid architecture reference for operational document control in mega-infrastructure projects.',
+                        'education.link2': 'Explore case study',
+                        'education.testimonial': '"The ex ante evaluation methodology presented by engineer Bonilla establishes a new standard for technical analysis in the design phase. It stands out for its ability to integrate analysis of existing studies, comparative evaluation of international issues and rigorous study of applicable technologies, articulating them through advanced technical-financial modeling."',
+                        'education.testimonial.author': '— Eng. Carlos Sully Bonnelly Ginebra, Phd | International Consultant in PPP and Transport Economics | Professor',
+                        
+                        // Footer
+                        'footer.title': 'Civil Engineer - CODIA 17378 | Technical Documentation Specialist | Surveying Manager',
+                        'footer.tagline': 'Interactive CV representing my integral vision: transform technical complexity into robust operating systems for projects >$100M.'
+                    }
+                };
+                
+                this.init();
+            }
+            
+            init() {
+                // 1. Detect preferred language
+                this.detectPreferredLanguage();
+                
+                // 2. Load initial translations
+                this.loadTranslations();
+                
+                // 3. Apply initial translations
+                this.updatePageContent();
+                
+                // 4. Setup language buttons
+                this.setupLanguageButtons();
+                
+                // 5. Animate elements
+                this.animateOnLoad();
+                
+                // 6. Setup analytics tracking
+                this.setupAnalytics();
+            }
+            
+            detectPreferredLanguage() {
+                // Priority 1: Saved preference
+                const savedLang = localStorage.getItem('cv-lang');
+                if (savedLang && (savedLang === 'en' || savedLang === 'es')) {
+                    this.currentLang = savedLang;
+                    return;
+                }
+                
+                // Priority 2: Browser language
+                const browserLang = navigator.language || navigator.userLanguage;
+                const primaryLang = browserLang.split('-')[0];
+                
+                if (primaryLang === 'en') {
+                    this.currentLang = 'en';
+                }
+                
+                // Priority 3: URL parameter ?lang=en
+                const urlParams = new URLSearchParams(window.location.search);
+                const urlLang = urlParams.get('lang');
+                if (urlLang === 'es' || urlLang === 'en') {
+                    this.currentLang = urlLang;
+                }
+            }
+            
+            loadTranslations() {
+                this.translations = this.translationData[this.currentLang] || this.translationData['es'];
+            }
+            
+            updatePageContent() {
+                // Update all elements with data-key
+                document.querySelectorAll('[data-key]').forEach(element => {
+                    const key = element.getAttribute('data-key');
+                    const translation = this.translations[key];
+                    
+                    if (translation !== undefined) {
+                        this.applyTranslation(element, translation);
+                    }
+                });
+                
+                // Update HTML attributes
+                document.documentElement.lang = this.currentLang;
+                document.documentElement.setAttribute('data-current-lang', this.currentLang);
+                
+                // Update meta tags
+                this.updateMetaTags();
+                
+                // Update active buttons
+                document.querySelectorAll('.lang-btn').forEach(btn => {
+                    btn.classList.toggle('active', btn.dataset.lang === this.currentLang);
+                });
+            }
+            
+            applyTranslation(element, translation) {
+                if (element.tagName === 'META') {
+                    if (element.name === 'description') {
+                        element.content = translation;
+                    }
+                } 
+                else if (element.tagName === 'TITLE') {
+                    element.textContent = translation;
+                }
+                else {
+                    // For HTML content
+                    if (translation.includes('<')) {
+                        element.innerHTML = translation;
+                    } else {
+                        element.textContent = translation;
+                    }
+                }
+            }
+            
+            updateMetaTags() {
+                // Update Open Graph tags based on language
+                const ogTitle = document.querySelector('meta[property="og:title"]');
+                const ogDesc = document.querySelector('meta[property="og:description"]');
+                const twitterTitle = document.querySelector('meta[name="twitter:title"]');
+                const twitterDesc = document.querySelector('meta[name="twitter:description"]');
+                
+                if (this.currentLang === 'en') {
+                    if (ogTitle) ogTitle.content = 'Piter J. Bonilla - Control Systems Architect for Mega-Projects';
+                    if (ogDesc) ogDesc.content = 'Civil Engineer specializing in systematization of critical processes for infrastructure';
+                    if (twitterTitle) twitterTitle.content = 'Piter J. Bonilla D. - Control Systems Architect';
+                    if (twitterDesc) twitterDesc.content = 'Transforming mega-projects through systematization of critical processes';
+                } else {
+                    if (ogTitle) ogTitle.content = 'Piter J. Bonilla - Arquitecto de Sistemas para Mega-Proyectos';
+                    if (ogDesc) ogDesc.content = 'Ingeniero Civil especializado en sistematización de procesos críticos para infraestructura';
+                    if (twitterTitle) twitterTitle.content = 'Piter J. Bonilla D. - Arquitecto de Sistemas de Control';
+                    if (twitterDesc) twitterDesc.content = 'Transformando mega-proyectos mediante sistematización de procesos críticos';
+                }
+            }
+            
+            setupLanguageButtons() {
+                document.querySelectorAll('.lang-btn').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const newLang = btn.dataset.lang;
+                        
+                        if (newLang !== this.currentLang) {
+                            // Track language change
+                            this.trackEvent('language_change', {
+                                'from_language': this.currentLang,
+                                'to_language': newLang
+                            });
+                            
+                            // Transition animation
+                            document.body.classList.add('changing-language');
+                            
+                            // Change language
+                            this.currentLang = newLang;
+                            localStorage.setItem('cv-lang', newLang);
+                            
+                            // Load new translations
+                            this.loadTranslations();
+                            
+                            // Apply translations
+                            this.updatePageContent();
+                            
+                            // Update URL
+                            this.updateURL();
+                            
+                            // Remove animation
+                            setTimeout(() => {
+                                document.body.classList.remove('changing-language');
+                            }, 300);
+                        }
+                    });
+                });
+            }
+            
+            updateURL() {
+                const url = new URL(window.location);
+                if (this.currentLang === 'es') {
+                    url.searchParams.delete('lang');
+                } else {
+                    url.searchParams.set('lang', this.currentLang);
+                }
+                window.history.replaceState({}, '', url);
+            }
+            
+            animateOnLoad() {
+                // Animate skill bars on skills tab
+                setTimeout(() => {
+                    this.animateSkillBars();
+                    this.animateChartBars();
+                }, 500);
+            }
+            
+            animateSkillBars() {
+                const skillBars = document.querySelectorAll('.skill-level');
+                skillBars.forEach(bar => {
+                    const width = bar.getAttribute('data-width') + '%';
+                    setTimeout(() => {
+                        bar.style.width = width;
+                    }, 100);
+                });
+            }
+            
+            animateChartBars() {
+                const chartBars = document.querySelectorAll('.chart-bar');
+                chartBars.forEach(bar => {
+                    const height = bar.getAttribute('data-height') + '%';
+                    setTimeout(() => {
+                        bar.style.height = height;
+                    }, 200);
+                });
+            }
+            
+            setupAnalytics() {
+                // Track tab clicks
+                document.querySelectorAll('.tab').forEach(tab => {
+                    tab.addEventListener('click', () => {
+                        this.trackEvent('tab_click', {
+                            'tab_name': tab.getAttribute('data-tab'),
+                            'language': this.currentLang
+                        });
+                    });
+                });
+                
+                // Track external link clicks
+                document.querySelectorAll('a[target="_blank"]').forEach(link => {
+                    link.addEventListener('click', () => {
+                        this.trackEvent('external_link_click', {
+                            'link_url': link.href,
+                            'link_text': link.textContent.trim(),
+                            'language': this.currentLang
+                        });
+                    });
+                });
+                
+                // Track print event
+                document.querySelector('.print-btn').addEventListener('click', () => {
+                    this.trackEvent('print_cv', {
+                        'language': this.currentLang
+                    });
+                });
+            }
+            
+            trackEvent(eventName, eventParams = {}) {
+                // Console log for debugging (can be replaced with actual analytics)
+                console.log(`[Analytics] ${eventName}:`, {
+                    ...eventParams,
+                    'timestamp': new Date().toISOString(),
+                    'url': window.location.href
+                });
+                
+                // Google Analytics 4 (if implemented)
+                if (typeof gtag !== 'undefined') {
+                    gtag('event', eventName, eventParams);
+                }
+                
+                // You can add other analytics platforms here
+            }
+        }
+        
+        // Initialize translator when DOM is ready
+        document.addEventListener('DOMContentLoaded', () => {
+            window.cvTranslator = new Translator();
+        });
+    </script>
+
+    <!-- MAIN SCRIPT -->
+    <script>
+        // Tab functionality
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active class from all tabs and content
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                
+                // Add active class to clicked tab and corresponding content
+                tab.classList.add('active');
+                const tabId = tab.getAttribute('data-tab');
+                document.getElementById(tabId).classList.add('active');
+                
+                // Track tab switch if translator is loaded
+                if (window.cvTranslator) {
+                    window.cvTranslator.trackEvent('tab_switch', {
+                        'tab_id': tabId,
+                        'tab_name': tab.querySelector('span').textContent.trim(),
+                        'language': window.cvTranslator.currentLang
+                    });
+                }
+                
+                // Animate elements when tab becomes active
+                if (tabId === 'skills') {
+                    setTimeout(() => {
+                        if (window.cvTranslator) window.cvTranslator.animateSkillBars();
+                    }, 300);
+                }
+                if (tabId === 'profile') {
+                    setTimeout(() => {
+                        if (window.cvTranslator) window.cvTranslator.animateChartBars();
+                    }, 300);
+                }
+            });
+        });
+
+        // Print functionality
+        document.querySelector('.print-btn').addEventListener('click', () => {
+            window.print();
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    
+                    // Track internal navigation
+                    if (window.cvTranslator) {
+                        window.cvTranslator.trackEvent('internal_navigation', {
+                            'target_section': targetId,
+                            'language': window.cvTranslator.currentLang
+                        });
+                    }
+                }
+            });
+        });
+
+        // Initialize animations on load
+        document.addEventListener('DOMContentLoaded', () => {
+            // Trigger initial animations
+            setTimeout(() => {
+                const activeTab = document.querySelector('.tab.active');
+                if (activeTab) {
+                    const tabId = activeTab.getAttribute('data-tab');
+                    if (tabId === 'skills' && window.cvTranslator) {
+                        window.cvTranslator.animateSkillBars();
+                    }
+                    if (tabId === 'profile' && window.cvTranslator) {
+                        window.cvTranslator.animateChartBars();
+                    }
+                }
+            }, 800);
+            
+            // Track page view
+            if (window.cvTranslator) {
+                setTimeout(() => {
+                    window.cvTranslator.trackEvent('page_view', {
+                        'language': window.cvTranslator.currentLang,
+                        'referrer': document.referrer || 'direct'
+                    });
+                }, 1000);
+            }
+        });
+
+        // Keyboard navigation for accessibility
+        document.addEventListener('keydown', (e) => {
+            // Tab navigation with arrow keys
+            if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+                const tabs = Array.from(document.querySelectorAll('.tab'));
+                const currentTab = document.querySelector('.tab.active');
+                const currentIndex = tabs.indexOf(currentTab);
+                
+                let nextIndex;
+                if (e.key === 'ArrowRight') {
+                    nextIndex = (currentIndex + 1) % tabs.length;
+                } else {
+                    nextIndex = (currentIndex - 1 + tabs.length) % tabs.length;
+                }
+                
+                tabs[nextIndex].click();
+                tabs[nextIndex].focus();
+            }
+            
+            // Print with Ctrl+P
+            if (e.ctrlKey && e.key === 'p') {
+                e.preventDefault();
+                window.print();
+            }
+            
+            // Language switching with Ctrl+L
+            if (e.ctrlKey && e.key === 'l') {
+                e.preventDefault();
+                const currentLang = document.documentElement.lang;
+                const newLang = currentLang === 'es' ? 'en' : 'es';
+                
+                const langBtn = document.querySelector(`.lang-btn[data-lang="${newLang}"]`);
+                if (langBtn) {
+                    langBtn.click();
+                }
+            }
+        });
+
+        // Add focus styles for accessibility
+        document.addEventListener('focusin', (e) => {
+            if (e.target.classList.contains('tab') || 
+                e.target.classList.contains('lang-btn') ||
+                e.target.classList.contains('project-link')) {
+                e.target.style.outline = '2px solid var(--accent)';
+                e.target.style.outlineOffset = '2px';
+            }
+        });
+
+        document.addEventListener('focusout', (e) => {
+            if (e.target.classList.contains('tab') || 
+                e.target.classList.contains('lang-btn') ||
+                e.target.classList.contains('project-link')) {
+                e.target.style.outline = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
