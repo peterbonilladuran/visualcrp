@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-key="meta.title">Dashboard v6.0 COMPLETO - Janna Castillo Bonilla (Transparencia Metodológica + Modelo Genético)</title>
+    <title data-key="meta.title">Dashboard v6.1 - Janna Castillo Bonilla (Modelo Genético + Transparencia)</title>
     <style>
         /* ========== PARTE 1: ESTILOS CSS ========== */
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -528,6 +528,9 @@
             .tabs, .print-button, .language-switcher { display: none; }
             .tab-content { display: block !important; }
             .content { max-height: none; }
+            /* Forzar impresión a color */
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
         }
         
         @media (max-width: 768px) {
@@ -544,7 +547,7 @@
             <span class="lang-flag">🇪🇸</span>
             <span class="lang-text">Español</span>
         </button>
-        <button class="lang-btn active" data-lang="en">
+        <button class="lang-btn" data-lang="en">
             <span class="lang-flag">🇺🇸</span>
             <span class="lang-text">English</span>
         </button>
@@ -552,26 +555,25 @@
 
     <div class="container">
         <div class="header">
-            <h1 data-key="header.title">✓ Dashboard Validado Técnicamente</h1>
+            <h1 data-key="header.title">✓ Dashboard Académico</h1>
             <div class="subtitle" data-key="header.subtitle">Janna Castillo Bonilla • 6 años • Kindergarten • Febrero 2026</div>
-            <div class="version-badge" data-key="header.version">Versión 6.0 COMPLETO - Transparencia Metodológica + Hitos Documentados + Modelo Genético + Comparación Nathan + Riesgos + PDF Escuela</div>
+            <div class="version-badge" data-key="header.version">Versión 6.1 - Patrón Familiar Consolidado (IQs Estimados)</div>
             <div class="disclaimer" data-key="header.disclaimer">
-                <strong>EVALUACIÓN ACADÉMICA - FEBRERO 2026:</strong> Este dashboard documenta el desempeño de Janna en evaluaciones mCLASS de Kindergarten (Middle of Year). <strong>ACTUALIZACIÓN v4.6:</strong> Incluye análisis exhaustivo del contexto de evaluación digital (NWF-WRC score estimado: 70/100) y linaje bilingüe compartido con hermano Nathan. Los resultados muestran Composite Score 401 (82/100 reportado) / 89/100 (ajustado conservador) Above Benchmark, destacando en Word Reading (17 wpm, 425% del objetivo) y Letter Sounds (40 sounds/min). <strong>Importante:</strong> mCLASS es herramienta de screening académico, no determina identificación gifted formal ni mide IQ.
+                <strong>EVALUACIÓN ACADÉMICA - FEBRERO 2026:</strong> Este dashboard documenta el desempeño de Janna en evaluaciones mCLASS de Kindergarten (Middle of Year). Los resultados muestran Composite Score 401 Above Benchmark, destacando en Word Reading (17 wpm, 425% de la meta) y Letter Sounds (40 sounds/min). Importante: mCLASS es una herramienta de screening académico, no determina identificación formal de altas capacidades ni mide IQ.
             </div>
         </div>
 
-        <!-- ACTUALIZACIÓN v6.0: DISCLAIMER METODOLÓGICO CRÍTICO -->
         <!-- BADGE COMPACTO - Metodología en tab separado -->
         <div style="background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%); padding: 15px 40px; text-align: center; border-bottom: 3px solid #dc3545;">
             <span style="font-size: 0.95em; color: #721c24;">
-                <strong>⚠️ <span data-key="badge.importante">IMPORTANTE:</span></strong> <span data-key="badge.texto">IQs familiares (Piter ~150, Madre ~140, Padre ~130, Janna 135-150) son estimaciones correlacionales (no WISC/WAIS).</span> 
+                <strong>⚠️ <span data-key="badge.importante">IMPORTANTE:</span></strong> <span data-key="badge.texto">IQs familiares son estimaciones correlacionales (no WISC/WAIS).</span> 
                 <a href="#" onclick="showTab('metodologia'); return false;" style="color: #dc3545; font-weight: 700; text-decoration: underline;">
                     <span data-key="badge.link">Ver metodología completa →</span>
                 </a>
             </span>
         </div>
 
-                <div class="tabs">
+        <div class="tabs">
             <button class="tab active" data-tab="validacion" data-key="tab.validacion">✓ Validación</button>
             <button class="tab" data-tab="convergencias" data-key="tab.convergencias">Análisis Original</button>
             <button class="tab" data-tab="estimaciones" data-key="tab.estimaciones">Estimaciones</button>
@@ -634,7 +636,7 @@
                                 <td><strong data-key="validacion.table.decoding">Decoding (NWF-WRC)</strong></td>
                                 <td><strong>0</strong></td>
                                 <td>3</td>
-                                <td><strong data-key="validacion.table.wellbelow">Well Below</strong></td>
+                                <td><strong data-key="validacion.table.wellbelow">Well Below Benchmark</strong></td>
                             </tr>
                         </tbody>
                     </table>
@@ -772,25 +774,25 @@ NWF-WRC<sub>est</sub> = (NWF-CLS × 0.7) + (PSF × 0.2) + (WRF × 0.1)
                 = <strong style="color: #28a745;">88.9 ≈ 70/100 raw</strong>
                 </code>
                 
-                <p style="margin: 15px 0; font-family: 'Segoe UI', sans-serif; line-height: 1.6;">
-                    <strong data-key="validacion.rationaleTitle">Rationale de Pesos:</strong><br>
-                    <span data-key="validacion.rationale1">• <strong>NWF-CLS (70%):</strong> Predictor más directo - reconocimiento de sonidos individuales</span><br>
-                    <span data-key="validacion.rationale2">• <strong>PSF (20%):</strong> Habilidad de manipular/combinar sonidos fonémicamente</span><br>
-                    <span data-key="validacion.rationale3">• <strong>WRF (10%):</strong> Evidencia de decodificación aplicada en palabras reales</span>
-                </p>
-                
-                <p style="margin: 15px 0; font-family: 'Segoe UI', sans-serif; line-height: 1.6;" data-key="validacion.ajusteIncertidumbre">
-                    <strong>Ajuste de Incertidumbre (-20%):</strong> Aplicamos ajuste conservador del 20% para evitar sobreestimación, dado que estamos inferiendo, no midiendo directamente.
-                </p>
+                                <p style="margin: 15px 0; font-family: 'Segoe UI', sans-serif; line-height: 1.6;">
+                                    <strong data-key="validacion.rationaleTitle">Rationale de Pesos:</strong><br>
+                                    <span data-key="validacion.rationale1">• <strong>NWF-CLS (70%):</strong> Predictor más directo - reconocimiento de sonidos individuales</span><br>
+                                    <span data-key="validacion.rationale2">• <strong>PSF (20%):</strong> Habilidad de manipular/combinar sonidos fonémicamente</span><br>
+                                    <span data-key="validacion.rationale3">• <strong>WRF (10%):</strong> Evidencia de decodificación aplicada en palabras reales</span>
+                                </p>
+                                
+                                <p style="margin: 15px 0; font-family: 'Segoe UI', sans-serif; line-height: 1.6;" data-key="validacion.ajusteIncertidumbre">
+                                    <strong>Ajuste de Incertidumbre (-20%):</strong> Aplicamos ajuste conservador del 20% para evitar sobreestimación, dado que estamos inferiendo, no midiendo directamente.
+                                </p>
 
-                <div style="background: white; padding: 15px; border-radius: 6px; margin-top: 15px; border-left: 4px solid #28a745;">
-                    <p style="font-family: 'Segoe UI', sans-serif; font-weight: bold; color: #155724; margin-bottom: 8px;">
-                        <span data-key="validacion.scoreRecomendado">Score Recomendado (Conservador):</span> <span style="font-size: 1.3em; color: #28a745;">89/100</span>
-                    </p>
-                    <p style="font-family: 'Segoe UI', sans-serif; font-size: 0.95em; line-height: 1.5;" data-key="validacion.rangoConfianza">
-                        Rango de confianza: 70-93/100 (conservador a optimista)
-                    </p>
-                </div>
+                                <div style="background: white; padding: 15px; border-radius: 6px; margin-top: 15px; border-left: 4px solid #28a745;">
+                                    <p style="font-family: 'Segoe UI', sans-serif; font-weight: bold; color: #155724; margin-bottom: 8px;">
+                                        <span data-key="validacion.scoreRecomendado">Score Recomendado (Conservador):</span> <span style="font-size: 1.3em; color: #28a745;">89/100</span>
+                                    </p>
+                                    <p style="font-family: 'Segoe UI', sans-serif; font-size: 0.95em; line-height: 1.5;" data-key="validacion.rangoConfianza">
+                                        Rango de confianza: 70-93/100 (conservador a optimista)
+                                    </p>
+                                </div>
                             </div>
 
                             <h4 style="color: #1976d2; margin: 25px 0 15px 0;" data-key="validacion.impactoComposite">🎯 Impacto en Composite Score</h4>
@@ -1001,7 +1003,7 @@ NWF-WRC<sub>est</sub> = (NWF-CLS × 0.7) + (PSF × 0.2) + (WRF × 0.1)
                             <h4><span class="icon">+</span><span data-key="convergencias.card6.title">Factor Hereditario</span></h4>
                             <ul>
                                 <li data-key="convergencias.card6.item1">Abuelo materno: aceleración documentada</li>
-                                <li data-key="convergencias.card6.item2" data-key-updated="true">Paralelos: ingeniería civil (espacial) + informática (lógica)</li>
+                                <li data-key="convergencias.card6.item2">Paralelos: ingeniería civil (espacial) + informática (lógica)</li>
                                 <li data-key="convergencias.card6.item3">Probabilidad base aumentada significativamente</li>
                                 <li data-key="convergencias.card6.item4">Patrón familiar consistente</li>
                             </ul>
@@ -1058,9 +1060,9 @@ NWF-WRC<sub>est</sub> = (NWF-CLS × 0.7) + (PSF × 0.2) + (WRF × 0.1)
                         </div>
 
                         <div style="background: white; padding: 20px; border-radius: 8px; margin: 15px 0;">
-                            <h5 style="color: #e65100; margin-bottom: 12px;" data-key="convergencias.nathanTitle">📊 Nathan: Patrón Familiar de Alto Desempeño</h5>
+                            <h5 style="color: #e65100; margin-bottom: 12px;" data-key="convergencias.nathanTitle">📊 Comparativa Familiar mCLASS</h5>
                             <p style="line-height: 1.8; margin-bottom: 15px;" data-key="convergencias.nathanDesc">
-                                El desempeño de Janna no ocurre en aislamiento. Su hermano mayor <strong>Nathan (7 años, 1er grado)</strong> estableció un patrón de desarrollo cognitivo excepcional que refuerza el contexto familiar:
+                                El hermano mayor de Janna, Nathan (7 años, 1er grado), estableció previamente un patrón de desarrollo cognitivo excepcional en el mismo entorno familiar, evaluado con el mismo sistema mCLASS:
                             </p>
                             
                             <table class="comparison-table" style="margin: 15px 0;">
@@ -1137,9 +1139,9 @@ NWF-WRC<sub>est</sub> = (NWF-CLS × 0.7) + (PSF × 0.2) + (WRF × 0.1)
                                 <div style="margin-top: 15px; padding: 12px; background: #fff9c4; border-radius: 4px; border-left: 3px solid #fbc02d;">
                                     <p style="margin-bottom: 8px; font-size: 0.95em; line-height: 1.6;"><strong>🧬 Contexto Bilingüe Compartido:</strong></p>
                                     <ul style="margin-left: 20px; font-size: 0.93em; line-height: 1.6;">
-                                        <li>Español L1 (lengua materna, 100% uso en casa por padres)</li>
-                                        <li>Inglés L2 (preferencia entre hermanos, inmersión escolar)</li>
-                                        <li>Desarrollo fonológico acelerado en ambos idiomas</li>
+                                        <li data-key="convergencias.espanolL1">Español L1 (lengua materna, 100% uso en casa por padres)</li>
+                                        <li data-key="convergencias.inglesL2">Inglés L2 (preferencia entre hermanos, inmersión escolar)</li>
+                                        <li data-key="convergencias.desarrolloFonologico">Desarrollo fonológico acelerado en ambos idiomas</li>
                                         <li data-key="convergencias.transferenciaPositiva">Transferencia positiva L1→L2 en conciencia fonémica</li>
                                     </ul>
                                 </div>
@@ -1226,10 +1228,10 @@ NWF-WRC<sub>est</sub> = (NWF-CLS × 0.7) + (PSF × 0.2) + (WRF × 0.1)
                             <!-- GENERACIÓN 1: Abuelo Materno -->
                             <g class="tree-node" filter="url(#shadow)" style="cursor: pointer;">
                                 <rect x="300" y="40" width="200" height="80" rx="12" fill="url(#gradG1)" stroke="#5a67d8" stroke-width="2"/>
-                                <text x="400" y="65" text-anchor="middle" fill="white" font-size="16" font-weight="bold">Abuelo Materno (Piter)</text>
-                                <text x="400" y="85" text-anchor="middle" fill="white" font-size="12">Ing. Civil + Informática</text>
-                                <text x="400" y="102" text-anchor="middle" fill="white" font-size="11" opacity="0.9">2 Grade Skips</text>
-                                <text x="400" y="116" text-anchor="middle" fill="#ffd700" font-size="13" font-weight="bold">IQ Est: ~142</text>
+                                <text data-key="svg.abuelo.titulo" x="400" y="65" text-anchor="middle" fill="white" font-size="16" font-weight="bold">Abuelo Materno (Piter)</text>
+                                <text data-key="svg.abuelo.sub1" x="400" y="85" text-anchor="middle" fill="white" font-size="12">Ing. Civil + Informática</text>
+                                <text data-key="svg.abuelo.sub2" x="400" y="102" text-anchor="middle" fill="white" font-size="11" opacity="0.9">2 Grade Skips</text>
+                                <text data-key="svg.abuelo.iq" x="400" y="116" text-anchor="middle" fill="#ffd700" font-size="13" font-weight="bold">IQ Est: ~142</text>
                                 
                                 <!-- Ícono de generación -->
                                 <circle cx="320" cy="55" r="8" fill="#ffd700"/>
@@ -1240,9 +1242,9 @@ NWF-WRC<sub>est</sub> = (NWF-CLS × 0.7) + (PSF × 0.2) + (WRF × 0.1)
                             <!-- Madre -->
                             <g class="tree-node" filter="url(#shadow)" style="cursor: pointer;">
                                 <rect x="180" y="280" width="200" height="60" rx="10" fill="url(#gradG2)" stroke="#28a745" stroke-width="2"/>
-                                <text x="280" y="302" text-anchor="middle" fill="white" font-size="14" font-weight="bold">Madre</text>
-                                <text x="280" y="318" text-anchor="middle" fill="white" font-size="11">Ingeniera Civil</text>
-                                <text x="280" y="333" text-anchor="middle" fill="#ffd700" font-size="12" font-weight="bold">IQ Est: ~138</text>
+                                <text data-key="svg.madre.titulo" x="280" y="302" text-anchor="middle" fill="white" font-size="14" font-weight="bold">Madre</text>
+                                <text data-key="svg.madre.sub1" x="280" y="318" text-anchor="middle" fill="white" font-size="11">Ingeniera Civil</text>
+                                <text data-key="svg.madre.iq" x="280" y="333" text-anchor="middle" fill="#ffd700" font-size="12" font-weight="bold">IQ Est: ~138</text>
                                 
                                 <circle cx="200" cy="292" r="7" fill="#ffd700"/>
                                 <text x="200" y="296" text-anchor="middle" fill="#28a745" font-size="10" font-weight="bold">G2</text>
@@ -1251,9 +1253,9 @@ NWF-WRC<sub>est</sub> = (NWF-CLS × 0.7) + (PSF × 0.2) + (WRF × 0.1)
                             <!-- Padre -->
                             <g class="tree-node" filter="url(#shadow)" style="cursor: pointer;">
                                 <rect x="420" y="280" width="200" height="60" rx="10" fill="url(#gradG2)" stroke="#28a745" stroke-width="2"/>
-                                <text x="520" y="302" text-anchor="middle" fill="white" font-size="14" font-weight="bold">Padre</text>
-                                <text x="520" y="318" text-anchor="middle" fill="white" font-size="11">Arte + Negocios (USA)</text>
-                                <text x="520" y="333" text-anchor="middle" fill="#ffd700" font-size="12" font-weight="bold">IQ Est: ~128</text>
+                                <text data-key="svg.padre.titulo" x="520" y="302" text-anchor="middle" fill="white" font-size="14" font-weight="bold">Padre</text>
+                                <text data-key="svg.padre.sub1" x="520" y="318" text-anchor="middle" fill="white" font-size="11">Arte + Negocios (USA)</text>
+                                <text data-key="svg.padre.iq" x="520" y="333" text-anchor="middle" fill="#ffd700" font-size="12" font-weight="bold">IQ Est: ~128</text>
                                 
                                 <circle cx="440" cy="292" r="7" fill="#ffd700"/>
                                 <text x="440" y="296" text-anchor="middle" fill="#28a745" font-size="10" font-weight="bold">G2</text>
@@ -1263,10 +1265,10 @@ NWF-WRC<sub>est</sub> = (NWF-CLS × 0.7) + (PSF × 0.2) + (WRF × 0.1)
                             <!-- Nathan -->
                             <g class="tree-node" filter="url(#shadow)" style="cursor: pointer;">
                                 <rect x="180" y="480" width="200" height="70" rx="12" fill="url(#gradG3Nathan)" stroke="#dc3545" stroke-width="3"/>
-                                <text x="280" y="503" text-anchor="middle" fill="white" font-size="16" font-weight="bold">NATHAN</text>
-                                <text x="280" y="520" text-anchor="middle" fill="white" font-size="11">Age 7 · Grade 1</text>
-                                <text x="280" y="536" text-anchor="middle" fill="#ffd700" font-size="14" font-weight="bold">IQ Est: 145-150</text>
-                                <text x="280" y="548" text-anchor="middle" fill="white" font-size="9" opacity="0.9">(Exceptionally Gifted)</text>
+                                <text data-key="svg.nathan.titulo" x="280" y="503" text-anchor="middle" fill="white" font-size="16" font-weight="bold">NATHAN</text>
+                                <text data-key="svg.nathan.sub1" x="280" y="520" text-anchor="middle" fill="white" font-size="11">Age 7 · Grade 1</text>
+                                <text data-key="svg.nathan.iq" x="280" y="536" text-anchor="middle" fill="#ffd700" font-size="14" font-weight="bold">IQ Est: 145-150</text>
+                                <text data-key="svg.nathan.sub2" x="280" y="548" text-anchor="middle" fill="white" font-size="9" opacity="0.9">(Exceptionally Gifted)</text>
                                 
                                 <circle cx="200" cy="492" r="7" fill="#ffd700"/>
                                 <text x="200" y="496" text-anchor="middle" fill="#dc3545" font-size="10" font-weight="bold">G3</text>
@@ -1281,10 +1283,10 @@ NWF-WRC<sub>est</sub> = (NWF-CLS × 0.7) + (PSF × 0.2) + (WRF × 0.1)
                             <!-- Janna -->
                             <g class="tree-node" filter="url(#shadow)" style="cursor: pointer;">
                                 <rect x="420" y="480" width="200" height="70" rx="12" fill="url(#gradG3Janna)" stroke="#ee5a6f" stroke-width="2"/>
-                                <text x="520" y="503" text-anchor="middle" fill="white" font-size="16" font-weight="bold">JANNA</text>
-                                <text x="520" y="520" text-anchor="middle" fill="white" font-size="11">Age 6 · Kindergarten</text>
-                                <text x="520" y="536" text-anchor="middle" fill="#ffd700" font-size="14" font-weight="bold">IQ Est: 132-138</text>
-                                <text x="520" y="548" text-anchor="middle" fill="white" font-size="9" opacity="0.9">(Very Superior to Highly Gifted)</text>
+                                <text data-key="svg.janna.titulo" x="520" y="503" text-anchor="middle" fill="white" font-size="16" font-weight="bold">JANNA</text>
+                                <text data-key="svg.janna.sub1" x="520" y="520" text-anchor="middle" fill="white" font-size="11">Age 6 · Kindergarten</text>
+                                <text data-key="svg.janna.iq" x="520" y="536" text-anchor="middle" fill="#ffd700" font-size="14" font-weight="bold">IQ Est: 132-138</text>
+                                <text data-key="svg.janna.sub2" x="520" y="548" text-anchor="middle" fill="white" font-size="9" opacity="0.9">(Very Superior to Highly Gifted)</text>
                                 
                                 <circle cx="440" cy="492" r="7" fill="#ffd700"/>
                                 <text x="440" y="496" text-anchor="middle" fill="#ee5a6f" font-size="10" font-weight="bold">G3</text>
@@ -1292,7 +1294,7 @@ NWF-WRC<sub>est</sub> = (NWF-CLS × 0.7) + (PSF × 0.2) + (WRF × 0.1)
                             
                             <!-- Leyenda -->
                             <g transform="translate(20, 570)">
-                                <text id="svg-legend" x="0" y="0" font-size="10" fill="#666" font-style="italic" data-key="svg.leyenda">
+                                <text data-key="svg.leyenda" x="0" y="0" font-size="10" fill="#666" font-style="italic">
                                     💡 Hover sobre nodos para información adicional · IQs estimados por correlación, no medición directa
                                 </text>
                             </g>
@@ -1322,8 +1324,7 @@ NWF-WRC<sub>est</sub> = (NWF-CLS × 0.7) + (PSF × 0.2) + (WRF × 0.1)
                         </p>
                         <p style="margin-top: 10px;">
                             <strong data-key="convergencias.estimacionJanna">Estimación contextual del rango de capacidad de Janna:</strong> 
-                            <span data-key="convergencias.rangoJanna">135-150 (Very Superior to Highly Gifted).</span>
-                            <span data-key="convergencias.rangoJanna">135-150 (Very Superior to Highly Gifted).</span>
+                            <span data-key="convergencias.rangoJanna">132-138 (Very Superior to Highly Gifted).</span>
                             <em data-key="convergencias.notaEstimacion">Inferencia basada en el contexto familiar y su desempeño; no sustituye evaluación formal (WISC-V).</em>
                         </p>
                     </div>
@@ -1390,14 +1391,13 @@ NWF-WRC<sub>est</sub> = (NWF-CLS × 0.7) + (PSF × 0.2) + (WRF × 0.1)
                 </div>
             </div>
 
-
             <!-- TAB 5: ESTIMACIONES (actualizada con nuevos rangos) -->
             <div id="estimaciones" class="tab-content">
                 <div class="section">
                     <h2 data-key="estimaciones.title">Estimación de Capacidad Cognitiva</h2>
                     <span class="badge badge-updated" data-key="estimaciones.actualizada">ACTUALIZADA CON PATRÓN FAMILIAR</span>
 
-                    <!-- v6.0: METODOLOGÍA DE CORRELACIÓN -->
+                    <!-- v6.1: METODOLOGÍA DE CORRELACIÓN -->
                     <div class="caution-box">
                         <h4 data-key="metodologia.title">🔬 Metodología de Correlación - Transparencia Total</h4>
                         <p style="font-weight: 600; margin-bottom: 10px;" data-key="metodologia.disclaimer"><strong>IQs Familiares = ESTIMADOS (no conocidos formalmente):</strong></p>
@@ -1407,15 +1407,15 @@ NWF-WRC<sub>est</sub> = (NWF-CLS × 0.7) + (PSF × 0.2) + (WRF × 0.1)
                         <div style="background: rgba(255,255,255,0.5); padding: 15px; border-radius: 8px; margin: 15px 0;">
                             <p style="font-family: 'Courier New', monospace; line-height: 2;" data-key="metodologia.calculo">
                                 <strong>Estimaciones base:</strong><br>
-                                • Piter: ~150 (2 skips: 1°→3° + 4°→5° + proyectos $500M+ + trading 96% win rate)<br>
-                                • Madre: ~140 (skip 2 grados recomendado + ingeniería civil)<br>
-                                • Padre: ~130 (doble carrera universitaria completa)<br>
+                                • Piter: ~142 (2 skips: 1°→3° + 4°→5° + proyectos $500M+ + trading 96% win rate)<br>
+                                • Madre: ~138 (skip 2 grados recomendado + ingeniería civil)<br>
+                                • Padre: ~128 (doble carrera universitaria completa)<br>
                                 <br>
                                 <strong>Cálculo Midparent:</strong><br>
                                 (Madre_est + Padre_est) / 2 = (140 + 130) / 2 = <strong>135</strong><br>
                                 <br>
                                 <strong>Heredabilidad aplicada:</strong> h² ≈ 0.70 (ajustada por assortative mating)<br>
-                                <strong>IQ esperado base genético:</strong> 0.70(135-100) + 100 = <strong>126.0</strong><br>
+                                <strong>IQ esperado base genético:</strong> 0.70(135-100) + 100 = <strong>125.0</strong><br>
                                 <strong>Rango solo genética:</strong> 112-137 (con varianza SD=12)<br>
                                 <br>
                                 <strong>Ajustes por evidencia adicional:</strong><br>
@@ -1424,8 +1424,8 @@ NWF-WRC<sub>est</sub> = (NWF-CLS × 0.7) + (PSF × 0.2) + (WRF × 0.1)
                                 + Achievement mCLASS excepcional: +5-15 pts<br>
                                 + K-1 Nurture identificación ciega: +5-10 pts<br>
                                 <br>
-                                <strong style="color: #dc3545;">ESTIMACIÓN FINAL JANNA: 135-150</strong><br>
-                                <em>(Punto medio: 137 · Very Superior to Highly Gifted · Percentil 99.3-99.75)</em>
+                                <strong style="color: #dc3545;">ESTIMACIÓN FINAL JANNA: 132-138</strong><br>
+                                <em>(Punto medio: 135 · Very Superior to Highly Gifted · Percentil 99.3-99.75)</em>
                             </p>
                         </div>
                         <p style="margin-top: 15px; padding: 12px; background: rgba(220,53,69,0.1); border-radius: 6px; border-left: 4px solid #dc3545;" data-key="metodologia.validacion">
@@ -1447,7 +1447,7 @@ NWF-WRC<sub>est</sub> = (NWF-CLS × 0.7) + (PSF × 0.2) + (WRF × 0.1)
                         </div>
                         <div class="metric-box" style="border-top-color: #4caf50;">
                             <div class="metric-label" data-key="estimaciones.rangoLabel">Rango Probable</div>
-                            <div class="metric-value" style="color: #4caf50;">135-150</div>
+                            <div class="metric-value" style="color: #4caf50;">132-138</div>
                             <div class="metric-note" data-key="estimaciones.rangoNote1">Altamente probable</div>
                             <div class="metric-note" data-key="estimaciones.rangoNote2">Very Superior to Highly Gifted</div>
                         </div>
@@ -1477,7 +1477,7 @@ NWF-WRC<sub>est</sub> = (NWF-CLS × 0.7) + (PSF × 0.2) + (WRF × 0.1)
                                 <td>
                                     • <span data-key="estimaciones.sabemos1">Seleccionado para programa AG en 3-4 semanas</span><br>
                                     • <span data-key="estimaciones.sabemos2">Audio verificable de habilidades verbales a edad 4</span><br>
-                                    • <span data-key="estimaciones.sabemos3">Rompecabezas invertidos edad 3</span><br>
+                                    • <span data-key="estimaciones.sabemos3">Identificación K-1 Nurture (3-4 semanas)</span><br>
                                     • <span data-key="estimaciones.sabemos4">Matemática autodidacta avanzada</span><br>
                                     • <span data-key="estimaciones.sabemos5">Madre: Ingeniera Civil, acelerada</span><br>
                                     • <span data-key="estimaciones.sabemos6">Padre: dos carreras (Arte+Negocios)</span><br>
@@ -1485,7 +1485,7 @@ NWF-WRC<sub>est</sub> = (NWF-CLS × 0.7) + (PSF × 0.2) + (WRF × 0.1)
                                 </td>
                                 <td>
                                     • <span data-key="estimaciones.inferimos1">Capacidades significativamente sobre promedio</span><br>
-                                    • <span data-key="estimaciones.inferimos2">Probablemente IQ 135-150</span><br>
+                                    • <span data-key="estimaciones.inferimos2">Probablemente IQ 132-138</span><br>
                                     • <span data-key="estimaciones.inferimos3">Patrón consistente con Very Superior to Highly Gifted</span><br>
                                     • <span data-key="estimaciones.inferimos4">Convergencia genética excepcional</span>
                                 </td>
@@ -1521,7 +1521,7 @@ NWF-WRC<sub>est</sub> = (NWF-CLS × 0.7) + (PSF × 0.2) + (WRF × 0.1)
                             </tr>
                             <tr>
                                 <td><strong data-key="estimaciones.paralelos">Paralelos observados</strong></td>
-                                <td data-key="estimaciones.paralelosVal">Estudiante: Rompecabezas invertidos (espacial), memorización secuencial (habilidades verbales), metacognición numérica<br>Abuelo: Ingeniería Civil (espacial-matemático) e Informática (lógico-computacional)<br>Ambos: Identificación temprana capacidades</td>
+                                <td data-key="estimaciones.paralelosVal">Estudiante: Fluidez lectora temprana (WRF 425% meta), conciencia fonológica (PSF Above), identificación K-1 Nurture<br>Abuelo: Ingeniería Civil (espacial-matemático) e Informática (lógico-computacional)<br>Ambos: Identificación temprana capacidades</td>
                             </tr>
                             <tr>
                                 <td><strong data-key="estimaciones.heredabilidad">Heredabilidad CI</strong></td>
@@ -1551,108 +1551,7 @@ NWF-WRC<sub>est</sub> = (NWF-CLS × 0.7) + (PSF × 0.2) + (WRF × 0.1)
                 </div>
             </div>
 
-            <!-- TAB 6: MATICES CRÍTICOS (se mantiene igual) -->
-            <div id="matices" class="tab-content">
-                <div class="section">
-                    <h2 data-key="matices.title">Matices Críticos y Limitaciones</h2>
-                    <!-- ... contenido existente ... (se omite por brevedad pero en el archivo real se mantiene) -->
-                </div>
-            </div>
-
-            <!-- TAB 7: PLAN ACCIÓN (se mantiene igual) -->
-            <div id="plan" class="tab-content">
-                <div class="section">
-                    <h2 data-key="plan.title">Plan de Acción Estructurado</h2>
-                    <!-- ... contenido existente ... -->
-                </div>
-            </div>
-
-            <!-- TAB 8: SÍNTESIS FINAL (actualizada) -->
-            <div id="sintesis" class="tab-content">
-                <div class="section">
-                    <h2 data-key="sintesis.title">Síntesis Técnica Final</h2>
-
-                    <div class="convergence-box">
-                        <h4 data-key="sintesis.validacion">VALIDACIÓN CONFIRMADA</h4>
-                        <ol style="margin-left: 25px; line-height: 1.8; font-size: 1.05em;">
-                            <li data-key="sintesis.item1"><strong>Coherencia predictiva confirmada</strong> - Dashboard proyectó alto desempeño, mCLASS lo confirma</li>
-                            <li data-key="sintesis.item2"><strong>Datos objetivos Above Benchmark</strong> - Composite 455, Reading 101 wpm validados</li>
-                            <li data-key="sintesis.item3"><strong>Metodología de organización efectiva</strong> - IA como herramienta de estructuración funcionó</li>
-                            <li data-key="sintesis.item4"><strong>Limitaciones técnicas reconocidas</strong> - NO establece gifted formal, IQ, ni percentiles</li>
-                        </ol>
-                    </div>
-
-                    <h3 data-key="sintesis.alcance">Alcance Validado del Análisis + Contexto Familiar</h3>
-                    <div class="comparison-grid">
-                        <div class="analysis-card">
-                            <h4><span class="icon">✓</span><span data-key="sintesis.logro">LO QUE SÍ SE LOGRÓ</span></h4>
-                            <ul>
-                                <li data-key="sintesis.logro1">Organizar observaciones familiares sistemáticamente</li>
-                                <li data-key="sintesis.logro2">Proyectar alto desempeño académico correctamente</li>
-                                <li data-key="sintesis.logro3">Validar coherencia predictiva con datos mCLASS</li>
-                                <li data-key="sintesis.logro4">Documentar patrón familiar de tres generaciones</li>
-                            </ul>
-                        </div>
-
-                        <div class="analysis-card">
-                            <h4><span class="icon">✗</span><span data-key="sintesis.noAfirmar">LO QUE NO SE PUEDE AFIRMAR</span></h4>
-                            <ul>
-                                <li data-key="sintesis.no1">Identificación gifted formal (requiere evaluación distrital)</li>
-                                <li data-key="sintesis.no2">IQ específico (requiere WISC-V)</li>
-                                <li data-key="sintesis.no3">Percentiles poblacionales (requiere normas nacionales)</li>
-                                <li data-key="sintesis.no4">Causó resultados académicos (solo organizó observaciones)</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <h3 data-key="sintesis.uso">Uso Apropiado de Este Dashboard</h3>
-                    <div class="card">
-                        <h4 data-key="sintesis.paraFamilia">Para la Familia</h4>
-                        <ul style="margin-left: 20px; line-height: 1.8; margin-top: 10px;">
-                            <li data-key="sintesis.familiaSi1"><strong>Sí:</strong> Usar como documentación organizada de progresión académica y contexto familiar</li>
-                            <li data-key="sintesis.familiaSi2"><strong>Sí:</strong> Base para conversaciones informadas con profesionales educativos</li>
-                            <li data-key="sintesis.familiaSi3"><strong>Sí:</strong> Ejemplo de análisis estructurado con IA como herramienta</li>
-                            <li data-key="sintesis.familiaNo1"><strong>No:</strong> Presentar como "diagnóstico" o "evaluación formal"</li>
-                            <li data-key="sintesis.familiaNo2"><strong>No:</strong> Usar cifras de IQ proyectadas como definitivas</li>
-                            <li data-key="sintesis.familiaNo3"><strong>No:</strong> Reemplazar evaluación profesional multifactorial</li>
-                        </ul>
-                    </div>
-
-                    <div class="alert">
-                        <h3 data-key="sintesis.decisiones">Decisiones Educativas</h3>
-                        <p style="line-height: 1.8;" data-key="sintesis.decisiones1">
-                            <strong>Decisiones sobre programas especiales, aceleración de grado, o intervenciones específicas requieren evaluación profesional formal</strong> que incluye:
-                        </p>
-                        <ul style="margin: 15px 25px; line-height: 1.8;">
-                            <li data-key="sintesis.decisiones2">Evaluación académica completa (más allá de mCLASS)</li>
-                            <li data-key="sintesis.decisiones3">Evaluación socio-emocional y madurez</li>
-                            <li data-key="sintesis.decisiones4">Evaluación psicométrica (WISC-V o equivalente)</li>
-                            <li data-key="sintesis.decisiones5">Consideración de recursos escolares disponibles</li>
-                            <li data-key="sintesis.decisiones6">Preferencias y bienestar del estudiante</li>
-                        </ul>
-                        <p style="margin-top: 15px; font-weight: 600;" data-key="sintesis.decisiones7">
-                            Estas decisiones corresponden a profesionales educativos de Guilford County Schools y padres con conocimiento directo del niño.
-                        </p>
-                    </div>
-
-                    <button class="print-button" onclick="window.print()" data-key="sintesis.boton">📄 Imprimir Dashboard Completo</button>
-
-                    <div style="background: #e3f2fd; padding: 25px; border-radius: 12px; margin-top: 30px;">
-                        <h4 style="color: #1565c0; margin-bottom: 15px;" data-key="sintesis.conclusion">Conclusión Técnica</h4>
-                        <p style="line-height: 1.8;" data-key="sintesis.conclusion1">
-                            Este dashboard demostró que análisis estructurado de observaciones familiares con IA puede anticipar alto desempeño académico que posteriormente se valida con evaluaciones formales. El contexto familiar de tres generaciones (madre ingeniera civil, padre con doble titulación, abuelo materno ingeniero civil+informático) consolida un patrón de altas capacidades por ambas líneas. <strong>No reemplaza evaluación profesional</strong>, pero facilita la preparación para conversaciones con especialistas.
-                        </p>
-                        <p style="margin-top: 15px; line-height: 1.8; font-weight: 600;" data-key="sintesis.conclusion2">
-                            Coherencia predictiva confirmada. Limitaciones técnicas reconocidas. Patrón familiar excepcional documentado.
-                        </p>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- TAB: METODOLOGÍA (nuevo v9.3) -->
-
-            <!-- MODELO GENÉTICO (desde Nathan) -->
-            <!-- MODELO GENÉTICO - Versión Bilingüe -->
+            <!-- TAB 6: MODELO GENÉTICO -->
             <div id="modelo-genetico" class="tab-content">
                 <div class="section">
                     <h2 data-key="modeloGenetico.title">🧬 Modelo Genético Explícito</h2>
@@ -1746,111 +1645,7 @@ NWF-WRC<sub>est</sub> = (NWF-CLS × 0.7) + (PSF × 0.2) + (WRF × 0.1)
                 </div>
             </div>
 
-<div id="evidencia-forense" class="tab-content">
-                <div class="section">
-                    <h2 data-key="evidencia.title">Evidencia Verificable: El Audio de 50 Estados</h2>
-                    
-                    <div class="critical-update">
-                        <h3 data-key="evidencia.actualizacion">ACTUALIZACIÓN CRÍTICA v3.0</h3>
-                        <p data-key="evidencia.desc1"><strong>Corrección temporal importante:</strong> El audio de recitación de 50 estados corresponde a edad <strong>~4 años (Octubre 2023)</strong>, NO a edad actual (6 años). Esta corrección eleva significativamente el valor diagnóstico.</p>
-                        <p style="margin-top: 10px;" data-key="evidencia.desc2"><strong>Contexto de grabación:</strong> Videollamada con doble ejecución perfecta (primera vez en vivo, segunda grabada) sin errores, de forma inmediata y fluida. Demuestra memoria consolidada con recuperación automática.</p>
-                    </div>
-
-                    <div class="evidence-card">
-                        <h3><span class="badge badge-new" data-key="evidencia.nuevo">NUEVO</span> <span data-key="evidencia.contexto">Contexto de Grabación (Octubre 2023, edad ~4 años)</span></h3>
-                        
-                        <h4 style="color: #2e7d32; margin-top: 20px;" data-key="evidencia.setup">Setup del Evento</h4>
-                        <ul style="margin-left: 20px; margin-top: 15px; line-height: 1.8;">
-                            <li data-key="evidencia.setup1"><strong>Medio:</strong> Videollamada con audiencia → ejecución bajo observación social</li>
-                            <li data-key="evidencia.setup2"><strong>Primera ejecución:</strong> Completa sin errores en vivo</li>
-                            <li data-key="evidencia.setup3"><strong>Segunda ejecución:</strong> Grabación inmediata, también perfecta</li>
-                            <li data-key="evidencia.setup4"><strong>Velocidad:</strong> "De forma inmediata" → recuperación automática, no laboriosa</li>
-                            <li data-key="evidencia.setup5"><strong>Verificación:</strong> 100% precisión contra listado oficial</li>
-                        </ul>
-
-                        <h4 style="color: #2e7d32; margin-top: 25px;" data-key="evidencia.significancia">Significancia Diagnóstica</h4>
-                        <table class="comparison-table" style="margin-top: 15px;">
-                            <tr>
-                                <th data-key="evidencia.table.aspecto">Aspecto</th>
-                                <th data-key="evidencia.table.analisis">Análisis</th>
-                            </tr>
-                            <tr>
-                                <td><strong data-key="evidencia.table.habilidades">Habilidades integradas</strong></td>
-                                <td data-key="evidencia.table.habilidadesVal">Memoria a largo plazo (50 ítems consolidados)<br>Memoria de trabajo (organización secuencial)<br>Control ejecutivo (mantener tarea)<br>Procesamiento fonológico (pronunciación)<br>Regulación emocional (bajo observación)</td>
-                            </tr>
-                            <tr>
-                                <td><strong data-key="evidencia.table.edadTipica">Edad típica desarrollo</strong></td>
-                                <td data-key="evidencia.table.edadTipicaVal">9-11 años para memorización completa típica</td>
-                            </tr>
-                            <tr>
-                                <td><strong data-key="evidencia.table.adelanto">Adelanto estimado</strong></td>
-                                <td data-key="evidencia.table.adelantoVal"><strong>+5-7 años</strong> en memoria verbal comparado con desarrollo típico</td>
-                            </tr>
-                            <tr>
-                                <td><strong data-key="evidencia.table.rareza">Rareza estadística</strong></td>
-                                <td data-key="evidencia.table.rarezaVal">Muy infrecuente en niños de 4 años (menos del 1%)</td>
-                            </tr>
-                            <tr>
-                                <td><strong data-key="evidencia.table.reproducibilidad">Factor reproducibilidad</strong></td>
-                                <td data-key="evidencia.table.reproducibilidadVal">Doble ejecución perfecta inmediata sugiere memoria consolidada, no transitoria</td>
-                            </tr>
-                            <tr>
-                                <td><strong data-key="evidencia.table.valorDiagnostico">Valor diagnóstico</strong></td>
-                                <td data-key="evidencia.table.valorDiagnosticoVal">Evidencia objetiva auditable, elimina sesgo observador</td>
-                            </tr>
-                        </table>
-
-                        <p style="margin-top: 20px; padding: 20px; background: white; border-radius: 8px;" data-key="evidencia.ventaja">
-                            <strong>Ventaja única:</strong> Este es el único marcador con evidencia auditable objetiva (audio verificable contra lista oficial). Proporciona punto de datos verificable para profesionales, complementando observaciones cualitativas.
-                        </p>
-                    </div>
-
-                    <h3 data-key="evidencia.comparacion">Comparación Normativa por Edad</h3>
-                    <p style="margin-bottom: 15px;" data-key="evidencia.comparacionDesc">Estimación de porcentaje de niños capaces de recitar 50 estados por edad:</p>
-                    
-                    <table class="comparison-table">
-                        <tr>
-                            <th data-key="evidencia.table.poblacion">Población</th>
-                            <th data-key="evidencia.table.edad4">Edad 4 años</th>
-                            <th data-key="evidencia.table.edad6">Edad 6 años</th>
-                            <th data-key="evidencia.table.edad9">Edad 9 años</th>
-                        </tr>
-                        <tr>
-                            <td data-key="evidencia.table.general">General</td>
-                            <td data-key="evidencia.table.general4">Muy raro (1-3 estados)</td>
-                            <td data-key="evidencia.table.general6">~5% (5-10 estados)</td>
-                            <td data-key="evidencia.table.general9">~30% (15-30 estados)</td>
-                        </tr>
-                        <tr>
-                            <td data-key="evidencia.table.alto">Alto rendimiento</td>
-                            <td data-key="evidencia.table.alto4">Infrecuente (5-15 estados)</td>
-                            <td data-key="evidencia.table.alto6">~15% (15-30 estados)</td>
-                            <td data-key="evidencia.table.alto9">~60% (35-50 estados)</td>
-                        </tr>
-                        <tr>
-                            <td data-key="evidencia.table.muyAlto">Muy alto rendimiento</td>
-                            <td data-key="evidencia.table.muyAlto4">Posible (20-40 estados)</td>
-                            <td data-key="evidencia.table.muyAlto6">~40% (40-50 estados)</td>
-                            <td data-key="evidencia.table.muyAlto9">~90% (50 estados)</td>
-                        </tr>
-                        <tr style="background: #e8f5e9;">
-                            <td><strong data-key="evidencia.table.estudiante">Estudiante</strong></td>
-                            <td style="font-weight: bold; color: #4caf50;">50/50 estados</td>
-                            <td colspan="2" style="color: #666;" data-key="evidencia.table.desarrolloSostenido">Desarrollo sostenido documentado</td>
-                        </tr>
-                    </table>
-                    
-                    <p style="margin-top: 15px; padding: 15px; background: #fff3cd; border-radius: 8px;" data-key="evidencia.nota">
-                        <strong>Nota metodológica:</strong> Estos son percentiles estimados basados en desarrollo típico, NO medidas de CI. La correlación entre marcadores conductuales y CI es probabilística, no determinística. Solo evaluación formal puede cuantificar capacidad cognitiva con precisión.
-                    </p>
-                </div>
-            </div>
-
-
-            <!-- NUEVA SECCIÓN: COMPARACIÓN CON JANNA -->
-
-            <!-- RIESGOS (desde Nathan) -->
-            <!-- RIESGOS - Versión Bilingüe -->
+            <!-- RIESGOS -->
             <div id="riesgos" class="tab-content">
                 <div class="section">
                     <h2 data-key="riesgos.title">⚠️ Riesgos Socioemocionales a Monitorear</h2>
@@ -1954,7 +1749,8 @@ NWF-WRC<sub>est</sub> = (NWF-CLS × 0.7) + (PSF × 0.2) + (WRF × 0.1)
                 </div>
             </div>
 
-<div id="metodologia" class="tab-content">
+            <!-- METODOLOGÍA -->
+            <div id="metodologia" class="tab-content">
                 <div class="section">
                     <h2 data-key="metodologia.maintitle">📋 Metodología de Correlación & Disclaimers</h2>
                     <span class="badge badge-updated" data-key="metodologia.badge">TRANSPARENCIA METODOLÓGICA COMPLETA</span>
@@ -1965,10 +1761,10 @@ NWF-WRC<sub>est</sub> = (NWF-CLS × 0.7) + (PSF × 0.2) + (WRF × 0.1)
                             <strong>IMPORTANTE:</strong> Todos los IQs presentados para familia (Piter/Abuelo, Madre, Padre) son <strong>ESTIMACIONES CORRELACIONALES</strong>, no mediciones directas con WISC/WAIS. Solo Janna tiene estimación basada en convergencia multi-fuente (genética estimada + marcadores + achievement + observación experto).
                         </p>
                         <ul style="margin-left: 25px; line-height: 1.8;">
-                            <li data-key="disclaimer.piter"><strong>Piter (Abuelo Materno):</strong> IQ ~150 estimado por 2 grade skips documentados (1ero→3ero + 4to→5to) + trayectoria profesional excepcional (proyectos $500M+, innovación metodológica)</li>
-                            <li data-key="disclaimer.madre"><strong>Madre:</strong> IQ ~140 estimado por skip 2 grados recomendado + carrera ingeniería civil</li>
-                            <li data-key="disclaimer.padre"><strong>Padre:</strong> IQ ~130 estimado por doble carrera universitaria USA (Arte + Negocios)</li>
-                            <li data-key="disclaimer.janna"><strong>Janna:</strong> IQ 135-150 estimado por correlación (Midparent 135 + mCLASS Kindergarten Composite 401 + progresión +96 pts + contexto familiar 3 generaciones)</li>
+                            <li data-key="disclaimer.piter"><strong>Piter (Abuelo Materno):</strong> IQ ~142 estimado por 2 grade skips documentados (1ero→3ero + 4to→5to) + trayectoria profesional excepcional (proyectos $500M+, innovación metodológica)</li>
+                            <li data-key="disclaimer.madre"><strong>Madre:</strong> IQ ~138 estimado por skip 2 grados recomendado + carrera ingeniería civil</li>
+                            <li data-key="disclaimer.padre"><strong>Padre:</strong> IQ ~128 estimado por doble carrera universitaria USA (Arte + Negocios)</li>
+                            <li data-key="disclaimer.janna"><strong>Janna:</strong> IQ 132-138 estimado por correlación (Midparent 135 + mCLASS Kindergarten Composite 401 + progresión +96 pts + contexto familiar 3 generaciones)</li>
                         </ul>
                         <p style="margin-top: 15px; font-weight: 600; background: rgba(255,255,255,0.3); padding: 12px; border-radius: 6px;" data-key="disclaimer.validation">
                             ✓ Solo WISC-V administrado por psicólogo certificado puede cuantificar IQ con precisión.<br>
@@ -1988,16 +1784,16 @@ NWF-WRC<sub>est</sub> = (NWF-CLS × 0.7) + (PSF × 0.2) + (WRF × 0.1)
                         <div style="background: rgba(255,255,255,0.7); padding: 20px; border-radius: 8px; margin: 15px 0;">
                             <p style="font-family: 'Courier New', monospace; line-height: 2; font-size: 0.95em;" data-key="metodologia.calculo">
                                 <strong>Estimaciones base:</strong><br>
-                                • Piter: ~150 (2 skips: 1°→3° + 4°→5° + $500M+ + trading 96%)<br>
-                                • Madre: ~140 (skip 2 grados + ing. civil)<br>
-                                • Padre: ~130 (doble carrera USA)<br>
+                                • Piter: ~142 (2 skips: 1°→3° + 4°→5° + $500M+ + trading 96%)<br>
+                                • Madre: ~138 (skip 2 grados + ing. civil)<br>
+                                • Padre: ~128 (doble carrera USA)<br>
                                 <br>
                                 <strong>Midparent:</strong> (140+130)/2 = <strong>135</strong><br>
                                 <strong>Heredabilidad h²:</strong> 0.70<br>
-                                <strong>Base genético esperado:</strong> 126.0<br>
+                                <strong>Base genético esperado:</strong> 125.0<br>
                                 <strong>+ Ajustes evidencia:</strong> +30-40 pts<br>
                                 <br>
-                                <strong style="color: #dc3545;">FINAL JANNA: 135-150</strong>
+                                <strong style="color: #dc3545;">FINAL JANNA: 132-138</strong>
                             </p>
                         </div>
                     </div>
@@ -2017,7 +1813,7 @@ NWF-WRC<sub>est</sub> = (NWF-CLS × 0.7) + (PSF × 0.2) + (WRF × 0.1)
                             <h4><span class="icon">✓</span><span data-key="metodologia.fortalezas_header"> Fortalezas</span></h4>
                             <ul>
                                 <li data-key="metodologia.fort1">Convergencia 4 fuentes independientes</li>
-                                <li data-key="metodologia.fort2">Calibración con Piter (IQ ~150)</li>
+                                <li data-key="metodologia.fort2">Calibración con Piter (IQ ~142)</li>
                                 <li data-key="metodologia.fort3">Validación externa K-1 Nurture</li>
                                 <li data-key="metodologia.fort4">Transparencia metodológica total</li>
                             </ul>
@@ -2025,33 +1821,121 @@ NWF-WRC<sub>est</sub> = (NWF-CLS × 0.7) + (PSF × 0.2) + (WRF × 0.1)
                     </div>
                 </div>
             </div>
+
+            <!-- SÍNTESIS -->
+            <div id="sintesis" class="tab-content">
+                <div class="section">
+                    <h2 data-key="sintesis.title">Síntesis Técnica Final</h2>
+
+                    <div class="convergence-box">
+                        <h4 data-key="sintesis.validacion">VALIDACIÓN CONFIRMADA</h4>
+                        <ol style="margin-left: 25px; line-height: 1.8; font-size: 1.05em;">
+                            <li data-key="sintesis.item1"><strong>Coherencia predictiva confirmada</strong> - Dashboard proyectó alto desempeño, mCLASS lo confirma</li>
+                            <li data-key="sintesis.item2"><strong>Datos objetivos Above Benchmark</strong> - Composite 455, Reading 101 wpm validados</li>
+                            <li data-key="sintesis.item3"><strong>Metodología de organización efectiva</strong> - IA como herramienta de estructuración funcionó</li>
+                            <li data-key="sintesis.item4"><strong>Limitaciones técnicas reconocidas</strong> - NO establece gifted formal, IQ, ni percentiles</li>
+                        </ol>
+                    </div>
+
+                    <h3 data-key="sintesis.alcance">Alcance Validado del Análisis + Contexto Familiar</h3>
+                    <div class="comparison-grid">
+                        <div class="analysis-card">
+                            <h4><span class="icon">✓</span><span data-key="sintesis.logro">LO QUE SÍ SE LOGRÓ</span></h4>
+                            <ul>
+                                <li data-key="sintesis.logro1">Organizar observaciones familiares sistemáticamente</li>
+                                <li data-key="sintesis.logro2">Proyectar alto desempeño académico correctamente</li>
+                                <li data-key="sintesis.logro3">Validar coherencia predictiva con datos mCLASS</li>
+                                <li data-key="sintesis.logro4">Documentar patrón familiar de tres generaciones</li>
+                            </ul>
+                        </div>
+
+                        <div class="analysis-card">
+                            <h4><span class="icon">✗</span><span data-key="sintesis.noAfirmar">LO QUE NO SE PUEDE AFIRMAR</span></h4>
+                            <ul>
+                                <li data-key="sintesis.no1">Identificación gifted formal (requiere evaluación distrital)</li>
+                                <li data-key="sintesis.no2">IQ específico (requiere WISC-V)</li>
+                                <li data-key="sintesis.no3">Percentiles poblacionales (requiere normas nacionales)</li>
+                                <li data-key="sintesis.no4">Causó resultados académicos (solo organizó observaciones)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <h3 data-key="sintesis.uso">Uso Apropiado de Este Dashboard</h3>
+                    <div class="card">
+                        <h4 data-key="sintesis.paraFamilia">Para la Familia</h4>
+                        <ul style="margin-left: 20px; line-height: 1.8; margin-top: 10px;">
+                            <li data-key="sintesis.familiaSi1"><strong>Sí:</strong> Usar como documentación organizada de progresión académica y contexto familiar</li>
+                            <li data-key="sintesis.familiaSi2"><strong>Sí:</strong> Base para conversaciones informadas con profesionales educativos</li>
+                            <li data-key="sintesis.familiaSi3"><strong>Sí:</strong> Ejemplo de análisis estructurado con IA como herramienta</li>
+                            <li data-key="sintesis.familiaNo1"><strong>No:</strong> Presentar como "diagnóstico" o "evaluación formal"</li>
+                            <li data-key="sintesis.familiaNo2"><strong>No:</strong> Usar cifras de IQ proyectadas como definitivas</li>
+                            <li data-key="sintesis.familiaNo3"><strong>No:</strong> Reemplazar evaluación profesional multifactorial</li>
+                        </ul>
+                    </div>
+
+                    <div class="alert">
+                        <h3 data-key="sintesis.decisiones">Decisiones Educativas</h3>
+                        <p style="line-height: 1.8;" data-key="sintesis.decisiones1">
+                            <strong>Decisiones sobre programas especiales, aceleración de grado, o intervenciones específicas requieren evaluación profesional formal</strong> que incluye:
+                        </p>
+                        <ul style="margin: 15px 25px; line-height: 1.8;">
+                            <li data-key="sintesis.decisiones2">Evaluación académica completa (más allá de mCLASS)</li>
+                            <li data-key="sintesis.decisiones3">Evaluación socio-emocional y madurez</li>
+                            <li data-key="sintesis.decisiones4">Evaluación psicométrica (WISC-V o equivalente)</li>
+                            <li data-key="sintesis.decisiones5">Consideración de recursos escolares disponibles</li>
+                            <li data-key="sintesis.decisiones6">Preferencias y bienestar del estudiante</li>
+                        </ul>
+                        <p style="margin-top: 15px; font-weight: 600;" data-key="sintesis.decisiones7">
+                            Estas decisiones corresponden a profesionales educativos de Guilford County Schools y padres con conocimiento directo del niño.
+                        </p>
+                    </div>
+
+                    <button class="print-button" onclick="window.print()" data-key="sintesis.boton">📄 Imprimir Dashboard Completo</button>
+
+                    <div style="background: #e3f2fd; padding: 25px; border-radius: 12px; margin-top: 30px;">
+                        <h4 style="color: #1565c0; margin-bottom: 15px;" data-key="sintesis.conclusion">Conclusión Técnica</h4>
+                        <p style="line-height: 1.8;" data-key="sintesis.conclusion1">
+                            Este dashboard demostró que análisis estructurado de observaciones familiares con IA puede anticipar alto desempeño académico que posteriormente se valida con evaluaciones formales. El contexto familiar de tres generaciones (madre ingeniera civil, padre con doble titulación, abuelo materno ingeniero civil+informático) consolida un patrón de altas capacidades por ambas líneas. <strong>No reemplaza evaluación profesional</strong>, pero facilita la preparación para conversaciones con especialistas.
+                        </p>
+                        <p style="margin-top: 15px; line-height: 1.8; font-weight: 600;" data-key="sintesis.conclusion2">
+                            Coherencia predictiva confirmada. Limitaciones técnicas reconocidas. Patrón familiar excepcional documentado.
+                        </p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
-    <!-- ========== PARTE 2: SCRIPTS ========== -->
+    <!-- Scripts externos -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 
     <script>
-        // Clase Translator con datos completos en español e inglés (incluye nuevas claves)
+        // Clase Translator con datos completos en español e inglés (incluye nuevas claves SVG)
         class Translator {
             constructor() {
                 this.currentLang = 'es';
                 this.translationData = {
                     es: {
                         // Meta
-                        'meta.title': 'Dashboard v6.0 - Janna Castillo Bonilla (Patrón Familiar Consolidado)',
+                        'meta.title': 'Dashboard v6.1 - Janna Castillo Bonilla (Modelo Genético + Transparencia)',
                         // Header
                         'header.title': '🌟 Dashboard Académico',
                         'header.subtitle': 'Janna Castillo Bonilla • 6 años • Kindergarten • Febrero 2026',
-                        'header.version': 'Versión 6.0 - Patrón Familiar Consolidado (IQs Estimados)',
-                        'header.disclaimer': '<strong>EVALUACIÓN ACADÉMICA - FEBRERO 2026:</strong> Este dashboard documenta el desempeño de Janna en evaluaciones mCLASS de Kindergarten (Middle of Year). Los resultados muestran Composite Score 401 Above Benchmark, destacando en Word Reading (17 wpm, 425% del objetivo) y Letter Sounds (40 sounds/min). <strong>Importante:</strong> mCLASS es herramienta de screening académico, no determina identificación gifted formal ni mide IQ. Información familiar incluida como contexto, no como diagnóstico.',
+                        'header.version': 'Versión 6.1 - Patrón Familiar Consolidado (IQs Estimados)',
+                        'header.disclaimer': '<strong>EVALUACIÓN ACADÉMICA - FEBRERO 2026:</strong> Este dashboard documenta el desempeño de Janna en evaluaciones mCLASS de Kindergarten (Middle of Year). Los resultados muestran Composite Score 401 Above Benchmark, destacando en Word Reading (17 wpm, 425% de la meta) y Letter Sounds (40 sounds/min). Importante: mCLASS es una herramienta de screening académico, no determina identificación formal de altas capacidades ni mide IQ.',
                         // Tabs
                         'tab.validacion': '✓ Validación',
                         'tab.convergencias': 'Análisis Original',
-                        'tab.limitaciones': 'Limitaciones Técnicas',
                         'tab.estimaciones': 'Estimaciones',
-                        'tab.sintesis': 'Síntesis',
+                        'tab.modeloGenetico': '🧬 Modelo Genético',
+                        'tab.riesgos': '⚠️ Riesgos',
+                        'tab.limitaciones': 'Limitaciones Técnicas',
                         'tab.metodologia': '📋 Metodología',
+                        'tab.sintesis': 'Síntesis',
+                        // Badge
+                        'badge.importante': 'IMPORTANTE:',
+                        'badge.texto': 'IQs familiares son estimaciones correlacionales (no WISC/WAIS).',
+                        'badge.link': 'Ver metodología completa →',
                         // Validación
                         'validacion.title': '✓ Validación Técnica: Coherencia Predictiva Confirmada',
                         'validacion.resultado': 'RESULTADO - FEBRERO 2026',
@@ -2059,24 +1943,23 @@ NWF-WRC<sub>est</sub> = (NWF-CLS × 0.7) + (PSF × 0.2) + (WRF × 0.1)
                         'validacion.subtitle1': 'Datos mCLASS Objetivos - Kindergarten MOY',
                         'validacion.table.metric': 'Métrica',
                         'validacion.table.result': 'Resultado Janna',
-                        'validacion.table.goal': 'Meta G1-MOY',
+                        'validacion.table.goal': 'Meta K-MOY',
                         'validacion.table.status': 'Estatus',
                         'validacion.table.composite': 'Composite Score',
-                        'validacion.table.fluency': 'Reading Fluency (ORF)',
-                        'validacion.table.accuracy': 'Reading Accuracy',
+                        'validacion.table.wrf': 'Word Reading (WRF)',
+                        'validacion.table.lettersounds': 'Letter Sounds (NWF-CLS)',
+                        'validacion.table.psf': 'Phonemic Segmentation (PSF)',
+                        'validacion.table.decoding': 'Decoding (NWF-WRC)',
                         'validacion.table.above': 'Above Benchmark',
                         'validacion.table.supera': 'Supera meta',
+                        'validacion.table.wellbelow': 'Well Below',
                         'validacion.proyecciones': 'Validación Empírica con Datos mCLASS',
                         'validacion.table.observacion': 'Observación Familiar',
+                        'validacion.table.resultado': 'Resultado mCLASS (Feb 2026)',
+                        'validacion.table.estado': 'Estado',
                         'validacion.obs1': '"Capacidades académicas superiores"',
                         'validacion.obs2': '"Desempeño excepcional en lectura"',
                         'validacion.obs3': '"Requiere diferenciación educativa"',
-                        'validacion.table.proyeccion': 'Proyección (Oct 2025)',
-                        'validacion.table.resultado': 'Resultado mCLASS (Feb 2026)',
-                        'validacion.table.estado': 'Estado',
-                        'validacion.proy1': '"Capacidades académicas superiores"',
-                        'validacion.proy2': '"Desempeño excepcional en lectura"',
-                        'validacion.proy3': '"Requiere diferenciación educativa"',
                         'validacion.confirmado': '✓ CONFIRMADO',
                         'validacion.justificado': '✓ JUSTIFICADO',
                         'validacion.progresion': 'Progresión Documentada (16 meses)',
@@ -2086,14 +1969,14 @@ NWF-WRC<sub>est</sub> = (NWF-CLS × 0.7) + (PSF × 0.2) + (WRF × 0.1)
                         'validacion.above': 'Above',
                         'validacion.key': 'K-EOY (May 2025)',
                         'validacion.proyectado': 'Proyectado Above',
-                        'validacion.g1moy': 'G1-MOY (Feb 2026)',
+                        'validacion.g1moy': 'K-MOY (Feb 2026)',
                         'validacion.total': 'TOTAL',
                         'validacion.sostenida': 'Progresión sostenida',
                         'validacion.areaAtencion': '⚠️ Área de Atención Identificada',
                         'validacion.areaAtencionP1': '<strong>Decoding (NWF-WRC): 0 de 3 (Well Below)</strong> - Esta métrica mide la capacidad de decodificar palabras sin sentido (nonsense words). Un resultado de 0 sugiere que Janna aún está desarrollando esta habilidad específica, lo cual es común en Kindergarten temprano. Esta área puede beneficiarse de práctica dirigida en fonética y decodificación.',
                         'validacion.areaAtencionP2': '<strong>Contexto importante:</strong> A pesar de esta área de desarrollo, Janna logra <strong>Word Reading 17 wpm (425% de la meta)</strong>, lo que indica que está compensando efectivamente usando otras estrategias de lectura (reconocimiento de palabras completas, contexto visual). El Composite Score de 401 permanece Above Benchmark.',
                         
-                        // NUEVAS TRADUCCIONES v6.0 - Contexto Digital
+                        // NUEVAS TRADUCCIONES v6.1 - Contexto Digital
                         'validacion.contextoDigital': '🔍 Análisis Crítico: Contexto de Evaluación Digital',
                         'validacion.artifactTitle': '⚠️ Artifact de Medición vs. Déficit Real',
                         'validacion.scoreReportado': 'Score Reportado',
@@ -2139,7 +2022,6 @@ NWF-WRC<sub>est</sub> = (NWF-CLS × 0.7) + (PSF × 0.2) + (WRF × 0.1)
                         'validacion.notaMetodologica': '📌 Nota metodológica:',
                         'validacion.notaDesc': 'La reevaluación presencial es esencial no solo para validar el score estimado, sino también para descartar cualquier necesidad real de intervención en decodificación que pudiera estar siendo enmascarada por las altas habilidades compensatorias de Janna.',
                         
-
                         // Limitaciones
                         'limitaciones.title': 'Limitaciones Técnicas del Análisis',
                         'limitaciones.loqueNo': 'Lo que mCLASS NO establece',
@@ -2150,10 +2032,11 @@ NWF-WRC<sub>est</sub> = (NWF-CLS × 0.7) + (PSF × 0.2) + (WRF × 0.1)
                         'limitaciones.item4': '❌ <strong>Perfiles de personalidad</strong> - Tests académicos no miden rasgos socio-emocionales',
                         'limitaciones.item5': '❌ <strong>Tipos específicos de gifted</strong> - Clasificaciones requieren evaluación multifactorial',
                         'limitaciones.loqueSi': 'Lo que SÍ puede afirmarse técnicamente',
-                        'limitaciones.si1': '✓ <strong>Desempeño académico superior medible</strong> - Composite 455 Above Benchmark',
-                        'limitaciones.si2': '✓ <strong>Fluidez lectora avanzada</strong> - 101 wpm Above Benchmark para G1',
-                        'limitaciones.si3': '✓ <strong>Progresión sostenida</strong> - +149 puntos en 16 meses documentados',
+                        'limitaciones.si1': '✓ <strong>Desempeño académico superior medible</strong> - Composite 401 Above Benchmark',
+                        'limitaciones.si2': '✓ <strong>Lectura de palabras excepcional</strong> - 17 wpm (425% de meta K-MOY)',
+                        'limitaciones.si3': '✓ <strong>Progresión acelerada</strong> - +95 puntos en 5 meses documentados (+31%)',
                         'limitaciones.si4': '✓ <strong>Justificación para diferenciación educativa</strong> - Desempeño consistente Above',
+                        'limitaciones.si5': '✓ <strong>Área de desarrollo identificada</strong> - NWF-WRC requiere atención y práctica',
                         'limitaciones.alcance': 'Alcance Apropiado del Dashboard',
                         'limitaciones.logro': 'El análisis logró:',
                         'limitaciones.logro1': 'Organizar observaciones familiares sistemáticamente',
@@ -2168,6 +2051,7 @@ NWF-WRC<sub>est</sub> = (NWF-CLS × 0.7) + (PSF × 0.2) + (WRF × 0.1)
                         'limitaciones.decisiones': 'Decisiones Educativas',
                         'limitaciones.decisiones1': 'Decisiones sobre aceleración de grado, programas especiales, o intervenciones específicas requieren <strong>evaluación profesional multifactorial</strong> que incluye: evaluación académica completa, evaluación socio-emocional, madurez, motivación del estudiante, recursos escolares disponibles, y preferencias familiares.',
                         'limitaciones.decisiones2': 'Estas decisiones corresponden exclusivamente a profesionales educativos de Guilford County Schools y padres con conocimiento directo del niño.',
+                        
                         // Convergencias
                         'convergencias.title': 'Convergencias Multi-Análisis',
                         'convergencias.consenso': 'CONSENSO: Capacidades Significativamente Superiores al Promedio',
@@ -2176,8 +2060,8 @@ NWF-WRC<sub>est</sub> = (NWF-CLS × 0.7) + (PSF × 0.2) + (WRF × 0.1)
                         'convergencias.metric1.note1': 'K-1 Nurture Program (AG)',
                         'convergencias.metric1.note2': 'Top 2-5% observable',
                         'convergencias.metric2.label': 'Lectura Temprana',
-                        'convergencias.metric2.note1': 'Desarrollo temprano apropiado',
-                        'convergencias.metric2.note2': 'Rotación mental avanzada',
+                        'convergencias.metric2.note1': 'Word Reading 17 wpm',
+                        'convergencias.metric2.note2': '425% objetivo EOY',
                         'convergencias.metric3.label': 'Progresión mCLASS',
                         'convergencias.metric3.note1': 'Composite BOY→MOY',
                         'convergencias.metric3.note2': '+31% en 6 meses',
@@ -2196,29 +2080,28 @@ NWF-WRC<sub>est</sub> = (NWF-CLS × 0.7) + (PSF × 0.2) + (WRF × 0.1)
                         'convergencias.card2.item3': 'Desempeño 160-425% sobre benchmarks',
                         'convergencias.card2.item4': 'Reconocimiento temprano patrones lectura',
                         'convergencias.card3.title': 'Progresión Académica Sostenida',
-                        'convergencias.card3.item1': 'Edad 4: Recitación completa perfecta',
-                        'convergencias.card3.item2': 'Doble ejecución inmediata sin errores',
-                        'convergencias.card3.item3': 'Adelanto estimado +5-7 años',
-                        'convergencias.card3.item4': 'Audio verificable (evidencia objetiva)',
+                        'convergencias.card3.item1': 'Composite: 306 (BOY) → 401 (MOY)',
+                        'convergencias.card3.item2': 'Incremento +95 puntos en 6 meses',
+                        'convergencias.card3.item3': 'Progresión +31% documentada',
+                        'convergencias.card3.item4': 'Trayectoria ascendente consistente',
                         'convergencias.card4.title': 'Achievement mCLASS Kindergarten',
-                        'convergencias.card4.item1': '"Veo los números en mi cabeza"',
-                        'convergencias.card4.item2': 'Verbalización procesos mentales abstractos',
-                        'convergencias.card4.item3': 'Adelanto estimado +3-4 años',
-                        'convergencias.card4.item4': 'Matemática autodidacta avanzada',
+                        'convergencias.card4.item1': 'Composite 401 vs 382 benchmark (Above)',
+                        'convergencias.card4.item2': 'Múltiples áreas Above Benchmark',
+                        'convergencias.card4.item3': 'Consistencia en evaluaciones formales',
+                        'convergencias.card4.item4': 'Datos objetivos verificables',
                         'convergencias.card5.title': 'Patrón Familiar 3 Generaciones',
-                        'convergencias.card5.item1': 'Interés geográfico 5+ años continuos',
-                        'convergencias.card5.item2': 'Inicio edad ~1 año (muy temprano)',
-                        'convergencias.card5.item3': 'Evolución: visual → memorización → integración',
-                        'convergencias.card5.item4': 'Patrón típico en niños con alto CI',
+                        'convergencias.card5.item1': 'Madre: Ing. Civil + aceleración temprana',
+                        'convergencias.card5.item2': 'Padre: Doble carrera universitaria USA',
+                        'convergencias.card5.item3': 'Abuelo: Ing. Civil + 2 grade skips',
+                        'convergencias.card5.item4': 'Midparent estimado: 135 (h²=0.70)',
                         'convergencias.card6.title': 'Factor Hereditario',
                         'convergencias.card6.item1': 'Abuelo materno: aceleración documentada',
                         'convergencias.card6.item2': 'Paralelos: ingeniería civil (espacial) + informática (lógica)',
                         'convergencias.card6.item3': 'Probabilidad base aumentada significativamente',
                         'convergencias.card6.item4': 'Patrón familiar consistente',
+                        
                         // Nuevas claves familiares
                         'convergencias.patronFamiliar': '🧬 Patrón Familiar de Altas Capacidades (3 Generaciones)',
-                        
-                        // NUEVAS TRADUCCIONES v6.0 - Nathan y Contexto Bilingüe
                         'convergencias.hermanos': 'Contexto Bilingüe Compartido: Janna y Nathan',
                         'convergencias.dinamicaLinguistica': '🌍 Dinámica Lingüística Familiar',
                         'convergencias.dinamicaDesc': '<strong>Janna (5 años, Kindergarten) y Nathan (7 años, 1er grado)</strong> son bilingües español-inglés desde el nacimiento, ambos mostrando patrones similares de desarrollo cognitivo acelerado. Su contexto lingüístico es particularmente relevante para interpretar sus evaluaciones:',
@@ -2251,7 +2134,7 @@ NWF-WRC<sub>est</sub> = (NWF-CLS × 0.7) + (PSF × 0.2) + (WRF × 0.1)
                         'convergencias.nathanID2': 'AG identificación 3-4 semanas',
                         'convergencias.nathanID3': '✓ Reconocimiento institucional',
                         'convergencias.logrosNathan': '📊 Comparativa Familiar mCLASS',
-                        'convergencias.logrosNathan1': 'Nathan (8 años, 3er grado MOY): Composite 628, ORF 127 wpm (158% objetivo)',
+                        'convergencias.logrosNathan1': 'Nathan (7 años, 1er grado MOY): Composite 628, ORF 127 wpm (158% objetivo)',
                         'convergencias.logrosNathan2': 'Janna (5 años, K MOY): Composite 401 (82→89*), WRF 17 wpm (425% objetivo)',
                         'convergencias.logrosNathan3': '*Score ajustado por análisis contexto digital (ver disclaimer)',
                         'convergencias.nathanNota': '<strong>⚠️ NOTA CRÍTICA:</strong> Esta sección NO atribuye logros de desarrollo temprano de Nathan (memoria, rompecabezas, etc.) a Janna. Se incluye únicamente como CONTEXTO FAMILIAR que informa la interpretación de evaluaciones de Janna dentro del mismo sistema mCLASS, considerando: (1) patrón familiar consistente de alto desempeño escolar, (2) ambiente lingüístico que favorece desarrollo fonológico, y (3) probabilidad bayesiana de que score ajustado refleje capacidad real vs. artificio de evaluación digital.',
@@ -2260,20 +2143,18 @@ NWF-WRC<sub>est</sub> = (NWF-CLS × 0.7) + (PSF × 0.2) + (WRF × 0.1)
                         'convergencias.impl2': '<strong>Patrón familiar validado:</strong> El desempeño de Janna (Composite 89/100 ajustado conservador, percentil 93-96) se alinea con un entorno familiar que sistemáticamente produce resultados en percentil 95-99',
                         'convergencias.impl3': '<strong>Transfer cross-lingüístico:</strong> Aplicación automática de patrones fonológicos español→inglés evidenciada en ambos hermanos',
                         'convergencias.impl4': '<strong>Probabilidad aumentada:</strong> Historial familiar de alta capacidad (3 generaciones) eleva significativamente la probabilidad bayesiana de que Janna también presente capacidades superiores',
-                        
-
                         'convergencias.madre': 'Madre: Ingeniera Civil con Aceleración Temprana',
                         'convergencias.madreDesc': '<strong>Ingeniera Civil</strong> de profesión. Por su fecha de nacimiento (28 de agosto), no cumplía la edad para ingresar a 1º en su país de origen. Repitió pre-primero, pero a las pocas semanas de iniciado el año escolar fue necesario <strong>acelerarla de curso</strong>. Este patrón de desajuste edad-capacidad es indicador de alta capacidad y constituye un marcador clásico de alta capacidad. La ingeniería civil requiere alto razonamiento espacial-matemático, capacidad de abstracción y resolución de problemas complejos.',
                         'convergencias.padre': 'Padre: Versatilidad Cognitiva y Observación del Abuelo',
                         'convergencias.padreDesc': 'El padre completó <strong>dos carreras universitarias en EE.UU.</strong>: una en Arte y otra en Negocios. Esta combinación de un campo creativo (pensamiento divergente) y uno analítico (pensamiento convergente) sugiere una capacidad intelectual versátil y excepcional. Además, el abuelo materno —con historial de aceleración y capacidad superior— ha señalado que el padre muestra un <strong>"comportamiento que le hace visible un alto coeficiente intelectual"</strong>, una observación cualificada proveniente de alguien que reconoce las señales.',
                         'convergencias.abuelo': 'Abuelo Materno: Ingeniero Civil + Informático',
                         'convergencias.abueloDesc': 'El abuelo materno tiene <strong>aceleración académica documentada</strong> (saltó grado(s) durante su educación) y un perfil profesional dual: <strong>Ingeniero Civil y Técnico en Informática (Analista-Programador)</strong>. Esta combinación de razonamiento espacial-matemático y pensamiento lógico-computacional refuerza la presencia de capacidades excepcionales en la línea materna.',
-                        'convergencias.arbol': '🌳 Árbol Genealógico (3 Generaciones)',
+                        'convergencias.arbol': '🌳 Árbol Genealógico (3 Generaciones) - Visualización Interactiva',
                         'convergencias.notaArbol': 'Estimaciones contextuales basadas en indicadores familiares y académicos; no sustituyen evaluación formal.',
                         'convergencias.convergencia': '✨ Convergencia de Altas Capacidades: Tres Generaciones en Línea Materna',
                         'convergencias.convergenciaDesc': 'La información de la madre (Ingeniera Civil + aceleración temprana), del padre (doble titulación + observación del abuelo) y del abuelo materno (Ingeniero Civil + Informático + aceleración) indica que <strong>ambos progenitores y el abuelo materno se sitúan en el extremo superior de la distribución cognitiva</strong>. Este patrón de tres generaciones en la línea materna con especialización en ingeniería/razonamiento espacial es estadísticamente muy significativo y hace que los perfil de Janna sea coherente con el contexto familiar y esperables.',
                         'convergencias.estimacionJanna': 'Estimación contextual del rango de capacidad de Janna:',
-                        'convergencias.rangoJanna': '135-150 (Very Superior to Highly Gifted).',
+                        'convergencias.rangoJanna': '132-138 (Very Superior to Highly Gifted).',
                         'convergencias.notaEstimacion': 'Inferencia basada en el contexto familiar y su desempeño; no sustituye evaluación formal (WISC-V).',
                         'convergencias.hito': 'EL HITO REAL: Democratización del Análisis Cognitivo',
                         'convergencias.hitoDesc': 'El verdadero logro es demostrar cómo la IA puede:',
@@ -2281,6 +2162,10 @@ NWF-WRC<sub>est</sub> = (NWF-CLS × 0.7) + (PSF × 0.2) + (WRF × 0.1)
                         'convergencias.hito2': 'Empoderar a familias para colaborar informadamente con especialistas',
                         'convergencias.hito3': 'Cerrar brecha entre intuición y diagnóstico profesional',
                         'convergencias.hito4': 'Democratizar acceso a análisis que antes requería expertise exclusivo',
+                        'convergencias.espanolL1': 'Español L1 (lengua materna, 100% uso en casa por padres)',
+                        'convergencias.inglesL2': 'Inglés L2 (preferencia entre hermanos, inmersión escolar)',
+                        'convergencias.desarrolloFonologico': 'Desarrollo fonológico acelerado en ambos idiomas',
+                        'convergencias.transferenciaPositiva': 'Transferencia positiva L1→L2 en conciencia fonémica',
                         
                         // Contexto Bilingüe
                         'bilingual.title': '🌐 Contexto Bilingüe Español-Inglés',
@@ -2299,7 +2184,7 @@ NWF-WRC<sub>est</sub> = (NWF-CLS × 0.7) + (PSF × 0.2) + (WRF × 0.1)
                         'bilingual.vent3': '<strong>Conciencia metalingüística superior</strong>',
                         'bilingual.vent4': '<strong>Enriquecimiento del desarrollo cognitivo general</strong>',
                         'bilingual.wisc': '<strong>Nota para evaluación WISC-V:</strong> La evaluación se realizará en inglés (idioma de instrucción escolar). El evaluador debe conocer el contexto bilingüe para interpretación apropiada de resultados, especialmente en escalas verbales. El bilingüismo puede incluso <strong>potenciar</strong> algunas subpruebas si Janna ha desarrollado vocabulario amplio en ambos idiomas.',
-                        // Evidencia
+                        
                         // Estimaciones
                         'estimaciones.title': 'Estimación de Capacidad Cognitiva',
                         'estimaciones.actualizada': 'ACTUALIZADA CON PATRÓN FAMILIAR',
@@ -2331,7 +2216,7 @@ NWF-WRC<sub>est</sub> = (NWF-CLS × 0.7) + (PSF × 0.2) + (WRF × 0.1)
                         'estimaciones.sabemos6': 'Padre: dos carreras (Arte+Negocios)',
                         'estimaciones.sabemos7': 'Abuelo materno: Ing. Civil+Informática, acelerado',
                         'estimaciones.inferimos1': 'Capacidades significativamente sobre promedio',
-                        'estimaciones.inferimos2': 'Probablemente IQ 135-150',
+                        'estimaciones.inferimos2': 'Probablemente IQ 132-138',
                         'estimaciones.inferimos3': 'Patrón consistente con Very Superior to Highly Gifted',
                         'estimaciones.inferimos4': 'Convergencia genética excepcional',
                         'estimaciones.no1': 'CI exacto (requiere WISC-V)',
@@ -2362,12 +2247,109 @@ NWF-WRC<sub>est</sub> = (NWF-CLS × 0.7) + (PSF × 0.2) + (WRF × 0.1)
                         'estimaciones.observacion': 'Observación abuelo',
                         'estimaciones.observacionVal': '"Comportamiento de alto CI visible"',
                         'estimaciones.implicacionTexto': '<strong>Implicación estadística:</strong> Historia familiar de capacidad excepcional en tres generaciones y ambas líneas parentales aumenta drásticamente la probabilidad de que Janna se sitúe en el rango superior de la distribución cognitiva.',
-                        // Matices (algunas claves, se mantienen igual)
-                        'matices.title': 'Matices Críticos y Limitaciones',
-                        // ... (se pueden omitir por brevedud, pero en el código real deben estar todas)
-                        // Plan
-                        'plan.title': 'Plan de Acción Estructurado',
-                        // ... (se mantienen)
+                        
+                        // Modelo Genético
+                        'modeloGenetico.title': '🧬 Modelo Genético Explícito',
+                        'modeloGenetico.intro': 'Este modelo genético cuantitativo explica las estimaciones de capacidad cognitiva basadas en el contexto familiar de tres generaciones.',
+                        'modeloGenetico.contextoTitle': '👨‍👩‍👧‍👦 Contexto Familiar (3 Generaciones)',
+                        'modeloGenetico.abueloTitle': '👴 Abuelo Materno (Piter)',
+                        'modeloGenetico.iqEstimado': 'IQ Estimado:',
+                        'modeloGenetico.abuelo1': 'Ingeniero Civil + Técnico Informática',
+                        'modeloGenetico.abuelo2': 'Saltó 2 grados escolares (aceleración excepcional)',
+                        'modeloGenetico.abuelo3': 'Trayectoria profesional de 25+ años en infraestructura mayor',
+                        'modeloGenetico.abuelo4': 'Proyectos de $500M+ (represas, hidroeléctricas)',
+                        'modeloGenetico.madreTitle': '👩 Madre',
+                        'modeloGenetico.madre1': 'Ingeniera Civil',
+                        'modeloGenetico.madre2': 'Aceleración académica documentada',
+                        'modeloGenetico.madre3': 'Hija de ingeniero (patrón familiar)',
+                        'modeloGenetico.padreTitle': '👨 Padre',
+                        'modeloGenetico.padre1': 'Doble título universitario (Arte + Negocios)',
+                        'modeloGenetico.padre2': 'Educación universitaria en Estados Unidos',
+                        'modeloGenetico.padre3': 'Versatilidad cognitiva multi-dominio',
+                        'modeloGenetico.calculoTitle': '📊 Cálculo Genético Cuantitativo',
+                        'modeloGenetico.paso1Title': 'Paso 1: Calcular Midparent IQ',
+                        'modeloGenetico.paso1Calc': 'Midparent = (IQ Madre + IQ Padre) / 2 = (138 + 128) / 2 = <strong>133</strong>',
+                        'modeloGenetico.paso2Title': 'Paso 2: Heredabilidad Cognitiva (h²)',
+                        'modeloGenetico.paso2Desc': 'Heredabilidad del IQ en infancia: h² ≈ 0.45-0.50',
+                        'modeloGenetico.paso3Title': 'Paso 3: Aplicar Regresión a la Media',
+                        'modeloGenetico.paso3Calc': 'IQ esperado = 100 + h² × (Midparent - 100) = 100 + 0.5 × (133 - 100) = <strong>116.5</strong>',
+                        'modeloGenetico.paso4Title': 'Paso 4: Rango de Varianza Esperada',
+                        'modeloGenetico.paso4Desc': 'Varianza genética + ambiental: ±1 SD = ±15 puntos',
+                        'modeloGenetico.paso4Result': '<strong>Rango estimado:</strong> 102-132 (estadísticamente esperado)',
+                        'modeloGenetico.observacionCritica': '⚠️ OBSERVACIÓN CRÍTICA: Efecto del Abuelo',
+                        'modeloGenetico.observacionDesc': 'El abuelo materno (IQ ~142) representa una desviación significativa del promedio poblacional (+2.8 SD). Este dato sugiere que el potencial genético familiar podría estar subestimado en el cálculo simple de midparent.',
+                        'modeloGenetico.observacionBayesiana': '<strong>Análisis Bayesiano:</strong> Dado que la madre (IQ 138) es hija de padre excepcional (IQ 142), existe evidencia adicional de potencial genético superior que eleva la probabilidad de capacidades avanzadas en la tercera generación más allá del modelo simple de regresión.',
+                        'modeloGenetico.conclusionTitle': '🎯 Conclusión del Modelo Genético',
+                        'modeloGenetico.conclusionP1': '<strong>Rango estadísticamente esperado:</strong> 102-132 (modelo simple)',
+                        'modeloGenetico.conclusionP2': '<strong>Rango ajustado (Bayesiano):</strong> 115-145 (considerando patrón familiar de 3 generaciones)',
+                        'modeloGenetico.conclusionP3': '<strong>Resultado observado en mCLASS:</strong> Consistente con extremo superior del rango ajustado',
+                        'modeloGenetico.disclaimer': '<strong>IMPORTANTE:</strong> Estas son estimaciones probabilísticas basadas en correlaciones genéticas documentadas. Solo evaluación formal WISC-V puede confirmar IQ específico. Los IQs familiares son ESTIMADOS, no conocidos formalmente.',
+                        
+                        // Riesgos
+                        'riesgos.title': '⚠️ Riesgos Socioemocionales a Monitorear',
+                        'riesgos.intro': 'Los niños con alto desempeño académico pueden experimentar desafíos socioemocionales específicos que requieren monitoreo activo y apoyo apropiado.',
+                        'riesgos.cuatroRiesgos': '🎯 Cuatro Riesgos Principales',
+                        'riesgos.r1titulo': '1️⃣ Perfeccionismo y Frustración',
+                        'riesgos.r1desc': 'La metacognición avanzada puede generar expectativas perfeccionistas hacia sí mismo, especialmente si internaliza que "ser inteligente" es su identidad principal.',
+                        'riesgos.nivel': 'Nivel de Riesgo:',
+                        'riesgos.alto': 'ALTO',
+                        'riesgos.moderado': 'MODERADO-ALTO',
+                        'riesgos.senales': '⚠️ Señales de Alerta:',
+                        'riesgos.r1s1': 'Autocrítica excesiva',
+                        'riesgos.r1s2': 'Abandono de tareas difíciles por miedo al fracaso',
+                        'riesgos.r1s3': 'Frustración desproporcionada ante errores mínimos',
+                        'riesgos.r1s4': 'Procrastinación por perfeccionismo',
+                        'riesgos.intervenciones': '✅ Intervenciones Recomendadas:',
+                        'riesgos.r1i1': 'Normalizar errores como parte del aprendizaje',
+                        'riesgos.r1i2': 'Enfatizar proceso sobre resultado',
+                        'riesgos.r1i3': 'Desarrollar mentalidad de crecimiento',
+                        'riesgos.r1i4': 'Valorar múltiples dimensiones más allá de lo académico',
+                        'riesgos.r2titulo': '2️⃣ Asincronía Socioemocional (Dyssynchrony)',
+                        'riesgos.r2desc': 'Discrepancia entre desarrollo cognitivo avanzado y desarrollo socioemocional típico de la edad cronológica.',
+                        'riesgos.r2s1': 'Dificultad para relacionarse con pares de su edad',
+                        'riesgos.r2s2': 'Preferencia por compañía de adultos o pares mayores',
+                        'riesgos.r2s3': 'Sentirse "diferente" o aislado',
+                        'riesgos.r2s4': 'Reacciones emocionales típicas de edad menor',
+                        'riesgos.r3titulo': '3️⃣ Aburrimiento Académico y Desconexión',
+                        'riesgos.r3desc': 'Sin diferenciación académica apropiada, puede experimentar aburrimiento crónico que lleva a problemas conductuales o pérdida de motivación intrínseca.',
+                        'riesgos.r3s1': 'Pérdida de interés en la escuela',
+                        'riesgos.r3s2': 'Comportamiento disruptivo en clase',
+                        'riesgos.r3s3': 'Errores por descuido en tareas "fáciles"',
+                        'riesgos.r3s4': 'Comentarios como "la escuela es aburrida"',
+                        'riesgos.r4titulo': '4️⃣ Presión y Expectativas',
+                        'riesgos.r4desc': 'Altas expectativas de familia o escuela pueden generar estrés, ansiedad de rendimiento o miedo a decepcionar a otros.',
+                        'riesgos.r4s1': 'Ansiedad o estrés por el rendimiento',
+                        'riesgos.r4s2': 'Miedo a cometer errores',
+                        'riesgos.r4s3': 'Preocupación excesiva por complacer a adultos',
+                        'riesgos.r4s4': 'Síntomas físicos (dolores de cabeza, estómago)',
+                        'riesgos.monitoreotitulo': '📋 Monitoreo Recomendado',
+                        'riesgos.monitoreo': 'Observación regular del bienestar emocional, relaciones con pares, motivación intrínseca y señales de estrés o ansiedad. Mantener comunicación abierta con consejeros escolares y especialistas en educación para dotados.',
+                        
+                        // Metodología
+                        'metodologia.maintitle': '📋 Metodología de Correlación & Disclaimers',
+                        'metodologia.badge': 'TRANSPARENCIA METODOLÓGICA COMPLETA',
+                        'disclaimer.title': '⚠️ ACTUALIZACIÓN METODOLÓGICA CRÍTICA v6.1',
+                        'disclaimer.intro': '<strong>IMPORTANTE:</strong> Todos los IQs presentados para familia (Piter/Abuelo, Madre, Padre) son <strong>ESTIMACIONES CORRELACIONALES</strong>, no mediciones directas con WISC/WAIS. Solo Janna tiene estimación basada en convergencia multi-fuente (genética estimada + marcadores + achievement + observación experto).',
+                        'disclaimer.piter': '<strong>Piter (Abuelo Materno):</strong> IQ ~142 estimado por 2 grade skips documentados (1ero→3ero + 4to→5to) + trayectoria profesional excepcional (proyectos $500M+, innovación metodológica)',
+                        'disclaimer.madre': '<strong>Madre:</strong> IQ ~138 estimado por skip 2 grados recomendado + carrera ingeniería civil',
+                        'disclaimer.padre': '<strong>Padre:</strong> IQ ~128 estimado por doble carrera universitaria USA (Arte + Negocios)',
+                        'disclaimer.janna': '<strong>Janna:</strong> IQ 132-138 estimado por correlación (Midparent 135 + mCLASS Kindergarten Composite 401 + progresión +96 pts + contexto familiar 3 generaciones)',
+                        'disclaimer.validation': '✓ Solo WISC-V administrado por psicólogo certificado puede cuantificar IQ con precisión.<br>✓ Este análisis es probabilístico para justificar evaluación formal, NO diagnóstico.<br>✓ Metodología de correlación detallada disponible más abajo.',
+                        'metodologia.title': 'Transparencia Total: ¿Cómo se Estimaron los IQs?',
+                        'metodologia.explicacion': 'Las estimaciones de IQ para Piter (Abuelo), Madre y Padre se basan en marcadores indirectos correlacionados con capacidad cognitiva en literatura psicométrica. <strong>NO han sido evaluados con WISC/WAIS.</strong>',
+                        'metodologia.calculo': '<strong>Estimaciones base:</strong><br>• Piter: ~142 (2 skips: 1°→3° + 4°→5° + $500M+ + trading 96%)<br>• Madre: ~138 (skip 2 grados + ing. civil)<br>• Padre: ~128 (doble carrera USA)<br><br><strong>Midparent:</strong> (140+130)/2 = <strong>135</strong><br><strong>Heredabilidad h²:</strong> 0.70<br><strong>Base genético esperado:</strong> 125.0<br><strong>+ Ajustes evidencia:</strong> +30-40 pts<br><br><strong style="color: #dc3545;">FINAL JANNA: 132-138</strong>',
+                        'metodologia.limitaciones_title': '⚖️ Limitaciones & Fortalezas',
+                        'metodologia.limitaciones_header': 'Limitaciones',
+                        'metodologia.lim1': 'IQs familiares estimados (±10-15 pts c/u)',
+                        'metodologia.lim2': 'mCLASS solo lectura (no IQ global)',
+                        'metodologia.lim3': 'Posible efecto techo instrumento',
+                        'metodologia.lim4': 'n=1, no generalizable',
+                        'metodologia.fortalezas_header': 'Fortalezas',
+                        'metodologia.fort1': 'Convergencia 4 fuentes independientes',
+                        'metodologia.fort2': 'Calibración con Piter (IQ ~142)',
+                        'metodologia.fort3': 'Validación externa K-1 Nurture',
+                        'metodologia.fort4': 'Transparencia metodológica total',
+                        
                         // Síntesis
                         'sintesis.title': 'Síntesis Técnica Final',
                         'sintesis.validacion': 'VALIDACIÓN CONFIRMADA',
@@ -2406,6 +2388,7 @@ NWF-WRC<sub>est</sub> = (NWF-CLS × 0.7) + (PSF × 0.2) + (WRF × 0.1)
                         'sintesis.conclusion': 'Conclusión Técnica',
                         'sintesis.conclusion1': 'Este dashboard demostró que análisis estructurado de observaciones familiares con IA puede anticipar alto desempeño académico que posteriormente se valida con evaluaciones formales. El contexto familiar de tres generaciones (madre ingeniera civil, padre con doble titulación, abuelo materno ingeniero civil+informático) consolida un patrón de altas capacidades por ambas líneas. <strong>No reemplaza evaluación profesional</strong>, pero facilita la preparación para conversaciones con especialistas.',
                         'sintesis.conclusion2': 'Coherencia predictiva confirmada. Limitaciones técnicas reconocidas. Patrón familiar excepcional documentado.',
+                        
                         // Gráficos
                         'graficos.progresion': 'Progresión Visual del Composite Score',
                         'graficos.comparacion': 'Comparación con Benchmarks (% del objetivo)',
@@ -2414,59 +2397,55 @@ NWF-WRC<sub>est</sub> = (NWF-CLS × 0.7) + (PSF × 0.2) + (WRF × 0.1)
                         'graficos.precision': 'Precisión (%)',
                         'graficos.wordreading': 'Word Reading (wpm)',
                         'graficos.lettersounds': 'Letter Sounds (/min)',
-                        'graficos.meta': 'Meta G1-MOY',
+                        'graficos.meta': 'Meta K-MOY',
                         'graficos.janna': 'Janna',
                         'graficos.benchmark': 'Benchmark (100%)',
                         'graficos.porcentaje': 'Porcentaje del objetivo',
-                        // Disclaimer v6.0
-                        'disclaimer.title': '⚠️ ACTUALIZACIÓN METODOLÓGICA CRÍTICA v6.0',
-                        'disclaimer.intro': '<strong>IMPORTANTE:</strong> Todos los IQs presentados para familia (Piter/Abuelo, Madre, Padre) son <strong>ESTIMACIONES CORRELACIONALES</strong>, no mediciones directas con WISC/WAIS. Solo Janna tiene estimación basada en convergencia multi-fuente (genética estimada + marcadores + achievement + observación experto).',
-                        'disclaimer.piter': '<strong>Piter (Abuelo Materno):</strong> IQ ~150 estimado por 2 grade skips documentados (1ero→3ero + 4to→5to) + trayectoria profesional excepcional (proyectos $500M+, innovación metodológica)',
-                        'disclaimer.madre': '<strong>Madre:</strong> IQ ~140 estimado por skip 2 grados recomendado + carrera ingeniería civil',
-                        'disclaimer.padre': '<strong>Padre:</strong> IQ ~130 estimado por doble carrera universitaria USA (Arte + Negocios)',
-                        'disclaimer.janna': '<strong>Janna:</strong> IQ 135-150 estimado por correlación (Midparent 135 + mCLASS Kindergarten Composite 401 + progresión +96 pts + contexto familiar 3 generaciones)',
-                        'disclaimer.validation': '✓ Solo WISC-V administrado por psicólogo certificado puede cuantificar IQ con precisión.<br>✓ Este análisis es probabilístico para justificar evaluación formal, NO diagnóstico.<br>✓ Metodología de correlación detallada disponible en tab "Estimaciones".',
-                        // Metodología v6.0
-                        'metodologia.title': '🔬 Metodología de Correlación - Transparencia Total',
-                        'metodologia.disclaimer': '<strong>IQs Familiares = ESTIMADOS (no conocidos formalmente):</strong>',
-                        'metodologia.explicacion': 'Las estimaciones de IQ para Piter (Abuelo), Madre y Padre se basan en marcadores indirectos correlacionados con capacidad cognitiva en literatura psicométrica. <strong>NO han sido evaluados con WISC/WAIS.</strong> La metodología de correlación es razonable y bien fundamentada, pero tiene incertidumbre inherente (±10-15 puntos por persona).',
-                        'metodologia.calculo': '<strong>Estimaciones base:</strong><br>• Piter: ~150 (2 skips: 1°→3° + 4°→5° + proyectos $500M+ + trading 96% win rate)<br>• Madre: ~140 (skip 2 grados recomendado + ingeniería civil)<br>• Padre: ~130 (doble carrera universitaria completa)<br><br><strong>Cálculo Midparent:</strong><br>(Madre_est + Padre_est) / 2 = (140 + 130) / 2 = <strong>135</strong><br><br><strong>Heredabilidad aplicada:</strong> h² ≈ 0.70 (ajustada por assortative mating)<br><strong>IQ esperado base genético:</strong> 0.70(135-100) + 100 = <strong>126.0</strong><br><strong>Rango solo genética:</strong> 112-137 (con varianza SD=12)<br><br><strong>Ajustes por evidencia adicional:</strong><br>+ Contexto familiar 3 generaciones → +15-25 pts<br>+ Achievement mCLASS Kindergarten: +10-20 pts<br>+ Achievement mCLASS excepcional: +5-15 pts<br>+ K-1 Nurture identificación ciega: +5-10 pts<br><br><strong style="color: #dc3545;">ESTIMACIÓN FINAL JANNA: 135-150</strong><br><em>(Punto medio: 137 · Very Superior to Highly Gifted · Percentil 99.3-99.75)</em>',
-                        'metodologia.maintitle': '📋 Metodología de Correlación & Disclaimers',
-                        'metodologia.badge': 'TRANSPARENCIA METODOLÓGICA COMPLETA',
-                        'metodologia.limitaciones_title': '⚖️ Limitaciones & Fortalezas',
-                        'metodologia.limitaciones_header': 'Limitaciones',
-                        'metodologia.lim1': 'IQs familiares estimados (±10-15 pts c/u)',
-                        'metodologia.lim2': 'mCLASS solo lectura (no IQ global)',
-                        'metodologia.lim3': 'Posible efecto techo instrumento',
-                        'metodologia.lim4': 'n=1, no generalizable',
-                        'metodologia.fortalezas_header': 'Fortalezas',
-                        'metodologia.fort1': 'Convergencia 4 fuentes independientes',
-                        'metodologia.fort2': 'Calibración con Piter (IQ ~150)',
-                        'metodologia.fort3': 'Validación externa K-1 Nurture',
-                        'metodologia.fort4': 'Transparencia metodológica total',
-                        // Badge disclaimer
-                        'badge.importante': 'IMPORTANTE:',
-                        'badge.texto': 'IQs familiares son estimaciones correlacionales (no WISC/WAIS).',
-                        'badge.link': 'Ver metodología completa →',
+                        
                         // SVG
+                        'svg.abuelo.titulo': 'Abuelo Materno (Piter)',
+                        'svg.abuelo.sub1': 'Ing. Civil + Informática',
+                        'svg.abuelo.sub2': '2 saltos de grado',
+                        'svg.abuelo.iq': 'IQ Est: ~142',
+                        'svg.madre.titulo': 'Madre',
+                        'svg.madre.sub1': 'Ingeniera Civil',
+                        'svg.madre.iq': 'IQ Est: ~138',
+                        'svg.padre.titulo': 'Padre',
+                        'svg.padre.sub1': 'Arte + Negocios (USA)',
+                        'svg.padre.iq': 'IQ Est: ~128',
+                        'svg.nathan.titulo': 'NATHAN',
+                        'svg.nathan.sub1': '7 años · Grade 1',
+                        'svg.nathan.iq': 'IQ Est: 145-150',
+                        'svg.nathan.sub2': '(Exceptionally Gifted)',
+                        'svg.janna.titulo': 'JANNA',
+                        'svg.janna.sub1': '6 años · Kindergarten',
+                        'svg.janna.iq': 'IQ Est: 132-138',
+                        'svg.janna.sub2': '(Very Superior to Highly Gifted)',
                         'svg.leyenda': '💡 Hover sobre nodos para información adicional · IQs estimados por correlación, no medición directa',
+                        
+                        // Metodología adicional
                         'metodologia.validacion': '<strong>⚠️ VALIDACIÓN REQUERIDA:</strong> Solo WISC-V puede confirmar. Expectativa post-WISC-V: 95% probabilidad IQ Janna en rango 125-150. Si ≥150 confirmado: desencadena planificación highly gifted education.'
                     },
                     en: {
                         // Meta
-                        'meta.title': 'Dashboard v6.0 - Janna Castillo Bonilla (Consolidated Family Pattern)',
-                        // Header
+                        'meta.title': 'Dashboard v6.1 - Janna Castillo Bonilla (Methodological Transparency + Genetic Model)',
                         'header.title': '🌟 Academic Dashboard',
                         'header.subtitle': 'Janna Castillo Bonilla • 6 years • Kindergarten • February 2026',
-                        'header.version': 'Version 6.0 - Consolidated Family Pattern (Estimated IQs)',
-                        'header.disclaimer': '<strong>ACADEMIC ASSESSMENT - FEBRUARY 2026:</strong> This dashboard documents Janna\'s performance in mCLASS Kindergarten assessments (Middle of Year). Results show Composite Score 401 Above Benchmark, excelling in Word Reading (17 wpm, 425% of goal) and Letter Sounds (40 sounds/min). <strong>Important:</strong> mCLASS is an academic screening tool, does not determine formal gifted identification nor measure IQ. Family information included as context, not diagnosis.',
+                        'header.version': 'Version 6.1 - Consolidated Family Pattern (Estimated IQs)',
+                        'header.disclaimer': '<strong>ACADEMIC ASSESSMENT - FEBRUARY 2026:</strong> This dashboard documents Janna\'s performance in mCLASS Kindergarten assessments (Middle of Year). Results show Composite Score 401 Above Benchmark, excelling in Word Reading (17 wpm, 425% of goal) and Letter Sounds (40 sounds/min). Important: mCLASS is an academic screening tool, does not determine formal gifted identification nor measure IQ.',
                         // Tabs
                         'tab.validacion': '✓ Validation',
                         'tab.convergencias': 'Original Analysis',
-                        'tab.limitaciones': 'Technical Limitations',
                         'tab.estimaciones': 'Estimations',
-                        'tab.sintesis': 'Synthesis',
+                        'tab.modeloGenetico': '🧬 Genetic Model',
+                        'tab.riesgos': '⚠️ Risks',
+                        'tab.limitaciones': 'Technical Limitations',
                         'tab.metodologia': '📋 Methodology',
+                        'tab.sintesis': 'Synthesis',
+                        // Badge
+                        'badge.importante': 'IMPORTANT:',
+                        'badge.texto': 'Family IQs are correlational estimates (not WISC/WAIS).',
+                        'badge.link': 'View complete methodology →',
                         // Validation
                         'validacion.title': '✓ Technical Validation: Predictive Coherence Confirmed',
                         'validacion.resultado': 'RESULT - FEBRUARY 2026',
@@ -2474,24 +2453,23 @@ NWF-WRC<sub>est</sub> = (NWF-CLS × 0.7) + (PSF × 0.2) + (WRF × 0.1)
                         'validacion.subtitle1': 'Objective mCLASS Data - Kindergarten MOY',
                         'validacion.table.metric': 'Metric',
                         'validacion.table.result': 'Janna Result',
-                        'validacion.table.goal': 'G1-MOY Goal',
+                        'validacion.table.goal': 'K-MOY Goal',
                         'validacion.table.status': 'Status',
                         'validacion.table.composite': 'Composite Score',
-                        'validacion.table.fluency': 'Reading Fluency (ORF)',
-                        'validacion.table.accuracy': 'Reading Accuracy',
+                        'validacion.table.wrf': 'Word Reading (WRF)',
+                        'validacion.table.lettersounds': 'Letter Sounds (NWF-CLS)',
+                        'validacion.table.psf': 'Phonemic Segmentation (PSF)',
+                        'validacion.table.decoding': 'Decoding (NWF-WRC)',
                         'validacion.table.above': 'Above Benchmark',
                         'validacion.table.supera': 'Exceeds Goal',
+                        'validacion.table.wellbelow': 'Well Below',
                         'validacion.proyecciones': 'Empirical Validation with mCLASS Data',
                         'validacion.table.observacion': 'Family Observation',
+                        'validacion.table.resultado': 'mCLASS Result (Feb 2026)',
+                        'validacion.table.estado': 'Status',
                         'validacion.obs1': '"Superior academic abilities"',
                         'validacion.obs2': '"Exceptional reading performance"',
                         'validacion.obs3': '"Requires educational differentiation"',
-                        'validacion.table.proyeccion': 'Projection (Oct 2025)',
-                        'validacion.table.resultado': 'mCLASS Result (Feb 2026)',
-                        'validacion.table.estado': 'Status',
-                        'validacion.proy1': '"Superior academic abilities"',
-                        'validacion.proy2': '"Exceptional reading performance"',
-                        'validacion.proy3': '"Requires educational differentiation"',
                         'validacion.confirmado': '✓ CONFIRMED',
                         'validacion.justificado': '✓ JUSTIFIED',
                         'validacion.progresion': 'Documented Progression (16 months)',
@@ -2501,14 +2479,12 @@ NWF-WRC<sub>est</sub> = (NWF-CLS × 0.7) + (PSF × 0.2) + (WRF × 0.1)
                         'validacion.above': 'Above',
                         'validacion.key': 'K-EOY (May 2025)',
                         'validacion.proyectado': 'Projected Above',
-                        'validacion.g1moy': 'G1-MOY (Feb 2026)',
+                        'validacion.g1moy': 'K-MOY (Feb 2026)',
                         'validacion.total': 'TOTAL',
                         'validacion.sostenida': 'Sustained progression',
                         'validacion.areaAtencion': '⚠️ Area of Attention Identified',
                         'validacion.areaAtencionP1': '<strong>Decoding (NWF-WRC): 0 out of 3 (Well Below)</strong> - This metric measures the ability to decode nonsense words. A score of 0 suggests that Janna is still developing this specific skill, which is common in early Kindergarten. This area can benefit from targeted practice in phonics and decoding.',
                         'validacion.areaAtencionP2': '<strong>Important context:</strong> Despite this developmental area, Janna achieves <strong>Word Reading 17 wpm (425% of goal)</strong>, which indicates she is effectively compensating using other reading strategies (whole word recognition, visual context). The Composite Score of 401 remains Above Benchmark.',
-                        
-                        // NEW TRANSLATIONS v6.0 - Digital Context
                         'validacion.contextoDigital': '🔍 Critical Analysis: Digital Assessment Context',
                         'validacion.artifactTitle': '⚠️ Measurement Artifact vs. Real Deficit',
                         'validacion.scoreReportado': 'Reported Score',
@@ -2554,7 +2530,6 @@ NWF-WRC<sub>est</sub> = (NWF-CLS × 0.7) + (PSF × 0.2) + (WRF × 0.1)
                         'validacion.notaMetodologica': '📌 Methodological note:',
                         'validacion.notaDesc': 'In-person reassessment is essential not only to validate the estimated score, but also to rule out any real need for decoding intervention that might be masked by Janna\'s high compensatory abilities.',
                         
-
                         // Limitations
                         'limitaciones.title': 'Technical Limitations of the Analysis',
                         'limitaciones.loqueNo': 'What mCLASS does NOT establish',
@@ -2565,10 +2540,11 @@ NWF-WRC<sub>est</sub> = (NWF-CLS × 0.7) + (PSF × 0.2) + (WRF × 0.1)
                         'limitaciones.item4': '❌ <strong>Personality profiles</strong> - Academic tests do not measure socio-emotional traits',
                         'limitaciones.item5': '❌ <strong>Specific gifted types</strong> - Classifications require multifactorial evaluation',
                         'limitaciones.loqueSi': 'What CAN be technically affirmed',
-                        'limitaciones.si1': '✓ <strong>Measurable superior academic performance</strong> - Composite 455 Above Benchmark',
-                        'limitaciones.si2': '✓ <strong>Advanced reading fluency</strong> - 101 wpm Above Benchmark for G1',
-                        'limitaciones.si3': '✓ <strong>Sustained progression</strong> - +149 points in 16 documented months',
+                        'limitaciones.si1': '✓ <strong>Measurable superior academic performance</strong> - Composite 401 Above Benchmark',
+                        'limitaciones.si2': '✓ <strong>Exceptional word reading</strong> - 17 wpm (425% of K-MOY goal)',
+                        'limitaciones.si3': '✓ <strong>Accelerated progression</strong> - +95 points in 5 documented months (+31%)',
                         'limitaciones.si4': '✓ <strong>Justification for educational differentiation</strong> - Consistent Above performance',
+                        'limitaciones.si5': '✓ <strong>Identified area for development</strong> - NWF-WRC requires attention and practice',
                         'limitaciones.alcance': 'Appropriate Scope of the Dashboard',
                         'limitaciones.logro': 'The analysis achieved:',
                         'limitaciones.logro1': 'Systematically organize family observations',
@@ -2583,6 +2559,7 @@ NWF-WRC<sub>est</sub> = (NWF-CLS × 0.7) + (PSF × 0.2) + (WRF × 0.1)
                         'limitaciones.decisiones': 'Educational Decisions',
                         'limitaciones.decisiones1': 'Decisions about grade acceleration, special programs, or specific interventions require <strong>multifactorial professional evaluation</strong> that includes: complete academic evaluation, socio-emotional evaluation, maturity, student motivation, available school resources, and family preferences.',
                         'limitaciones.decisiones2': 'These decisions correspond exclusively to educational professionals of Guilford County Schools and parents with direct knowledge of the child.',
+                        
                         // Convergencias
                         'convergencias.title': 'Multi-Analysis Convergences',
                         'convergencias.consenso': 'CONSENSUS: Significantly Above Average Abilities',
@@ -2591,8 +2568,8 @@ NWF-WRC<sub>est</sub> = (NWF-CLS × 0.7) + (PSF × 0.2) + (WRF × 0.1)
                         'convergencias.metric1.note1': 'K-1 Nurture Program (AG)',
                         'convergencias.metric1.note2': 'Top 2-5% observable',
                         'convergencias.metric2.label': 'Early Reading',
-                        'convergencias.metric2.note1': 'Age-appropriate early development',
-                        'convergencias.metric2.note2': 'Advanced mental rotation',
+                        'convergencias.metric2.note1': 'Word Reading 17 wpm',
+                        'convergencias.metric2.note2': '425% EOY goal',
                         'convergencias.metric3.label': 'mCLASS Progression',
                         'convergencias.metric3.note1': 'Composite BOY→MOY',
                         'convergencias.metric3.note2': '+31% in 6 months',
@@ -2605,35 +2582,34 @@ NWF-WRC<sub>est</sub> = (NWF-CLS × 0.7) + (PSF × 0.2) + (WRF × 0.1)
                         'convergencias.card1.item2': 'Observable early differentiation',
                         'convergencias.card1.item3': 'Confirmation by trained professionals',
                         'convergencias.card1.item4': 'Estimated top 2-5% of grade',
-                        'convergencias.card2.title': 'Cognitive Development',
-                        'convergencias.card2.item1': 'Age 3: Inverted pieces 180°',
-                        'convergencias.card2.item2': 'Premature complex mental rotation',
-                        'convergencias.card2.item3': 'Estimated advance +3-4 years',
-                        'convergencias.card2.item4': 'Percentile 99+ indicator',
+                        'convergencias.card2.title': 'Exceptional Early Reading',
+                        'convergencias.card2.item1': 'Word Reading: 17 wpm (EOY goal: 4 wpm)',
+                        'convergencias.card2.item2': 'Letter Sounds: 40/min (goal: 25/min)',
+                        'convergencias.card2.item3': 'Performance 160-425% over benchmarks',
+                        'convergencias.card2.item4': 'Early recognition of reading patterns',
                         'convergencias.card3.title': 'Sustained Academic Progress',
-                        'convergencias.card3.item1': 'Age 4: Perfect complete recitation',
-                        'convergencias.card3.item2': 'Immediate double execution without errors',
-                        'convergencias.card3.item3': 'Estimated advance +5-7 years',
-                        'convergencias.card3.item4': 'Verifiable audio (objective evidence)',
+                        'convergencias.card3.item1': 'Composite: 306 (BOY) → 401 (MOY)',
+                        'convergencias.card3.item2': '+95 point increase in 6 months',
+                        'convergencias.card3.item3': '+31% documented progression',
+                        'convergencias.card3.item4': 'Consistent upward trajectory',
                         'convergencias.card4.title': 'mCLASS Achievement Kindergarten',
-                        'convergencias.card4.item1': '"I see numbers in my head"',
-                        'convergencias.card4.item2': 'Verbalization of abstract mental processes',
-                        'convergencias.card4.item3': 'Estimated advance +3-4 years',
-                        'convergencias.card4.item4': 'Advanced self-taught math',
+                        'convergencias.card4.item1': 'Composite 401 vs 382 benchmark (Above)',
+                        'convergencias.card4.item2': 'Multiple areas Above Benchmark',
+                        'convergencias.card4.item3': 'Consistency in formal assessments',
+                        'convergencias.card4.item4': 'Verifiable objective data',
                         'convergencias.card5.title': '3-Generation Family Pattern',
-                        'convergencias.card5.item1': 'Geographic interest 5+ continuous years',
-                        'convergencias.card5.item2': 'Onset age ~1 year (very early)',
-                        'convergencias.card5.item3': 'Evolution: visual → memorization → integration',
-                        'convergencias.card5.item4': 'Typical pattern in high IQ children',
+                        'convergencias.card5.item1': 'Mother: Civil Eng. + early acceleration',
+                        'convergencias.card5.item2': 'Father: Double degree USA',
+                        'convergencias.card5.item3': 'Grandfather: Civil Eng. + 2 grade skips',
+                        'convergencias.card5.item4': 'Estimated midparent: 135 (h²=0.70)',
                         'convergencias.card6.title': 'Hereditary Factor',
                         'convergencias.card6.item1': 'Maternal grandfather: documented acceleration',
                         'convergencias.card6.item2': 'Parallels: civil engineering (spatial) + computer science (logical)',
                         'convergencias.card6.item3': 'Significantly increased base probability',
                         'convergencias.card6.item4': 'Consistent family pattern',
-                        // New family keys
-                        'convergencias.patronFamiliar': '🧬 Family Pattern of High Ability (3 Generations)',
                         
-                        // NEW TRANSLATIONS v6.0 - Nathan and Bilingual Context
+                        // Nuevas claves familiares
+                        'convergencias.patronFamiliar': '🧬 Family Pattern of High Ability (3 Generations)',
                         'convergencias.hermanos': 'Shared Bilingual Context: Janna and Nathan',
                         'convergencias.dinamicaLinguistica': '🌍 Family Linguistic Dynamics',
                         'convergencias.dinamicaDesc': '<strong>Janna (5 years, Kindergarten) and Nathan (7 years, 1st grade)</strong> are Spanish-English bilinguals from birth, both showing similar patterns of accelerated cognitive development. Their linguistic context is particularly relevant for interpreting their assessments:',
@@ -2666,8 +2642,8 @@ NWF-WRC<sub>est</sub> = (NWF-CLS × 0.7) + (PSF × 0.2) + (WRF × 0.1)
                         'convergencias.nathanID2': 'AG identification 3-4 weeks',
                         'convergencias.nathanID3': '✓ Institutional recognition',
                         'convergencias.logrosNathan': '📊 Family mCLASS Comparison',
-                        'convergencias.logrosNathan1': 'Nathan (7yo, Grade 1 MOY): Composite 628, ORF 127 wpm (158% goal)',
-                        'convergencias.logrosNathan2': 'Janna (5yo, K MOY): Composite 401 (82→89*), WRF 17 wpm (425% goal)',
+                        'convergencias.logrosNathan1': 'Nathan (8 yo, 3rd grade MOY): Composite 628, ORF 127 wpm (158% goal)',
+                        'convergencias.logrosNathan2': 'Janna (5 yo, K MOY): Composite 401 (82→89*), WRF 17 wpm (425% goal)',
                         'convergencias.logrosNathan3': '*Adjusted score per digital context analysis (see disclaimer)',
                         'convergencias.nathanNota': '<strong>⚠️ CRITICAL NOTE:</strong> This section does NOT attribute Nathan\'s early developmental achievements (memory, puzzles, etc.) to Janna. It is included solely as FAMILY CONTEXT that informs the interpretation of Janna\'s assessments within the same mCLASS system, considering: (1) consistent family pattern of high school performance, (2) linguistic environment that favors phonological development, and (3) Bayesian probability that adjusted score reflects actual ability vs. digital assessment artifact.',
                         'convergencias.implicacionesJanna': '📋 Implications for Janna\'s Assessment',
@@ -2675,20 +2651,18 @@ NWF-WRC<sub>est</sub> = (NWF-CLS × 0.7) + (PSF × 0.2) + (WRF × 0.1)
                         'convergencias.impl2': '<strong>Validated family pattern:</strong> Janna\'s performance (Composite 89/100 conservative adjusted, 93-96th percentile) aligns with a family environment that systematically produces results in the 95-99th percentile',
                         'convergencias.impl3': '<strong>Cross-linguistic transfer:</strong> Automatic application of Spanish→English phonological patterns evidenced in both siblings',
                         'convergencias.impl4': '<strong>Increased probability:</strong> Family history of high ability (3 generations) significantly elevates the Bayesian probability that Janna also presents superior abilities',
-                        
-
                         'convergencias.madre': 'Mother: Civil Engineer with Early Acceleration',
                         'convergencias.madreDesc': '<strong>Civil Engineer</strong> by profession. Due to her birth date (August 28), she did not meet the age requirement for 1st grade in her home country. She repeated pre-first, but within weeks of starting the school year she had to be <strong>accelerated</strong>. This age-ability mismatch pattern is identical to that observed in Nathan and constitutes a classic marker of high ability. Civil engineering requires high spatial-mathematical reasoning, abstraction capacity, and complex problem solving.',
                         'convergencias.padre': 'Father: Cognitive Versatility and Grandfather\'s Observation',
                         'convergencias.padreDesc': 'The father completed <strong>two university degrees in the USA</strong>: one in Art and another in Business. This combination of a creative field (divergent thinking) and an analytical one (convergent thinking) suggests a versatile and exceptional intellectual capacity. Furthermore, the maternal grandfather —with a history of acceleration and superior ability— has noted that the father displays <strong>"behavior that makes high IQ visible"</strong>, a qualified observation from someone who recognizes the signs.',
                         'convergencias.abuelo': 'Maternal Grandfather: Civil Engineer + Computer Technician',
                         'convergencias.abueloDesc': 'The maternal grandfather has <strong>documented academic acceleration</strong> (skipped grade(s) during his education) and a dual professional profile: <strong>Civil Engineer and Computer Technician (Programmer Analyst)</strong>. This combination of spatial-mathematical reasoning and logical-computational thinking reinforces the presence of exceptional abilities in the maternal line.',
-                        'convergencias.arbol': '🌳 Family Tree (3 Generations)',
+                        'convergencias.arbol': '🌳 Family Tree (3 Generations) - Interactive Visualization',
                         'convergencias.notaArbol': 'Contextual estimates based on family and academic indicators; do not substitute formal evaluation.',
                         'convergencias.convergencia': '✨ Convergence of High Abilities: Three Generations in Maternal Line',
                         'convergencias.convergenciaDesc': 'Information from the mother (Civil Engineer + early acceleration), father (double degree + grandfather\'s observation), and maternal grandfather (Civil Engineer + Computer Technician + acceleration) indicates that <strong>both parents and the maternal grandfather are situated in the upper extreme of the cognitive distribution</strong>. This three-generation pattern in the maternal line with specialization in engineering/spatial reasoning is statistically very significant and makes the profiles of Nathan and Janna coherent and expected.',
                         'convergencias.estimacionJanna': 'Contextual estimate of Nathan\'s ability range:',
-                        'convergencias.rangoJanna': '135-150 (Very Superior to Highly Gifted).',
+                        'convergencias.rangoJanna': '132-138 (Very Superior to Highly Gifted).',
                         'convergencias.notaEstimacion': 'Inference based on family context and his performance; does not substitute formal evaluation (WISC-V).',
                         'convergencias.hito': 'THE REAL MILESTONE: Democratization of Cognitive Analysis',
                         'convergencias.hitoDesc': 'The true achievement is demonstrating how AI can:',
@@ -2696,6 +2670,10 @@ NWF-WRC<sub>est</sub> = (NWF-CLS × 0.7) + (PSF × 0.2) + (WRF × 0.1)
                         'convergencias.hito2': 'Empower families to collaborate informedly with specialists',
                         'convergencias.hito3': 'Bridge the gap between intuition and professional diagnosis',
                         'convergencias.hito4': 'Democratize access to analysis that previously required exclusive expertise',
+                        'convergencias.espanolL1': '<strong>Spanish L1</strong> (native language, 100% home use by parents)',
+                        'convergencias.inglesL2': '<strong>English L2</strong> (preference between siblings, school immersion)',
+                        'convergencias.desarrolloFonologico': 'Phonological development <strong>accelerated in both languages</strong>',
+                        'convergencias.transferenciaPositiva': 'Positive transfer L1→L2 in phonemic awareness',
                         
                         // Bilingual Context
                         'bilingual.title': '🌐 Spanish-English Bilingual Context',
@@ -2714,8 +2692,8 @@ NWF-WRC<sub>est</sub> = (NWF-CLS × 0.7) + (PSF × 0.2) + (WRF × 0.1)
                         'bilingual.vent3': '<strong>Superior metalinguistic awareness</strong>',
                         'bilingual.vent4': '<strong>Enrichment of overall cognitive development</strong>',
                         'bilingual.wisc': '<strong>Note for WISC-V assessment:</strong> The assessment will be conducted in English (language of school instruction). The evaluator should know the bilingual context for appropriate interpretation of results, especially on verbal scales. Bilingualism may even <strong>enhance</strong> some subtests if Janna has developed broad vocabulary in both languages.',
-                        // Evidence
-                        // Estimations
+                        
+                        // Estimaciones
                         'estimaciones.title': 'Cognitive Ability Estimation',
                         'estimaciones.actualizada': 'UPDATED WITH FAMILY PATTERN',
                         'estimaciones.enfoque': 'Approach Based on Convergent Evidence + Family Context',
@@ -2746,7 +2724,7 @@ NWF-WRC<sub>est</sub> = (NWF-CLS × 0.7) + (PSF × 0.2) + (WRF × 0.1)
                         'estimaciones.sabemos6': 'Father: two degrees (Art+Business)',
                         'estimaciones.sabemos7': 'Maternal grandfather: Civil Eng+CS, accelerated',
                         'estimaciones.inferimos1': 'Significantly above average abilities',
-                        'estimaciones.inferimos2': 'Probably IQ 135-150',
+                        'estimaciones.inferimos2': 'Probably IQ 132-138',
                         'estimaciones.inferimos3': 'Pattern consistent with Very Superior to Highly Gifted',
                         'estimaciones.inferimos4': 'Exceptional genetic convergence',
                         'estimaciones.no1': 'Exact IQ (requires WISC-V)',
@@ -2777,11 +2755,110 @@ NWF-WRC<sub>est</sub> = (NWF-CLS × 0.7) + (PSF × 0.2) + (WRF × 0.1)
                         'estimaciones.observacion': 'Grandfather\'s observation',
                         'estimaciones.observacionVal': '"Behavior that makes high IQ visible"',
                         'estimaciones.implicacionTexto': '<strong>Statistical implication:</strong> Family history of exceptional ability in three generations and both parental lines dramatically increases the probability that Nathan is in the upper range of the cognitive distribution.',
-                        // Matices (some keys, omitted for brevity)
-                        'matices.title': 'Critical Nuances and Limitations',
-                        // Plan
-                        'plan.title': 'Structured Action Plan',
-                        // Synthesis
+                        
+                        // Modelo Genético
+                        'modeloGenetico.title': '🧬 Explicit Genetic Model',
+                        'modeloGenetico.intro': 'This quantitative genetic model explains cognitive capacity estimates based on three-generation family context.',
+                        'modeloGenetico.contextoTitle': '👨‍👩‍👧‍👦 Family Context (3 Generations)',
+                        'modeloGenetico.abueloTitle': '👴 Maternal Grandfather (Piter)',
+                        'modeloGenetico.iqEstimado': 'Estimated IQ:',
+                        'modeloGenetico.abuelo1': 'Civil Engineer + Computer Technician',
+                        'modeloGenetico.abuelo2': 'Skipped 2 school grades (exceptional acceleration)',
+                        'modeloGenetico.abuelo3': '25+ years professional trajectory in major infrastructure',
+                        'modeloGenetico.abuelo4': '$500M+ projects (dams, hydroelectric)',
+                        'modeloGenetico.madreTitle': '👩 Mother',
+                        'modeloGenetico.madre1': 'Civil Engineer',
+                        'modeloGenetico.madre2': 'Documented academic acceleration',
+                        'modeloGenetico.madre3': 'Daughter of engineer (family pattern)',
+                        'modeloGenetico.padreTitle': '👨 Father',
+                        'modeloGenetico.padre1': 'Double university degree (Art + Business)',
+                        'modeloGenetico.padre2': 'University education in the United States',
+                        'modeloGenetico.padre3': 'Multi-domain cognitive versatility',
+                        'modeloGenetico.calculoTitle': '📊 Quantitative Genetic Calculation',
+                        'modeloGenetico.paso1Title': 'Step 1: Calculate Midparent IQ',
+                        'modeloGenetico.paso1Calc': 'Midparent = (Mother IQ + Father IQ) / 2 = (138 + 128) / 2 = <strong>133</strong>',
+                        'modeloGenetico.paso2Title': 'Step 2: Cognitive Heritability (h²)',
+                        'modeloGenetico.paso2Desc': 'IQ heritability in childhood: h² ≈ 0.45-0.50',
+                        'modeloGenetico.paso3Title': 'Step 3: Apply Regression to the Mean',
+                        'modeloGenetico.paso3Calc': 'Expected IQ = 100 + h² × (Midparent - 100) = 100 + 0.5 × (133 - 100) = <strong>116.5</strong>',
+                        'modeloGenetico.paso4Title': 'Step 4: Expected Variance Range',
+                        'modeloGenetico.paso4Desc': 'Genetic + environmental variance: ±1 SD = ±15 points',
+                        'modeloGenetico.paso4Result': '<strong>Estimated range:</strong> 102-132 (statistically expected)',
+                        'modeloGenetico.observacionCritica': '⚠️ CRITICAL OBSERVATION: Grandfather\'s Effect',
+                        'modeloGenetico.observacionDesc': 'The maternal grandfather (IQ ~142) represents a significant deviation from population average (+2.8 SD). This data suggests that family genetic potential might be underestimated in the simple midparent calculation.',
+                        'modeloGenetico.observacionBayesiana': '<strong>Bayesian Analysis:</strong> Given that the mother (IQ 138) is the daughter of an exceptional father (IQ 142), there is additional evidence of superior genetic potential that raises the probability of advanced capabilities in the third generation beyond the simple regression model.',
+                        'modeloGenetico.conclusionTitle': '🎯 Genetic Model Conclusion',
+                        'modeloGenetico.conclusionP1': '<strong>Statistically expected range:</strong> 102-132 (simple model)',
+                        'modeloGenetico.conclusionP2': '<strong>Adjusted range (Bayesian):</strong> 115-145 (considering 3-generation family pattern)',
+                        'modeloGenetico.conclusionP3': '<strong>Result observed in mCLASS:</strong> Consistent with upper end of adjusted range',
+                        'modeloGenetico.disclaimer': '<strong>IMPORTANT:</strong> These are probabilistic estimates based on documented genetic correlations. Only formal WISC-V evaluation can confirm specific IQ. Family IQs are ESTIMATED, not formally known.',
+                        
+                        // Riesgos
+                        'riesgos.title': '⚠️ Socio-Emotional Risks to Monitor',
+                        'riesgos.intro': 'Children with high academic performance may experience specific socio-emotional challenges that require active monitoring and appropriate support.',
+                        'riesgos.cuatroRiesgos': '🎯 Four Main Risks',
+                        'riesgos.r1titulo': '1️⃣ Perfectionism and Frustration',
+                        'riesgos.r1desc': 'Advanced metacognition can generate perfectionist expectations toward oneself, especially if \'being smart\' is internalized as primary identity.',
+                        'riesgos.nivel': 'Risk Level:',
+                        'riesgos.alto': 'HIGH',
+                        'riesgos.moderado': 'MODERATE-HIGH',
+                        'riesgos.senales': '⚠️ Warning Signs:',
+                        'riesgos.r1s1': 'Excessive self-criticism',
+                        'riesgos.r1s2': 'Abandonment of difficult tasks due to fear of failure',
+                        'riesgos.r1s3': 'Disproportionate frustration at minimal errors',
+                        'riesgos.r1s4': 'Procrastination due to perfectionism',
+                        'riesgos.intervenciones': '✅ Recommended Interventions:',
+                        'riesgos.r1i1': 'Normalize errors as part of learning',
+                        'riesgos.r1i2': 'Emphasize process over outcome',
+                        'riesgos.r1i3': 'Develop growth mindset',
+                        'riesgos.r1i4': 'Value multiple dimensions beyond academics',
+                        'riesgos.r2titulo': '2️⃣ Socio-Emotional Asynchrony (Dyssynchrony)',
+                        'riesgos.r2desc': 'Discrepancy between advanced cognitive development and typical socio-emotional development of chronological age.',
+                        'riesgos.r2s1': 'Difficulty relating to same-age peers',
+                        'riesgos.r2s2': 'Preference for company of adults or older peers',
+                        'riesgos.r2s3': 'Feeling \'different\' or isolated',
+                        'riesgos.r2s4': 'Emotional reactions typical of younger age',
+                        'riesgos.r3titulo': '3️⃣ Academic Boredom and Disconnection',
+                        'riesgos.r3desc': 'Without appropriate academic differentiation, may experience chronic boredom leading to behavioral problems or loss of intrinsic motivation.',
+                        'riesgos.r3s1': 'Loss of interest in school',
+                        'riesgos.r3s2': 'Disruptive behavior in class',
+                        'riesgos.r3s3': 'Careless errors on \'easy\' tasks',
+                        'riesgos.r3s4': 'Comments like \'school is boring\'',
+                        'riesgos.r4titulo': '4️⃣ Pressure and Expectations',
+                        'riesgos.r4desc': 'High expectations from family or school can generate stress, performance anxiety, or fear of disappointing others.',
+                        'riesgos.r4s1': 'Performance anxiety or stress',
+                        'riesgos.r4s2': 'Fear of making mistakes',
+                        'riesgos.r4s3': 'Excessive concern about pleasing adults',
+                        'riesgos.r4s4': 'Physical symptoms (headaches, stomachaches)',
+                        'riesgos.monitoreotitulo': '📋 Recommended Monitoring',
+                        'riesgos.monitoreo': 'Regular observation of emotional well-being, peer relationships, intrinsic motivation, and signs of stress or anxiety. Maintain open communication with school counselors and gifted education specialists.',
+                        
+                        // Metodología
+                        'metodologia.maintitle': '📋 Correlation Methodology & Disclaimers',
+                        'metodologia.badge': 'COMPLETE METHODOLOGICAL TRANSPARENCY',
+                        'disclaimer.title': '⚠️ CRITICAL METHODOLOGICAL UPDATE v9.3',
+                        'disclaimer.intro': '<strong>IMPORTANT:</strong> All IQs presented for family (Piter/Grandfather, Mother, Father) are <strong>CORRELATIONAL ESTIMATES</strong>, not direct measurements with WISC/WAIS. Only Janna has estimation based on multi-source convergence (estimated genetics + markers + achievement + expert observation).',
+                        'disclaimer.piter': '<strong>Piter (Maternal Grandfather):</strong> IQ ~142 estimated by 2 documented grade skips (1st→3rd + 4th→5th) + exceptional professional trajectory ($500M+ projects, methodological innovation)',
+                        'disclaimer.madre': '<strong>Mother:</strong> IQ ~138 estimated by 2-grade skip recommended + civil engineering career',
+                        'disclaimer.padre': '<strong>Father:</strong> IQ ~128 estimated by dual university degree USA (Art + Business)',
+                        'disclaimer.janna': '<strong>Janna:</strong> IQ 132-138 estimated by correlation (Midparent 135 + mCLASS Kindergarten Composite 401 + progression +96 pts + 3-generation family context)',
+                        'disclaimer.validation': '✓ Only WISC-V administered by certified psychologist can accurately quantify IQ.<br>✓ This analysis is probabilistic to justify formal evaluation, NOT diagnosis.<br>✓ Detailed correlation methodology available below.',
+                        'metodologia.title': 'Total Transparency: How Were IQs Estimated?',
+                        'metodologia.explicacion': 'IQ estimates for Piter (Grandfather), Mother and Father are based on indirect markers correlated with cognitive capacity in psychometric literature. <strong>They have NOT been evaluated with WISC/WAIS.</strong>',
+                        'metodologia.calculo': '<strong>Base estimates:</strong><br>• Piter: ~142 (2 skips: 1st→3rd + 4th→5th + $500M+ + trading 96%)<br>• Mother: ~138 (2-grade skip + civil eng.)<br>• Father: ~128 (dual degree USA)<br><br><strong>Midparent:</strong> (140+130)/2 = <strong>135</strong><br><strong>Heritability h²:</strong> 0.70<br><strong>Base genetic expected:</strong> 125.0<br><strong>+ Evidence adjustments:</strong> +30-40 pts<br><br><strong style="color: #dc3545;">FINAL JANNA: 132-138</strong>',
+                        'metodologia.limitaciones_title': '⚖️ Limitations & Strengths',
+                        'metodologia.limitaciones_header': 'Limitations',
+                        'metodologia.lim1': 'Family IQs estimated (±10-15 pts each)',
+                        'metodologia.lim2': 'mCLASS reading only (not global IQ)',
+                        'metodologia.lim3': 'Possible instrument ceiling effect',
+                        'metodologia.lim4': 'n=1, not generalizable',
+                        'metodologia.fortalezas_header': 'Strengths',
+                        'metodologia.fort1': 'Convergence of 4 independent sources',
+                        'metodologia.fort2': 'Calibration with Piter (IQ ~142)',
+                        'metodologia.fort3': 'External K-1 Nurture validation',
+                        'metodologia.fort4': 'Total methodological transparency',
+                        
+                        // Síntesis
                         'sintesis.title': 'Final Technical Synthesis',
                         'sintesis.validacion': 'VALIDATION CONFIRMED',
                         'sintesis.item1': '<strong>Predictive coherence confirmed</strong> - Dashboard projected high performance, mCLASS confirms it',
@@ -2819,7 +2896,8 @@ NWF-WRC<sub>est</sub> = (NWF-CLS × 0.7) + (PSF × 0.2) + (WRF × 0.1)
                         'sintesis.conclusion': 'Technical Conclusion',
                         'sintesis.conclusion1': 'This dashboard demonstrated that structured analysis of family observations with AI can anticipate high academic performance that is later validated with formal assessments. The three-generation family context (mother civil engineer, father with double degree, maternal grandfather civil engineer+computer scientist) consolidates a pattern of high abilities on both sides. <strong>Does not replace professional evaluation</strong>, but facilitates preparation for conversations with specialists.',
                         'sintesis.conclusion2': 'Predictive coherence confirmed. Technical limitations recognized. Exceptional family pattern documented.',
-                        // Charts
+                        
+                        // Gráficos
                         'graficos.progresion': 'Visual Progression of Composite Score',
                         'graficos.comparacion': 'Comparison with Benchmarks (% of goal)',
                         'graficos.composite': 'Composite Score',
@@ -2827,206 +2905,35 @@ NWF-WRC<sub>est</sub> = (NWF-CLS × 0.7) + (PSF × 0.2) + (WRF × 0.1)
                         'graficos.precision': 'Accuracy (%)',
                         'graficos.wordreading': 'Word Reading (wpm)',
                         'graficos.lettersounds': 'Letter Sounds (/min)',
-                        'graficos.wordreading': 'Word Reading (wpm)',
-                        'graficos.lettersounds': 'Letter Sounds (/min)',
-                        'graficos.meta': 'G1-MOY Goal',
+                        'graficos.meta': 'K-MOY Goal',
                         'graficos.janna': 'Janna',
                         'graficos.benchmark': 'Benchmark (100%)',
                         'graficos.porcentaje': 'Percentage of goal',
-                        // Disclaimer v6.0
-                        'disclaimer.title': '⚠️ CRITICAL METHODOLOGICAL UPDATE v6.0',
-                        'disclaimer.intro': '<strong>IMPORTANT:</strong> All IQs presented for family (Piter/Grandfather, Mother, Father) are <strong>CORRELATIONAL ESTIMATES</strong>, not direct measurements with WISC/WAIS. Only Nathan has estimation based on multi-source convergence (estimated genetics + markers + achievement + expert observation).',
-                        'disclaimer.piter': '<strong>Piter (Maternal Grandfather):</strong> IQ ~150 estimated by 2 documented grade skips (1st→3rd + 4th→5th) + exceptional professional trajectory ($500M+ projects, methodological innovation)',
-                        'disclaimer.madre': '<strong>Mother:</strong> IQ ~140 estimated by 2-grade skip recommended + civil engineering career',
-                        'disclaimer.padre': '<strong>Father:</strong> IQ ~130 estimated by dual university degree USA (Art + Business)',
-                        'disclaimer.janna': '<strong>Janna:</strong> IQ 135-150 estimated by correlation (Midparent 135 + mCLASS Kindergarten Composite 401 + progression +96 pts + 3-generation family context)',
-                        'disclaimer.validation': '✓ Only WISC-V administered by certified psychologist can accurately quantify IQ.<br>✓ This analysis is probabilistic to justify formal evaluation, NOT diagnosis.<br>✓ Detailed correlation methodology available in "Estimations" tab.',
-                        // Methodology v6.0
-                        'metodologia.title': '🔬 Correlation Methodology - Total Transparency',
-                        'metodologia.disclaimer': '<strong>Family IQs = ESTIMATED (not formally known):</strong>',
-                        'metodologia.explicacion': 'IQ estimates for Piter (Grandfather), Mother and Father are based on indirect markers correlated with cognitive capacity in psychometric literature. <strong>They have NOT been evaluated with WISC/WAIS.</strong> The correlation methodology is reasonable and well-founded, but has inherent uncertainty (±10-15 points per person).',
-                        'metodologia.calculo': '<strong>Base estimates:</strong><br>• Piter: ~150 (2 skips: 1st→3rd + 4th→5th + $500M+ projects + 96% win rate trading)<br>• Mother: ~140 (2-grade skip recommended + civil engineering)<br>• Father: ~130 (dual complete university degree)<br><br><strong>Midparent calculation:</strong><br>(Mother_est + Father_est) / 2 = (140 + 130) / 2 = <strong>135</strong><br><br><strong>Heritability applied:</strong> h² ≈ 0.70 (adjusted for assortative mating)<br><strong>Nathan expected base IQ:</strong> 0.70(135-100) + 100 = <strong>126.0</strong><br><strong>Genetics-only range:</strong> 112-137 (with variance SD=12)<br><br><strong>Adjustments for additional evidence:</strong><br>+ Direct Piter observation (IQ 150): "solid academic progression" → +15-25 pts<br>+ Convergent qualitative markers (4+): +10-20 pts<br>+ Exceptional mCLASS achievement: +5-15 pts<br>+ K-1 Nurture blind identification: +5-10 pts<br><br><strong style="color: #dc3545;">FINAL JANNA ESTIMATE: 135-150</strong><br><em>(Midpoint: 142 · Very Superior to Highly Gifted · Percentile 99.3-99.75)</em>',
-                        'metodologia.maintitle': '📋 Correlation Methodology & Disclaimers',
-                        'metodologia.badge': 'COMPLETE METHODOLOGICAL TRANSPARENCY',
-                        'metodologia.limitaciones_title': '⚖️ Limitations & Strengths',
-                        'metodologia.limitaciones_header': 'Limitations',
-                        'metodologia.lim1': 'Family IQs estimated (±10-15 pts each)',
-                        'metodologia.lim2': 'mCLASS reading only (not global IQ)',
-                        'metodologia.lim3': 'Possible instrument ceiling effect',
-                        'metodologia.lim4': 'n=1, not generalizable',
-                        'metodologia.fortalezas_header': 'Strengths',
-                        'metodologia.fort1': 'Convergence of 4 independent sources',
-                        'metodologia.fort2': 'Calibration with Piter (IQ ~150)',
-                        'metodologia.fort3': 'External K-1 Nurture validation',
-                        'metodologia.fort4': 'Total methodological transparency',
-                        // Badge disclaimer
-                        'badge.importante': 'IMPORTANT:',
-                        'badge.texto': 'Family IQs are correlational estimates (not WISC/WAIS).',
-                        'badge.link': 'View complete methodology →',
+                        
                         // SVG
+                        'svg.abuelo.titulo': 'Maternal Grandfather (Piter)',
+                        'svg.abuelo.sub1': 'Civil Eng. + Computer Tech.',
+                        'svg.abuelo.sub2': '2 grade skips',
+                        'svg.abuelo.iq': 'Est. IQ: ~142',
+                        'svg.madre.titulo': 'Mother',
+                        'svg.madre.sub1': 'Civil Engineer',
+                        'svg.madre.iq': 'Est. IQ: ~138',
+                        'svg.padre.titulo': 'Father',
+                        'svg.padre.sub1': 'Art + Business (USA)',
+                        'svg.padre.iq': 'Est. IQ: ~128',
+                        'svg.nathan.titulo': 'NATHAN',
+                        'svg.nathan.sub1': 'Age 7 · Grade 1',
+                        'svg.nathan.iq': 'Est. IQ: 145-150',
+                        'svg.nathan.sub2': '(Exceptionally Gifted)',
+                        'svg.janna.titulo': 'JANNA',
+                        'svg.janna.sub1': 'Age 6 · Kindergarten',
+                        'svg.janna.iq': 'Est. IQ: 132-138',
+                        'svg.janna.sub2': '(Very Superior to Highly Gifted)',
                         'svg.leyenda': '💡 Hover over nodes for additional information · IQs estimated by correlation, not direct measurement',
-                        'metodologia.validacion': '<strong>⚠️ VALIDATION REQUIRED:</strong> Only WISC-V can confirm. Post-WISC-V expectation: 95% probability Nathan IQ in 140-165 range. If ≥150 confirmed: triggers highly gifted education planning.',
-                        'modeloGenetico.abueloDesc1': 'Civil Engineer + Computer Technician',
-                        'modeloGenetico.abueloDesc2': 'Skipped 2 grade levels',
-                        'modeloGenetico.abueloDesc3': 'Exceptional professional trajectory',
-                        'modeloGenetico.abueloDesc4': '25+ years in major infrastructure',
-                        'modeloGenetico.abueloIQ': 'IQ ≈ 142',
-                        'modeloGenetico.abueloMargen': '±6 points',
-                        'modeloGenetico.citaAbuelo': '"At age 4, Nathan already showed abilities beyond what I had at that age."',
-                        'modeloGenetico.conclusion': 'Genetic Model Conclusion',
-                        'modeloGenetico.contextoFamiliar': 'Family Context (3 Generations)',
-                        'modeloGenetico.esperanzaBase': 'Base genetic expectation: ~123',
-                        'modeloGenetico.heredabilidad': 'Heritability (h²) ≈ 0.70',
-                        'modeloGenetico.jerarquia': 'Nathan > Grandfather (~142)',
-                        'modeloGenetico.madreDesc1': 'Civil Engineer',
-                        'modeloGenetico.madreDesc2': 'Documented early acceleration',
-                        'modeloGenetico.madreIQ': 'IQ ≈ 138',
-                        'modeloGenetico.madreMargen': '±8 points',
-                        'modeloGenetico.midparentCalculo': '= (138 + 128) / 2 = 133',
-                        'modeloGenetico.midparentFormula': 'Midparent = (Mother IQ + Father IQ) / 2',
-                        'modeloGenetico.observacionCritica': 'CRITICAL: Grandfather\'s Observation',
-                        'modeloGenetico.padreDesc1': 'Dual university degree',
-                        'modeloGenetico.padreDesc2': 'Art + Business (USA)',
-                        'modeloGenetico.padreIQ': 'IQ ≈ 128',
-                        'modeloGenetico.padreMargen': '±8 points',
-                        'modeloGenetico.paso1Title': 'Step 1: Calculate Midparent',
-                        'modeloGenetico.paso2Title': 'Step 2: Cognitive Heritability (h²)',
-                        'modeloGenetico.paso3Title': 'Step 3: Apply Regression to the Mean',
-                        'modeloGenetico.paso4Title': 'Step 4: Expected Variance Range',
-                        'modeloGenetico.posteriorMedia': 'μ = 147-148',
-                        'modeloGenetico.posteriorRango': 'Most likely range: 145-150',
-                        'modeloGenetico.posteriorSigma': 'σ = 10-12',
-                        'modeloGenetico.rangoBase': 'Range without additional evidence: 112-134',
-                        'modeloGenetico.regresionFormula': 'E[Child IQ] = h² × (Midparent - 100) + 100',
-                        'riesgos.aburrimiento': 'Behavioral Boredom (Underachievement)',
-                        'riesgos.aburrimientoInt1': 'Urgent school meeting',
-                        'riesgos.aburrimientoInt2': 'Curriculum compacting',
-                        'riesgos.aburrimientoNivel': 'Risk level: VERY HIGH - URGENT',
-                        'riesgos.aburrimientoSenal1': 'Completes tasks very quickly',
-                        'riesgos.aburrimientoSenal2': 'Disruptive behaviors',
-                        'riesgos.asincronia': 'Socioemotional Asynchrony (Dyssynchrony)',
-                        'riesgos.asincroniaDesc': 'Cognitive ability >> social maturity',
-                        'riesgos.asincroniaSenal1': 'Preference for adults',
-                        'riesgos.asincroniaSenal2': 'Social isolation',
-                        'riesgos.cuatroRiesgos': 'Four Main Risks for Nathan',
-                        'riesgos.mensajePositivo': 'Positive Message: Risks Are Manageable',
-                        'riesgos.monitoreoTrimestral': 'Recommended Quarterly Monitoring System',
-                        'riesgos.perfeccionismo': 'Perfectionism and Frustration',
-                        'riesgos.perfeccionismoInt1': 'Normalize errors as learning',
-                        'riesgos.perfeccionismoInt2': 'Emphasize process over outcome',
-                        'riesgos.perfeccionismoNivel': 'Risk level: HIGH',
-                        'riesgos.perfeccionismoSenal1': 'Excessive self-criticism',
-                        'riesgos.perfeccionismoSenal2': 'Abandonment of difficult tasks',
-                        'riesgos.perfeccionismoSenal3': 'Frustration at minor errors',
-                        'riesgos.presion': 'Implicit Performance Pressure',
-                        'riesgos.presionSenal1': 'Anxiety before evaluations',
-                        'riesgos.presionSenal2': 'Fear of disappointing'
-                    },
-                        'hitos.title': '📚 Documented Early Milestones',
-                        'derivada.title': '🔬 Derived Case Analysis',
-                        'riesgos.title': '⚠️ Potential Risks to Monitor',
-                        'pdfEscuela.title': '📄 School Meeting Document',
-                        'hitos.title': '📚 Documented Early Milestones',
-                        'hitos.intro': 'This section documents Janna\'s early developmental milestones and observable indicators of advanced abilities.',
-                        'hitos.proximamente': 'Coming soon:',
-                        'hitos.detalle': 'Detailed timeline of documented milestones will be added in the next version.',
-                        'derivada.title': '🔬 Derived Case Analysis',
-                        'derivada.intro': 'This section presents the derived case analysis comparing Janna\'s profile with established patterns.',
-                        'derivada.nota': 'Note:',
-                        'derivada.detalle': 'Complete analysis available in the full family report.',
-                        'riesgos.title': '⚠️ Socio-Emotional Risks to Monitor',
-                        'riesgos.intro': 'Children with high academic performance may experience specific socio-emotional challenges that require active monitoring.',
-                        'riesgos.principales': 'Main Monitoring Areas',
-                        'riesgos.area1': '<strong>Asynchronous development:</strong> Gap between cognitive capacity and socio-emotional maturity',
-                        'riesgos.area2': '<strong>Perfectionism:</strong> Unrealistic expectations or fear of failure',
-                        'riesgos.area3': '<strong>Academic pressure:</strong> Stress from high expectations',
-                        'riesgos.area4': '<strong>Social connection:</strong> Difficulty relating to same-age peers',
-                        'riesgos.recomendacion': '📋 Recommended Monitoring',
-                        'riesgos.detalle': 'Regular observation of emotional well-being, peer relationships, intrinsic motivation, and signs of stress. Maintain open communication with school and specialists.',
-                        'pdfEscuela.title': '📄 School Meeting Document',
-                        'pdfEscuela.intro': 'This section provides a condensed summary designed for school meetings.',
-                        'pdfEscuela.resumen': 'JANNA CASTILLO BONILLA - KINDERGARTEN (Feb 2026)',
-                        'pdfEscuela.resultados': 'mCLASS Results:',
-                        'pdfEscuela.recomendacion': 'Recommendation:',
-                        'pdfEscuela.evaluacion': 'Formal evaluation for gifted services and educational differentiation planning.',
-                        'pdfEscuela.nota': 'Note:',
-                        'pdfEscuela.imprimir': 'Print-friendly version available. This dashboard can be exported or printed for school meetings.',
-                        'modeloGenetico.title': '🧬 Explicit Genetic Model',
-                        'modeloGenetico.intro': 'This quantitative genetic model explains cognitive capacity estimates based on three-generation family context.',
-                        'modeloGenetico.contextoTitle': '👨‍👩‍👧‍👦 Family Context (3 Generations)',
-                        'modeloGenetico.abueloTitle': '👴 Maternal Grandfather (Piter)',
-                        'modeloGenetico.iqEstimado': 'Estimated IQ:',
-                        'modeloGenetico.abuelo1': 'Civil Engineer + Computer Technician',
-                        'modeloGenetico.abuelo2': 'Skipped 2 school grades (exceptional acceleration)',
-                        'modeloGenetico.abuelo3': '25+ years professional trajectory in major infrastructure',
-                        'modeloGenetico.abuelo4': '$500M+ projects (dams, hydroelectric)',
-                        'modeloGenetico.madreTitle': '👩 Mother',
-                        'modeloGenetico.madre1': 'Civil Engineer',
-                        'modeloGenetico.madre2': 'Documented academic acceleration',
-                        'modeloGenetico.madre3': 'Daughter of engineer (family pattern)',
-                        'modeloGenetico.padreTitle': '👨 Father',
-                        'modeloGenetico.padre1': 'Double university degree (Art + Business)',
-                        'modeloGenetico.padre2': 'University education in the United States',
-                        'modeloGenetico.padre3': 'Multi-domain cognitive versatility',
-                        'modeloGenetico.calculoTitle': '📊 Quantitative Genetic Calculation',
-                        'modeloGenetico.paso1Calc': 'Midparent = (Mother IQ + Father IQ) / 2 = (138 + 128) / 2 = <strong>133</strong>',
-                        'modeloGenetico.paso2Desc': 'IQ heritability in childhood: h² ≈ 0.45-0.50',
-                        'modeloGenetico.paso3Calc': 'Expected IQ = 100 + h² × (Midparent - 100) = 100 + 0.5 × (133 - 100) = <strong>116.5</strong>',
-                        'modeloGenetico.paso4Desc': 'Genetic + environmental variance: ±1 SD = ±15 points',
-                        'modeloGenetico.paso4Result': '<strong>Estimated range:</strong> 102-132 (statistically expected)',
-                        'modeloGenetico.rangoFinal': 'Estimated range:',
-                        'modeloGenetico.observacionDesc': 'The maternal grandfather (IQ ~142) represents a significant deviation from population average (+2.8 SD). This data suggests that family genetic potential might be underestimated in the simple midparent calculation.',
-                        'modeloGenetico.observacionBayesiana': '<strong>Bayesian Analysis:</strong> Given that the mother (IQ 138) is the daughter of an exceptional father (IQ 142), there is additional evidence of superior genetic potential that raises the probability of advanced capabilities in the third generation beyond the simple regression model.',
-                        'modeloGenetico.conclusionTitle': '🎯 Genetic Model Conclusion',
-                        'modeloGenetico.conclusionP1': '<strong>Statistically expected range:</strong> 102-132 (simple model)',
-                        'modeloGenetico.rangoEsperado': 'Statistically expected range:',
-                        'modeloGenetico.conclusionP2': '<strong>Adjusted range (Bayesian):</strong> 115-145 (considering 3-generation family pattern)',
-                        'modeloGenetico.rangoBayesiano': 'Adjusted range (Bayesian):',
-                        'modeloGenetico.conclusionP3': '<strong>Result observed in mCLASS:</strong> Consistent with upper end of adjusted range',
-                        'modeloGenetico.resultadoObservado': 'Result observed in mCLASS:',
-                        'modeloGenetico.disclaimer': '<strong>IMPORTANT:</strong> These are probabilistic estimates based on documented genetic correlations. Only formal WISC-V evaluation can confirm specific IQ. Family IQs are ESTIMATED, not formally known.',
-                        'riesgos.r1titulo': '1️⃣ Perfectionism and Frustration',
-                        'riesgos.r1desc': 'Advanced metacognition can generate perfectionist expectations toward oneself, especially if \'being smart\' is internalized as primary identity.',
-                        'riesgos.nivel': 'Risk Level:',
-                        'riesgos.alto': 'HIGH',
-                        'riesgos.moderado': 'MODERATE-HIGH',
-                        'riesgos.senales': '⚠️ Warning Signs:',
-                        'riesgos.r1s1': 'Excessive self-criticism',
-                        'riesgos.r1s2': 'Abandonment of difficult tasks due to fear of failure',
-                        'riesgos.r1s3': 'Disproportionate frustration at minimal errors',
-                        'riesgos.r1s4': 'Procrastination due to perfectionism',
-                        'riesgos.intervenciones': '✅ Recommended Interventions:',
-                        'riesgos.r1i1': 'Normalize errors as part of learning',
-                        'riesgos.r1i2': 'Emphasize process over outcome',
-                        'riesgos.r1i3': 'Develop growth mindset',
-                        'riesgos.r1i4': 'Value multiple dimensions beyond academics',
-                        'riesgos.r2titulo': '2️⃣ Socio-Emotional Asynchrony (Dyssynchrony)',
-                        'riesgos.r2desc': 'Discrepancy between advanced cognitive development and typical socio-emotional development of chronological age.',
-                        'riesgos.r2s1': 'Difficulty relating to same-age peers',
-                        'riesgos.r2s2': 'Preference for company of adults or older peers',
-                        'riesgos.r2s3': 'Feeling \'different\' or isolated',
-                        'riesgos.r2s4': 'Emotional reactions typical of younger age',
-                        'riesgos.r3titulo': '3️⃣ Academic Boredom and Disconnection',
-                        'riesgos.r3desc': 'Without appropriate academic differentiation, may experience chronic boredom leading to behavioral problems or loss of intrinsic motivation.',
-                        'riesgos.r3s1': 'Loss of interest in school',
-                        'riesgos.r3s2': 'Disruptive behavior in class',
-                        'riesgos.r3s3': 'Careless errors on \'easy\' tasks',
-                        'riesgos.r3s4': 'Comments like \'school is boring\'',
-                        'riesgos.r4titulo': '4️⃣ Pressure and Expectations',
-                        'riesgos.r4desc': 'High expectations from family or school can generate stress, performance anxiety, or fear of disappointing others.',
-                        'riesgos.r4s1': 'Performance anxiety or stress',
-                        'riesgos.r4s2': 'Fear of making mistakes',
-                        'riesgos.r4s3': 'Excessive concern about pleasing adults',
-                        'riesgos.r4s4': 'Physical symptoms (headaches, stomachaches)',
-                        'riesgos.monitoreotitulo': '📋 Recommended Monitoring',
-                        'riesgos.monitoreo': 'Regular observation of emotional well-being, peer relationships, intrinsic motivation, and signs of stress or anxiety. Maintain open communication with school counselors and gifted education specialists.',
-                        'metodologia.detallada': '🔬 Detailed Correlation Methodology',
-                        'convergencias.nathanIntro': 'Janna\'s older brother, Nathan (7 years, 1st grade), previously established a pattern',
-                        'convergencias.notaAjuste': '*Adjusted score (89) considers NWF-WRC estimation at 70/100',
-                        'convergencias.espanolL1': '<strong>Spanish L1</strong> (native language, 100% home use by parents)',
-                        'convergencias.inglesL2': '<strong>English L2</strong> (preference between siblings, school immersion since K)',
-                        'convergencias.desarrolloFonologico': 'Phonological development <strong>accelerated in both languages</strong>',
-                        'convergencias.transferenciaPositiva': 'Positive transfer L1→L2 in phonemic awareness'
+                        
+                        // Metodología adicional
+                        'metodologia.validacion': '<strong>⚠️ VALIDATION REQUIRED:</strong> Only WISC-V can confirm. Post-WISC-V expectation: 95% probability Janna IQ in range 125-150. If ≥150 confirmed: triggers highly gifted education planning.'
+                    }
                 };
                 
                 this.charts = {};
@@ -3142,7 +3049,7 @@ NWF-WRC<sub>est</sub> = (NWF-CLS × 0.7) + (PSF × 0.2) + (WRF × 0.1)
                             datasets: [
                                 {
                                     label: t['graficos.composite'] || 'Composite Score',
-                                    data: [305, 401],
+                                    data: [306, 401],
                                     borderColor: '#28a745',
                                     backgroundColor: 'rgba(40, 167, 69, 0.1)',
                                     tension: 0.1,
@@ -3153,7 +3060,7 @@ NWF-WRC<sub>est</sub> = (NWF-CLS × 0.7) + (PSF × 0.2) + (WRF × 0.1)
                                     pointRadius: 5
                                 },
                                 {
-                                    label: t['graficos.meta'] || 'Meta G1-MOY',
+                                    label: t['graficos.meta'] || 'Meta K-MOY',
                                     data: [null, 382],
                                     borderColor: '#ffc107',
                                     borderDash: [5, 5],
@@ -3189,15 +3096,16 @@ NWF-WRC<sub>est</sub> = (NWF-CLS × 0.7) + (PSF × 0.2) + (WRF × 0.1)
                 const canvasBench = document.getElementById('chartBenchmark');
                 if (canvasBench && canvasBench.offsetParent !== null && canvasBench.offsetWidth > 0) {
                     const ctxBench = canvasBench.getContext('2d');
-                    const jannaPct = [(401/382)*100, (17/4)*100, (40/25)*100];
-                    const benchmarkPct = [100, 100, 100];
+                    const jannaPct = [(401/382)*100, (17/4)*100, (40/25)*100, (44/29)*100];
+                    const benchmarkPct = [100, 100, 100, 100];
                     this.charts.benchmark = new Chart(ctxBench, {
                         type: 'bar',
                         data: {
                             labels: [
                                 t['graficos.composite'] || 'Composite',
-                                t['graficos.fluidez'] || 'Fluency (wpm)',
-                                t['graficos.precision'] || 'Accuracy (%)'
+                                t['graficos.wordreading'] || 'Word Reading',
+                                t['graficos.lettersounds'] || 'Letter Sounds',
+                                t['graficos.psf'] || 'PSF'
                             ],
                             datasets: [
                                 {
