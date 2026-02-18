@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informe Captura 3D · CHCNAV RS10 vs Matterport Pro3</title>
+    <!-- Font Awesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+        }
+        body {
+            background: #f4f7fc;
+            color: #1e2b3a;
+            line-height: 1.5;
+        }
+        .header {
+            background: linear-gradient(145deg, #0b2b44, #123b5e);
+            color: white;
+            padding: 2rem 2rem 1.5rem;
+            box-shadow: 0 6px 18px rgba(0,20,40,0.3);
+        }
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            letter-spacing: -0.5px;
+        }
+        .header h1 strong {
+            font-weight: 600;
+            color: #ffd966;
+        }
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-top: 0.5rem;
+        }
+        .header .meta {
+            display: flex;
+            gap: 2rem;
+            margin-top: 1.5rem;
+            font-size: 0.95rem;
+            border-top: 1px solid #2a577b;
+            padding-top: 1rem;
+        }
+        /* contenedor de pestañas */
+        .tabs-container {
+            max-width: 1400px;
+            margin: 2rem auto;
+            background: white;
+            border-radius: 28px 28px 18px 18px;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
+            overflow: hidden;
+        }
+        .tab-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            background: #eef2f6;
+            border-bottom: 2px solid #cbd5e1;
+        }
+        .tab-btn {
+            padding: 1rem 1.8rem;
+            background: transparent;
+            border: none;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #2c3e50;
+            cursor: pointer;
+            transition: all 0.2s;
+            border-right: 1px solid #cdd9e9;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .tab-btn i {
+            font-size: 1.2rem;
+            color: #1e4a76;
+        }
+        .tab-btn:hover {
+            background: #e2e8f0;
+        }
+        .tab-btn.active {
+            background: white;
+            color: #0c4a6e;
+            border-bottom: 4px solid #0c4a6e;
+            margin-bottom: -2px;
+        }
+        .tab-pane {
+            display: none;
+            padding: 2.5rem 2rem;
+            background: white;
+        }
+        .tab-pane.active {
+            display: block;
+        }
+        h2 {
+            font-size: 2rem;
+            font-weight: 500;
+            border-left: 8px solid #0c4a6e;
+            padding-left: 1.2rem;
+            margin-bottom: 2rem;
+            color: #0b2b44;
+        }
+        h3 {
+            font-size: 1.5rem;
+            font-weight: 500;
+            margin: 2rem 0 1rem;
+            color: #1e405e;
+        }
+        h4 {
+            font-weight: 600;
+            color: #1e3a5f;
+            margin: 1.2rem 0 0.5rem;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+        }
+        th {
+            background: #f1f6fa;
+            font-weight: 600;
+            text-align: left;
+            padding: 14px 12px;
+            font-size: 0.95rem;
+            color: #0c4a6e;
+        }
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #e6edf4;
+            vertical-align: top;
+        }
+        tr:last-child td {
+            border-bottom: none;
+        }
+        .badge {
+            display: inline-block;
+            background: #dbeafe;
+            color: #1e3a8a;
+            border-radius: 40px;
+            padding: 0.25rem 0.9rem;
+            font-weight: 600;
+            font-size: 0.8rem;
+            margin-right: 0.5rem;
+        }
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.8rem;
+            margin: 2rem 0;
+        }
+        .card {
+            background: #f9fcff;
+            border-radius: 20px;
+            padding: 1.8rem 1.5rem;
+            border: 1px solid #dde7f0;
+            box-shadow: 0 8px 18px -6px rgba(0,40,80,0.1);
+        }
+        .card i {
+            font-size: 2.5rem;
+            color: #1e4a76;
+            margin-bottom: 0.8rem;
+        }
+        .metric {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #022b49;
+        }
+        .progress-bar {
+            background: #e2e8f0;
+            height: 24px;
+            border-radius: 40px;
+            margin: 0.8rem 0;
+            overflow: hidden;
+        }
+        .progress-fill {
+            background: #0c4a6e;
+            height: 100%;
+            color: white;
+            font-size: 0.8rem;
+            padding-left: 8px;
+            line-height: 24px;
+        }
+        .flex-chart {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        .legend {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 6px;
+        }
+        .checklist {
+            list-style: none;
+        }
+        .checklist li {
+            margin: 0.7rem 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+        .checklist li i {
+            color: #0b7d3b;
+            font-size: 1.2rem;
+            min-width: 24px;
+        }
+        hr {
+            border: none;
+            border-top: 2px dashed #bcd0e5;
+            margin: 2rem 0;
+        }
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: #4b6b88;
+            font-size: 0.9rem;
+        }
+        @media (max-width: 800px) {
+            .tab-btn { padding: 0.8rem 1rem; font-size: 0.9rem; }
+            .header h1 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1><strong>Captura 3D profesional</strong> · CHCNAV RS10 vs Matterport Pro3</h1>
+        <p>Análisis, implementación y estrategia comercial · Documento maestro v1.0</p>
+        <div class="meta">
+            <span><i class="fas fa-calendar-alt"></i> 18 Febrero 2026</span>
+            <span><i class="fas fa-user-tie"></i> Piter J. Bonilla D.</span>
+            <span><i class="fas fa-globe-americas"></i> Mercado EE.UU.</span>
+        </div>
+    </div>
+
+    <div class="tabs-container">
+        <div class="tab-buttons" id="tabButtons">
+            <button class="tab-btn active" data-tab="resumen"><i class="fas fa-compass"></i> Resumen</button>
+            <button class="tab-btn" data-tab="tecnica"><i class="fas fa-microchip"></i> Comparativa técnica</button>
+            <button class="tab-btn" data-tab="flujos"><i class="fas fa-diagram-project"></i> Flujos de trabajo</button>
+            <button class="tab-btn" data-tab="productos"><i class="fas fa-cube"></i> Productos & entregables</button>
+            <button class="tab-btn" data-tab="costos"><i class="fas fa-chart-line"></i> Costos y ROI</button>
+            <button class="tab-btn" data-tab="mercado"><i class="fas fa-store"></i> Aplicaciones</button>
+            <button class="tab-btn" data-tab="estrategia"><i class="fas fa-chess-queen"></i> Estrategia</button>
+            <button class="tab-btn" data-tab="operativo"><i class="fas fa-clipboard-check"></i> SOP & checklists</button>
+        </div>
+
+        <!-- PANELES -->
+        <!-- RESUMEN EJECUTIVO -->
+        <div class="tab-pane active" id="resumen">
+            <h2>📌 Resumen ejecutivo</h2>
+            <p style="font-size:1.2rem">El mercado de captura 3D converge dos necesidades distintas: <strong>precisión técnica</strong> (ingeniería/construcción) e <strong>inmersión visual</strong> (marketing/comercial). <br>Ninguna solución única satisface ambas de forma óptima.</p>
+            <div class="card-grid">
+                <div class="card">
+                    <i class="fas fa-satellite-dish"></i>
+                    <h3>CHCNAV RS10</h3>
+                    <p>Instrumento de medición geoespacial con GNSS RTK + LiDAR + SLAM. Precisión absoluta <5 cm, relativa <1 cm. Ideal para topografía, BIM, as-built, ingeniería.</p>
+                    <span class="badge">precisión</span><span class="badge">georreferenciación</span>
+                </div>
+                <div class="card">
+                    <i class="fas fa-vr-cardboard"></i>
+                    <h3>Matterport Pro3</h3>
+                    <p>Plataforma de gemelos digitales inmersivos. Captura 360° HDR + LiDAR, procesamiento automático en nube. Tours virtuales, planos esquemáticos, facility management.</p>
+                    <span class="badge">visualización</span><span class="badge">velocidad</span>
+                </div>
+            </div>
+            <h3>Modelo híbrido ganador</h3>
+            <p>La estrategia más rentable en EE.UU. es usar <strong>Matterport para el 80-90% de proyectos</strong> (visualización) y <strong>RS10 para el 10-20%</strong> que requiere precisión técnica. Venta cruzada, entregas escalonadas, máximo aprovechamiento.</p>
+            <div class="progress-bar" style="width:80%; margin:2rem auto"><div class="progress-fill" style="width:80%">80% Matterport</div></div>
+            <div class="progress-bar" style="width:20%; margin:2rem auto"><div class="progress-fill" style="width:100%">20% RS10</div></div>
+            <p><i class="fas fa-check-circle" style="color:#166534;"></i> ROI más rápido con Matterport; mayor ingreso por proyecto con RS10.</p>
+        </div>
+
+        <!-- COMPARATIVA TÉCNICA -->
+        <div class="tab-pane" id="tecnica">
+            <h2>⚙️ Análisis técnico comparativo</h2>
+            <table>
+                <tr><th>Característica</th><th>CHCNAV RS10</th><th>Matterport Pro3</th></tr>
+                <tr><td>Tecnología base</td><td>GNSS RTK + LiDAR + SLAM</td><td>LiDAR + Fotogrametría 360° HDR</td></tr>
+                <tr><td>Precisión absoluta</td><td>< 5 cm (con correcciones)</td><td>No aplica (coordenadas relativas)</td></tr>
+                <tr><td>Precisión relativa</td><td>< 1 cm</td><td>±1-2% distancia (≈ ±2 cm a 10 m)</td></tr>
+                <tr><td>Rango de escaneo</td><td>0.05 – 120 m</td><td>Hasta 100 m (modo extendido)</td></tr>
+                <tr><td>Georreferenciación</td><td>Absoluta (coordenadas reales)</td><td>Relativa (sistema local)</td></tr>
+                <tr><td>Densidad nube puntos</td><td>Muy alta (millones ptos/m²)</td><td>Media-alta (optimizada visual)</td></tr>
+                <tr><td>Textura fotográfica</td><td>Limitada (opcional externa)</td><td>Excelente (HDR integrado)</td></tr>
+                <tr><td>Flujo procesamiento</td><td>Post-proceso en PC (CoPre, CGO)</td><td>Automático en nube (Cortex AI)</td></tr>
+                <tr><td>Software principal</td><td>CoPre, CGO, SmartGo, LandStar</td><td>Matterport Cloud, Workspace</td></tr>
+                <tr><td>Portabilidad</td><td>Portátil 1.9 kg, IP64, baterías intercambiables</td><td>Trípode, menos robusto en exteriores hostiles</td></tr>
+                <tr><td>Curva aprendizaje</td><td>Alta (topografía + CAD)</td><td>Baja (días)</td></tr>
+            </table>
+            <h3>Capacidades clave</h3>
+            <div class="card-grid">
+                <div class="card"><i class="fas fa-ruler"></i> <strong>RS10</strong><br>Control dimensional, integración BIM, topografía combinada interior/exterior, as-built de instalaciones.</div>
+                <div class="card"><i class="fas fa-camera-retro"></i> <strong>Matterport</strong><br>Marketing inmobiliario, planos instantáneos, home staging virtual, facility management remoto.</div>
+            </div>
+        </div>
+
+        <!-- FLUJOS DE TRABAJO -->
+        <div class="tab-pane" id="flujos">
+            <h2>📋 Flujos de trabajo detallados</h2>
+            <div class="flex-chart">
+                <div style="flex:1; min-width:260px">
+                    <h4>CHCNAV RS10 (aprox. 15-30 h total)</h4>
+                    <ul class="checklist">
+                        <li><i class="fas fa-check-circle" style="color:#0c4a6e;"></i> Planificación geodésica (1-2h)</li>
+                        <li><i class="fas fa-check-circle" style="color:#0c4a6e;"></i> Captura caminando 1-2h</li>
+                        <li><i class="fas fa-check-circle" style="color:#0c4a6e;"></i> Post-proceso en CoPre 4-8h</li>
+                        <li><i class="fas fa-check-circle" style="color:#0c4a6e;"></i> Vectorización CAD 8-20h</li>
+                        <li><i class="fas fa-check-circle" style="color:#0c4a6e;"></i> Personal: técnico + delineante</li>
+                    </ul>
+                </div>
+                <div style="flex:1; min-width:260px">
+                    <h4>Matterport Pro3 (aprox. 3-6 h)</h4>
+                    <ul class="checklist">
+                        <li><i class="fas fa-clock" style="color:#1f7a3b;"></i> Planificación estaciones 30min</li>
+                        <li><i class="fas fa-clock" style="color:#1f7a3b;"></i> Captura 45-60 min</li>
+                        <li><i class="fas fa-clock" style="color:#1f7a3b;"></i> Procesamiento automático 1-3h</li>
+                        <li><i class="fas fa-clock" style="color:#1f7a3b;"></i> Personalización 1-2h</li>
+                        <li><i class="fas fa-clock" style="color:#1f7a3b;"></i> Un solo operador</li>
+                    </ul>
+                </div>
+            </div>
+            <h3>Diagrama de flujo híbrido</h3>
+            <pre style="background:#f0f5fb;padding:1.5rem;border-radius:20px;font-family:monospace;overflow-x:auto">
+ Captura Matterport (rápida) → Tour en 24h + oferta de valor → Captura RS10 selectiva (si aplica) → entrega diferida de planos técnicos.
+            </pre>
+            <p><i class="fas fa-arrow-right"></i> Ver sección 19 para detalles del modelo dual.</p>
+        </div>
+
+        <!-- PRODUCTOS Y ENTREGABLES -->
+        <div class="tab-pane" id="productos">
+            <h2>📦 Productos procesados y entregables</h2>
+            <table>
+                <tr><th>Producto</th><th>CHCNAV RS10</th><th>Matterport Pro3</th></tr>
+                <tr><td>Nube de puntos</td><td>Alta densidad, georreferenciada (.las/.e57)</td><td>Media-alta, coordenadas locales (MatterPak .e57/.obj)</td></tr>
+                <tr><td>Planos 2D (DWG)</td><td>Precisión centimétrica, capas AIA, dibujo manual</td><td>Esquemáticos, automáticos (±2%)</td></tr>
+                <tr><td>Modelos BIM (RVT/IFC)</td><td>Alta fidelidad, LOD 200-400</td><td>Solo malla OBJ (requiere remapeo)</td></tr>
+                <tr><td>Tours virtuales</td><td>Posible con post-proceso adicional</td><td>Estrella: interactivo, dollhouse, plano</td></tr>
+                <tr><td>Vídeos 3D</td><td>Requiere animación desde nube</td><td>Automático, fotorealista</td></tr>
+                <tr><td>Informes técnicos</td><td>Detallado (precisión, metodología)</td><td>No aplica</td></tr>
+            </table>
+            <p><span class="badge">RS10</span> ideal para permisos de obra, licitaciones. <span class="badge">Matterport</span> para listados MLS, facility management.</p>
+        </div>
+
+        <!-- COSTOS Y ROI -->
+        <div class="tab-pane" id="costos">
+            <h2>💰 Costos, personal y retorno de inversión</h2>
+            <h3>Hardware / software</h3>
+            <table>
+                <tr><th>Concepto</th><th>CHCNAV RS10</th><th>Matterport Pro3</th></tr>
+                <tr><td>Hardware (equipo + accesorios)</td><td>$10,500 – $12,000</td><td>$4,000 – $6,500</td></tr>
+                <tr><td>Software / licencias</td><td>CoPre (incluido), CGO (licencia), CAD (~$1,800/año)</td><td>Suscripción $10-$300/mes; MatterPak ~$50-100/proyecto</td></tr>
+                <tr><td>Suscripciones NTRIP</td><td>$200-500/año</td><td>No aplica</td></tr>
+            </table>
+            <h3>Costos de personal (EE.UU., por hora)</h3>
+            <table>
+                <tr><th>Rol</th><th>Costo/hora</th></tr>
+                <tr><td>Técnico campo RS10</td><td>$25–$35</td></tr>
+                <tr><td>Técnico campo Matterport</td><td>$20–$28</td></tr>
+                <tr><td>Delineante CAD</td><td>$22–$33</td></tr>
+                <tr><td>Modelador BIM</td><td>$30–$43</td></tr>
+            </table>
+            <h3>ROI por proyecto (apartamento 100m²)</h3>
+            <div class="flex-chart">
+                <div style="flex:1">
+                    <p><strong>RS10</strong></p>
+                    <ul>
+                        <li>Coste proyecto: ~$455</li>
+                        <li>Precio venta: $1,500–$3,000</li>
+                        <li>Margen: $1,045–$2,545 (230–560%)</li>
+                    </ul>
+                </div>
+                <div style="flex:1">
+                    <p><strong>Matterport</strong></p>
+                    <ul>
+                        <li>Coste proyecto: ~$72–122</li>
+                        <li>Precio venta: $350–$600</li>
+                        <li>Margen: $277–527 (380–430%)</li>
+                    </ul>
+                </div>
+            </div>
+            <div style="background:#eef2f6;padding:1.5rem;border-radius:20px;">
+                <p><span class="metric">2.5–3.5 meses</span> para recuperar inversión RS10 (2-3 proy/mes).</p>
+                <p><span class="metric">1–1.5 meses</span> para Matterport (8-12 proy/mes).</p>
+            </div>
+        </div>
+
+        <!-- APLICACIONES DE MERCADO -->
+        <div class="tab-pane" id="mercado">
+            <h2>🏢 Campos de aplicación real en EE.UU.</h2>
+            <h3>CHCNAV RS10</h3>
+            <ul>
+                <li>Construcción: As-built, control dimensional (contratistas generales).</li>
+                <li>Ingeniería estructural: análisis de cargas, restauración.</li>
+                <li>Arquitectura: BIM para renovación.</li>
+                <li>Topografía: combinada interior/exterior, MDT.</li>
+                <li>Industria: plantas de proceso, mantenimiento.</li>
+            </ul>
+            <h3>Matterport Pro3</h3>
+            <ul>
+                <li>Bienes raíces residenciales: tours MLS, ventas rápidas.</li>
+                <li>Bienes raíces comerciales: oficinas, naves.</li>
+                <li>Facility management: inspección remota, capacitación.</li>
+                <li>Home staging virtual (Defurnish).</li>
+                <li>Seguros y peritajes: documentación rápida.</li>
+            </ul>
+            <p><i class="fas fa-chart-bar"></i> Tendencias: adopción masiva Matterport en real estate; demanda creciente de precisión BIM; gemelos digitales híbridos.</p>
+        </div>
+
+        <!-- ESTRATEGIA COMERCIAL -->
+        <div class="tab-pane" id="estrategia">
+            <h2>🧠 Estrategia comercial y modelo híbrido</h2>
+            <h3>Matriz de decisión</h3>
+            <table>
+                <tr><th>Necesidad</th><th>Presupuesto/plazo</th><th>Recomendación</th></tr>
+                <tr><td>Vender propiedad rápido</td><td>Medio / inmediato</td><td>Matterport Premium</td></tr>
+                <tr><td>Planos precisos para construcción</td><td>Alto / flexible</td><td>RS10 Planos As-Built</td></tr>
+                <tr><td>Modelo BIM para rehabilitación</td><td>Alto / flexible</td><td>RS10 BIM</td></tr>
+                <tr><td>Documentación local comercial</td><td>Medio / rápido</td><td>Matterport + MatterPak</td></tr>
+                <tr><td>Inspección estructural</td><td>Medio-alto / flexible</td><td>RS10 Inspección</td></tr>
+            </table>
+            <h3>Ejemplo híbrido (ático de lujo)</h3>
+            <p>1. Tour Matterport Élite ($1,000) → venta rápida.<br>2. Oferta descuento 20% para levantamiento técnico de cocina/baño con RS10 ($2,000).<br>El comprador contrata el servicio para reforma. <strong>Venta cruzada y fidelización.</strong></p>
+            <h4>Paquetes de servicios (precios orientativos)</h4>
+            <ul>
+                <li><strong>Matterport Básico:</strong> $350-450</li>
+                <li><strong>Matterport Premium:</strong> $550-750</li>
+                <li><strong>RS10 Nube básica:</strong> $800-1,500</li>
+                <li><strong>RS10 Planos As-Built:</strong> $2,500-5,000</li>
+                <li><strong>RS10 BIM:</strong> $5,000-10,000+</li>
+                <li><strong>Híbrido venta+renovación:</strong> $3,500-6,000</li>
+            </ul>
+        </div>
+
+        <!-- SOP y CHECKLISTS -->
+        <div class="tab-pane" id="operativo">
+            <h2>📋 Herramientas operativas (SOP, checklists, carpetas)</h2>
+            <h3>Estructura de carpetas RS10 (extracto)</h3>
+            <pre style="background:#f0f5fb;padding:1rem;border-radius:16px;font-size:0.9rem">
+[ID]_[Cliente]_RS10/
+├── 01_Documentacion/
+├── 02_Datos_Brutos/
+├── 03_Procesados/Nube_Filtrada/
+├── 04_Planos_DWG/
+└── 06_Informes/
+            </pre>
+            <h3>Estructura Matterport</h3>
+            <pre style="background:#f0f5fb;padding:1rem;border-radius:16px;font-size:0.9rem">
+[ID]_[Cliente]_MTR/
+├── 01_Tour_Virtual/
+├── 02_Videos/
+├── 03_Planos/
+├── 04_Exportaciones_3D/ (MatterPak)
+└── 05_Marketing/
+            </pre>
+            <h4>Checklist QC RS10 (resumen)</h4>
+            <ul class="checklist">
+                <li><i class="fas fa-check"></i> ¿Cierre SLAM < 3cm?</li>
+                <li><i class="fas fa-check"></i> ¿Nube georreferenciada (EPSG)?</li>
+                <li><i class="fas fa-check"></i> ¿Planos DWG con capas AIA?</li>
+            </ul>
+            <h4>Checklist Matterport</h4>
+            <ul class="checklist">
+                <li><i class="fas fa-check"></i> Tour navegable en Chrome/Safari</li>
+                <li><i class="fas fa-check"></i> Imágenes HDR correctas</li>
+                <li><i class="fas fa-check"></i> Planos automáticos sin errores graves</li>
+            </ul>
+            <p><i class="fas fa-file-contract"></i> Plantillas de propuesta y correos de entrega disponibles en sección 16.</p>
+        </div>
+    </div>
+
+    <footer>
+        <i class="fas fa-copyright"></i> Piter J. Bonilla D. · Informe maestro v1.0 · Feb 2026 · Basado en análisis CHCNAV RS10 y Matterport Pro3.
+    </footer>
+
+    <script>
+        (function() {
+            const buttons = document.querySelectorAll('.tab-btn');
+            const panes = document.querySelectorAll('.tab-pane');
+
+            function activateTab(tabId) {
+                panes.forEach(p => p.classList.remove('active'));
+                buttons.forEach(b => b.classList.remove('active'));
+
+                const activePane = document.getElementById(tabId);
+                if (activePane) activePane.classList.add('active');
+
+                const activeBtn = Array.from(buttons).find(b => b.dataset.tab === tabId);
+                if (activeBtn) activeBtn.classList.add('active');
+            }
+
+            buttons.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const tabId = btn.dataset.tab;
+                    activateTab(tabId);
+                });
+            });
+
+            // activar por defecto resumen
+            activateTab('resumen');
+        })();
+    </script>
+</body>
+</html>
