@@ -303,16 +303,46 @@
             border-top: 1px solid #d4e2f0;
         }
 
+        /* Tooltip para ITBIS */
+        .itbis-tooltip {
+            border-bottom: 1px dashed #f5b041;
+            cursor: help;
+            position: relative;
+            font-weight: 600;
+        }
+        .itbis-tooltip:hover::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 150%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #123b5e;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            white-space: nowrap;
+            z-index: 10;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        /* ESTILOS DE IMPRESIÓN: TODAS LAS PESTAÑAS VISIBLES, CADA UNA EN PÁGINA NUEVA */
         @media print {
             body { background: white; padding: 0; }
-            .container { box-shadow: none; }
-            .tabs, .top-actions, .print-top-btn { display: none; }
-            .tab-content { display: block !important; }
-            /* Asegurar que el contenido se muestre completo sin scroll */
-            .content {
-                max-height: none;
-                overflow: visible;
+            .container { box-shadow: none; max-width: 100%; border-radius: 0; }
+            .tabs, .top-actions, .print-top-btn, footer { display: none; }
+            .tab-content { 
+                display: block !important; 
+                opacity: 1 !important; 
+                visibility: visible !important;
+                page-break-after: always; /* salto de página después de cada pestaña */
+                padding: 2rem;
             }
+            /* La primera pestaña no necesita salto antes */
+            .tab-content:first-of-type { page-break-after: always; }
+            .content { padding: 0; max-width: 100%; }
+            h2 { margin-top: 0; }
+            .card, .card-grid, table { break-inside: avoid; }
         }
 
         @media (max-width: 768px) {
@@ -357,6 +387,7 @@
             <button class="tab" data-tab="tiempo" data-key="tab.tiempo"><i class="fas fa-calendar-alt"></i> Dimensión temporal</button>
             <button class="tab" data-tab="casos" data-key="tab.casos"><i class="fas fa-hard-hat"></i> Casos de uso</button>
             <button class="tab" data-tab="ventajas" data-key="tab.ventajas"><i class="fas fa-rocket"></i> Ventajas</button>
+            <button class="tab" data-tab="estrategico" data-key="tab.estrategico"><i class="fas fa-chart-line"></i> Análisis Estratégico</button>
         </div>
 
         <div class="content">
@@ -402,7 +433,7 @@
                     <div class="card">
                         <i class="fas fa-list-ul"></i>
                         <h3 data-key="componentes.listas.titulo">Listas maestras</h3>
-                        <p data-key="componentes.listas.desc">Materiales (con ITBIS), equipos (costos horarios), mano de obra (salarios base). Códigos únicos, actualización centralizada.</p>
+                        <p data-key="componentes.listas.desc">Materiales (con <span class="itbis-tooltip" data-tooltip="ITBIS: Impuesto a los Materiales (equivalente a IVA, VAT, Sales Tax, GST según el país)">ITBIS</span>), equipos (costos horarios), mano de obra (salarios base). Códigos únicos, actualización centralizada.</p>
                     </div>
                     <div class="card">
                         <i class="fas fa-cubes"></i>
@@ -419,7 +450,8 @@
                         <tr><td data-key="componentes.tabla.mo">Mano de obra</td><td>1,260.00</td><td>1.00</td><td>1,260.00</td></tr>
                         <tr><td><strong data-key="componentes.tabla.total">Total</strong></td><td></td><td></td><td>13,115.55</td></tr>
                     </table>
-                    <p><span class="badge" style="background:#2d6a4f; color:white; padding:0.3rem 1rem; border-radius:20px;" data-key="componentes.itbis">ITBIS transparente</span> <span data-key="componentes.itbis.desc">en cada APU factorizado aparece el impuesto (18%) o "No Aplica" si exento.</span></p>
+                    <p><span class="badge" style="background:#2d6a4f; color:white; padding:0.3rem 1rem; border-radius:20px;" data-key="componentes.itbis"><span class="itbis-tooltip" data-tooltip="ITBIS = Impuesto a los Materiales (IVA, VAT, Sales Tax)">ITBIS</span> transparente</span> <span data-key="componentes.itbis.desc">en cada APU factorizado aparece el impuesto (18%) o "No Aplica" si exento.</span></p>
+                    <p style="font-size:0.9rem; font-style:italic; margin-top:0.5rem;" data-key="componentes.itbis.nota">*ITBIS es el impuesto dominicano a los materiales. Equivalente a IVA (España, Latinoamérica), VAT (Reino Unido), Sales Tax (EE.UU.), GST (Canadá, Australia), etc.</p>
                 </div>
             </div>
 
@@ -435,7 +467,7 @@
                         <tr><td>4</td><td data-key="reportes.r4">Desglose Costos Directos</td><td data-key="reportes.r4.prop">Auditoría estructura</td></tr>
                         <tr><td>5</td><td data-key="reportes.r5">Desglose Costos Indirectos</td><td data-key="reportes.r5.prop">Justificación gastos generales</td></tr>
                         <tr><td>6</td><td data-key="reportes.r6">Desglose Carga Social M.O.</td><td data-key="reportes.r6.prop">Cumplimiento legal / RRHH</td></tr>
-                        <tr><td>7</td><td data-key="reportes.r7">Cuantificación de Materiales</td><td data-key="reportes.r7.prop">Logística y compras</td></tr>
+                        <tr><td>7</td><td data-key="reportes.r7">Cuantificación de Materiales</td><td data-key="reportes.r7.prop">Logística y compras (incluye <span class="itbis-tooltip" data-tooltip="ITBIS = Impuesto a Materiales (IVA/VAT/Sales Tax)">ITBIS</span> implícito)</td></tr>
                         <tr><td>8</td><td data-key="reportes.r8">Cuantificación de Mano de Obra</td><td data-key="reportes.r8.prop">Contratación cuadrillas</td></tr>
                         <tr><td>9</td><td data-key="reportes.r9">APU Factorizados</td><td data-key="reportes.r9.prop">Presentación al cliente</td></tr>
                         <tr><td>10</td><td data-key="reportes.r10">APU Base</td><td data-key="reportes.r10.prop">Control interno (propiedad intelectual)</td></tr>
@@ -534,6 +566,82 @@
                     <p style="font-size:1.3rem;" data-key="ventajas.factorx"><i class="fas fa-bolt"></i> Factor Nx: ingeniería inversa 5x más potente, actualización 100x más rápida.</p>
                 </div>
             </div>
+
+            <!-- PESTAÑA: ANÁLISIS ESTRATÉGICO (con nueva conclusión) -->
+            <div id="estrategico" class="tab-content">
+                <h2 data-key="estrategico.title">📊 Análisis Estratégico: Gestión Paramétrica de Ofertas</h2>
+                
+                <!-- Contexto ENR y brecha -->
+                <div style="background:#eaf2fb; border-radius:24px; padding:2rem; margin-bottom:2rem;">
+                    <h3 data-key="estrategico.brecha.titulo">El ecosistema ENR y la brecha analítica</h3>
+                    <p data-key="estrategico.brecha.desc">Las empresas de primer nivel (ENR Top) utilizan potentes herramientas: ERP (CMiC, Sage), estimación (HeavyBid, WinEst), planeamiento (P6). Sin embargo, existe una <strong>brecha estructural</strong>: estos sistemas registran transacciones pero no reconstruyen paramétricamente la ingeniería de costos. El AC&P opera como una <strong>capa analítica transversal</strong> que traduce la información entre silos.</p>
+                    <table>
+                        <tr><th data-key="estrategico.tabla.herramienta">Herramienta</th><th data-key="estrategico.tabla.funcion">Función</th><th data-key="estrategico.tabla.limite">Limitación analítica</th></tr>
+                        <tr><td>ERP (CMiC, Sage)</td><td data-key="estrategico.tabla.erp.func">Registro financiero, contabilidad</td><td data-key="estrategico.tabla.erp.limite">No desglosa por partida técnica; rigidez para modelar escenarios</td></tr>
+                        <tr><td>Estimación (HeavyBid, WinEst)</td><td data-key="estrategico.tabla.est.func">Presupuestos base, takeoffs</td><td data-key="estrategico.tabla.est.limite">Factores globales, poca integración con cronograma</td></tr>
+                        <tr><td>Planeamiento (P6, MS Project)</td><td data-key="estrategico.tabla.plan.func">Cronogramas, control de plazos</td><td data-key="estrategico.tabla.plan.limite">Sin vínculo nativo con costos unitarios</td></tr>
+                        <tr><td><strong>AC&P</strong></td><td data-key="estrategico.tabla.acyp.func">Capa analítica: doble contabilidad, factorización inversa, APU dinámicos</td><td data-key="estrategico.tabla.acyp.limite">—</td></tr>
+                    </table>
+                </div>
+
+                <!-- Las 4 capas del pricing estratégico -->
+                <h3 data-key="estrategico.capas.titulo">Las cuatro capas del pricing estratégico</h3>
+                <div class="card-grid">
+                    <div class="card">
+                        <i class="fas fa-layer-group"></i>
+                        <h4 data-key="estrategico.capa1.titulo">1. Piso técnico</h4>
+                        <p data-key="estrategico.capa1.desc">Costo base validado por APU. Límite inferior de negociación. Inviolable.</p>
+                    </div>
+                    <div class="card">
+                        <i class="fas fa-bullseye"></i>
+                        <h4 data-key="estrategico.capa2.titulo">2. Punto de cierre</h4>
+                        <p data-key="estrategico.capa2.desc">Precio final negociado, siempre por encima del piso técnico. Optimiza margen.</p>
+                    </div>
+                    <div class="card">
+                        <i class="fas fa-chart-line"></i>
+                        <h4 data-key="estrategico.capa3.titulo">3. Blanco competitivo</h4>
+                        <p data-key="estrategico.capa3.desc">Referencia de mercado (competencia). Guía la calibración del factor.</p>
+                    </div>
+                    <div class="card">
+                        <i class="fas fa-anchor"></i>
+                        <h4 data-key="estrategico.capa4.titulo">4. Ancla estratégica</h4>
+                        <p data-key="estrategico.capa4.desc">Precio inicial alto, crea percepción de valor y margen para concesiones controladas.</p>
+                    </div>
+                </div>
+
+                <!-- Comparación de métodos -->
+                <div style="background:#f9fcff; border-radius:24px; padding:2rem; margin:2rem 0;">
+                    <h3 data-key="estrategico.comparacion.titulo">Comparación: método tradicional vs. paramétrico</h3>
+                    <table>
+                        <tr><th data-key="estrategico.comparacion.aspecto">Aspecto</th><th data-key="estrategico.comparacion.trad">Tradicional (solo ERP/hojas)</th><th data-key="estrategico.comparacion.param">Paramétrico (AC&P)</th></tr>
+                        <tr><td data-key="estrategico.comparacion.ajuste">Ajuste de precio</td><td data-key="estrategico.comparacion.ajuste.trad">Manual, descuentos globales ciegos</td><td data-key="estrategico.comparacion.ajuste.param">Por factores, coherente, recálculo automático</td></tr>
+                        <tr><td data-key="estrategico.comparacion.decision">Toma de decisiones</td><td data-key="estrategico.comparacion.decision.trad">Reactiva, basada en presión</td><td data-key="estrategico.comparacion.decision.param">Proactiva, basada en simulaciones</td></tr>
+                        <tr><td data-key="estrategico.comparacion.margen">Visibilidad del margen</td><td data-key="estrategico.comparacion.margen.trad">Incierto, riesgo de pérdida en partidas</td><td data-key="estrategico.comparacion.margen.param">Conocido y controlado en cada paso</td></tr>
+                    </table>
+                </div>
+
+                <!-- Caso de reconstrucción fiscal (ITBIS con definición) -->
+                <h3 data-key="estrategico.fiscal.titulo">Caso concreto: reconstrucción de impuestos (<span class="itbis-tooltip" data-tooltip="ITBIS = Impuesto a Materiales (IVA, VAT, Sales Tax)">ITBIS</span>)</h3>
+                <div style="display:flex; flex-wrap:wrap; gap:2rem; align-items:center; margin:1.5rem 0;">
+                    <div style="flex:1; min-width:250px;">
+                        <p data-key="estrategico.fiscal.desc"><strong>Problema:</strong> El PM necesita saber el <span class="itbis-tooltip" data-tooltip="ITBIS = Impuesto a Materiales (IVA, VAT, Sales Tax)">ITBIS</span> pagado en marzo por materiales de hormigón. El ERP solo da totales mensuales, sin desglose por partida.</p>
+                        <p><strong data-key="estrategico.fiscal.sol">Solución con AC&P:</strong> <span data-key="estrategico.fiscal.sol.desc">Se ingresan las cantidades ejecutadas en marzo; el sistema, usando los APU, reconstruye los materiales consumidos y calcula el <span class="itbis-tooltip" data-tooltip="ITBIS = Impuesto a Materiales (IVA, VAT, Sales Tax)">ITBIS</span> estimado. Luego se concilia con facturas reales (doble validación).</span></p>
+                        <p style="font-size:0.9rem; font-style:italic;" data-key="estrategico.fiscal.nota">*<span class="itbis-tooltip" data-tooltip="ITBIS = Impuesto a Materiales (IVA, VAT, Sales Tax)">ITBIS</span> es el impuesto dominicano. Equivalente a IVA (España, Latinoamérica), VAT (UK), Sales Tax (USA), GST (Canadá, Australia).</p>
+                    </div>
+                    <div style="flex:1; min-width:250px; background:#eaf2fb; padding:1.5rem; border-radius:20px;">
+                        <p><i class="fas fa-check-circle" style="color:#2e7d32;"></i> <strong data-key="estrategico.fiscal.val1">Validación técnica:</strong> <span data-key="estrategico.fiscal.val1.desc">Avance físico → consumo teórico de materiales → <span class="itbis-tooltip" data-tooltip="ITBIS = Impuesto a Materiales (IVA, VAT, Sales Tax)">ITBIS</span> teórico.</span></p>
+                        <p><i class="fas fa-check-circle" style="color:#2e7d32;"></i> <strong data-key="estrategico.fiscal.val2">Validación financiera:</strong> <span data-key="estrategico.fiscal.val2.desc">Facturas reales del ERP confirman montos; diferencias se explican por acopio.</span></p>
+                    </div>
+                </div>
+
+                <!-- NUEVA CONCLUSIÓN: La frase clave del usuario -->
+                <div style="background:#123b5e; color:white; border-radius:30px; padding:2.5rem; margin:2rem 0; text-align:center; border:2px solid #f5b041;">
+                    <i class="fas fa-gem" style="font-size:3rem; color:#f5b041; margin-bottom:1rem; display:block;"></i>
+                    <p style="font-size:1.4rem; font-weight:300; line-height:1.5; max-width:900px; margin:0 auto;" data-key="estrategico.conclusion">
+                        El valor no está solo en la herramienta, sino en la metodología de la arquitectura que separa el presupuesto técnico base del precio estratégico de oferta escalonada, permitiendo una negociación controlada y una inteligencia de costos transversal.
+                    </p>
+                </div>
+            </div>
         </div>
 
         <footer>
@@ -560,6 +668,7 @@
                         'tab.tiempo': 'Dimensión temporal',
                         'tab.casos': 'Casos de uso',
                         'tab.ventajas': 'Ventajas',
+                        'tab.estrategico': 'Análisis Estratégico',
                         'filosofia.title': '🧠 Filosofía: simpleza con propósito',
                         'filosofia.excel.titulo': 'Excel como vehículo universal',
                         'filosofia.excel.desc': 'Ubicuo, familiar, sin licencias extra. Millones de profesionales ya lo manejan. La curva de aprendizaje es mínima.',
@@ -588,6 +697,7 @@
                         'componentes.tabla.total': 'Total',
                         'componentes.itbis': 'ITBIS transparente',
                         'componentes.itbis.desc': 'en cada APU factorizado aparece el impuesto (18%) o "No Aplica" si exento.',
+                        'componentes.itbis.nota': '*ITBIS es el impuesto dominicano a los materiales. Equivalente a IVA (España, Latinoamérica), VAT (Reino Unido), Sales Tax (EE.UU.), GST (Canadá, Australia), etc.',
                         'reportes.title': '📑 10 reportes estratégicos',
                         'reportes.tabla.reporte': 'Reporte',
                         'reportes.tabla.proposito': 'Propósito',
@@ -648,7 +758,54 @@
                         'ventajas.acyp.3': 'Doble contabilidad nativa',
                         'ventajas.acyp.4': '10 reportes automáticos',
                         'ventajas.factorx': 'Factor Nx: ingeniería inversa 5x más potente, actualización 100x más rápida.',
-                        'footer': '© Piter J. Bonilla D. · Sistema AC&P · Documento maestro v2.0'
+                        'footer': '© Piter J. Bonilla D. · Sistema AC&P · Documento maestro v2.0',
+                        // Nueva pestaña estratégica
+                        'estrategico.title': '📊 Análisis Estratégico: Gestión Paramétrica de Ofertas',
+                        'estrategico.brecha.titulo': 'El ecosistema ENR y la brecha analítica',
+                        'estrategico.brecha.desc': 'Las empresas de primer nivel (ENR Top) utilizan potentes herramientas: ERP (CMiC, Sage), estimación (HeavyBid, WinEst), planeamiento (P6). Sin embargo, existe una <strong>brecha estructural</strong>: estos sistemas registran transacciones pero no reconstruyen paramétricamente la ingeniería de costos. El AC&P opera como una <strong>capa analítica transversal</strong> que traduce la información entre silos.',
+                        'estrategico.tabla.herramienta': 'Herramienta',
+                        'estrategico.tabla.funcion': 'Función',
+                        'estrategico.tabla.limite': 'Limitación analítica',
+                        'estrategico.tabla.erp.func': 'Registro financiero, contabilidad',
+                        'estrategico.tabla.erp.limite': 'No desglosa por partida técnica; rigidez para modelar escenarios',
+                        'estrategico.tabla.est.func': 'Presupuestos base, takeoffs',
+                        'estrategico.tabla.est.limite': 'Factores globales, poca integración con cronograma',
+                        'estrategico.tabla.plan.func': 'Cronogramas, control de plazos',
+                        'estrategico.tabla.plan.limite': 'Sin vínculo nativo con costos unitarios',
+                        'estrategico.tabla.acyp.func': 'Capa analítica: doble contabilidad, factorización inversa, APU dinámicos',
+                        'estrategico.tabla.acyp.limite': '—',
+                        'estrategico.capas.titulo': 'Las cuatro capas del pricing estratégico',
+                        'estrategico.capa1.titulo': '1. Piso técnico',
+                        'estrategico.capa1.desc': 'Costo base validado por APU. Límite inferior de negociación. Inviolable.',
+                        'estrategico.capa2.titulo': '2. Punto de cierre',
+                        'estrategico.capa2.desc': 'Precio final negociado, siempre por encima del piso técnico. Optimiza margen.',
+                        'estrategico.capa3.titulo': '3. Blanco competitivo',
+                        'estrategico.capa3.desc': 'Referencia de mercado (competencia). Guía la calibración del factor.',
+                        'estrategico.capa4.titulo': '4. Ancla estratégica',
+                        'estrategico.capa4.desc': 'Precio inicial alto, crea percepción de valor y margen para concesiones controladas.',
+                        'estrategico.comparacion.titulo': 'Comparación: método tradicional vs. paramétrico',
+                        'estrategico.comparacion.aspecto': 'Aspecto',
+                        'estrategico.comparacion.trad': 'Tradicional (solo ERP/hojas)',
+                        'estrategico.comparacion.param': 'Paramétrico (AC&P)',
+                        'estrategico.comparacion.ajuste': 'Ajuste de precio',
+                        'estrategico.comparacion.ajuste.trad': 'Manual, descuentos globales ciegos',
+                        'estrategico.comparacion.ajuste.param': 'Por factores, coherente, recálculo automático',
+                        'estrategico.comparacion.decision': 'Toma de decisiones',
+                        'estrategico.comparacion.decision.trad': 'Reactiva, basada en presión',
+                        'estrategico.comparacion.decision.param': 'Proactiva, basada en simulaciones',
+                        'estrategico.comparacion.margen': 'Visibilidad del margen',
+                        'estrategico.comparacion.margen.trad': 'Incierto, riesgo de pérdida en partidas',
+                        'estrategico.comparacion.margen.param': 'Conocido y controlado en cada paso',
+                        'estrategico.fiscal.titulo': 'Caso concreto: reconstrucción de impuestos (ITBIS)',
+                        'estrategico.fiscal.desc': '<strong>Problema:</strong> El PM necesita saber el ITBIS pagado en marzo por materiales de hormigón. El ERP solo da totales mensuales, sin desglose por partida.',
+                        'estrategico.fiscal.sol': 'Solución con AC&P:',
+                        'estrategico.fiscal.sol.desc': 'Se ingresan las cantidades ejecutadas en marzo; el sistema, usando los APU, reconstruye los materiales consumidos y calcula el ITBIS estimado. Luego se concilia con facturas reales (doble validación).',
+                        'estrategico.fiscal.nota': '*ITBIS es el impuesto dominicano a los materiales. Equivalente a IVA (España, Latinoamérica), VAT (UK), Sales Tax (USA), GST (Canadá, Australia).',
+                        'estrategico.fiscal.val1': 'Validación técnica:',
+                        'estrategico.fiscal.val1.desc': 'Avance físico → consumo teórico de materiales → ITBIS teórico.',
+                        'estrategico.fiscal.val2': 'Validación financiera:',
+                        'estrategico.fiscal.val2.desc': 'Facturas reales del ERP confirman montos; diferencias se explican por acopio.',
+                        'estrategico.conclusion': 'El valor no está solo en la herramienta, sino en la metodología de la arquitectura que separa el presupuesto técnico base del precio estratégico de oferta escalonada, permitiendo una negociación controlada y una inteligencia de costos transversal.'
                     },
                     en: {
                         'meta.title': 'AC&P System · Power that solves, simplicity that empowers',
@@ -664,6 +821,7 @@
                         'tab.tiempo': 'Time dimension',
                         'tab.casos': 'Use cases',
                         'tab.ventajas': 'Advantages',
+                        'tab.estrategico': 'Strategic Analysis',
                         'filosofia.title': '🧠 Philosophy: purposeful simplicity',
                         'filosofia.excel.titulo': 'Excel as universal vehicle',
                         'filosofia.excel.desc': 'Ubiquitous, familiar, no extra licenses. Millions already use it. Learning curve is minimal.',
@@ -678,7 +836,7 @@
                         'filosofia.doblecontabilidad': 'Double accounting: real costs (base) vs. factored prices (sale). Protects intellectual property and enables commercial scenario modeling.',
                         'componentes.title': '⚙️ Internal components: intelligence others lack',
                         'componentes.listas.titulo': 'Master lists',
-                        'componentes.listas.desc': 'Materials (with tax), equipment (hourly costs), labor (base wages). Unique codes, centralized updates.',
+                        'componentes.listas.desc': 'Materials (with ITBIS), equipment (hourly costs), labor (base wages). Unique codes, centralized updates.',
                         'componentes.apu.titulo': 'Nested APUs',
                         'componentes.apu.desc': 'Unit Price Analysis as "recipes" combining inputs. Can include other APUs as support, creating real hierarchies.',
                         'componentes.factorizacion.titulo': '🧮 Reverse factoring engine',
@@ -692,6 +850,7 @@
                         'componentes.tabla.total': 'Total',
                         'componentes.itbis': 'Transparent tax',
                         'componentes.itbis.desc': 'in each factored APU the tax (18%) or "Not Applicable" appears if exempt.',
+                        'componentes.itbis.nota': '*ITBIS is the Dominican Republic tax on materials. Equivalent to VAT (Spain, Latin America), VAT (UK), Sales Tax (USA), GST (Canada, Australia), etc.',
                         'reportes.title': '📑 10 strategic reports',
                         'reportes.tabla.reporte': 'Report',
                         'reportes.tabla.proposito': 'Purpose',
@@ -752,7 +911,54 @@
                         'ventajas.acyp.3': 'Native double accounting',
                         'ventajas.acyp.4': '10 automatic reports',
                         'ventajas.factorx': 'Nx factor: reverse engineering 5x more powerful, updates 100x faster.',
-                        'footer': '© Piter J. Bonilla D. · AC&P System · Master document v2.0'
+                        'footer': '© Piter J. Bonilla D. · AC&P System · Master document v2.0',
+                        // New strategic tab
+                        'estrategico.title': '📊 Strategic Analysis: Parametric Bid Management',
+                        'estrategico.brecha.titulo': 'The ENR ecosystem and the analytical gap',
+                        'estrategico.brecha.desc': 'Top-tier companies (ENR Top) use powerful tools: ERP (CMiC, Sage), estimating (HeavyBid, WinEst), scheduling (P6). However, a <strong>structural gap</strong> exists: these systems record transactions but do not parametrically reconstruct cost engineering. AC&P operates as a <strong>cross-sectional analytical layer</strong> that translates information between silos.',
+                        'estrategico.tabla.herramienta': 'Tool',
+                        'estrategico.tabla.funcion': 'Function',
+                        'estrategico.tabla.limite': 'Analytical limitation',
+                        'estrategico.tabla.erp.func': 'Financial recording, accounting',
+                        'estrategico.tabla.erp.limite': 'No breakdown by technical line item; rigid for scenario modeling',
+                        'estrategico.tabla.est.func': 'Base budgets, takeoffs',
+                        'estrategico.tabla.est.limite': 'Global factors, little integration with schedule',
+                        'estrategico.tabla.plan.func': 'Schedules, deadline control',
+                        'estrategico.tabla.plan.limite': 'No native link to unit costs',
+                        'estrategico.tabla.acyp.func': 'Analytical layer: double accounting, reverse factoring, dynamic APUs',
+                        'estrategico.tabla.acyp.limite': '—',
+                        'estrategico.capas.titulo': 'The four layers of strategic pricing',
+                        'estrategico.capa1.titulo': '1. Technical floor',
+                        'estrategico.capa1.desc': 'Base cost validated by APU. Lower negotiation limit. Inviolable.',
+                        'estrategico.capa2.titulo': '2. Closing point',
+                        'estrategico.capa2.desc': 'Final negotiated price, always above the technical floor. Optimizes margin.',
+                        'estrategico.capa3.titulo': '3. Competitive target',
+                        'estrategico.capa3.desc': 'Market reference (competition). Guides factor calibration.',
+                        'estrategico.capa4.titulo': '4. Strategic anchor',
+                        'estrategico.capa4.desc': 'High initial price, creates value perception and room for controlled concessions.',
+                        'estrategico.comparacion.titulo': 'Comparison: traditional vs. parametric method',
+                        'estrategico.comparacion.aspecto': 'Aspect',
+                        'estrategico.comparacion.trad': 'Traditional (only ERP/spreadsheets)',
+                        'estrategico.comparacion.param': 'Parametric (AC&P)',
+                        'estrategico.comparacion.ajuste': 'Price adjustment',
+                        'estrategico.comparacion.ajuste.trad': 'Manual, blind global discounts',
+                        'estrategico.comparacion.ajuste.param': 'By factors, coherent, automatic recalculation',
+                        'estrategico.comparacion.decision': 'Decision making',
+                        'estrategico.comparacion.decision.trad': 'Reactive, based on pressure',
+                        'estrategico.comparacion.decision.param': 'Proactive, based on simulations',
+                        'estrategico.comparacion.margen': 'Margin visibility',
+                        'estrategico.comparacion.margen.trad': 'Uncertain, risk of loss on line items',
+                        'estrategico.comparacion.margen.param': 'Known and controlled at every step',
+                        'estrategico.fiscal.titulo': 'Concrete case: tax reconstruction (ITBIS)',
+                        'estrategico.fiscal.desc': '<strong>Problem:</strong> The PM needs to know the ITBIS paid in March for concrete materials. The ERP only gives monthly totals, no breakdown by item.',
+                        'estrategico.fiscal.sol': 'Solution with AC&P:',
+                        'estrategico.fiscal.sol.desc': 'Enter quantities executed in March; the system, using APUs, reconstructs consumed materials and calculates estimated ITBIS. Then reconcile with actual invoices (double validation).',
+                        'estrategico.fiscal.nota': '*ITBIS is the Dominican Republic tax on materials. Equivalent to VAT (Spain, Latin America), VAT (UK), Sales Tax (USA), GST (Canada, Australia).',
+                        'estrategico.fiscal.val1': 'Technical validation:',
+                        'estrategico.fiscal.val1.desc': 'Physical progress → theoretical material consumption → theoretical ITBIS.',
+                        'estrategico.fiscal.val2': 'Financial validation:',
+                        'estrategico.fiscal.val2.desc': 'Actual ERP invoices confirm amounts; differences explained by stockpiling.',
+                        'estrategico.conclusion': 'Value lies not in the tool, but in the architectural methodology that separates the technical base budget from the staged strategic bid price, enabling controlled negotiation and cross-sectional cost intelligence.'
                     }
                 };
                 this.init();
