@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-key="meta.title">Sistema AC&P · Potencia que resuelve, simplicidad que empodera</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+        }
+
+        body {
+            background: #f0f5fb;
+            padding: 20px;
+            transition: opacity 0.3s ease;
+            color: #1e2f40;
+        }
+        body.changing-language { opacity: 0.7; }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 32px;
+            box-shadow: 0 25px 50px -12px rgba(0, 20, 40, 0.3);
+            overflow: hidden;
+        }
+
+        /* HEADER */
+        .header {
+            background: linear-gradient(145deg, #0b2b44, #123b5e);
+            color: white;
+            padding: 2.5rem 3rem;
+            position: relative;
+        }
+        .header h1 {
+            font-size: 2.8rem;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+            margin-bottom: 0.5rem;
+        }
+        .header h1 small {
+            font-size: 1.2rem;
+            font-weight: 400;
+            color: #bbd9ff;
+            margin-left: 1rem;
+        }
+        .header .subtitle {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            margin-bottom: 1rem;
+        }
+        .version-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(4px);
+            padding: 0.5rem 1.5rem;
+            border-radius: 40px;
+            font-size: 0.95rem;
+            border: 1px solid rgba(255,255,255,0.2);
+            margin-top: 0.5rem;
+        }
+        .disclaimer {
+            background: rgba(255,255,255,0.1);
+            padding: 1.2rem;
+            border-radius: 20px;
+            margin-top: 1.5rem;
+            border-left: 6px solid #f5b041;
+            font-size: 1rem;
+        }
+
+        /* BARRA SUPERIOR DERECHA: IDIOMA + IMPRIMIR */
+        .top-actions {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            display: flex;
+            gap: 12px;
+            z-index: 10;
+        }
+        .language-switcher {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(8px);
+            border-radius: 50px;
+            padding: 6px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            border: 1px solid rgba(18,59,94,0.2);
+            display: flex;
+            gap: 4px;
+        }
+        .lang-btn {
+            padding: 0.6rem 1.5rem;
+            border-radius: 40px;
+            border: none;
+            background: transparent;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: #1a365d;
+        }
+        .lang-btn:hover {
+            background: #e2e8f0;
+        }
+        .lang-btn.active {
+            background: #0c4a6e;
+            color: white;
+            box-shadow: 0 2px 10px rgba(12,74,110,0.3);
+        }
+        .lang-flag { font-size: 1.2rem; }
+
+        .print-top-btn {
+            background: #f5b041;
+            border: none;
+            border-radius: 50px;
+            padding: 0.6rem 1.8rem;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #0b2b44;
+            transition: all 0.2s;
+        }
+        .print-top-btn:hover {
+            background: #e09d32;
+            transform: translateY(-2px);
+        }
+
+        /* PESTAÑAS */
+        .tabs {
+            display: flex;
+            flex-wrap: wrap;
+            background: #eef2f6;
+            border-bottom: 2px solid #cbd5e1;
+            padding: 0 1.5rem;
+            gap: 0.2rem;
+        }
+        .tab {
+            padding: 1rem 1.8rem;
+            background: transparent;
+            border: none;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #2c3e50;
+            cursor: pointer;
+            transition: all 0.2s;
+            border-radius: 30px 30px 0 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            white-space: nowrap;
+        }
+        .tab i { color: #2c5a8c; font-size: 1.1rem; }
+        .tab:hover {
+            background: #d9e2ef;
+        }
+        .tab.active {
+            background: white;
+            color: #0b2b44;
+            border-bottom: 4px solid #f5b041;
+            margin-bottom: -2px;
+        }
+        .tab.active i { color: #f5b041; }
+
+        /* CONTENIDO */
+        .content {
+            padding: 2.5rem 3rem;
+            background: white;
+        }
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.4s;
+        }
+        .tab-content.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* TIPOGRAFÍA */
+        h2 {
+            font-size: 2.2rem;
+            font-weight: 500;
+            border-left: 8px solid #f5b041;
+            padding-left: 1.5rem;
+            margin-bottom: 2rem;
+            color: #0b2b44;
+        }
+        h3 {
+            font-size: 1.6rem;
+            font-weight: 500;
+            margin: 2rem 0 1rem;
+            color: #1e3f60;
+        }
+        h4 {
+            font-weight: 600;
+            color: #123b5e;
+            margin: 1.5rem 0 0.8rem;
+        }
+
+        /* TARJETAS */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        .card {
+            background: #f9fcff;
+            border-radius: 24px;
+            padding: 2rem 1.8rem;
+            border: 1px solid #dde9f5;
+            box-shadow: 0 8px 18px -8px rgba(0,40,80,0.1);
+            transition: transform 0.2s;
+        }
+        .card:hover { transform: translateY(-4px); }
+        .card i {
+            font-size: 2.5rem;
+            color: #f5b041;
+            margin-bottom: 1rem;
+        }
+
+        /* TABLAS */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.8rem 0;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+        }
+        th {
+            background: #e6f0fa;
+            color: #0c4a6e;
+            font-weight: 600;
+            padding: 1rem;
+            text-align: left;
+        }
+        td {
+            padding: 1rem;
+            border-bottom: 1px solid #e2edf7;
+        }
+        tr:last-child td { border-bottom: none; }
+
+        /* BARRAS DE PROGRAMA (conceptuales) */
+        .progress-bar {
+            background: #e2e8f0;
+            height: 30px;
+            border-radius: 40px;
+            margin: 1rem 0;
+            overflow: hidden;
+        }
+        .progress-fill {
+            background: #123b5e;
+            height: 100%;
+            color: white;
+            line-height: 30px;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+        .progress-fill.gold { background: #f5b041; color: #0b2b44; }
+
+        /* CHECKLIST */
+        .checklist {
+            list-style: none;
+            margin-left: 1rem;
+        }
+        .checklist li {
+            margin: 0.8rem 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+        .checklist li i {
+            color: #2e7d32;
+            font-size: 1.2rem;
+            min-width: 24px;
+        }
+
+        /* CÓDIGO / ESTRUCTURAS */
+        pre {
+            background: #f0f7ff;
+            padding: 1.2rem;
+            border-radius: 16px;
+            font-family: monospace;
+            overflow-x: auto;
+            border: 1px solid #cddef5;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: #4b6b88;
+            border-top: 1px solid #d4e2f0;
+        }
+
+        @media print {
+            body { background: white; padding: 0; }
+            .container { box-shadow: none; }
+            .tabs, .top-actions, .print-top-btn { display: none; }
+            .tab-content { display: block !important; }
+            /* Asegurar que el contenido se muestre completo sin scroll */
+            .content {
+                max-height: none;
+                overflow: visible;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header h1 { font-size: 2rem; }
+            .top-actions { position: static; justify-content: flex-end; margin-bottom: 1rem; }
+            .tabs { flex-direction: column; }
+            .tab { border-right: none; }
+            .content { padding: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Barra superior con idioma e imprimir -->
+    <div class="top-actions">
+        <div class="language-switcher">
+            <button class="lang-btn" data-lang="es">
+                <span class="lang-flag">🇪🇸</span>
+                <span class="lang-text">Español</span>
+            </button>
+            <button class="lang-btn" data-lang="en">
+                <span class="lang-flag">🇺🇸</span>
+                <span class="lang-text">English</span>
+            </button>
+        </div>
+        <button class="print-top-btn" onclick="window.print()" data-key="print.button"><i class="fas fa-print"></i> Imprimir / PDF</button>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <h1>AC&P <small data-key="header.small">Análisis de Costos y Presupuestos</small></h1>
+            <div class="subtitle" data-key="header.subtitle">Potencia que resuelve · Simplicidad que empodera</div>
+            <div class="version-badge" data-key="header.version">v2.0 · Ing. Piter J. Bonilla D. · Febrero 2026</div>
+            <div class="disclaimer" data-key="header.disclaimer">
+                <strong data-key="header.disclaimer.strong">INFORME TÉCNICO-ESTRATÉGICO:</strong> <span data-key="header.disclaimer.text">Arquitectura bifile, doble contabilidad, factorización inversa y dimensión temporal. Un sistema que no compite, resuelve.</span>
+            </div>
+        </div>
+
+        <div class="tabs">
+            <button class="tab active" data-tab="filosofia" data-key="tab.filosofia"><i class="fas fa-lightbulb"></i> Filosofía</button>
+            <button class="tab" data-tab="componentes" data-key="tab.componentes"><i class="fas fa-puzzle-piece"></i> Componentes</button>
+            <button class="tab" data-tab="reportes" data-key="tab.reportes"><i class="fas fa-file-alt"></i> 10 Reportes</button>
+            <button class="tab" data-tab="tiempo" data-key="tab.tiempo"><i class="fas fa-calendar-alt"></i> Dimensión temporal</button>
+            <button class="tab" data-tab="casos" data-key="tab.casos"><i class="fas fa-hard-hat"></i> Casos de uso</button>
+            <button class="tab" data-tab="ventajas" data-key="tab.ventajas"><i class="fas fa-rocket"></i> Ventajas</button>
+        </div>
+
+        <div class="content">
+            <!-- PESTAÑA FILOSOFÍA -->
+            <div id="filosofia" class="tab-content active">
+                <h2 data-key="filosofia.title">🧠 Filosofía: simpleza con propósito</h2>
+                <div class="card-grid">
+                    <div class="card">
+                        <i class="fas fa-file-excel"></i>
+                        <h3 data-key="filosofia.excel.titulo">Excel como vehículo universal</h3>
+                        <p data-key="filosofia.excel.desc">Ubicuo, familiar, sin licencias extra. Millones de profesionales ya lo manejan. La curva de aprendizaje es mínima.</p>
+                    </div>
+                    <div class="card">
+                        <i class="fas fa-shield-alt"></i>
+                        <h3 data-key="filosofia.macros.titulo">Macros: camino blindado</h3>
+                        <p data-key="filosofia.macros.desc">Automatización que elimina errores de fórmula, actualiza en cascada y protege la integridad de los datos. El usuario sólo ingresa cantidades.</p>
+                    </div>
+                </div>
+                <div style="background:#ecf5fe; border-radius:24px; padding:2rem; margin:2rem 0;">
+                    <h3 data-key="filosofia.arquitectura.titulo">Arquitectura de dos archivos</h3>
+                    <div style="display:flex; flex-wrap:wrap; gap:2rem; justify-content:center; align-items:center;">
+                        <div style="background:#123b5e; color:white; padding:1.5rem; border-radius:20px; width:220px; text-align:center;">
+                            <i class="fas fa-database" style="font-size:3rem;"></i>
+                            <p style="font-weight:600; margin-top:0.5rem;" data-key="filosofia.base">Base de Datos</p>
+                            <small data-key="filosofia.base.desc">Listas · APU · Conocimiento</small>
+                        </div>
+                        <i class="fas fa-arrow-right" style="font-size:2rem; color:#f5b041;"></i>
+                        <div style="background:#f5b041; color:#0b2b44; padding:1.5rem; border-radius:20px; width:220px; text-align:center;">
+                            <i class="fas fa-file-invoice" style="font-size:3rem;"></i>
+                            <p style="font-weight:600; margin-top:0.5rem;" data-key="filosofia.plantilla">Plantilla Presupuesto</p>
+                            <small data-key="filosofia.plantilla.desc">Proyecto · cantidades</small>
+                        </div>
+                    </div>
+                    <p style="margin-top:2rem; text-align:center;" data-key="filosofia.vinculacion"><i class="fas fa-link"></i> Vinculación dinámica: actualiza la base y todos los presupuestos se refrescan al instante.</p>
+                </div>
+                <p class="footnote" style="background:#f1f6fc; padding:1.5rem; border-radius:20px; border-left:6px solid #f5b041;" data-key="filosofia.doblecontabilidad"><i class="fas fa-balance-scale"></i> <strong>Doble contabilidad:</strong> costos reales (base) vs. precios factorizados (venta). Protege la propiedad intelectual y permite modelar escenarios comerciales.</p>
+            </div>
+
+            <!-- PESTAÑA COMPONENTES -->
+            <div id="componentes" class="tab-content">
+                <h2 data-key="componentes.title">⚙️ Componentes internos: inteligencia que otros no tienen</h2>
+                <div class="card-grid">
+                    <div class="card">
+                        <i class="fas fa-list-ul"></i>
+                        <h3 data-key="componentes.listas.titulo">Listas maestras</h3>
+                        <p data-key="componentes.listas.desc">Materiales (con ITBIS), equipos (costos horarios), mano de obra (salarios base). Códigos únicos, actualización centralizada.</p>
+                    </div>
+                    <div class="card">
+                        <i class="fas fa-cubes"></i>
+                        <h3 data-key="componentes.apu.titulo">APU anidados</h3>
+                        <p data-key="componentes.apu.desc">Análisis de Precios Unitarios como "recetas" que combinan insumos. Pueden incluir otros APU como soporte, creando jerarquías reales.</p>
+                    </div>
+                </div>
+                <div style="background:#eaf2fb; border-radius:24px; padding:2rem;">
+                    <h3 data-key="componentes.factorizacion.titulo">🧮 Motor de factorización inversa</h3>
+                    <p data-key="componentes.factorizacion.desc">Aplica factores a materiales y mano de obra (carga social + extra). Parte de un precio objetivo y calcula el factor necesario, manteniendo coherencia matemática.</p>
+                    <table>
+                        <tr><th data-key="componentes.tabla.componente">Componente</th><th data-key="componentes.tabla.base">Base</th><th data-key="componentes.tabla.factor">Factor</th><th data-key="componentes.tabla.factorizado">Factorizado</th></tr>
+                        <tr><td data-key="componentes.tabla.materiales">Materiales</td><td>11,291.00</td><td>1.05</td><td>11,855.55</td></tr>
+                        <tr><td data-key="componentes.tabla.mo">Mano de obra</td><td>1,260.00</td><td>1.00</td><td>1,260.00</td></tr>
+                        <tr><td><strong data-key="componentes.tabla.total">Total</strong></td><td></td><td></td><td>13,115.55</td></tr>
+                    </table>
+                    <p><span class="badge" style="background:#2d6a4f; color:white; padding:0.3rem 1rem; border-radius:20px;" data-key="componentes.itbis">ITBIS transparente</span> <span data-key="componentes.itbis.desc">en cada APU factorizado aparece el impuesto (18%) o "No Aplica" si exento.</span></p>
+                </div>
+            </div>
+
+            <!-- PESTAÑA REPORTES -->
+            <div id="reportes" class="tab-content">
+                <h2 data-key="reportes.title">📑 10 reportes estratégicos</h2>
+                <div style="overflow-x:auto;">
+                    <table>
+                        <tr><th>#</th><th data-key="reportes.tabla.reporte">Reporte</th><th data-key="reportes.tabla.proposito">Propósito</th></tr>
+                        <tr><td>1</td><td data-key="reportes.r1">Presupuesto General</td><td data-key="reportes.r1.prop">Vista ejecutiva / cliente</td></tr>
+                        <tr><td>2</td><td data-key="reportes.r2">Presupuesto M.O. (factorizado)</td><td data-key="reportes.r2.prop">Control administrativo</td></tr>
+                        <tr><td>3</td><td data-key="reportes.r3">Presupuesto M.O. (base)</td><td data-key="reportes.r3.prop">Negociación trabajadores</td></tr>
+                        <tr><td>4</td><td data-key="reportes.r4">Desglose Costos Directos</td><td data-key="reportes.r4.prop">Auditoría estructura</td></tr>
+                        <tr><td>5</td><td data-key="reportes.r5">Desglose Costos Indirectos</td><td data-key="reportes.r5.prop">Justificación gastos generales</td></tr>
+                        <tr><td>6</td><td data-key="reportes.r6">Desglose Carga Social M.O.</td><td data-key="reportes.r6.prop">Cumplimiento legal / RRHH</td></tr>
+                        <tr><td>7</td><td data-key="reportes.r7">Cuantificación de Materiales</td><td data-key="reportes.r7.prop">Logística y compras</td></tr>
+                        <tr><td>8</td><td data-key="reportes.r8">Cuantificación de Mano de Obra</td><td data-key="reportes.r8.prop">Contratación cuadrillas</td></tr>
+                        <tr><td>9</td><td data-key="reportes.r9">APU Factorizados</td><td data-key="reportes.r9.prop">Presentación al cliente</td></tr>
+                        <tr><td>10</td><td data-key="reportes.r10">APU Base</td><td data-key="reportes.r10.prop">Control interno (propiedad intelectual)</td></tr>
+                    </table>
+                </div>
+                <p style="margin-top:2rem; font-style:italic;" data-key="reportes.nota">Todos se generan con un clic, sin copiar y pegar, sin errores.</p>
+            </div>
+
+            <!-- PESTAÑA DIMENSIÓN TEMPORAL -->
+            <div id="tiempo" class="tab-content">
+                <h2 data-key="tiempo.title">⏳ Del presupuesto estático a la gestión dinámica</h2>
+                <p data-key="tiempo.intro">Un presupuesto general es una foto; la obra es una película. Con AC&P, cada mes del cronograma se convierte en un presupuesto mensual.</p>
+                <div class="card-grid">
+                    <div class="card">
+                        <i class="fas fa-coins"></i>
+                        <h3 data-key="tiempo.flujo.titulo">Flujo de caja proyectado</h3>
+                        <p data-key="tiempo.flujo.desc">Suma los totales de cada mes y obtén la curva de inversión. Planifica liquidez con meses de antelación.</p>
+                    </div>
+                    <div class="card">
+                        <i class="fas fa-truck"></i>
+                        <h3 data-key="tiempo.compras.titulo">Compras justo a tiempo</h3>
+                        <p data-key="tiempo.compras.desc">El Reporte #7 de cada mes es tu lista de compras. Pide sólo lo necesario, reduce inventario.</p>
+                    </div>
+                    <div class="card">
+                        <i class="fas fa-users"></i>
+                        <h3 data-key="tiempo.mo.titulo">Contratación de personal</h3>
+                        <p data-key="tiempo.mo.desc">El Reporte #8 mensual te dice cuántos albañiles, ayudantes, etc., necesitas cada mes.</p>
+                    </div>
+                    <div class="card">
+                        <i class="fas fa-file-signature"></i>
+                        <h3 data-key="tiempo.certificaciones.titulo">Certificaciones justificadas</h3>
+                        <p data-key="tiempo.certificaciones.desc">Cada cobro al cliente se respalda con el presupuesto del mes ejecutado. Transparencia total.</p>
+                    </div>
+                </div>
+                <div style="background:#f2f8ff; border-radius:24px; padding:1.5rem;">
+                    <p data-key="tiempo.ejemplo"><strong>Ejemplo:</strong> Obra de 12 meses → 12 presupuestos mensuales. Misma base de datos, precios actualizados al instante.</p>
+                    <div class="progress-bar"><div class="progress-fill" style="width:25%;" data-key="tiempo.mes1">Mes 1</div></div>
+                    <div class="progress-bar"><div class="progress-fill" style="width:40%;" data-key="tiempo.mes2">Mes 2</div></div>
+                    <div class="progress-bar"><div class="progress-fill gold" style="width:60%;" data-key="tiempo.mes3">Mes 3</div></div>
+                </div>
+            </div>
+
+            <!-- PESTAÑA CASOS DE USO -->
+            <div id="casos" class="tab-content">
+                <h2 data-key="casos.title">🏗️ Casos de uso reales</h2>
+                <div class="card-grid">
+                    <div class="card">
+                        <i class="fas fa-clock-rotate-left"></i>
+                        <h3 data-key="casos.actualizar.titulo">Actualizar presupuesto de hace 2 años</h3>
+                        <p data-key="casos.actualizar.desc">Abres el archivo, cambias la base a la versión actual, un clic y ya tienes el presupuesto con precios de hoy. Segundos vs. días.</p>
+                    </div>
+                    <div class="card">
+                        <i class="fas fa-globe"></i>
+                        <h3 data-key="casos.regional.titulo">Licitación nacional vs. ejecución regional</h3>
+                        <p data-key="casos.regional.desc">Oficina central licita con base nacional; filial regional reconecta a su base local. Precios reales sin reingresar datos.</p>
+                    </div>
+                    <div class="card">
+                        <i class="fas fa-people-arrows"></i>
+                        <h3 data-key="casos.paralelo.titulo">Múltiples equipos en paralelo</h3>
+                        <p data-key="casos.paralelo.desc">Analistas actualizan la base mientras 5 presupuestistas trabajan. Cada uno decide cuándo actualizar. Cero conflictos.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PESTAÑA VENTAJAS DIFERENCIALES -->
+            <div id="ventajas" class="tab-content">
+                <h2 data-key="ventajas.title">🚀 No compite, resuelve</h2>
+                <div style="display:flex; gap:2rem; flex-wrap:wrap; justify-content:center;">
+                    <div style="flex:1; min-width:250px; background:#f0f7fa; border-radius:24px; padding:1.8rem;">
+                        <h4 data-key="ventajas.manual.titulo">📗 Hojas manuales</h4>
+                        <ul class="checklist">
+                            <li><i class="fas fa-times-circle" style="color:#c0392b;"></i> <span data-key="ventajas.manual.1">Fórmulas que se rompen</span></li>
+                            <li><i class="fas fa-times-circle" style="color:#c0392b;"></i> <span data-key="ventajas.manual.2">Actualización manual propensa a errores</span></li>
+                            <li><i class="fas fa-times-circle" style="color:#c0392b;"></i> <span data-key="ventajas.manual.3">Sin trazabilidad</span></li>
+                        </ul>
+                    </div>
+                    <div style="flex:1; min-width:250px; background:#f0f7fa; border-radius:24px; padding:1.8rem;">
+                        <h4 data-key="ventajas.software.titulo">💼 Softwares caros</h4>
+                        <ul class="checklist">
+                            <li><i class="fas fa-times-circle" style="color:#c0392b;"></i> <span data-key="ventajas.software.1">Curva de aprendizaje enorme</span></li>
+                            <li><i class="fas fa-times-circle" style="color:#c0392b;"></i> <span data-key="ventajas.software.2">Costo elevado</span></li>
+                            <li><i class="fas fa-times-circle" style="color:#c0392b;"></i> <span data-key="ventajas.software.3">Factorización rígida</span></li>
+                        </ul>
+                    </div>
+                    <div style="flex:1; min-width:250px; background:#f0f7fa; border-radius:24px; padding:1.8rem; border-top:4px solid #f5b041;">
+                        <h4 data-key="ventajas.acyp.titulo">⭐ AC&P</h4>
+                        <ul class="checklist">
+                            <li><i class="fas fa-check-circle" style="color:#2e7d32;"></i> <span data-key="ventajas.acyp.1">Curva cero (Excel)</span></li>
+                            <li><i class="fas fa-check-circle" style="color:#2e7d32;"></i> <span data-key="ventajas.acyp.2">Factorización inversa única</span></li>
+                            <li><i class="fas fa-check-circle" style="color:#2e7d32;"></i> <span data-key="ventajas.acyp.3">Doble contabilidad nativa</span></li>
+                            <li><i class="fas fa-check-circle" style="color:#2e7d32;"></i> <span data-key="ventajas.acyp.4">10 reportes automáticos</span></li>
+                        </ul>
+                    </div>
+                </div>
+                <div style="background:#123b5e; color:white; border-radius:30px; padding:2rem; margin:2rem 0; text-align:center;">
+                    <p style="font-size:1.3rem;" data-key="ventajas.factorx"><i class="fas fa-bolt"></i> Factor Nx: ingeniería inversa 5x más potente, actualización 100x más rápida.</p>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <span data-key="footer">© Piter J. Bonilla D. · Sistema AC&P · Documento maestro v2.0</span>
+        </footer>
+    </div>
+
+    <script>
+        class Translator {
+            constructor() {
+                this.currentLang = 'es';
+                this.translationData = {
+                    es: {
+                        'meta.title': 'Sistema AC&P · Potencia que resuelve, simplicidad que empodera',
+                        'print.button': 'Imprimir / PDF',
+                        'header.small': 'Análisis de Costos y Presupuestos',
+                        'header.subtitle': 'Potencia que resuelve · Simplicidad que empodera',
+                        'header.version': 'v2.0 · Ing. Piter J. Bonilla D. · Febrero 2026',
+                        'header.disclaimer.strong': 'INFORME TÉCNICO-ESTRATÉGICO:',
+                        'header.disclaimer.text': 'Arquitectura bifile, doble contabilidad, factorización inversa y dimensión temporal. Un sistema que no compite, resuelve.',
+                        'tab.filosofia': 'Filosofía',
+                        'tab.componentes': 'Componentes',
+                        'tab.reportes': '10 Reportes',
+                        'tab.tiempo': 'Dimensión temporal',
+                        'tab.casos': 'Casos de uso',
+                        'tab.ventajas': 'Ventajas',
+                        'filosofia.title': '🧠 Filosofía: simpleza con propósito',
+                        'filosofia.excel.titulo': 'Excel como vehículo universal',
+                        'filosofia.excel.desc': 'Ubicuo, familiar, sin licencias extra. Millones de profesionales ya lo manejan. La curva de aprendizaje es mínima.',
+                        'filosofia.macros.titulo': 'Macros: camino blindado',
+                        'filosofia.macros.desc': 'Automatización que elimina errores de fórmula, actualiza en cascada y protege la integridad de los datos. El usuario sólo ingresa cantidades.',
+                        'filosofia.arquitectura.titulo': 'Arquitectura de dos archivos',
+                        'filosofia.base': 'Base de Datos',
+                        'filosofia.base.desc': 'Listas · APU · Conocimiento',
+                        'filosofia.plantilla': 'Plantilla Presupuesto',
+                        'filosofia.plantilla.desc': 'Proyecto · cantidades',
+                        'filosofia.vinculacion': 'Vinculación dinámica: actualiza la base y todos los presupuestos se refrescan al instante.',
+                        'filosofia.doblecontabilidad': 'Doble contabilidad: costos reales (base) vs. precios factorizados (venta). Protege la propiedad intelectual y permite modelar escenarios comerciales.',
+                        'componentes.title': '⚙️ Componentes internos: inteligencia que otros no tienen',
+                        'componentes.listas.titulo': 'Listas maestras',
+                        'componentes.listas.desc': 'Materiales (con ITBIS), equipos (costos horarios), mano de obra (salarios base). Códigos únicos, actualización centralizada.',
+                        'componentes.apu.titulo': 'APU anidados',
+                        'componentes.apu.desc': 'Análisis de Precios Unitarios como "recetas" que combinan insumos. Pueden incluir otros APU como soporte, creando jerarquías reales.',
+                        'componentes.factorizacion.titulo': '🧮 Motor de factorización inversa',
+                        'componentes.factorizacion.desc': 'Aplica factores a materiales y mano de obra (carga social + extra). Parte de un precio objetivo y calcula el factor necesario, manteniendo coherencia matemática.',
+                        'componentes.tabla.componente': 'Componente',
+                        'componentes.tabla.base': 'Base',
+                        'componentes.tabla.factor': 'Factor',
+                        'componentes.tabla.factorizado': 'Factorizado',
+                        'componentes.tabla.materiales': 'Materiales',
+                        'componentes.tabla.mo': 'Mano de obra',
+                        'componentes.tabla.total': 'Total',
+                        'componentes.itbis': 'ITBIS transparente',
+                        'componentes.itbis.desc': 'en cada APU factorizado aparece el impuesto (18%) o "No Aplica" si exento.',
+                        'reportes.title': '📑 10 reportes estratégicos',
+                        'reportes.tabla.reporte': 'Reporte',
+                        'reportes.tabla.proposito': 'Propósito',
+                        'reportes.r1': 'Presupuesto General',
+                        'reportes.r1.prop': 'Vista ejecutiva / cliente',
+                        'reportes.r2': 'Presupuesto M.O. (factorizado)',
+                        'reportes.r2.prop': 'Control administrativo',
+                        'reportes.r3': 'Presupuesto M.O. (base)',
+                        'reportes.r3.prop': 'Negociación trabajadores',
+                        'reportes.r4': 'Desglose Costos Directos',
+                        'reportes.r4.prop': 'Auditoría estructura',
+                        'reportes.r5': 'Desglose Costos Indirectos',
+                        'reportes.r5.prop': 'Justificación gastos generales',
+                        'reportes.r6': 'Desglose Carga Social M.O.',
+                        'reportes.r6.prop': 'Cumplimiento legal / RRHH',
+                        'reportes.r7': 'Cuantificación de Materiales',
+                        'reportes.r7.prop': 'Logística y compras',
+                        'reportes.r8': 'Cuantificación de Mano de Obra',
+                        'reportes.r8.prop': 'Contratación cuadrillas',
+                        'reportes.r9': 'APU Factorizados',
+                        'reportes.r9.prop': 'Presentación al cliente',
+                        'reportes.r10': 'APU Base',
+                        'reportes.r10.prop': 'Control interno (propiedad intelectual)',
+                        'reportes.nota': 'Todos se generan con un clic, sin copiar y pegar, sin errores.',
+                        'tiempo.title': '⏳ Del presupuesto estático a la gestión dinámica',
+                        'tiempo.intro': 'Un presupuesto general es una foto; la obra es una película. Con AC&P, cada mes del cronograma se convierte en un presupuesto mensual.',
+                        'tiempo.flujo.titulo': 'Flujo de caja proyectado',
+                        'tiempo.flujo.desc': 'Suma los totales de cada mes y obtén la curva de inversión. Planifica liquidez con meses de antelación.',
+                        'tiempo.compras.titulo': 'Compras justo a tiempo',
+                        'tiempo.compras.desc': 'El Reporte #7 de cada mes es tu lista de compras. Pide sólo lo necesario, reduce inventario.',
+                        'tiempo.mo.titulo': 'Contratación de personal',
+                        'tiempo.mo.desc': 'El Reporte #8 mensual te dice cuántos albañiles, ayudantes, etc., necesitas cada mes.',
+                        'tiempo.certificaciones.titulo': 'Certificaciones justificadas',
+                        'tiempo.certificaciones.desc': 'Cada cobro al cliente se respalda con el presupuesto del mes ejecutado. Transparencia total.',
+                        'tiempo.ejemplo': 'Ejemplo: Obra de 12 meses → 12 presupuestos mensuales. Misma base de datos, precios actualizados al instante.',
+                        'tiempo.mes1': 'Mes 1',
+                        'tiempo.mes2': 'Mes 2',
+                        'tiempo.mes3': 'Mes 3',
+                        'casos.title': '🏗️ Casos de uso reales',
+                        'casos.actualizar.titulo': 'Actualizar presupuesto de hace 2 años',
+                        'casos.actualizar.desc': 'Abres el archivo, cambias la base a la versión actual, un clic y ya tienes el presupuesto con precios de hoy. Segundos vs. días.',
+                        'casos.regional.titulo': 'Licitación nacional vs. ejecución regional',
+                        'casos.regional.desc': 'Oficina central licita con base nacional; filial regional reconecta a su base local. Precios reales sin reingresar datos.',
+                        'casos.paralelo.titulo': 'Múltiples equipos en paralelo',
+                        'casos.paralelo.desc': 'Analistas actualizan la base mientras 5 presupuestistas trabajan. Cada uno decide cuándo actualizar. Cero conflictos.',
+                        'ventajas.title': '🚀 No compite, resuelve',
+                        'ventajas.manual.titulo': '📗 Hojas manuales',
+                        'ventajas.manual.1': 'Fórmulas que se rompen',
+                        'ventajas.manual.2': 'Actualización manual propensa a errores',
+                        'ventajas.manual.3': 'Sin trazabilidad',
+                        'ventajas.software.titulo': '💼 Softwares caros',
+                        'ventajas.software.1': 'Curva de aprendizaje enorme',
+                        'ventajas.software.2': 'Costo elevado',
+                        'ventajas.software.3': 'Factorización rígida',
+                        'ventajas.acyp.titulo': '⭐ AC&P',
+                        'ventajas.acyp.1': 'Curva cero (Excel)',
+                        'ventajas.acyp.2': 'Factorización inversa única',
+                        'ventajas.acyp.3': 'Doble contabilidad nativa',
+                        'ventajas.acyp.4': '10 reportes automáticos',
+                        'ventajas.factorx': 'Factor Nx: ingeniería inversa 5x más potente, actualización 100x más rápida.',
+                        'footer': '© Piter J. Bonilla D. · Sistema AC&P · Documento maestro v2.0'
+                    },
+                    en: {
+                        'meta.title': 'AC&P System · Power that solves, simplicity that empowers',
+                        'print.button': 'Print / PDF',
+                        'header.small': 'Cost Analysis & Budgeting',
+                        'header.subtitle': 'Power that solves · Simplicity that empowers',
+                        'header.version': 'v2.0 · Eng. Piter J. Bonilla D. · February 2026',
+                        'header.disclaimer.strong': 'TECHNICAL-STRATEGIC REPORT:',
+                        'header.disclaimer.text': 'Two-file architecture, double accounting, reverse factoring and time dimension. A system that does not compete, it solves.',
+                        'tab.filosofia': 'Philosophy',
+                        'tab.componentes': 'Components',
+                        'tab.reportes': '10 Reports',
+                        'tab.tiempo': 'Time dimension',
+                        'tab.casos': 'Use cases',
+                        'tab.ventajas': 'Advantages',
+                        'filosofia.title': '🧠 Philosophy: purposeful simplicity',
+                        'filosofia.excel.titulo': 'Excel as universal vehicle',
+                        'filosofia.excel.desc': 'Ubiquitous, familiar, no extra licenses. Millions already use it. Learning curve is minimal.',
+                        'filosofia.macros.titulo': 'Macros: guarded path',
+                        'filosofia.macros.desc': 'Automation eliminates formula errors, cascading updates, and protects data integrity. User only enters quantities.',
+                        'filosofia.arquitectura.titulo': 'Two-file architecture',
+                        'filosofia.base': 'Database',
+                        'filosofia.base.desc': 'Master lists · APU · Knowledge',
+                        'filosofia.plantilla': 'Budget Template',
+                        'filosofia.plantilla.desc': 'Project · quantities',
+                        'filosofia.vinculacion': 'Dynamic linking: update the database and all budgets refresh instantly.',
+                        'filosofia.doblecontabilidad': 'Double accounting: real costs (base) vs. factored prices (sale). Protects intellectual property and enables commercial scenario modeling.',
+                        'componentes.title': '⚙️ Internal components: intelligence others lack',
+                        'componentes.listas.titulo': 'Master lists',
+                        'componentes.listas.desc': 'Materials (with tax), equipment (hourly costs), labor (base wages). Unique codes, centralized updates.',
+                        'componentes.apu.titulo': 'Nested APUs',
+                        'componentes.apu.desc': 'Unit Price Analysis as "recipes" combining inputs. Can include other APUs as support, creating real hierarchies.',
+                        'componentes.factorizacion.titulo': '🧮 Reverse factoring engine',
+                        'componentes.factorizacion.desc': 'Apply factors to materials and labor (social charges + extra). Start from a target price and calculate the necessary factor, maintaining mathematical coherence.',
+                        'componentes.tabla.componente': 'Component',
+                        'componentes.tabla.base': 'Base',
+                        'componentes.tabla.factor': 'Factor',
+                        'componentes.tabla.factorizado': 'Factored',
+                        'componentes.tabla.materiales': 'Materials',
+                        'componentes.tabla.mo': 'Labor',
+                        'componentes.tabla.total': 'Total',
+                        'componentes.itbis': 'Transparent tax',
+                        'componentes.itbis.desc': 'in each factored APU the tax (18%) or "Not Applicable" appears if exempt.',
+                        'reportes.title': '📑 10 strategic reports',
+                        'reportes.tabla.reporte': 'Report',
+                        'reportes.tabla.proposito': 'Purpose',
+                        'reportes.r1': 'General Budget',
+                        'reportes.r1.prop': 'Executive view / client',
+                        'reportes.r2': 'Labor Budget (factored)',
+                        'reportes.r2.prop': 'Administrative control',
+                        'reportes.r3': 'Labor Budget (base)',
+                        'reportes.r3.prop': 'Worker negotiation',
+                        'reportes.r4': 'Direct Costs Breakdown',
+                        'reportes.r4.prop': 'Structure audit',
+                        'reportes.r5': 'Indirect Costs Breakdown',
+                        'reportes.r5.prop': 'Overhead justification',
+                        'reportes.r6': 'Labor Social Charges',
+                        'reportes.r6.prop': 'Legal / HR compliance',
+                        'reportes.r7': 'Material Quantification',
+                        'reportes.r7.prop': 'Logistics & purchasing',
+                        'reportes.r8': 'Labor Quantification',
+                        'reportes.r8.prop': 'Crew hiring',
+                        'reportes.r9': 'Factored APUs',
+                        'reportes.r9.prop': 'Client presentation',
+                        'reportes.r10': 'Base APUs',
+                        'reportes.r10.prop': 'Internal control (IP)',
+                        'reportes.nota': 'All generated with one click, no copy-paste, no errors.',
+                        'tiempo.title': '⏳ From static budget to dynamic management',
+                        'tiempo.intro': 'A general budget is a snapshot; the project is a movie. With AC&P, each month of the schedule becomes a monthly budget.',
+                        'tiempo.flujo.titulo': 'Projected cash flow',
+                        'tiempo.flujo.desc': 'Sum monthly totals to get the investment curve. Plan liquidity months ahead.',
+                        'tiempo.compras.titulo': 'Just-in-time purchasing',
+                        'tiempo.compras.desc': 'Report #7 for each month is your shopping list. Order only what you need, reduce inventory.',
+                        'tiempo.mo.titulo': 'Workforce planning',
+                        'tiempo.mo.desc': 'Monthly Report #8 tells you how many bricklayers, helpers, etc., you need each month.',
+                        'tiempo.certificaciones.titulo': 'Justified certifications',
+                        'tiempo.certificaciones.desc': 'Each client invoice is backed by the executed month’s budget. Total transparency.',
+                        'tiempo.ejemplo': 'Example: 12-month project → 12 monthly budgets. Same database, prices updated instantly.',
+                        'tiempo.mes1': 'Month 1',
+                        'tiempo.mes2': 'Month 2',
+                        'tiempo.mes3': 'Month 3',
+                        'casos.title': '🏗️ Real use cases',
+                        'casos.actualizar.titulo': 'Update a 2-year-old budget',
+                        'casos.actualizar.desc': 'Open the file, switch to current database, one click and you have today’s budget. Seconds vs. days.',
+                        'casos.regional.titulo': 'National bid vs. regional execution',
+                        'casos.regional.desc': 'Head office bids with national database; regional branch reconnects to local database. Real prices without re-entering data.',
+                        'casos.paralelo.titulo': 'Multiple teams in parallel',
+                        'casos.paralelo.desc': 'Analysts update the database while 5 estimators work. Each decides when to update. Zero conflicts.',
+                        'ventajas.title': '🚀 Does not compete, it solves',
+                        'ventajas.manual.titulo': '📗 Manual spreadsheets',
+                        'ventajas.manual.1': 'Formulas that break',
+                        'ventajas.manual.2': 'Error-prone manual updates',
+                        'ventajas.manual.3': 'No traceability',
+                        'ventajas.software.titulo': '💼 Expensive software',
+                        'ventajas.software.1': 'Steep learning curve',
+                        'ventajas.software.2': 'High cost',
+                        'ventajas.software.3': 'Rigid factoring',
+                        'ventajas.acyp.titulo': '⭐ AC&P',
+                        'ventajas.acyp.1': 'Zero curve (Excel)',
+                        'ventajas.acyp.2': 'Unique reverse factoring',
+                        'ventajas.acyp.3': 'Native double accounting',
+                        'ventajas.acyp.4': '10 automatic reports',
+                        'ventajas.factorx': 'Nx factor: reverse engineering 5x more powerful, updates 100x faster.',
+                        'footer': '© Piter J. Bonilla D. · AC&P System · Master document v2.0'
+                    }
+                };
+                this.init();
+            }
+            init() {
+                this.detectPreferredLanguage();
+                this.loadTranslations();
+                this.updatePageContent();
+                this.setupLanguageButtons();
+            }
+            detectPreferredLanguage() {
+                const savedLang = localStorage.getItem('dashboard-lang');
+                if (savedLang && (savedLang === 'en' || savedLang === 'es')) {
+                    this.currentLang = savedLang;
+                    return;
+                }
+                const browserLang = navigator.language || navigator.userLanguage;
+                const primaryLang = browserLang.split('-')[0];
+                if (primaryLang === 'en') this.currentLang = 'en';
+                const urlParams = new URLSearchParams(window.location.search);
+                const urlLang = urlParams.get('lang');
+                if (urlLang === 'es' || urlLang === 'en') this.currentLang = urlLang;
+            }
+            loadTranslations() {
+                this.translations = this.translationData[this.currentLang] || this.translationData['es'];
+            }
+            updatePageContent() {
+                document.querySelectorAll('[data-key]').forEach(element => {
+                    const key = element.getAttribute('data-key');
+                    const translation = this.translations[key];
+                    if (translation !== undefined) {
+                        if (element.tagName === 'META') {
+                            if (element.name === 'description') element.content = translation;
+                        } else if (element.tagName === 'TITLE') {
+                            element.textContent = translation;
+                        } else {
+                            if (translation.includes('<')) {
+                                element.innerHTML = translation;
+                            } else {
+                                element.textContent = translation;
+                            }
+                        }
+                    }
+                });
+                document.documentElement.lang = this.currentLang;
+                document.querySelectorAll('.lang-btn').forEach(btn => {
+                    btn.classList.toggle('active', btn.dataset.lang === this.currentLang);
+                });
+            }
+            setupLanguageButtons() {
+                document.querySelectorAll('.lang-btn').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const newLang = btn.dataset.lang;
+                        if (newLang !== this.currentLang) {
+                            document.body.classList.add('changing-language');
+                            this.currentLang = newLang;
+                            localStorage.setItem('dashboard-lang', newLang);
+                            this.loadTranslations();
+                            this.updatePageContent();
+                            setTimeout(() => document.body.classList.remove('changing-language'), 300);
+                        }
+                    });
+                });
+            }
+        }
+        document.addEventListener('DOMContentLoaded', () => {
+            window.translator = new Translator();
+        });
+
+        // Tabs
+        (function() {
+            const tabs = document.querySelectorAll('.tab');
+            const contents = document.querySelectorAll('.tab-content');
+            function activateTab(tabId) {
+                contents.forEach(c => c.classList.remove('active'));
+                tabs.forEach(t => t.classList.remove('active'));
+                document.getElementById(tabId).classList.add('active');
+                const activeBtn = Array.from(tabs).find(t => t.dataset.tab === tabId);
+                if (activeBtn) activeBtn.classList.add('active');
+            }
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => activateTab(tab.dataset.tab));
+            });
+            // activar primera
+            if (tabs.length) activateTab('filosofia');
+        })();
+    </script>
+</body>
+</html>
