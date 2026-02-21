@@ -117,16 +117,20 @@ a:hover { text-decoration: underline; }
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(245,243,239,0.92);
+  background: rgba(245,243,239,0.96);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--rule);
-  padding: 12px 0;
+  padding: 0;
 }
+/* Row 1: brand + actions */
 .topbar-inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
+  gap: 12px;
+  padding: 10px 28px;
+  max-width: var(--max);
+  margin: 0 auto;
 }
 .topbar-brand {
   font-family: var(--font-head);
@@ -134,42 +138,18 @@ a:hover { text-decoration: underline; }
   font-weight: 800;
   letter-spacing: -0.03em;
   color: var(--ink);
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.topbar-brand span {
-  color: var(--gold);
-}
-.topbar-nav {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  list-style: none;
-}
-.topbar-nav a {
-  font-family: var(--font-mono);
-  font-size: 0.68rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--steel);
-  padding: 5px 10px;
-  border-radius: var(--r);
-  transition: color 0.2s, background 0.2s;
-}
-.topbar-nav a:hover {
-  color: var(--ink);
-  background: var(--rule);
-  text-decoration: none;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 .topbar-actions {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
+  flex-shrink: 0;
 }
 .lang-btn {
   font-family: var(--font-mono);
-  font-size: 0.68rem;
+  font-size: 0.65rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   padding: 5px 10px;
@@ -179,6 +159,7 @@ a:hover { text-decoration: underline; }
   color: var(--steel);
   cursor: pointer;
   transition: all 0.2s;
+  white-space: nowrap;
 }
 .lang-btn.active, .lang-btn:hover {
   background: var(--ink);
@@ -187,7 +168,7 @@ a:hover { text-decoration: underline; }
 }
 .print-btn {
   font-family: var(--font-mono);
-  font-size: 0.68rem;
+  font-size: 0.65rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   padding: 5px 12px;
@@ -197,10 +178,53 @@ a:hover { text-decoration: underline; }
   color: var(--gold);
   cursor: pointer;
   transition: all 0.2s;
+  white-space: nowrap;
 }
 .print-btn:hover {
   background: var(--gold);
   color: var(--white);
+}
+/* Row 2: tab bar — always visible, scrollable */
+.topbar-tabs {
+  border-top: 1px solid var(--rule);
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.topbar-tabs::-webkit-scrollbar { display: none; }
+.topbar-nav {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  list-style: none;
+  min-width: max-content;
+  padding: 0 20px;
+}
+.topbar-nav li { display: flex; }
+.topbar-nav a {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--steel);
+  padding: 9px 14px;
+  border-bottom: 2px solid transparent;
+  white-space: nowrap;
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
+  display: flex;
+  align-items: center;
+}
+.topbar-nav a:hover {
+  color: var(--ink);
+  background: rgba(200,168,75,0.07);
+  text-decoration: none;
+}
+.topbar-nav a.active {
+  color: var(--ink);
+  border-bottom-color: var(--gold);
+  font-weight: 500;
 }
 
 /* ═══════════════════════════════════════
@@ -1377,7 +1401,7 @@ section:nth-child(even) {
   .arch-flow { grid-template-columns: 1fr; }
   .inverse-flow { grid-template-columns: 1fr; }
   .inv-arrow { transform: rotate(90deg); }
-  .topbar-nav { display: none; }
+  .topbar-nav a { font-size: 0.6rem; padding: 8px 11px; }
   .itbis-flow { grid-template-columns: 1fr; }
   .pl-3 { margin: 0 0.5rem; }
   .pl-2 { margin: 0 1rem; }
@@ -1385,6 +1409,11 @@ section:nth-child(even) {
 }
 @media (max-width: 600px) {
   .hero-stats { grid-template-columns: repeat(2, 1fr); }
+  .topbar-brand { font-size: 0.85rem; }
+  .topbar-actions { gap: 5px; }
+  .lang-btn { padding: 4px 7px; font-size: 0.6rem; }
+  .print-btn { padding: 4px 8px; font-size: 0.6rem; }
+  .topbar-nav a { font-size: 0.58rem; padding: 7px 9px; letter-spacing: 0.06em; }
   .comp-grid { grid-template-columns: 1fr; }
   .temporal-features { grid-template-columns: 1fr; }
   .nx-factors { grid-template-columns: 1fr 1fr; }
@@ -1404,6 +1433,8 @@ section:nth-child(even) {
   opacity: 1;
   transform: translateY(0);
 }
+
+
 </style>
 </head>
 
@@ -1411,8 +1442,15 @@ section:nth-child(even) {
 
 <!-- ═══════ TOPBAR ═══════ -->
 <nav class="topbar no-print">
-  <div class="container topbar-inner">
+  <div class="topbar-inner">
     <div class="topbar-brand">AC<span class="brand-amp">&amp;</span>P <span style="color:var(--steel);font-weight:400;font-size:0.7rem;margin-left:4px;letter-spacing:0.05em">v2.0</span></div>
+    <div class="topbar-actions">
+      <button class="lang-btn active" onclick="setLang('es')" id="btn-es">🇪🇸 ES</button>
+      <button class="lang-btn" onclick="setLang('en')" id="btn-en">🇺🇸 EN</button>
+      <button class="print-btn" onclick="window.print()">⬇ PDF</button>
+    </div>
+  </div>
+  <div class="topbar-tabs">
     <ul class="topbar-nav">
       <li><a href="#filosofia">Filosofía</a></li>
       <li><a href="#componentes">Componentes</a></li>
@@ -1422,11 +1460,6 @@ section:nth-child(even) {
       <li><a href="#ventajas">Ventajas</a></li>
       <li><a href="#estrategico">ENR</a></li>
     </ul>
-    <div class="topbar-actions">
-      <button class="lang-btn active" onclick="setLang('es')" id="btn-es">🇪🇸 ES</button>
-      <button class="lang-btn" onclick="setLang('en')" id="btn-en">🇺🇸 EN</button>
-      <button class="print-btn" onclick="window.print()">⬇ PDF</button>
-    </div>
   </div>
 </nav>
 
@@ -1958,7 +1991,7 @@ section:nth-child(even) {
 
     <div class="enr-grid reveal">
       <div class="enr-card">
-        <h3>El ecosistema ENR y sus brechas</h3>
+        <h3 id="enr-h3-0">El ecosistema ENR y sus brechas</h3>
         <ul class="enr-tool-list">
           <li class="enr-tool">
             <span class="enr-tool-name">ERP (CMiC, Sage)</span>
@@ -1979,7 +2012,7 @@ section:nth-child(even) {
         </ul>
       </div>
       <div class="enr-card">
-        <h3>Las 4 capas del pricing estratégico</h3>
+        <h3 id="enr-h3-1">Las 4 capas del pricing estratégico</h3>
         <div class="pricing-pyramid">
           <div class="pyramid-layer pl-4">
             <span class="pl-num">4</span>
@@ -2061,23 +2094,23 @@ section:nth-child(even) {
 
     <!-- ITBIS reconstruction -->
     <div class="enr-card reveal" style="margin-top:2rem">
-      <h3>Simulación B · Reconstrucción Fiscal (ITBIS) · Doble Validación</h3>
-      <p style="font-size:0.82rem;color:rgba(255,255,255,0.45);margin-bottom:1.5rem">Pregunta del auditor: "¿Cuánto ITBIS se pagó en marzo por materiales de hormigón?"</p>
+      <h3 id="itbis-title">Simulación B · Reconstrucción Fiscal (ITBIS) · Doble Validación</h3>
+      <p id="itbis-sub" style="font-size:0.82rem;color:rgba(255,255,255,0.45);margin-bottom:1.5rem">Pregunta del auditor: "¿Cuánto ITBIS se pagó en marzo por materiales de hormigón?"</p>
       <div class="itbis-flow">
         <div class="itbis-col col-a">
           <div class="itbis-col-title">Opción A · Solo ERP</div>
-          <div class="itbis-step warn"><span class="itbis-step-num">1.</span> Facturas de proveedores del ERP: totales sin desglose por partida.</div>
-          <div class="itbis-step warn"><span class="itbis-step-num">2.</span> Cruce manual con procurement. Días de trabajo.</div>
-          <div class="itbis-step warn"><span class="itbis-step-num">3.</span> Estimación gruesa. Sin vínculo con avance físico real.</div>
-          <div class="itbis-step warn"><span class="itbis-step-num">4.</span> Respuesta al auditor: pila de facturas. Justificación técnica: ninguna.</div>
+          <div class="itbis-step warn"><span class="itbis-step-num">1.</span> <span id="itbis-a1">Facturas de proveedores del ERP: totales sin desglose por partida.</span></div>
+          <div class="itbis-step warn"><span class="itbis-step-num">2.</span> <span id="itbis-a2">Cruce manual con procurement. Días de trabajo.</span></div>
+          <div class="itbis-step warn"><span class="itbis-step-num">3.</span> <span id="itbis-a3">Estimación gruesa. Sin vínculo con avance físico real.</span></div>
+          <div class="itbis-step warn"><span class="itbis-step-num">4.</span> <span id="itbis-a4">Respuesta al auditor: pila de facturas. Justificación técnica: ninguna.</span></div>
         </div>
         <div class="itbis-vs">VS</div>
         <div class="itbis-col col-b">
           <div class="itbis-col-title">Opción B · ERP + AC&P</div>
-          <div class="itbis-step highlight"><span class="itbis-step-num">1.</span> Ingresar cantidades ejecutadas en marzo (desde P6 o reportes de campo).</div>
-          <div class="itbis-step highlight"><span class="itbis-step-num">2.</span> AC&P reconstruye materiales teóricos usando APU: cemento, arena, grava, acero.</div>
-          <div class="itbis-step highlight"><span class="itbis-step-num">3.</span> Calcula ITBIS estimado por partida. Genera reporte en minutos.</div>
-          <div class="itbis-step highlight"><span class="itbis-step-num">4.</span> Conciliación con facturas del ERP. Diferencias = acopio documentado. Respuesta sólida.</div>
+          <div class="itbis-step highlight"><span class="itbis-step-num">1.</span> <span id="itbis-b1">Ingresar cantidades ejecutadas en marzo (desde P6 o reportes de campo).</span></div>
+          <div class="itbis-step highlight"><span class="itbis-step-num">2.</span> <span id="itbis-b2">AC&P reconstruye materiales teóricos usando APU: cemento, arena, grava, acero.</span></div>
+          <div class="itbis-step highlight"><span class="itbis-step-num">3.</span> <span id="itbis-b3">Calcula ITBIS estimado por partida. Genera reporte en minutos.</span></div>
+          <div class="itbis-step highlight"><span class="itbis-step-num">4.</span> <span id="itbis-b4">Conciliación con facturas del ERP. Diferencias = acopio documentado. Respuesta sólida.</span></div>
         </div>
       </div>
     </div>
@@ -2088,10 +2121,10 @@ section:nth-child(even) {
 <!-- ═══════ FOOTER ═══════ -->
 <footer class="footer">
   <div class="container footer-inner">
-    <div class="footer-brand">AC<span>&</span>P · Sistema de Análisis de Costos y Presupuestos</div>
+    <div class="footer-brand">AC<span class="brand-amp">&amp;</span>P · Sistema de Análisis de Costos y Presupuestos</div>
     <div class="footer-meta">
       Ing. Piter J. Bonilla D. · CODIA 17378 · República Dominicana<br>
-      Documento maestro v2.0 · Febrero 2026 · visualcrp.com
+      v2.0 · Febrero 2026 · <a href="https://visualcrp.com/Sample.pdf" target="_blank" rel="noopener" style="color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(200,168,75,0.4);transition:border-color 0.2s" onmouseover="this.style.borderBottomColor='var(--gold)'" onmouseout="this.style.borderBottomColor='rgba(200,168,75,0.4)'">Presupuesto de Muestra</a>
     </div>
   </div>
 </footer>
@@ -2126,13 +2159,9 @@ const i18n = {
     'hero.badge2': 'Factorización Inversa',
     'hero.badge3': '10 Reportes Automáticos',
     'hero.badge4': 'Doble Contabilidad',
-    'hero.stat1.num': '92',
     'hero.stat1.lbl': 'Puntuación global / 100',
-    'hero.stat2.num': '10',
     'hero.stat2.lbl': 'Reportes estratégicos automáticos',
-    'hero.stat3.num': '2',
     'hero.stat3.lbl': 'Archivos. Arquitectura bifile',
-    'hero.stat4.num': '0',
     'hero.stat4.lbl': 'Curva de aprendizaje. Ya sabes Excel',
     /* S1 FILOSOFIA */
     's1.label': '01 · Filosofía',
@@ -2277,6 +2306,7 @@ const i18n = {
     's7.bid.trad': 'Método Tradicional (solo ERP/hojas)',
     's7.bid.param': 'Método Paramétrico (AC&P)',
     's7.bid.r1.note': 'Oferta inicial · Markup estándar',
+    's7.bid.r1p.note': 'Factor 1.20 sobre CB · Decisión informada',
     's7.bid.r1.margin': 'Margen 20%',
     's7.bid.r2t.note': 'Descuento 7.5% "a ojo" · Sin control',
     's7.bid.r2t.warn': 'Riesgo oculto',
@@ -2302,7 +2332,7 @@ const i18n = {
     's7.itbis.b4': 'Conciliación con facturas del ERP. Diferencias = acopio documentado. Respuesta sólida.',
     /* FOOTER */
     'footer.brand': 'AC<span style="font-family:Georgia,serif;font-style:italic;font-weight:400;color:var(--gold)">&amp;</span>P · Sistema de Análisis de Costos y Presupuestos',
-    'footer.meta': 'Ing. Piter J. Bonilla D. · CODIA 17378 · República Dominicana<br>Documento maestro v2.0 · Febrero 2026 · visualcrp.com',
+    'footer.meta': 'Ing. Piter J. Bonilla D. · CODIA 17378 · República Dominicana<br>v2.0 · Febrero 2026 · <a href="https://visualcrp.com/Sample.pdf" target="_blank" rel="noopener" style="color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(200,168,75,0.4)">Presupuesto de Muestra</a>',
   },
 
   en: {
@@ -2317,7 +2347,7 @@ const i18n = {
     'nav.estrategico': 'ENR',
     'btn.pdf': '⬇ PDF',
     'hero.eyebrow': 'Cost Intelligence System · Construction',
-    'hero.title': 'AC<span class="hero-amp">&amp;</span>P<br>Cost Analysis<br><span class="hero-amp">&amp;</span> Budgeting<br>System',
+    'hero.title': 'AC<span class="hero-amp">&amp;</span>P<br>Cost Analysis<br>Budgeting<br>System',
     'hero.tagline': '<strong>Power that solves · Clarity that transforms.</strong><br>Bifile architecture, dual accounting, inverse factorization and time dimension. A system that doesn\'t compete with your ERP — it completes it.',
     'hero.meta1': 'Eng. Piter J. Bonilla D.',
     'hero.meta2': 'CODIA 17378',
@@ -2326,13 +2356,9 @@ const i18n = {
     'hero.badge2': 'Inverse Factorization',
     'hero.badge3': '10 Automatic Reports',
     'hero.badge4': 'Dual Accounting',
-    'hero.stat1.num': '92',
     'hero.stat1.lbl': 'Global score / 100',
-    'hero.stat2.num': '10',
     'hero.stat2.lbl': 'Automatic strategic reports',
-    'hero.stat3.num': '2',
     'hero.stat3.lbl': 'Files. Bifile architecture',
-    'hero.stat4.num': '0',
     'hero.stat4.lbl': 'Learning curve. You already know Excel',
     's1.label': '01 · Philosophy',
     's1.title': 'Simplicity with purpose',
@@ -2470,6 +2496,7 @@ const i18n = {
     's7.bid.trad': 'Traditional Method (ERP/sheets only)',
     's7.bid.param': 'Parametric Method (AC&P)',
     's7.bid.r1.note': 'Initial offer · Standard markup',
+    's7.bid.r1p.note': 'Factor 1.20 over CB · Informed decision',
     's7.bid.r1.margin': 'Margin 20%',
     's7.bid.r2t.note': 'Blind 7.5% discount · No control',
     's7.bid.r2t.warn': 'Hidden risk',
@@ -2494,7 +2521,7 @@ const i18n = {
     's7.itbis.b3': 'Calculates estimated tax per item. Generates report in minutes.',
     's7.itbis.b4': 'Reconciliation with ERP invoices. Differences = documented stockpiling. Solid answer.',
     'footer.brand': 'AC<span style="font-family:Georgia,serif;font-style:italic;font-weight:400;color:var(--gold)">&amp;</span>P · Cost Analysis & Budgeting System',
-    'footer.meta': 'Eng. Piter J. Bonilla D. · CODIA 17378 · Dominican Republic<br>Master document v2.0 · February 2026 · visualcrp.com',
+    'footer.meta': 'Eng. Piter J. Bonilla D. · CODIA 17378 · Dominican Republic<br>v2.0 · February 2026 · <a href="https://visualcrp.com/Sample.pdf" target="_blank" rel="noopener" style="color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(200,168,75,0.4)">Sample Budget</a>',
   }
 };
 
@@ -2624,7 +2651,7 @@ const nodes = {
   's7.label':      () => [document.querySelector('#estrategico .label'), 'textContent'],
   's7.title':      () => [document.querySelectorAll('.section-title')[6], 'textContent'],
   's7.sub':        () => [document.querySelectorAll('.section-sub')[5], 'textContent'],
-  's7.enr1.title': () => [document.querySelectorAll('.enr-card h3')[0], 'textContent'],
+  's7.enr1.title': () => [document.getElementById('enr-h3-0'), 'textContent'],
   's7.tool1':      () => [document.querySelectorAll('.enr-tool-name')[0], 'textContent'],
   's7.gap1':       () => [document.querySelectorAll('.enr-tool-gap')[0], 'textContent'],
   's7.tool2':      () => [document.querySelectorAll('.enr-tool-name')[1], 'textContent'],
@@ -2633,7 +2660,7 @@ const nodes = {
   's7.gap3':       () => [document.querySelectorAll('.enr-tool-gap')[2], 'textContent'],
   's7.tool4':      () => [document.querySelectorAll('.enr-tool-name')[3], 'textContent'],
   's7.gap4':       () => [document.querySelectorAll('.enr-tool-acp')[0], 'textContent'],
-  's7.pyr.title':  () => [document.querySelectorAll('.enr-card h3')[1], 'textContent'],
+  's7.pyr.title':  () => [document.getElementById('enr-h3-1'), 'textContent'],
   's7.pl4.name':   () => [document.querySelectorAll('.pl-name')[0], 'textContent'],
   's7.pl4.desc':   () => [document.querySelectorAll('.pl-desc')[0], 'textContent'],
   's7.pl3.name':   () => [document.querySelectorAll('.pl-name')[1], 'textContent'],
@@ -2647,10 +2674,18 @@ const nodes = {
   's7.bid.param':  () => [document.querySelectorAll('.bid-col-title')[1], 'textContent'],
   's7.bid.verdict.bad':  () => [document.querySelectorAll('.bid-verdict')[0], 'textContent'],
   's7.bid.verdict.good': () => [document.querySelectorAll('.bid-verdict')[1], 'textContent'],
-  's7.itbis.title':() => [document.querySelectorAll('.enr-card h3')[2], 'textContent'],
-  's7.itbis.sub':  () => [document.querySelector('.enr-card > p'), 'textContent'],
+  's7.itbis.title':() => [document.getElementById('itbis-title'), 'textContent'],
+  's7.itbis.sub':  () => [document.getElementById('itbis-sub'), 'textContent'],
   's7.itbis.a.title':()=> [document.querySelectorAll('.itbis-col-title')[0], 'textContent'],
   's7.itbis.b.title':()=> [document.querySelectorAll('.itbis-col-title')[1], 'textContent'],
+  's7.itbis.a1':   () => [document.getElementById('itbis-a1'), 'textContent'],
+  's7.itbis.a2':   () => [document.getElementById('itbis-a2'), 'textContent'],
+  's7.itbis.a3':   () => [document.getElementById('itbis-a3'), 'textContent'],
+  's7.itbis.a4':   () => [document.getElementById('itbis-a4'), 'textContent'],
+  's7.itbis.b1':   () => [document.getElementById('itbis-b1'), 'textContent'],
+  's7.itbis.b2':   () => [document.getElementById('itbis-b2'), 'textContent'],
+  's7.itbis.b3':   () => [document.getElementById('itbis-b3'), 'textContent'],
+  's7.itbis.b4':   () => [document.getElementById('itbis-b4'), 'textContent'],
   'footer.brand':  () => [document.querySelector('.footer-brand'), 'innerHTML'],
   'footer.meta':   () => [document.querySelector('.footer-meta'), 'innerHTML'],
 };
@@ -2665,14 +2700,12 @@ const reportRows = [
   {num:'07',tag:'rt-ext'},{num:'08',tag:'rt-adm'},{num:'09',tag:'rt-ext'},{num:'10',tag:'rt-int'}
 ];
 
-/* ── ITBIS steps ── */
-const itbisA = ['a1','a2','a3','a4'];
-const itbisB = ['b1','b2','b3','b4'];
+/* ITBIS steps handled via nodes map */
 
 /* ── Bid rounds ── */
 const bidRounds = {
   trad: [
-    {price:'12.00 MM', noteKey:'s7.bid.r1.note', warnKey:'s7.bid.r1.margin', warnClass:'bid-round-safe'},
+    {price:'12.00 MM', noteKey:'s7.bid.r1p.note', warnKey:'s7.bid.r1.margin', warnClass:'bid-round-safe'},
     {price:'11.10 MM', noteKey:'s7.bid.r2t.note', warnKey:'s7.bid.r2t.warn', warnClass:'bid-round-danger'},
     {price:'10.50 MM', noteKey:'s7.bid.r3t.note', warnKey:'s7.bid.r3t.warn', warnClass:'bid-round-danger'},
   ],
@@ -2771,13 +2804,7 @@ function setLang(lang) {
     }
   } catch(e) {}
 
-  /* ITBIS steps A & B */
-  try {
-    const stepsA = document.querySelectorAll('.col-a .itbis-step');
-    const stepsB = document.querySelectorAll('.col-b .itbis-step');
-    itbisA.forEach((k,i)=>{ if(stepsA[i]) { const span=stepsA[i].querySelector('span:last-child'); if(span) span.textContent=t[`s7.itbis.${k}`]||''; }});
-    itbisB.forEach((k,i)=>{ if(stepsB[i]) { const span=stepsB[i].querySelector('span:last-child'); if(span) span.textContent=t[`s7.itbis.${k}`]||''; }});
-  } catch(e) {}
+  /* ITBIS steps — now handled by nodes map via getElementById */
 
   /* Timeline months label */
   try {
@@ -2833,19 +2860,36 @@ function setLang(lang) {
 (function initActiveNav() {
   const sections = document.querySelectorAll('section[id]');
   const navLinks = document.querySelectorAll('.topbar-nav a');
-  window.addEventListener('scroll', () => {
+
+  function updateActive() {
     let current = '';
     sections.forEach(s => {
-      if (window.scrollY >= s.offsetTop - 120) current = s.id;
+      if (window.scrollY >= s.offsetTop - 130) current = s.id;
     });
     navLinks.forEach(a => {
-      a.style.color = a.getAttribute('href') === '#' + current
-        ? 'var(--ink)' : '';
-      a.style.background = a.getAttribute('href') === '#' + current
-        ? 'var(--rule)' : '';
+      const isActive = a.getAttribute('href') === '#' + current;
+      a.classList.toggle('active', isActive);
+      a.style.color = '';
+      a.style.background = '';
+      // Auto-scroll the nav so active tab is visible
+      if (isActive) {
+        const nav = a.closest('.topbar-nav');
+        if (nav) {
+          const aLeft = a.offsetLeft;
+          const aWidth = a.offsetWidth;
+          const navWidth = nav.offsetWidth;
+          const scrollTarget = aLeft - (navWidth / 2) + (aWidth / 2);
+          nav.scrollTo({ left: scrollTarget, behavior: 'smooth' });
+        }
+      }
     });
-  }, { passive: true });
+  }
+
+  window.addEventListener('scroll', updateActive, { passive: true });
+  updateActive();
 })();
+
+
 </script>
 </body>
 </html>
