@@ -55,17 +55,19 @@ body {
 /* ── PRINT ── */
 @media print {
   .no-print, .topbar-actions, .tier-legend { display: none !important; }
-  .tab-pane  { display: block !important; opacity: 1 !important; }
+  .tab-pane  { display: block !important; opacity: 1 !important; visibility: visible !important; }
   .tab-bar   { display: none !important; }
-  .topbar-inner { display: none !important; }
-  .topbar-tabs  { display: none !important; }
-  body       { background: white; color: black; font-size: 11pt; }
+  .topbar    { display: none !important; }
+  body       { background: white !important; color: black; font-size: 11pt; }
   header     { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-  .card, .tier-card, .callout { page-break-inside: avoid; }
+  .card, .tier-card, .callout { page-break-inside: avoid; break-inside: avoid; }
   .card      { box-shadow: none; border: 1px solid #ccc; }
-  .ch-box canvas { height: 180px !important; }
-  .tab-pane  { page-break-before: always; }
-  .tab-pane:first-of-type { page-break-before: avoid; }
+  .ch-box canvas { height: 220px !important; width: 100% !important; }
+  .ch-box    { page-break-inside: avoid; break-inside: avoid; }
+  .tab-pane  { page-break-before: always; break-before: page; }
+  .tab-pane:first-child { page-break-before: avoid; break-before: avoid; }
+  .reveal    { opacity: 1 !important; transform: none !important; }
+  * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
 }
 
 /* ── TOPBAR ── */
@@ -84,7 +86,7 @@ body {
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  padding: 9px 40px;
+  padding: 9px 24px;
   max-width: 1120px;
   margin: 0 auto;
 }
@@ -277,9 +279,10 @@ header h1 em {
   display: flex;
   align-items: center;
   gap: 7px;
-  font-size: 12.5px;
+  font-size: 12px;
   font-weight: 500;
   color: var(--slate);
+  white-space: nowrap;
 }
 .tier-dot {
   width: 10px; height: 10px;
@@ -300,24 +303,28 @@ header h1 em {
   overflow-x: auto;
   scrollbar-width: none;
   -ms-overflow-style: none;
+  /* Needed so active tab bottom border isn't clipped */
+  overflow-y: visible;
 }
 .tab-bar::-webkit-scrollbar { display: none; }
 .tab-inner {
   max-width: 1120px;
   margin: 0 auto;
-  padding: 0 40px;
+  padding: 0 24px;
   display: flex;
-  overflow-x: auto;
+  /* Do NOT set overflow-x here — let .tab-bar handle it */
   scrollbar-width: none;
   gap: 0;
+  /* Ensure bottom indicator is never clipped */
+  padding-bottom: 1px;
 }
 .tab-inner::-webkit-scrollbar { display: none; }
 
 .tb {
   flex-shrink: 0;
-  padding: 14px 18px;
+  padding: 13px 14px;
   font-family: 'DM Sans', sans-serif;
-  font-size: 13px;
+  font-size: 12.5px;
   font-weight: 500;
   color: var(--muted);
   background: none;
@@ -326,18 +333,26 @@ header h1 em {
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 6px;
-  margin-bottom: -2px;
+  gap: 5px;
+  /* Remove negative margin — it clips the active indicator */
+  margin-bottom: 0;
+  position: relative;
+  bottom: -1px; /* align bottom border with tab-bar bottom border */
   transition: color .16s, border-color .16s;
   white-space: nowrap;
 }
 .tb:hover { color: var(--ink); }
 .tb.on { color: var(--kit); border-bottom-color: var(--kit); font-weight: 600; }
-.tb .ico { font-size: 14px; }
+.tb .ico { font-size: 13px; }
 
-@media (max-width: 700px) {
+@media (max-width: 900px) {
   .tab-inner { padding: 0 16px; }
-  .tb { padding: 12px 12px; font-size: 12px; }
+  .tb { padding: 11px 10px; font-size: 12px; gap: 4px; }
+  .tb .ico { display: none; }
+}
+@media (max-width: 700px) {
+  .tab-inner { padding: 0 8px; }
+  .tb { padding: 10px 8px; font-size: 11px; }
 }
 
 /* ════════ MAIN ════════ */
@@ -693,9 +708,9 @@ footer strong { color: rgba(255,255,255,0.55); }
       <span data-es="Complemento · Kit Smartphone" data-en="Supplement · Smartphone Kit">Complemento · Kit Smartphone</span>
     </div>
     <h1><span data-es="Captura 3D con" data-en="3D Capture with">Captura 3D con</span><br><em data-es="Kit de Baja Inversión" data-en="Low-Investment Kit">Kit de Baja Inversión</em></h1>
-    <p class="hdr-sub" data-es="Tercer carril del sistema CHMP · Redmi Note 10 Pro + kit $150 como alternativa de entrada al mercado inmobiliario EE.UU. Complemento al Informe Comparativo RS10 vs Matterport Pro3 · v1.0 · Piter J. Bonilla D. · Feb 2026" data-en="Third rail of the CHMP system · Redmi Note 10 Pro + $150 kit as a market-entry alternative for the U.S. real estate market. Supplement to the RS10 vs Matterport Pro3 Comparative Report · v1.0 · Piter J. Bonilla D. · Feb 2026">
+    <p class="hdr-sub" data-es="Tercer carril del sistema CHMP · Redmi Note 10 Pro + kit $150 como alternativa de entrada al mercado inmobiliario EE.UU. Complemento al Informe Comparativo RS10 vs Matterport Pro3 · v2.0 · Piter J. Bonilla D. · Feb 2026" data-en="Third rail of the CHMP system · Redmi Note 10 Pro + $150 kit as a market-entry alternative for the U.S. real estate market. Supplement to the RS10 vs Matterport Pro3 Comparative Report · v2.0 · Piter J. Bonilla D. · Feb 2026">
       Tercer carril del sistema CHMP · Redmi Note 10 Pro + kit $150 como alternativa de entrada al mercado inmobiliario EE.UU.
-      Complemento al Informe Comparativo RS10 vs Matterport Pro3 · v1.0 · Piter J. Bonilla D. · Feb 2026
+      Complemento al Informe Comparativo RS10 vs Matterport Pro3 · v2.0 · Piter J. Bonilla D. · Feb 2026
     </p>
 
     <div class="kpi-band">
@@ -726,20 +741,20 @@ footer strong { color: rgba(255,255,255,0.55); }
 <!-- ══════════════════ TOPBAR ══════════════════ -->
 <nav class="topbar no-print">
   <div class="topbar-inner">
-    <div class="topbar-brand">CHMP <em>v1.0</em> &nbsp;·&nbsp; <span id="tb-sub" style="color:var(--muted);font-weight:400">RS10 · Pro3 · Kit</span></div>
+    <div class="topbar-brand">CHMP <em>v2.0</em> &nbsp;·&nbsp; <span id="tb-sub" style="color:var(--muted);font-weight:400">RS10 · Pro3 · Kit</span></div>
     <div class="topbar-actions">
       <button class="lang-btn active" onclick="setLang('es')" id="btn-es">🇪🇸 ES</button>
       <button class="lang-btn"        onclick="setLang('en')" id="btn-en">🇺🇸 EN</button>
-      <button class="print-btn"       onclick="window.print()" id="btn-pdf">⬇ PDF</button>
+      <button class="print-btn"       onclick="printAll()" id="btn-pdf">⬇ PDF</button>
     </div>
   </div>
 
   <!-- tier legend row -->
-  <div style="max-width:1120px;margin:0 auto;padding:7px 40px;display:flex;align-items:center;gap:22px;border-top:1px solid var(--border);flex-wrap:wrap;" id="tier-row">
+  <div style="max-width:1120px;margin:0 auto;padding:6px 24px;display:flex;align-items:center;gap:16px;border-top:1px solid var(--border);flex-wrap:wrap;overflow:hidden;" id="tier-row">
     <span style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);" id="sys-label">Sistema CHMP:</span>
     <div class="tier-pill"><div class="tier-dot td-rs10"></div> <span id="leg-rs10">CHCNAV RS10 — Precisión geoespacial</span></div>
     <div class="tier-pill"><div class="tier-dot td-pro3"></div> <span id="leg-pro3">Matterport Pro3 — Tour inmersivo profesional</span></div>
-    <div class="tier-pill"><div class="tier-dot td-kit"></div>  <strong><span id="leg-kit">Kit Smartphone</span></strong> — <span id="leg-kit-sub">Este documento · Entrada de mercado</span></div>
+    <div class="tier-pill"><div class="tier-dot td-kit"></div>  <strong><span id="leg-kit">Kit Smartphone</span></strong> — <span id="leg-kit-sub">Entrada de mercado</span></div>
   </div>
 
   <!-- tab bar row -->
@@ -808,7 +823,7 @@ footer strong { color: rgba(255,255,255,0.55); }
         <div class="tier-hdr bg-kit">
           <div>
             <h3>Kit Smartphone ★</h3>
-            <div class="price">$150 hardware · Este doc.</div>
+            <div class="price" id="kit-price" data-es="$150 hardware" data-en="$150 hardware">$150 hardware</div>
           </div>
           <div class="badge">Entrada</div>
         </div>
@@ -941,7 +956,7 @@ footer strong { color: rgba(255,255,255,0.55); }
             <td class="bold" id="td-tec-tecnologia">Tecnología base</td>
             <td class="c rs10">GNSS RTK + LiDAR + SLAM</td>
             <td class="c pro3">LiDAR + Fotogr. 360° HDR</td>
-            <td class="c kit">Cámara gran angular + app Matterport Android</td>
+            <td class="c kit">Cámara principal 108 MP (vertical) + app Matterport Android</td>
           </tr>
           <tr>
             <td class="bold" id="td-tec-abs">Precisión absoluta</td>
@@ -1143,13 +1158,50 @@ footer strong { color: rgba(255,255,255,0.55); }
     <div class="card-title"><span class="tier-dot td-kit" style="display:inline-block"></span> <span id="f-kit-title">Kit Smartphone · Flujo de trabajo (2–3 h en sitio + procesado nube)</span></div>
     <div class="card-sub" id="f-kit-sub">Tercer flujo — metodología de doble ronda con Matterport Android y estabilización mecánica.</div>
     <div class="steps">
-      <div class="step"><div class="step-n kit">1</div><div class="step-b"><strong data-es="Preparación del espacio (15–20 min)" data-en="Space preparation (15–20 min)">Preparación del espacio (15–20 min)</strong><span data-es="Encender luces, abrir puertas interiores, cerrar apps en segundo plano del dispositivo. Batería ≥80%. Verificar calibración nodal del soporte Ulanzi ST-02S para el lente gran angular 8 MP." data-en="Turn on lights, open interior doors, close background apps on device. Battery ≥80%. Verify Ulanzi ST-02S mount nodal calibration for 8 MP wide-angle lens.">Encender luces, abrir puertas interiores, cerrar apps en segundo plano del dispositivo. Batería ≥80%. Verificar calibración nodal del soporte Ulanzi ST-02S para el lente gran angular 8 MP.</span></div></div>
+      <div class="step"><div class="step-n kit">1</div><div class="step-b"><strong data-es="Preparación del espacio (15–20 min)" data-en="Space preparation (15–20 min)">Preparación del espacio (15–20 min)</strong><span data-es="Encender luces, abrir puertas interiores, cerrar apps en segundo plano del dispositivo. Batería ≥80%. Verificar calibración nodal del soporte Ulanzi ST-02S para la cámara principal 108 MP (posición vertical)." data-en="Turn on lights, open interior doors, close background apps on device. Battery ≥80%. Verify Ulanzi ST-02S mount nodal calibration for the 108 MP main camera (vertical position).">Encender luces, abrir puertas interiores, cerrar apps en segundo plano del dispositivo. Batería ≥80%. Verificar calibración nodal del soporte Ulanzi ST-02S para la cámara principal 108 MP (posición vertical).</span></div></div>
       <div class="step"><div class="step-n kit">2</div><div class="step-b"><strong data-es="Planificación de puntos (10 min)" data-en="Point planning (10 min)">Planificación de puntos (10 min)</strong><span data-es="~19 puntos para 135 m². Distancia entre puntos: 2.5–3 m. Marcar con cinta si necesario. Identificar zonas críticas: escaleras, pasillos &lt;1.5 m, esquinas con aberturas." data-en="~19 points for 135 m². Distance between points: 2.5–3 m. Mark with tape if needed. Identify critical areas: stairs, hallways &lt;1.5 m, corners with openings.">~19 puntos para 135 m². Distancia entre puntos: 2.5–3 m. Marcar con cinta si necesario. Identificar zonas críticas: escaleras, pasillos &lt;1.5 m, esquinas con aberturas.</span></div></div>
       <div class="step"><div class="step-n kit">3</div><div class="step-b"><strong data-es="Captura por punto — Doble ronda (4–6 min/punto)" data-en="Per-point capture — Dual pass (4–6 min/point)">Captura por punto — Doble ronda (4–6 min/punto)</strong><span data-es="Ronda 0°: 20 fotos de paredes y aberturas. Ronda 45° hacia abajo: 20 fotos de suelo y base geométrica. Disparo automático por sensor de posición o disparador Bluetooth para eliminar vibración." data-en="0° pass: 20 photos of walls and openings. 45° downward pass: 20 photos of floor and geometric base. Automatic trigger by position sensor or Bluetooth trigger to eliminate vibration.">Ronda 0°: 20 fotos de paredes y aberturas. Ronda 45° hacia abajo: 20 fotos de suelo y base geométrica. Disparo automático por sensor de posición o disparador Bluetooth para eliminar vibración.</span></div></div>
       <div class="step"><div class="step-n kit">4</div><div class="step-b"><strong data-es="Verificación en sitio (10 min)" data-en="On-site verification (10 min)">Verificación en sitio (10 min)</strong><span data-es="Revisar pre-visualización en la app antes de desmontar. Re-escanear si hay lagunas. Confirmar carga inicial a servidores Matterport antes de salir." data-en="Check preview in app before dismounting. Rescan if there are gaps. Confirm initial upload to Matterport servers before leaving.">Revisar pre-visualización en la app antes de desmontar. Re-escanear si hay lagunas. Confirmar carga inicial a servidores Matterport antes de salir.</span></div></div>
       <div class="step"><div class="step-n kit">5</div><div class="step-b"><strong data-es="Procesado en nube Matterport (2–12 h — no local)" data-en="Matterport cloud processing (2–12 h — not local)">Procesado en nube Matterport (2–12 h — no local)</strong><span data-es="El modelo 3D completo se genera en servidores Matterport. El dispositivo solo realiza un stitch inicial de pre-visualización. Entrega del link al cliente en ≤24 h." data-en="The complete 3D model is generated on Matterport servers. The device only performs an initial preview stitch. Delivery of link to client within ≤24 h.">El modelo 3D completo se genera en servidores Matterport. El dispositivo solo realiza un stitch inicial de pre-visualización. Entrega del link al cliente en ≤24 h.</span></div></div>
     </div>
     <div class="ib amber" id="ib-dif-critica"><div class="ii">⚠️</div><div><strong>Diferencia crítica vs. Pro3:</strong> El tiempo de captura del kit (2–3 h) es 2–4× mayor que el Pro3 (45–60 min) para el mismo espacio. Esto afecta directamente la capacidad máxima de trabajos por día. A compensar con precios adecuados y eficiencia operativa creciente.</div></div>
+    <div class="ib violet" style="margin-top:8px;" id="ib-link-validacion">
+      <div class="ii">🧪</div>
+      <div><strong data-es="Validación en condiciones mínimas:" data-en="Validation in minimal conditions:">Validación en condiciones mínimas:</strong> <span data-es="Se ha realizado una captura 100% manual (handheld) sin trípode ni soporte nodal, con resultados comerciales. " data-en="A 100% handheld capture (no tripod, no nodal mount) has been performed with commercial-grade results. ">Se ha realizado una captura 100% manual (handheld) sin trípode ni soporte nodal, con resultados comerciales. </span><a href="#tab-flujos" onclick="showTab('flujos', document.getElementById('nav-flujos')); setTimeout(() => document.getElementById('validacion-handheld').scrollIntoView({behavior: 'smooth'}), 100); return false;" style="color: var(--kit); font-weight: 600; text-decoration: underline;" data-es="Ver detalles" data-en="See details">Ver detalles</a>.</div>
+    </div>
+  </div>
+
+  <!-- NUEVA TARJETA: Validación en condiciones mínimas (handheld) -->
+  <div class="card stripe-amber reveal" id="validacion-handheld">
+    <div class="card-title"><span>🧪</span> <span id="f-val-title">Validación en condiciones mínimas (handheld) – Redmi Note 10 Pro</span></div>
+    <div class="card-sub" id="f-val-sub">Captura realizada el 22 Feb 2026 en Santiago, RD, 100% manual, sin trípode, sin soporte nodal, sin base niveladora. Representa la línea base operativa mínima.</div>
+    <div class="g2">
+      <div>
+        <div class="sec-lbl" id="f-val-res">Resultados clave</div>
+        <ul class="cl">
+          <li><div class="ck g">✓</div><div><strong data-es="Tasa de alineación:" data-en="Alignment rate:">Tasa de alineación:</strong> <span data-es="18/19 sweeps (94.7%)" data-en="18/19 sweeps (94.7%)">18/19 sweeps (94.7%)</span></div></li>
+          <li><div class="ck g">✓</div><div><strong data-es="RFC promedio:" data-en="Average RFC:">RFC promedio:</strong> ≈30% <span data-es="(9 sweeps en categoría Excelente)" data-en="(9 sweeps in Excellent category)">(9 sweeps en categoría Excelente)</span></div></li>
+          <li><div class="ck g">✓</div><div><strong data-es="Modelo publicado:" data-en="Published model:">Modelo publicado:</strong> <span data-es="Sin lagunas perceptibles, cumple estándares comerciales." data-en="No perceptible gaps, meets commercial standards.">Sin lagunas perceptibles, cumple estándares comerciales.</span></div></li>
+          <li><div class="ck a">⚑</div><div><strong data-es="Sweep crítico (c2fcd313):" data-en="Critical sweep (c2fcd313):">Sweep crítico (c2fcd313):</strong> <span data-es="RFC 18.2% por baja textura visual. No degradó el recorrido final." data-en="RFC 18.2% due to low visual texture. Did not degrade final walkthrough.">RFC 18.2% por baja textura visual. No degradó el recorrido final.</span></div></li>
+        </ul>
+      </div>
+      <div>
+        <div class="sec-lbl" id="f-val-sweep">Reinterpretación del Sweep 0de9d8d9</div>
+        <div class="ib amber" style="margin-top:0;">
+          <div class="ii">🔍</div>
+          <div><span data-es="No es fallo técnico. Se introdujo deliberadamente un cambio topológico (puerta abierta vs. cerrada). El sistema SLAM reaccionó como está diseñado, registrando " data-en="Not a technical failure. A deliberate topological change was introduced (door open vs. closed). The SLAM system reacted as designed, logging ">No es fallo técnico. Se introdujo deliberadamente un cambio topológico (puerta abierta vs. cerrada). El sistema SLAM reaccionó como está diseñado, registrando </span><code>rscan_align_failed</code><span data-es=". La imagen .swl se capturó correctamente. El sistema funcionó conforme a su diseño." data-en=". The .swl image was captured correctly. The system performed as designed.">. La imagen .swl se capturó correctamente. El sistema funcionó conforme a su diseño.</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="ib violet" style="margin-top:12px;">
+      <div class="ii">📈</div>
+      <div><strong data-es="Proyección con kit de estabilización:" data-en="Projection with stabilization kit:">Proyección con kit de estabilización:</strong> <span data-es="Mayor uniformidad de RFC, reducción de fallos de alineación, menor drift angular. No cambiará radicalmente la calidad visual ni lo hará apto para BIM." data-en="Greater RFC uniformity, reduction in alignment failures, lower angular drift. It will not radically change visual quality or make it suitable for BIM.">Mayor uniformidad de RFC, reducción de fallos de alineación, menor drift angular. No cambiará radicalmente la calidad visual ni lo hará apto para BIM.</span></div>
+    </div>
+    <div class="callout" style="background: linear-gradient(135deg, #1A2A3A, #0F1A24); margin-top: 12px; padding: 18px;">
+      <p style="margin:0; color: #A5F3FC;" data-es="✅ Conclusión: El flujo manual ya es comercialmente viable. El kit de estabilización no es requisito de viabilidad, sino herramienta de estandarización y repetibilidad." data-en="✅ Conclusion: The manual workflow is already commercially viable. The stabilization kit is not a viability requirement, but a tool for standardization and repeatability.">
+        ✅ Conclusión: El flujo manual ya es comercialmente viable. El kit de estabilización no es requisito de viabilidad, sino herramienta de estandarización y repetibilidad.
+      </p>
+    </div>
   </div>
 
   <div class="card stripe-neutral reveal">
@@ -1263,8 +1315,12 @@ footer strong { color: rgba(255,255,255,0.55); }
       <li><div class="ck r">✕</div><div data-es="Planos DWG centimétricos: Los planos automáticos del kit tienen ±2.5% de error. Para planos de construcción o permisos, derivar al RS10." data-en="Centimeter DWG plans: The kit's automatic floor plans have ±2.5% error. For construction plans or permits, use RS10.">Planos DWG centimétricos: Los planos automáticos del kit tienen ±2.5% de error. Para planos de construcción o permisos, derivar al RS10.</div></li>
       <li><div class="ck r">✕</div><div data-es="BIM LOD 200+ para rehabilitación: El kit no genera geometría apta para modelado BIM. El RS10 es el único instrumento de los tres que lo hace correctamente." data-en="BIM LOD 200+ for renovation: The kit does not generate geometry suitable for BIM modeling. The RS10 is the only instrument of the three that does it correctly.">BIM LOD 200+ para rehabilitación: El kit no genera geometría apta para modelado BIM. El RS10 es el único instrumento de los tres que lo hace correctamente.</div></li>
       <li><div class="ck a">⚑</div><div data-es="Espacios &gt;300 m² con escaleras: Tiempo de captura aumenta a 4–5 h. Evaluar si es más rentable usar Pro3 para ese trabajo." data-en="Spaces >300 m² with stairs: Capture time increases to 4–5 h. Evaluate if it's more profitable to use Pro3 for that job.">Espacios &gt;300 m² con escaleras: Tiempo de captura aumenta a 4–5 h. Evaluar si es más rentable usar Pro3 para ese trabajo.</div></li>
-      <li><div class="ck a">⚑</div><div data-es="Propiedades con iluminación extremadamente baja: El lente gran angular 8 MP tiene peor rendimiento en baja luz que el LiDAR del Pro3. Llevar siempre luces LED portátiles." data-en="Properties with extremely low light: The 8 MP wide-angle lens performs worse in low light than the Pro3's LiDAR. Always carry portable LED lights.">Propiedades con iluminación extremadamente baja: El lente gran angular 8 MP tiene peor rendimiento en baja luz que el LiDAR del Pro3. Llevar siempre luces LED portátiles.</div></li>
+      <li><div class="ck a">⚑</div><div data-es="Propiedades con iluminación extremadamente baja: La cámara principal 108 MP (f/1.9) tiene buen rendimiento en baja luz, pero sin LiDAR activo el SLAM depende de textura visual. Llevar siempre luces LED portátiles." data-en="Properties with extremely low light: The 108 MP main camera (f/1.9) performs well in low light, but without active LiDAR the SLAM relies on visual texture. Always carry portable LED lights.">Propiedades con iluminación extremadamente baja: La cámara principal 108 MP (f/1.9) tiene buen rendimiento en baja luz, pero sin LiDAR activo el SLAM depende de textura visual. Llevar siempre luces LED portátiles.</div></li>
     </ul>
+    <div class="ib green" style="margin-top:12px;">
+      <div class="ii">✅</div>
+      <div><strong data-es="Nota de validación:" data-en="Validation note:">Nota de validación:</strong> <span data-es="A pesar de estas limitaciones teóricas, una captura 100% manual (handheld) logró una tasa de alineación del 94.7% y un modelo publicado sin lagunas, demostrando que el sistema es comercialmente viable incluso en condiciones mínimas." data-en="Despite these theoretical limitations, a 100% handheld capture achieved a 94.7% alignment rate and a published model with no gaps, demonstrating that the system is commercially viable even in minimal conditions.">A pesar de estas limitaciones teóricas, una captura 100% manual (handheld) logró una tasa de alineación del 94.7% y un modelo publicado sin lagunas, demostrando que el sistema es comercialmente viable incluso en condiciones mínimas.</span></div>
+    </div>
   </div>
 
 </div>
@@ -1430,7 +1486,7 @@ footer strong { color: rgba(255,255,255,0.55); }
         <tbody>
           <tr><td class="bold" id="td-esc-arranque">Arranque (mes 1–2)</td><td class="c">4–6</td><td class="c r">$1,000–$1,560</td><td class="c r a">$600–650</td><td class="c r kit">$350–$910</td><td class="c">$28–50</td></tr>
           <tr><td class="bold" id="td-esc-crecimiento">Crecimiento (mes 3–5)</td><td class="c">8–12</td><td class="c r">$2,080–$3,120</td><td class="c r a">$650–700</td><td class="c r kit">$1,380–$2,420</td><td class="c">$50–68</td></tr>
-          <tr><td class="bold" id="td-esc-estable">Estable (mes 6+)</td><td class="c">2/semana</td><td class="c r">$2,080</td><td class="c r a">$670</td><td class="c r g">~$1,410</td><td class="c">$60–70</td></tr>
+          <tr><td class="bold" id="td-esc-estable">Estable (mes 6+)</td><td class="c" data-es="2/semana" data-en="2/week">2/semana</td><td class="c r">$2,080</td><td class="c r a">$670</td><td class="c r g">~$1,410</td><td class="c">$60–70</td></tr>
           <tr><td class="bold" id="td-esc-maximo">Máximo individual</td><td class="c">20</td><td class="c r">$5,200–$6,500</td><td class="c r a">$760</td><td class="c r g">$4,440–$5,740</td><td class="c">$70–80</td></tr>
         </tbody>
       </table>
@@ -1725,7 +1781,7 @@ footer strong { color: rgba(255,255,255,0.55); }
         <ul class="cl">
           <li><div class="ck g">✓</div><div data-es="Batería dispositivo ≥80%" data-en="Device battery ≥80%">Batería dispositivo ≥80%</div></li>
           <li><div class="ck g">✓</div><div data-es="App Matterport actualizada (verificar versión)" data-en="Matterport app updated (check version)">App Matterport actualizada (verificar versión)</div></li>
-          <li><div class="ck g">✓</div><div data-es="Calibración nodal del soporte Ulanzi verificada (lente gran angular 8 MP)" data-en="Ulanzi mount nodal calibration verified (8 MP wide-angle lens)">Calibración nodal del soporte Ulanzi verificada (lente gran angular 8 MP)</div></li>
+          <li><div class="ck g">✓</div><div data-es="Calibración nodal del soporte Ulanzi verificada (cámara principal 108 MP, posición vertical)" data-en="Ulanzi mount nodal calibration verified (108 MP main camera, vertical position)">Calibración nodal del soporte Ulanzi verificada (cámara principal 108 MP, posición vertical)</div></li>
           <li><div class="ck g">✓</div><div data-es="Trípode nivelado (nivel de burbuja a 0)" data-en="Tripod leveled (bubble level at 0)">Trípode nivelado (nivel de burbuja a 0)</div></li>
           <li><div class="ck g">✓</div><div data-es="Todas las apps en 2° plano cerradas" data-en="All background apps closed">Todas las apps en 2° plano cerradas</div></li>
           <li><div class="ck g">✓</div><div data-es="Plan de puntos revisado (plano si existe)" data-en="Point plan reviewed (floor plan if available)">Plan de puntos revisado (plano si existe)</div></li>
@@ -1769,7 +1825,7 @@ footer strong { color: rgba(255,255,255,0.55); }
 <footer>
   <strong id="ft-brand">Complemento CHMP · Kit Smartphone</strong> &nbsp;·&nbsp;
   Piter J. Bonilla D. &nbsp;·&nbsp;
-  <span id="ft-meta">Documento maestro v1.0 · Greensboro NC · Febrero 2026 · Basado en análisis CHCNAV RS10 y Matterport Pro3</span>
+  <span id="ft-meta">Documento maestro v2.0 · Greensboro NC · Febrero 2026 · Basado en análisis CHCNAV RS10 y Matterport Pro3</span>
 </footer>
 
 <script>
@@ -1784,6 +1840,85 @@ function showTab(id, btn) {
 }
 
 /* ══════════════════════════════════════════════════
+   PRINT ALL — muestra todos los tabs, redibuja
+   charts y lanza impresión completa del documento
+══════════════════════════════════════════════════ */
+function printAll() {
+  /* 1. Guardar estado activo */
+  const activePane = document.querySelector('.tab-pane.on');
+  const activeBtn  = document.querySelector('.tb.on');
+  const activePaneId = activePane ? activePane.id : null;
+
+  /* 2. Mostrar TODOS los tabs simultáneamente */
+  document.querySelectorAll('.tab-pane').forEach(p => {
+    p.style.display = 'block';
+    p.style.opacity = '1';
+    p.style.visibility = 'visible';
+  });
+
+  /* 3. Forzar que todos los elementos .reveal sean visibles */
+  document.querySelectorAll('.reveal').forEach(el => {
+    el.style.opacity = '1';
+    el.style.transform = 'none';
+  });
+
+  /* 4. Esperar a que el DOM se repinte y luego redimensionar charts */
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      /* Redimensionar todos los charts de Chart.js para que calculen
+         su tamaño correcto con todos los tabs visibles */
+      if (window._charts) {
+        Object.values(window._charts).forEach(chart => {
+          try {
+            chart.resize();
+            chart.update('none'); /* 'none' = sin animación */
+          } catch(e) {}
+        });
+      }
+
+      /* 5. Pequeña pausa para que los canvas terminen de renderizar */
+      setTimeout(() => {
+        window.print();
+
+        /* 6. Restaurar estado original tras el diálogo de impresión */
+        const restoreState = () => {
+          document.querySelectorAll('.tab-pane').forEach(p => {
+            p.style.display = '';
+            p.style.opacity = '';
+            p.style.visibility = '';
+          });
+          document.querySelectorAll('.reveal').forEach(el => {
+            el.style.opacity = '';
+            el.style.transform = '';
+          });
+          /* Restaurar tab activo */
+          if (activePaneId) {
+            document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('on'));
+            document.getElementById(activePaneId).classList.add('on');
+          }
+          if (activeBtn) {
+            document.querySelectorAll('.tb').forEach(b => b.classList.remove('on'));
+            activeBtn.classList.add('on');
+          }
+          /* Re-redimensionar charts al estado normal */
+          if (window._charts) {
+            Object.values(window._charts).forEach(chart => {
+              try { chart.resize(); } catch(e) {}
+            });
+          }
+        };
+
+        /* El evento afterprint se dispara cuando el usuario cierra
+           el diálogo de impresión (imprime o cancela) */
+        window.addEventListener('afterprint', restoreState, { once: true });
+        /* Fallback por si afterprint no se dispara */
+        setTimeout(restoreState, 3000);
+      }, 350);
+    });
+  });
+}
+
+/* ══════════════════════════════════════════════════
    i18n — FULL TRANSLATION SYSTEM (AC&P pattern)
 ══════════════════════════════════════════════════ */
 const i18n = {
@@ -1794,7 +1929,7 @@ const i18n = {
     'leg.rs10':       'CHCNAV RS10 — Precisión geoespacial',
     'leg.pro3':       'Matterport Pro3 — Tour inmersivo profesional',
     'leg.kit':        'Kit Smartphone',
-    'leg.kit.sub':    'Este documento · Entrada de mercado',
+    'leg.kit.sub':    'Entrada de mercado',
     'btn.pdf':        '⬇ PDF',
     /* TABS */
     'tn.resumen':     'Resumen ejecutivo',
@@ -1814,7 +1949,7 @@ const i18n = {
     /* HEADER */
     'hdr.h1a':        'Captura 3D con',
     'hdr.h1b':        'Kit de Baja Inversión',
-    'hdr.sub':        'Tercer carril del sistema CHMP · Redmi Note 10 Pro + kit $150 como alternativa de entrada al mercado inmobiliario EE.UU. Complemento al Informe Comparativo RS10 vs Matterport Pro3 · v1.0 · Piter J. Bonilla D. · Feb 2026',
+    'hdr.sub':        'Tercer carril del sistema CHMP · Redmi Note 10 Pro + kit $150 como alternativa de entrada al mercado inmobiliario EE.UU. Complemento al Informe Comparativo RS10 vs Matterport Pro3 · v2.0 · Piter J. Bonilla D. · Feb 2026',
     /* RESUMEN */
     'r.callout.title':'Tercer carril del modelo CHMP',
     'r.callout.body': 'El informe CHMP original establece que la estrategia más rentable combina Matterport Pro3 (80–90% de trabajos) con el RS10 (10–20% de precisión técnica). Este complemento documenta un <strong>tercer carril de entrada</strong>: un kit de $150 basado en smartphone que permite operar en el segmento inmobiliario residencial con precisión del 98–99%, sin la inversión inicial de la Pro3 ($4,000–$6,500) ni la curva técnica del RS10 ($10,500–$12,000). No reemplaza a ninguno — los complementa como punto de partida.',
@@ -1861,6 +1996,12 @@ const i18n = {
     'f.time.title':   'Comparativa de tiempos — Tres instrumentos',
     'f.time.sub':     'Distribución de horas por fase para un proyecto estándar de 135 m².',
     'f.time.cht':     'Tiempo total por fase y por instrumento (horas)',
+    /* NUEVAS ENTRADAS PARA VALIDACIÓN */
+    'f.val.title':    'Validación en condiciones mínimas (handheld) – Redmi Note 10 Pro',
+    'f.val.sub':      'Captura realizada el 22 Feb 2026 en Santiago, RD, 100% manual, sin trípode, sin soporte nodal, sin base niveladora. Representa la línea base operativa mínima.',
+    'f.val.res':      'Resultados clave',
+    'f.val.sweep':    'Reinterpretación del Sweep 0de9d8d9',
+    'ib.link-validacion': '<div class="ii">🧪</div><div><strong>Validación en condiciones mínimas:</strong> Se ha realizado una captura 100% manual (handheld) sin trípode ni soporte nodal, con resultados comerciales. <a href="#tab-flujos" onclick="showTab(\'flujos\', document.getElementById(\'nav-flujos\')); setTimeout(() => document.getElementById(\'validacion-handheld\').scrollIntoView({behavior: \'smooth\'}), 100); return false;" style="color: var(--kit); font-weight: 600; text-decoration: underline;">Ver detalles</a>.',
     /* PRODUCTOS */
     'p.title':        'Productos procesados y entregables — Tres instrumentos',
     'p.sub':          'El kit genera el mismo subconjunto de entregables que el Pro3, con menor fidelidad pero suficiente para el mercado residencial.',
@@ -1905,7 +2046,7 @@ const i18n = {
     'sop.contract.sub':'Protecciones mínimas para gestionar expectativas de precisión y vigencia del link.',
     /* FOOTER */
     'ft.brand':       'Complemento CHMP · Kit Smartphone',
-    'ft.meta':        'Documento maestro v1.0 · Greensboro NC · Febrero 2026 · Basado en análisis CHCNAV RS10 y Matterport Pro3',
+    'ft.meta':        'Documento maestro v2.0 · Greensboro NC · Febrero 2026 · Basado en análisis CHCNAV RS10 y Matterport Pro3',
   },
   en: {
     /* TOPBAR */
@@ -1914,7 +2055,7 @@ const i18n = {
     'leg.rs10':       'CHCNAV RS10 — Geospatial precision',
     'leg.pro3':       'Matterport Pro3 — Professional immersive tour',
     'leg.kit':        'Smartphone Kit',
-    'leg.kit.sub':    'This document · Market entry',
+    'leg.kit.sub':    'Market entry',
     'btn.pdf':        '⬇ PDF',
     /* TABS */
     'tn.resumen':     'Executive Summary',
@@ -1934,7 +2075,7 @@ const i18n = {
     /* HEADER */
     'hdr.h1a':        '3D Capture with',
     'hdr.h1b':        'Low-Investment Kit',
-    'hdr.sub':        'Third rail of the CHMP system · Redmi Note 10 Pro + $150 kit as a market-entry alternative for the U.S. real estate market. Supplement to the RS10 vs Matterport Pro3 Comparative Report · v1.0 · Piter J. Bonilla D. · Feb 2026',
+    'hdr.sub':        'Third rail of the CHMP system · Redmi Note 10 Pro + $150 kit as a market-entry alternative for the U.S. real estate market. Supplement to the RS10 vs Matterport Pro3 Comparative Report · v2.0 · Piter J. Bonilla D. · Feb 2026',
     /* RESUMEN */
     'r.callout.title':'Third rail of the CHMP model',
     'r.callout.body': 'The original CHMP report establishes that the most profitable strategy combines the Matterport Pro3 (80–90% of jobs) with the RS10 (10–20% of technical-precision work). This supplement documents a <strong>third entry rail</strong>: a $150 smartphone kit that allows operating in the residential real estate segment with 98–99% accuracy — without the Pro3\'s upfront investment ($4,000–$6,500) or the RS10\'s technical learning curve ($10,500–$12,000). It replaces neither — it complements both as a starting point.',
@@ -1981,6 +2122,12 @@ const i18n = {
     'f.time.title':   'Time comparison — Three instruments',
     'f.time.sub':     'Hours by phase for a standard 135 m² project.',
     'f.time.cht':     'Total time by phase and instrument (hours)',
+    /* NUEVAS ENTRADAS PARA VALIDACIÓN */
+    'f.val.title':    'Validation in minimal conditions (handheld) – Redmi Note 10 Pro',
+    'f.val.sub':      'Capture performed on Feb 22, 2026 in Santiago, DR, 100% manual, no tripod, no nodal mount, no leveling base. Represents the minimum operational baseline.',
+    'f.val.res':      'Key results',
+    'f.val.sweep':    'Reinterpretation of Sweep 0de9d8d9',
+    'ib.link-validacion': '<div class="ii">🧪</div><div><strong>Validation in minimal conditions:</strong> A 100% handheld capture (no tripod, no nodal mount) has been performed with commercial-grade results. <a href="#tab-flujos" onclick="showTab(\'flujos\', document.getElementById(\'nav-flujos\')); setTimeout(() => document.getElementById(\'validacion-handheld\').scrollIntoView({behavior: \'smooth\'}), 100); return false;" style="color: var(--kit); font-weight: 600; text-decoration: underline;">See details</a>.',
     /* PRODUCTOS */
     'p.title':        'Processed products and deliverables — Three instruments',
     'p.sub':          'The kit produces the same subset of deliverables as the Pro3, with slightly lower fidelity but sufficient for the residential market.',
@@ -2025,7 +2172,7 @@ const i18n = {
     'sop.contract.sub':'Minimum protections for managing accuracy expectations and link validity.',
     /* FOOTER */
     'ft.brand':       'CHMP Supplement · Smartphone Kit',
-    'ft.meta':        'Master document v1.0 · Greensboro NC · February 2026 · Based on CHCNAV RS10 and Matterport Pro3 analysis',
+    'ft.meta':        'Master document v2.0 · Greensboro NC · February 2026 · Based on CHCNAV RS10 and Matterport Pro3 analysis',
   }
 };
 
@@ -2062,6 +2209,19 @@ const nodes = {
   /* footer */
   'ft.brand':        () => [document.getElementById('ft-brand'),        'textContent'],
   'ft.meta':         () => [document.getElementById('ft-meta'),         'textContent'],
+  /* card titles — resumen tab */
+  'cmp.title':       () => [document.getElementById('cmp-title'),       'textContent'],
+  'cmp.sub':         () => [document.getElementById('cmp-sub'),         'textContent'],
+  'roi.title':       () => [document.getElementById('roi-title'),       'textContent'],
+  'roi.sub':         () => [document.getElementById('roi-sub'),         'textContent'],
+  /* card titles — tecnica tab */
+  't.title':         () => [document.getElementById('t-title'),         'textContent'],
+  't.sub':           () => [document.getElementById('t-sub'),           'textContent'],
+  /* card titles — costos tab */
+  'c.roi.title':     () => [document.getElementById('c-roi-title'),     'textContent'],
+  'c.roi.sub':       () => [document.getElementById('c-roi-sub'),       'textContent'],
+  'c.proj.title':    () => [document.getElementById('c-proj-title'),    'textContent'],
+  'c.proj.sub':      () => [document.getElementById('c-proj-sub'),      'textContent'],
 };
 
 /* ══════════════════════════════════════════════════
@@ -2124,6 +2284,12 @@ function setLang(lang) {
     if (ibv) ibv.innerHTML = t['ib.kit.role'] || '';
   } catch(e) {}
 
+  /* ── Info box link validación ── */
+  try {
+    const ibLink = document.getElementById('ib-link-validacion');
+    if (ibLink) ibLink.innerHTML = t['ib.link-validacion'] || '';
+  } catch(e) {}
+
   /* ── Card titles + subs (by id) ── */
   const cardMap = {
     'cmp-title': 'cmp.title', 'cmp-sub': 'cmp.sub',
@@ -2137,6 +2303,9 @@ function setLang(lang) {
     'f-pro3-title': 'f.pro3.title', 'f-pro3-sub': 'f.pro3.sub',
     'f-kit-title': 'f.kit.title', 'f-kit-sub': 'f.kit.sub',
     'f-time-title': 'f.time.title', 'f-time-sub': 'f.time.sub', 'f-time-cht': 'f.time.cht',
+    /* NUEVAS TARJETAS */
+    'f-val-title': 'f.val.title', 'f-val-sub': 'f.val.sub',
+    'f-val-res': 'f.val.res', 'f-val-sweep': 'f.val.sweep',
     'p-title': 'p.title', 'p-sub': 'p.sub',
     'p-key-title': 'p.key.title', 'p-key-sub': 'p.key.sub',
     'c-hw-title': 'c.hw.title', 'c-hw-sub': 'c.hw.sub',
