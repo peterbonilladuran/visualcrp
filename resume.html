@@ -888,7 +888,7 @@
                     </div>
                     <div class="contact-item">
                         <i class="fas fa-envelope"></i>
-                        <a href="/cdn-cgi/l/email-protection#a7d7ced3c2d589c5c8c9cecbcbc6e7d1ced4d2c6cbc4d5d789c4c8ca"><span class="__cf_email__" data-cfemail="deaeb7aabbacf0bcb1b0b7b2b2bf9ea8b7adabbfb2bdacaef0bdb1b3">[email&#160;protected]</span></a>
+                        <a href="mailto:piter.bonilla@visualcrp.com">piter.bonilla@visualcrp.com</a>
                     </div>
                     <div class="contact-item">
                         <i class="fab fa-linkedin"></i>
@@ -1617,7 +1617,7 @@
             <div class="footer-links">
                 <a href="https://visualcrp.com" target="_blank" rel="noopener">Visual CRP</a> • 
                 <a href="https://www.linkedin.com/in/piter-bonilla-16244473/" target="_blank" rel="noopener">LinkedIn</a> • 
-                <a href="/cdn-cgi/l/email-protection#7e0e170a1b0c501c11101712121f3e08170d0b1f121d0c0e501d1113">Contacto</a>
+                <a href="mailto:piter.bonilla@visualcrp.com">Contacto</a>
             </div>
         </footer>
     </div>
@@ -1628,7 +1628,7 @@
     </button>
 
     <!-- SISTEMA DE TRADUCCIÓN COMPLETO -->
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    <script>
         class Translator {
             constructor() {
                 this.currentLang = 'es';
@@ -2507,4 +2507,13 @@
             }
         });
 
-        document.addEventListener('f
+        document.addEventListener('focusout', (e) => {
+            if (e.target.classList.contains('tab') || 
+                e.target.classList.contains('lang-btn') ||
+                e.target.classList.contains('project-link')) {
+                e.target.style.outline = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
