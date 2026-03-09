@@ -880,7 +880,7 @@
                 <div class="contact-info">
                     <div class="contact-item">
                         <i class="fas fa-map-marker-alt"></i>
-                        <span data-key="contact.location">Greensboro, NC 27406</span>
+                        <span data-key="contact.location">República Dominicana</span>
                     </div>
                     <div class="contact-item">
                         <i class="fas fa-phone"></i>
@@ -888,7 +888,7 @@
                     </div>
                     <div class="contact-item">
                         <i class="fas fa-envelope"></i>
-                        <a href="/cdn-cgi/l/email-protection#4c3c2538293e622e23222520202d0c3a253f392d202f3e3c622f2321"><span class="__cf_email__" data-cfemail="3848514c5d4a165a575651545459784e514b4d59545b4a48165b5755">[email&#160;protected]</span></a>
+                        <a href="mailto:peterbonilla@hotmail.com">peterbonilla@hotmail.com</a>
                     </div>
                     <div class="contact-item">
                         <i class="fab fa-linkedin"></i>
@@ -1617,7 +1617,7 @@
             <div class="footer-links">
                 <a href="https://visualcrp.com" target="_blank" rel="noopener">Visual CRP</a> • 
                 <a href="https://www.linkedin.com/in/piter-bonilla-16244473/" target="_blank" rel="noopener">LinkedIn</a> • 
-                <a href="/cdn-cgi/l/email-protection#5121382534237f333e3f383d3d301127382224303d3223217f323e3c">Contacto</a>
+                <a href="mailto:peterbonilla@hotmail.com">Contacto</a>
             </div>
         </footer>
     </div>
@@ -1628,7 +1628,7 @@
     </button>
 
     <!-- SISTEMA DE TRADUCCIÓN COMPLETO -->
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    <script>
         class Translator {
             constructor() {
                 this.currentLang = 'es';
@@ -1644,7 +1644,7 @@
                         'header.badge': 'CODIA 17378',
                         
                         // Contact
-                        'contact.location': 'Greensboro, NC 27406',
+                        'contact.location': 'República Dominicana',
                         
                         // Tabs
                         'tabs.profile': 'Perfil',
@@ -1880,7 +1880,7 @@
                     en: {
                         // Meta
                         'meta.title': 'Piter J. Bonilla D. - Control Systems Architect for Mega-Projects',
-                        'meta.description': 'Civil Engineer with 25+ years in land development, infrastructure projects, and surveying management. Specialist in AutoCAD Civil 3D, geospatial systems, and project controls.',
+                        'meta.description': 'Civil Engineer with over 25 years transforming mega-projects through systematization of critical processes. Technical Documentation Specialist and Surveying Manager.',
                         
                         // Header
                         'header.title': 'Civil Engineer | Land Development | Surveying & Project Controls',
@@ -1888,7 +1888,7 @@
                         'header.badge': 'CODIA 17378',
                         
                         // Contact
-                        'contact.location': 'Greensboro, NC 27406',
+                        'contact.location': 'Dominican Republic',
                         
                         // Tabs
                         'tabs.profile': 'Profile',
@@ -2507,4 +2507,13 @@
             }
         });
 
-        document.addEventListener('f
+        document.addEventListener('focusout', (e) => {
+            if (e.target.classList.contains('tab') || 
+                e.target.classList.contains('lang-btn') ||
+                e.target.classList.contains('project-link')) {
+                e.target.style.outline = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
