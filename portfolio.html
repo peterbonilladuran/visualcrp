@@ -1520,7 +1520,7 @@
                             <div class="contact-icon"><i class="fas fa-envelope"></i></div>
                             <div class="contact-details">
                                 <h4 data-key="contact.email.title">Email</h4>
-                                <p><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="96e6f3e2f3e4f4f9f8fffafaf7d6fef9e2fbf7fffab8f5f9fb">[email&#160;protected]</a></p>
+                                <p><a href="mailto:peterbonilla@hotmail.com" style="color: var(--primary);">peterbonilla@hotmail.com</a></p>
                             </div>
                         </div>
                         
@@ -1555,25 +1555,27 @@
                             Para consultas específicas sobre implementación de sistemas, evaluaciones técnicas o colaboración en proyectos.
                         </p>
                         
-                        <form id="contactForm">
+                        <form id="contactForm" action="https://formspree.io/f/peterbonilla" method="POST">
+                            <input type="hidden" name="_replyto" value="peterbonilla@hotmail.com">
+                            <input type="hidden" name="_subject" value="Portfolio Contact — visualcrp.com">
                             <div class="form-group">
                                 <label for="name" data-key="contact.form.name">Nombre completo *</label>
-                                <input type="text" id="name" class="form-control" required>
+                                <input type="text" id="name" name="name" class="form-control" required>
                             </div>
                             
                             <div class="form-group">
                                 <label for="company" data-key="contact.form.company">Empresa / Organización</label>
-                                <input type="text" id="company" class="form-control">
+                                <input type="text" id="company" name="company" class="form-control">
                             </div>
                             
                             <div class="form-group">
                                 <label for="email" data-key="contact.form.email">Email *</label>
-                                <input type="email" id="email" class="form-control" required>
+                                <input type="email" id="email" name="email" class="form-control" required>
                             </div>
                             
                             <div class="form-group">
                                 <label for="projectType" data-key="contact.form.project">Tipo de Proyecto / Consulta</label>
-                                <select id="projectType" class="form-control">
+                                <select id="projectType" name="projectType" class="form-control">
                                     <option value="" data-key="contact.form.select">Seleccionar...</option>
                                     <option value="evaluation" data-key="contact.form.option1">Evaluación Ex-Ante</option>
                                     <option value="implementation" data-key="contact.form.option2">Implementación Visual CRP</option>
@@ -1585,7 +1587,7 @@
                             
                             <div class="form-group">
                                 <label for="message" data-key="contact.form.message">Mensaje *</label>
-                                <textarea id="message" class="form-control" rows="5" required></textarea>
+                                <textarea id="message" name="message" class="form-control" rows="5" required></textarea>
                             </div>
                             
                             <button type="submit" class="btn-submit">
@@ -1627,7 +1629,7 @@
             <div class="footer-links">
                 <a href="https://visualcrp.com" class="footer-link" target="_blank" data-key="footer.link1">Visual CRP</a>
                 <a href="https://www.linkedin.com/in/piter-bonilla-16244473/" class="footer-link" target="_blank" data-key="footer.link2">LinkedIn</a>
-                <a href="/cdn-cgi/l/email-protection#7f0f1a0b1a0d1d10111613131e3f17100b121e1613511c1012" class="footer-link" data-key="footer.link3">Contacto Directo</a>
+                <a href="mailto:peterbonilla@hotmail.com" class="footer-link" data-key="footer.link3">Contacto Directo</a>
                 <a href="https://1drv.ms/f/c/990c860f44e7c976/EsNTzYLRpctFt8YjcwTqi9wB-XeOmREJvGoXmkrwrR34Fw?e=Lcko6u" 
                    class="footer-link" target="_blank" data-key="footer.link4">Catálogo Maestro (PDF)</a>
                 <a href="#" class="footer-link" onclick="window.print()" data-key="footer.link5">Versión Imprimible</a>
@@ -1643,7 +1645,7 @@
     </button>
 
     <!-- Translation System -->
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    <script>
         class PortfolioTranslator {
             constructor() {
                 this.currentLang = 'es';
