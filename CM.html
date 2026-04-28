@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CM + EPC — Terminología Bilingüe Ampliada</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@300;400;600;700&display=swap');
+
+  :root {
+    --blue: #0066CC;
+    --blue-light: #E8F0FA;
+    --gold: #C8820A;
+    --dark: #0D1117;
+    --mid: #24292E;
+    --gray: #57606A;
+    --line: #D0D7DE;
+    --bg: #F6F8FA;
+    --white: #FFFFFF;
+    --epc: #1A5276;
+    --epc-light: #D6EAF8;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'IBM Plex Sans', sans-serif;
+    background: var(--bg);
+    color: var(--dark);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  header {
+    background: var(--dark);
+    color: white;
+    padding: 28px 32px 22px;
+    border-bottom: 3px solid var(--blue);
+  }
+
+  header h1 { font-size: 22px; font-weight: 700; letter-spacing: -0.3px; }
+  header p { font-size: 12px; color: #8B949E; margin-top: 4px; font-family: 'IBM Plex Mono', monospace; }
+
+  .header-stats {
+    display: flex; gap: 24px; margin-top: 14px; flex-wrap: wrap;
+  }
+  .header-stat {
+    font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #8B949E;
+  }
+  .header-stat strong { color: white; font-size: 15px; display: block; }
+
+  .container { max-width: 980px; margin: 0 auto; padding: 24px 20px 48px; }
+
+  .filter-bar {
+    display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; align-items: center;
+  }
+  .filter-bar span { font-size: 11px; color: var(--gray); font-family: 'IBM Plex Mono', monospace; margin-right: 4px; }
+
+  .tag-btn {
+    font-family: 'IBM Plex Mono', monospace; font-size: 11px; padding: 4px 12px;
+    border-radius: 20px; border: 1.5px solid var(--line); background: white;
+    color: var(--mid); cursor: pointer; transition: all 0.15s;
+  }
+  .tag-btn:hover, .tag-btn.active { background: var(--blue); border-color: var(--blue); color: white; }
+  .tag-btn.epc-btn:hover, .tag-btn.epc-btn.active { background: var(--epc); border-color: var(--epc); }
+
+  .search-box {
+    width: 100%; padding: 10px 14px; border: 1.5px solid var(--line); border-radius: 8px;
+    font-family: 'IBM Plex Sans', sans-serif; font-size: 13px; background: white;
+    margin-bottom: 16px; outline: none; transition: border-color 0.15s;
+  }
+  .search-box:focus { border-color: var(--blue); }
+
+  .section-title {
+    font-size: 11px; font-family: 'IBM Plex Mono', monospace; color: var(--blue);
+    text-transform: uppercase; letter-spacing: 1.5px; padding: 10px 0 6px;
+    border-bottom: 2px solid var(--blue-light); margin-bottom: 8px; margin-top: 24px;
+  }
+  .section-title.epc { color: var(--epc); border-bottom-color: var(--epc-light); }
+
+  .term-card {
+    background: white; border: 1px solid var(--line); border-radius: 8px;
+    margin-bottom: 8px; overflow: hidden; transition: box-shadow 0.15s;
+  }
+  .term-card:hover { box-shadow: 0 2px 8px rgba(0,102,204,0.12); }
+  .term-card.epc-card { border-left: 3px solid var(--epc); }
+
+  .term-header {
+    display: grid; grid-template-columns: 240px 1fr auto;
+    align-items: center; padding: 12px 16px; gap: 12px; cursor: pointer;
+  }
+
+  .term-en { font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 600; color: var(--blue); }
+  .term-en.epc { color: var(--epc); }
+  .term-es { font-size: 13px; font-weight: 600; color: var(--dark); }
+
+  .term-badge {
+    font-family: 'IBM Plex Mono', monospace; font-size: 10px;
+    padding: 2px 8px; border-radius: 12px; white-space: nowrap;
+  }
+
+  .badge-contrato { background: #FFF3CD; color: #856404; border: 1px solid #FFDA6A; }
+  .badge-proceso  { background: #D1E7DD; color: #0A3622; border: 1px solid #A3CFBB; }
+  .badge-roles    { background: #CFF4FC; color: #055160; border: 1px solid #9EEAF9; }
+  .badge-costos   { background: #F8D7DA; color: #58151C; border: 1px solid #F1AEB5; }
+  .badge-campo    { background: #E2D9F3; color: #3D0A91; border: 1px solid #C5B3E6; }
+  .badge-legal    { background: #FFE5D0; color: #6E1F00; border: 1px solid #FFC8A0; }
+  .badge-programa { background: #D3F9D8; color: #0B3D0F; border: 1px solid #8CE99A; }
+  .badge-epc      { background: #D6EAF8; color: #1A5276; border: 1px solid #85C1E9; font-weight: 600; }
+  .badge-siglas   { background: #FADBD8; color: #641E16; border: 1px solid #F1948A; font-weight: 600; }
+
+  .term-detail {
+    display: none; padding: 0 16px 14px 16px;
+    border-top: 1px solid var(--line); background: var(--bg);
+  }
+  .term-detail.open { display: block; }
+
+  .detail-row { display: flex; gap: 8px; margin-top: 10px; align-items: flex-start; }
+  .detail-label {
+    font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--gray);
+    min-width: 90px; padding-top: 2px; text-transform: uppercase;
+  }
+  .detail-text { font-size: 13px; color: var(--mid); flex: 1; }
+  .detail-text.nota { font-style: italic; color: var(--gold); font-size: 12px; }
+
+  .chevron { font-size: 12px; color: var(--gray); transition: transform 0.2s; min-width: 14px; }
+
+  .hidden { display: none !important; }
+
+  .new-badge {
+    display: inline-block; background: #0066CC; color: white;
+    font-size: 9px; font-family: 'IBM Plex Mono', monospace;
+    padding: 1px 6px; border-radius: 8px; margin-left: 6px; vertical-align: middle;
+  }
+
+  footer {
+    text-align: center; font-family: 'IBM Plex Mono', monospace; font-size: 11px;
+    color: var(--gray); padding: 20px; border-top: 1px solid var(--line); margin-top: 32px;
+  }
+
+  @media (max-width: 600px) {
+    .term-header { grid-template-columns: 1fr; }
+    .header-stats { gap: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>CM + EPC — Terminología Bilingüe Ampliada</h1>
+  <p>Construction Management JumpStart (Jackson, Wiley) + Terminología EPC / EPCM / Megaproyectos de Infraestructura</p>
+  <div class="header-stats">
+    <div class="header-stat"><strong>170+</strong>términos</div>
+    <div class="header-stat"><strong>9</strong>categorías</div>
+    <div class="header-stat"><strong>EN ↔ ES</strong>bilingüe</div>
+    <div class="header-stat"><strong>EPC</strong>ampliado</div>
+  </div>
+</header>
+
+<div class="container">
+
+  <input class="search-box" type="text" id="searchInput" placeholder="Buscar término en inglés o español... (ej: FEED, EVM, punch list, cubicación)">
+
+  <div class="filter-bar">
+    <span>FILTRAR:</span>
+    <button class="tag-btn active" onclick="filterTag('all')">Todos</button>
+    <button class="tag-btn epc-btn" onclick="filterTag('epc')">⚡ EPC / Siglas</button>
+    <button class="tag-btn" onclick="filterTag('contrato')">Contratos</button>
+    <button class="tag-btn" onclick="filterTag('proceso')">Proceso</button>
+    <button class="tag-btn" onclick="filterTag('roles')">Roles</button>
+    <button class="tag-btn" onclick="filterTag('costos')">Costos</button>
+    <button class="tag-btn" onclick="filterTag('campo')">Campo</button>
+    <button class="tag-btn" onclick="filterTag('legal')">Legal</button>
+    <button class="tag-btn" onclick="filterTag('programa')">Programación</button>
+  </div>
+
+  <div id="termList"></div>
+
+</div>
+
+<script>
+const terms = [
+
+  // ══════════════════════════════════════════════════════════════════
+  // EPC / SIGLAS — NUEVA CATEGORÍA
+  // ══════════════════════════════════════════════════════════════════
+
+  {
+    cat: "epc",
+    en: "EPC — Engineering, Procurement & Construction",
+    es: "Ingeniería, Procura y Construcción",
+    def: "Modalidad contractual donde un solo contratista es responsable del diseño completo, la procura de todos los equipos y materiales, y la construcción de la obra.",
+    uso: "Dominante en proyectos de energía, petroquímica, minería e infraestructura de gran escala. El propietario recibe la planta 'lista para operar'.",
+    nota: "Andrade Gutiérrez (Montegrande) y Odebrecht (Palomino) operaron bajo esquemas EPC. Tu experiencia de 25+ años es esencialmente EPC."
+  },
+  {
+    cat: "epc",
+    en: "EPCM — Engineering, Procurement & Construction Management",
+    es: "Ingeniería, Procura y Gerencia de Construcción",
+    def: "Variante donde el contratista gestiona ingeniería y procura, y administra la construcción en nombre del dueño, pero el riesgo de construcción permanece en el dueño.",
+    uso: "El dueño contrata directamente a los subcontratistas de construcción. El EPCM actúa como su representante técnico.",
+    nota: "Fluor, Bechtel, Jacobs y AECOM operan frecuentemente como EPCM. Diferencia clave vs. EPC: quién asume el riesgo de costo de construcción."
+  },
+  {
+    cat: "epc",
+    en: "EP — Engineering & Procurement",
+    es: "Ingeniería y Procura",
+    def: "Contrato que cubre solo la fase de ingeniería y la procura de equipos/materiales, sin incluir la construcción.",
+    uso: "El dueño contrata la construcción por separado. Común cuando el dueño quiere control directo sobre los constructores.",
+    nota: ""
+  },
+  {
+    cat: "epc",
+    en: "EPCC — Engineering, Procurement, Construction & Commissioning",
+    es: "Ingeniería, Procura, Construcción y Puesta en Marcha",
+    def: "Extensión del EPC que incluye la puesta en marcha (commissioning) y pruebas del sistema hasta la entrega operacional.",
+    uso: "Común en plantas de energía, refinería y procesos industriales donde la operabilidad es el hito final.",
+    nota: ""
+  },
+  {
+    cat: "epc",
+    en: "FEED — Front-End Engineering Design",
+    es: "Ingeniería de Definición / Diseño Conceptual Avanzado",
+    def: "Etapa de ingeniería previa a la decisión de inversión (FID) que desarrolla el diseño al nivel necesario para estimar costos con precisión de ±10-15%.",
+    uso: "Producto del FEED: Process Flow Diagrams (PFDs), P&IDs preliminares, estimado Clase 3, cronograma de referencia, paquete licitatorio para EPC.",
+    nota: "El equivalente en RD sería el 'Diseño Básico' de Las Placetas que dirigiste en 2012."
+  },
+  {
+    cat: "epc",
+    en: "FID — Final Investment Decision",
+    es: "Decisión Final de Inversión",
+    def: "Decisión formal del directorio o inversionistas para aprobar y financiar la ejecución completa del proyecto.",
+    uso: "Se toma después del FEED. Una vez aprobado el FID, se inicia el contrato EPC o EPCM.",
+    nota: ""
+  },
+  {
+    cat: "epc",
+    en: "LSTK — Lump Sum Turn Key",
+    es: "Suma Global Llave en Mano",
+    def: "Contrato EPC a precio fijo donde el contratista entrega la instalación completamente operativa. El contratista asume todo el riesgo de costo y alcance.",
+    uso: "El dueño maximiza la certeza de costo. El contratista maximiza el riesgo pero también el potencial de utilidad.",
+    nota: "Montegrande fue un contrato de tipo LSTK. La gestión rigurosa de cantidades es crítica para el contratista en este esquema."
+  },
+  {
+    cat: "epc",
+    en: "FEL — Front-End Loading",
+    es: "Carga de Trabajo en Fase Inicial / Maduración del Proyecto",
+    def: "Metodología que mide la madurez de la definición del proyecto antes de la aprobación de inversión. FEL-1 (conceptual), FEL-2 (prefactibilidad), FEL-3 (FEED).",
+    uso: "IPA (Independent Project Analysis) establece que proyectos con FEL-3 completo tienen 4x más probabilidad de éxito.",
+    nota: ""
+  },
+  {
+    cat: "epc",
+    en: "WBS — Work Breakdown Structure",
+    es: "Estructura de Desglose del Trabajo / EDT",
+    def: "Descomposición jerárquica del alcance total del proyecto en entregables y paquetes de trabajo manejables.",
+    uso: "Base para presupuesto, cronograma, asignación de responsabilidades y control del avance. Cada elemento del WBS tiene un código único.",
+    nota: "Tu experiencia de WBS en megaproyectos es directamente transferible al mercado US."
+  },
+  {
+    cat: "epc",
+    en: "CBS — Cost Breakdown Structure",
+    es: "Estructura de Desglose de Costos",
+    def: "Organización jerárquica de los costos del proyecto, alineada con el WBS. Define cómo se acumulan y reportan los costos.",
+    uso: "Permite comparar estimado vs. real a cualquier nivel de detalle.",
+    nota: ""
+  },
+  {
+    cat: "epc",
+    en: "OBS — Organizational Breakdown Structure",
+    es: "Estructura Organizacional del Proyecto",
+    def: "Representación jerárquica de la organización del proyecto y las responsabilidades de cada unidad.",
+    uso: "Combinada con el WBS genera la RAM (Responsibility Assignment Matrix).",
+    nota: ""
+  },
+  {
+    cat: "epc",
+    en: "RAM — Responsibility Assignment Matrix",
+    es: "Matriz de Asignación de Responsabilidades / Matriz RACI",
+    def: "Matriz que cruza actividades del WBS con roles de la OBS para definir quién es Responsable, Aprobador, Consultado e Informado (RACI).",
+    uso: "Herramienta de gobernanza. Elimina ambigüedad sobre quién hace qué.",
+    nota: ""
+  },
+  {
+    cat: "epc",
+    en: "IFC — Issued for Construction",
+    es: "Emitido para Construcción",
+    def: "Estado de revisión de un documento (plano, especificación) que certifica que está aprobado y listo para usarse en obra.",
+    uso: "Solo documentos IFC deben usarse en campo. Tu sistema Visual CRP gestiona exactamente este flujo de revisiones.",
+    nota: "Otros estados: IFR (For Review), IFA (For Approval), IFB (For Bid), AFC (Approved for Construction)."
+  },
+  {
+    cat: "epc",
+    en: "IFR — Issued for Review",
+    es: "Emitido para Revisión",
+    def: "Estado previo al IFC. El documento está en revisión y no debe usarse para construcción.",
+    uso: "Parte del flujo de revisión: IFR → comentarios → IFA → aprobación → IFC.",
+    nota: "Tu Visual CRP gestiona todo este flujo con codificación de revisiones AA, A, BA, B, 0, 1..."
+  },
+  {
+    cat: "epc",
+    en: "AFC — Approved for Construction",
+    es: "Aprobado para Construcción",
+    def: "Equivalente al IFC en muchos proyectos. Documento que ha pasado por revisión completa y está autorizado para uso en campo.",
+    uso: "El sello AFC/IFC en un plano es el control de calidad mínimo antes de construcción.",
+    nota: ""
+  },
+  {
+    cat: "epc",
+    en: "MDR — Master Document Register",
+    es: "Registro Maestro de Documentos",
+    def: "Lista maestra de todos los documentos del proyecto con su estado, revisión vigente, y responsable.",
+    uso: "Herramienta central del Document Controller. Tu Visual CRP es esencialmente un MDR interactivo.",
+    nota: "En proyectos grandes puede tener 10,000–50,000 registros."
+  },
+  {
+    cat: "epc",
+    en: "TBE — Technical Bid Evaluation",
+    es: "Evaluación Técnica de Ofertas",
+    def: "Proceso de evaluación de propuestas técnicas de licitantes antes de abrir las ofertas económicas.",
+    uso: "Garantiza que solo ofertas técnicamente conformes sean consideradas en la evaluación económica.",
+    nota: ""
+  },
+  {
+    cat: "epc",
+    en: "ITT — Invitation to Tender",
+    es: "Invitación a Licitar / Pliego Licitatorio",
+    def: "Documento completo que define el alcance, condiciones, requisitos técnicos y comerciales para una licitación.",
+    uso: "Equivalente al RFP/ITB en terminología CM. Incluye: SoR, especificaciones, planos, condiciones de contrato.",
+    nota: ""
+  },
+  {
+    cat: "epc",
+    en: "SoR — Statement of Requirements",
+    es: "Declaración de Requisitos / Bases Técnicas",
+    def: "Documento que describe los requisitos funcionales, técnicos y de calidad que debe cumplir el contratista.",
+    uso: "Parte del ITT. Define qué debe entregar el contratista sin prescribir cómo lo debe hacer.",
+    nota: ""
+  },
+  {
+    cat: "epc",
+    en: "SoW — Scope of Work",
+    es: "Alcance del Trabajo",
+    def: "Descripción detallada de todos los trabajos incluidos en el contrato. Define límites del alcance.",
+    uso: "Documento contractual crítico. Lo que no está en el SoW no está en el contrato.",
+    nota: ""
+  },
+  {
+    cat: "epc",
+    en: "MTO — Material Take-Off",
+    es: "Metrado de Materiales / Cómputo de Materiales",
+    def: "Cuantificación detallada de todos los materiales requeridos para ejecutar un trabajo, derivada de los planos de ingeniería.",
+    uso: "Base para la procura. En tuberías: metros lineales, codos, válvulas, bridas por diámetro y material.",
+    nota: "Equivalente al QTO pero aplicado específicamente a materiales en plantas industriales."
+  },
+  {
+    cat: "epc",
+    en: "PO — Purchase Order",
+    es: "Orden de Compra",
+    def: "Documento contractual emitido por el departamento de procura al proveedor para comprar equipos o materiales.",
+    uso: "Define: especificaciones técnicas, cantidad, precio, plazos de entrega, condiciones de pago.",
+    nota: ""
+  },
+  {
+    cat: "epc",
+    en: "RFQ — Request for Quotation",
+    es: "Solicitud de Cotización",
+    def: "Documento enviado a proveedores solicitando propuesta técnica-económica para equipos o materiales específicos.",
+    uso: "Proceso estándar de procura. El departamento de Procurement los gestiona masivamente en EPC.",
+    nota: "No confundir con Request for Qualifications (mismo acrónimo, diferente contexto en CM)."
+  },
+  {
+    cat: "epc",
+    en: "FAT — Factory Acceptance Test",
+    es: "Prueba de Aceptación en Fábrica",
+    def: "Inspección y prueba de equipos en las instalaciones del fabricante antes del despacho al sitio.",
+    uso: "El cliente o su representante técnico inspecciona el equipo en la planta del fabricante.",
+    nota: ""
+  },
+  {
+    cat: "epc",
+    en: "SAT — Site Acceptance Test",
+    es: "Prueba de Aceptación en Sitio",
+    def: "Prueba de equipos instalados en el sitio del proyecto antes de la puesta en marcha.",
+    uso: "Verifica que el equipo funciona correctamente en condiciones reales de instalación.",
+    nota: ""
+  },
+  {
+    cat: "epc",
+    en: "MC — Mechanical Completion",
+    es: "Terminación Mecánica / Completación Mecánica",
+    def: "Hito en proyectos de plantas industriales que certifica que todos los equipos y sistemas están físicamente instalados y listos para pruebas.",
+    uso: "Precede al commissioning. Diferente de Substantial Completion en CM building.",
+    nota: ""
+  },
+  {
+    cat: "epc",
+    en: "COD — Commercial Operation Date",
+    es: "Fecha de Operación Comercial",
+    def: "Fecha en que la planta comienza a operar comercialmente y generar ingresos. Hito contractual máximo en proyectos de energía.",
+    uso: "En plantas de energía: el generador comienza a vender electricidad. Las LD se calculan contra esta fecha.",
+    nota: "En el análisis de Línea 3 Metro desarrollaste el concepto equivalente como ICOD."
+  },
+  {
+    cat: "epc",
+    en: "HAZOP — Hazard and Operability Study",
+    es: "Estudio de Peligros y Operabilidad",
+    def: "Análisis sistemático de riesgos operativos de una planta industrial, realizado por equipo multidisciplinario.",
+    uso: "Requerido en plantas de proceso, petroquímica, minería. Identifica desviaciones del diseño que pueden causar accidentes.",
+    nota: ""
+  },
+  {
+    cat: "epc",
+    en: "HSSE / HSE",
+    es: "Salud, Seguridad, Seguridad Industrial y Medio Ambiente",
+    def: "Health, Safety, Security & Environment. Sistema integral de gestión de riesgos para personas, instalaciones y entorno.",
+    uso: "Todo proyecto EPC tiene un HSSE Manager y métricas de TRIR (Total Recordable Incident Rate), LTIR, etc.",
+    nota: ""
+  },
+  {
+    cat: "epc",
+    en: "TRIR — Total Recordable Incident Rate",
+    es: "Tasa Total de Incidentes Registrables",
+    def: "Métrica de seguridad: número de incidentes registrables por 200,000 horas-hombre trabajadas.",
+    uso: "Indicador estándar de desempeño en seguridad. Las grandes firmas EPC lo reportan en contratos y licitaciones.",
+    nota: ""
+  },
+  {
+    cat: "epc",
+    en: "QA/QC — Quality Assurance / Quality Control",
+    es: "Aseguramiento / Control de Calidad",
+    def: "QA: sistema de procesos para garantizar calidad. QC: actividades de inspección y verificación de conformidad.",
+    uso: "QA = cómo se trabaja (procesos, procedimientos). QC = qué se verifica (inspecciones, pruebas, ensayos).",
+    nota: ""
+  },
+  {
+    cat: "epc",
+    en: "NCR — Non-Conformance Report",
+    es: "Reporte de No Conformidad",
+    def: "Documento formal que registra cuando un trabajo, material o equipo no cumple los requisitos del contrato o especificaciones.",
+    uso: "Genera acción correctiva obligatoria. El registro de NCRs es indicador de calidad del proyecto.",
+    nota: ""
+  },
+  {
+    cat: "epc",
+    en: "MOM — Minutes of Meeting",
+    es: "Acta de Reunión / Minuta",
+    def: "Registro formal de los acuerdos, decisiones y compromisos tomados en reuniones de proyecto.",
+    uso: "Documento de registro oficial. Las acciones comprometidas en MOM tienen seguimiento formal.",
+    nota: "En proyectos latinoamericanos también llamadas 'actas de reunión' o 'minutas'."
+  },
+  {
+    cat: "epc",
+    en: "LOI — Letter of Intent",
+    es: "Carta de Intención",
+    def: "Documento pre-contractual que formaliza la intención de contratar y puede autorizar al contratista a comenzar trabajos preliminares.",
+    uso: "Permite iniciar la ingeniería o la procura de equipos de largo plazo antes de firmar el contrato definitivo.",
+    nota: ""
+  },
+  {
+    cat: "epc",
+    en: "NTP — Notice to Proceed",
+    es: "Orden de Inicio / Acta de Inicio",
+    def: "Comunicación formal del propietario autorizando al contratista a comenzar los trabajos. Define la fecha de inicio contractual.",
+    uso: "La fecha del NTP es el punto de partida del cronograma contractual y el plazo de ejecución.",
+    nota: "Ver también en categoría Proceso."
+  },
+  {
+    cat: "epc",
+    en: "VO — Variation Order",
+    es: "Orden de Variación",
+    def: "Modificación formal al contrato que altera alcance, costo o plazo. Equivalente internacional al Change Order (CO).",
+    uso: "Terminología dominante en contratos FIDIC y proyectos internacionales. En EE.UU. se usa más CO.",
+    nota: "Tu experiencia en evaluación y rastreo de change orders (Palomino, Montegrande) cubre exactamente esto."
+  },
+  {
+    cat: "epc",
+    en: "FIDIC — International Federation of Consulting Engineers",
+    es: "Fédération Internationale des Ingénieurs-Conseils",
+    def: "Organización que publica los contratos estándar más usados en proyectos internacionales: Red Book (DBB), Yellow Book (DB/EPC), Silver Book (LSTK), Gold Book (DBOM).",
+    uso: "El Yellow Book y Silver Book son los estándares de facto en proyectos EPC internacionales financiados por multilaterales (BID, Banco Mundial).",
+    nota: "Los contratos de Palomino y Montegrande muy probablemente siguieron estructura FIDIC o similar."
+  },
+  {
+    cat: "epc",
+    en: "FIDIC Yellow Book",
+    es: "FIDIC Libro Amarillo — Condiciones para Plant & Design-Build",
+    def: "Contrato estándar FIDIC para proyectos Design-Build donde el contratista diseña y construye según los requisitos del empleador.",
+    uso: "Muy usado en proyectos de plantas de energía e infraestructura. El ingeniero del empleador tiene rol central.",
+    nota: ""
+  },
+  {
+    cat: "epc",
+    en: "FIDIC Silver Book",
+    es: "FIDIC Libro Plateado — EPC/Turnkey",
+    def: "Contrato FIDIC para proyectos EPC llave en mano con precio fijo. El contratista asume máximo riesgo.",
+    uso: "El propietario define el resultado deseado. El contratista diseña, construye y pone en marcha.",
+    nota: ""
+  },
+  {
+    cat: "epc",
+    en: "DBO — Design-Build-Operate",
+    es: "Diseño-Construcción-Operación",
+    def: "Extensión del DB donde el mismo contratista opera la instalación por un período determinado después de construirla.",
+    uso: "Común en plantas de tratamiento de agua, concesiones de carreteras, proyectos de APPs.",
+    nota: ""
+  },
+  {
+    cat: "epc",
+    en: "PPP / APP — Public-Private Partnership",
+    es: "Asociación Público-Privada",
+    def: "Esquema contractual donde el sector privado financia, diseña, construye y/u opera infraestructura pública a cambio de ingresos garantizados o tarifas.",
+    uso: "Autopistas, aeropuertos, hospitales, plantas de agua. El gobierno transfiere riesgo al sector privado.",
+    nota: "El análisis de la Línea 3 Metro que desarrollaste evaluó implícitamente la viabilidad de un esquema APP."
+  },
+  {
+    cat: "epc",
+    en: "O&M — Operations & Maintenance",
+    es: "Operación y Mantenimiento",
+    def: "Fase post-construcción de un activo. Puede ser contratada separadamente o incluida en contratos DBO.",
+    uso: "Costos de O&M son críticos en análisis de ciclo de vida. Tu análisis de la Línea 3 Metro los modeló a 60 años.",
+    nota: ""
+  },
+  {
+    cat: "epc",
+    en: "OPEX — Operating Expenditure",
+    es: "Gastos Operativos / Costos de Operación",
+    def: "Costos recurrentes de operar y mantener un activo: personal, energía, insumos, mantenimiento.",
+    uso: "Diferente del CAPEX. En análisis financiero de infraestructura, OPEX determina la sostenibilidad del proyecto.",
+    nota: ""
+  },
+  {
+    cat: "epc",
+    en: "CAPEX — Capital Expenditure",
+    es: "Gasto de Capital / Inversión de Capital",
+    def: "Inversión en activos de larga duración: diseño, construcción, equipamiento. Gasto no recurrente.",
+    uso: "El presupuesto EPC es esencialmente el CAPEX del proyecto.",
+    nota: "Tu experiencia de $2B+ en valor de proyectos EPC es experiencia en gestión de CAPEX."
+  },
+  {
+    cat: "epc",
+    en: "IRR — Internal Rate of Return",
+    es: "Tasa Interna de Retorno",
+    def: "Tasa de descuento que hace que el VPN (valor presente neto) de los flujos de caja del proyecto sea cero.",
+    uso: "Indicador de rentabilidad. Un proyecto es viable si su IRR supera el costo de capital del inversionista.",
+    nota: "Tu análisis de la Línea 3 Metro y Soco-Yabacao usó IRR con metodología Newton-Raphson y Monte Carlo."
+  },
+  {
+    cat: "epc",
+    en: "NPV / VPN — Net Present Value",
+    es: "Valor Presente Neto",
+    def: "Suma de los flujos de caja futuros del proyecto descontados a la tasa de descuento del inversionista.",
+    uso: "Si VPN > 0, el proyecto genera valor por encima del costo de capital. Herramienta central en evaluación de proyectos.",
+    nota: ""
+  },
+  {
+    cat: "epc",
+    en: "TIR / TRI",
+    es: "Tasa Interna de Retorno (español)",
+    def: "Equivalente español del IRR. Tasa de descuento que anula el VPN.",
+    uso: "Se usa indistintamente IRR y TIR en contextos bilingües. La metodología es idéntica.",
+    nota: ""
+  },
+  {
+    cat: "epc",
+    en: "GIS — Geographic Information System",
+    es: "Sistema de Información Geográfica",
+    def: "Sistema para capturar, almacenar, manipular, analizar y visualizar datos geoespaciales.",
+    uso: "Planificación de trazados, análisis de interferencias, modelado de terreno, gestión de activos.",
+    nota: "Global Mapper (tu herramienta) es un SIG. ArcGIS es el estándar corporativo en EE.UU."
+  },
+  {
+    cat: "epc",
+    en: "LiDAR — Light Detection and Ranging",
+    es: "LiDAR — Detección y Medición por Luz Láser",
+    def: "Tecnología de teledetección que usa pulsos láser para medir distancias y generar nubes de puntos 3D del terreno o estructuras.",
+    uso: "Levantamientos topográficos, control de excavaciones, modelado de túneles, inspección de estructuras.",
+    nota: "Tu sistema ICOD automatizó el procesamiento de datos LiDAR de escáner de túnel, resolviendo un problema que ningún software comercial podía manejar."
+  },
+  {
+    cat: "epc",
+    en: "DTM / DEM — Digital Terrain / Elevation Model",
+    es: "Modelo Digital de Terreno / Elevaciones",
+    def: "Representación digital del terreno desnudo (sin vegetación ni estructuras). Base para diseño, volumetrías y machine control.",
+    uso: "Generado de LiDAR, fotogrametría o topografía. Fundamental para estimación de movimiento de tierra.",
+    nota: "Produjiste DTMs para firma de EE.UU. en proyectos de machine control (Trimble/Topcon) 2013–2015."
+  },
+  {
+    cat: "epc",
+    en: "UAV / Drone Survey",
+    es: "Levantamiento con Dron / Aerofotogrametría",
+    def: "Captura de imágenes aéreas con vehículos no tripulados para generar ortomosaicos, nubes de puntos y DTMs.",
+    uso: "Control de avance de excavaciones, cubicaciones volumétricas, inspección de accesos, monitoreo de presas.",
+    nota: "Ejecutaste campañas quincenales con Pix4D sobre 12M m³ de excavación activa en Montegrande."
+  },
+  {
+    cat: "epc",
+    en: "TBM — Tunnel Boring Machine",
+    es: "Tuneladora / Máquina Perforadora de Túneles",
+    def: "Máquina de gran diámetro que excava túneles mecanizadamente, instalando el revestimiento de anillos simultáneamente.",
+    uso: "Hidroeléctricas, metro, carreteras en montaña. La TBM de Palomino fue una Herrenknecht doble escudo de 12.44km.",
+    nota: "Tienes experiencia única: control topográfico de una TBM de gran diámetro durante 20 meses completos."
+  },
+  {
+    cat: "epc",
+    en: "RCC / CCR — Roller-Compacted Concrete",
+    es: "Concreto Compactado con Rodillo",
+    def: "Tipo de concreto de muy baja relación agua/cemento, colocado con maquinaria de pavimentación y compactado con rodillo. Usado en presas.",
+    uso: "Método constructivo predominante en presas de concreto modernas. Muy rápido y económico vs. concreto convencional.",
+    nota: "La presa CCR de 60m en Palomino y Las Placetas son proyectos RCC."
+  },
+  {
+    cat: "epc",
+    en: "P6 — Primavera P6",
+    es: "Primavera P6 — Oracle",
+    def: "Software de programación y control de proyectos de Oracle, estándar de facto en proyectos EPC, energía y construcción pesada.",
+    uso: "Gestión de cronogramas complejos con miles de actividades, recursos, y múltiples proyectos simultáneos.",
+    nota: "Ausente en tu resume actual. Instalación de P6 Community Edition es acción pendiente crítica antes de entrevistas con Fluor o Duke."
+  },
+  {
+    cat: "epc",
+    en: "MCC — Master Control Committee",
+    es: "Comité de Control Maestro",
+    def: "Comité de alto nivel del proyecto que toma decisiones sobre cambios de alcance, presupuesto y cronograma.",
+    uso: "Existe en proyectos grandes para gobernar cambios que superan la autoridad del PM.",
+    nota: ""
+  },
+  {
+    cat: "epc",
+    en: "PMC — Project Management Consultant",
+    es: "Consultor de Gerencia de Proyecto",
+    def: "Firma especializada contratada por el dueño para gestionar el proyecto EPC en su nombre, cuando el dueño no tiene capacidad interna.",
+    uso: "Frecuente en proyectos de países en desarrollo o dueños sin experiencia en proyectos grandes.",
+    nota: "Diferente del EPCM: el PMC es consultor; el EPCM tiene responsabilidad técnica de ingeniería y procura."
+  },
+  {
+    cat: "epc",
+    en: "PCM — Project Controls Manager",
+    es: "Gerente de Controles de Proyecto",
+    def: "Responsable de la función integrada de planning, scheduling, cost control, progress measurement y reporting.",
+    uso: "Rol senior en proyectos EPC grandes. Coordina al Cost Engineer, Planner/Scheduler y Document Controller.",
+    nota: "Este es el rol objetivo en tu búsqueda — Duke Energy (Principal PC Specialist) y Fluor."
+  },
+  {
+    cat: "epc",
+    en: "Cost Engineer",
+    es: "Ingeniero de Costos",
+    def: "Especialista en estimación, control de costos y análisis de desviaciones presupuestarias.",
+    uso: "Prepara estimados de costo en distintas fases, monitorea el presupuesto y proyecta el costo al completar (EAC).",
+    nota: "Tu sistema AC&P cubre funcionalidades de Cost Engineering parametrizado."
+  },
+  {
+    cat: "epc",
+    en: "Planner / Scheduler",
+    es: "Planificador / Programador de Obra",
+    def: "Especialista en desarrollo y mantenimiento de cronogramas de proyecto usando herramientas como P6.",
+    uso: "Desarrolla el baseline schedule, actualiza el avance, analiza el impacto de cambios y retrasos.",
+    nota: ""
+  },
+  {
+    cat: "epc",
+    en: "Document Controller",
+    es: "Controlador de Documentos / Gestor Documental",
+    def: "Responsable de la gestión del sistema de control de documentos del proyecto: registro, distribución, control de revisiones y archivo.",
+    uso: "En proyectos EPC grandes puede haber equipos de 5–10 document controllers.",
+    nota: "Visual CRP fue diseñado para empoderar a los ingenieros de campo y reducir la dependencia de document controllers dedicados."
+  },
+  {
+    cat: "epc",
+    en: "Commissioning Engineer",
+    es: "Ingeniero de Commissioning / Puesta en Marcha",
+    def: "Especialista que coordina las pruebas y verificación de sistemas instalados para confirmar su operabilidad.",
+    uso: "Trabaja en la transición de construcción a operación. Prepara los procedimientos de prueba y los sistemas de pre-commissioning.",
+    nota: ""
+  },
+  {
+    cat: "epc",
+    en: "S-Curve",
+    es: "Curva S de Avance",
+    def: "Representación gráfica del avance acumulado del proyecto vs. tiempo, que toma forma de S por la naturaleza de los proyectos (lento inicio, aceleración, desaceleración al cierre).",
+    uso: "Herramienta visual de control. Compara avance real vs. planificado. Desviaciones indican problemas de cronograma.",
+    nota: "Relacionado con EVM. Tu seguimiento de avance en Montegrande generaba los datos para construir S-curves."
+  },
+  {
+    cat: "epc",
+    en: "Progress Measurement",
+    es: "Medición de Avance / Control de Progreso",
+    def: "Sistema para cuantificar el trabajo físico ejecutado vs. el planificado, por actividad y a nivel global.",
+    uso: "Base del Earned Value. Los métodos incluyen: unidades completadas, jalones ponderados, porcentaje de ingeniería, etc.",
+    nota: ""
+  },
+  {
+    cat: "epc",
+    en: "MAN-HOURS / HH",
+    es: "Horas-Hombre",
+    def: "Unidad de medida del esfuerzo laboral. Métrica central en control de productividad y costo de mano de obra.",
+    uso: "El presupuesto de mano de obra se expresa en HH. La productividad se mide como HH real vs. HH presupuestadas.",
+    nota: ""
+  },
+  {
+    cat: "epc",
+    en: "CPI — Cost Performance Index",
+    es: "Índice de Desempeño de Costo",
+    def: "CPI = EV / AC (Earned Value / Actual Cost). Mide eficiencia del costo: CPI>1 bajo presupuesto, CPI<1 sobre presupuesto.",
+    uso: "Métrica central de EVM. Un CPI de 0.85 significa que se está gastando $1.18 por cada $1.00 de trabajo producido.",
+    nota: ""
+  },
+  {
+    cat: "epc",
+    en: "SPI — Schedule Performance Index",
+    es: "Índice de Desempeño del Cronograma",
+    def: "SPI = EV / PV (Earned Value / Planned Value). Mide eficiencia del cronograma: SPI>1 adelantado, SPI<1 retrasado.",
+    uso: "Métrica central de EVM. SPI=0.90 significa que se ha ejecutado el 90% del trabajo planificado a la fecha.",
+    nota: ""
+  },
+  {
+    cat: "epc",
+    en: "EAC — Estimate at Completion",
+    es: "Estimado al Completar / Proyección de Costo Final",
+    def: "Costo total proyectado del proyecto al finalizar, basado en el desempeño real acumulado.",
+    uso: "EAC = BAC / CPI (fórmula más común). Si el CPI es 0.90, el proyecto terminará 11% sobre presupuesto.",
+    nota: ""
+  },
+  {
+    cat: "epc",
+    en: "BAC — Budget at Completion",
+    es: "Presupuesto al Completar / Presupuesto Total",
+    def: "Presupuesto total aprobado para el proyecto. La suma de todos los presupuestos de las actividades del WBS.",
+    uso: "Es el denominador en muchas fórmulas EVM. Representa el plan de costo total.",
+    nota: ""
+  },
+  {
+    cat: "epc",
+    en: "Lugeon Test",
+    es: "Prueba Lugeon / Ensayo de Permeabilidad",
+    def: "Ensayo in situ para medir la permeabilidad de macizos rocosos mediante inyección de agua a presión en sondeos.",
+    uso: "Fundamental en diseño de presas y túneles. Un Lugeon = absorción de 1 L/min/m de perforación a 1 MPa.",
+    nota: "Procesaste 104 ensayos Lugeon/Lefranc en el programa geotécnico de Montegrande."
+  },
+  {
+    cat: "epc",
+    en: "Lefranc Test",
+    es: "Prueba Lefranc",
+    def: "Ensayo de permeabilidad en suelos o roca blanda mediante medición del caudal de entrada o salida de agua en un sondeo.",
+    uso: "Complementario al Lugeon en suelos y roca de baja resistencia.",
+    nota: ""
+  },
+  {
+    cat: "epc",
+    en: "GCP — Ground Control Point",
+    es: "Punto de Control Terrestre",
+    def: "Punto con coordenadas precisas medidas en campo que se usa para georreferenciar imágenes aéreas o nubes de puntos LiDAR.",
+    uso: "En fotogrametría drone: mínimo 5 GCPs por vuelo para precisión centimétrica. Levantados con GPS RTK.",
+    nota: "En Las Placetas levantaste 36 GCPs con GPS RTK TOPCON GR-5 con RMS < 1.5cm."
+  },
+  {
+    cat: "epc",
+    en: "RTK — Real-Time Kinematic GPS",
+    es: "GPS RTK — Cinemático en Tiempo Real",
+    def: "Técnica GPS diferencial que proporciona correcciones en tiempo real para lograr precisión centimétrica en levantamientos topográficos.",
+    uso: "Levantamiento de GCPs, control de construcción, replanteo de estructuras, machine control.",
+    nota: ""
+  },
+  {
+    cat: "epc",
+    en: "GSD — Ground Sampling Distance",
+    es: "Distancia de Muestreo del Suelo / Resolución del Suelo",
+    def: "En fotogrametría: tamaño real en el terreno que representa cada pixel de la imagen capturada.",
+    uso: "GSD = (altura de vuelo × tamaño pixel sensor) / longitud focal. Determina la precisión del ortomosaico y DTM.",
+    nota: "En Las Placetas CM2 lograste GSD = 0.12m. Para Manabao GSD = 0.10m a alturas de 350–500m."
+  },
+  {
+    cat: "epc",
+    en: "WGS84 — World Geodetic System 1984",
+    es: "Sistema Geodésico Mundial 1984",
+    def: "Sistema de referencia geodésico global usado por el GPS. Define la forma y dimensiones de la Tierra.",
+    uso: "Todos los GPS producen coordenadas WGS84. Se transforma al sistema de coordenadas local del proyecto.",
+    nota: ""
+  },
+  {
+    cat: "epc",
+    en: "EGM2008",
+    es: "Modelo de Geoide EGM2008",
+    def: "Earth Gravitational Model 2008. Modelo global del geoide usado para convertir alturas elipsoidales GPS a elevaciones ortométricas.",
+    uso: "La elevación que usa la ingeniería (msnm) se obtiene restando la ondulación del geoide EGM2008 a la altura GPS.",
+    nota: "Identificaste el error EGM2008 vs. geoide local en el estudio LiDAR de Bávaro-Miches, viajando a Perú para corregirlo."
+  },
+  {
+    cat: "epc",
+    en: "UTM — Universal Transverse Mercator",
+    es: "Proyección UTM — Mercator Transversal Universal",
+    def: "Sistema de coordenadas planas dividido en 60 zonas de 6° de longitud. El más usado en proyectos de ingeniería civil.",
+    uso: "República Dominicana está en Zona 19N. La corrección por factor de escala UTM es crítica en levantamientos extensos.",
+    nota: "Tu sistema SALT integra el factor de escala UTM en el ajuste de coordenadas."
+  },
+  {
+    cat: "epc",
+    en: "AASHTO",
+    es: "AASHTO — Asociación Americana de Oficiales de Carreteras",
+    def: "American Association of State Highway and Transportation Officials. Publica los estándares de diseño vial más usados en EE.UU. y globalmente.",
+    uso: "AASHTO 1993: metodología de diseño de pavimentos flexible y rígido. También define estándares geométricos de carreteras.",
+    nota: "Diseñaste vías de acceso con AASHTO 1993 en Palomino y Las Placetas."
+  },
+  {
+    cat: "epc",
+    en: "Machine Control",
+    es: "Control de Maquinaria / Guía de Máquinas",
+    def: "Sistema que usa GPS y sensores en equipos de movimiento de tierra (motoniveladoras, excavadoras) para guiarlos automáticamente al diseño 3D.",
+    uso: "Elimina estacas de topografía. El operador ve el DTM de diseño en pantalla y la máquina ejecuta con precisión centimétrica.",
+    nota: "Produjiste DTMs para machine control para firma de EE.UU. (Trimble/Topcon) 2013–2015."
+  },
+
+  // ══════════════════════════════════════════════════════════════════
+  // CONTRATOS (original + ampliado)
+  // ══════════════════════════════════════════════════════════════════
+
+  { cat:"contrato", en:"Lump Sum Contract", es:"Contrato a Precio Global / Suma Alzada", def:"Contrato de monto fijo donde el contratista asume el riesgo de costo. El precio no varía salvo órdenes de cambio formales.", uso:"Común en proyectos con diseño completamente definido antes de licitar.", nota:"Equivalente al contrato a precio cerrado. En EPC se llama LSTK (Lump Sum Turn Key)." },
+  { cat:"contrato", en:"Cost-Plus Contract", es:"Contrato por Costos Reembolsables", def:"El dueño paga los costos reales de construcción más un fee al contratista.", uso:"Proyectos con alcance indefinido, emergencias, o inicio antes de tener diseño completo.", nota:"Equivalente a administración delegada o contratos de reembolso." },
+  { cat:"contrato", en:"GMP — Guaranteed Maximum Price", es:"Precio Máximo Garantizado", def:"Variante del Cost-Plus con techo de costo. El contratista absorbe sobrecostos pero comparte ahorros.", uso:"Muy común en CM at Risk.", nota:"" },
+  { cat:"contrato", en:"Unit Price Contract", es:"Contrato por Precios Unitarios", def:"Pago por unidades de trabajo ejecutadas (m³, m², ton). La cantidad final puede variar.", uso:"Movimiento de tierra, pavimentación, obras donde la cantidad exacta no se conoce al contratar.", nota:"El más común en infraestructura latinoamericana. Tu experiencia en SALT/ICOD es directamente aplicable." },
+  { cat:"contrato", en:"Time & Materials (T&M)", es:"Tiempo y Materiales", def:"Pago por horas de mano de obra a tarifas pactadas más costo de materiales.", uso:"Trabajos de emergencia, reparaciones, alcance indeterminado.", nota:"" },
+  { cat:"contrato", en:"Change Order (CO)", es:"Orden de Cambio / Orden de Variación", def:"Modificación formal al contrato que altera alcance, costo, o plazo. Requiere firma de ambas partes.", uso:"Mecanismo estándar para gestionar cualquier desviación del contrato original.", nota:"En proyectos internacionales también llamado Variation Order (VO). Ver VO en categoría EPC." },
+  { cat:"contrato", en:"Liquidated Damages (LD)", es:"Daños y Perjuicios Pactados / Multas por Retraso", def:"Monto diario preestablecido que el contratista paga al dueño por retrasos.", uso:"Incentivo para cumplir el plazo. Común en contratos públicos y privados.", nota:"" },
+  { cat:"contrato", en:"Retainage", es:"Retención de Garantía", def:"Porcentaje (típicamente 5–10%) retenido de cada pago hasta la aceptación final.", uso:"Se libera al Substantial Completion o Final Completion.", nota:"Equivalente a la retención de garantía usada en contratos latinoamericanos." },
+  { cat:"contrato", en:"Performance Bond", es:"Fianza de Cumplimiento", def:"Garantía que cubre al dueño si el contratista incumple el contrato.", uso:"Obligatorio en contratos públicos federales (Miller Act). Cubre hasta 100% del contrato.", nota:"" },
+  { cat:"contrato", en:"Payment Bond", es:"Fianza de Pago", def:"Garantía que asegura que el contratista pagará a subcontratistas y proveedores.", uso:"Protege a terceros. Obligatorio bajo Miller Act.", nota:"" },
+  { cat:"contrato", en:"Bid Bond", es:"Fianza de Oferta / Garantía de Seriedad", def:"Garantía que acompaña la propuesta. Asegura que el licitante formalizará el contrato si gana.", uso:"Típicamente 5–10% del monto de la oferta.", nota:"Equivalente a la garantía de mantenimiento de oferta en licitaciones latinoamericanas." },
+  { cat:"contrato", en:"Force Majeure", es:"Fuerza Mayor", def:"Eventos fuera del control de las partes que excusan el incumplimiento.", uso:"Permite extensión de plazo sin penalidad.", nota:"" },
+  { cat:"contrato", en:"Indemnification Clause", es:"Cláusula de Indemnización", def:"Disposición donde una parte asume responsabilidad por daños o reclamaciones de terceros.", uso:"Estándar en todos los contratos de construcción.", nota:"" },
+
+  // ══════════════════════════════════════════════════════════════════
+  // PROCESO / DELIVERY
+  // ══════════════════════════════════════════════════════════════════
+
+  { cat:"proceso", en:"Design-Bid-Build (DBB)", es:"Diseño-Licitación-Construcción", def:"Método tradicional: diseñador separado, luego licitación de construcción.", uso:"Obligatorio en muchos proyectos públicos.", nota:"El modelo dominante en proyectos públicos de América Latina." },
+  { cat:"proceso", en:"Design-Build (DB)", es:"Diseño y Construcción / Llave en Mano", def:"Un solo contratista asume diseño y construcción bajo contrato único.", uso:"Mayor velocidad, precio único.", nota:"Equivalente al contrato llave en mano (turnkey). En EPC: Design-Build es la base del modelo." },
+  { cat:"proceso", en:"CM at Risk (CMAR)", es:"CM con Riesgo / Gerencia a Riesgo", def:"El CM actúa como consultor en diseño y luego como contratista general con GMP.", uso:"Permite constructabilidad temprana.", nota:"" },
+  { cat:"proceso", en:"CM Agency", es:"CM como Agente / Gerencia de Proyecto", def:"El CM actúa solo como representante del dueño, sin asumir riesgo.", uso:"Similar a gerencia de proyecto o interventoría latinoamericana.", nota:"" },
+  { cat:"proceso", en:"Notice to Proceed (NTP)", es:"Orden de Inicio / Acta de Inicio", def:"Autorización formal para comenzar los trabajos. Define la fecha de inicio contractual.", uso:"La fecha del NTP es el punto de partida del cronograma.", nota:"" },
+  { cat:"proceso", en:"Substantial Completion", es:"Terminación Sustancial", def:"Punto en que la obra está suficientemente completa para su uso previsto.", uso:"Activa inicio de garantías y liberación parcial de retención.", nota:"Hito de control más importante en contratos de EE.UU." },
+  { cat:"proceso", en:"Final Completion", es:"Terminación Final / Recepción Definitiva", def:"Cuando todos los trabajos del punch list están completos.", uso:"Activa liberación del saldo de retención.", nota:"" },
+  { cat:"proceso", en:"Punch List", es:"Lista de Pendientes / Lista de Deficiencias", def:"Lista de items incompletos o defectuosos identificados antes de la terminación sustancial.", uso:"El contratista debe corregir todos los items.", nota:"También llamado snag list en contexto británico/FIDIC." },
+  { cat:"proceso", en:"Value Engineering (VE)", es:"Ingeniería de Valor", def:"Proceso para encontrar alternativas que mantengan funcionalidad a menor costo.", uso:"Aplicado durante diseño o construcción.", nota:"" },
+  { cat:"proceso", en:"Constructability Review", es:"Revisión de Constructibilidad", def:"Análisis del diseño desde la perspectiva de cómo se va a construir.", uso:"Clave para reducir Change Orders durante construcción.", nota:"" },
+  { cat:"proceso", en:"Request for Information (RFI)", es:"Solicitud de Información / Consulta Técnica", def:"Consulta formal del contratista al diseñador para aclarar ambigüedades.", uso:"Mecanismo oficial de comunicación técnica.", nota:"Tu sistema Visual CRP gestiona RFIs." },
+
+  // ══════════════════════════════════════════════════════════════════
+  // ROLES
+  // ══════════════════════════════════════════════════════════════════
+
+  { cat:"roles", en:"Owner / Employer", es:"Dueño / Propietario / Empleador", def:"Entidad que financia el proyecto. En FIDIC se llama Employer.", uso:"Define requisitos, aprueba cambios, realiza pagos.", nota:"En EPC el Owner suele tener un Owner's Engineer o PCM para representarlo." },
+  { cat:"roles", en:"General Contractor (GC)", es:"Contratista General", def:"Empresa principal que tiene contrato directo con el dueño y subcontrata especialidades.", uso:"Responsable de coordinación, seguridad y entrega.", nota:"" },
+  { cat:"roles", en:"Subcontractor (Sub)", es:"Subcontratista", def:"Empresa especializada contratada por el GC para trabajos específicos.", uso:"Realiza la mayor parte del trabajo físico.", nota:"" },
+  { cat:"roles", en:"Construction Manager (CM)", es:"Gerente de Construcción / Director de Obra", def:"Profesional que coordina y supervisa el proceso en nombre del dueño.", uso:"Puede actuar como agente (sin riesgo) o at-risk (con GMP).", nota:"" },
+  { cat:"roles", en:"Architect of Record (AOR)", es:"Arquitecto de Registro", def:"Arquitecto legalmente responsable del diseño. Firma y sella los planos.", uso:"Su firma es requisito para permisos.", nota:"" },
+  { cat:"roles", en:"Engineer of Record (EOR)", es:"Ingeniero de Registro", def:"Ingeniero PE que firma y sella planos estructurales, civiles, MEP.", uso:"Responsabilidad legal y profesional de los diseños firmados.", nota:"En EE.UU. requiere licencia PE por estado." },
+  { cat:"roles", en:"Owner's Engineer", es:"Ingeniero del Propietario", def:"Firma de ingeniería independiente que representa al dueño en proyectos EPC, supervisa al contratista y certifica pagos.", uso:"En contratos FIDIC tiene rol explícito y autoridad para tomar decisiones.", nota:"Equivalente al supervisor técnico o interventor en esquemas latinoamericanos." },
+  { cat:"roles", en:"Project Manager (PM)", es:"Gerente de Proyecto", def:"Responsable de planificación, presupuesto, cronograma y comunicación.", uso:"Coordina con el cliente, diseñadores y el superintendente.", nota:"" },
+  { cat:"roles", en:"Project Engineer (PE)", es:"Ingeniero de Proyecto", def:"Profesional técnico de apoyo al PM. Gestiona submittals, RFIs, documentación.", uso:"Eslabón entre oficina y campo. Rol de entrada típico.", nota:"" },
+  { cat:"roles", en:"Superintendent", es:"Superintendente de Obra / Jefe de Obra", def:"Representante del contratista en campo. Coordina cuadrillas, subcontratistas y materiales.", uso:"Equivale al residente de obra o jefe de obra.", nota:"" },
+  { cat:"roles", en:"Owner's Representative", es:"Representante del Propietario", def:"Persona o firma que actúa en nombre del dueño para supervisar el proyecto.", uso:"El dueño delega autoridad para toma de decisiones en campo.", nota:"" },
+  { cat:"roles", en:"Inspector / Special Inspector", es:"Inspector / Inspector Especial", def:"Profesional que verifica conformidad de materiales y trabajos con planos y especificaciones.", uso:"Special Inspectors requeridos por código para trabajos críticos.", nota:"" },
+
+  // ══════════════════════════════════════════════════════════════════
+  // COSTOS
+  // ══════════════════════════════════════════════════════════════════
+
+  { cat:"costos", en:"Quantity Takeoff (QTO)", es:"Metrado / Cómputo Métrico / Cubicación", def:"Proceso de medir y cuantificar materiales y trabajos a partir de planos.", uso:"Base para estimación de costos y elaboración de oferta.", nota:"Es una de tus especialidades core con 25+ años." },
+  { cat:"costos", en:"Bid Estimate", es:"Presupuesto de Oferta / Estimación para Licitación", def:"Cálculo de costo para formular la propuesta económica.", uso:"Incluye costos directos, indirectos y margen.", nota:"" },
+  { cat:"costos", en:"Contingency", es:"Contingencia / Imprevistos", def:"Reserva de costo para incertidumbres no previstas.", uso:"Típicamente 5–15% en diseño.", nota:"Tu sistema AC&P desarrolla análisis paramétrico de contingencia." },
+  { cat:"costos", en:"General Conditions", es:"Condiciones Generales / Costos Generales de Obra", def:"Costos indirectos de campo: supervisor, oficina temporal, seguridad.", uso:"Típicamente 5–15% del costo directo.", nota:"" },
+  { cat:"costos", en:"Overhead & Profit (O&P)", es:"Gastos Generales y Utilidad", def:"Overhead: costos corporativos no atribuibles a proyecto. Profit: margen.", uso:"Se agregan al costo directo e indirecto para obtener el precio.", nota:"" },
+  { cat:"costos", en:"Schedule of Values (SOV)", es:"Relación de Valores / Desglose de Valor del Contrato", def:"Lista de todas las partidas del contrato con valor asignado. Base para pagos.", uso:"El GC lo presenta al inicio. Cada AFP se basa en el % completado del SOV.", nota:"" },
+  { cat:"costos", en:"Application for Payment (AFP)", es:"Solicitud de Pago / Valuación", def:"Documento periódico donde el contratista solicita pago por trabajo ejecutado.", uso:"Se basa en el SOV. El CM/arquitecto lo certifica antes del pago.", nota:"Equivalente a la valuación o estimación de obra en proyectos latinoamericanos." },
+  { cat:"costos", en:"Allowance", es:"Provisión / Partida Estimada", def:"Suma incluida en el contrato para ítem cuyo costo final no se puede determinar al licitar.", uso:"Ej: acabados a seleccionar, demoliciones de alcance incierto.", nota:"" },
+  { cat:"costos", en:"Class 1–5 Estimate", es:"Estimado Clase 1–5 (AACE)", def:"Clasificación AACE de precisión de estimados: Clase 5 (±50%, conceptual) a Clase 1 (±5%, listo para construcción).", uso:"Clase 5: orden de magnitud. Clase 3: FEED/prefactibilidad (±20%). Clase 1: definitivo post-diseño.", nota:"El estimado producido en FEED es típicamente Clase 3." },
+
+  // ══════════════════════════════════════════════════════════════════
+  // CAMPO
+  // ══════════════════════════════════════════════════════════════════
+
+  { cat:"campo", en:"Submittal", es:"Sometimiento / Documentación de Sometimiento", def:"Documentos que el contratista envía al diseñador para aprobación antes de instalar.", uso:"Shop drawings, product data, samples.", nota:"Gestionar submittals es función clave del Project Engineer." },
+  { cat:"campo", en:"Shop Drawings", es:"Planos de Taller / Planos de Fabricación", def:"Planos detallados del subcontratista mostrando cómo fabricará e instalará su trabajo.", uso:"Deben ser aprobados por el EOR antes de fabricar.", nota:"" },
+  { cat:"campo", en:"As-Built Drawings", es:"Planos de Obra Terminada / Planos Record", def:"Planos actualizados que reflejan la construcción tal como fue ejecutada.", uso:"Entregable obligatorio al cierre. Esenciales para O&M.", nota:"También llamados planos conforme a obra." },
+  { cat:"campo", en:"Superintendent's Daily Log", es:"Bitácora Diaria / Diario de Obra", def:"Registro diario de actividades, clima, personal y eventos relevantes.", uso:"Documento legal importante en disputas.", nota:"" },
+  { cat:"campo", en:"OSHA", es:"OSHA — Administración de Seguridad y Salud Ocupacional", def:"Agencia federal que regula la seguridad en el trabajo. Estándar 29 CFR 1926 para construcción.", uso:"Inspecciones sin previo aviso. Multas severas por violaciones.", nota:"" },
+  { cat:"campo", en:"Safety Plan / HASP", es:"Plan de Seguridad / HASP", def:"Documento que define procedimientos de seguridad. HASP incluye riesgos de materiales peligrosos.", uso:"OSHA requiere planes de seguridad.", nota:"" },
+  { cat:"campo", en:"BIM — Building Information Modeling", es:"Modelado de Información de la Construcción", def:"Proceso de crear y gestionar información del proyecto en modelo 3D inteligente.", uso:"Detección de conflictos, coordinación MEP, estimación, facility management.", nota:"Revit es el software dominante. Civil 3D es el equivalente para infraestructura civil." },
+  { cat:"campo", en:"Commissioning (Cx)", es:"Puesta en Marcha / Commissioning", def:"Proceso sistemático de verificar que los sistemas instalados funcionan según diseño.", uso:"Requerido en edificios LEED. En EPC: hito previo al COD.", nota:"" },
+
+  // ══════════════════════════════════════════════════════════════════
+  // LEGAL
+  // ══════════════════════════════════════════════════════════════════
+
+  { cat:"legal", en:"Mechanic's Lien", es:"Gravamen del Mecánico / Lien de Construcción", def:"Derecho legal para reclamar la propiedad si contratistas/proveedores no son pagados.", uso:"Protege a quienes aportaron trabajo o material.", nota:"Cada estado tiene sus propios plazos y procedimientos." },
+  { cat:"legal", en:"Preliminary Notice", es:"Aviso Preliminar", def:"Notificación que subcontratistas y proveedores envían para preservar sus derechos de lien.", uso:"Requisito previo al lien en la mayoría de los estados.", nota:"" },
+  { cat:"legal", en:"Claims", es:"Reclamaciones / Claims", def:"Demanda formal solicitando compensación adicional por tiempo o dinero.", uso:"Puede originarse en: cambios, condiciones difusas, retrasos, disrupciones.", nota:"" },
+  { cat:"legal", en:"Differing Site Conditions (DSC)", es:"Condiciones Difusas del Sitio / Condiciones Imprevisibles", def:"Condiciones encontradas que difieren materialmente de las representadas en el contrato.", uso:"Base frecuente para claims de costo y tiempo.", nota:"Ejemplo clásico: encontrar roca donde el estudio geotécnico indicaba suelo." },
+  { cat:"legal", en:"Dispute Resolution / ADR", es:"Resolución de Disputas / Métodos Alternativos", def:"Métodos para resolver conflictos sin litigación: mediación, arbitraje, Dispute Review Boards.", uso:"La mayoría de contratos incluyen cláusula ADR antes de litigio.", nota:"" },
+  { cat:"legal", en:"Notice of Default", es:"Aviso de Incumplimiento", def:"Notificación formal de que una parte ha incumplido sus obligaciones.", uso:"Primer paso formal antes de terminar el contrato o reclamar la fianza.", nota:"" },
+  { cat:"legal", en:"Certificate of Occupancy (CO)", es:"Certificado de Ocupación", def:"Documento que certifica que el edificio cumple el código y puede ser ocupado.", uso:"Requerido para que el dueño pueda usar el edificio.", nota:"" },
+
+  // ══════════════════════════════════════════════════════════════════
+  // PROGRAMACIÓN
+  // ══════════════════════════════════════════════════════════════════
+
+  { cat:"programa", en:"Critical Path Method (CPM)", es:"Método de la Ruta Crítica", def:"Técnica que identifica la secuencia de actividades más larga que determina la duración mínima del proyecto.", uso:"Base de todos los cronogramas de proyectos complejos.", nota:"Tu experiencia en hidroeléctricas implica CPM avanzado." },
+  { cat:"programa", en:"Float / Slack", es:"Holgura / Float", def:"Tiempo que una actividad puede retrasarse sin afectar la fecha de terminación.", uso:"Actividades en ruta crítica tienen float = 0.", nota:"" },
+  { cat:"programa", en:"Baseline Schedule", es:"Cronograma Base / Programa Contractual", def:"Cronograma original aprobado que sirve como referencia para medir el avance.", uso:"No debe modificarse sin aprobación formal.", nota:"" },
+  { cat:"programa", en:"Look-Ahead Schedule", es:"Programa de Corto Plazo / Programa de 3 Semanas", def:"Cronograma detallado de las próximas 2–4 semanas para planificación operativa.", uso:"Herramienta de gestión del superintendente.", nota:"" },
+  { cat:"programa", en:"Earned Value Management (EVM)", es:"Gestión del Valor Ganado", def:"Metodología que integra alcance, cronograma y costo para medir el desempeño real.", uso:"Métricas clave: CPI, SPI, EAC, BAC, EV, PV, AC.", nota:"Requerido en contratos federales >$20M. Tu metodología AC&P tiene componentes similares." },
+  { cat:"programa", en:"Acceleration", es:"Aceleración", def:"Medidas para completar el proyecto más rápido: horas extra, turnos adicionales.", uso:"Puede ser ordenada por el dueño (con compensación) o voluntaria.", nota:"" },
+  { cat:"programa", en:"Delay", es:"Atraso / Retraso", def:"Extensión del plazo más allá de la fecha de terminación contractual.", uso:"Puede ser excusable (fuerza mayor), compensable (culpa del dueño), o inexcusable.", nota:"" },
+  { cat:"programa", en:"Primavera P6", es:"Primavera P6 — Oracle", def:"Software estándar de la industria EPC para programación y control de proyectos complejos.", uso:"Gestión de cronogramas con miles de actividades, recursos, y múltiples proyectos simultáneos.", nota:"Estándar de facto en Fluor, Bechtel, Duke Energy y firmas EPC grandes. Instalación prioritaria." },
+  { cat:"programa", en:"WBS Dictionary", es:"Diccionario del EDT / WBS", def:"Documento que define el alcance, entregables, responsables y criterios de aceptación de cada elemento del WBS.", uso:"Complemento del WBS. Elimina ambigüedad sobre qué incluye cada paquete de trabajo.", nota:"" },
+
+];
+
+// ══════════════════════════════════════════════════════════════════
+// RENDER ENGINE
+// ══════════════════════════════════════════════════════════════════
+
+function badgeClass(cat) {
+  const map = { contrato:'badge-contrato', proceso:'badge-proceso', roles:'badge-roles',
+    costos:'badge-costos', campo:'badge-campo', legal:'badge-legal',
+    programa:'badge-programa', epc:'badge-epc' };
+  return map[cat] || '';
+}
+
+function badgeLabel(cat) {
+  const map = { contrato:'Contratos', proceso:'Proceso', roles:'Roles', costos:'Costos',
+    campo:'Campo', legal:'Legal', programa:'Programación', epc:'EPC/Siglas' };
+  return map[cat] || cat;
+}
+
+let currentFilter = 'all';
+
+function renderTerms(filter, search) {
+  const container = document.getElementById('termList');
+  container.innerHTML = '';
+
+  const cats = ['epc','contrato','proceso','roles','costos','campo','legal','programa'];
+  const catLabels = {
+    epc:      '⚡ EPC / EPCM / Siglas y Acrónimos',
+    contrato: '📄 Contratos',
+    proceso:  '🔄 Proceso y Métodos de Entrega',
+    roles:    '👷 Roles y Responsabilidades',
+    costos:   '💰 Costos y Estimación',
+    campo:    '🏗️ Campo y Documentación Técnica',
+    legal:    '⚖️ Marco Legal y Permisos',
+    programa: '📅 Programación y Control',
+  };
+
+  const searchLower = (search || '').toLowerCase();
+
+  cats.forEach(cat => {
+    if (filter !== 'all' && filter !== cat) return;
+
+    const filtered = terms.filter(t => {
+      if (t.cat !== cat) return false;
+      if (searchLower) {
+        return t.en.toLowerCase().includes(searchLower) ||
+               t.es.toLowerCase().includes(searchLower) ||
+               (t.def || '').toLowerCase().includes(searchLower) ||
+               (t.nota || '').toLowerCase().includes(searchLower);
+      }
+      return true;
+    });
+
+    if (filtered.length === 0) return;
+
+    const sec = document.createElement('div');
+    const isEpc = cat === 'epc';
+    sec.innerHTML = `<div class="section-title${isEpc?' epc':''}">${catLabels[cat]} <span style="font-size:10px;opacity:0.7;">(${filtered.length})</span></div>`;
+
+    filtered.forEach((t, i) => {
+      const id = `${cat}-${i}`;
+      const card = document.createElement('div');
+      card.className = `term-card${isEpc?' epc-card':''}`;
+      card.dataset.cat = t.cat;
+      card.innerHTML = `
+        <div class="term-header" onclick="toggleCard('${id}')">
+          <div class="term-en${isEpc?' epc':''}">${t.en}</div>
+          <div class="term-es">${t.es}</div>
+          <div style="display:flex;align-items:center;gap:8px">
+            <span class="term-badge ${badgeClass(t.cat)}">${badgeLabel(t.cat)}</span>
+            <span class="chevron" id="chev-${id}">▶</span>
+          </div>
+        </div>
+        <div class="term-detail" id="detail-${id}">
+          <div class="detail-row">
+            <span class="detail-label">Definición</span>
+            <span class="detail-text">${t.def}</span>
+          </div>
+          ${t.uso ? `<div class="detail-row">
+            <span class="detail-label">Uso típico</span>
+            <span class="detail-text">${t.uso}</span>
+          </div>` : ''}
+          ${t.nota ? `<div class="detail-row">
+            <span class="detail-label">Nota</span>
+            <span class="detail-text nota">💡 ${t.nota}</span>
+          </div>` : ''}
+        </div>`;
+      sec.appendChild(card);
+    });
+
+    container.appendChild(sec);
+  });
+
+  // Update count
+  const total = terms.filter(t => {
+    if (filter !== 'all' && t.cat !== filter) return false;
+    if (searchLower) return t.en.toLowerCase().includes(searchLower) || t.es.toLowerCase().includes(searchLower) || (t.def||'').toLowerCase().includes(searchLower);
+    return true;
+  }).length;
+
+  const info = document.getElementById('resultCount');
+  if (info) info.textContent = `${total} términos`;
+}
+
+function toggleCard(id) {
+  const detail = document.getElementById('detail-' + id);
+  const chev = document.getElementById('chev-' + id);
+  if (!detail) return;
+  const isOpen = detail.classList.contains('open');
+  detail.classList.toggle('open', !isOpen);
+  chev.style.transform = isOpen ? '' : 'rotate(90deg)';
+}
+
+function filterTag(tag) {
+  currentFilter = tag;
+  document.querySelectorAll('.tag-btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+  renderTerms(currentFilter, document.getElementById('searchInput').value);
+}
+
+document.getElementById('searchInput').addEventListener('input', function() {
+  renderTerms(currentFilter, this.value);
+});
+
+// Result count display
+const countEl = document.createElement('div');
+countEl.id = 'resultCount';
+countEl.style.cssText = 'font-family:IBM Plex Mono,monospace;font-size:11px;color:#57606A;margin-bottom:12px;';
+document.querySelector('.container').insertBefore(countEl, document.getElementById('termList'));
+
+renderTerms('all', '');
+</script>
+
+<footer>
+  CM + EPC Terminología Bilingüe · Construction Management JumpStart (Jackson, Wiley) + EPC/EPCM Industry Standard · 2026
+</footer>
+</body>
+</html>
