@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="en" id="html-root">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Deep Technical Portfolio — Civil Engineering & Geospatial Solutions · Piter J. Bonilla D. · Full technical depth across all 12 series">
+<title>Portfolio Deep Technical — Piter J. Bonilla D.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,500;0,700;0,900;1,300;1,500&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+:root {
+  --bg:      #0b1220;
+  --surface: #111d30;
+  --card:    #16243a;
+  --border:  #1e334f;
+  --gold:    #c9a84c;
+  --gold2:   #e8c96a;
+  --teal:    #3fb8c0;
+  --blue:    #5b9bd5;
+  --muted:   #6b7f96;
+  --text:    #cdd8e6;
+  --light:   #eaf0f8;
+  --white:   #f5f8fc;
+  --green:   #2d7d4f;
+  --red:     #8b2020;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  line-height: 1.75;
+}
+
+/* ── LANG BAR ── */
+.lang-bar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(11,18,32,0.96);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
+  padding: 10px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.lang-toggle {
+  display: flex;
+  gap: 6px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 3px;
+}
+
+.lang-btn {
+  background: none;
+  border: none;
+  padding: 6px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  color: var(--muted);
+  transition: all 0.2s;
+}
+.lang-btn.active { background: var(--gold); color: var(--bg); }
+
+.site-link { font-family:'DM Mono',monospace; font-size:11px; color:var(--muted); text-decoration:none; }
+.site-link:hover { color:var(--teal); }
+
+/* ── QUICK NAV SIDEBAR ── */
+.quick-nav {
+  position: fixed;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(17,29,48,0.92);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 12px 10px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.qn-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--muted);
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  position: relative;
+}
+
+.qn-btn:hover { background: var(--surface); border-color: var(--gold); color: var(--gold2); transform: scale(1.1); }
+.qn-btn.active { background: rgba(201,168,76,0.2); border-color: var(--gold); color: var(--gold2); }
+
+.qn-btn::after {
+  content: attr(title);
+  position: absolute;
+  left: 56px;
+  background: rgba(11,18,32,0.96);
+  border: 1px solid var(--border);
+  color: var(--light);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px;
+  white-space: nowrap;
+  padding: 5px 10px;
+  border-radius: 6px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+}
+.qn-btn:hover::after { opacity: 1; }
+
+.qn-divider { width: 24px; height: 1px; background: var(--border); margin: 2px auto; }
+
+@media (max-width: 1100px) { .quick-nav { display: none; } }
+
+/* ── HERO ── */
+.hero {
+  padding: 60px 40px 40px;
+  max-width: 1100px;
+  margin: 0 auto;
+  border-bottom: 1px solid var(--border);
+}
+
+.hero-eyebrow { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin-bottom:14px; }
+.hero-name { font-family:'Fraunces',serif; font-size:clamp(32px,4.5vw,52px); font-weight:700; line-height:1.1; color:var(--white); margin-bottom:10px; }
+.hero-name em { font-style:italic; color:var(--gold2); }
+.hero-sub { font-size:15px; color:var(--muted); max-width:680px; margin-bottom:10px; line-height:1.65; }
+.hero-badge { display:inline-block; background:rgba(201,168,76,0.15); border:1px solid rgba(201,168,76,0.3); border-radius:4px; padding:4px 10px; font-family:'DM Mono',monospace; font-size:10px; color:var(--gold); letter-spacing:1px; margin-bottom:24px; }
+
+.hero-stats { display:flex; gap:28px; flex-wrap:wrap; padding-top:20px; border-top:1px solid var(--border); }
+.stat { font-family:'DM Mono',monospace; }
+.stat-val { font-size:24px; font-weight:500; color:var(--gold2); display:block; font-family:'Fraunces',serif; }
+.stat-lbl { font-size:10px; color:var(--muted); letter-spacing:1px; text-transform:uppercase; }
+
+/* ── SECTION NAV ── */
+.section-nav { background:var(--surface); border-bottom:1px solid var(--border); padding:0 40px; overflow-x:auto; white-space:nowrap; }
+.section-nav-inner { display:inline-flex; gap:0; }
+.snav-btn { background:none; border:none; border-bottom:2px solid transparent; padding:13px 16px; cursor:pointer; font-family:'DM Mono',monospace; font-size:11px; letter-spacing:0.5px; color:var(--muted); text-transform:uppercase; transition:all 0.2s; white-space:nowrap; }
+.snav-btn:hover { color:var(--light); }
+.snav-btn.active { color:var(--gold); border-bottom-color:var(--gold); }
+
+/* ── CONTENT ── */
+.content { max-width:1100px; margin:0 auto; padding:36px 40px 80px; }
+.section { display:none; }
+.section.active { display:block; }
+
+/* ── SERIES BLOCK ── */
+.series-block { margin-bottom:56px; padding-bottom:48px; border-bottom:1px solid var(--border); }
+.series-block:last-child { border-bottom:none; }
+.series-tag { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; color:var(--gold); text-transform:uppercase; margin-bottom:6px; }
+.series-title { font-family:'Fraunces',serif; font-size:26px; font-weight:700; color:var(--white); line-height:1.2; margin-bottom:4px; }
+.series-sub { font-size:13px; color:var(--muted); margin-bottom:18px; font-style:italic; }
+
+/* ── H2 ── */
+.sh2 { font-family:'Fraunces',serif; font-size:17px; font-weight:500; color:var(--teal); margin:26px 0 10px; padding-bottom:5px; border-bottom:1px solid rgba(63,184,192,0.2); font-style:italic; }
+
+/* ── TEXT ── */
+.narrative { font-size:14px; line-height:1.8; color:var(--text); margin-bottom:16px; }
+.narrative strong { color:var(--light); }
+.narrative em { color:var(--teal); font-style:italic; }
+
+/* ── BOXES ── */
+.hl { background:linear-gradient(135deg,rgba(201,168,76,.1),rgba(201,168,76,.04)); border:1px solid rgba(201,168,76,.25); border-left:3px solid var(--gold); border-radius:6px; padding:14px 18px; margin:16px 0; font-size:13px; line-height:1.7; color:var(--light); }
+.hl strong { color:var(--gold2); }
+
+.hl-teal { background:rgba(63,184,192,.06); border:1px solid rgba(63,184,192,.2); border-left:3px solid var(--teal); border-radius:6px; padding:14px 18px; margin:16px 0; font-size:13px; line-height:1.7; color:var(--light); }
+.hl-teal strong { color:var(--teal); }
+
+.hl-green { background:rgba(45,125,79,.1); border:1px solid rgba(45,125,79,.3); border-left:3px solid #2d7d4f; border-radius:6px; padding:14px 18px; margin:16px 0; font-size:13px; line-height:1.7; color:var(--light); }
+.hl-green strong { color:#5dbd87; }
+
+/* ── CODE ── */
+.code { background:rgba(0,0,0,.4); border:1px solid var(--border); border-radius:6px; padding:14px 18px; font-family:'DM Mono',monospace; font-size:12px; color:#a8d8ea; margin:12px 0; line-height:1.8; overflow-x:auto; }
+.code .c { color:#5b7a9b; }
+.code .k { color:#e8c96a; }
+.code .v { color:#7ecf9e; }
+
+/* ── TABLES ── */
+.dtable { width:100%; border-collapse:collapse; font-size:12px; margin:14px 0; }
+.dtable th { background:rgba(201,168,76,.1); color:var(--gold); padding:8px 12px; text-align:left; border:1px solid var(--border); font-family:'DM Mono',monospace; font-size:11px; letter-spacing:.5px; font-weight:500; }
+.dtable td { padding:7px 12px; border:1px solid var(--border); color:var(--text); line-height:1.5; vertical-align:top; }
+.dtable tr:nth-child(even) td { background:rgba(255,255,255,.02); }
+.dtable td:first-child { color:var(--teal); font-family:'DM Mono',monospace; font-size:11px; font-weight:500; white-space:nowrap; }
+
+/* ── METRICS ── */
+.mrow { display:flex; gap:10px; flex-wrap:wrap; margin:14px 0; }
+.mchip { background:var(--card); border:1px solid var(--border); border-radius:6px; padding:9px 13px; font-family:'DM Mono',monospace; font-size:12px; }
+.mchip .v { color:var(--gold2); font-size:15px; font-weight:500; display:block; font-family:'Fraunces',serif; }
+.mchip .l { color:var(--muted); font-size:10px; margin-top:2px; }
+
+/* ── DOC GRID ── */
+.doc-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:12px; margin:16px 0; }
+.doc-card { background:var(--card); border:1px solid var(--border); border-radius:8px; padding:14px; transition:border-color .2s; }
+.doc-card:hover { border-color:rgba(201,168,76,.35); }
+.doc-card .dc-id { font-family:'DM Mono',monospace; font-size:10px; color:var(--gold); margin-bottom:4px; letter-spacing:.5px; }
+.doc-card .dc-title { font-family:'Fraunces',serif; font-size:13px; font-weight:600; color:var(--white); margin-bottom:6px; }
+.doc-card .dc-body { font-size:12px; line-height:1.6; color:var(--text); }
+.doc-card .dc-body strong { color:var(--teal); }
+
+/* ── PROOF TABLE ── */
+.ptable { width:100%; border-collapse:collapse; font-size:12px; margin:14px 0; }
+.ptable th { background:rgba(201,168,76,.12); color:var(--gold); padding:8px 13px; text-align:left; border:1px solid var(--border); font-family:'DM Mono',monospace; font-size:11px; }
+.ptable td { padding:7px 13px; border:1px solid var(--border); color:var(--text); font-size:12px; line-height:1.5; vertical-align:top; }
+.ptable tr:nth-child(even) td { background:rgba(255,255,255,.02); }
+.ptable td:first-child { color:var(--teal); font-family:'DM Mono',monospace; font-weight:500; white-space:nowrap; }
+
+/* ── FOOTER ── */
+footer { background:var(--surface); border-top:1px solid var(--border); padding:18px 40px; font-family:'DM Mono',monospace; font-size:11px; color:var(--muted); display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px; }
+footer a { color:var(--teal); text-decoration:none; }
+
+/* ── LANG ── */
+.en { display:none; }
+.es { display:block; }
+html[lang="en"] .en { display:block; }
+html[lang="en"] .es { display:none; }
+span.en { display:none; }
+span.es { display:inline; }
+html[lang="en"] span.en { display:inline; }
+html[lang="en"] span.es { display:none; }
+
+@media (max-width:700px) {
+  .hero,.content,footer { padding-left:20px; padding-right:20px; }
+  .lang-bar { padding:10px 20px; }
+  .section-nav { padding:0 20px; }
+}
+</style>
+</head>
+<body>
+
+<!-- LANG BAR -->
+<div class="lang-bar">
+  <div style="display:flex;gap:16px;align-items:center;">
+    <a href="https://visualcrp.com/portfolio.html" class="site-link">← portfolio.html</a>
+    <a href="https://visualcrp.com/portfolio-narrative.html" class="site-link" style="color:var(--teal)">← Versión ligera / Light version</a>
+  </div>
+  <div class="lang-toggle">
+    <button class="lang-btn" onclick="setLang('es')">🇪🇸 ES</button>
+    <button class="lang-btn active" onclick="setLang('en')">🇺🇸 EN</button>
+  </div>
+</div>
+
+<!-- QUICK NAV SIDEBAR -->
+<nav class="quick-nav" id="quick-nav">
+  <button class="qn-btn active" data-section="s-overview" title="Overview"><i class="fas fa-map"></i></button>
+  <button class="qn-btn" data-section="s-projects" title="Major Projects"><i class="fas fa-layer-group"></i></button>
+  <button class="qn-btn" data-section="s-crp" title="Visual CRP"><i class="fas fa-folder-open"></i></button>
+  <button class="qn-btn" data-section="s-acp" title="AC&P System"><i class="fas fa-calculator"></i></button>
+  <button class="qn-btn" data-section="s-salt" title="SALT · Method PB"><i class="fas fa-drafting-compass"></i></button>
+  <button class="qn-btn" data-section="s-etl" title="Vinculaciones ETL"><i class="fas fa-database"></i></button>
+  <button class="qn-btn" data-section="s-qto" title="QTO &amp; Controls"><i class="fas fa-ruler-combined"></i></button>
+  <button class="qn-btn" data-section="s-gis" title="GIS · LiDAR · Drone"><i class="fas fa-globe-americas"></i></button>
+  <button class="qn-btn" data-section="s-consulting" title="Consulting"><i class="fas fa-file-signature"></i></button>
+  <div class="qn-divider"></div>
+  <button class="qn-btn" onclick="setLang('es')" id="qn-es" title="Español" style="font-size:16px;">🇪🇸</button>
+  <button class="qn-btn active" onclick="setLang('en')" id="qn-en" title="English" style="font-size:16px;">🇺🇸</button>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow es">Narrativa Técnica Profunda · Todas las Series · Profundidad Completa</div>
+  <div class="hero-eyebrow en">Deep Technical Narrative · All Series · Full Technical Depth</div>
+  <div class="hero-name">Piter J. Bonilla D.<br><em class="es">Profundidad técnica completa</em><em class="en">Full technical depth</em></div>
+  <div class="hero-sub es">Descripción técnica exhaustiva de cada serie — arquitectura de sistemas, datos verificables, metodologías propias, y evidencia de despliegue en producción. Para audiencias técnicas con tiempo de análisis.</div>
+  <div class="hero-sub en">Exhaustive technical description of each series — system architecture, verifiable data, proprietary methodologies, and production deployment evidence. For technical audiences with analysis time.</div>
+  <div class="hero-badge es">⚡ Versión de Profundidad Técnica · Ver también: Versión Ligera en portfolio-narrative.html</div>
+  <div class="hero-badge en">⚡ Technical Depth Version · See also: Light Version at portfolio-narrative.html</div>
+  <div class="hero-stats">
+    <div class="stat"><span class="stat-val">$2B+</span><span class="stat-lbl es">Valor EPC</span><span class="stat-lbl en">EPC value</span></div>
+    <div class="stat"><span class="stat-val">5</span><span class="stat-lbl es">Sistemas propietarios</span><span class="stat-lbl en">Proprietary systems</span></div>
+    <div class="stat"><span class="stat-val">133</span><span class="stat-lbl es">Documentos indexados</span><span class="stat-lbl en">Indexed documents</span></div>
+    <div class="stat"><span class="stat-val">15,000+</span><span class="stat-lbl es">Registros Visual CRP · PMG</span><span class="stat-lbl en">Visual CRP records · PMG</span></div>
+    <div class="stat"><span class="stat-val">1:516,577</span><span class="stat-lbl es">Precisión SALT Método PB</span><span class="stat-lbl en">SALT Method PB precision</span></div>
+    <div class="stat"><span class="stat-val">253</span><span class="stat-lbl es">Campos ETL configurables</span><span class="stat-lbl en">ETL configurable fields</span></div>
+  </div>
+</div>
+
+<!-- SECTION NAV -->
+<div class="section-nav">
+  <div class="section-nav-inner">
+    <button class="snav-btn active" onclick="showSection('s-overview')"><span class="es">Visión General</span><span class="en">Overview</span></button>
+    <button class="snav-btn" onclick="showSection('s-projects')"><span class="es">Proyectos</span><span class="en">Projects</span></button>
+    <button class="snav-btn" onclick="showSection('s-crp')">Visual CRP</button>
+    <button class="snav-btn" onclick="showSection('s-acp')">AC&amp;P</button>
+    <button class="snav-btn" onclick="showSection('s-salt')">SALT · <span class="es">Método PB</span><span class="en">Method PB</span></button>
+    <button class="snav-btn" onclick="showSection('s-etl')"><span class="es">Vinculaciones ETL</span><span class="en">ETL Links</span></button>
+    <button class="snav-btn" onclick="showSection('s-qto')">QTO &amp; <span class="es">Controles</span><span class="en">Controls</span></button>
+    <button class="snav-btn" onclick="showSection('s-gis')">GIS · LiDAR · Drone</button>
+    <button class="snav-btn" onclick="showSection('s-consulting')"><span class="es">Consultoría</span><span class="en">Consulting</span></button>
+  </div>
+</div>
+
+<div class="content">
+
+<!-- ══════════════════════════════════════════ -->
+<!-- OVERVIEW -->
+<!-- ══════════════════════════════════════════ -->
+<div id="s-overview" class="section active">
+  <div class="series-block">
+    <div class="series-tag es">Mapa del Portfolio · 12 Series · 133 Documentos</div>
+    <div class="series-tag en">Portfolio Map · 12 Series · 133 Documents</div>
+    <div class="series-title es">Hilo Conductor — Un Mindset, Escala Creciente</div>
+    <div class="series-title en">Portfolio Thread — One Mindset, Increasing Scale</div>
+
+    <div class="hl">
+      <strong class="es">El principio que conecta todo:</strong><strong class="en">The connecting principle:</strong>
+      <span class="es"> Cuando el software comercial no resuelve el problema, se construye la solución y se despliega en producción. La misma lógica que produjo SALT en 2004 para mensuras catastrales es la que produjo ICOD en 2020 para procesar 2,800 secciones LiDAR en 2 semanas. El objeto físico cambia. La arquitectura de pensamiento no.</span>
+      <span class="en"> When commercial software doesn't solve the problem, build the solution and deploy it in production. The same logic that produced SALT in 2004 for cadastral surveys is what produced ICOD in 2020 to process 2,800 LiDAR sections in 2 weeks. The physical object changes. The thinking architecture doesn't.</span>
+    </div>
+
+    <div class="sh2 es">Cronología de sistemas propietarios</div>
+    <div class="sh2 en">Proprietary systems timeline</div>
+    <table class="dtable">
+      <tr><th><span class="es">Año</span><span class="en">Year</span></th><th><span class="es">Sistema</span><span class="en">System</span></th><th><span class="es">Contexto de origen</span><span class="en">Origin context</span></th><th><span class="es">Escala de despliegue</span><span class="en">Deployment scale</span></th></tr>
+      <tr><td>2004</td><td>AC&P</td><td><span class="es">Estimación paramétrica — mensuras y obra</span><span class="en">Parametric estimation — surveys and construction</span></td><td><span class="es">$400M+ proyectos · versión US 2026</span><span class="en">$400M+ projects · US version 2026</span></td></tr>
+      <tr><td>2004</td><td>SALT</td><td><span class="es">Ajuste poligonal general · mensuras catastrales</span><span class="en">General polygon adjustment · cadastral surveys</span></td><td><span class="es">Método PB añadido en Palomino · 1:516,577</span><span class="en">Method PB added at Palomino · 1:516,577</span></td></tr>
+      <tr><td>2007</td><td>Visual CRP</td><td><span class="es">Control documental EPC — Palomino. Origen: necesidad de topografía</span><span class="en">EPC document control — Palomino. Origin: survey dept. need</span></td><td><span class="es">PMG: 15,000+ registros · 4,000+ docs · 60+ usuarios</span><span class="en">PMG: 15,000+ records · 4,000+ docs · 60+ users</span></td></tr>
+      <tr><td>2009</td><td><span class="es">Vinculaciones ETL</span><span class="en">ETL Links</span></td><td><span class="es">Consolidación paramétrica — Caverna Palomino</span><span class="en">Parametric consolidation — Palomino Cavern</span></td><td><span class="es">750+ pernos · Rev 5.0 · 253 campos · N archivos ilimitados</span><span class="en">750+ rock bolts · Rev 5.0 · 253 fields · unlimited files</span></td></tr>
+      <tr><td>2020</td><td>ICOD</td><td><span class="es">LiDAR en túneles — Montegrande. No existía herramienta comercial</span><span class="en">Tunnel LiDAR — Montegrande. No commercial tool existed</span></td><td><span class="es">2,800 secciones · 12+ km · 75% reducción drafting</span><span class="en">2,800 sections · 12+ km · 75% drafting reduction</span></td></tr>
+    </table>
+
+    <div class="sh2 es">Tabla maestra de series</div>
+    <div class="sh2 en">Master series table</div>
+    <table class="dtable">
+      <tr><th><span class="es">Serie</span><span class="en">Series</span></th><th><span class="es">Contenido</span><span class="en">Content</span></th><th><span class="es">Dato técnico clave</span><span class="en">Key technical data</span></th></tr>
+      <tr><td>000–014</td><td><span class="es">Megaproyectos — escala visual</span><span class="en">Megaprojects — visual scale</span></td><td><span class="es">PMG $500M+ · Palomino $400M+ · TBM 12.44km · Las Placetas $300M+ reactivado</span><span class="en">PMG $500M+ · Palomino $400M+ · TBM 12.44km · Las Placetas $300M+ reactivated</span></td></tr>
+      <tr><td>101–105</td><td>ICOD · LiDAR</td><td><span class="es">4,000 pts/sección · 2,800 secciones · 12+km · DDE Civil 3D · 75% drafting ↓</span><span class="en">4,000 pts/section · 2,800 sections · 12+km · DDE Civil 3D · 75% drafting ↓</span></td></tr>
+      <tr><td>201–207</td><td>GIS · Geomática</td><td><span class="es">4,110,752 m³ certificados Global Mapper · Red GNSS 5 estaciones 12h · LiDAR HLP</span><span class="en">4,110,752 m³ certified Global Mapper · 5-station 12h GNSS network · LiDAR HLP</span></td></tr>
+      <tr><td>208–223</td><td><span class="es">Topografía</span><span class="en">Surveying</span></td><td><span class="es">Doc 212: 124 hojas 7 túneles · SALT Método PB · 1:52,753 poligonal 16.2km · Pix4D</span><span class="en">Doc 212: 124 sheets 7 tunnels · SALT Method PB · 1:52,753 polygon 16.2km · Pix4D</span></td></tr>
+      <tr><td>300–309</td><td><span class="es">Diseño vial</span><span class="en">Road design</span></td><td><span class="es">AASHTO 1993 · 18 alternativas · Ø72" culvert Q=6.43 m³/s · CBR=3%</span><span class="en">AASHTO 1993 · 18 alternatives · Ø72" culvert Q=6.43 m³/s · CBR=3%</span></td></tr>
+      <tr><td>400–416</td><td><span class="es">Modelos 3D</span><span class="en">3D Models</span></td><td><span class="es">Caverna 47.35m×33m · Factor Escala 1.0000745 · As-Built Rev J · 390 viviendas verificables</span><span class="en">47.35m×33m cavern · Scale Factor 1.0000745 · As-Built Rev J · 390 units verifiable</span></td></tr>
+      <tr><td>501–517A</td><td><span class="es">5 Sistemas VBA</span><span class="en">5 VBA Systems</span></td><td><span class="es">Visual CRP · AC&P · SALT · Secciones · Vinculaciones ETL</span><span class="en">Visual CRP · AC&P · SALT · Sections · ETL Links</span></td></tr>
+      <tr><td>600–615</td><td><span class="es">Informes técnicos</span><span class="en">Engineering reports</span></td><td><span class="es">Sobre-excavación r² no-lineal · 1:52,753 precisión · Visual CRP externo 1,388 docs</span><span class="en">Non-linear r² over-excavation · 1:52,753 precision · external CRP 1,388 docs</span></td></tr>
+      <tr><td>700–707</td><td>QTO</td><td><span class="es">Pay App $708K · 350 secciones 5m · 928,682 m³ corte · 1,797,261 m³ relleno</span><span class="en">Pay App $708K · 350 sections 5m · 928,682 m³ cut · 1,797,261 m³ fill</span></td></tr>
+      <tr><td>801–807</td><td><span class="es">Consultoría Haina/Hatillo</span><span class="en">Haina/Hatillo Consulting</span></td><td><span class="es">4 planos CAASD 48h · 228.20 Mm³ embalse · ITRF-2000 · sistema 7 campos</span><span class="en">4 CAASD drawings 48h · 228.20 Mm³ reservoir · ITRF-2000 · 7-field coding system</span></td></tr>
+      <tr><td>901–916</td><td><span class="es">Drone tracking</span><span class="en">Drone tracking</span></td><td><span class="es">16 períodos · 3.74M m³ · Sector C 38%/69% early warning · Pix4D bisemanales</span><span class="en">16 periods · 3.74M m³ · Sector C 38%/69% early warning · biweekly Pix4D</span></td></tr>
+    </table>
+
+    <div class="hl-teal">
+      <strong>📂 </strong>
+      <span class="es">Todos los documentos verificables en </span><span class="en">All documents verifiable at </span>
+      <a href="https://visualcrp.com/portfolio.html" style="color:var(--teal);font-weight:500;">visualcrp.com/portfolio.html</a>
+      <span class="es"> · OneDrive con acceso directo por serie.</span>
+      <span class="en"> · OneDrive with direct series folder access.</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════ -->
+<!-- PROJECTS -->
+<!-- ══════════════════════════════════════════ -->
+<div id="s-projects" class="section">
+  <div class="series-block">
+    <div class="series-tag">000–014</div>
+    <div class="series-title es">Proyectos Principales — Evidencia Fotográfica de Escala Real</div>
+    <div class="series-title en">Major Projects — Photographic Evidence of Real Scale</div>
+
+    <table class="dtable">
+      <tr><th><span class="es">Componente PMG</span><span class="en">PMG Component</span></th><th><span class="es">Cantidad</span><span class="en">Quantity</span></th><th><span class="es">Referencia en portfolio</span><span class="en">Portfolio reference</span></th></tr>
+      <tr><td><span class="es">Río represado</span><span class="en">Dammed river</span></td><td><span class="es">Río Yaque del Norte · orientación N-S</span><span class="en">Río Yaque del Norte · N-S orientation</span></td><td>Doc 000</td></tr>
+      <tr><td><span class="es">Presa</span><span class="en">Dam</span></td><td>L=2.2km · H=57m · <span class="es">núcleo asfáltico</span><span class="en">asphalt core</span></td><td>Doc 000</td></tr>
+      <tr><td><span class="es">Excavaciones</span><span class="en">Excavations</span></td><td>12,000,000 m³</td><td><span class="es">Series 700-707, 901-916</span><span class="en">Series 700-707, 901-916</span></td></tr>
+      <tr><td><span class="es">Concreto</span><span class="en">Concrete</span></td><td>230,000 m³</td><td>Doc 703-707</td></tr>
+      <tr><td><span class="es">Núcleo asfáltico</span><span class="en">Asphalt core</span></td><td>39,000 m³</td><td>Doc 703-707</td></tr>
+      <tr><td><span class="es">Túneles de desvío</span><span class="en">Diversion tunnels</span></td><td>36,500 m³</td><td>Doc 101-105, 401-402</td></tr>
+      <tr><td>Centro Poblado</td><td><span class="es">390 viviendas · margen izq. desfogue · aguas abajo · todas las comunidades afectadas</span><span class="en">390 units · left bank tailrace · downstream · all affected communities</span></td><td>Doc 001-002, 409-416</td></tr>
+    </table>
+
+    <table class="dtable">
+      <tr><th><span class="es">Componente Palomino</span><span class="en">Palomino Component</span></th><th><span class="es">Detalle</span><span class="en">Detail</span></th></tr>
+      <tr><td>TBM Tunnel</td><td>12.44km · double-shield · Herrenknecht/VMT SLS-HR · Feb 2006–Jul 2011</td></tr>
+      <tr><td>NATM adit</td><td>1.23 km</td></tr>
+      <tr><td><span class="es">Acceso Casa de Máquinas</span><span class="en">Powerhouse Access</span></td><td>0.66km + 11 <span class="es">túneles interconectados</span><span class="en">interconnected tunnels</span></td></tr>
+      <tr><td>Penstock tunnel</td><td>0.80 km</td></tr>
+      <tr><td>Discharge tunnel</td><td>2.02km + <span class="es">pozo oscilación subterráneo</span><span class="en">underground surge shaft</span></td></tr>
+      <tr><td>Surge shaft</td><td><span class="es">400m profundidad vertical</span><span class="en">400m vertical depth</span></td></tr>
+      <tr><td>CCR Dam</td><td>H=60m · <span class="es">vertedero libre</span><span class="en">free overflow spillway</span></td></tr>
+      <tr><td><span class="es">Línea de transmisión</span><span class="en">Transmission line</span></td><td>19 km</td></tr>
+      <tr><td><span class="es">Equipo de topografía</span><span class="en">Survey team</span></td><td><span class="es">hasta 80 personas</span><span class="en">up to 80 personnel</span></td></tr>
+    </table>
+
+    <div class="hl es"><strong>Las Placetas — Reactivación en 6 meses:</strong> Proyecto $300M+ paralizado desde 2009. Alternative Basic Design: 2 plantas Francis en cascada (111.32 MW, +27% sobre diseño original), 2 presas RCC (65m + 52m), 20.16km de túneles a presión, 2 surge shafts (208m + 131m). Aprobación conceptual octubre 2012.</div>
+    <div class="hl en"><strong>Las Placetas — Reactivation in 6 months:</strong> $300M+ project paralyzed since 2009. Alternative Basic Design: 2 cascade Francis plants (111.32 MW, +27% over original design), 2 RCC dams (65m + 52m), 20.16km pressure tunnels, 2 surge shafts (208m + 131m). Conceptual approval October 2012.</div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════ -->
+<!-- VISUAL CRP -->
+<!-- ══════════════════════════════════════════ -->
+<div id="s-crp" class="section">
+  <div class="series-block">
+    <div class="series-tag">501–502 · DOC 502: User Training 13 páginas · 14 Julio 2023</div>
+    <div class="series-title">Visual CRP — <span class="es">Control de Revisiones de Proyectos</span><span class="en">Project Revision Control</span></div>
+    <div class="series-sub es">Origen 2007 · Palomino · Montegrande: proyecto de referencia · 19 años en producción continua</div>
+    <div class="series-sub en">Origin 2007 · Palomino · Montegrande: reference project · 19 years continuous production</div>
+
+    <div class="mrow">
+      <div class="mchip"><span class="v">2007</span><span class="l es">Año de origen · Palomino</span><span class="l en">Origin year · Palomino</span></div>
+      <div class="mchip"><span class="v">15,000+</span><span class="l es">Registros PMG (proyecto de referencia)</span><span class="l en">PMG records (reference project)</span></div>
+      <div class="mchip"><span class="v">4,000+</span><span class="l es">Documentos activos PMG</span><span class="l en">Active documents PMG</span></div>
+      <div class="mchip"><span class="v">60+</span><span class="l es">Usuarios diarios PMG</span><span class="l en">Daily users PMG</span></div>
+      <div class="mchip"><span class="v">$1.6M+</span><span class="l es">Ahorro vs. licencias</span><span class="l en">Savings vs. licenses</span></div>
+      <div class="mchip"><span class="v">100%</span><span class="l es">Compliance auditorías externas</span><span class="l en">External audit compliance</span></div>
+    </div>
+
+    <div class="sh2 es">Origen y evolución — 19 años de iteración</div>
+    <div class="sh2 en">Origin and evolution — 19 years of iteration</div>
+
+    <div class="narrative es"><strong>El antecedente — Proyecto Pinalito:</strong> Desorden incalificable de errores por revisiones atrasadas en campo. Primera demostración de que el problema no era de actitud sino de arquitectura — no había un sistema que garantizara acceso a la revisión vigente en campo. <strong>2007, Palomino:</strong> La primera versión resolvió lo que Citadon no podía, nacida de la necesidad del departamento de topografía de que el control documental funcionara para ser diferencial en su trabajo técnico. Evolucionó en cada proyecto. <strong>Montegrande es el proyecto de referencia</strong> donde alcanzó su madurez completa con 6 tipos de informes dinámicos. <strong>Guayubín (2023) es un despliegue externo independiente</strong> — instalación como servicio, elegido como caso de muestra del portfolio por su proceso ordenado desde el inicio. Hoy Montegrande opera en la etapa de canales de riego <em>sin soporte externo del autor</em>.</div>
+    <div class="narrative en"><strong>The precedent — Pinalito Project:</strong> An unacceptable disorder of construction errors from delayed field revisions. First demonstration that the problem was architectural, not attitudinal — no system guaranteed access to the current revision in the field. <strong>2007, Palomino:</strong> The first version solved what Citadon could not, born from the survey department's need for document control to function effectively. Evolved through each project. <strong>Montegrande is the reference project</strong> where it reached full maturity with 6 types of dynamic reports. <strong>Guayubín (2023) is an independent external deployment</strong> — service installation, chosen as portfolio sample case for its orderly process from day one. Today Montegrande operates in the irrigation canals stage <em>without external support from the author</em>.</div>
+
+    <div class="sh2 es">Los 5 principios de arquitectura del sistema</div>
+    <div class="sh2 en">The 5 system architecture principles</div>
+    <table class="dtable">
+      <tr><th>#</th><th><span class="es">Principio</span><span class="en">Principle</span></th><th><span class="es">Por qué importa</span><span class="en">Why it matters</span></th></tr>
+      <tr><td>1</td><td><span class="es">Carpeta única en red local</span><span class="en">Single folder on local network</span></td><td><span class="es">Sin internet · sin latencia · disponible en campo donde cloud falla</span><span class="en">No internet · no latency · available in field where cloud fails</span></td></tr>
+      <tr><td>2</td><td><span class="es">Acceso solo a última revisión vigente</span><span class="en">Access only to current live revision</span></td><td><span class="es">Elimina el error más común: construir desde una revisión superada</span><span class="en">Eliminates the most common error: building from a superseded revision</span></td></tr>
+      <tr><td>3</td><td><span class="es">Análisis en tiempo real sin exportar</span><span class="en">Real-time analysis without exporting</span></td><td><span class="es">Cualquier usuario genera su informe con CTRL+SHIFT+J o W</span><span class="en">Any user generates their report with CTRL+SHIFT+J or W</span></td></tr>
+      <tr><td>4</td><td><span class="es">Auto-alimentación dinámica por usuario</span><span class="en">Dynamic self-feeding per user</span></td><td><span class="es">Sin cuello de botella del administrador — 60+ usuarios simultáneos</span><span class="en">No administrator bottleneck — 60+ simultaneous users</span></td></tr>
+      <tr><td>5</td><td><span class="es">Motor de filtros con comodines (* ?)</span><span class="en">Wildcard filter engine (* ?)</span></td><td><span class="es">Busca por proyectista, grupo, disciplina, código en una sola cadena</span><span class="en">Searches by designer, group, discipline, code in a single string</span></td></tr>
+    </table>
+
+    <div class="sh2 es">6 tipos de informes dinámicos — Guayubín 2023 (1,183 documentos · 9 proyectistas)</div>
+    <div class="sh2 en">6 types of dynamic reports — Guayubín 2023 (1,183 documents · 9 designers)</div>
+    <table class="dtable">
+      <tr><th><span class="es">Informe</span><span class="en">Report</span></th><th><span class="es">Contenido</span><span class="en">Content</span></th></tr>
+      <tr><td>Informe 00</td><td><span class="es">Master list completa — todos los campos visibles</span><span class="en">Complete master list — all fields visible</span></td></tr>
+      <tr><td>Informe 01</td><td><span class="es">Resumen por grupos de documentos con totales</span><span class="en">Summary by document groups with totals</span></td></tr>
+      <tr><td>Informe 02</td><td><span class="es">Grupos + Status con desglose por proyectista en columnas</span><span class="en">Groups + Status with designer breakdown in columns</span></td></tr>
+      <tr><td>Informe 03</td><td><span class="es">Master list por status con código de carta asociado</span><span class="en">Master list by status with associated letter code</span></td></tr>
+      <tr><td>Informe 04</td><td><span class="es">Listado completo por grupo con código-revisión y descripción</span><span class="en">Complete listing by group with revision-code and description</span></td></tr>
+      <tr><td>Informe 05</td><td><span class="es">TOTAL-P: tabla cruzada proyectista × status + gráfico de barras embebido</span><span class="en">TOTAL-P: designer × status cross-table + embedded bar chart</span></td></tr>
+    </table>
+
+    <div class="sh2 es">19 años de observación directa — diagnóstico de sistemas comerciales</div>
+    <div class="sh2 en">19 years of direct observation — commercial systems diagnosis</div>
+    <table class="dtable">
+      <tr><th><span class="es">Sistema</span><span class="en">System</span></th><th><span class="es">Proyecto / Año</span><span class="en">Project / Year</span></th><th><span class="es">Falla operacional observada</span><span class="en">Observed operational failure</span></th></tr>
+      <tr><td>CITADON</td><td>Odebrecht / 2004</td><td><span class="es">Servidor de archivos costoso sin flujo de control real. Proyectistas suben, obra descarga — sin trazabilidad de revisiones</span><span class="en">Expensive file server with no real control flow. Designers upload, site downloads — no revision traceability</span></td></tr>
+      <tr><td>SIGEDE</td><td>Palomino / 2005</td><td><span class="es">Navegación imposible por congestión de internet en obra</span><span class="en">Navigation impossible due to site internet congestion</span></td></tr>
+      <tr><td>CONSTRUMANAGER + PLANC</td><td>Andrade G. / 2008</td><td><span class="es">Protocolo de aprobación digital nunca contemplado en el contrato</span><span class="en">Digital approval protocol never contemplated in the contract</span></td></tr>
+      <tr><td>PROCORE</td><td>Estrella / 2023 + Monorriel Stgo</td><td><span class="es">Las tres fallas anteriores persisten. Concremat (supervisión Montegrande y Monorriel) observó el contraste directamente</span><span class="en">The three previous failures persist. Concremat (Montegrande and Monorail supervision) observed the contrast directly</span></td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════ -->
+<!-- AC&P -->
+<!-- ══════════════════════════════════════════ -->
+<div id="s-acp" class="section">
+  <div class="series-block">
+    <div class="series-tag">501–509 · Doc 503A: US Electrical Budget · Greensboro NC · 23-Abr-2026</div>
+    <div class="series-title">AC&P — <span class="es">Análisis de Costos y Presupuestos</span><span class="en">Cost and Budget Analysis</span></div>
+    <div class="series-sub es">Origen 2004 · Arquitectura de dos capas · Motor de factorización inversa · Versión US activa</div>
+    <div class="series-sub en">Origin 2004 · Two-layer architecture · Inverse factorization engine · Active US version</div>
+
+    <div class="sh2 es">Arquitectura de dos capas — la distinción fundamental</div>
+    <div class="sh2 en">Two-layer architecture — the fundamental distinction</div>
+
+    <table class="dtable">
+      <tr><th><span class="es">Capa</span><span class="en">Layer</span></th><th><span class="es">Propósito</span><span class="en">Purpose</span></th><th><span class="es">Componentes</span><span class="en">Components</span></th><th><span class="es">Visibilidad</span><span class="en">Visibility</span></th></tr>
+      <tr><td><span class="es">Capa 1 — Presupuesto BID</span><span class="en">Layer 1 — BID Budget</span></td><td><span class="es">Precio estratégico de oferta</span><span class="en">Strategic bid price</span></td><td><span class="es">Factores ocultos de retenciones/variación: materiales ×1.101 · M.O. factor oculto · indirectos (10 slots) · carga social M.O. (11 slots)</span><span class="en">Hidden retention/variation factors: materials ×1.101 · hidden labor factor · indirect costs (10 slots) · labor burden (11 slots)</span></td><td><span class="es">Solo precio unitario final visible al cliente</span><span class="en">Only final unit price visible to client</span></td></tr>
+      <tr><td><span class="es">Capa 2 — APU individual</span><span class="en">Layer 2 — Individual APU</span></td><td><span class="es">Costos reales de campo</span><span class="en">Real field costs</span></td><td><span class="es">Rendimientos de campo (horas reales/unidad) · factores de ajuste (altura, acceso, complejidad) · factores de desperdicio (% por tipo de material)</span><span class="en">Field output rates (real hours/unit) · adjustment factors (height, access, complexity) · waste factors (% by material type)</span></td><td><span class="es">Visible para auditor y análisis interno</span><span class="en">Visible for auditor and internal analysis</span></td></tr>
+    </table>
+
+    <div class="sh2 es">Motor de factorización inversa — demostrado en vivo</div>
+    <div class="sh2 en">Inverse factorization engine — demonstrated live</div>
+
+    <div class="hl">
+      <strong class="es">La secuencia exacta del diálogo del sistema (captura en vivo):</strong>
+      <strong class="en">The exact system dialog sequence (live capture):</strong>
+      <div class="code" style="margin-top:10px;">
+<span class="c es">' Estado actual del modelo</span><span class="c en">' Current model state</span>
+Costos Directos = <span class="v">433,415.37</span>
+
+<span class="c es">' Usuario define el target de BID</span><span class="c en">' User defines the BID target</span>
+Defina nuevo valor de COSTOS DIRECTOS: <span class="k">450,000</span>
+
+<span class="c es">' Output del sistema</span><span class="c en">' System output</span>
+Para un Costo Directo de <span class="k">450,000.00</span>
+El factor es <span class="v">1.10109337926671</span>
+
+<span class="c es">' Todos los precios unitarios se actualizan simultáneamente</span>
+<span class="c en">' All unit prices update simultaneously</span>
+GRAND TOTAL → <span class="v">$508,500.00</span></div>
+    </div>
+
+    <div class="narrative es">Este motor no existe en HeavyBid, WinEst, ni Sage Estimating. Los sistemas comerciales solo trabajan en dirección directa: insumos → precio. AC&P trabaja en ambas direcciones. El factor 1.10109337926671 (14 decimales) es exacto al centavo — verificable matemáticamente: 450,000 ÷ (433,415.37 / factor_anterior).</div>
+    <div class="narrative en">This engine does not exist in HeavyBid, WinEst, or Sage Estimating. Commercial systems only work in the forward direction: inputs → price. AC&P works in both directions. Factor 1.10109337926671 (14 decimal places) is exact to the cent — mathematically verifiable: 450,000 ÷ (433,415.37 / previous_factor).</div>
+
+    <div class="sh2 es">Panel "VALORES A UTILIZAR" — configuración de indirectos y carga social</div>
+    <div class="sh2 en">"VALUES TO USE" Panel — indirect costs and social burden configuration</div>
+    <table class="dtable">
+      <tr><th><span class="es">Panel</span><span class="en">Panel</span></th><th><span class="es">Slots disponibles</span><span class="en">Available slots</span></th><th><span class="es">Valores activos en demo</span><span class="en">Active values in demo</span></th></tr>
+      <tr><td>INDIRECTOS</td><td>10 <span class="es">líneas configurables</span><span class="en">configurable lines</span></td><td>Freight &amp; on-site storage: 3% · Contingency: 10%</td></tr>
+      <tr><td><span class="es">CARGA SOCIAL M.O.</span><span class="en">LABOR BURDEN</span></td><td>11 <span class="es">líneas configurables</span><span class="en">configurable lines</span></td><td>Factor labor: 5% → 0.050 · Factor Carga Social: 1.050</td></tr>
+    </table>
+
+    <div class="sh2 es">Versión US — AC&P US · Greensboro NC · Activa May 2026</div>
+    <div class="sh2 en">US Version — AC&P US · Greensboro NC · Active May 2026</div>
+
+    <div class="hl-teal">
+      <strong>Grand Total: $508,500 · Direct Costs: $450,000 · Indirect Costs: $58,500 (13%)</strong><br>
+      <span class="es">Estructura CSI MasterFormat Div. 26 · Toggle bilingüe EN/ES operacional · Journeyman Electrician $150/HR · Factor retenciones oculto M.O.: 0.60 · Total proyecto: 1,710.24 HR</span>
+      <span class="en">CSI MasterFormat Div. 26 structure · Operational EN/ES bilingual toggle · Journeyman Electrician $150/HR · Hidden labor retention factor: 0.60 · Project total: 1,710.24 HR</span>
+    </div>
+
+    <table class="dtable">
+      <tr><th><span class="es">Código</span><span class="en">Code</span></th><th><span class="es">Material US</span><span class="en">US Material</span></th><th><span class="es">Precio</span><span class="en">Price</span></th><th>Qty</th></tr>
+      <tr><td>ELECA03</td><td>Milbank U5054-XL-200 meter base</td><td>$1,800</td><td>1</td></tr>
+      <tr><td>ELECA00</td><td>Square D QO130L200PGC 30-circuit panel</td><td>$350</td><td>2</td></tr>
+      <tr><td>ELECB00</td><td>Leviton T5320 15A 125V duplex outlet</td><td>$4.50</td><td>560</td></tr>
+      <tr><td>ELECD00</td><td>Commercial Electric 11" LED flush mount</td><td>$35</td><td>420</td></tr>
+      <tr><td>ELECE00</td><td>Kidde 20SA10 smoke detector 120V</td><td>$25</td><td>180</td></tr>
+      <tr><td>ELECE02</td><td>Notifier NFS2-3030 addressable fire panel</td><td>$4,500</td><td>1</td></tr>
+      <tr><td>ELECF00</td><td>Southwire 12AWG 2C+G NM-B 250ft</td><td>$85</td><td>120</td></tr>
+    </table>
+    <div class="narrative es" style="font-size:12px;">Precios de lista Graybar/Rexel Greensboro NC 2025-2026. Creado 23-Abril-2026 — no es portfolio histórico, es herramienta operacional activa.</div>
+    <div class="narrative en" style="font-size:12px;">Graybar/Rexel Greensboro NC 2025-2026 list prices. Created April 23, 2026 — not historical portfolio, active operational tool.</div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════ -->
+<!-- SALT -->
+<!-- ══════════════════════════════════════════ -->
+<div id="s-salt" class="section">
+  <div class="series-block">
+    <div class="series-tag">208–223 · 501–510 · Video: youtube.com/watch?v=opBY0S1D1R0</div>
+    <div class="series-title">SALT — <span class="es">Sistema de Ajuste de Levantamientos Topográficos</span><span class="en">Survey Adjustment System</span></div>
+    <div class="series-sub es">Origen 2004 · Método PB añadido en Palomino · Rev 4.0 · Demo 85MB · Manual 27 páginas</div>
+    <div class="series-sub en">Origin 2004 · Method PB added at Palomino · Rev 4.0 · 85MB Demo · 27-page manual</div>
+
+    <div class="sh2 es">Método PB — Poligonal Doble Sentido en 1 Ocupación</div>
+    <div class="sh2 en">Method PB — Double-Direction Polygon in 1 Occupation</div>
+
+    <div class="hl">
+      <strong class="es">Mecánica de campo exacta:</strong><strong class="en">Exact field mechanics:</strong>
+      <div class="code" style="margin-top:10px;">
+<span class="c es"># Ocupación 1 (parado en punto 1):</span><span class="c en"># Occupation 1 (standing at point 1):</span>
+  BS = 2 <span class="c es">(atrás)</span><span class="c en">(backside)</span>  → <span class="k es">series directo-reverso sobre 2</span><span class="k en">direct-reverse series on 2</span>
+  FS = 3 <span class="c es">(adelante)</span><span class="c en">(foresight)</span> → <span class="k es">series directo-reverso sobre 3</span><span class="k en">direct-reverse series on 3</span>
+  <span class="c es">→ archivo: punto 2 = punto 5 (marcado rojo ®)</span>
+  <span class="c en">→ file: point 2 = point 5 (marked red ®)</span>
+
+<span class="c es"># Ocupación 2 (parado en punto 3):</span><span class="c en"># Occupation 2 (standing at point 3):</span>
+  BS = 1 → <span class="k es">series sobre 1 (verificación)</span><span class="k en">series on 1 (verification)</span>
+  FS = 4 → <span class="k es">series sobre 4 (punto 6 en campo)</span><span class="k en">series on 4 (point 6 in field)</span>
+
+<span class="c es"># Un solo archivo. SALT procesa IDA + VUELTA.</span>
+<span class="c en"># One single file. SALT processes FORWARD + RETURN.</span>
+<span class="c es"># Ajusta cierre angular EN CADA ESTACIÓN, no al final.</span>
+<span class="c en"># Adjusts angular closure AT EACH STATION, not at the end.</span>
+      </div>
+    </div>
+
+    <div class="narrative es"><strong>Por qué resuelve las bases removibles:</strong> Las bases de plataforma se anclan a la pared del túnel con brazos — se quitan para dejar pasar el back-up train y se recolocan. La discrepancia backside en cada ocupación <em>es</em> el error de reposicionamiento exacto. SALT lo detecta y compensa localmente antes de propagar al siguiente punto. Los métodos clásicos (Compass, Crandall, Transit) distribuyen el error al final de toda la poligonal — no pueden detectar un error puntual en la estación 7 de 22.</div>
+    <div class="narrative en"><strong>Why it solves removable bases:</strong> Platform bases are anchored to the tunnel wall with bracket arms — removed to let the back-up train pass and repositioned. The backside discrepancy at each occupation <em>is</em> the exact repositioning error. SALT detects and compensates it locally before propagating to the next point. Classic methods (Compass, Crandall, Transit) distribute error at the end of the entire polygon — they cannot detect a point error at station 7 of 22.</div>
+
+    <div class="sh2 es">Resultados verificados en video público</div>
+    <div class="sh2 en">Results verified on public video</div>
+
+    <div class="mrow">
+      <div class="mchip"><span class="v">50</span><span class="l es">Puntos · 32,390m longitud</span><span class="l en">Points · 32,390m length</span></div>
+      <div class="mchip"><span class="v">00.44"</span><span class="l es">Residual angular promedio</span><span class="l en">Average angular residual</span></div>
+      <div class="mchip"><span class="v">01.36"</span><span class="l es">Residual máximo (P-14)</span><span class="l en">Maximum residual (P-14)</span></div>
+      <div class="mchip"><span class="v">00.00"</span><span class="l es">Residual mínimo (P-02)</span><span class="l en">Minimum residual (P-02)</span></div>
+    </div>
+
+    <table class="dtable">
+      <tr><th><span class="es">Etapa de ajuste</span><span class="en">Adjustment stage</span></th><th><span class="es">Error horizontal</span><span class="en">Horizontal error</span></th><th><span class="es">Precisión</span><span class="en">Precision</span></th></tr>
+      <tr><td><span class="es">Sin ajuste angular (datos crudos)</span><span class="en">Without angular adjustment (raw data)</span></td><td>0.1757 m</td><td>1 : 184,321</td></tr>
+      <tr><td><span class="es">Post ajuste angular (Método PB)</span><span class="en">After angular adjustment (Method PB)</span></td><td>0.0627 m</td><td>1 : 516,577</td></tr>
+      <tr><td><span class="es">Post ajuste lineal (Compass)</span><span class="en">After linear adjustment (Compass)</span></td><td>0.0000 m</td><td><strong>1 : ∞</strong></td></tr>
+      <tr><td><span class="es">Cierre final Horizontal</span><span class="en">Final horizontal closure</span></td><td colspan="2"><strong>0.001 m</strong> <span class="es">sobre 32.4km de poligonal abierta</span><span class="en">over 32.4km open polygon</span></td></tr>
+      <tr><td><span class="es">Cierre final Vertical</span><span class="en">Final vertical closure</span></td><td colspan="2"><strong>0.003 m</strong></td></tr>
+    </table>
+
+    <div class="hl-teal">
+      <strong class="es">La Casa de Máquinas — igual o más exigente que el TBM:</strong>
+      <strong class="en">The Powerhouse — equally or more demanding than the TBM:</strong>
+      <span class="es"> El TBM tiene su propio sistema de guía (VMT SLS-HR con giroscopios internos). El desafío real era la CM: 11 frentes convergentes a 99.50m de overburden, sin sistema de guía automático, líneas de visión cortas, espacio restringido, bases removibles en cada punto. El TBM es único y visible. La CM es donde la topografía clásica opera en su máxima complejidad.</span>
+      <span class="en"> The TBM has its own guidance system (VMT SLS-HR with internal gyroscopes). The real challenge was the Powerhouse: 11 converging faces at 99.50m overburden, no automatic guidance system, short lines of sight, restricted space, removable bases at every point. The TBM is unique and visible. The Powerhouse is where classical surveying operates at maximum complexity.</span>
+    </div>
+
+    <div class="narrative es">Video de demostración pública: <a href="https://www.youtube.com/watch?v=opBY0S1D1R0" style="color:var(--teal);">youtube.com/watch?v=opBY0S1D1R0</a> — "06 - Sistema Ajustes de Levantamientos Topográficos (SALT) · Método PB".</div>
+    <div class="narrative en">Public demo video: <a href="https://www.youtube.com/watch?v=opBY0S1D1R0" style="color:var(--teal);">youtube.com/watch?v=opBY0S1D1R0</a> — "06 - Survey Adjustment System (SALT) · Method PB".</div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════ -->
+<!-- ETL VINCULACIONES -->
+<!-- ══════════════════════════════════════════ -->
+<div id="s-etl" class="section">
+  <div class="series-block">
+    <div class="series-tag">517A · Plantilla Rev 5.0 · Palomino 2009 · Montegrande 2018</div>
+    <div class="series-title es">Sistema de Vinculaciones — Motor ETL Universal en Excel VBA</div>
+    <div class="series-title en">Linking System — Universal ETL Engine in Excel VBA</div>
+
+    <div class="sh2 es">Arquitectura técnica — VBA reconstruido desde el binario</div>
+    <div class="sh2 en">Technical architecture — VBA reconstructed from binary</div>
+
+    <div class="code">
+<span class="c es">' El núcleo técnico: GetValue con ExecuteExcel4Macro</span>
+<span class="c en">' The technical core: GetValue with ExecuteExcel4Macro</span>
+<span class="k">Function</span> GetValue(Ruta, Archivo, Hoja, Columna, Fila)
+    Ref = <span class="k">"='"</span> & Ruta & <span class="k">"["</span> & Archivo & <span class="k">"]"</span> & Hoja & <span class="k">"'!$"</span> & Columna & <span class="k">"$"</span> & Fila
+    GetValue = Application._Evaluate(Ref)
+<span class="k">End Function</span>
+
+<span class="c es">' Lee directamente del disco sin abrir el archivo fuente</span>
+<span class="c en">' Reads directly from disk WITHOUT opening the source file</span>
+<span class="c es">' 750 archivos × 14 campos = 10,500 lecturas · en segundos</span>
+<span class="c en">' 750 files × 14 fields = 10,500 reads · in seconds</span>
+
+<span class="c es">' El motor central — doble loop: archivo × campo → BD</span>
+<span class="c en">' The central engine — double loop: file × field → DB</span>
+<span class="k">Sub</span> Abrirlo()
+    N = MENU.Range(<span class="k">"E8"</span>).Value   <span class="c es">' nº campos activos desde hoja MENU</span><span class="c en">' active fields from MENU sheet</span>
+    <span class="k">For Each</span> Archivo <span class="k">In</span> Archivos
+        <span class="k">For</span> Campo = 1 <span class="k">To</span> N
+            Columna = MENU.Cells(11 + Campo, 4).Value  <span class="c es">' cero hardcoding</span><span class="c en">' zero hardcoding</span>
+            Fila    = MENU.Cells(11 + Campo, 5).Value
+            Vinc = GetValue(Ruta, Archivo, Hoja_1, Columna, Fila)
+            BD.Cells(rowOffset, columnOffset + Campo) = Vinc
+        <span class="k">Next</span> Campo
+        rowOffset = rowOffset + 1
+    <span class="k">Next</span> Archivo
+<span class="k">End Sub</span></div>
+
+    <div class="sh2 es">Los 5 diferenciadores de diseño</div>
+    <div class="sh2 en">The 5 design differentiators</div>
+    <table class="dtable">
+      <tr><th>#</th><th><span class="es">Decisión</span><span class="en">Decision</span></th><th><span class="es">Alternativa obvia</span><span class="en">Obvious alternative</span></th><th><span class="es">Por qué esta es superior</span><span class="en">Why this is superior</span></th></tr>
+      <tr><td>1</td><td>ExecuteExcel4Macro</td><td><span class="es">Workbooks.Open cada archivo</span><span class="en">Workbooks.Open each file</span></td><td><span class="es">750 archivos sin saturar memoria · 10× más rápido</span><span class="en">750 files without saturating memory · 10× faster</span></td></tr>
+      <tr><td>2</td><td><span class="es">Mapa en MENU · cero hardcoding</span><span class="en">Field map in MENU · zero hardcoding</span></td><td><span class="es">Columnas y filas fijas en código</span><span class="en">Fixed columns and rows in code</span></td><td><span class="es">Cambiar dominio = editar tabla · sin tocar VBA</span><span class="en">Change domain = edit table · no VBA touch</span></td></tr>
+      <tr><td>3</td><td>Dir() loop ilimitado</td><td><span class="es">Lista manual de archivos</span><span class="en">Manual file list</span></td><td><span class="es">Añadir 100 archivos = copiarlos a la carpeta</span><span class="en">Add 100 files = copy them to the folder</span></td></tr>
+      <tr><td>4</td><td>Hoja_1 + Hoja_2</td><td><span class="es">Una sola hoja por archivo</span><span class="en">Single sheet per file</span></td><td><span class="es">Extrae de múltiples hojas del mismo archivo en una pasada</span><span class="en">Extracts from multiple sheets of same file in one pass</span></td></tr>
+      <tr><td>5</td><td>253 slots B12:B264</td><td><span class="es">Límite fijo de campos</span><span class="en">Fixed field limit</span></td><td><span class="es">Numeración en cascada · insertar fila = recalcular todo</span><span class="en">Cascade numbering · insert row = recalculate everything</span></td></tr>
+    </table>
+
+    <div class="sh2 es">Los dos casos documentados</div>
+    <div class="sh2 en">The two documented cases</div>
+    <table class="dtable">
+      <tr><th><span class="es">Caso</span><span class="en">Case</span></th><th><span class="es">Fuente</span><span class="en">Source</span></th><th><span class="es">Campos mapeados</span><span class="en">Mapped fields</span></th><th><span class="es">Análisis habilitado</span><span class="en">Analysis enabled</span></th></tr>
+      <tr><td><span class="es">Pernos de anclaje · Palomino 2009-2010</span><span class="en">Rock bolts · Palomino 2009-2010</span></td><td>750+ P(n).xls · Caverna 47.35m×33m</td><td><span class="es">Fecha · Código · Frente · Pared · Progresiva · Elevación · Ø barra · Tipo ASTM · Longitud · Relación A/C · Cemento kg</span><span class="en">Date · Code · Face · Wall · Station · Elevation · Bar Ø · ASTM Type · Length · W/C ratio · Cement kg</span></td><td><span class="es">Cruce con convergencias: ¿qué pernos están en la zona de movimiento?</span><span class="en">Cross with convergences: which bolts are in the movement zone?</span></td></tr>
+      <tr><td><span class="es">Convergencias · Montegrande 2018</span><span class="en">Convergences · Montegrande 2018</span></td><td><span class="es">Reportes T2 C05 · Cercha 104-105 · Est. Total Nikon Nivo 3C</span><span class="en">T2 C05 reports · Arch 104-105 · Nikon Nivo 3C Total Station</span></td><td><span class="es">5 puntos × 3 coord × 3 series · 6 distancias promediadas · residuales ±6mm</span><span class="en">5 points × 3 coord × 3 series · 6 averaged distances · residuals ±6mm</span></td><td><span class="es">Tendencias de convergencia espacio-temporales sobre toda la obra de túneles</span><span class="en">Spatio-temporal convergence trends over all tunnel works</span></td></tr>
+    </table>
+
+    <div class="hl es"><strong>Principio universal:</strong> Si el dato está en una posición consistente — porque lo puso un humano siguiendo una plantilla, o porque lo exportó un sistema de terceros (Procore CSV, Primavera XLS, logger de sensores) — el sistema lo extrae, lo consolida, y lo hace analizable. El contenido es irrelevante. La estructura es todo.</div>
+    <div class="hl en"><strong>Universal principle:</strong> If the data is in a consistent position — because a human placed it following a template, or because a third-party system exported it (Procore CSV, Primavera XLS, sensor logger) — the system extracts it, consolidates it, and makes it analyzable. The content is irrelevant. The structure is everything.</div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════ -->
+<!-- QTO & CONTROLS -->
+<!-- ══════════════════════════════════════════ -->
+<div id="s-qto" class="section">
+  <div class="series-block">
+    <div class="series-tag">700–707 · 600–615 · 901–916</div>
+    <div class="series-title es">QTO, Certificaciones e Informes Técnicos</div>
+    <div class="series-title en">QTO, Certifications and Technical Reports</div>
+
+    <div class="sh2 es">Método de 2 Superficies — resolución del impasse de $500M+</div>
+    <div class="sh2 en">Two-Surface Method — resolution of the $500M+ impasse</div>
+
+    <div class="mrow">
+      <div class="mchip"><span class="v">928,682 m³</span><span class="l es">Corte total certificado</span><span class="l en">Total certified cut</span></div>
+      <div class="mchip"><span class="v">1,797,261 m³</span><span class="l es">Relleno total certificado</span><span class="l en">Total certified fill</span></div>
+      <div class="mchip"><span class="v">−868,579 m³</span><span class="l es">Déficit neto</span><span class="l en">Net deficit</span></div>
+      <div class="mchip"><span class="v">350</span><span class="l es">Secciones a 5m</span><span class="l en">Sections at 5m</span></div>
+      <div class="mchip"><span class="v">5</span><span class="l es">Reportes para resolver el impasse</span><span class="l en">Reports to resolve impasse</span></div>
+    </div>
+
+    <div class="hl es"><strong>Por qué el método de 2 superficies es incontestable:</strong> TN→FG86 / FG86→RG86. Evita el error de superficie única que subestima volúmenes en zonas de préstamo. Las dos partes usaban cálculos de superficie única — el modelo independiente con 350 secciones a 5m produjo un déficit de 868,579 m³ que ninguna parte podía disputar porque la metodología era transparente y auditable punto por punto.</div>
+    <div class="hl en"><strong>Why the 2-surface method is uncontestable:</strong> TN→FG86 / FG86→RG86. Avoids the single-surface error that underestimates volumes in borrow zones. Both parties were using single-surface calculations — the independent model with 350 sections at 5m produced a deficit of 868,579 m³ that neither party could dispute because the methodology was transparent and auditable point by point.</div>
+
+    <div class="sh2 es">Pay Application No. 7 · Palomino · Noviembre 2006 · $708,323</div>
+    <div class="sh2 en">Pay Application No. 7 · Palomino · November 2006 · $708,323</div>
+    <table class="dtable">
+      <tr><th><span class="es">Ítem</span><span class="en">Item</span></th><th><span class="es">Cantidad certificada</span><span class="en">Certified quantity</span></th><th><span class="es">% sobre presupuesto</span><span class="en">% over budget</span></th><th><span class="es">Justificación</span><span class="en">Justification</span></th></tr>
+      <tr><td><span class="es">Movimiento de tierras</span><span class="en">Earthwork</span></td><td>95,273 m³</td><td>196%</td><td><span class="es">Condiciones de campo reales vs. estimado</span><span class="en">Real field conditions vs. estimate</span></td></tr>
+      <tr><td>Drenaje / Ø72"</td><td>11,299 m³ + 4,803 m²</td><td>345.5%</td><td><span class="es">Alcantarillas Ø72" no cubicadas originalmente</span><span class="en">Ø72" culverts not originally quantified</span></td></tr>
+      <tr><td><span class="es">Total Rubro 7</span><span class="en">Total Item 7</span></td><td>$708,323</td><td><strong>+1.1%</strong></td><td><span class="es">Compensación entre sub-ítems → total bajo control</span><span class="en">Cross-item compensation → total under control</span></td></tr>
+    </table>
+
+    <div class="sh2 es">Informe 602 — Análisis de Sobre-Excavación · Razonamiento no-lineal</div>
+    <div class="sh2 en">Report 602 — Over-Excavation Analysis · Non-linear reasoning</div>
+    <div class="hl es">
+      <strong>El argumento geométrico que cambia el valor del claim:</strong>
+      Un 18% de exceso en el área de la sección del túnel produce:
+      <strong>+18% en shotcrete</strong> (crece con el radio — lineal)
+      pero <strong>+36% en concreto estructural</strong> (el volumen del anillo crece con r² — no lineal).
+      Documentar este razonamiento geométrico antes de que el contractor presente su claim es la diferencia entre pagar $X y pagar $2X.
+    </div>
+    <div class="hl en">
+      <strong>The geometric argument that changes the claim value:</strong>
+      An 18% excess in tunnel cross-section area produces:
+      <strong>+18% in shotcrete</strong> (grows with radius — linear)
+      but <strong>+36% in structural concrete</strong> (ring volume grows with r² — non-linear).
+      Documenting this geometric reasoning before the contractor submits their claim is the difference between paying $X and paying $2X.
+    </div>
+
+    <div class="sh2 es">Serie 901-916 — Drone Tracking · Early Warning · Sector C</div>
+    <div class="sh2 en">Series 901-916 — Drone Tracking · Early Warning · Sector C</div>
+    <table class="dtable">
+      <tr><th>Snapshot</th><th><span class="es">Fecha</span><span class="en">Date</span></th><th><span class="es">Ejecutado</span><span class="en">Executed</span></th><th>%</th></tr>
+      <tr><td>S-61</td><td>19-Mar-19</td><td>1,879,093 m³</td><td>50.2%</td></tr>
+      <tr><td>S-65</td><td>16-Abr-19</td><td>2,080,988 m³</td><td>55.6%</td></tr>
+      <tr><td><strong>S-70</strong></td><td><strong>21-May-19</strong></td><td><strong>2,358,613 m³</strong></td><td><strong>63.1%</strong></td></tr>
+    </table>
+    <div class="hl-teal">
+      <strong class="es">Early warning S-70:</strong><strong class="en">Early warning S-70:</strong>
+      <span class="es"> Sector C (41.5% del área total) estaba al <strong>38% de avance</strong> con el <strong>69% del déficit total</strong>. Identificado en el snapshot bisemanales antes de que el retraso fuera irrecuperable. El reporte más valioso no describe "dónde estamos" — describe "dónde se concentra el problema."</span>
+      <span class="en"> Sector C (41.5% of total area) was at <strong>38% progress</strong> with <strong>69% of the total deficit</strong>. Identified in biweekly snapshots before the delay became unrecoverable. The most valuable report doesn't describe "where we are" — it describes "where the problem is concentrated."</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════ -->
+<!-- GIS · LIDAR · DRONE -->
+<!-- ══════════════════════════════════════════ -->
+<div id="s-gis" class="section">
+  <div class="series-block">
+    <div class="series-tag">101–105 · 201–207 · 208–223 · 400–416</div>
+    <div class="series-title es">GIS, LiDAR, Drone y Topografía Avanzada</div>
+    <div class="series-title en">GIS, LiDAR, Drone and Advanced Surveying</div>
+
+    <div class="sh2">ICOD — <span class="es">Automatización LiDAR en Túneles · Montegrande</span><span class="en">Tunnel LiDAR Automation · Montegrande</span></div>
+    <div class="mrow">
+      <div class="mchip"><span class="v">2,800</span><span class="l es">Secciones auto-generadas</span><span class="l en">Auto-generated sections</span></div>
+      <div class="mchip"><span class="v">4,000+</span><span class="l es">Puntos procesados / sección</span><span class="l en">Points processed / section</span></div>
+      <div class="mchip"><span class="v">12+ km</span><span class="l es">De túneles procesados</span><span class="l en">Of tunnels processed</span></div>
+      <div class="mchip"><span class="v">2 semanas</span><span class="l es">Desarrollo del sistema</span><span class="l en">System development time</span></div>
+      <div class="mchip"><span class="v">75%</span><span class="l es">Reducción tiempo drafting</span><span class="l en">Drafting time reduction</span></div>
+    </div>
+    <div class="hl es"><strong>Autoría explícita:</strong> "ICOD versión 2.0 — Autor: Ing. Piter J. Bonilla D." visible en Doc 102. Desarrollado en 2 semanas porque ninguna herramienta comercial podía manejar la densidad de los datos del escáner en el contexto operacional del proyecto. <strong>ICOD es exclusivo de Montegrande</strong> — los túneles de Palomino usan el Sistema de Secciones (Series 501-517).</div>
+    <div class="hl en"><strong>Explicit authorship:</strong> "ICOD version 2.0 — Author: Ing. Piter J. Bonilla D." visible in Doc 102. Developed in 2 weeks because no commercial tool could handle the scanner data density in the project's operational context. <strong>ICOD is exclusive to Montegrande</strong> — Palomino tunnels use the Sections System (Series 501-517).</div>
+
+    <div class="sh2 es">Global Mapper — Certificación de 4.11M m³</div>
+    <div class="sh2 en">Global Mapper — 4.11M m³ Certification</div>
+    <div class="hl-teal es">Archivo activo: <strong>"...LEER GM (4,110,752 m3).gmw"</strong> · WGS84 UTM Zone 19N · 8 capas activas · TIN LiDAR de 4 campañas de vuelo · workspace guardado y auditable · no es un número en un reporte — es un modelo reproducible.</div>
+    <div class="hl-teal en">Active file: <strong>"...LEER GM (4,110,752 m3).gmw"</strong> · WGS84 UTM Zone 19N · 8 active layers · LiDAR TIN from 4 flight campaigns · saved and auditable workspace · not a number in a report — a reproducible model.</div>
+
+    <div class="sh2 es">Red GPS/GNSS — Topcon Tools · Las Placetas</div>
+    <div class="sh2 en">GPS/GNSS Network — Topcon Tools · Las Placetas</div>
+    <table class="dtable">
+      <tr><th><span class="es">Estación</span><span class="en">Station</span></th><th><span class="es">Latitud</span><span class="en">Latitude</span></th><th><span class="es">Sep. Geoidal (EGM2008)</span><span class="en">Geoid Sep. (EGM2008)</span></th><th><span class="es">Factor Escala UTM</span><span class="en">UTM Scale Factor</span></th></tr>
+      <tr><td>BARA</td><td>18°12'31.31670"N</td><td>−30.627 m</td><td>0.999792311736</td></tr>
+      <tr><td>LVEG</td><td>19°13'21.77675"N</td><td>−33.915 m</td><td>1.000009213837</td></tr>
+      <tr><td>SROD</td><td>19°28'30.90259"N</td><td>−31.915 m</td><td>0.999669040884</td></tr>
+      <tr><td>SPED</td><td>18°27'39.65605"N</td><td>−22.106 m</td><td>1.000383810472</td></tr>
+    </table>
+    <div class="narrative es" style="font-size:12px;">Sesiones de 12 horas · Separaciones geoidales negativas características del Caribe · Factor Escala Combinado Doc 407: 1.0000745 (reducción nivel medio del mar + corrección cuadrícula UTM).</div>
+    <div class="narrative en" style="font-size:12px;">12-hour sessions · Negative geoid separations characteristic of the Caribbean · Combined Scale Factor Doc 407: 1.0000745 (mean sea level reduction + UTM grid correction).</div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════ -->
+<!-- CONSULTING -->
+<!-- ══════════════════════════════════════════ -->
+<div id="s-consulting" class="section">
+  <div class="series-block">
+    <div class="series-tag">801–807 · 300–309</div>
+    <div class="series-title es">Consultoría Independiente — Haina, Hatillo y Diseño Vial</div>
+    <div class="series-title en">Independent Consulting — Haina, Hatillo and Road Design</div>
+
+    <div class="sh2 es">Sistema de Codificación de Documentos (Doc 801) — 7 campos jerárquicos</div>
+    <div class="sh2 en">Document Coding System (Doc 801) — 7 hierarchical fields</div>
+
+    <div class="code">
+HR  -  PH  -  PL  -  1 1 0  -  00  -  001  -  AA
+ I     II    III       IV        V     VI     VII
+
+<span class="c es">I   = Proyectista (2 chars)     HR = Hanson Rodriguez</span>
+<span class="c en">I   = Designer (2 chars)       HR = Hanson Rodriguez</span>
+<span class="c es">II  = Proyecto (2 chars)        PH = Presa Haina · TH = Trasvase Hatillo · PD · PJ</span>
+<span class="c en">II  = Project (2 chars)         PH = Haina Dam · TH = Hatillo Transfer · PD · PJ</span>
+<span class="c es">III = Tipo documento (2 chars)  20 tipos: PL, MC, RT, PR, DI, ET, LM, MH, EG, SK, RR...</span>
+<span class="c en">III = Document type (2 chars)   20 types: PL, MC, RT, PR, DI, ET, LM, MH, EG, SK, RR...</span>
+<span class="c es">IV  = Fase(4) + Disciplina(5) + Área-Grupo(10)</span>
+<span class="c en">IV  = Phase(4) + Discipline(5) + Area-Group(10)</span>
+<span class="c es">V   = Especialidad (30+ sub-categorías)</span>
+<span class="c en">V   = Specialty (30+ sub-categories)</span>
+<span class="c es">     Incluye: Línea de Transmisión (7) · Alta Tensión (8) · Subestación (9)</span>
+<span class="c en">     Includes: Transmission Line (7) · High Voltage (8) · Substation (9)</span>
+VI  = Correlativo (001, 002...)
+VII = Revisión (AA, A, B, 0, 1, 2...)
+    </div>
+
+    <div class="sh2 es">4 planos en 48 horas — 2 proyectos simultáneos</div>
+    <div class="sh2 en">4 drawings in 48 hours — 2 simultaneous projects</div>
+    <table class="dtable">
+      <tr><th><span class="es">Fecha</span><span class="en">Date</span></th><th><span class="es">Código</span><span class="en">Code</span></th><th><span class="es">Proyecto</span><span class="en">Project</span></th><th><span class="es">Tipo</span><span class="en">Type</span></th><th><span class="es">Firma</span><span class="en">Signature</span></th></tr>
+      <tr><td>08-NOV-22</td><td>HR-PH-PL-110-00-001</td><td>Haina</td><td><span class="es">Ubicación y Accesos</span><span class="en">Location and Access</span></td><td>P.BONILLA / P.BONILLA</td></tr>
+      <tr><td>08-NOV-22</td><td>HR-PH-PL-110-10-001</td><td>Haina</td><td><span class="es">Topografía Base</span><span class="en">Base Topography</span></td><td>P.BONILLA / P.BONILLA</td></tr>
+      <tr><td>10-NOV-22</td><td>HR-TH-PL-110-00-001</td><td>Hatillo</td><td><span class="es">Ubicación y Accesos</span><span class="en">Location and Access</span></td><td>P.BONILLA / P.BONILLA</td></tr>
+      <tr><td>10-NOV-22</td><td>HR-TH-PL-110-10-001</td><td>Hatillo</td><td><span class="es">Topografía Base</span><span class="en">Base Topography</span></td><td>P.BONILLA / P.BONILLA</td></tr>
+    </table>
+
+    <div class="hl es"><strong>Embalse Haina — datos del modelo:</strong> Elev.125.00 = 228.20 millones m³ · 14.35 km² espejo · Tablas E-V multi-eje (6 páginas, incrementos 0.5m en zona operacional) · Datum ITRF-2000 época 1999.0 · Base cartográfica SRTM Plus v3 (USGS · ~38m resolución) · WGS84 UTM Zona 19N · Eje verificado con coordenadas GPS en plano formal CAASD.</div>
+    <div class="hl en"><strong>Haina Reservoir — model data:</strong> Elev.125.00 = 228.20 million m³ · 14.35 km² water surface · Multi-axis E-V tables (6 pages, 0.5m increments in operational zone) · ITRF-2000 epoch 1999.0 datum · SRTM Plus v3 (USGS · ~38m resolution) base cartography · WGS84 UTM Zone 19N · Axis GPS-verified on formal CAASD drawing.</div>
+
+    <div class="sh2 es">Diseño Vial — AASHTO 1993 · Doc 307 + Doc 309</div>
+    <div class="sh2 en">Road Design — AASHTO 1993 · Doc 307 + Doc 309</div>
+    <table class="dtable">
+      <tr><th><span class="es">Progresiva</span><span class="en">Station</span></th><th>Q diseño</th><th>Ø</th><th><span class="es">Tubos</span><span class="en">Pipes</span></th><th>H.relleno</th></tr>
+      <tr><td>0+173.91</td><td>6.43 m³/s</td><td>1.829m (72")</td><td>28</td><td>6.65 m</td></tr>
+      <tr><td>0+315.00</td><td>0.32 m³/s</td><td>0.762m (30")</td><td>12</td><td>—</td></tr>
+      <tr><td>0+875.00</td><td>3.96 m³/s</td><td>1.524m (60")</td><td>14</td><td>1.50 m</td></tr>
+    </table>
+    <div class="narrative es" style="font-size:12px;">Método Racional · I(5min) = 157.47 mm/hr TR=20 años · 5 cuencas · Kirpich para tiempo de concentración. Doc 309: 18 alternativas AASHTO 1993 · W18=5,000,000 · R=95% (ZR=−1.645) · CBR=3% · SN=4.89.</div>
+    <div class="narrative en" style="font-size:12px;">Rational Method · I(5min) = 157.47 mm/hr TR=20yr · 5 watersheds · Kirpich for time of concentration. Doc 309: 18 AASHTO 1993 alternatives · W18=5,000,000 · R=95% (ZR=−1.645) · CBR=3% · SN=4.89.</div>
+  </div>
+</div>
+
+</div><!-- /content -->
+
+<footer>
+  <span>Piter J. Bonilla D. · CODIA #17378 · Greensboro, NC · <a href="mailto:peterbonilla@hotmail.com">peterbonilla@hotmail.com</a> · +1 (336) 268-7426</span>
+  <span>
+    <a href="https://visualcrp.com/portfolio.html">portfolio.html</a> ·
+    <a href="https://visualcrp.com/portfolio-narrative.html">portfolio-narrative.html</a> ·
+    <span class="es">Narrativa Técnica Profunda · Mayo 2026</span>
+    <span class="en">Deep Technical Narrative · May 2026</span>
+  </span>
+</footer>
+
+<script>
+function setLang(lang) {
+  document.getElementById('html-root').setAttribute('lang', lang);
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+  const btn = document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`);
+  if (btn) btn.classList.add('active');
+  document.getElementById('qn-es').classList.toggle('active', lang === 'es');
+  document.getElementById('qn-en').classList.toggle('active', lang === 'en');
+}
+
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.snav-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.qn-btn[data-section]').forEach(b => b.classList.remove('active'));
+  const section = document.getElementById(id);
+  if (section) section.classList.add('active');
+  const topBtn = document.querySelector(`.snav-btn[onclick="showSection('${id}')"]`);
+  if (topBtn) topBtn.classList.add('active');
+  const sideBtn = document.querySelector(`.qn-btn[data-section="${id}"]`);
+  if (sideBtn) sideBtn.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+document.querySelectorAll('.qn-btn[data-section]').forEach(btn => {
+  btn.addEventListener('click', () => showSection(btn.dataset.section));
+});
+
+// Default: English
+setLang('en');
+</script>
+</body>
+</html>
