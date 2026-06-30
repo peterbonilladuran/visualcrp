@@ -2953,14 +2953,44 @@ function applyLang(lang) {
 
 
 window.toggleLang = function() {
-  // Use URL param for guaranteed clean state — no accumulation possible
-  const url = new URL(window.location.href);
+  // In-memory toggle — works with content://, file://, https://
   if (_lang === 'es') {
-    url.searchParams.set('lang', 'en');
+    _takeSnapshot();
+    applyLang('en');
   } else {
-    url.searchParams.delete('lang');
+    // EN → ES: restore DOM from snapshot
+    if (_origSnapshot) {
+      _origSnapshot.nodes.forEach(function(s) {
+        try { s.node.textContent = s.text; } catch(e) {}
+      });
+    }
+    // Restore data-es elements
+    document.querySelectorAll('[data-es]').forEach(function(el) {
+      if (el.children.length === 0) el.textContent = el.dataset.es;
+    });
+    // Restore innerHTML elements via reverse INNER_PHRASE
+    var innerSorted = INNER_PHRASE.slice().sort(function(a,b){ return b[1].length - a[1].length; });
+    var sel = '.card-head, .alert-head, .mbox-head, .mech-box, .tl-time, .compare-head, .sec, .topbar-id, .badge, .chip, .stat-lbl, .hero-eyebrow, .hero-title, .hero-sub, .chart-title, .chart-sub, .mech-title, .dose-time, .dose-note, .dose-body, .dose-outcome, .priority-label, .card-sub, .tl-label, .tl-desc, .card-text, .alert, .priority-body, td, th, .risk-name, .risk-pct, .risk-desc, .compare-item, .sl-item, .card-num, .foot span';
+    document.querySelectorAll(sel).forEach(function(el) {
+      if (el.hasAttribute('data-es')) return;
+      var h = el.innerHTML;
+      for (var i = 0; i < innerSorted.length; i++) {
+        var es = innerSorted[i][0], en = innerSorted[i][1];
+        if (en && h.includes(en)) h = h.split(en).join(es);
+      }
+      el.innerHTML = h;
+    });
+    _lang = 'es';
+    var lb = document.getElementById('lang-btn');
+    if (lb) { lb.textContent = '🌐 EN'; lb.classList.remove('lang-active'); }
+    document.documentElement.lang = 'es';
+    var pb = document.getElementById('print-btn');
+    if (pb) pb.textContent = '⎊ Imprimir';
+    var isLight = document.documentElement.classList.contains('light');
+    var tb = document.getElementById('theme-btn');
+    if (tb) tb.textContent = isLight ? '◑ Oscuro' : '☀︎ Claro';
+    updateCharts('es');
   }
-  window.location.href = url.toString();
 };
 
 // Init: restore saved lang and theme
