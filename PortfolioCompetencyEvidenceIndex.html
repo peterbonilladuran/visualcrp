@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Competency Evidence Index · Piter J. Bonilla D. · v5.0</title>
+<title>Competency Evidence Index · Piter J. Bonilla D. · v7.0</title>
 <meta name="description" content="Competency Evidence Index — Piter J. Bonilla D. Civil Engineer 25+ years EPC infrastructure. Maps each technical competency to verifiable portfolio evidence.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -900,29 +900,29 @@ html[lang="es"] .en {
   <div style="font-size:22pt;font-weight:700;margin-bottom:3mm;">Competency Evidence Index</div>
   <div style="font-size:11pt;color:#1A5ABF;margin-bottom:6mm;">Piter J. Bonilla D. · Civil Engineer · Civil Design · Survey · Project Controls</div>
   <div style="font-size:8pt;color:#999;margin-top:5mm;">Elizabeth, NJ · visualcrp.com/portfolio.html</div>
-  <div style="font-size:7pt;color:#aaa;margin-top:3mm;">Updated: 20 July 2026 · v5.0</div>
+  <div style="font-size:7pt;color:#aaa;margin-top:3mm;">Updated: 20 July 2026 · v7.0</div>
 </div>
 
 <!-- TOPBAR -->
-<nav class="topbar">
+<nav class="topbar" role="banner" aria-label="Document navigation">
   <div class="tb-id"><strong>COMPETENCY INDEX</strong> · PITER J. BONILLA D. · EPC INFRASTRUCTURE</div>
-  <div class="tb-right">
-    <div class="lang-toggle">
-      <button class="lang-btn" onclick="setLang('es')" id="top-lang-es">ES</button>
-      <button class="lang-btn active" onclick="setLang('en')" id="top-lang-en">EN</button>
+  <div class="tb-right" role="toolbar" aria-label="Display controls">
+    <div class="lang-toggle" role="group" aria-label="Language selection">
+      <button class="lang-btn" onclick="setLang('es')" id="top-lang-es" aria-label="Cambiar a Español">ES</button>
+      <button class="lang-btn active" onclick="setLang('en')" id="top-lang-en" aria-label="Switch to English">EN</button>
     </div>
-    <button class="btn-ctrl" onclick="toggleTheme()" id="theme-btn">☀︎ Light</button>
-    <button class="btn-ctrl" onclick="prepPrint()">⎙ Print / PDF</button>
+    <button class="btn-ctrl" onclick="toggleTheme()" id="theme-btn" aria-label="Toggle light/dark theme">☀︎ Light</button>
+    <button class="btn-ctrl" onclick="prepPrint()" aria-label="Print or save as PDF">⎙ Print / PDF</button>
   </div>
 </nav>
 
 <!-- TABS -->
-<div class="tabs">
-  <button class="tab-btn active" onclick="openTab(this,'p0')" data-panel="p0"><span class="en">00 · Overview</span><span class="es">00 · Visión General</span></button>
-  <button class="tab-btn" onclick="openTab(this,'p1')" data-panel="p1"><span class="en">I · Competency Matrix</span><span class="es">I · Matriz de Competencias</span></button>
-  <button class="tab-btn" onclick="openTab(this,'p2')" data-panel="p2"><span class="en">II · Portfolio Evidence</span><span class="es">II · Evidencia del Portfolio</span></button>
-  <button class="tab-btn" onclick="openTab(this,'p3')" data-panel="p3"><span class="en">III · Technical Corpus</span><span class="es">III · Corpus Técnico</span></button>
-  <button class="tab-btn" onclick="openTab(this,'p4')" data-panel="p4"><span class="en">IV · Resources</span><span class="es">IV · Recursos</span></button>
+<div class="tabs" role="tablist" aria-label="Content sections">
+  <button class="tab-btn active" onclick="openTab(this,'p0')" data-panel="p0" role="tab" aria-selected="true" aria-controls="p0"><span class="en">00 · Overview</span><span class="es">00 · Visión General</span></button>
+  <button class="tab-btn" onclick="openTab(this,'p1')" data-panel="p1" role="tab" aria-selected="false" aria-controls="p1"><span class="en">I · Competency Matrix</span><span class="es">I · Matriz de Competencias</span></button>
+  <button class="tab-btn" onclick="openTab(this,'p2')" data-panel="p2" role="tab" aria-selected="false" aria-controls="p2"><span class="en">II · Portfolio Evidence</span><span class="es">II · Evidencia del Portfolio</span></button>
+  <button class="tab-btn" onclick="openTab(this,'p3')" data-panel="p3" role="tab" aria-selected="false" aria-controls="p3"><span class="en">III · Applied Analysis</span><span class="es">III · Análisis Aplicado</span></button>
+  <button class="tab-btn" onclick="openTab(this,'p4')" data-panel="p4" role="tab" aria-selected="false" aria-controls="p4"><span class="en">IV · Resources</span><span class="es">IV · Recursos</span></button>
 </div>
 
 <!-- QUICK NAV SIDEBAR -->
@@ -998,15 +998,36 @@ html[lang="es"] .en {
     <span class="en">Between major EPC assignments, independent consulting practice: engineering systems development, machine control modeling, technical feasibility analysis, and continued R&D of proprietary systems (AC&amp;P · SALT · ETL Links · Visual CRP).</span>
     <span class="es">Entre grandes asignaciones EPC, práctica consultora independiente: desarrollo de sistemas de ingeniería, modelado de control de máquinas, análisis de factibilidad técnica y I+D continuo de sistemas propietarios (AC&amp;P · SALT · ETL Links · Visual CRP).</span>
   </div>
+
+  <div class="sec"><span class="en">palomino · competency origin</span><span class="es">palomino · origen de competencias</span></div>
+  <div class="alert blue" style="margin-bottom:16px;">
+    <div class="ah"><span class="en">Why Palomino matters</span><span class="es">Por qué Palomino importa</span></div>
+    <span class="en">Palomino is not a single competency — it is the project where most professional competencies were simultaneously exercised and documented for the first time. Visual CRP is one result of that experience. The list below shows what Palomino actually documents across nine separate competency families.</span>
+    <span class="es">Palomino no es una competencia singular — es el proyecto donde la mayoría de las competencias profesionales fueron ejercidas simultáneamente y documentadas por primera vez. Visual CRP es uno de los resultados de esa experiencia. La lista a continuación muestra lo que Palomino realmente documenta en nueve familias de competencias distintas.</span>
+  </div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr>
+        <th><span class="en">Competency Family</span><span class="es">Familia de Competencia</span></th>
+        <th><span class="en">What Palomino Documents</span><span class="es">Qué Documenta Palomino</span></th>
+        <th><span class="en">Evidence</span><span class="es">Evidencia</span></th>
+      </tr></thead>
+      <tbody>
+        <tr><td class="comp"><span class="en">Civil Design</span><span class="es">Diseño Civil</span></td><td class="ev"><span class="en">Grading · Roadway geometry · Access roads · Surface modeling · Earthwork design</span><span class="es">Grading · Geometría vial · Vías de acceso · Modelado de superficies · Diseño de movimiento de tierras</span></td><td class="cat"><span class="en">Series 300–309 · Series 400–416</span></td></tr>
+        <tr><td class="comp"><span class="en">Drainage & Hydraulics</span><span class="es">Drenaje e Hidráulica</span></td><td class="ev"><span class="en">Rational Method · 5 watersheds · 72" culvert design · stormwater routing</span><span class="es">Método Racional · 5 cuencas · diseño alcantarilla 72" · encauzamiento pluvial</span></td><td class="cat"><span class="en">Series 300–309</span></td></tr>
+        <tr><td class="comp"><span class="en">TBM Survey & Geodetic Control</span><span class="es">Topografía TBM y Control Geodésico</span></td><td class="ev"><span class="en">SALT Method PB · 12.44km · 9,531 rings · 1:516,577 precision · residual avg 0.44"</span><span class="es">Método PB SALT · 12.44km · 9,531 anillos · precisión 1:516,577 · residual promedio 0.44"</span></td><td class="cat"><span class="en">Series 208–223 · SALT Rev 4.0</span></td></tr>
+        <tr><td class="comp"><span class="en">3D Modeling & CAD Production</span><span class="es">Modelado 3D y Producción CAD</span></td><td class="ev"><span class="en">Powerhouse platform model · 390 units · Factor Scale 1.0000745 · Rev J · Doc 212 124 sheets</span><span class="es">Modelo plataforma Casa de Máquinas · 390 viviendas · Factor Escala 1.0000745 · Rev J · Doc 212 124 láminas</span></td><td class="cat"><span class="en">Series 400–416 · Doc 212</span></td></tr>
+        <tr><td class="comp"><span class="en">Document Control & Governance</span><span class="es">Control Documental y Gobernanza</span></td><td class="ev"><span class="en">Visual CRP origin · ISO 9001 first hydropower outside Brazil · tripartite workflow · 9 firms</span><span class="es">Origen Visual CRP · primera hidroeléctrica ISO 9001 fuera de Brasil · flujo tripartito · 9 firmas</span></td><td class="cat"><span class="en">Series 502 · Visual CRP</span></td></tr>
+        <tr><td class="comp"><span class="en">Contractor Payment Certification</span><span class="es">Certificación de Pagos al Contratista</span></td><td class="ev"><span class="en">$708,323 Pay App certified · 928,682 m³ cut · 1,797,261 m³ fill · impasse resolved in 5 reports</span><span class="es">$708,323 certificados · 928,682 m³ corte · 1,797,261 m³ relleno · impasse resuelto en 5 reportes</span></td><td class="cat"><span class="en">Series 700–707</span></td></tr>
+        <tr><td class="comp"><span class="en">Construction Engineering Support</span><span class="es">Soporte de Ingeniería de Construcción</span></td><td class="ev"><span class="en">TBM daily production report at state level · VMT + geology + rings + shift production</span><span class="es">Reporte diario TBM a nivel de estado · VMT + geología + anillos + producción por turno</span></td><td class="cat"><span class="en">Doc 603 · Series 000–014</span></td></tr>
+        <tr><td class="comp"><span class="en">Cost Estimation & QS</span><span class="es">Estimación de Costos y Cubicación</span></td><td class="ev"><span class="en">AC&P origin · Dywidag bolt tracking · ETL Links origin · dual-surface earthwork methodology</span><span class="es">Origen AC&P · seguimiento de pernos Dywidag · origen ETL Links · metodología de doble superficie</span></td><td class="cat"><span class="en">AC&P · Series 700</span></td></tr>
+        <tr><td class="comp"><span class="en">Engineering Systems Development</span><span class="es">Desarrollo de Sistemas de Ingeniería</span></td><td class="ev"><span class="en">Visual CRP v1 2007 · SALT v1 2004 · ETL Links origin 2008 · AC&P origin 2001–2004 · all 5 systems trace to Palomino period</span><span class="es">Visual CRP v1 2007 · SALT v1 2004 · origen ETL Links 2008 · origen AC&P 2001–2004 · los 5 sistemas tienen raíces en el período Palomino</span></td><td class="cat"><span class="en">Series 501–517A</span></td></tr>
       </tbody>
     </table>
   </div>
 
-  <div class="footer"><span class="en">Updated: 20 July 2026 · v5.0 · </span><span class="es">Actualizado: 20 Julio 2026 · v5.0 · </span><strong>Competency Evidence Index</strong> · Piter J. Bonilla D.</div>
+  <div class="footer"><span class="en">Updated: 20 July 2026 · v7.0 · </span><span class="es">Actualizado: 20 Julio 2026 · v7.0 · </span><strong>Competency Evidence Index</strong> · Piter J. Bonilla D.</div>
 </div>
-
-<!-- ============================================================ -->
-<!-- PANEL P1: COMPETENCY MATRIX -->
 <!-- ============================================================ -->
 <div class="panel" id="p1">
   <div class="hero">
@@ -1019,6 +1040,27 @@ html[lang="es"] .en {
     <div class="legend-item"><span class="lv lv-S">S</span> <span class="en">Documented in production at scale</span><span class="es">Documentado en producción a escala</span></div>
     <div class="legend-item"><span class="lv lv-A">A</span> <span class="en">Documented with measurable outcomes</span><span class="es">Documentado con resultados medibles</span></div>
     <div class="legend-item"><span class="lv lv-B">B</span> <span class="en">Documented in portfolio / corpus</span><span class="es">Documentado en portfolio / corpus</span></div>
+  </div>
+
+  <!-- --- CIVIL DESIGN --- -->
+  <div class="sec"><span class="en">civil design · grading · roadway · drainage · 3d modeling</span><span class="es">diseño civil · grading · vial · drenaje · modelado 3d</span></div>
+  <div class="alert green" style="margin-bottom:12px;">
+    <div class="ah"><span class="en">Palomino origin · Series 300–416</span><span class="es">Origen Palomino · Series 300–416</span></div>
+    <span class="en">These competencies were exercised and documented at Palomino (2006–2011): site grading, roadway geometry, drainage design, platform modeling, earthwork optimization, Civil 3D workflows, and corridor development. The evidence is not theoretical — it is indexed in portfolio Series 300–309 (roadway and hydraulics) and Series 400–416 (3D models and as-built). Each document is accessible via the OneDrive folders in Panel II.</span>
+    <span class="es">Estas competencias fueron ejercidas y documentadas en Palomino (2006–2011): grading de sitio, geometría vial, diseño de drenaje, modelado de plataformas, optimización de movimiento de tierras, flujos de trabajo Civil 3D y desarrollo de corredores. La evidencia no es teórica — está indexada en las series del portfolio 300–309 (vial e hidráulica) y 400–416 (modelos 3D y as-built). Cada documento es accesible a través de las carpetas OneDrive en el Panel II.</span>
+  </div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th><span class="en">Competency</span><span class="es">Competencia</span></th><th><span class="en">Cat.</span><span class="es">Cat.</span></th><th><span class="en">Lvl</span><span class="es">Niv.</span></th><th><span class="en">Primary Evidence</span><span class="es">Evidencia Primaria</span></th><th><span class="en">Supporting Evidence</span><span class="es">Evidencia Secundaria</span></th></tr></thead>
+      <tbody>
+        <tr><td class="comp"><span class="en">Grading & Earthwork Modeling</span><span class="es">Grading y Modelado de Movimiento de Tierras</span></td><td class="cat">CIVIL</td><td class="lvl S">S</td><td class="ev"><span class="en">Series 400–416: Palomino powerhouse platform model · 99.50m overburden · 5 levels · Factor Scale 1.0000745 · Rev J (10 iterations) · 390 units verified Google Earth</span><span class="es">Series 400–416: Modelo de plataforma Casa de Máquinas Palomino · 99.50m de recubrimiento · 5 niveles · Factor Escala 1.0000745 · Rev J (10 iteraciones) · 390 viviendas verificadas Google Earth</span></td><td class="ev"><span class="en">Series 700–707: 928,682 m³ cut + 1,797,261 m³ fill · dual-surface reconciliation</span><span class="es">Series 700–707: 928,682 m³ corte + 1,797,261 m³ relleno · reconciliación de doble superficie</span></td></tr>
+        <tr><td class="comp"><span class="en">Roadway Geometry & Access Design</span><span class="es">Geometría Vial y Diseño de Accesos</span></td><td class="cat">CIVIL</td><td class="lvl A">A</td><td class="ev"><span class="en">Series 300–309: 18 AASHTO 1993 alternatives · CBR=3% SN=4.89 · Bávaro-Miches + Ocoa-Piedra Blanca highway corridors</span><span class="es">Series 300–309: 18 alternativas AASHTO 1993 · CBR=3% SN=4.89 · corredores viales Bávaro-Miches + Ocoa-Piedra Blanca</span></td><td class="ev"><span class="en">Doc 307 + Doc 309: Rational Method 5 basins · 72" culvert H=6.65m</span><span class="es">Doc 307 + Doc 309: Método Racional 5 cuencas · alcantarilla 72" H=6.65m</span></td></tr>
+        <tr><td class="comp"><span class="en">Drainage & Hydraulics</span><span class="es">Drenaje e Hidráulica</span></td><td class="cat">CIVIL</td><td class="lvl A">A</td><td class="ev"><span class="en">Series 300–309: Rational Method · 5 watersheds · Kirpich tc · I(5min)=157.47 mm/hr TR=20yr</span><span class="es">Series 300–309: Método Racional · 5 cuencas · Kirpich tc · I(5min)=157.47 mm/hr TR=20yr</span></td><td class="ev"><span class="en">Ø72" culvert Q=6.43 m³/s · 28 pipes · 6.65m cover</span><span class="es">Alcantarilla Ø72" Q=6.43 m³/s · 28 tubos · 6.65m de relleno</span></td></tr>
+        <tr><td class="comp"><span class="en">3D Modeling & As-Built Coordination</span><span class="es">Modelado 3D y Coordinación As-Built</span></td><td class="cat">CAD/3D</td><td class="lvl A">A</td><td class="ev"><span class="en">Series 400–416: Cavern 47.35×33m · 5 levels EL413→427m · 390 units verified Google Earth 26/01/2024</span><span class="es">Series 400–416: Caverna 47.35×33m · 5 niveles EL413→427m · 390 viviendas verificadas Google Earth 26/01/2024</span></td><td class="ev"><span class="en">AutoCAD Civil 3D · DDE API integration · Rev J (10 iterations)</span><span class="es">AutoCAD Civil 3D · integración API DDE · Rev J (10 iteraciones)</span></td></tr>
+        <tr><td class="comp"><span class="en">CAD Production · Civil 3D</span><span class="es">Producción CAD · Civil 3D</span></td><td class="cat">CAD/3D</td><td class="lvl A">A</td><td class="ev"><span class="en">Doc 212: 124 sheets · 7 tunnels · 4 days Rev A→B→C · dual-signature Odebrecht workflow</span><span class="es">Doc 212: 124 láminas · 7 túneles · 4 días Rev A→B→C · flujo de doble firma Odebrecht</span></td><td class="ev"><span class="en">Series 400–416 · 3D models · Eagle Point + AutoCAD MDT LiDAR</span><span class="es">Series 400–416 · modelos 3D · Eagle Point + AutoCAD MDT LiDAR</span></td></tr>
+        <tr><td class="comp"><span class="en">Construction Engineering Support</span><span class="es">Soporte de Ingeniería de Construcción</span></td><td class="cat">CIVIL</td><td class="lvl S">S</td><td class="ev"><span class="en">TBM daily production report at state level: VMT + geology + rings + shift production · 12,435m · 9,531 rings</span><span class="es">Reporte diario de producción TBM a nivel de estado: VMT + geología + anillos + producción por turno · 12,435m · 9,531 anillos</span></td><td class="ev"><span class="en">Doc 603 Engineering Reports series · trend analysis · dashboards</span><span class="es">Serie Doc 603 Informes de Ingeniería · análisis de tendencias · dashboards</span></td></tr>
+      </tbody>
+    </table>
   </div>
 
   <!-- --- OFFICE ENGINEER --- -->
@@ -1035,22 +1077,6 @@ html[lang="es"] .en {
         <tr><td class="comp"><span class="en">Project Records · Closeout</span><span class="es">Registros de Proyecto · Cierre</span></td><td class="cat">OFFICE ENG</td><td class="lvl S">S</td><td class="ev"><span class="en">Montegrande Visual CRP: full lifecycle records · 15,000+ engineering records · asset registers · turnover coordination</span><span class="es">Visual CRP Montegrande: registros de ciclo de vida completo · 15,000+ registros de ingeniería · registros de activos · coordinación de entrega</span></td><td class="ev"><span class="en">Closeout documentation across three $400–700M EPC projects</span><span class="es">Documentación de cierre en tres proyectos EPC de $400–700M</span></td></tr>
         <tr><td class="comp"><span class="en">Multi-Firm Stakeholder Coordination</span><span class="es">Coordinación Multi-Firma con Stakeholders</span></td><td class="cat">OFFICE ENG</td><td class="lvl S">S</td><td class="ev"><span class="en">Visual CRP 9 engineering firms · tripartite flow · 3 commands for 100% daily use · controlled distribution</span><span class="es">Visual CRP 9 firmas de ingeniería · flujo tripartito · 3 comandos para uso diario 100% · distribución controlada</span></td><td class="ev"><span class="en">Series 502: 1,183 docs · 6 dynamic reports · field-office integration</span><span class="es">Serie 502: 1,183 documentos · 6 informes dinámicos · integración campo-oficina</span></td></tr>
         <tr><td class="comp"><span class="en">Equipment Tracking · Commissioning Documentation</span><span class="es">Seguimiento de Equipos · Documentación de Puesta en Marcha</span></td><td class="cat">OFFICE ENG</td><td class="lvl B">B</td><td class="ev"><span class="en">Montegrande: equipment schedules · test reports · commissioning coordination · asset numbering</span><span class="es">Montegrande: cronogramas de equipos · reportes de pruebas · coordinación de puesta en marcha · numeración de activos</span></td><td class="ev"><span class="en">O&M manual coordination · turnover preparation · DEP-format records</span><span class="es">Coordinación de manuales O&M · preparación de entrega · registros en formato DEP</span></td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <!-- --- CIVIL DESIGN --- -->
-  <div class="sec"><span class="en">civil design · grading · roadway · drainage · 3d modeling</span><span class="es">diseño civil · grading · vial · drenaje · modelado 3d</span></div>
-  <div class="tbl-wrap">
-    <table>
-      <thead><tr><th><span class="en">Competency</span><span class="es">Competencia</span></th><th><span class="en">Cat.</span><span class="es">Cat.</span></th><th><span class="en">Lvl</span><span class="es">Niv.</span></th><th><span class="en">Primary Evidence</span><span class="es">Evidencia Primaria</span></th><th><span class="en">Supporting Evidence</span><span class="es">Evidencia Secundaria</span></th></tr></thead>
-      <tbody>
-        <tr><td class="comp"><span class="en">Grading & Earthwork Modeling</span><span class="es">Grading y Modelado de Movimiento de Tierras</span></td><td class="cat">CIVIL</td><td class="lvl S">S</td><td class="ev"><span class="en">Series 400–416: Palomino powerhouse platform model · 99.50m overburden · 5 levels · Factor Scale 1.0000745 · Rev J (10 iterations) · 390 units verified Google Earth</span><span class="es">Series 400–416: Modelo de plataforma Casa de Máquinas Palomino · 99.50m de recubrimiento · 5 niveles · Factor Escala 1.0000745 · Rev J (10 iteraciones) · 390 viviendas verificadas Google Earth</span></td><td class="ev"><span class="en">Series 700–707: 928,682 m³ cut + 1,797,261 m³ fill · dual-surface reconciliation</span><span class="es">Series 700–707: 928,682 m³ corte + 1,797,261 m³ relleno · reconciliación de doble superficie</span></td></tr>
-        <tr><td class="comp"><span class="en">Roadway Geometry & Access Design</span><span class="es">Geometría Vial y Diseño de Accesos</span></td><td class="cat">CIVIL</td><td class="lvl A">A</td><td class="ev"><span class="en">Series 300–309: 18 AASHTO 1993 alternatives · CBR=3% SN=4.89 · Bávaro-Miches + Ocoa-Piedra Blanca highway corridors</span><span class="es">Series 300–309: 18 alternativas AASHTO 1993 · CBR=3% SN=4.89 · corredores viales Bávaro-Miches + Ocoa-Piedra Blanca</span></td><td class="ev"><span class="en">Doc 307 + Doc 309: Rational Method 5 basins · 72" culvert H=6.65m</span><span class="es">Doc 307 + Doc 309: Método Racional 5 cuencas · alcantarilla 72" H=6.65m</span></td></tr>
-        <tr><td class="comp"><span class="en">Drainage & Hydraulics</span><span class="es">Drenaje e Hidráulica</span></td><td class="cat">CIVIL</td><td class="lvl A">A</td><td class="ev"><span class="en">Series 300–309: Rational Method · 5 watersheds · Kirpich tc · I(5min)=157.47 mm/hr TR=20yr</span><span class="es">Series 300–309: Método Racional · 5 cuencas · Kirpich tc · I(5min)=157.47 mm/hr TR=20yr</span></td><td class="ev"><span class="en">Ø72" culvert Q=6.43 m³/s · 28 pipes · 6.65m cover</span><span class="es">Alcantarilla Ø72" Q=6.43 m³/s · 28 tubos · 6.65m de relleno</span></td></tr>
-        <tr><td class="comp"><span class="en">3D Modeling & As-Built Coordination</span><span class="es">Modelado 3D y Coordinación As-Built</span></td><td class="cat">CAD/3D</td><td class="lvl A">A</td><td class="ev"><span class="en">Series 400–416: Cavern 47.35×33m · 5 levels EL413→427m · 390 units verified Google Earth 26/01/2024</span><span class="es">Series 400–416: Caverna 47.35×33m · 5 niveles EL413→427m · 390 viviendas verificadas Google Earth 26/01/2024</span></td><td class="ev"><span class="en">AutoCAD Civil 3D · DDE API integration · Rev J (10 iterations)</span><span class="es">AutoCAD Civil 3D · integración API DDE · Rev J (10 iteraciones)</span></td></tr>
-        <tr><td class="comp"><span class="en">CAD Production · Civil 3D</span><span class="es">Producción CAD · Civil 3D</span></td><td class="cat">CAD/3D</td><td class="lvl A">A</td><td class="ev"><span class="en">Doc 212: 124 sheets · 7 tunnels · 4 days Rev A→B→C · dual-signature Odebrecht workflow</span><span class="es">Doc 212: 124 láminas · 7 túneles · 4 días Rev A→B→C · flujo de doble firma Odebrecht</span></td><td class="ev"><span class="en">Series 400–416 · 3D models · Eagle Point + AutoCAD MDT LiDAR</span><span class="es">Series 400–416 · modelos 3D · Eagle Point + AutoCAD MDT LiDAR</span></td></tr>
-        <tr><td class="comp"><span class="en">Construction Engineering Support</span><span class="es">Soporte de Ingeniería de Construcción</span></td><td class="cat">CIVIL</td><td class="lvl S">S</td><td class="ev"><span class="en">TBM daily production report at state level: VMT + geology + rings + shift production · 12,435m · 9,531 rings</span><span class="es">Reporte diario de producción TBM a nivel de estado: VMT + geología + anillos + producción por turno · 12,435m · 9,531 anillos</span></td><td class="ev"><span class="en">Doc 603 Engineering Reports series · trend analysis · dashboards</span><span class="es">Serie Doc 603 Informes de Ingeniería · análisis de tendencias · dashboards</span></td></tr>
       </tbody>
     </table>
   </div>
@@ -1113,7 +1139,7 @@ html[lang="es"] .en {
     </table>
   </div>
 
-  <div class="footer"><span class="en">Updated: 20 July 2026 · v5.0 · </span><span class="es">Actualizado: 20 Julio 2026 · v5.0 · </span><strong>Competency Evidence Index</strong> · Piter J. Bonilla D.</div>
+  <div class="footer"><span class="en">Updated: 20 July 2026 · v7.0 · </span><span class="es">Actualizado: 20 Julio 2026 · v7.0 · </span><strong>Competency Evidence Index</strong> · Piter J. Bonilla D.</div>
 </div>
 
 <!-- ============================================================ -->
@@ -1326,7 +1352,7 @@ html[lang="es"] .en {
   })();
   </script>
 
-  <div class="footer"><span class="en">Updated: 20 July 2026 · v5.0 · </span><span class="es">Actualizado: 20 Julio 2026 · v5.0 · </span><strong>Competency Evidence Index</strong> · Piter J. Bonilla D.</div>
+  <div class="footer"><span class="en">Updated: 20 July 2026 · v7.0 · </span><span class="es">Actualizado: 20 Julio 2026 · v7.0 · </span><strong>Competency Evidence Index</strong> · Piter J. Bonilla D.</div>
 </div>
 
 <!-- ============================================================ -->
@@ -1334,14 +1360,15 @@ html[lang="es"] .en {
 <!-- ============================================================ -->
 <div class="panel" id="p3">
   <div class="hero">
-    <div class="hero-eyebrow"><span class="en">Independent Engineering Research · 2025–2026</span><span class="es">Investigación Independiente en Ingeniería · 2025–2026</span></div>
-    <h1 class="hero-title"><span class="en">Technical<br><span class="acc">Published Corpus</span></span><span class="es">Corpus<br><span class="acc">Técnico Publicado</span></span></h1>
-    <p class="hero-sub"><span class="en">Published analytical and technical work demonstrating engineering reasoning applied to infrastructure decision-making, forensic analysis, and systems design. These works are the product of applied research during a period of professional transition — not a gap, but a phase of intellectual production and continued capability development.</span><span class="es">Trabajos analíticos y técnicos publicados que demuestran razonamiento de ingeniería aplicado a la toma de decisiones en infraestructura, análisis forense y diseño de sistemas. Estos trabajos son el producto de investigación aplicada durante un período de transición profesional — no un vacío, sino una fase de producción intelectual y desarrollo continuo de capacidades.</span></p>
+    <div class="hero-eyebrow"><span class="en">Applied Infrastructure Analysis · 2025–2026</span><span class="es">Análisis de Infraestructura Aplicado · 2025–2026</span></div>
+    <h1 class="hero-title"><span class="en">Applied<br><span class="acc">Infrastructure Analysis</span></span><span class="es">Análisis<br><span class="acc">de Infraestructura</span></span></h1>
+    <p class="hero-sub"><span class="en">A distinct competency: the ability to apply engineering, financial, and forensic reasoning to infrastructure decisions at project scale. These works — produced independently during 2025–2026 — demonstrate the same analytical pattern applied in EPC megaprojects: quantify the risk before it materializes, verify the number before it becomes contractual, document the finding before it becomes irreversible.</span><span class="es">Una competencia diferenciada: la capacidad de aplicar razonamiento de ingeniería, financiero y forense a decisiones de infraestructura a escala de proyecto. Estos trabajos — producidos de forma independiente durante 2025–2026 — demuestran el mismo patrón analítico aplicado en megaproyectos EPC: cuantificar el riesgo antes de que se materialice, verificar el número antes de que se vuelva contractual, documentar el hallazgo antes de que se vuelva irreversible.</span></p>
   </div>
 
   <div class="alert green">
     <div class="ah"><span class="en">Public record</span><span class="es">Registro público</span></div>
-    <span class="en">These works were published independently of the job search. They demonstrate the application of the same analytical pattern — "What would have to be true for this number to be correct?" — to infrastructure analysis, financial viability, and forensic engineering. The competencies demonstrated here are also mapped in the matrix above (see "Risk · Forensic · Feasibility Analysis").</span>
+    <span class="en">Applied Infrastructure Analysis is a competency — not a publication category. It represents the ability to independently model, verify, and communicate complex infrastructure decisions using engineering, financial, and forensic reasoning. The works below demonstrate this competency applied to real decisions at $800M–$2.3B project scale. The analytical pattern is the same one applied in Palomino, Las Placetas, and Montegrande — the difference is that here it operates without a client directive, which makes the evidence stronger, not weaker.</span>
+    <span class="es">El Análisis de Infraestructura Aplicado es una competencia — no una categoría de publicaciones. Representa la capacidad de modelar, verificar y comunicar de forma independiente decisiones complejas de infraestructura usando razonamiento de ingeniería, financiero y forense. Los trabajos a continuación demuestran esta competencia aplicada a decisiones reales a escala de proyectos de $800M–$2.3B. El patrón analítico es el mismo aplicado en Palomino, Las Placetas y Montegrande — la diferencia es que aquí opera sin una directiva de cliente, lo que hace la evidencia más sólida, no más débil.</span>
     <span class="es">Estos trabajos fueron publicados independientemente de la búsqueda de empleo. Demuestran la aplicación del mismo patrón analítico — "¿Qué tendría que ser verdad para que este número sea correcto?" — al análisis de infraestructura, viabilidad financiera e ingeniería forense. Las competencias aquí demostradas también están mapeadas en la matriz anterior (ver "Riesgo · Forense · Análisis de Factibilidad").</span>
   </div>
 
@@ -1404,7 +1431,7 @@ html[lang="es"] .en {
     </table>
   </div>
 
-  <div class="footer"><span class="en">Updated: 20 July 2026 · v5.0 · </span><span class="es">Actualizado: 20 Julio 2026 · v5.0 · </span><strong>Competency Evidence Index</strong> · Piter J. Bonilla D.</div>
+  <div class="footer"><span class="en">Updated: 20 July 2026 · v7.0 · </span><span class="es">Actualizado: 20 Julio 2026 · v7.0 · </span><strong>Competency Evidence Index</strong> · Piter J. Bonilla D.</div>
 </div>
 
 <!-- ============================================================ -->
@@ -1449,7 +1476,7 @@ html[lang="es"] .en {
     <p style="font-size:.65rem;color:var(--muted);margin-top:6px;"><span class="en">Opens print dialog — select "Save as PDF" for a clean, paginated document</span><span class="es">Abre el diálogo de impresión — selecciona "Guardar como PDF" para un documento limpio y paginado</span></p>
   </div>
 
-  <div class="footer"><span class="en">Updated: 20 July 2026 · v5.0 · </span><span class="es">Actualizado: 20 Julio 2026 · v5.0 · </span><strong>Competency Evidence Index</strong> · Piter J. Bonilla D.</div>
+  <div class="footer"><span class="en">Updated: 20 July 2026 · v7.0 · </span><span class="es">Actualizado: 20 Julio 2026 · v7.0 · </span><strong>Competency Evidence Index</strong> · Piter J. Bonilla D.</div>
 </div>
 
 <!-- ============================================================ -->
@@ -1473,10 +1500,14 @@ function toggleTheme() {
 }
 
 function openTab(btn, id) {
-  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => {
+    b.classList.remove('active');
+    b.setAttribute('aria-selected', 'false');
+  });
   document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.qn-btn[data-panel]').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
+  btn.setAttribute('aria-selected', 'true');
   document.getElementById(id).classList.add('active');
   const sideBtn = document.querySelector(`.qn-btn[data-panel="${id}"]`);
   if (sideBtn) sideBtn.classList.add('active');
