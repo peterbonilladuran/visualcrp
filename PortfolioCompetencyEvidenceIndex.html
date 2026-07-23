@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" id="html-root">
+<html lang="en" id="html-root" class="light">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -86,6 +86,40 @@ body {
 
 html.light .topbar {
   background: rgba(238, 242, 250, .96);
+}
+
+html.light .quick-nav {
+  background: rgba(255, 255, 255, 0.95);
+  border-color: #B8C4DC;
+  box-shadow: 0 4px 20px rgba(26, 34, 64, 0.12);
+}
+
+html.light .qn-btn {
+  background: #FFFFFF;
+  border-color: #B8C4DC;
+  color: #5A6888;
+}
+
+html.light .qn-btn:hover {
+  background: #E2E8F4;
+  border-color: #7A4C00;
+  color: #7A4C00;
+}
+
+html.light .qn-btn.active {
+  background: rgba(122, 76, 0, 0.12);
+  border-color: #7A4C00;
+  color: #7A4C00;
+}
+
+html.light .qn-divider {
+  background: #B8C4DC;
+}
+
+html.light .qn-btn::after {
+  background: rgba(238, 242, 250, 0.98);
+  border-color: #B8C4DC;
+  color: #1A2240;
 }
 
 .tb-id {
@@ -911,7 +945,7 @@ html[lang="es"] .en {
       <button class="lang-btn" onclick="setLang('es')" id="top-lang-es" aria-label="Cambiar a Español">ES</button>
       <button class="lang-btn active" onclick="setLang('en')" id="top-lang-en" aria-label="Switch to English">EN</button>
     </div>
-    <button class="btn-ctrl" onclick="toggleTheme()" id="theme-btn" aria-label="Toggle light/dark theme">☀︎ Light</button>
+    <button class="btn-ctrl" onclick="toggleTheme()" id="theme-btn" aria-label="Toggle light/dark theme">☾ Dark</button>
     <button class="btn-ctrl" onclick="prepPrint()" aria-label="Print or save as PDF">⎙ Print / PDF</button>
   </div>
 </nav>
