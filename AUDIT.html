@@ -611,6 +611,60 @@ hr.div { border: none; border-top: 1px solid var(--rule); margin: 28px 0; }
   line-height: 1.7;
 }
 
+/* ── SOURCES SECTION ─────────────────── */
+.sources-section {
+  margin-top: 28px;
+  padding: 20px 24px;
+  background: var(--white);
+  border: 1px solid var(--rule);
+  border-left: 4px solid var(--navy);
+}
+.sources-title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--navy);
+  margin-bottom: 4px;
+}
+html.dark .sources-title { color: #93c5fd; }
+.sources-subtitle {
+  font-size: 11.5px;
+  color: var(--ink2);
+  font-style: italic;
+  margin-bottom: 14px;
+}
+.sources-list { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+.sources-list li { display: flex; align-items: baseline; gap: 10px; font-size: 12.5px; color: var(--ink2); }
+.sources-list li strong { color: var(--ink); white-space: nowrap; min-width: 44px; }
+.sources-list li a { color: var(--steel); text-decoration: none; font-weight: 500; transition: color .15s; }
+.sources-list li a:hover { color: var(--accent); text-decoration: underline; }
+html.dark .sources-list li a { color: #93c5fd; }
+
+/* ── FOOTER SOURCES LINE ─────────────── */
+.df-sources {
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255,255,255,.1);
+  font-size: 11px;
+  color: rgba(255,255,255,.5);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2px 0;
+}
+.df-sources strong { color: rgba(255,255,255,.75); margin-right: 8px; }
+.df-sources a {
+  color: rgba(255,255,255,.55);
+  text-decoration: none;
+  padding: 2px 8px;
+  border-right: 1px solid rgba(255,255,255,.15);
+  transition: color .15s;
+  font-size: 11px;
+}
+.df-sources a:last-child { border-right: none; }
+.df-sources a:hover { color: #fff; }
+
 /* ── PRINT PAGE FOOTER ───────── */
 @media print {
   /* Running footer on every printed page */
@@ -673,7 +727,7 @@ html.dark small           { color: #6a7a9a; }
   <div class="header-inner">
     <div class="header-badge"><span class="es">Expediente SNIP 17248 · v2.0</span><span class="en">SNIP File 17248 · v2.0</span></div>
     <h1><span class="es">Auditoría Integral del Proyecto Monorriel de Santo Domingo</span><span class="en">Comprehensive Audit — Santo Domingo Monorail Project</span></h1>
-    <p class="header-sub"><span class="es">Expediente ejecutivo de auditoría — Síntesis de las Notas Técnicas I–V, dos Libros Maestros de Excel y el Informe Consolidado del procedimiento FITRAM-CCC-LP-2025-0001</span><span class="en">Executive Audit Brief — Synthesis of Technical Notes I–V, two Master Excel Workbooks, and the Consolidated Report of procedure FITRAM-CCC-LP-2025-0001</span></p>
+    <p class="header-sub"><span class="es">Expediente ejecutivo de auditoría — Síntesis de las Notas Técnicas I–V y dos Libros Maestros de Excel del procedimiento FITRAM-CCC-LP-2025-0001</span><span class="en">Executive Audit Brief — Synthesis of Technical Notes I–V and two Master Excel Workbooks of procedure FITRAM-CCC-LP-2025-0001</span></p>
     <div class="header-kpis">
       <div class="kpi"><div class="kpi-val">USD 932.8M</div><div class="kpi-label"><span class="es">Inversión declarada</span><span class="en">Declared investment</span></div></div>
       <div class="kpi"><div class="kpi-val">5</div><div class="kpi-label"><span class="es">Notas Técnicas</span><span class="en">Technical Notes</span></div></div>
@@ -784,6 +838,20 @@ html.dark small           { color: #6a7a9a; }
   <div class="summary-strip mt-28">
     <h3><span class="es">Conclusión General del Corpus</span><span class="en">General Conclusion of the Corpus</span></h3>
     <div class="conclusion-text"><span class="es">"El expediente contiene un perfil reforzado con análisis técnicos, socioeconómicos y financieros. Sin embargo, la documentación examinada no acredita, con la trazabilidad, reproducibilidad y robustez exigibles, que el monorriel sea la opción tecnológicamente superior, económicamente eficiente o financieramente viable. Esta conclusión no equivale a afirmar la inviabilidad del proyecto, sino a constatar la insuficiencia del soporte documental aportado."</span><span class="en">"The file contains an enhanced profile with technical, socioeconomic and financial analyses. However, the documentation examined does not demonstrate, with the required traceability, reproducibility and robustness, that the monorail is the technologically superior, economically efficient or financially viable option. This conclusion does not amount to declaring the project unviable, but to noting the insufficiency of the documentary support provided."</span></div>
+  </div>
+
+  <!-- Documentos de referencia — Capa 1: Resumen Ejecutivo -->
+  <div class="sources-section">
+    <div class="sources-title"><span class="es">Documentos de referencia — Dr. Carlos Bonnelly Ginebra</span><span class="en">Reference documents — Dr. Carlos Bonnelly Ginebra</span></div>
+    <div class="sources-subtitle"><span class="es">Toda la evidencia cuantitativa y los hallazgos de esta síntesis pueden verificarse en los documentos originales:</span><span class="en">All quantitative evidence and findings in this synthesis can be verified in the original documents:</span></div>
+    <ul class="sources-list">
+      <li><strong>NT-I</strong><span><span class="es">Auditoría técnica de la selección tecnológica y del análisis multicriterio — Parte I</span><span class="en">Technical audit of technology selection and multi-criteria analysis — Part I</span> &nbsp;<a href="https://lnkd.in/eRhYMsGV" target="_blank" rel="noopener">↗ lnkd.in/eRhYMsGV</a></span></li>
+      <li><strong>NT-II</strong><span><span class="es">Auditoría técnica de la selección tecnológica y del análisis multicriterio — Parte II</span><span class="en">Technical audit of technology selection and multi-criteria analysis — Part II</span> &nbsp;<a href="https://lnkd.in/eUNyjwT4" target="_blank" rel="noopener">↗ lnkd.in/eUNyjwT4</a></span></li>
+      <li><strong>NT-III</strong><span><span class="es">Auditoría técnica de la selección tecnológica y del análisis multicriterio — Parte III</span><span class="en">Technical audit of technology selection and multi-criteria analysis — Part III</span> &nbsp;<a href="https://lnkd.in/eysvaTi7" target="_blank" rel="noopener">↗ lnkd.in/eysvaTi7</a></span></li>
+      <li><strong>NT-IV</strong><span><span class="es">Auditoría técnica del análisis costo-beneficio (Anexo 7)</span><span class="en">Technical audit of the cost-benefit analysis (Annex 7)</span> &nbsp;<a href="https://www.linkedin.com/posts/carlos-sully-bonnelly-ginebra-7934603a_nota-t%C3%A9cnica-4-auditor%C3%ADa-monorriel-sd-activity-7487436779567001600-9Bd_" target="_blank" rel="noopener">↗ LinkedIn</a></span></li>
+      <li><strong>NT-V</strong><span><span class="es">Auditoría de la evaluación financiera (Anexo 9)</span><span class="en">Audit of the financial evaluation (Annex 9)</span> &nbsp;<a href="https://www.linkedin.com/posts/carlos-sully-bonnelly-ginebra-7934603a_nota-t%C3%A9cnica-v-auditor%C3%ADa-monorriel-sd-ugcPost-7488280767538794496-I9X-/?utm_source=share&utm_medium=member_desktop&rcm=ACoAAA-Mf9oBFCBYSSy1yyXRKGa_cvG81_Vz8jg" target="_blank" rel="noopener">↗ LinkedIn</a></span></li>
+      <li><strong><span class="es">Guía</span><span class="en">Guide</span></strong><span><span class="es">Guía de Lectura del Libro Maestro V15</span><span class="en">Reading Guide for Master Workbook V15</span> &nbsp;<a href="https://lnkd.in/e46r3Aun" target="_blank" rel="noopener">↗ lnkd.in/e46r3Aun</a></span></li>
+    </ul>
   </div>
 
   <div class="tab-footer">
@@ -1448,6 +1516,15 @@ html.dark small           { color: #6a7a9a; }
   <div class="df-title">Nota de Alcance · Auditoría Monorriel de Santo Domingo — SNIP 17248 · v2.0</div>
   <div><strong>Síntesis:</strong> Ing. Piter J. Bonilla D. &nbsp;·&nbsp; CODIA #17378 &nbsp;·&nbsp; 30 de julio de 2026 &nbsp;·&nbsp; visualcrp.com &nbsp;·&nbsp; linkedin.com/in/piter-bonilla-16244473</div>
   <div class="df-alcance"><span class="es">Los resultados, conclusiones y recomendaciones contenidos en este documento corresponden exclusivamente al Dr. Ing. Carlos Bonnelly Ginebra, autor del corpus de auditoría (Notas Técnicas I–V y Libros Maestros de Excel). El Ing. Piter J. Bonilla D. actúa únicamente como sintetizador del corpus documental y no asume responsabilidad alguna por su contenido técnico ni por sus implicaciones legales, administrativas o procesales.</span><span class="en">The results, conclusions and recommendations in this document correspond exclusively to Dr. Ing. Carlos Bonnelly Ginebra, author of the audit corpus (Technical Notes I–V and Master Excel Workbooks). Ing. Piter J. Bonilla D. acts solely as synthesizer of the documentary corpus and assumes no responsibility for its technical content or its legal, administrative or procedural implications.</span></div>
+  <div class="df-sources">
+    <strong><span class="es">📄 Fuentes primarias:</span><span class="en">📄 Primary sources:</span></strong>
+    <a href="https://lnkd.in/eRhYMsGV" target="_blank" rel="noopener">NT-I</a>
+    <a href="https://lnkd.in/eUNyjwT4" target="_blank" rel="noopener">NT-II</a>
+    <a href="https://lnkd.in/eysvaTi7" target="_blank" rel="noopener">NT-III</a>
+    <a href="https://www.linkedin.com/posts/carlos-sully-bonnelly-ginebra-7934603a_nota-t%C3%A9cnica-4-auditor%C3%ADa-monorriel-sd-activity-7487436779567001600-9Bd_" target="_blank" rel="noopener">NT-IV</a>
+    <a href="https://www.linkedin.com/posts/carlos-sully-bonnelly-ginebra-7934603a_nota-t%C3%A9cnica-v-auditor%C3%ADa-monorriel-sd-ugcPost-7488280767538794496-I9X-/?utm_source=share&utm_medium=member_desktop&rcm=ACoAAA-Mf9oBFCBYSSy1yyXRKGa_cvG81_Vz8jg" target="_blank" rel="noopener">NT-V</a>
+    <a href="https://lnkd.in/e46r3Aun" target="_blank" rel="noopener"><span class="es">Guía de Lectura</span><span class="en">Reading Guide</span></a>
+  </div>
 </footer>
 
 <!-- ════════════════════════════════════════
