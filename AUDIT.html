@@ -52,21 +52,18 @@ html.light {
   --surface: #ffffff;
 }
 
-/* ── LANGUAGE SYSTEM (ref v10.0) ── */
+/* ── LANGUAGE SYSTEM ── */
 .en { display: none; }
 .es { display: inline; }
 html[lang="en"] .es { display: none; }
 html[lang="en"] .en { display: inline; }
 html[lang="es"] .es { display: inline; }
 html[lang="es"] .en { display: none; }
-
-/* Block-level bilingual elements */
 .es-block { display: block; }
 .en-block { display: none; }
 html[lang="en"] .es-block { display: none; }
 html[lang="en"] .en-block { display: block; }
 
-/* ── LANG TOGGLE BUTTON ── */
 .lang-toggle {
   display: flex; gap: 2px;
   background: rgba(255,255,255,.08);
@@ -118,9 +115,7 @@ html.light .topbar { background: rgba(238,242,250,.97); border-bottom: 1px solid
 }
 html.light .tb-brand { color: var(--ink2); }
 .tb-brand strong { color: var(--accent); }
-
 .tb-right { display: flex; gap: 8px; align-items: center; }
-
 .btn-ctrl {
   background: none;
   border: 1px solid rgba(255,255,255,.15);
@@ -136,33 +131,22 @@ html.light .btn-ctrl:hover { border-color: var(--accent); color: var(--accent); 
 /* ── PRINT MEDIA ── */
 @media print {
   .topbar, .tab-bar { display: none !important; }
-
-  /* Print-all: show every tab panel */
   body.print-all .tab-panel {
     display: block !important;
     padding: 16px 0 32px !important;
     orphans: 4; widows: 4;
   }
-  /* Only break before panels that are NOT immediately after the header;
-     prevents blank pages from short panels. */
   body.print-all .tab-panel + .tab-panel {
     page-break-before: always;
     break-before: page;
   }
-  /* Panels with little content: avoid blank-page blowout */
   body.print-all .tab-panel .tab-footer {
     page-break-after: avoid;
     break-after: avoid;
   }
-
-  /* Normal CTRL+P: only show the active panel */
   body:not(.print-all) .tab-panel { display: none !important; }
   body:not(.print-all) .tab-panel.active { display: block !important; }
-
-  /* Hide global footer in print — replaced by running footer */
   .doc-footer { display: none !important; }
-
-  /* Show print running footer */
   .print-page-footer {
     display: flex !important;
     position: fixed;
@@ -176,11 +160,7 @@ html.light .btn-ctrl:hover { border-color: var(--accent); color: var(--accent); 
     align-items: center;
     z-index: 9999;
   }
-
-  /* Add bottom margin so content doesn't go under the footer */
   body { margin-bottom: 28pt; }
-
-  /* Print color palette */
   :root {
     --navy: #0f1f3d; --navy2: #1a3260; --slate: #2c4a7c; --steel: #4a6fa5;
     --fog: #e8edf5; --page: #fff; --white: #fff;
@@ -191,21 +171,15 @@ html.light .btn-ctrl:hover { border-color: var(--accent); color: var(--accent); 
     --accent: #e63946; --surface: #fff;
   }
   body { background: #fff !important; color: #1e293b !important; padding-top: 0 !important; }
-
   .card, .chart-box, .finding, .number-callout,
   .pillar-card, .omission-item { page-break-inside: avoid; }
-
   .tab-footer { page-break-inside: avoid; border-top-color: #cbd5e1 !important; }
   .tf-author { color: #1e293b !important; }
   .tf-original { color: #475569 !important; }
-
   canvas { display: block !important; max-width: 100% !important; }
-
   .header { background: #0f1f3d !important; }
   .summary-strip { background: #0f1f3d !important; }
-
   thead th { background: #0f1f3d !important; color: #fff !important; }
-
   @page { margin: 14mm 14mm 22mm; size: A4; }
   * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 }
@@ -549,8 +523,6 @@ td strong { color: var(--ink); }
 
 /* ── DIVIDER ─────────────────── */
 hr.div { border: none; border-top: 1px solid var(--rule); margin: 28px 0; }
-
-/* ── SPACER ──────────────────── */
 .mt-20 { margin-top: 20px; }
 .mt-28 { margin-top: 28px; }
 
@@ -667,7 +639,6 @@ html.dark .sources-list li a { color: #93c5fd; }
 
 /* ── PRINT PAGE FOOTER ───────── */
 @media print {
-  /* Running footer on every printed page */
   .print-page-footer {
     display: block !important;
     position: fixed;
@@ -681,7 +652,6 @@ html.dark .sources-list li a { color: #93c5fd; }
     justify-content: space-between;
   }
 }
-/* Hidden in screen mode */
 .print-page-footer { display: none; }
 html.dark .section-title  { color: #c8d8f0; }
 html.dark .section-eyebrow { color: #e05252; }
@@ -744,7 +714,8 @@ html.dark small           { color: #6a7a9a; }
 ════════════════════════════════════════ -->
 <nav class="tab-bar">
   <div class="tab-bar-inner">
-    <button class="tab-btn active" onclick="showTab('resumen')"><span class="es">Resumen Ejecutivo</span><span class="en">Executive Summary</span></button>
+    <button class="tab-btn active" onclick="showTab('sintesis')"><span class="es">Síntesis · 00</span><span class="en">Synopsis · 00</span></button>
+    <button class="tab-btn" onclick="showTab('resumen')"><span class="es">Resumen Ejecutivo</span><span class="en">Executive Summary</span></button>
     <button class="tab-btn" onclick="showTab('cronologia')"><span class="es">NT-I/II · Cronología</span><span class="en">NT-I/II · Timeline</span></button>
     <button class="tab-btn" onclick="showTab('tecnologia')"><span class="es">NT-III · Tecnología</span><span class="en">NT-III · Technology</span></button>
     <button class="tab-btn" onclick="showTab('socioeconomico')"><span class="es">NT-IV · ACB</span><span class="en">NT-IV · CBA</span></button>
@@ -760,8 +731,176 @@ html.dark small           { color: #6a7a9a; }
 ════════════════════════════════════════ -->
 <div class="content">
 
-<!-- ─── TAB: RESUMEN ─────────────────── -->
-<div class="tab-panel active" id="tab-resumen">
+<!-- ─── TAB: SÍNTESIS · 00 ───────────────── -->
+<div class="tab-panel active" id="tab-sintesis">
+  <div class="section-head">
+    <div class="section-eyebrow"><span class="es">Corpus de Auditoría · SNIP 17248 · v2.0</span><span class="en">Audit Corpus · SNIP 17248 · v2.0</span></div>
+    <div class="section-title"><span class="es">Resumen Final Detallado</span><span class="en">Detailed Final Summary</span></div>
+    <div class="section-desc"><span class="es">Síntesis estructurada del corpus completo. Autoría técnica: Dr. Ing. Carlos Bonnelly Ginebra. Síntesis: Ing. Piter J. Bonilla D. · CODIA #17378.</span><span class="en">Structured synthesis of the full corpus. Technical authorship: Dr. Ing. Carlos Bonnelly Ginebra. Synthesis: Ing. Piter J. Bonilla D. · CODIA #17378.</span></div>
+  </div>
+
+  <!-- VISIÓN GENERAL -->
+  <div class="finding critical">
+    <div class="finding-tag"><span class="es">Visión General</span><span class="en">Overview</span></div>
+    <div class="finding-title"><span class="es">El corpus y su tesis central</span><span class="en">The corpus and its central thesis</span></div>
+    <div class="finding-body">
+      <span class="es">El expediente se presenta como síntesis ejecutiva de las Notas Técnicas I a V, más dos Libros Maestros de Excel, sobre el procedimiento FITRAM-CCC-LP-2025-0001 y el SNIP 17248. La conclusión central <strong>no afirma que el proyecto sea inviable</strong>, sino que la documentación disponible es <strong>insuficiente</strong> para justificar una decisión de esa magnitud con el nivel de robustez, trazabilidad y reproducibilidad exigible a una inversión pública de USD 932.8 millones.</span>
+      <span class="en">The file is presented as an executive synthesis of Technical Notes I through V, plus two Master Excel Workbooks, covering procedure FITRAM-CCC-LP-2025-0001 and SNIP 17248. The central conclusion <strong>does not assert that the project is unviable</strong>, but rather that the available documentation is <strong>insufficient</strong> to justify a decision of this magnitude with the level of robustness, traceability and reproducibility required for a public investment of USD 932.8 million.</span>
+    </div>
+  </div>
+
+  <!-- TESIS CENTRAL — TABLA DE 5 DIMENSIONES -->
+  <div class="section-head mt-20">
+    <div class="section-eyebrow"><span class="es">Tesis Central</span><span class="en">Central Thesis</span></div>
+    <div class="section-title"><span class="es">Déficit documental, aritmético y metodológico en cinco planos</span><span class="en">Documentary, arithmetic and methodological deficit across five dimensions</span></div>
+    <div class="section-desc"><span class="es">Los hallazgos son acumulativos e independientes: refutar uno no debilita a los restantes.</span><span class="en">The findings are cumulative and independent: refuting one does not weaken the rest.</span></div>
+  </div>
+
+  <table>
+    <thead><tr>
+      <th><span class="es">Dimensión</span><span class="en">Dimension</span></th>
+      <th><span class="es">Hallazgo central</span><span class="en">Key finding</span></th>
+    </tr></thead>
+    <tbody>
+      <tr><td><strong><span class="es">Institucional</span><span class="en">Institutional</span></strong></td><td><span class="es">Convocatoria (sept 2025) precedió en 197 días a la asignación del Código SNIP 17248 (mar 2026), invirtiendo el ciclo normativo (Ley 498-06, Decreto 493-07).</span><span class="en">The public call (Sept 2025) preceded the assignment of SNIP Code 17248 (Mar 2026) by 197 days, inverting the required regulatory sequence (Law 498-06, Decree 493-07).</span></td></tr>
+      <tr><td><strong><span class="es">Jurídico-Procedimental</span><span class="en">Legal-Procedural</span></strong></td><td><span class="es">Consultas técnicas no respondidas; evaluación como habilitación de facto (99.8 vs 97.4, ambos 35/35 en equipos); posible conflicto de interés no gestionado.</span><span class="en">Technical consultations unanswered; evaluation as de facto qualification (99.8 vs 97.4, both 35/35 in equipment); possible unmanaged conflict of interest.</span></td></tr>
+      <tr><td><strong><span class="es">Tecnológica</span><span class="en">Technological</span></strong></td><td><span class="es">93.2% de registros no trazables; resultado no reproducible con la aritmética visible; monorriel 0/36 victorias en sensibilidad.</span><span class="en">93.2% of records not traceable; result not reproducible from visible arithmetic; monorail 0/36 wins in sensitivity analysis.</span></td></tr>
+      <tr><td><strong><span class="es">Socioeconómica</span><span class="en">Socioeconomic</span></strong></td><td><span class="es">Rentabilidad individual acreditada (TIR 10.55%, VANE +USD 268.4M), pero no eficiencia comparativa. Con TSD 10%, el VANE se vuelve negativo (−USD 34.4M).</span><span class="en">Individual profitability demonstrated (IRR 10.55%, SNPV +USD 268.4M), but not comparative efficiency. At 10% SDR, SNPV turns negative (−USD 34.4M).</span></td></tr>
+      <tr><td><strong><span class="es">Financiera</span><span class="en">Financial</span></strong></td><td><span class="es">VAN publicado (+USD 1,099.7M) no concilia con flujos reconstruidos; diferencia USD 1,823.5M; OPEX de mantenimiento y energía en USD 0 durante 50 años.</span><span class="en">Published NPV (+USD 1,099.7M) does not reconcile with reconstructed cash flows; difference USD 1,823.5M; maintenance and energy OPEX at USD 0 for 50 years.</span></td></tr>
+    </tbody>
+  </table>
+
+  <!-- HALLAZGO INSTITUCIONAL NT-I -->
+  <div class="section-head mt-20">
+    <div class="section-eyebrow"><span class="es">NT-I · Hallazgo Institucional</span><span class="en">NT-I · Institutional Finding</span></div>
+    <div class="section-title"><span class="es">La falla cronológica: 197 días de anticipación ilegal</span><span class="en">The chronological failure: 197 days of illegal anticipation</span></div>
+  </div>
+  <div class="finding critical">
+    <div class="finding-body">
+      <span class="es"><strong>Convocatoria pública:</strong> 9–10 de septiembre de 2025.<br><strong>Asignación del Código SNIP 17248:</strong> 25 de marzo de 2026.<br><strong>Diferencia: 197 días.</strong><br><br>El Código SNIP es el requisito previo para licitar. Al obtenerlo 197 días después de la convocatoria, se invierte por completo la secuencia legal exigida. La certificación de fondos cubría solo RD$28,462.9M de los RD$58,672.5M requeridos (48.5%).</span>
+      <span class="en"><strong>Public call:</strong> September 9–10, 2025.<br><strong>Assignment of SNIP Code 17248:</strong> March 25, 2026.<br><strong>Difference: 197 days.</strong><br><br>The SNIP Code is the prerequisite for tendering. By obtaining it 197 days after the call, the required legal sequence is completely inverted. The funding certification covered only RD$28,462.9M of the RD$58,672.5M required (48.5%).</span>
+    </div>
+  </div>
+
+  <!-- HALLAZGO JURÍDICO-PROCEDIMENTAL NT-II -->
+  <div class="section-head mt-20">
+    <div class="section-eyebrow"><span class="es">NT-II · Hallazgo Jurídico-Procedimental</span><span class="en">NT-II · Legal-Procedural Finding</span></div>
+    <div class="section-title"><span class="es">Tres banderas: silencio, falsa competencia y conflicto de interés</span><span class="en">Three flags: silence, false competition and conflict of interest</span></div>
+  </div>
+  <div class="finding critical">
+    <div class="finding-body">
+      <span class="es"><strong>Bandera 1 — Silencio Administrativo:</strong> Las consultas técnicas del Consorcio Neovías, presentadas en plazo, no fueron respondidas.<br><br><strong>Bandera 2 — Habilitación de Facto:</strong> Oferente CNMI: 99.8/100 · Oferente CTSD: 97.4/100. Ambos obtuvieron 35/35 en equipos. La diferencia de 2.4 puntos con empate en el criterio más crítico convierte la evaluación en un trámite, no en un instrumento de selección.<br><br><strong>Bandera 3 — Conflicto de Interés (Nivel 2):</strong> El consultor técnico de la iniciativa privada APP (2021) pasó a ser Director Ejecutivo de FITRAM y Presidente del Comité de Compras (2025). No consta declaración formal de intereses ni evaluación de incompatibilidad en el expediente.</span>
+      <span class="en"><strong>Flag 1 — Administrative Silence:</strong> Technical consultations submitted by Consorcio Neovías within the deadline were never answered.<br><br><strong>Flag 2 — De Facto Qualification:</strong> Bidder CNMI: 99.8/100 · Bidder CTSD: 97.4/100. Both scored 35/35 on equipment. The 2.4-point difference with a tie on the most critical criterion turns the evaluation into a formality, not a selection instrument.<br><br><strong>Flag 3 — Conflict of Interest (Level 2):</strong> The technical consultant for the private APP initiative (2021) became Executive Director of FITRAM and Chair of the Procurement Committee (2025). No formal declaration of interests or incompatibility assessment appears in the file.</span>
+    </div>
+  </div>
+
+  <!-- HALLAZGO TECNOLÓGICO NT-III -->
+  <div class="section-head mt-20">
+    <div class="section-eyebrow"><span class="es">NT-III · Hallazgo Tecnológico</span><span class="en">NT-III · Technological Finding</span></div>
+    <div class="section-title"><span class="es">Caja negra, colapso operativo y 0/36 victorias</span><span class="en">Black box, operational collapse and 0/36 wins</span></div>
+  </div>
+  <div class="finding critical">
+    <div class="finding-body">
+      <span class="es"><strong>93.2% de los 88 registros</strong> no son trazables (solo 1 alcanza Categoría A de trazabilidad plena).<br><br><strong>Inconsistencia aritmética:</strong> Resultado publicado: Monorriel 0.700 / Metro 0.600. Reconstrucción: Monorriel 0.824 / Metro 0.699. La fórmula de agregación no existe en el expediente.<br><br><strong>Análisis de robustez (36 combinaciones):</strong> Metro gana en 36/36 escenarios (100%). Monorriel: 0/36.<br><br><strong>Ficción de la capacidad:</strong> La ventaja del monorriel depende de headway de 90s sin validación operativa. A 180s, la capacidad cae a 11,240 pphps — por debajo de la demanda crítica de 12,500 pphps. El sistema nace colapsado desde el Día 1.</span>
+      <span class="en"><strong>93.2% of 88 records</strong> are not traceable (only 1 reaches Category A full traceability).<br><br><strong>Arithmetic inconsistency:</strong> Published result: Monorail 0.700 / Metro 0.600. Reconstruction: Monorail 0.824 / Metro 0.699. The aggregation formula does not exist in the file.<br><br><strong>Robustness analysis (36 combinations):</strong> Metro wins in 36/36 scenarios (100%). Monorail: 0/36.<br><br><strong>Capacity fiction:</strong> The monorail's advantage depends on a 90s headway with no operational validation. At 180s, capacity falls to 11,240 pphps — below the critical demand of 12,500 pphps. The system is born collapsed from Day 1.</span>
+    </div>
+  </div>
+
+  <!-- HALLAZGO SOCIOECONÓMICO NT-IV -->
+  <div class="section-head mt-20">
+    <div class="section-eyebrow"><span class="es">NT-IV · Hallazgo Socioeconómico</span><span class="en">NT-IV · Socioeconomic Finding</span></div>
+    <div class="section-title"><span class="es">Rentabilidad individual acreditada, eficiencia comparativa no demostrada</span><span class="en">Individual profitability demonstrated, comparative efficiency not proven</span></div>
+  </div>
+  <div class="finding verify">
+    <div class="finding-body">
+      <span class="es"><strong>Lo que el Anexo 7 sí demuestra:</strong> TIR Social 10.55% · VANE +USD 268.4M. El proyecto genera más beneficios sociales que costos bajo sus propias hipótesis.<br><br><strong>Lo que el Anexo 7 no demuestra:</strong> Eficiencia comparativa frente a alternativas tecnológicas. Analiza el monorriel de forma aislada sin contrafactual completo.<br><br><strong>Fragilidad:</strong> Con TSD del 10% (estándar regional), el VANE se vuelve negativo: −USD 34.4M.<br><br><strong>Asimetría direccional:</strong> Anexo 7 subestima beneficios (B/C publicado 1.16 vs. reconstruido ~1.25). Anexo 9 sobreestima radicalmente el valor financiero. Errores en direcciones opuestas en el mismo expediente.</span>
+      <span class="en"><strong>What Annex 7 does demonstrate:</strong> Social IRR 10.55% · SNPV +USD 268.4M. The project generates more social benefits than costs under its own assumptions.<br><br><strong>What Annex 7 does not demonstrate:</strong> Comparative efficiency against technological alternatives. It analyzes the monorail in isolation without a complete counterfactual.<br><br><strong>Fragility:</strong> At 10% SDR (regional standard), SNPV turns negative: −USD 34.4M.<br><br><strong>Directional asymmetry:</strong> Annex 7 understates benefits (published B/C 1.16 vs. reconstructed ~1.25). Annex 9 radically overstates financial value. Errors in opposite directions within the same file.</span>
+    </div>
+  </div>
+
+  <!-- HALLAZGO FINANCIERO NT-V -->
+  <div class="section-head mt-20">
+    <div class="section-eyebrow"><span class="es">NT-V · Hallazgo Financiero</span><span class="en">NT-V · Financial Finding</span></div>
+    <div class="section-title"><span class="es">El abismo financiero: USD 1,823.5M inexplicables</span><span class="en">The financial abyss: USD 1,823.5M unexplained</span></div>
+  </div>
+  <div class="finding critical">
+    <div class="finding-body">
+      <span class="es"><strong>Control C-13 — El hallazgo más incontestable:</strong><br>VAN publicado (Anexo 9): +USD 1,099.7M<br>VAN reconstruido con los propios flujos del Anexo 9: −USD 723.8M<br>Diferencia: <strong>USD 1,823.5M</strong> — casi el doble del costo total del proyecto.<br><br><strong>Manipulación de la TIR:</strong> Los 2 años de construcción fueron eliminados de la fórmula. Al adelantar artificialmente los flujos de explotación, la TIR aparece positiva cuando no lo sería con la cronología real.<br><br><strong>OPEX cero durante 50 años:</strong> El mantenimiento de vías y energía está proyectado en USD 0 durante toda la vida útil. Físicamente imposible. OPEX base: 0.92% del CAPEX. Brecha vs. estándar JICA: 44%.<br><br><strong>Incoherencias internas:</strong> Período de construcción: Anexo 7 = 5 años / Anexo 9 = 2 años. Demanda: Anexo 7 ≈ 174,722 viajes/día / Anexo 9 = 62.2M pax/año. El expediente carece de base paramétrica común.</span>
+      <span class="en"><strong>Control C-13 — The most incontestable finding:</strong><br>Published NPV (Annex 9): +USD 1,099.7M<br>Reconstructed NPV using Annex 9's own cash flows: −USD 723.8M<br>Difference: <strong>USD 1,823.5M</strong> — nearly twice the total project cost.<br><br><strong>IRR manipulation:</strong> The 2 construction years were removed from the formula. By artificially advancing operating cash flows, the IRR appears positive when it would not be under the real timeline.<br><br><strong>Zero OPEX for 50 years:</strong> Track maintenance and energy are projected at USD 0 for the entire useful life. Physically impossible. Base OPEX: 0.92% of CAPEX. Gap vs. JICA benchmark: 44%.<br><br><strong>Internal inconsistencies:</strong> Construction period: Annex 7 = 5 years / Annex 9 = 2 years. Demand: Annex 7 ≈ 174,722 trips/day / Annex 9 = 62.2M pax/year. The file lacks a common parametric base.</span>
+    </div>
+  </div>
+
+  <!-- MAPA DE CERTIDUMBRE -->
+  <div class="section-head mt-20">
+    <div class="section-eyebrow"><span class="es">Mapa de Certidumbre</span><span class="en">Certainty Map</span></div>
+    <div class="section-title"><span class="es">17 hallazgos consolidados · 0 refutados</span><span class="en">17 consolidated findings · 0 refuted</span></div>
+  </div>
+
+  <table>
+    <thead><tr>
+      <th><span class="es">Nivel</span><span class="en">Level</span></th>
+      <th><span class="es">Cantidad</span><span class="en">Count</span></th>
+      <th><span class="es">Naturaleza</span><span class="en">Nature</span></th>
+      <th><span class="es">Estado</span><span class="en">Status</span></th>
+    </tr></thead>
+    <tbody>
+      <tr>
+        <td><span class="badge badge-red"><span class="es">Nivel 1 — Evidencia suficiente</span><span class="en">Level 1 — Sufficient evidence</span></span></td>
+        <td><strong>12</strong></td>
+        <td><span class="es">Hechos aritméticos, cronológicos y documentales incontestables sin el Excel original</span><span class="en">Arithmetic, chronological and documentary facts incontestable without the original Excel</span></td>
+        <td><span class="badge badge-red"><span class="es">Ninguno refutado</span><span class="en">None refuted</span></span></td>
+      </tr>
+      <tr>
+        <td><span class="badge badge-amber"><span class="es">Nivel 2 — Requieren verificación</span><span class="en">Level 2 — Require verification</span></span></td>
+        <td><strong>5</strong></td>
+        <td><span class="es">Requieren documentación no pública (modelos Excel originales, declaraciones de conflicto de interés)</span><span class="en">Require non-public documentation (original Excel models, conflict of interest declarations)</span></td>
+        <td><span class="badge badge-amber"><span class="es">Ninguno refutado</span><span class="en">None refuted</span></span></td>
+      </tr>
+      <tr>
+        <td><strong><span class="es">Total refutados</span><span class="en">Total refuted</span></strong></td>
+        <td><strong>0</strong></td>
+        <td><span class="es">Dentro de la documentación incorporada al expediente revisado, no se identificaron refutaciones documentales de los hallazgos</span><span class="en">Within the documentation incorporated into the reviewed file, no documentary refutations of the findings were identified</span></td>
+        <td>—</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- CONCLUSIÓN GENERAL -->
+  <div class="summary-strip mt-28">
+    <h3><span class="es">Conclusión General</span><span class="en">General Conclusion</span></h3>
+    <div class="conclusion-text">
+      <span class="es">"El expediente acredita la existencia de documentación sustantiva, pero no acredita la robustez de la decisión. La selección del monorriel, la rentabilidad socioeconómica y la viabilidad financiera no están demostradas con el nivel de trazabilidad, reproducibilidad y sensibilidad exigible a una inversión pública de USD 932.8 millones."</span>
+      <span class="en">"The file demonstrates the existence of substantive documentation, but does not demonstrate the robustness of the decision. The selection of the monorail, socioeconomic profitability and financial viability are not demonstrated with the level of traceability, reproducibility and sensitivity required for a public investment of USD 932.8 million."</span>
+    </div>
+  </div>
+
+  <!-- ─── ACCESO DIRECTO AL ECOSISTEMA ─── -->
+  <div class="sources-section" style="margin-top:28px;">
+    <div class="sources-title"><span class="es">Acceso directo al ecosistema</span><span class="en">Direct access to the ecosystem</span></div>
+    <div class="sources-subtitle"><span class="es">Escanea el código QR o haz clic en los enlaces para acceder a los productos de la auditoría.</span><span class="en">Scan the QR code or click the links to access the audit products.</span></div>
+
+    <!-- Imagen QR única con los 4 códigos -->
+    <div style="text-align:center; margin:16px 0;">
+      <img src="QR.png" alt="QR - Dashboard, Infografía, Presentación y Podcast" style="max-width:100%; height:auto; max-height:300px; border:1px solid var(--rule); border-radius:8px;"/>
+    </div>
+
+    <!-- Enlaces directos (con iconos) -->
+    <ul class="sources-list" style="margin-top:12px;">
+      <li><strong>🌐</strong> <a href="https://visualcrp.com/AUDIT.html" target="_blank">Dashboard interactivo v2.0</a></li>
+      <li><strong>📊</strong> <a href="https://tinyurl.com/2m83z4ma" target="_blank">01A Infografía</a></li>
+      <li><strong>🧠</strong> <a href="https://tinyurl.com/mw92hat4" target="_blank">02A Presentación</a></li>
+      <li><strong>🎧</strong> <a href="https://tinyurl.com/anpxackc" target="_blank">03A Podcast · 34 min</a></li>
+    </ul>
+  </div>
+
+  <div class="tab-footer">
+    <div class="tf-author">Ing. Piter J. Bonilla D. &nbsp;·&nbsp; CODIA #17378 &nbsp;·&nbsp; <span class="es">30 de julio de 2026</span><span class="en">July 30, 2026</span></div>
+    <div class="tf-original"><span class="es">Auditoría original y autoría de los hallazgos: Dr. Ing. Carlos Bonnelly Ginebra (Notas Técnicas I–V)</span><span class="en">Original audit and authorship of findings: Dr. Ing. Carlos Bonnelly Ginebra (Technical Notes I–V)</span></div>
+  </div>
+</div>
+
+<!-- ─── TAB: RESUMEN EJECUTIVO ───────────────── -->
+<div class="tab-panel" id="tab-resumen">
   <div class="section-head">
     <div class="section-eyebrow"><span class="es">Visión General</span><span class="en">Overview</span></div>
     <div class="section-title"><span class="es">Resumen Ejecutivo del Corpus de Auditoría</span><span class="en">Executive Summary of the Audit Corpus</span></div>
@@ -1541,10 +1680,10 @@ function showTab(id) {
   document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   document.getElementById('tab-' + id).classList.add('active');
-  event.currentTarget.classList.add('active');
+  if (event && event.currentTarget) event.currentTarget.classList.add('active');
 }
 
-// ── LANGUAGE TOGGLE (ref v10.0) ────────
+// ── LANGUAGE TOGGLE ────────────
 function setLang(lang) {
   document.getElementById('html-root').setAttribute('lang', lang);
   document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
@@ -1554,7 +1693,7 @@ function setLang(lang) {
   if (typeof buildCharts === 'function') buildCharts();
 }
 
-// ── THEME TOGGLE ───────────────────────
+// ── THEME TOGGLE ───────────────
 function toggleTheme() {
   const h = document.getElementById('html-root');
   h.classList.toggle('light');
@@ -1563,7 +1702,7 @@ function toggleTheme() {
   localStorage.setItem('audit-theme', isLight ? 'light' : 'dark');
 }
 
-// ── PRINT COMPLETO ─────────────────────
+// ── PRINT ──────────────────────
 function prepPrint() {
   document.body.classList.add('print-all');
   window.print();
@@ -1580,7 +1719,6 @@ Chart.defaults.font.size = 12;
 Chart.defaults.plugins.legend.labels.boxWidth = 12;
 Chart.defaults.plugins.legend.labels.padding = 14;
 
-// Dynamic colors aware of dark/light mode
 function isDark() { return !document.getElementById('html-root').classList.contains('light'); }
 
 const NAVY  = '#0f1f3d';
@@ -1593,7 +1731,7 @@ const FOG   = isDark() ? '#1a2740' : '#e8edf5';
 const GRID  = isDark() ? 'rgba(200,216,240,.08)' : '#e8edf5';
 const TICK  = isDark() ? '#8898b8' : '#64748b';
 
-// ── CHART REGISTRY — destroy & rebuild on lang change ──
+// ── CHART REGISTRY ──────────────
 var _charts = {};
 function destroyCharts() {
   Object.values(_charts).forEach(c => { try { c.destroy(); } catch(e){} });
@@ -1893,10 +2031,10 @@ function buildCharts() {
   });
 }
 
-// Build charts on load — called AFTER all functions defined
+// ── BUILD CHARTS ──────────────────
 buildCharts();
 
-// ── RESTORE PREFERENCES (runs last) ───
+// ── RESTORE PREFERENCES ──────────
 (function() {
   const savedTheme = localStorage.getItem('audit-theme');
   const savedLang  = localStorage.getItem('audit-lang');
@@ -1905,10 +2043,8 @@ buildCharts();
     h.classList.add('light');
     h.classList.remove('dark');
   }
-  // setLang rebuilds charts with correct lang labels
   setLang(savedLang || 'es');
 })();
-
 
 </script>
 </body>
