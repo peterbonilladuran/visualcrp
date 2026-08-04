@@ -3,1495 +3,808 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>El Embudo que Nadie Quiere Ver — v1.0</title>
+<title>El Embudo que Nadie Quiere Ver — Dashboard</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
-  /* ── DARK MODE (default) ── */
-  :root {
-    --bg: #070e1c;
-    --surface: #0c1525;
-    --surface2: #1e2535;
-    --border: rgba(200,216,240,.1);
-    --accent: #e85d26;
-    --accent2: #f0a500;
-    --text: #c8d8f0;
-    --text-muted: #8898b8;
-    --green: #22c55e;
-    --red: #ef4444;
-    --blue: #3b82f6;
-    --font-mono: 'Courier New', monospace;
-    --font-body: 'Georgia', serif;
-    --font-ui: system-ui, -apple-system, sans-serif;
-  }
+/* ── DARK MODE (default) ── */
+:root {
+  --bg: #070e1c;
+  --surface: #0c1525;
+  --surface2: #1a2a45;
+  --border: rgba(200,216,240,.1);
+  --accent: #e85d26;
+  --accent2: #f0a500;
+  --text: #c8d8f0;
+  --text-muted: #8898b8;
+  --green: #22c55e;
+  --red: #ef4444;
+  --blue: #3b82f6;
+  --font-mono: 'Courier New', monospace;
+  --font-body: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --font-ui: system-ui, -apple-system, sans-serif;
+  --topbar-h: 48px;
+}
 
-  /* ── LIGHT MODE ── */
-  html.light {
-    --bg: #f4f6fa;
-    --surface: #ffffff;
-    --surface2: #e8edf5;
-    --border: #cbd5e1;
-    --accent: #e85d26;
-    --accent2: #b45309;
-    --text: #1e293b;
-    --text-muted: #475569;
-    --green: #166534;
-    --red: #b91c1c;
-    --blue: #1d4ed8;
-  }
+/* ── LIGHT MODE ── */
+html.light {
+  --bg: #f4f6fa;
+  --surface: #ffffff;
+  --surface2: #e8edf5;
+  --border: #cbd5e1;
+  --accent: #e85d26;
+  --accent2: #b45309;
+  --text: #1e293b;
+  --text-muted: #475569;
+  --green: #166534;
+  --red: #b91c1c;
+  --blue: #1d4ed8;
+}
 
-  /* ── LANGUAGE SYSTEM (idéntico al AUDIT.html) ── */
-  .en { display: none; }
-  .es { display: inline; }
-  html[lang="en"] .es { display: none; }
-  html[lang="en"] .en { display: inline; }
-  html[lang="es"] .es { display: inline; }
-  html[lang="es"] .en { display: none; }
-  .es-block { display: block; }
-  .en-block { display: none; }
-  html[lang="en"] .es-block { display: none; }
-  html[lang="en"] .en-block { display: block; }
+/* ── LANGUAGE SYSTEM ── */
+.en { display: none; }
+.es { display: inline; }
+html[lang="en"] .es { display: none; }
+html[lang="en"] .en { display: inline; }
+html[lang="es"] .es { display: inline; }
+html[lang="es"] .en { display: none; }
+.es-block { display: block; }
+.en-block { display: none; }
+html[lang="en"] .es-block { display: none; }
+html[lang="en"] .en-block { display: block; }
 
-  * { box-sizing: border-box; margin: 0; padding: 0; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: var(--font-body);
-    font-size: 16px;
-    line-height: 1.7;
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 2rem 1.5rem 4rem;
-  }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.6;
+  padding-top: var(--topbar-h);
+  transition: background .2s, color .2s;
+  min-height: 100vh;
+}
 
-  /* HEADER */
-  .header {
-    border-left: 4px solid var(--accent);
-    padding: 2rem 0 2rem 2rem;
-    margin-bottom: 3rem;
-  }
-  .header .eyebrow {
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    color: var(--accent);
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    margin-bottom: 0.75rem;
-  }
-  .header h1 {
-    font-family: var(--font-body);
-    font-size: clamp(1.6rem, 4vw, 2.4rem);
-    font-weight: 700;
-    line-height: 1.2;
-    color: var(--text);
-    margin-bottom: 0.5rem;
-  }
-  .header .subtitle {
-    font-size: 1rem;
-    color: var(--text-muted);
-    font-style: italic;
-    margin-bottom: 1.5rem;
-  }
-  .meta-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 0.5rem;
-    margin-top: 1.25rem;
-  }
-  .meta-item {
-    font-family: var(--font-ui);
-    font-size: 0.8rem;
-    color: var(--text-muted);
-  }
-  .meta-item strong { color: var(--text); }
+/* ── TOPBAR ── */
+.topbar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 300;
+  height: var(--topbar-h);
+  background: rgba(7,14,28,.95);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 24px;
+  transition: background .2s;
+}
+html.light .topbar {
+  background: rgba(244,246,250,.97);
+}
+.tb-brand {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.tb-brand strong { color: var(--accent); }
+.tb-right { display: flex; gap: 8px; align-items: center; }
+.btn-ctrl {
+  background: none;
+  border: 1px solid rgba(255,255,255,.15);
+  color: rgba(255,255,255,.55);
+  padding: 4px 14px; border-radius: 20px; cursor: pointer;
+  font-size: 0.6rem; font-weight: 600; letter-spacing: .04em;
+  font-family: var(--font-mono);
+  transition: all .18s; white-space: nowrap;
+}
+.btn-ctrl:hover { border-color: var(--accent); color: var(--accent); }
+html.light .btn-ctrl { border-color: var(--border); color: var(--text-muted); }
+html.light .btn-ctrl:hover { border-color: var(--accent); color: var(--accent); }
+.lang-toggle {
+  display: flex; gap: 2px;
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.15);
+  border-radius: 20px; padding: 2px;
+}
+html.light .lang-toggle {
+  background: var(--surface2);
+  border-color: var(--border);
+}
+.lang-btn {
+  background: none; border: none;
+  padding: 2px 10px; border-radius: 16px;
+  cursor: pointer; font-size: 0.6rem; font-weight: 700;
+  letter-spacing: .04em; color: rgba(255,255,255,.45);
+  font-family: var(--font-mono);
+  transition: all .18s;
+}
+.lang-btn.active { background: var(--accent); color: #fff; }
+html.light .lang-btn { color: var(--text-muted); }
+html.light .lang-btn.active { background: var(--accent); color: #fff; }
 
-  /* NOTA METODOLÓGICA */
-  .metodologia {
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-top: 3px solid var(--accent2);
-    border-radius: 4px;
-    padding: 1.5rem;
-    margin-bottom: 3rem;
-  }
-  .metodologia h2 {
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    letter-spacing: 0.12em;
-    color: var(--accent2);
-    text-transform: uppercase;
-    margin-bottom: 1rem;
-  }
-  .nivel-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 1rem;
-    margin-top: 1rem;
-  }
-  .nivel-card {
-    padding: 1rem;
-    border-radius: 4px;
-    border-left: 3px solid;
-  }
-  .nivel-card.n1 { background: rgba(34,197,94,0.08); border-color: var(--green); }
-  .nivel-card.n2 { background: rgba(59,130,246,0.08); border-color: var(--blue); }
-  .nivel-card.n3 { background: rgba(240,165,0,0.08); border-color: var(--accent2); }
-  .nivel-card .nivel-label {
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    margin-bottom: 0.4rem;
-    font-weight: 700;
-  }
-  .n1 .nivel-label { color: var(--green); }
-  .n2 .nivel-label { color: var(--blue); }
-  .n3 .nivel-label { color: var(--accent2); }
-  .nivel-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; }
+/* ── TABS ── */
+.tab-bar {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  position: sticky; top: var(--topbar-h); z-index: 100;
+  overflow-x: auto; scrollbar-width: none;
+  padding: 0 24px;
+}
+.tab-bar::-webkit-scrollbar { display: none; }
+.tab-bar-inner { display: flex; max-width: 1200px; margin: 0 auto; }
+.tab-btn {
+  background: none; border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 0.65rem; font-weight: 500;
+  padding: 12px 16px;
+  white-space: nowrap;
+  border-bottom: 2px solid transparent;
+  font-family: var(--font-body);
+  transition: color .15s, border-color .15s;
+}
+.tab-btn:hover { color: var(--text); }
+.tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
 
-  /* BADGE DE NIVEL */
-  .badge {
-    display: inline-block;
-    font-family: var(--font-mono);
-    font-size: 0.65rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    padding: 0.2rem 0.5rem;
-    border-radius: 2px;
-    vertical-align: middle;
-    margin-left: 0.5rem;
-  }
-  .badge-n1 { background: rgba(34,197,94,0.15); color: var(--green); border: 1px solid rgba(34,197,94,0.3); }
-  .badge-n2 { background: rgba(59,130,246,0.15); color: var(--blue); border: 1px solid rgba(59,130,246,0.3); }
-  .badge-n3 { background: rgba(240,165,0,0.15); color: var(--accent2); border: 1px solid rgba(240,165,0,0.3); }
+/* ── CONTENT ── */
+.content { max-width: 1100px; margin: 0 auto; padding: 32px 24px 64px; }
+.tab-panel { display: none; animation: fadeIn .3s ease; }
+.tab-panel.active { display: block; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
 
-  /* SECCIONES */
-  .section {
-    margin-bottom: 3rem;
-    padding-bottom: 2rem;
-    border-bottom: 1px solid var(--border);
-  }
-  .section:last-of-type { border-bottom: none; }
+/* ── SECTION HEADS ── */
+.section-head { margin-bottom: 24px; padding-bottom: 14px; border-bottom: 1px solid var(--border); }
+.section-eyebrow { font-family: var(--font-mono); font-size: 0.55rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--accent); margin-bottom: 4px; }
+.section-title { font-size: 1.3rem; font-weight: 700; color: var(--text); line-height: 1.25; }
+.section-desc { font-size: 0.8rem; color: var(--text-muted); margin-top: 4px; max-width: 780px; }
 
-  .section-header {
-    display: flex;
-    align-items: baseline;
-    gap: 1rem;
-    margin-bottom: 1.25rem;
-    flex-wrap: wrap;
-  }
-  .section-num {
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
-    color: var(--accent);
-    letter-spacing: 0.1em;
-  }
-  .section h2 {
-    font-family: var(--font-body);
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: var(--text);
-  }
-  .section p { margin-bottom: 1rem; color: var(--text); }
-  .section p:last-child { margin-bottom: 0; }
+/* ── CARDS ── */
+.card { background: var(--surface); border: 1px solid var(--border); padding: 18px 20px; margin-bottom: 16px; border-radius: 4px; }
+.card-title { font-family: var(--font-mono); font-size: 0.6rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 12px; }
 
-  /* TABLAS */
-  .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+/* ── KPI STRIP ── */
+.kpi-strip { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1px; background: var(--border); border-radius: 4px; overflow: hidden; margin-bottom: 20px; }
+.kpi { background: var(--surface); padding: 14px 16px; text-align: center; }
+.kn { font-family: var(--font-mono); font-size: 1.6rem; font-weight: 700; color: var(--accent2); line-height: 1.1; }
+.kn.green { color: var(--green); }
+.kn.red { color: var(--red); }
+.kn.blue { color: var(--blue); }
+.kl { font-size: 0.65rem; color: var(--text-muted); margin-top: 2px; }
 
-  .data-table {
-    width: 100%;
-    min-width: 480px;
-    border-collapse: collapse;
-    margin: 1.25rem 0;
-    font-family: var(--font-ui);
-    font-size: 0.85rem;
-  }
-  .data-table th {
-    background: var(--surface2);
-    color: var(--text-muted);
-    font-weight: 600;
-    font-size: 0.75rem;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    padding: 0.6rem 0.8rem;
-    text-align: left;
-    border-bottom: 2px solid var(--border);
-  }
-  .data-table td {
-    padding: 0.6rem 0.8rem;
-    border-bottom: 1px solid var(--border);
-    color: var(--text);
-    vertical-align: top;
-  }
-  .data-table tr:last-child td { border-bottom: none; }
-  .data-table tr:hover td { background: rgba(255,255,255,0.02); }
-  .data-table .num { font-family: var(--font-mono); color: var(--accent2); font-weight: 700; }
-  .data-table .highlight { color: var(--accent2); font-weight: 600; }
-  .data-table .source { color: var(--text-muted); font-size: 0.78rem; }
+/* ── TABLES ── */
+.tbl-wrap { overflow-x: auto; margin-bottom: 16px; border: 1px solid var(--border); border-radius: 4px; }
+table { width: 100%; border-collapse: collapse; font-size: 0.78rem; }
+thead { background: var(--surface2); }
+thead th { font-family: var(--font-mono); font-size: 0.55rem; letter-spacing: .08em; text-transform: uppercase; color: var(--text-muted); padding: 8px 12px; text-align: left; border-bottom: 1px solid var(--border); }
+tbody td { padding: 7px 12px; border-bottom: 1px solid var(--border); color: var(--text); vertical-align: top; }
+tbody tr:last-child td { border-bottom: none; }
+tbody tr:hover td { background: rgba(255,255,255,.02); }
+.badge { display: inline-block; padding: 1px 8px; font-size: 0.55rem; font-weight: 700; border-radius: 2px; letter-spacing: .06em; text-transform: uppercase; }
+.badge-n1 { background: rgba(34,197,94,.15); color: var(--green); border: 1px solid rgba(34,197,94,.3); }
+.badge-n2 { background: rgba(59,130,246,.15); color: var(--blue); border: 1px solid rgba(59,130,246,.3); }
+.badge-n3 { background: rgba(240,165,0,.15); color: var(--accent2); border: 1px solid rgba(240,165,0,.3); }
 
-  /* KPI CARDS */
-  .kpi-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
-    gap: 1rem;
-    margin: 1.5rem 0;
-  }
-  .kpi-card {
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 1.25rem;
-    text-align: center;
-  }
-  .kpi-value {
-    font-family: var(--font-mono);
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: var(--accent2);
-    line-height: 1.1;
-  }
-  .kpi-label {
-    font-family: var(--font-ui);
-    font-size: 0.75rem;
-    color: var(--text-muted);
-    margin-top: 0.4rem;
-    line-height: 1.3;
-  }
-  .kpi-card.green .kpi-value { color: var(--green); }
-  .kpi-card.red .kpi-value { color: var(--red); }
-  .kpi-card.blue .kpi-value { color: var(--blue); }
+/* ── CHART BOX ── */
+.chart-box { background: var(--surface); border: 1px solid var(--border); border-radius: 4px; padding: 18px 16px; margin-bottom: 16px; }
+.chart-box canvas { max-height: 260px; width: 100% !important; }
 
-  /* INFERENCIA BOX */
-  .inferencia {
-    background: rgba(240,165,0,0.06);
-    border: 1px solid rgba(240,165,0,0.25);
-    border-left: 3px solid var(--accent2);
-    border-radius: 4px;
-    padding: 1rem 1.25rem;
-    margin: 1.25rem 0;
-    font-size: 0.9rem;
-  }
-  .inferencia .inf-label {
-    font-family: var(--font-mono);
-    font-size: 0.65rem;
-    color: var(--accent2);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    margin-bottom: 0.4rem;
-  }
+/* ── INFERENCE BOX ── */
+.inferencia { background: rgba(240,165,0,.06); border: 1px solid rgba(240,165,0,.25); border-left: 3px solid var(--accent2); border-radius: 4px; padding: 12px 16px; margin: 12px 0; font-size: 0.85rem; }
+.inferencia .inf-label { font-family: var(--font-mono); font-size: 0.55rem; color: var(--accent2); letter-spacing: .1em; text-transform: uppercase; margin-bottom: 4px; }
+.advertencia { background: rgba(232,93,38,.08); border: 1px solid rgba(232,93,38,.3); border-left: 3px solid var(--accent); border-radius: 4px; padding: 12px 16px; margin: 12px 0; font-size: 0.85rem; }
+.advertencia .adv-label { font-family: var(--font-mono); font-size: 0.55rem; color: var(--accent); letter-spacing: .1em; text-transform: uppercase; margin-bottom: 4px; }
 
-  /* ADVERTENCIA */
-  .advertencia {
-    background: rgba(232,93,38,0.08);
-    border: 1px solid rgba(232,93,38,0.3);
-    border-left: 3px solid var(--accent);
-    border-radius: 4px;
-    padding: 1rem 1.25rem;
-    margin: 1.25rem 0;
-    font-size: 0.9rem;
-  }
-  .advertencia .adv-label {
-    font-family: var(--font-mono);
-    font-size: 0.65rem;
-    color: var(--accent);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    margin-bottom: 0.4rem;
-  }
+/* ── ECOSISTEMA ── */
+.sources-section { margin-top: 20px; padding: 16px 20px; background: var(--surface); border: 1px solid var(--border); border-left: 4px solid var(--blue); border-radius: 0 4px 4px 0; }
+.sources-title { font-family: var(--font-mono); font-size: 0.6rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--blue); margin-bottom: 4px; }
+.sources-subtitle { font-size: 0.78rem; color: var(--text-muted); font-style: italic; margin-bottom: 12px; }
+.sources-list { list-style: none; display: flex; flex-direction: column; gap: 6px; padding: 0; }
+.sources-list li { display: flex; align-items: baseline; gap: 8px; font-size: 0.78rem; color: var(--text-muted); }
+.sources-list li strong { color: var(--text); min-width: 32px; }
+.sources-list li a { color: var(--blue); text-decoration: none; font-weight: 500; transition: color .15s; }
+.sources-list li a:hover { color: var(--accent); text-decoration: underline; }
 
-  /* MODELO PASO A PASO */
-  .modelo-steps {
-    counter-reset: step;
-    margin: 1.25rem 0;
-  }
-  .step {
-    display: grid;
-    grid-template-columns: auto 1fr auto;
-    gap: 0.75rem;
-    align-items: center;
-    padding: 0.6rem 0.8rem;
-    border-bottom: 1px solid var(--border);
-    font-family: var(--font-ui);
-    font-size: 0.85rem;
-  }
-  .step:last-child { border-bottom: none; }
-  .step-num {
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
-    color: var(--text-muted);
-    min-width: 1.5rem;
-  }
-  .step-op { color: var(--text); }
-  .step-result {
-    font-family: var(--font-mono);
-    font-weight: 700;
-    color: var(--accent2);
-    text-align: right;
-    white-space: nowrap;
-  }
+/* ── GRID ── */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+@media (max-width: 700px) { .grid-2 { grid-template-columns: 1fr; } }
 
-  /* COMPARACIÓN VISUAL */
-  .comparacion {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-    margin: 1.5rem 0;
-  }
-  @media (max-width: 600px) { .comparacion { grid-template-columns: 1fr; } }
-  .comp-card {
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 1.25rem;
-  }
-  .comp-card.win { border-top: 3px solid var(--green); }
-  .comp-card.lose { border-top: 3px solid var(--red); }
-  .comp-title {
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    margin-bottom: 0.75rem;
-  }
-  .comp-card.win .comp-title { color: var(--green); }
-  .comp-card.lose .comp-title { color: var(--red); }
-  .comp-big {
-    font-family: var(--font-mono);
-    font-size: 1.6rem;
-    font-weight: 700;
-    margin-bottom: 0.25rem;
-  }
-  .comp-card.win .comp-big { color: var(--green); }
-  .comp-card.lose .comp-big { color: var(--red); }
-  .comp-sub { font-size: 0.8rem; color: var(--text-muted); }
+/* ── FOOTER ── */
+.footer { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border); font-family: var(--font-mono); font-size: 0.55rem; color: var(--text-muted); text-align: center; line-height: 1.8; }
+.footer strong { color: var(--text); }
 
-  /* BARRA DE PROGRESO */
-  .progress-wrap { margin: 1.5rem 0; }
-  .progress-item { margin-bottom: 1rem; }
-  .progress-label {
-    display: flex;
-    justify-content: space-between;
-    font-family: var(--font-ui);
-    font-size: 0.8rem;
-    color: var(--text-muted);
-    margin-bottom: 0.3rem;
-  }
-  .progress-label .pct { font-family: var(--font-mono); font-weight: 700; }
-  .progress-bar {
-    height: 8px;
-    background: var(--border);
-    border-radius: 4px;
-    overflow: hidden;
-  }
-  .progress-fill {
-    height: 100%;
-    border-radius: 4px;
-    transition: width 0.3s;
-  }
-
-  /* PREGUNTA FINAL */
-  .pregunta-final {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 2rem;
-    margin: 2rem 0;
-    text-align: center;
-  }
-  .pregunta-final .pf-label {
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
-    color: var(--accent);
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    margin-bottom: 1rem;
-  }
-  .pregunta-final blockquote {
-    font-size: clamp(0.95rem, 2.5vw, 1.15rem);
-    font-style: italic;
-    line-height: 1.6;
-    color: var(--text);
-    max-width: 700px;
-    margin: 0 auto;
-  }
-
-  /* FUENTES */
-  .fuentes-table { width: 100%; }
-
-  /* NOTA PENDIENTE */
-  .nota-pendiente {
-    background: rgba(59,130,246,0.08);
-    border: 1px solid rgba(59,130,246,0.25);
-    border-left: 3px solid var(--blue);
-    border-radius: 4px;
-    padding: 0.75rem 1rem;
-    font-size: 0.82rem;
-    color: var(--text-muted);
-    margin: 0.75rem 0;
-    font-family: var(--font-ui);
-  }
-  .nota-pendiente strong { color: var(--blue); }
-
-  /* FOOTER */
-  .footer {
-    margin-top: 3rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid var(--border);
-    font-family: var(--font-ui);
-    font-size: 0.78rem;
-    color: var(--text-muted);
-    line-height: 1.6;
-  }
-
-  /* RESUMEN EJECUTIVO */
-  .resumen-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1px;
-    background: var(--border);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    overflow: hidden;
-    margin: 1.25rem 0;
-  }
-  @media (max-width: 600px) { .resumen-grid { grid-template-columns: 1fr; } }
-  .resumen-cell {
-    background: var(--surface2);
-    padding: 1.1rem;
-  }
-  .resumen-cell .rc-label {
-    font-family: var(--font-mono);
-    font-size: 0.65rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    margin-bottom: 0.5rem;
-  }
-  .rc-n1 { color: var(--green); }
-  .rc-n2 { color: var(--blue); }
-  .rc-n3 { color: var(--accent2); }
-  .resumen-cell p { font-size: 0.85rem; color: var(--text); }
-
-  hr.divider {
-    border: none;
-    border-top: 1px solid var(--border);
-    margin: 2rem 0;
-  }
-
-  .fn {
-    font-size: 0.75rem;
-    color: var(--text-muted);
-    vertical-align: super;
-    font-family: var(--font-mono);
-    margin-left: 1px;
-  }
-  .footnotes {
-    margin-top: 1rem;
-    font-size: 0.8rem;
-    color: var(--text-muted);
-    font-family: var(--font-ui);
-    line-height: 1.6;
-  }
-  .footnotes p { margin-bottom: 0.4rem; }
-
-  /* ── TOPBAR ── */
-  .topbar {
-    position: sticky; top: 0; z-index: 100;
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 0 1.5rem; height: 44px;
-    background: rgba(7,14,28,.95);
-    border-bottom: 1px solid var(--border);
-    backdrop-filter: blur(8px);
-    margin: -2rem -1.5rem 2rem;
-  }
-  html.light .topbar {
-    background: rgba(244,246,250,.97);
-    border-bottom: 1px solid var(--border);
-  }
-  .topbar-brand {
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
-    color: var(--text-muted);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
-  .topbar-controls { display: flex; align-items: center; gap: 0.5rem; }
-  .lang-toggle {
-    display: flex; gap: 2px;
-    background: rgba(255,255,255,.08);
-    border: 1px solid rgba(255,255,255,.15);
-    border-radius: 20px; padding: 2px;
-  }
-  html.light .lang-toggle {
-    background: var(--surface2);
-    border-color: var(--border);
-  }
-  .lang-btn {
-    background: none; border: none;
-    padding: 2px 10px; border-radius: 16px;
-    cursor: pointer; font-size: 11px; font-weight: 700;
-    color: var(--text-muted);
-    font-family: var(--font-mono);
-    letter-spacing: 0.05em;
-    transition: background 0.15s;
-  }
-  .lang-btn.active { background: var(--accent); color: #fff; }
-  .btn-ctrl {
-    background: none;
-    border: 1px solid rgba(255,255,255,.2);
-    border-radius: 16px;
-    padding: 3px 12px;
-    cursor: pointer;
-    font-size: 11px;
-    color: var(--text-muted);
-    font-family: var(--font-mono);
-    transition: border-color 0.15s, color 0.15s;
-  }
-  html.light .btn-ctrl { border-color: var(--border); color: var(--text-muted); }
-  .btn-ctrl:hover { border-color: var(--accent); color: var(--accent); }
-
-
-  /* ── LIGHT MODE OVERRIDES ── */
-  html.light body { background: var(--bg); color: var(--text); }
-  html.light .header { border-left-color: var(--accent); }
-  html.light .metodologia { background: #f0f4ff; border-color: #d0daf0; }
-  html.light .nivel-card.n1 { background: rgba(22,101,52,0.06); }
-  html.light .nivel-card.n2 { background: rgba(29,78,216,0.06); }
-  html.light .nivel-card.n3 { background: rgba(180,83,9,0.06); }
-  html.light .section { border-bottom-color: var(--border); }
-  html.light .data-table th { background: var(--surface2); color: var(--text-muted); border-bottom-color: var(--border); }
-  html.light .data-table td { border-bottom-color: var(--border); color: var(--text); }
-  html.light .data-table tr:hover td { background: rgba(0,0,0,0.02); }
-  html.light .kpi-card { background: var(--surface2); border-color: var(--border); }
-  html.light .inferencia { background: rgba(180,83,9,0.05); border-color: rgba(180,83,9,0.2); }
-  html.light .advertencia { background: rgba(220,38,38,0.05); border-color: rgba(220,38,38,0.2); }
-  html.light .nota-pendiente { background: rgba(29,78,216,0.05); border-color: rgba(29,78,216,0.2); }
-  html.light .pregunta-final { background: var(--surface); border-color: var(--border); }
-  html.light .step { border-bottom-color: var(--border); }
-  html.light .comp-card { background: var(--surface2); border-color: var(--border); }
-  html.light .resumen-grid { background: var(--border); border-color: var(--border); }
-  html.light .resumen-cell { background: var(--surface); }
-  html.light .footer { border-top-color: var(--border); color: var(--text-muted); }
-  html.light .section-num { color: var(--accent); }
-  html.light .modelo-steps { border-color: var(--border); }
-
-
-  /* ── MOBILE ── */
-  @media (max-width: 480px) {
-    .topbar-brand { display: none; }
-    .topbar { justify-content: flex-end; }
-    body { padding: 0.75rem 1rem 3rem; }
-  }
-
-
-
-
-
-  /* ── SECCIÓN ECOSISTEMA (patrón AUDIT.html) ── */
-  .sources-section {
-    margin-top: 2rem;
-    padding: 1.25rem 1.5rem;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-left: 4px solid var(--blue);
-    border-radius: 0 4px 4px 0;
-  }
-  html.light .sources-section {
-    background: var(--surface);
-    border-color: var(--border);
-    border-left-color: var(--blue);
-  }
-  .sources-title {
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--blue);
-    margin-bottom: 0.25rem;
-  }
-  .sources-subtitle {
-    font-family: var(--font-ui);
-    font-size: 0.8rem;
-    color: var(--text-muted);
-    font-style: italic;
-    margin-bottom: 1rem;
-  }
-  .sources-qr {
-    text-align: center;
-    margin: 1rem 0;
-  }
-  .sources-qr img {
-    max-width: 100%;
-    height: auto;
-    max-height: 280px;
-    border: 1px solid var(--border);
-    border-radius: 6px;
-  }
-  .sources-list {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 0.55rem;
-    margin-top: 0.75rem;
-    padding: 0;
-  }
-  .sources-list li {
-    display: flex;
-    align-items: baseline;
-    gap: 0.6rem;
-    font-family: var(--font-ui);
-    font-size: 0.82rem;
-    color: var(--text-muted);
-  }
-  .sources-list li strong { color: var(--text); white-space: nowrap; min-width: 2rem; }
-  .sources-list li a {
-    color: var(--blue);
-    text-decoration: none;
-    font-weight: 500;
-    transition: color 0.15s;
-  }
-  .sources-list li a:hover { color: var(--accent); text-decoration: underline; }
-  .sources-list .pending {
-    color: var(--text-muted);
-    font-style: italic;
-  }
-  .badge-soon {
-    font-family: var(--font-mono);
-    font-size: 0.65rem;
-    font-weight: 700;
-    letter-spacing: 0.06em;
-    background: var(--accent2);
-    color: #fff;
-    padding: 1px 6px;
-    border-radius: 3px;
-    margin-left: 0.4rem;
-    vertical-align: middle;
-  }
-
+/* ── PRINT ── */
+@media print {
+  .topbar, .tab-bar { display: none !important; }
+  body { background: #fff !important; color: #000 !important; padding-top: 0 !important; }
+  .tab-panel { display: block !important; padding: 16px 0 32px !important; page-break-inside: avoid; }
+  .tab-panel + .tab-panel { page-break-before: always; }
+  .card, .chart-box, .kpi-strip, .inferencia, .sources-section { border: 1px solid #ccc !important; background: #fff !important; page-break-inside: avoid; }
+  :root { --bg: #fff; --surface: #fff; --surface2: #f3f3f3; --border: #ccc; --text: #000; --text-muted: #555; }
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .print-btn { display: none !important; }
+  @page { margin: 14mm; size: A4; }
+}
 </style>
 </head>
 <body>
 
-<!-- HEADER -->
-<div class="topbar">
-  <div class="topbar-brand">
-    <span class="es">El Embudo · Análisis Técnico Independiente · v1.0</span>
-    <span class="en">The Bottleneck · Independent Technical Analysis · v1.0</span>
-  </div>
-  <div class="topbar-controls">
+<!-- TOPBAR -->
+<header class="topbar">
+  <div class="tb-brand"><strong>El Embudo</strong> · Dashboard · v1.0</div>
+  <div class="tb-right">
     <div class="lang-toggle" role="group" aria-label="Idioma / Language">
       <button class="lang-btn active" onclick="setLang('es')" id="top-lang-es" aria-label="Cambiar a Español">ES</button>
       <button class="lang-btn" onclick="setLang('en')" id="top-lang-en" aria-label="Switch to English">EN</button>
     </div>
-    <button class="btn-ctrl" onclick="toggleTheme()" id="theme-btn" aria-label="Cambiar modo claro/oscuro">
-      <span class="es">☀︎ Claro</span><span class="en">☀︎ Light</span>
-    </button>
+    <button class="btn-ctrl" onclick="toggleTheme()" id="theme-btn" aria-label="Cambiar modo claro/oscuro"><span class="es">☀︎ Claro</span><span class="en">☀︎ Light</span></button>
+    <button class="btn-ctrl" onclick="prepPrint()" aria-label="Imprimir PDF completo"><span class="es">⎙ PDF completo</span><span class="en">⎙ Full PDF</span></button>
+  </div>
+</header>
+
+<!-- TAB BAR -->
+<nav class="tab-bar">
+  <div class="tab-bar-inner">
+    <button class="tab-btn active" onclick="showTab('sintesis')"><span class="es">00 · Síntesis</span><span class="en">00 · Synopsis</span></button>
+    <button class="tab-btn" onclick="showTab('hechos')"><span class="es">01 · Hechos (N1)</span><span class="en">01 · Facts (N1)</span></button>
+    <button class="tab-btn" onclick="showTab('modelos')"><span class="es">02 · Modelos (N2)</span><span class="en">02 · Models (N2)</span></button>
+    <button class="tab-btn" onclick="showTab('inferencias')"><span class="es">03 · Inferencias (N3)</span><span class="en">03 · Inferences (N3)</span></button>
+    <button class="tab-btn" onclick="showTab('ecosistema')"><span class="es">04 · Ecosistema</span><span class="en">04 · Ecosystem</span></button>
+    <button class="tab-btn" onclick="showTab('fuentes')"><span class="es">05 · Fuentes</span><span class="en">05 · Sources</span></button>
+  </div>
+</nav>
+
+<!-- CONTENT -->
+<div class="content">
+
+<!-- ================================ -->
+<!-- TAB: SÍNTESIS · 00 -->
+<!-- ================================ -->
+<div class="tab-panel active" id="tab-sintesis">
+  <div class="section-head">
+    <div class="section-eyebrow"><span class="es">Análisis Técnico Independiente · v1.0 · 4 de agosto de 2026</span><span class="en">Independent Technical Analysis · v1.0 · Aug 4, 2026</span></div>
+    <div class="section-title"><span class="es">El Embudo que Nadie Quiere Ver</span><span class="en">The Bottleneck Nobody Wants to See</span></div>
+    <div class="section-desc"><span class="es">El Metro de Santo Domingo: Una Solución que ya Existe, un Proyecto que lo Desconecta.</span><span class="en">Santo Domingo Metro: An Existing Solution, a Project that Disconnects It.</span></div>
+  </div>
+
+  <div class="kpi-strip">
+    <div class="kpi"><div class="kn">400,000</div><div class="kl"><span class="es">Metro actual (pax/día)</span><span class="en">Current Metro (pax/day)</span></div></div>
+    <div class="kpi"><div class="kn blue">464,800</div><div class="kl"><span class="es">Demanda METI 2030</span><span class="en">METI Demand 2030</span></div></div>
+    <div class="kpi"><div class="kn red">306,000</div><div class="kl"><span class="es">Capacidad monorriel (modelo)</span><span class="en">Monorail capacity (model)</span></div></div>
+    <div class="kpi"><div class="kn green">86%</div><div class="kl"><span class="es">Metro actual vs demanda 2030</span><span class="en">Current Metro vs 2030 demand</span></div></div>
+    <div class="kpi"><div class="kn red">34%</div><div class="kl"><span class="es">Déficit del monorriel</span><span class="en">Monorail deficit</span></div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="es">Tesis central</span><span class="en">Central Thesis</span></div>
+    <p style="font-size:0.9rem; line-height:1.7;"><span class="es">El Metro de Santo Domingo ya existe, ya opera con 52 trenes Alstom y transporta 400,000 pasajeros diarios. La demanda proyectada para 2030 es de 464,800 pasajeros diarios. El monorriel propuesto, con 17 trenes de 750 pasajeros y un headway de 3.53 minutos, alcanzaría una capacidad estimada de solo 306,000 pasajeros diarios — una brecha estructural del 34% desde el Día 1.</span><span class="en">The Santo Domingo Metro already exists, operating with 52 Alstom trains and moving 400,000 passengers daily. Projected demand for 2030 is 464,800 passengers daily. The proposed monorail, with 17 trains of 750 passengers and a headway of 3.53 minutes, would achieve an estimated capacity of only 306,000 passengers daily — a structural gap of 34% from Day 1.</span></p>
+  </div>
+
+  <div class="chart-box">
+    <div class="card-title"><span class="es">Brecha de capacidad — Demanda vs Oferta</span><span class="en">Capacity Gap — Demand vs Supply</span></div>
+    <canvas id="chartBrecha"></canvas>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title"><span class="es">Metodología</span><span class="en">Methodology</span></div>
+      <p style="font-size:0.82rem; line-height:1.7;"><span class="es">Este documento distingue tres niveles de evidencia: <span class="badge badge-n1">N1</span> Hechos documentados (datos verificables), <span class="badge badge-n2">N2</span> Modelos de cálculo (estimaciones con supuestos explícitos), y <span class="badge badge-n3">N3</span> Inferencias técnicas (conclusiones derivadas de la comparación lógica entre hechos y modelos).</span><span class="en">This document distinguishes three levels of evidence: <span class="badge badge-n1">N1</span> Documented facts (verifiable data), <span class="badge badge-n2">N2</span> Calculation models (estimates with explicit assumptions), and <span class="badge badge-n3">N3</span> Technical inferences (conclusions derived from logical comparison of facts and models).</span></p>
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="es">Autor</span><span class="en">Author</span></div>
+      <p style="font-size:0.82rem; line-height:1.7;"><strong>Ing. Piter J. Bonilla D.</strong> · CODIA #17378<br><span class="es">Análisis técnico independiente. Este documento complementa — sin sustituir — el corpus de auditoría del Dr. Ing. Carlos Bonnelly Ginebra (Notas Técnicas I–V).</span><span class="en">Independent technical analysis. This document complements — without replacing — the audit corpus of Dr. Ing. Carlos Bonnelly Ginebra (Technical Notes I–V).</span></p>
+    </div>
   </div>
 </div>
 
-<div class="header">
-  <div class="eyebrow"><span class="es">Análisis Técnico Independiente · v1.0 · 4 de agosto de 2026</span><span class="en">Independent Technical Analysis · v1.0 · August 4, 2026</span></div>
-  <h1><span class="es">El Embudo que Nadie Quiere Ver</span><span class="en">The Bottleneck Nobody Wants to See</span></h1>
-  <div class="subtitle"><span class="es">El Metro de Santo Domingo: Una Solución que ya Existe, un Proyecto que lo Desconecta</span><span class="en">Santo Domingo Metro: An Existing Solution, a Project that Disconnects It</span></div>
-  <div class="meta-grid">
-    <div class="meta-item"><strong><span class="es">Autor:</span><span class="en">Author:</span></strong> Ing. Piter J. Bonilla D. · CODIA #17378</div>
-    <div class="meta-item"><strong><span class="es">Fecha:</span><span class="en">Date:</span></strong> <span class="es">4 de agosto de 2026</span><span class="en">August 4, 2026</span></div>
-    <div class="meta-item"><strong><span class="es">Versión:</span><span class="en">Version:</span></strong> 1.0</div>
+<!-- ================================ -->
+<!-- TAB: HECHOS (N1) -->
+<!-- ================================ -->
+<div class="tab-panel" id="tab-hechos">
+  <div class="section-head">
+    <div class="section-eyebrow"><span class="badge badge-n1">Nivel 1</span> <span class="es">Hechos Documentados</span><span class="en">Documented Facts</span></div>
+    <div class="section-title"><span class="es">El Metro ya existe, ya opera</span><span class="en">The Metro Already Exists, Already Operates</span></div>
+    <div class="section-desc"><span class="es">Datos verificables provenientes de fuentes primarias.</span><span class="en">Verifiable data from primary sources.</span></div>
+  </div>
+
+  <div class="kpi-strip">
+    <div class="kpi"><div class="kn">52</div><div class="kl"><span class="es">Trenes Metropolis Alstom</span><span class="en">Alstom Metropolis trains</span></div></div>
+    <div class="kpi"><div class="kn green">400,000</div><div class="kl"><span class="es">Pasajeros diarios (L1+L2)</span><span class="en">Daily passengers (L1+L2)</span></div></div>
+    <div class="kpi"><div class="kn">3</div><div class="kl"><span class="es">Años de contrato de mantenimiento</span><span class="en">Years of maintenance contract</span></div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="es">Metro actual — Comunicado Oficial Alstom</span><span class="en">Current Metro — Official Alstom Press Release</span></div>
+    <p style="font-size:0.85rem; font-style:italic; color:var(--text-muted); padding:8px 12px; border-left:3px solid var(--blue); background:var(--surface2); border-radius:2px;">
+      <span class="es">"A diario las dos líneas de Metro, operadas por la OPRET con una flota de 52 trenes Metropolis de Alstom, transportan alrededor de 400.000 pasajeros."</span>
+      <span class="en">"Daily the two Metro lines, operated by OPRET with a fleet of 52 Alstom Metropolis trains, transport around 400,000 passengers."</span>
+      <br><span style="font-size:0.75rem; color:var(--text-muted);">— Iván Moncayo, Director General Alstom Panamá y República Dominicana, 20 de mayo de 2024</span>
+    </p>
+    <p style="font-size:0.8rem; color:var(--text-muted); margin-top:8px;"><span class="es">📎 <a href="https://www.alstom.com/press-releases-news/2024/5/alstom-firma-contrato-de-mantenimiento-para-todos-los-trenes-del-metro-de-santo-domingo" target="_blank" style="color:var(--blue);">Press Release Alstom · 20 mayo 2024</a></span><span class="en">📎 <a href="https://www.alstom.com/press-releases-news/2024/5/alstom-firma-contrato-de-mantenimiento-para-todos-los-trenes-del-metro-de-santo-domingo" target="_blank" style="color:var(--blue);">Alstom Press Release · May 20, 2024</a></span></p>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="es">Demanda proyectada — Estudio METI/NIPPON KOEI (2024)</span><span class="en">Projected Demand — METI/NIPPON KOEI Study (2024)</span></div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Año</th><th><span class="es">Demanda diaria (pax/día)</span><span class="en">Daily Demand (pax/day)</span></th><th>PPHPD</th><th><span class="es">Demanda anual</span><span class="en">Annual Demand</span></th></tr></thead>
+        <tbody>
+          <tr><td><strong>2030</strong></td><td style="font-family:var(--font-mono);color:var(--accent2);font-weight:700;">464,800</td><td>12,800</td><td>153 millones</td></tr>
+          <tr><td><strong>2045</strong></td><td style="font-family:var(--font-mono);color:var(--accent2);font-weight:700;">571,100</td><td>16,200</td><td>188 millones</td></tr>
+          <tr><td><strong>2060</strong></td><td style="font-family:var(--font-mono);color:var(--accent2);font-weight:700;">704,000</td><td>20,600</td><td>232 millones</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:0.78rem; color:var(--text-muted);"><span class="es">Tasa de crecimiento anual compuesta (CAGR): <strong>~1.39%</strong> · <a href="https://www.meti.go.jp/meti_lib/report/2023FY/000401.pdf" target="_blank" style="color:var(--blue);">📄 Estudio completo (PDF)</a></span><span class="en">Compound Annual Growth Rate (CAGR): <strong>~1.39%</strong> · <a href="https://www.meti.go.jp/meti_lib/report/2023FY/000401.pdf" target="_blank" style="color:var(--blue);">📄 Full Study (PDF)</a></span></p>
+  </div>
+
+  <div class="chart-box">
+    <div class="card-title"><span class="es">Proyección de demanda METI (2030–2060)</span><span class="en">METI Demand Projection (2030–2060)</span></div>
+    <canvas id="chartDemandaMETI"></canvas>
   </div>
 </div>
 
-<!-- NOTA METODOLÓGICA -->
-<div class="metodologia">
-  <h2>📋 <span class="es">Nota Metodológica — Tres Niveles de Evidencia</span><span class="en">Methodological Note — Three Levels of Evidence</span></h2>
-  <p style="font-size:0.875rem; color:var(--text-muted); margin-bottom:1rem;">Este documento distingue explícitamente tres niveles de información. Esta separación permite al lector distinguir entre lo que está probado, lo que se calcula y lo que se deduce.</p>
-  <div class="nivel-grid">
-    <div class="nivel-card n1">
-      <div class="nivel-label"><span class="es">Nivel 1 — Hechos Documentados</span><span class="en">Level 1 — Documented Facts</span></div>
-      <p>Datos verificables provenientes de fuentes primarias: contratos, comunicados oficiales, estudios de prefactibilidad publicados.</p>
+<!-- ================================ -->
+<!-- TAB: MODELOS (N2) -->
+<!-- ================================ -->
+<div class="tab-panel" id="tab-modelos">
+  <div class="section-head">
+    <div class="section-eyebrow"><span class="badge badge-n2">Nivel 2</span> <span class="es">Modelos de Cálculo</span><span class="en">Calculation Models</span></div>
+    <div class="section-title"><span class="es">Capacidad Operativa del Monorriel</span><span class="en">Monorail Operational Capacity</span></div>
+    <div class="section-desc"><span class="es">Estimaciones basadas en parámetros operativos y supuestos explícitos.</span><span class="en">Estimates based on operational parameters and explicit assumptions.</span></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="es">Modelo de capacidad — 17 trenes · 750 pax</span><span class="en">Capacity Model — 17 trains · 750 pax</span></div>
+    <div style="display:grid;grid-template-columns:auto 1fr auto;gap:6px 12px;font-size:0.82rem;padding:8px 0;border-bottom:1px solid var(--border);">
+      <span style="font-family:var(--font-mono);color:var(--text-muted);">01</span>
+      <span>17 trenes × 750 pasajeros/tren</span>
+      <span style="font-family:var(--font-mono);color:var(--accent2);font-weight:700;">12,750 pphps</span>
     </div>
-    <div class="nivel-card n2">
-      <div class="nivel-label"><span class="es">Nivel 2 — Modelos de Cálculo</span><span class="en">Level 2 — Calculation Models</span></div>
-      <p>Estimaciones basadas en parámetros operativos y supuestos explícitos, presentados como tales con sus fuentes metodológicas.</p>
+    <div style="display:grid;grid-template-columns:auto 1fr auto;gap:6px 12px;font-size:0.82rem;padding:8px 0;border-bottom:1px solid var(--border);">
+      <span style="font-family:var(--font-mono);color:var(--text-muted);">02</span>
+      <span>12,750 × 4 horas pico</span>
+      <span style="font-family:var(--font-mono);color:var(--accent2);font-weight:700;">51,000 pax pico</span>
     </div>
-    <div class="nivel-card n3">
-      <div class="nivel-label"><span class="es">Nivel 3 — Inferencias Técnicas</span><span class="en">Level 3 — Technical Inferences</span></div>
-      <p>Conclusiones derivadas de la comparación entre hechos y modelos, formuladas como hipótesis fundamentadas, no como hechos probados.</p>
+    <div style="display:grid;grid-template-columns:auto 1fr auto;gap:6px 12px;font-size:0.82rem;padding:8px 0;border-bottom:1px solid var(--border);">
+      <span style="font-family:var(--font-mono);color:var(--text-muted);">03</span>
+      <span>51,000 ÷ 0.30 (factor de punta)</span>
+      <span style="font-family:var(--font-mono);color:var(--accent2);font-weight:700;">170,000 pax/sentido</span>
     </div>
+    <div style="display:grid;grid-template-columns:auto 1fr auto;gap:6px 12px;font-size:0.82rem;padding:8px 0;border-bottom:1px solid var(--border);">
+      <span style="font-family:var(--font-mono);color:var(--text-muted);">04</span>
+      <span>170,000 × 2 sentidos</span>
+      <span style="font-family:var(--font-mono);color:var(--accent2);font-weight:700;">340,000 pax/día</span>
+    </div>
+    <div style="display:grid;grid-template-columns:auto 1fr auto;gap:6px 12px;font-size:0.82rem;padding:8px 0;">
+      <span style="font-family:var(--font-mono);color:var(--text-muted);">05</span>
+      <span>340,000 × 0.90 (eficiencia operativa)</span>
+      <span style="font-family:var(--font-mono);color:var(--red);font-weight:700;">306,000 pax/día</span>
+    </div>
+    <p style="font-size:0.78rem;color:var(--text-muted);margin-top:10px;"><span class="es"><strong>Headway resultante:</strong> 60 ÷ 17 = <strong>3.53 minutos</strong> — frecuencia alcanzable según estándares UITP para sistemas automatizados (GoA3/GoA4).</span><span class="en"><strong>Resulting headway:</strong> 60 ÷ 17 = <strong>3.53 minutes</strong> — achievable frequency per UITP standards for automated systems (GoA3/GoA4).</span></p>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="es">Factor de punta (30%) — UITP</span><span class="en">Peak Factor (30%) — UITP</span></div>
+    <p style="font-size:0.82rem;line-height:1.7;"><span class="es">4 horas pico (2 mañana + 2 tarde) concentran el 30% de la demanda diaria total. Las otras 12 horas de operación absorben el 70% restante. Este parámetro está establecido por la Unión Internacional de Transporte Público (UITP) para corredores urbanos de alta densidad.</span><span class="en">4 peak hours (2 morning + 2 evening) concentrate 30% of total daily demand. The other 12 operating hours absorb the remaining 70%. This parameter is established by the International Association of Public Transport (UITP) for high-density urban corridors.</span></p>
+  </div>
+
+  <div class="chart-box">
+    <div class="card-title"><span class="es">Comparativa de capacidad por tren</span><span class="en">Capacity per Train Comparison</span></div>
+    <canvas id="chartCapacidadTren"></canvas>
   </div>
 </div>
 
-<!-- RESUMEN EJECUTIVO -->
-<div class="section">
-  <div class="section-header">
-    <span class="section-num">§ 0</span>
-    <h2>Resumen Ejecutivo</h2>
-  </div>
-  <div class="resumen-grid">
-    <div class="resumen-cell">
-      <div class="rc-label rc-n1">Nivel 1 · Hecho</div>
-      <p>El Metro de Santo Domingo opera con 52 trenes Alstom transportando <strong>400,000 pasajeros diarios</strong>. El estudio METI/NIPPON KOEI (febrero 2024) proyecta una demanda de <strong>464,800 pasajeros diarios para 2030</strong> en el corredor analizado.</p>
-    </div>
-    <div class="resumen-cell">
-      <div class="rc-label rc-n2">Nivel 2 · Modelo</div>
-      <p>El monorriel propuesto, con 17 trenes de 750 pasajeros y un headway de 3.53 minutos, alcanzaría una capacidad operativa estimada de <strong>306,000 pasajeros diarios</strong> — inferior a la demanda proyectada y al Metro actual.</p>
-    </div>
-    <div class="resumen-cell">
-      <div class="rc-label rc-n3">Nivel 3 · Inferencia</div>
-      <p>El Metro existente cubre el <strong>86% de la demanda proyectada para 2030</strong>. La posible desconexión de la Línea 1 constituye la restricción de capacidad operacional que este documento examina.</p>
-    </div>
-  </div>
-</div>
-
-<!-- SECCIÓN 1: EL METRO YA EXISTE -->
-<div class="section">
-  <div class="section-header">
-    <span class="section-num">§ 1</span>
-    <h2>El Metro ya Existe, ya Opera <span class="badge badge-n1">Nivel 1</span></h2>
+<!-- ================================ -->
+<!-- TAB: INFERENCIAS (N3) -->
+<!-- ================================ -->
+<div class="tab-panel" id="tab-inferencias">
+  <div class="section-head">
+    <div class="section-eyebrow"><span class="badge badge-n3">Nivel 3</span> <span class="es">Inferencias Técnicas</span><span class="en">Technical Inferences</span></div>
+    <div class="section-title"><span class="es">El Embudo — Restricción de Capacidad</span><span class="en">The Bottleneck — Capacity Restriction</span></div>
+    <div class="section-desc"><span class="es">Conclusiones derivadas de la comparación entre hechos y modelos.</span><span class="en">Conclusions derived from comparison of facts and models.</span></div>
   </div>
 
-  <div class="table-wrap"><table class="data-table">
-    <thead>
-      <tr>
-        <th>Elemento</th>
-        <th>Dato</th>
-        <th>Fuente</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Flota</td>
-        <td class="num">52 trenes Metropolis Alstom</td>
-        <td class="source">Contrato de mantenimiento Alstom–OPRET, 2024<sup class="fn">[1]</sup></td>
-      </tr>
-      <tr>
-        <td>Pasajeros diarios</td>
-        <td class="num">400,000 pax/día<sup class="fn">[A]</sup></td>
-        <td class="source">Comunicado oficial Alstom, 20 de mayo de 2024<sup class="fn">[1]</sup></td>
-      </tr>
-      <tr>
-        <td>Red</td>
-        <td>Red ferroviaria metropolitana más extensa del Caribe</td>
-        <td class="source">Id.</td>
-      </tr>
-      <tr>
-        <td>Contrato de mantenimiento</td>
-        <td>Vigente · 3 años</td>
-        <td class="source">Id.</td>
-      </tr>
-    </tbody>
-  </table>
-  </div>
-
-  <div class="nota-pendiente">
-    <strong>[A] Nota de contexto y cita exacta:</strong> El Press Release de Alstom (20 mayo 2024) indica textualmente: <em>"A diario las dos líneas de Metro, operadas por la OPRET con una flota de 52 trenes Metropolis de Alstom, transportan alrededor de 400.000 pasajeros."</em> Esta cifra corresponde a las Líneas 1 y 2 combinadas, no exclusivamente al corredor de la Línea 3 analizado por METI. La demanda atribuible al corredor específico del monorriel propuesto es un subconjunto de esta cifra. Esta distinción es relevante para la comparación de la Sección 5.
-  </div>
-</div>
-
-<!-- SECCIÓN 2: DEMANDA PROYECTADA -->
-<div class="section">
-  <div class="section-header">
-    <span class="section-num">§ 2</span>
-    <h2>La Demanda Proyectada <span class="badge badge-n1">Nivel 1</span></h2>
-  </div>
-  <p>Fuente: <em>Estudio de Prefactibilidad de la Línea 3 del Metro (Tren Metropolitano) de Santo Domingo en la República Dominicana</em>, NIPPON KOEI / Asociación Japonesa de Metro, Febrero 2024.<sup class="fn">[2]</sup><br>
-  <a href="https://www.meti.go.jp/meti_lib/report/2023FY/000401.pdf" style="color:var(--blue); font-size:0.82rem;" target="_blank">https://www.meti.go.jp/meti_lib/report/2023FY/000401.pdf</a></p>
-
-  <div class="table-wrap"><table class="data-table">
-    <thead>
-      <tr><th>Año</th><th>Demanda diaria (pax/día)</th><th>PPHPD</th><th>Demanda anual</th></tr>
-    </thead>
-    <tbody>
-      <tr><td>2030</td><td class="num">464,800</td><td class="num">12,800</td><td>153 millones</td></tr>
-      <tr><td>2045</td><td class="num">571,100</td><td class="num">16,200</td><td>188 millones</td></tr>
-      <tr><td>2060</td><td class="num">704,000</td><td class="num">20,600</td><td>232 millones</td></tr>
-    </tbody>
-  </table>
-
-  <p>Tasa de crecimiento anual compuesta (CAGR) documentada: <strong>~1.39% anual</strong> (1.38%–1.40% por período)<sup class="fn">[E]</sup> — demanda creciente que ninguna solución sin capacidad de escalamiento puede absorber a largo plazo.</p>
-</div>
-
-
-  <div class="table-wrap"><table class="data-table" style="margin-top:1rem;">
-    <thead>
-      <tr><th>Período</th><th>CAGR calculado</th><th>Verificación</th></tr>
-    </thead>
-    <tbody>
-      <tr><td>2030 → 2045</td><td class="num">1.38% anual</td><td style="color:var(--green)">✓ (571,100/464,800)^(1/15)−1</td></tr>
-      <tr><td>2045 → 2060</td><td class="num">1.40% anual</td><td style="color:var(--green)">✓ (704,000/571,100)^(1/15)−1</td></tr>
-      <tr><td>2030 → 2060</td><td class="num">1.39% anual</td><td style="color:var(--green)">✓ (704,000/464,800)^(1/30)−1</td></tr>
-      <tr><td><strong>Ponderada</strong></td><td class="num" style="color:var(--accent2)"><strong>~1.39% anual</strong></td><td>Consistente en todos los períodos</td></tr>
-    </tbody>
-  </table>
-  </div>
-  <p style="font-size:0.82rem; color:var(--text-muted); margin-top:0.5rem;">La tasa es notablemente estable entre períodos (1.38%–1.40%), lo que indica que las proyecciones METI son internamente consistentes y que el crecimiento de demanda es predecible. Cualquier sistema de transporte debe poder escalar ~1.4% anual para mantener cobertura efectiva a lo largo del horizonte de concesión.</p>
-
-<!-- SECCIÓN 3: MODELO DE CAPACIDAD -->
-<div class="section">
-  <div class="section-header">
-    <span class="section-num">§ 3</span>
-    <h2>Modelo de Capacidad del Monorriel <span class="badge badge-n2">Nivel 2</span></h2>
-  </div>
-  <p>El siguiente modelo estima la capacidad operativa de una configuración de monorriel con 17 trenes de 750 pasajeros (6 vagones).<sup class="fn">[B]</sup> Se presenta como ejercicio de cálculo, no como dato observado.</p>
-
-  <div class="modelo-steps">
-    <div class="step">
-      <span class="step-num">01</span>
-      <span class="step-op">17 trenes × 750 pasajeros/tren</span>
-      <span class="step-result">12,750 pphps</span>
-    </div>
-    <div class="step">
-      <span class="step-num">02</span>
-      <span class="step-op">12,750 × 4 horas pico</span>
-      <span class="step-result">51,000 pax pico</span>
-    </div>
-    <div class="step">
-      <span class="step-num">03</span>
-      <span class="step-op">51,000 ÷ 0.30 (factor de punta)<sup class="fn">[C]</sup></span>
-      <span class="step-result">170,000 pax/sentido</span>
-    </div>
-    <div class="step">
-      <span class="step-num">04</span>
-      <span class="step-op">170,000 × 2 sentidos</span>
-      <span class="step-result">340,000 pax/día</span>
-    </div>
-    <div class="step">
-      <span class="step-num">05</span>
-      <span class="step-op">340,000 × 0.90 (eficiencia operativa)</span>
-      <span class="step-result">306,000 pax/día</span>
-    </div>
-  </div>
-
-  <p><strong>Headway resultante:</strong> 60 ÷ 17 = <strong>3.53 minutos</strong> — frecuencia alcanzable según estándares internacionales para sistemas automatizados de mediana capacidad (GoA3/GoA4).<sup class="fn">[D]</sup></p>
-
-  <div class="footnotes">
-    <p><strong>[B]</strong> La cifra de 17 trenes y la capacidad de 750 pasajeros/tren (6 vagones) corresponden a los parámetros del proyecto tal como fueron presentados en las vistas públicas del proceso FITRAM-CCC-LP-2025-0001. <em>Pendiente: confirmar referencia exacta de página en el expediente SNIP 17248 o en el estudio METI Feb. 2024.</em></p>
-    <p><strong>[C]</strong> Factor de concentración de 30% en horas pico: parámetro consistente con los estándares UITP (Unión Internacional de Transporte Público) para corredores urbanos de alta densidad y con los patrones registrados en el propio estudio METI/NIPPON KOEI para el corredor analizado. <em>Pendiente: citar tabla específica del estudio METI con distribución horaria de demanda.</em></p>
-    <p><strong>[E]</strong> Verificación independiente de la CAGR METI: 2030→2045: (571,100/464,800)^(1/15)−1 = 1.3825%; 2045→2060: (704,000/571,100)^(1/15)−1 = 1.4045%; 2030→2060: (704,000/464,800)^(1/30)−1 = 1.3935%. Tasa ponderada: 1.3935% ≈ 1.39%. La cifra 1.44% citada en versiones anteriores resulta de redondeos intermedios — con 1.44% durante 30 años se obtienen 713,745 pax vs. los 704,000 de METI. La tasa matemáticamente consistente con las tres proyecciones es 1.39%.</p>
-    <p><strong>[D]</strong> Referencia: UITP — World Metro Figures 2023; y estándares IEC 62267 para sistemas automatizados. Un headway de 3.5 minutos es operativo en sistemas GoA3/GoA4 de escala comparable al proyecto propuesto.</p>
-  </div>
-</div>
-
-<!-- SECCIÓN 4: FACTOR DE PUNTA -->
-<div class="section">
-  <div class="section-header">
-    <span class="section-num">§ 4</span>
-    <h2>La Lógica del Factor de Punta (30%) <span class="badge badge-n2">Nivel 2</span></h2>
-  </div>
-  <p>El 30% es el factor de concentración de la demanda en horas pico: 4 horas pico (2 mañana + 2 tarde) concentran el 30% de la demanda diaria total. Las otras 12 horas de operación absorben el 70% restante con frecuencias menores.</p>
-
-  <p><strong>Verificación inversa desde la demanda total:</strong></p>
-  <div class="modelo-steps">
-    <div class="step">
-      <span class="step-num">→</span>
-      <span class="step-op">170,000 × 0.30 = 51,000 pax en 4h pico</span>
-      <span class="step-result">✓</span>
-    </div>
-    <div class="step">
-      <span class="step-num">→</span>
-      <span class="step-op">51,000 ÷ 4h = 12,750 pax/hora pico</span>
-      <span class="step-result">✓</span>
-    </div>
-    <div class="step">
-      <span class="step-num">→</span>
-      <span class="step-op">12,750 ÷ 750 pax/tren = 17 trenes/hora</span>
-      <span class="step-result">✓</span>
-    </div>
-    <div class="step">
-      <span class="step-num">→</span>
-      <span class="step-op">60 min ÷ 17 trenes = 3.53 min de headway</span>
-      <span class="step-result">✓</span>
-    </div>
-  </div>
-  <p style="font-size:0.85rem; color:var(--text-muted);">El modelo dimensiona para el pico, no sobredimensiona toda la jornada. Es un enfoque conservador estándar en planificación de transporte masivo.</p>
-</div>
-
-<!-- SECCIÓN 5: EL EMBUDO -->
-<div class="section">
-  <div class="section-header">
-    <span class="section-num">§ 5</span>
-    <h2>La Restricción de Capacidad Operacional <span class="badge badge-n3">Nivel 3</span></h2>
-  </div>
-
-  <div class="kpi-grid">
-    <div class="kpi-card green">
-      <div class="kpi-value">400,000</div>
-      <div class="kpi-label">Capacidad actual del Metro<br><em>Hecho documentado</em></div>
-    </div>
-    <div class="kpi-card blue">
-      <div class="kpi-value">464,800</div>
-      <div class="kpi-label">Demanda METI 2030<br><em>Hecho documentado</em></div>
-    </div>
-    <div class="kpi-card red">
-      <div class="kpi-value">306,000</div>
-      <div class="kpi-label">Capacidad estimada Monorriel<br><em>Modelo de cálculo</em></div>
-    </div>
-  </div>
-
-  <div class="progress-wrap">
-    <div class="progress-item">
-      <div class="progress-label">
-        <span>Metro actual vs. demanda 2030</span>
-        <span class="pct" style="color:var(--green)">86.1%</span>
-      </div>
-      <div class="progress-bar"><div class="progress-fill" style="width:86.1%;background:var(--green)"></div></div>
-    </div>
-    <div class="progress-item">
-      <div class="progress-label">
-        <span>Monorriel (modelo) vs. demanda 2030</span>
-        <span class="pct" style="color:var(--red)">65.8%</span>
-      </div>
-      <div class="progress-bar"><div class="progress-fill" style="width:65.8%;background:var(--red)"></div></div>
-    </div>
-    <div class="progress-item">
-      <div class="progress-label">
-        <span>Demanda 2030 cubierta (línea de referencia)</span>
-        <span class="pct">100%</span>
-      </div>
-      <div class="progress-bar"><div class="progress-fill" style="width:100%;background:var(--border)"></div></div>
-    </div>
+  <div class="kpi-strip">
+    <div class="kpi"><div class="kn green">86%</div><div class="kl"><span class="es">Metro actual vs demanda 2030</span><span class="en">Current Metro vs 2030 demand</span></div></div>
+    <div class="kpi"><div class="kn red">65.8%</div><div class="kl"><span class="es">Monorriel vs demanda 2030</span><span class="en">Monorail vs 2030 demand</span></div></div>
+    <div class="kpi"><div class="kn red">34.2%</div><div class="kl"><span class="es">Déficit estructural</span><span class="en">Structural deficit</span></div></div>
   </div>
 
   <div class="inferencia">
-    <div class="inf-label">Inferencia derivada</div>
-    <p>El Metro existente ya cubre el 86% de la demanda proyectada para 2030. El monorriel, con la configuración analizada, tendría una capacidad estimada inferior tanto a la demanda proyectada como a la capacidad actual del Metro. La restricción de capacidad no es un riesgo futuro — es una brecha estructural desde el Día 1.</p>
-  </div>
-</div>
-
-<!-- SECCIÓN 6: COMPARACIÓN DE ESCENARIOS -->
-<div class="section">
-  <div class="section-header">
-    <span class="section-num">§ 6</span>
-    <h2>Comparación de Escenarios con Misma Flota <span class="badge badge-n3">Nivel 3</span></h2>
+    <div class="inf-label"><span class="es">Inferencia derivada</span><span class="en">Derived Inference</span></div>
+    <p><span class="es">El Metro existente ya cubre el 86% de la demanda proyectada para 2030. El monorriel, con la configuración analizada, tendría una capacidad estimada inferior tanto a la demanda proyectada como a la capacidad actual del Metro. <strong>La restricción de capacidad no es un riesgo futuro — es una brecha estructural desde el Día 1.</strong></span><span class="en">The existing Metro already covers 86% of projected demand for 2030. The monorail, with the analyzed configuration, would have an estimated capacity below both projected demand and current Metro capacity. <strong>The capacity restriction is not a future risk — it is a structural gap from Day 1.</strong></span></p>
   </div>
 
-  <div class="table-wrap"><table class="data-table">
-    <thead>
-      <tr><th>Sistema</th><th>Pax/día (est.)</th><th>Flota</th><th>Headway</th><th>Naturaleza</th></tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><strong>Metro actual</strong></td>
-        <td class="num" style="color:var(--green)">400,000</td>
-        <td>52 trenes</td>
-        <td>—</td>
-        <td>Dato observado</td>
-      </tr>
-      <tr>
-        <td><strong>Metro 6 vagones</strong> (17 trenes)</td>
-        <td class="num" style="color:var(--blue)">490,000</td>
-        <td>17 trenes</td>
-        <td>3.53 min</td>
-        <td>Modelo · 1,200 pax/tren</td>
-      </tr>
-      <tr>
-        <td><strong>Monorriel</strong> (proyecto)</td>
-        <td class="num" style="color:var(--red)">306,000</td>
-        <td>17 trenes</td>
-        <td>3.53 min</td>
-        <td>Modelo · 750 pax/tren</td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="chart-box">
+    <div class="card-title"><span class="es">Brecha de cobertura (Demanda 2030)</span><span class="en">Coverage Gap (2030 Demand)</span></div>
+    <canvas id="chartCobertura"></canvas>
   </div>
 
-  <div class="inferencia">
-    <div class="inf-label">Inferencia</div>
-    <p>Con la misma flota de 17 trenes y el mismo headway de 3.53 minutos, una configuración de Metro de 6 vagones (1,200 pax/tren) tendría una capacidad estimada <strong>60% superior</strong> a la del monorriel. La diferencia no es de frecuencia — es de capacidad por tren.</p>
-  </div>
-</div>
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title"><span class="es">Comparativa — Misma flota (17 trenes)</span><span class="en">Comparison — Same fleet (17 trains)</span></div>
+      <div class="tbl-wrap" style="border:none;margin:0;">
+        <table>
+          <thead><tr><th><span class="es">Sistema</span><span class="en">System</span></th><th><span class="es">Pax/día</span><span class="en">Pax/day</span></th><th><span class="es">Capacidad por tren</span><span class="en">Capacity/train</span></th></tr></thead>
+          <tbody>
+            <tr><td><strong><span class="es">Monorriel</span><span class="en">Monorail</span></strong></td><td style="color:var(--red);font-weight:700;">306,000</td><td>750 pax</td></tr>
+            <tr><td><strong><span class="es">Metro 6 vagones</span><span class="en">Metro 6 cars</span></strong></td><td style="color:var(--green);font-weight:700;">490,000</td><td>1,200 pax</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="font-size:0.78rem;color:var(--text-muted);margin-top:8px;"><span class="es">El Metro de 6 vagones tendría una capacidad <strong>60% superior</strong> con la misma flota y frecuencia.</span><span class="en">The 6-car Metro would have <strong>60% higher</strong> capacity with the same fleet and frequency.</span></p>
+    </div>
 
-<!-- SECCIÓN 7: ESCALABILIDAD -->
-<div class="section">
-  <div class="section-header">
-    <span class="section-num">§ 7</span>
-    <h2>Escalabilidad: Lo que Exige el Futuro <span class="badge badge-n3">Nivel 3</span></h2>
-  </div>
-  <p>La proyección METI indica crecimiento sostenido hasta 2060 (704,000 pax/día). El diseño del sistema debe contemplar esa evolución.</p>
-
-  <div class="table-wrap"><table class="data-table">
-    <thead>
-      <tr><th>Configuración</th><th>Pax/tren</th><th>Pax/hora (17 trenes)</th><th>Pax/día estimados</th><th>Cubre demanda 2060</th></tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Monorriel (proyecto)</td>
-        <td class="num">750</td>
-        <td class="num">12,750</td>
-        <td class="num" style="color:var(--red)">306,000</td>
-        <td style="color:var(--red)">No (43%)</td>
-      </tr>
-      <tr>
-        <td>Metro 6 vagones</td>
-        <td class="num">1,200</td>
-        <td class="num">20,400</td>
-        <td class="num" style="color:var(--accent2)">490,000</td>
-        <td style="color:var(--accent2)">Parcial (70%)</td>
-      </tr>
-      <tr>
-        <td>Metro 8 vagones</td>
-        <td class="num">1,600</td>
-        <td class="num">27,200</td>
-        <td class="num" style="color:var(--green)">653,000</td>
-        <td style="color:var(--green)">Sí (93%)</td>
-      </tr>
-    </tbody>
-  </table>
+    <div class="card">
+      <div class="card-title"><span class="es">Escalabilidad 2060</span><span class="en">Scalability 2060</span></div>
+      <div class="tbl-wrap" style="border:none;margin:0;">
+        <table>
+          <thead><tr><th><span class="es">Configuración</span><span class="en">Configuration</span></th><th><span class="es">Pax/día</span><span class="en">Pax/day</span></th><th><span class="es">Cobertura 2060</span><span class="en">2060 Coverage</span></th></tr></thead>
+          <tbody>
+            <tr><td><span class="es">Monorriel (6v)</span><span class="en">Monorail (6c)</span></td><td>306,000</td><td style="color:var(--red);">43%</td></tr>
+            <tr><td><span class="es">Metro 6v</span><span class="en">Metro 6c</span></td><td>490,000</td><td style="color:var(--accent2);">70%</td></tr>
+            <tr><td><span class="es">Metro 8v</span><span class="en">Metro 8c</span></td><td style="color:var(--green);font-weight:700;">653,000</td><td style="color:var(--green);">93%</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
 
-  <div class="inferencia">
-    <div class="inf-label">Inferencia</div>
-    <p>La escalabilidad a trenes de 8 vagones (1,600 pax) permitiría al sistema absorber el 93% de la demanda proyectada para 2060. Esta práctica es operativa en el Metro de Panamá y en sistemas latinoamericanos de escala comparable. El monorriel propuesto, incluso con 6 vagones, no alcanza el 50% de la demanda proyectada para ese horizonte.</p>
-  </div>
-</div>
-
-<!-- SECCIÓN 8: POSIBLE DESCONEXIÓN -->
-<div class="section">
-  <div class="section-header">
-    <span class="section-num">§ 8</span>
-    <h2>La Posible Desconexión de la Línea 1 <span class="badge badge-n3">Nivel 3</span></h2>
+  <div class="card">
+    <div class="card-title"><span class="es">Headway — 90s vs 3.53 min</span><span class="en">Headway — 90s vs 3.53 min</span></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:8px;">
+      <div style="background:var(--surface2);padding:12px;border-radius:4px;border-top:3px solid var(--red);">
+        <div style="font-family:var(--font-mono);font-size:0.6rem;color:var(--red);letter-spacing:.08em;text-transform:uppercase;"><span class="es">Expediente oficial</span><span class="en">Official file</span></div>
+        <div style="font-size:1.4rem;font-weight:700;color:var(--red);">90s</div>
+        <div style="font-size:0.75rem;color:var(--text-muted);">40 trenes/hora · Sin validación operativa</div>
+      </div>
+      <div style="background:var(--surface2);padding:12px;border-radius:4px;border-top:3px solid var(--green);">
+        <div style="font-family:var(--font-mono);font-size:0.6rem;color:var(--green);letter-spacing:.08em;text-transform:uppercase;"><span class="es">Modelo realista</span><span class="en">Realistic model</span></div>
+        <div style="font-size:1.4rem;font-weight:700;color:var(--green);">3.53 min</div>
+        <div style="font-size:0.75rem;color:var(--text-muted);">17 trenes/hora · Estándar UITP</div>
+      </div>
+    </div>
   </div>
 
   <div class="advertencia">
-    <div class="adv-label">⚠ Nota de evidencia</div>
-    <p>La afirmación sobre los "trenes de 6 vagones desde el inicio" proviene de declaraciones presentadas en vistas públicas recientes del proceso FITRAM-CCC-LP-2025-0001. <strong>Pendiente de documentación verificable:</strong> fecha exacta, expositor y canal de la vista pública. Esta sección debe tratarse como Nivel 3 hasta que esa cita sea verificada. No debe utilizarse en contextos institucionales (DGCP, Congreso, comunicado público) sin la referencia completa.</p>
-  </div>
-
-  <div class="table-wrap"><table class="data-table">
-    <thead>
-      <tr><th>Declaración pública</th><th>Inferencia técnica</th></tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>"Los trenes de 6 vagones van desde el inicio"</td>
-        <td>La capacidad se incrementa nominalmente pero no supera la demanda proyectada</td>
-      </tr>
-      <tr>
-        <td>"El sistema es viable"</td>
-        <td>Podría serlo operativamente si se reduce la demanda efectiva a absorber</td>
-      </tr>
-      <tr>
-        <td>"La demanda está cubierta"</td>
-        <td>Solo si se excluye la demanda que actualmente aporta la integración con Línea 1</td>
-      </tr>
-    </tbody>
-  </table>
-  </div>
-
-  <div class="inferencia">
-    <div class="inf-label">Inferencia</div>
-    <p>Si la interconexión con la Línea 1 se elimina, la demanda efectiva que enfrentaría el monorriel se reduciría, haciendo el sistema aparentemente "viable" en papel. Sin embargo, el resultado sería funcionalmente una línea aislada — lo que compromete el carácter integrado de la red de transporte metropolitano.</p>
+    <div class="adv-label">⚠ <span class="es">Nota de evidencia</span><span class="en">Evidence note</span></div>
+    <p style="font-size:0.82rem;"><span class="es">La afirmación sobre "trenes de 6 vagones desde el inicio" proviene de vistas públicas recientes del proceso FITRAM-CCC-LP-2025-0001. <strong>Pendiente de documentación verificable:</strong> fecha exacta, expositor y canal de la vista pública. Esta sección debe tratarse como Nivel 3 hasta que esa cita sea verificada.</span><span class="en">The statement about "6-car trains from the start" comes from recent public hearings of the FITRAM-CCC-LP-2025-0001 process. <strong>Pending verifiable documentation:</strong> exact date, speaker and channel of the public hearing. This section must be treated as Level 3 until that citation is verified.</span></p>
   </div>
 </div>
 
-<!-- SECCIÓN 9: HEADWAY -->
-<div class="section">
-  <div class="section-header">
-    <span class="section-num">§ 9</span>
-    <h2>La Cláusula de Garantía del Headway <span class="badge badge-n3">Nivel 3</span></h2>
+<!-- ================================ -->
+<!-- TAB: ECOSISTEMA -->
+<!-- ================================ -->
+<div class="tab-panel" id="tab-ecosistema">
+  <div class="section-head">
+    <div class="section-eyebrow"><span class="es">Acceso directo</span><span class="en">Direct Access</span></div>
+    <div class="section-title"><span class="es">Ecosistema de productos</span><span class="en">Product Ecosystem</span></div>
+    <div class="section-desc"><span class="es">Escanea el código QR o haz clic en los enlaces para acceder a los productos de la auditoría.</span><span class="en">Scan the QR code or click the links to access the audit products.</span></div>
   </div>
 
-  <div class="comparacion">
-    <div class="comp-card lose">
-      <div class="comp-title">Headway oficial (expediente SNIP 17248)</div>
-      <div class="comp-big">90s</div>
-      <div class="comp-sub">40 trenes/hora · 30,000 pphps<br>Sin validación operativa documentada en sistemas GoA4 de esta escala</div>
+  <div class="sources-section" style="margin-top:0;">
+    <div class="sources-title"><span class="es">Acceso directo al ecosistema</span><span class="en">Direct Access to the Ecosystem</span></div>
+    <div style="text-align:center;margin:12px 0;">
+      <img src="QRE.png" alt="QR — Ecosistema El Embudo" style="max-width:100%;max-height:240px;border:1px solid var(--border);border-radius:6px;">
     </div>
-    <div class="comp-card win">
-      <div class="comp-title">Headway modelo realista</div>
-      <div class="comp-big">3.53 min</div>
-      <div class="comp-sub">17 trenes/hora · 12,750 pphps<br>Alcanzable según estándares UITP para sistemas automatizados comparables</div>
-    </div>
+    <ul class="sources-list">
+      <li><strong>🌐</strong> <a href="https://visualcrp.com/embudo.html" target="_blank"><span class="es">El Embudo · Análisis Técnico Independiente v1.0</span><span class="en">The Bottleneck · Independent Technical Analysis v1.0</span></a></li>
+      <li><strong>📊</strong> <a href="https://tinyurl.com/k34v8ajk" target="_blank">01E · <span class="es">Infografía — Déficit de Capacidad Monorriel vs Metro</span><span class="en">Infographic — Monorail vs Metro Capacity Deficit</span></a></li>
+      <li><strong>🧠</strong> <a href="https://tinyurl.com/3jxu4pk3" target="_blank">02E · <span class="es">Presentación PDF — Auditoría de Capacidad</span><span class="en">PDF Presentation — Capacity Audit</span></a></li>
+      <li><strong>🎧</strong> <a href="https://tinyurl.com/bdeft736" target="_blank">03E · <span class="es">Podcast · 30 min — El Embudo que Nadie Quiere Ver</span><span class="en">Podcast · 30 min — The Bottleneck Nobody Wants to See</span></a></li>
+    </ul>
   </div>
 
-  <div class="inferencia">
-    <div class="inf-label">Propuesta</div>
-    <p>Una cláusula de garantía operativa que transfiera al contratista el riesgo de no alcanzar el headway prometido de 90 segundos protegería al Estado de eventuales déficits operativos. La evidencia técnica disponible — incluyendo el análisis del corpus de auditoría — sugiere que ese headway no tiene validación operativa para el sistema propuesto.</p>
-  </div>
-</div>
-
-<!-- SECCIÓN 10: CONCLUSIÓN -->
-<div class="section">
-  <div class="section-header">
-    <span class="section-num">§ 10</span>
-    <h2>Conclusión: La Pregunta que el Expediente No Responde</h2>
-  </div>
-
-  <div class="table-wrap"><table class="data-table">
-    <thead><tr><th>Hecho establecido</th><th>Naturaleza</th></tr></thead>
-    <tbody>
-      <tr><td>El Metro existe y transporta 400,000 pasajeros diarios</td><td><span class="badge badge-n1">Nivel 1</span></td></tr>
-      <tr><td>La demanda proyectada para 2030 es de 464,800 pasajeros diarios</td><td><span class="badge badge-n1">Nivel 1</span></td></tr>
-      <tr><td>El Metro actual cubre el 86% de esa demanda proyectada</td><td><span class="badge badge-n3">Nivel 3</span></td></tr>
-      <tr><td>El monorriel, en el modelo analizado, cubre el 65.8% de la demanda 2030</td><td><span class="badge badge-n2">Nivel 2</span></td></tr>
-    </tbody>
-  </table>
-  </div>
-
-  <div class="inferencia">
-    <div class="inf-label">Inferencia final</div>
-    <p>La documentación examinada no demuestra que el monorriel propuesto pueda absorber la demanda proyectada por METI sin degradar la integración de la red existente. La capacidad estimada del monorriel es inferior a la demanda proyectada y también inferior a la capacidad actual del Metro. Si el proyecto implica la eliminación de la interconexión con la Línea 1, el sistema resultante operaría como una línea funcionalmente aislada.</p>
-  </div>
-</div>
-
-<!-- SECCIÓN 11: RESUMEN EN NÚMEROS -->
-<div class="section">
-  <div class="section-header">
-    <span class="section-num">§ 11</span>
-    <h2>Resumen en Números</h2>
-  </div>
-
-  <div class="table-wrap"><table class="data-table">
-    <thead>
-      <tr><th>Concepto</th><th>Monorriel (6 vagones)</th><th>Metro (6 vagones)</th><th>Naturaleza</th></tr>
-    </thead>
-    <tbody>
-      <tr><td>Capacidad por tren</td><td class="highlight">750 pax</td><td class="num" style="color:var(--green)">1,200 pax</td><td>Parámetro de diseño</td></tr>
-      <tr><td>Flota (modelo)</td><td>17 trenes</td><td>17 trenes</td><td>Misma flota</td></tr>
-      <tr><td>Headway</td><td>3.53 min</td><td>3.53 min</td><td>Misma frecuencia</td></tr>
-      <tr><td>Capacidad diaria estimada</td><td class="num" style="color:var(--red)">306,000 pax</td><td class="num" style="color:var(--green)">490,000 pax</td><td>Modelo de cálculo</td></tr>
-      <tr><td>Demanda METI 2030</td><td colspan="2" style="text-align:center" class="num">464,800 pax</td><td>Hecho documentado</td></tr>
-      <tr><td>¿Cubre la demanda 2030?</td><td style="color:var(--red)">No (65.8%)</td><td style="color:var(--green)">Sí (105.4%)</td><td>Inferencia</td></tr>
-    </tbody>
-  </table>
-  </div>
-</div>
-
-<!-- PREGUNTA FINAL -->
-<div class="pregunta-final">
-  <div class="pf-label">§ 13 · <span class="es">La Pregunta Final</span><span class="en">The Final Question</span></div>
-  <blockquote>
-    <span class="es">"¿Por qué se está construyendo un sistema con capacidad estimada inferior a la demanda proyectada, cuando el Metro existente ya cubre el 86% de esa demanda y cuenta con un contrato de mantenimiento que garantiza su operación?"</span>
-    <span class="en">"Why is a system being built with estimated capacity below projected demand, when the existing Metro already covers 86% of that demand and has a maintenance contract guaranteeing its operation?"</span>
-  </blockquote>
-  <p style="margin-top:1.25rem; font-size:0.85rem; color:var(--text-muted);"><span class="es">La respuesta a esa pregunta no se encuentra en los documentos examinados.</span><span class="en">The answer to that question is not found in the documents examined.</span></p>
-</div>
-
-<!-- SECCIÓN 12: FUENTES -->
-<div class="section">
-  <div class="section-header">
-    <span class="section-num">§ 12</span>
-    <h2>Fuentes Documentales</h2>
-  </div>
-
-  <div class="table-wrap"><table class="data-table fuentes-table">
-    <thead>
-      <tr><th>#</th><th>Documento</th><th>Fecha</th><th>Contenido</th><th>Nivel</th></tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td class="num">[1]</td>
-        <td><strong>Press Release Alstom — "Alstom firma contrato de mantenimiento para todos los trenes del Metro de Santo Domingo"</strong><br>
-        <span style="font-size:0.78rem; color:var(--text-muted);">Iván Moncayo, Director General Alstom Panamá y República Dominicana · OPRET · Santo Domingo, 20 de mayo de 2024.<br>
-        Texto exacto: <em>"A diario las dos líneas de Metro, operadas por la Oficina para el Reordenamiento del Transporte (OPRET) con una flota de 52 trenes Metropolis de Alstom, transportan alrededor de 400.000 pasajeros."</em><br>
-        Disponible: <a href="https://www.alstom.com/press-releases-news/2024/5/alstom-firma-contrato-de-mantenimiento-para-todos-los-trenes-del-metro-de-santo-domingo" style="color:var(--blue); font-size:0.78rem;" target="_blank">alstom.com · Press Release 20 mayo 2024</a></span></td>
-        <td>20 mayo 2024</td>
-        <td>400,000 pax/día · 52 trenes Metropolis · contrato mantenimiento 3 años · Línea 2 extensión 7.5 km en construcción</td>
-        <td><span class="badge badge-n1">N1</span></td>
-      </tr>
-      <tr>
-        <td class="num">[2]</td>
-        <td><strong>METI / NIPPON KOEI — "Estudio de Prefactibilidad de la Línea 3 del Metro (Tren Metropolitano) de Santo Domingo en la República Dominicana"</strong><br>
-        <span style="font-size:0.78rem; color:var(--text-muted);">Ministerio de Economía, Comercio e Industria del Japón (METI) · Asociación Japonesa de Metro · Febrero 2024.<br>
-        <a href="https://www.meti.go.jp/meti_lib/report/2023FY/000401.pdf" style="color:var(--blue); font-size:0.78rem;" target="_blank">https://www.meti.go.jp/meti_lib/report/2023FY/000401.pdf</a></span></td>
-        <td>Feb. 2024</td>
-        <td>Demanda: 464,800 pax/día (2030) · 571,100 (2045) · 704,000 (2060) · CAGR 1.39% anual · PPHPD: 12,800 / 16,200 / 20,600</td>
-        <td><span class="badge badge-n1">N1</span></td>
-      </tr>
-      <tr>
-        <td class="num">[3]</td>
-        <td>Informe R-04-F (entregado a FITRAM)</td>
-        <td>14 Nov. 2025</td>
-        <td>Análisis de interconexión · Registro pre-adjudicación</td>
-        <td><span class="badge badge-n1">N1</span></td>
-      </tr>
-      <tr>
-        <td class="num">[4]</td>
-        <td><strong>Informe de Riesgo Técnico-Financiero Ex Ante — Línea 3 Metro Santo Domingo</strong><br>
-        <span style="font-size:0.78rem; color:var(--text-muted);">
-          <a href="https://lnkd.in/emkqSdVe" style="color:var(--blue);" target="_blank">PDF completo · lnkd.in/emkqSdVe</a>
-          &nbsp;·&nbsp;
-          <a href="https://www.linkedin.com/posts/piter-bonilla-16244473_microsoft-onedrive-activity-7415232766835171328-9dTX" style="color:var(--blue);" target="_blank">LinkedIn</a>
-        </span></td>
-        <td>8 Ene. 2026</td>
-        <td>Riesgo operativo del déficit de capacidad · análisis técnico-financiero pre-adjudicación</td>
-        <td><span class="badge badge-n1">N1</span></td>
-      </tr>
-      <tr>
-        <td class="num">[5]</td>
-        <td><strong>Serie de 6 Videos Técnicos Independientes</strong><br>
-        <span style="font-size:0.78rem; color:var(--text-muted); line-height:1.8;">
-          <a href="https://youtu.be/jx-1f7lP_Fg" style="color:var(--blue);" target="_blank">V1 · La Decisión de $2,300M</a> — METI 2024: Monorriel 24/50 vs Metro 36/50 · déficit estructural desde día 1<br>
-          <a href="https://youtu.be/YNsWwYy4_m8" style="color:var(--blue);" target="_blank">V2 · $486M en Trenes Fantasma</a> — Headway real 3.4 min vs 1.5 min prometido · 19 trenes en exceso<br>
-          <a href="https://youtu.be/VJoyiM5QHs0" style="color:var(--blue);" target="_blank">V3 · São Paulo — El Fallo</a> — Realidades operativas GoA4 en entornos de producción<br>
-          <a href="https://youtu.be/2McmoesyY4o" style="color:var(--blue);" target="_blank">V4 · LCOT Ajustado</a> — Costo de ciclo de vida: Metro $1.05 vs Monorriel $1.21 por pax-km<br>
-          <a href="https://youtu.be/Qj6nJZXSzVQ" style="color:var(--blue);" target="_blank">V5 · Matemáticas de Colmado</a> — Déficit de capacidad para audiencias no técnicas<br>
-          <a href="https://youtu.be/yxzTqLKzTsk" style="color:var(--blue);" target="_blank">V6 · Comparación R-04-V</a> — Análisis comparativo final · implicaciones regulatorias
-        </span></td>
-        <td>Nov. 2025–Ene. 2026</td>
-        <td>Serie pre-adjudicación · 6 análisis técnicos independientes · <a href="https://youtube.com/@peterbonilla8239" style="color:var(--blue);" target="_blank">youtube.com/@peterbonilla8239</a></td>
-        <td><span class="badge badge-n1">N1</span></td>
-      </tr>
-      <tr>
-        <td class="num">[6]</td>
-        <td>UITP — World Metro Figures 2023</td>
-        <td>2023</td>
-        <td>Estándares operativos headway · sistemas automatizados</td>
-        <td><span class="badge badge-n2">N2</span></td>
-      </tr>
-      <tr>
-        <td class="num">[7]</td>
-        <td>IEC 62267 — Automated urban guided transport systems</td>
-        <td>Vigente</td>
-        <td>Estándares GoA3/GoA4 para sistemas automatizados</td>
-        <td><span class="badge badge-n2">N2</span></td>
-      </tr>
-    </tbody>
-  </table>
-  </div>
-
-  <div class="nota-pendiente" style="margin-top:1rem;">
-    <strong>Pendientes de verificación:</strong> (a) Fuente exacta de los 17 trenes y 750 pax/tren en el expediente SNIP 17248. (b) Tabla de distribución horaria de demanda en el estudio METI para validar el factor 30%. (c) Fecha, expositor y canal de las vistas públicas citadas en la Sección 8.
-  </div>
-</div>
-
-<!-- NOTA FINAL -->
-<div class="section">
-  <p style="font-style:italic; color:var(--text-muted); font-size:0.9rem;">
-    Este documento no afirma que el monorriel sea técnicamente inviable. Examina si la documentación disponible demuestra que el proyecto puede absorber la demanda proyectada sin degradar la integración de la red existente. La evidencia revisada no permite responder afirmativamente a esa pregunta. Las inferencias aquí presentadas se derivan de los hechos y modelos documentados, y se formulan explícitamente como tales.
-  </p>
-</div>
-
-<!-- FOOTER -->
-
-<!-- ─── ACCESO DIRECTO AL ECOSISTEMA ─── -->
-<div class="sources-section">
-  <div class="sources-title">
-    <span class="es">Acceso directo al ecosistema</span>
-    <span class="en">Direct access to the ecosystem</span>
-  </div>
-  <div class="sources-subtitle">
-    <span class="es">Escanea el código QR o haz clic en los enlaces para acceder a los productos de la auditoría.</span>
-    <span class="en">Scan the QR code or click the links to access the audit products.</span>
-  </div>
-
-  <!-- Imagen QR — tres códigos activos: Infografía, Presentación, Podcast -->
-  <div class="sources-qr">
-    <img src="QRE.png"
-         alt="QR — 01E Infografía · 02E Presentación · 03E Podcast"
-         title="Escanea para acceder a los productos del ecosistema El Embudo" />
-  </div>
-
-  <!-- Lista de artefactos -->
-  <ul class="sources-list">
-    <!-- Dashboard principal -->
-    <li>
-      <strong>🌐</strong>
-      <a href="https://visualcrp.com/embudo.html" target="_blank">
-        <span class="es">El Embudo · Análisis Técnico Independiente v1.0</span>
-        <span class="en">The Bottleneck · Independent Technical Analysis v1.0</span>
-      </a>
-    </li>
-
-    <!-- Infografía -->
-    <li>
-      <strong>📊</strong>
-      <a href="https://tinyurl.com/k34v8ajk" target="_blank" style="color:var(--blue);">
-        01E · <span class="es">Infografía — Déficit de Capacidad Monorriel vs Metro</span>
-        <span class="en">Infographic — Monorail vs Metro Capacity Deficit</span>
-      </a>
-    </li>
-
-    <!-- Presentación -->
-    <li>
-      <strong>🧠</strong>
-      <a href="https://tinyurl.com/3jxu4pk3" target="_blank" style="color:var(--blue);">
-        02E · <span class="es">Presentación PDF — Auditoría de Capacidad</span>
-        <span class="en">PDF Presentation — Capacity Audit</span>
-      </a>
-    </li>
-
-    <!-- Podcast -->
-    <li>
-      <strong>🎧</strong>
-      <a href="https://tinyurl.com/bdeft736" target="_blank" style="color:var(--blue);">
-        03E · <span class="es">Podcast · 30 min — El Embudo que Nadie Quiere Ver</span>
-        <span class="en">Podcast · 30 min — The Bottleneck Nobody Wants to See</span>
-      </a>
-    </li>
-  </ul>
-
-  <!-- Separador: Serie de análisis previos -->
-  <div style="margin-top:1.25rem; padding-top:1rem; border-top:1px solid var(--border);">
-    <div style="font-family:var(--font-mono); font-size:0.65rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--text-muted); margin-bottom:0.5rem;">
-      <span class="es">Serie de análisis pre-adjudicación · Nov 2025–Ene 2026</span>
-      <span class="en">Pre-Award Analysis Series · Nov 2025–Jan 2026</span>
-    </div>
-    <div style="font-family:var(--font-ui); font-size:0.78rem; color:var(--text-muted); font-style:italic; margin-bottom:0.85rem; line-height:1.5;">
+  <div style="margin-top:20px;padding:16px 20px;background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:0 4px 4px 0;">
+    <div style="font-family:var(--font-mono);font-size:0.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);margin-bottom:8px;"><span class="es">Serie de análisis pre-adjudicación · Nov 2025–Ene 2026</span><span class="en">Pre-Award Analysis Series · Nov 2025–Jan 2026</span></div>
+    <div style="font-size:0.78rem;color:var(--text-muted);font-style:italic;margin-bottom:10px;line-height:1.5;">
       <span class="es">El R-04-F fue remitido a FITRAM el 14 de noviembre de 2025 (Ing. Jhael Isa · admin@fitram.gob.do). Sin respuesta institucional, se inició la publicación pública con el Video 6 (R-04-V, 27 nov 2025). El Informe Ex-Ante de enero 2026 cierra la serie como síntesis técnica final.</span>
       <span class="en">R-04-F was submitted to FITRAM on November 14, 2025 (Ing. Jhael Isa · admin@fitram.gob.do). With no institutional response, public publication began with Video 6 (R-04-V, Nov 27, 2025). The January 2026 Ex Ante Report closes the series as the final technical synthesis.</span>
     </div>
-    <ul class="sources-list">
-
-      <!-- R-04-F — origen de todo: enviado a FITRAM, sin respuesta -->
-      <li>
-        <strong>📄</strong>
-        <span>
-          <span style="font-family:var(--font-mono); font-size:0.65rem; background:var(--accent); color:#fff; padding:1px 6px; border-radius:3px; margin-right:0.4rem; font-weight:700;">ORIGEN</span>
-          <a href="https://lnkd.in/emkqSdVe" target="_blank" style="color:var(--blue); font-weight:700;">
-            <span class="es">R-04-F · Nota Técnica Ejecutiva · 14 Nov. 2025</span>
-            <span class="en">R-04-F · Executive Technical Note · Nov 14, 2025</span>
-          </a><br>
-          <span style="font-size:0.78rem; color:var(--text-muted);">
-            <span class="es">Enviado a FITRAM (Ing. Jhael Isa) el 14/11/2025. Sin respuesta institucional. Dio origen a la serie de videos. PDF completo.</span>
-            <span class="en">Submitted to FITRAM (Ing. Jhael Isa) on 11/14/2025. No institutional response. Originated the video series. Full PDF.</span>
-          </span>
-        </span>
-      </li>
-
-      <!-- V6 — primer video publicado -->
-      <li>
-        <strong>▶</strong>
-        <span>
-          <a href="https://youtu.be/yxzTqLKzTsk" target="_blank" style="color:var(--blue); font-weight:700;">
-            V6 · <span class="es">Comparación R-04-V</span><span class="en">R-04-V Comparison</span>
-          </a>
-          <span style="font-family:var(--font-mono); font-size:0.65rem; background:var(--blue); color:#fff; padding:1px 6px; border-radius:3px; margin-left:0.4rem; font-weight:700;">
-            <span class="es">1er VIDEO · 27 Nov 2025</span><span class="en">1st VIDEO · Nov 27, 2025</span>
-          </span><br>
-          <span style="font-size:0.78rem; color:var(--text-muted);">
-            <span class="es">Análisis comparativo final · implicaciones regulatorias y contractuales</span>
-            <span class="en">Final comparative analysis · regulatory and contractual implications</span>
-          </span>
-        </span>
-      </li>
-
-      <!-- V1 — entrada recomendada para nueva audiencia -->
-      <li>
-        <strong>▶</strong>
-        <span>
-          <a href="https://youtu.be/jx-1f7lP_Fg" target="_blank" style="color:var(--blue); font-weight:700;">
-            V1 · <span class="es">La Decisión de $2,300M</span><span class="en">The $2.3B Decision</span>
-          </a>
-          <span style="font-family:var(--font-mono); font-size:0.65rem; background:var(--accent); color:#fff; padding:1px 6px; border-radius:3px; margin-left:0.4rem; font-weight:700;">
-            <span class="es">EMPEZAR AQUÍ</span><span class="en">START HERE</span>
-          </span><br>
-          <span style="font-size:0.78rem; color:var(--text-muted);">
-            <span class="es">METI 2024: Monorriel 24/50 vs Metro 36/50 · déficit de capacidad estructural desde el día 1</span>
-            <span class="en">METI 2024: Monorail 24/50 vs Metro 36/50 · structural capacity deficit from day 1</span>
-          </span>
-        </span>
-      </li>
-
-      <!-- V2 -->
-      <li>
-        <strong>▶</strong>
-        <span>
-          <a href="https://youtu.be/YNsWwYy4_m8" target="_blank" style="color:var(--blue);">
-            V2 · <span class="es">$486M en Trenes Fantasma</span><span class="en">$486M in Ghost Trains</span>
-          </a><br>
-          <span style="font-size:0.78rem; color:var(--text-muted);">
-            <span class="es">Headway real 3.4 min vs 1.5 min prometido · 19 trenes en exceso</span>
-            <span class="en">Real headway 3.4 min vs 1.5 min promised · 19 excess trains</span>
-          </span>
-        </span>
-      </li>
-
-      <!-- Serie V3–V5 compactos -->
-      <li style="padding-top:0.5rem; border-top:1px dashed var(--border); margin-top:0.25rem;">
-        <strong style="font-size:0.7rem; color:var(--text-muted);">
-          <span class="es">Serie completa:</span><span class="en">Full series:</span>
-        </strong>
-        <span style="font-size:0.78rem; color:var(--text-muted);">
-          <a href="https://youtu.be/VJoyiM5QHs0" target="_blank" style="color:var(--blue);">V3 São Paulo</a>
-          &nbsp;·&nbsp;
-          <a href="https://youtu.be/2McmoesyY4o" target="_blank" style="color:var(--blue);">V4 LCOT</a>
-          &nbsp;·&nbsp;
-          <a href="https://youtu.be/Qj6nJZXSzVQ" target="_blank" style="color:var(--blue);">V5 Colmado</a>
-          &nbsp;·&nbsp;
-          <a href="https://youtube.com/@peterbonilla8239" target="_blank" style="color:var(--blue);">youtube.com/@peterbonilla8239</a>
-        </span>
-      </li>
-
-      <!-- Informe Ex-Ante — cierre de la serie -->
-      <li style="padding-top:0.5rem; border-top:1px dashed var(--border); margin-top:0.25rem;">
-        <strong>📋</strong>
-        <span>
-          <span style="font-family:var(--font-mono); font-size:0.65rem; background:var(--green); color:#fff; padding:1px 6px; border-radius:3px; margin-right:0.4rem; font-weight:700;">
-            <span class="es">CIERRE · 8 ENE 2026</span><span class="en">CLOSE · JAN 8, 2026</span>
-          </span>
-          <a href="https://lnkd.in/emkqSdVe" target="_blank" style="color:var(--blue); font-weight:600;">
-            <span class="es">Informe Ex-Ante · Síntesis Técnico-Financiera Final</span>
-            <span class="en">Ex Ante Report · Final Technical-Financial Synthesis</span>
-          </a><br>
-          <span style="font-size:0.78rem; color:var(--text-muted);">
-            <span class="es">Síntesis final post-videos. Análisis de riesgo técnico-financiero completo.</span>
-            <span class="en">Final synthesis post-videos. Complete technical-financial risk analysis.</span>
-          </span>
-        </span>
-      </li>
-
+    <ul class="sources-list" style="font-size:0.78rem;">
+      <li><strong>📋</strong> <a href="https://lnkd.in/emkqSdVe" target="_blank" style="color:var(--blue);font-weight:600;"><span class="es">Informe Ex-Ante · Síntesis Final · 8 Ene 2026</span><span class="en">Ex Ante Report · Final Synthesis · Jan 8, 2026</span></a></li>
+      <li><strong>▶</strong> <a href="https://youtu.be/jx-1f7lP_Fg" target="_blank" style="color:var(--blue);">V6 · <span class="es">La Decisión de $2,300M</span><span class="en">The $2.3B Decision</span></a></li>
+      <li><strong>▶</strong> <a href="https://youtu.be/YNsWwYy4_m8" target="_blank" style="color:var(--blue);">V5 · <span class="es">$486M en Trenes Fantasma</span><span class="en">$486M in Ghost Trains</span></a></li>
+      <li><strong>▶</strong> <a href="https://youtu.be/VJoyiM5QHs0" target="_blank" style="color:var(--blue);">V4 · <span class="es">São Paulo — El Fallo</span><span class="en">São Paulo — The Failure</span></a></li>
+      <li><strong>▶</strong> <a href="https://youtu.be/2McmoesyY4o" target="_blank" style="color:var(--blue);">V3 · <span class="es">LCOT Ajustado</span><span class="en">Adjusted LCOT</span></a></li>
+      <li><strong>▶</strong> <a href="https://youtu.be/Qj6nJZXSzVQ" target="_blank" style="color:var(--blue);">V2 · <span class="es">Matemáticas de Colmado</span><span class="en">Corner Store Math</span></a></li>
+      <li><strong>▶</strong> <a href="https://youtu.be/yxzTqLKzTsk" target="_blank" style="color:var(--blue);">V1 · <span class="es">Comparación R-04-V</span><span class="en">R-04-V Comparison</span></a></li>
+      <li><strong>📄</strong> <a href="https://lnkd.in/emkqSdVe" target="_blank" style="color:var(--blue);font-weight:600;"><span class="es">R-04-F · Nota Técnica Ejecutiva → FITRAM · 14 Nov 2025</span><span class="en">R-04-F · Executive Technical Note → FITRAM · Nov 14, 2025</span></a></li>
     </ul>
   </div>
 </div>
 
-<div class="footer">
-  <p><strong>Ing. Piter J. Bonilla D.</strong> · CODIA #17378 · visualcrp.com · linkedin.com/in/piter-bonilla-16244473</p>
-  <p style="margin-top:0.4rem;"><span class="es">Documento de análisis técnico independiente. Los resultados y conclusiones son de exclusiva responsabilidad del autor. Este documento complementa — sin sustituir — el corpus de auditoría del Dr. Ing. Carlos Bonnelly Ginebra (Notas Técnicas I–V).</span><span class="en">Independent technical analysis document. Results and conclusions are the sole responsibility of the author. This document complements — without replacing — the audit corpus of Dr. Ing. Carlos Bonnelly Ginebra (Technical Notes I–V).</span></p>
-  <p style="margin-top:0.4rem; color:var(--border);">v1.0 · 4 agosto 2026</p>
+<!-- ================================ -->
+<!-- TAB: FUENTES -->
+<!-- ================================ -->
+<div class="tab-panel" id="tab-fuentes">
+  <div class="section-head">
+    <div class="section-eyebrow"><span class="es">Documentación</span><span class="en">Documentation</span></div>
+    <div class="section-title"><span class="es">Fuentes Documentales</span><span class="en">Documentary Sources</span></div>
+    <div class="section-desc"><span class="es">Fuentes primarias, metodológicas y de referencia utilizadas en el análisis.</span><span class="en">Primary, methodological and reference sources used in the analysis.</span></div>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>#</th><th><span class="es">Documento</span><span class="en">Document</span></th><th><span class="es">Fecha</span><span class="en">Date</span></th><th><span class="es">Contenido</span><span class="en">Content</span></th><th><span class="es">Nivel</span><span class="en">Level</span></th></tr></thead>
+      <tbody>
+        <tr>
+          <td>[1]</td>
+          <td><strong><span class="es">Press Release Alstom</span><span class="en">Alstom Press Release</span></strong><br><span style="font-size:0.7rem;color:var(--text-muted);"><span class="es">Iván Moncayo, OPRET, Santo Domingo</span><span class="en">Iván Moncayo, OPRET, Santo Domingo</span></span></td>
+          <td>20 mayo 2024</td>
+          <td><span class="es">400,000 pax/día · 52 trenes Metropolis · contrato mantenimiento 3 años</span><span class="en">400,000 pax/day · 52 Metropolis trains · 3-year maintenance contract</span></td>
+          <td><span class="badge badge-n1">N1</span></td>
+        </tr>
+        <tr>
+          <td>[2]</td>
+          <td><strong>METI / NIPPON KOEI</strong><br><span style="font-size:0.7rem;color:var(--text-muted);"><span class="es">Estudio de Prefactibilidad Línea 3 Metro Santo Domingo</span><span class="en">Pre-feasibility Study Metro Line 3 Santo Domingo</span></span></td>
+          <td>Feb. 2024</td>
+          <td><span class="es">Demanda: 464,800 (2030) · 571,100 (2045) · 704,000 (2060) · CAGR 1.39%</span><span class="en">Demand: 464,800 (2030) · 571,100 (2045) · 704,000 (2060) · CAGR 1.39%</span></td>
+          <td><span class="badge badge-n1">N1</span></td>
+        </tr>
+        <tr>
+          <td>[3]</td>
+          <td><strong><span class="es">R-04-F · Nota Técnica Ejecutiva</span><span class="en">R-04-F · Executive Technical Note</span></strong></td>
+          <td>14 Nov 2025</td>
+          <td><span class="es">Análisis multi-escenario · 123,456 simulaciones · Enviado a FITRAM</span><span class="en">Multi-scenario analysis · 123,456 simulations · Submitted to FITRAM</span></td>
+          <td><span class="badge badge-n1">N1</span></td>
+        </tr>
+        <tr>
+          <td>[4]</td>
+          <td><strong><span class="es">Informe Ex-Ante</span><span class="en">Ex Ante Report</span></strong></td>
+          <td>8 Ene 2026</td>
+          <td><span class="es">Síntesis técnico-financiera final · Análisis de riesgo completo</span><span class="en">Final technical-financial synthesis · Complete risk analysis</span></td>
+          <td><span class="badge badge-n1">N1</span></td>
+        </tr>
+        <tr>
+          <td>[5]</td>
+          <td><strong><span class="es">Serie de 6 Videos Técnicos</span><span class="en">6 Technical Videos Series</span></strong></td>
+          <td>Nov 2025–Ene 2026</td>
+          <td><span class="es">Análisis técnico pre-adjudicación · V1–V6</span><span class="en">Pre-award technical analysis · V1–V6</span></td>
+          <td><span class="badge badge-n1">N1</span></td>
+        </tr>
+        <tr>
+          <td>[6]</td>
+          <td><strong>UITP — World Metro Figures 2023</strong></td>
+          <td>2023</td>
+          <td><span class="es">Estándares operativos headway · sistemas automatizados</span><span class="en">Headway operational standards · automated systems</span></td>
+          <td><span class="badge badge-n2">N2</span></td>
+        </tr>
+        <tr>
+          <td>[7]</td>
+          <td><strong>IEC 62267</strong></td>
+          <td><span class="es">Vigente</span><span class="en">Current</span></td>
+          <td><span class="es">Estándares GoA3/GoA4 para sistemas automatizados</span><span class="en">GoA3/GoA4 standards for automated systems</span></td>
+          <td><span class="badge badge-n2">N2</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="advertencia" style="margin-top:12px;">
+    <div class="adv-label"><span class="es">Pendientes de verificación</span><span class="en">Pending verification</span></div>
+    <ul style="font-size:0.82rem;color:var(--text-muted);padding-left:20px;line-height:1.8;">
+      <li><span class="es">(a) Fuente exacta de los 17 trenes y 750 pax/tren en el expediente SNIP 17248.</span><span class="en">(a) Exact source of 17 trains and 750 pax/train in SNIP 17248 file.</span></li>
+      <li><span class="es">(b) Tabla de distribución horaria de demanda en el estudio METI para validar el factor 30%.</span><span class="en">(b) Demand hourly distribution table in METI study to validate the 30% factor.</span></li>
+      <li><span class="es">(c) Fecha, expositor y canal de las vistas públicas citadas en la Sección 8.</span><span class="en">(c) Date, speaker and channel of public hearings cited in Section 8.</span></li>
+    </ul>
+  </div>
 </div>
 
+</div><!-- /content -->
+
+<!-- FOOTER -->
+<div class="footer" style="max-width:1100px;margin:0 auto;padding:16px 24px 32px;">
+  <p><strong>Ing. Piter J. Bonilla D.</strong> · CODIA #17378 · visualcrp.com · linkedin.com/in/piter-bonilla-16244473</p>
+  <p style="margin-top:4px;"><span class="es">Documento de análisis técnico independiente. Los resultados y conclusiones son de exclusiva responsabilidad del autor.</span><span class="en">Independent technical analysis document. Results and conclusions are the sole responsibility of the author.</span></p>
+  <p style="margin-top:4px;color:var(--border);">v1.0 · 4 agosto 2026 · Elizabeth NJ</p>
+</div>
 
 <script>
-/* ── FUNCIONES: idénticas al AUDIT.html ── */
+// ── TAB LOGIC ──
+function showTab(id) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  if (event && event.currentTarget) event.currentTarget.classList.add('active');
+  // Rebuild charts when tab changes to ensure proper rendering
+  setTimeout(() => { if (typeof buildCharts === 'function') buildCharts(); }, 100);
+}
+
+// ── LANGUAGE TOGGLE ──
 function setLang(lang) {
   document.getElementById('html-root').setAttribute('lang', lang);
   document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
   const topBtn = document.getElementById('top-lang-' + lang);
   if (topBtn) topBtn.classList.add('active');
-  localStorage.setItem('embudo-lang', lang);
-  // Actualizar label del botón de tema
-  const themeBtn = document.getElementById('theme-btn');
-  const isLight = document.getElementById('html-root').classList.contains('light');
-  if (themeBtn) {
-    themeBtn.querySelector('.es').style.display = lang === 'es' ? 'inline' : 'none';
-    themeBtn.querySelector('.en').style.display = lang === 'en' ? 'inline' : 'none';
-  }
+  localStorage.setItem('embudo-dash-lang', lang);
+  // Rebuild charts for bilingual labels
+  setTimeout(() => { if (typeof buildCharts === 'function') buildCharts(); }, 150);
 }
 
+// ── THEME TOGGLE ──
 function toggleTheme() {
   const h = document.getElementById('html-root');
   h.classList.toggle('light');
   h.classList.toggle('dark');
   const isLight = h.classList.contains('light');
-  localStorage.setItem('embudo-theme', isLight ? 'light' : 'dark');
-  // Actualizar label del botón
-  const themeBtn = document.getElementById('theme-btn');
-  if (themeBtn) {
-    const lang = h.getAttribute('lang') || 'es';
-    if (isLight) {
-      themeBtn.innerHTML = lang === 'es'
-        ? '<span class="es">🌙 Oscuro</span><span class="en" style="display:none">🌙 Dark</span>'
-        : '<span class="es" style="display:none">🌙 Oscuro</span><span class="en">🌙 Dark</span>';
-    } else {
-      themeBtn.innerHTML = lang === 'es'
-        ? '<span class="es">☀︎ Claro</span><span class="en" style="display:none">☀︎ Light</span>'
-        : '<span class="es" style="display:none">☀︎ Claro</span><span class="en">☀︎ Light</span>';
-    }
+  localStorage.setItem('embudo-dash-theme', isLight ? 'light' : 'dark');
+  // Update chart colors
+  setTimeout(() => { if (typeof buildCharts === 'function') buildCharts(); }, 150);
+}
+
+// ── PRINT ──
+function prepPrint() {
+  document.body.classList.add('print-all');
+  window.print();
+  setTimeout(() => document.body.classList.remove('print-all'), 1200);
+}
+
+// ── CHART DEFAULTS ──
+Chart.defaults.font.family = "'Segoe UI', system-ui, sans-serif";
+Chart.defaults.font.size = 11;
+Chart.defaults.plugins.legend.labels.boxWidth = 12;
+Chart.defaults.plugins.legend.labels.padding = 12;
+
+function isDark() { return !document.getElementById('html-root').classList.contains('light'); }
+function getLang() { return document.getElementById('html-root').getAttribute('lang') || 'es'; }
+function t(es, en) { return getLang() === 'en' ? en : es; }
+
+function getChartColors() {
+  const dark = isDark();
+  return {
+    grid: dark ? 'rgba(200,216,240,.08)' : '#e8edf5',
+    tick: dark ? '#8898b8' : '#64748b',
+    border: dark ? '#1a2740' : '#fff',
+    text: dark ? '#c8d8f0' : '#1e293b',
+    muted: dark ? '#8898b8' : '#475569',
+  };
+}
+
+// ── CHART REGISTRY ──
+let _charts = {};
+function destroyCharts() {
+  Object.values(_charts).forEach(c => { try { c.destroy(); } catch(e){} });
+  Object.keys(_charts).forEach(k => delete _charts[k]);
+}
+
+function buildCharts() {
+  destroyCharts();
+  const colors = getChartColors();
+  const D = isDark();
+  const GRID = D ? 'rgba(200,216,240,.08)' : '#e8edf5';
+  const TICK = D ? '#8898b8' : '#64748b';
+  const BORDER = D ? '#0c1525' : '#fff';
+
+  // ── BREACHA (Síntesis) ──
+  const ctxBrecha = document.getElementById('chartBrecha');
+  if (ctxBrecha) {
+    _charts.brecha = new Chart(ctxBrecha, {
+      type: 'bar',
+      data: {
+        labels: [t('Demanda METI 2030','METI Demand 2030'), t('Metro actual','Current Metro'), t('Capacidad monorriel','Monorail Capacity')],
+        datasets: [{
+          label: t('Pasajeros diarios','Daily passengers'),
+          data: [464800, 400000, 306000],
+          backgroundColor: ['#3b82f6', '#22c55e', '#ef4444'],
+          borderWidth: 0,
+          borderRadius: 3,
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: { legend: { display: false } },
+        scales: {
+          y: { grid: { color: GRID }, ticks: { color: TICK, callback: v => (v/1000).toFixed(0)+'k' } },
+          x: { grid: { display: false }, ticks: { color: TICK } }
+        }
+      }
+    });
+  }
+
+  // ── DEMANDA METI ──
+  const ctxMETI = document.getElementById('chartDemandaMETI');
+  if (ctxMETI) {
+    _charts.meti = new Chart(ctxMETI, {
+      type: 'bar',
+      data: {
+        labels: ['2030', '2045', '2060'],
+        datasets: [{
+          label: t('Demanda diaria (pax/día)','Daily Demand (pax/day)'),
+          data: [464800, 571100, 704000],
+          backgroundColor: ['#3b82f6', '#3b82f6', '#3b82f6'],
+          borderWidth: 0,
+          borderRadius: 3,
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { display: false },
+          tooltip: { callbacks: { label: ctx => `${ctx.raw.toLocaleString()} pax/día` } }
+        },
+        scales: {
+          y: { grid: { color: GRID }, ticks: { color: TICK, callback: v => (v/1000).toFixed(0)+'k' } },
+          x: { grid: { display: false }, ticks: { color: TICK } }
+        }
+      }
+    });
+  }
+
+  // ── CAPACIDAD POR TREN ──
+  const ctxCap = document.getElementById('chartCapacidadTren');
+  if (ctxCap) {
+    _charts.capTren = new Chart(ctxCap, {
+      type: 'bar',
+      data: {
+        labels: [t('Monorriel (6v)','Monorail (6c)'), t('Metro 6v','Metro 6c')],
+        datasets: [{
+          label: t('Pasajeros por tren','Passengers per train'),
+          data: [750, 1200],
+          backgroundColor: ['#ef4444', '#22c55e'],
+          borderWidth: 0,
+          borderRadius: 3,
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: { legend: { display: false } },
+        scales: {
+          y: { grid: { color: GRID }, ticks: { color: TICK } },
+          x: { grid: { display: false }, ticks: { color: TICK } }
+        }
+      }
+    });
+  }
+
+  // ── COBERTURA ──
+  const ctxCob = document.getElementById('chartCobertura');
+  if (ctxCob) {
+    _charts.cobertura = new Chart(ctxCob, {
+      type: 'bar',
+      data: {
+        labels: [t('Metro actual','Current Metro'), t('Monorriel','Monorail')],
+        datasets: [{
+          label: t('Cobertura vs demanda 2030','Coverage vs 2030 demand'),
+          data: [86.1, 65.8],
+          backgroundColor: ['#22c55e', '#ef4444'],
+          borderWidth: 0,
+          borderRadius: 3,
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { display: false },
+          tooltip: { callbacks: { label: ctx => `${ctx.raw}%` } }
+        },
+        scales: {
+          y: { min: 0, max: 100, grid: { color: GRID }, ticks: { color: TICK, callback: v => v+'%' } },
+          x: { grid: { display: false }, ticks: { color: TICK } }
+        }
+      }
+    });
   }
 }
 
-/* ── INIT: restaurar preferencias guardadas ── */
+// ── INIT ──
 (function() {
-  const savedTheme = localStorage.getItem('embudo-theme');
-  const savedLang  = localStorage.getItem('embudo-lang');
+  const savedTheme = localStorage.getItem('embudo-dash-theme');
+  const savedLang = localStorage.getItem('embudo-dash-lang');
   const h = document.getElementById('html-root');
-  if (savedTheme === 'light') {
-    h.classList.add('light');
-    h.classList.remove('dark');
-  }
+  if (savedTheme === 'light') { h.classList.add('light'); h.classList.remove('dark'); }
   setLang(savedLang || 'es');
+  setTimeout(buildCharts, 300);
 })();
-</script>
 
+// Rebuild charts when window resizes
+let resizeTimer;
+window.addEventListener('resize', () => {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(() => { if (typeof buildCharts === 'function') buildCharts(); }, 500);
+});
+</script>
 </body>
 </html>
