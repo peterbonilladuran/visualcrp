@@ -323,6 +323,7 @@ hr.rule { border: none; border-top: 1px solid var(--rule); margin: 24px 0; }
     <button class="tab-btn" onclick="showTab('graficos')"><span class="es">Gráficos</span><span class="en">Charts</span></button>
     <button class="tab-btn" onclick="showTab('ecosistema')"><span class="es">Ecosistema</span><span class="en">Ecosystem</span></button>
     <button class="tab-btn" onclick="showTab('fuentes')"><span class="es">Fuentes</span><span class="en">Sources</span></button>
+    <button class="tab-btn" onclick="showTab('macro')"><span class="es">Macroeconómico</span><span class="en">Macroeconomic</span></button>
   </div>
 </nav>
 
@@ -766,6 +767,176 @@ hr.rule { border: none; border-top: 1px solid var(--rule); margin: 24px 0; }
       <div class="tf-original"><span class="es">Documento de análisis técnico independiente. Los resultados y conclusiones son de exclusiva responsabilidad del autor. Este documento complementa — sin sustituir — el corpus de auditoría del Dr. Ing. Carlos Bonnelly Ginebra (Notas Técnicas I–V).</span><span class="en">Independent technical analysis document. Results and conclusions are the sole responsibility of the author. This document complements — without replacing — the audit corpus of Dr. Ing. Carlos Bonnelly Ginebra (Technical Notes I–V).</span></div>
     </div>
     <div style="font-size:11px; color:var(--muted);">v1.0 · 4 <span class="es">agosto</span><span class="en">August</span> 2026</div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     TAB 8 · MACROECONÓMICO
+══════════════════════════════════════════════ -->
+<div class="tab-panel" id="tab-macro">
+
+  <!-- ALERTA CENTRAL -->
+  <div class="box box-warn" style="padding:20px 24px; margin-bottom:32px;">
+    <div class="box-label" style="color:var(--red, #c0392b); font-size:10px; letter-spacing:.08em; text-transform:uppercase; margin-bottom:8px;"><span class="es">Hallazgo macroeconómico central · N3</span><span class="en">Central macroeconomic finding · N3</span></div>
+    <div style="font-size:32px; font-weight:700; color:var(--red, #c0392b); font-family:var(--mono,'monospace'); line-height:1; margin-bottom:6px;">USD 1,359.6M</div>
+    <p style="font-size:13px;"><span class="es">Sobrecosto neto del Monorriel vs. Metro 6 vagones a 15 años (2030–2045), incorporando Pérdida de Bienestar Social de los 158,800 pasajeros excluidos diarios. Supera el costo total del proyecto (USD 932.8M). Los supuestos LCOT ($1.05/$1.07) están verificados contra el modelo LCOT Ajustado (dic. 2025). Pendiente de validación: tarifa informal USD 1.50/viaje y tipo de cambio vigente.</span><span class="en">Net cost overrun of the Monorail vs. 6-car Metro over 15 years (2030–2045), incorporating Social Welfare Loss from 158,800 daily excluded passengers. Exceeds total project cost (USD 932.8M). LCOT assumptions ($1.05/$1.07) verified against Adjusted LCOT model (Dec. 2025). Pending validation: informal transport fare USD 1.50/trip and current exchange rate.</span></p>
+  </div>
+
+  <hr class="rule">
+
+  <!-- §M1 METODOLOGÍA -->
+  <div class="sec">
+    <div class="sec-hdr"><span class="sec-num">M1 ·</span><span class="sec-title"><span class="es">Fundamento Metodológico</span><span class="en">Methodological Basis</span></span></div>
+    <p><span class="es">Este análisis aplica los mismos tres niveles de evidencia del dashboard. La Pérdida de Bienestar Social corrige la asimetría del modelo oficial: el Monorriel aparenta menor subsidio porque su incapacidad física le impide atender al 34% de la demanda. La comparación simétrica ("manzanas con manzanas") carga ese costo al Monorriel.</span><span class="en">This analysis applies the same three evidence levels as the dashboard. The Social Welfare Loss corrects the asymmetry in the official model: the Monorail appears to have a lower subsidy because its physical incapacity prevents it from serving 34% of demand. The symmetric comparison ("apples to apples") charges that cost to the Monorail.</span></p>
+    <div class="box box-note" style="margin-top:16px;">
+      <div class="box-label"><span class="es">Nota — Flota idéntica en ambos escenarios</span><span class="en">Note — Identical fleet in both scenarios</span></div>
+      <p><span class="es">Ambos escenarios asumen la <strong>misma flota base</strong> (17 trenes · headway 3.53 min). La diferencia de capacidad no es de frecuencia ni de número de trenes — es exclusivamente de <strong>capacidad física por tren</strong>: 1,200 pax en Metro 6V vs. 750 pax en Monorriel. El Metro 6V con 17 trenes cubre el 100% de la demanda proyectada hasta 2045. El valor "topado" refleja que el subsidio se estabiliza porque el sistema ya no tiene demanda insatisfecha — no porque la flota sea insuficiente.</span><span class="en">Both scenarios assume the <strong>same base fleet</strong> (17 trains · 3.53 min headway). The capacity difference is not in frequency or number of trains — it is exclusively in <strong>physical capacity per train</strong>: 1,200 pax in Metro 6V vs. 750 pax in Monorail. The 6V Metro with 17 trains covers 100% of projected demand through 2045. The "capped" value reflects that the subsidy stabilizes because the system has no unmet demand — not because the fleet is insufficient.</span></p>
+    </div>
+  </div>
+
+  <hr class="rule">
+
+  <!-- §M2 PARÁMETROS VERIFICADOS -->
+  <div class="sec">
+    <div class="sec-hdr"><span class="sec-num">M2 ·</span><span class="sec-title"><span class="es">Parámetros Financieros — Estado de Verificación</span><span class="en">Financial Parameters — Verification Status</span></span><span class="lbl-n2 section-label" style="margin-left:8px;">N2</span></div>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th><span class="es">Parámetro</span><span class="en">Parameter</span></th>
+            <th><span class="es">Metro 6V</span><span class="en">Metro 6V</span></th>
+            <th><span class="es">Monorriel M-6V</span><span class="en">Monorail M-6V</span></th>
+            <th><span class="es">Estado</span><span class="en">Status</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="es">LCOT Ajustado (USD/pax)</span><span class="en">Adjusted LCOT (USD/pax)</span></td>
+            <td class="num" style="color:var(--green)"><strong>$1.05</strong></td>
+            <td class="num" style="color:var(--red)"><strong>$1.07</strong></td>
+            <td><span class="lbl-n1 section-label">✅ N1</span> <span style="font-size:11px;"><a href="https://www.youtube.com/watch?v=2McmoesyY4o" target="_blank" style="color:var(--blue);">Video V3 LCOT Ajustado, dic. 2025</a></span></td>
+          </tr>
+          <tr style="background:var(--red-lt);">
+            <td><span class="es">LCOT Monorriel M-4V (expediente original)</span><span class="en">LCOT Monorail M-4V (original file)</span></td>
+            <td class="num">—</td>
+            <td class="num" style="color:var(--red)"><strong>$1.14</strong> · FC 2060: 126.2% ❌</td>
+            <td><span class="lbl-n1 section-label">✅ N1</span> <span style="font-size:11px;"><a href="https://www.youtube.com/watch?v=2McmoesyY4o" target="_blank" style="color:var(--blue);">Video V3</a></span></td>
+          </tr>
+          <tr>
+            <td><span class="es">Boleto subsidiado</span><span class="en">Subsidized fare</span></td>
+            <td colspan="2" class="num">RD$37.50 (USD 0.6433)</td>
+            <td><span class="lbl-n3 section-label">⚠ Pendiente</span></td>
+          </tr>
+          <tr>
+            <td><span class="es">Subsidio estatal unitario</span><span class="en">Unit state subsidy</span></td>
+            <td class="num" style="color:var(--green)">$0.4067/viaje</td>
+            <td class="num" style="color:var(--red)">$0.4267/viaje</td>
+            <td><span class="lbl-n2 section-label">N2 · Cálculo</span></td>
+          </tr>
+          <tr>
+            <td><span class="es">Tarifa transporte informal (excluidos)</span><span class="en">Informal transport fare (excluded)</span></td>
+            <td class="num" style="color:var(--green)">USD 0 (cubre todos)</td>
+            <td class="num" style="color:var(--red)">USD 1.50/viaje × 158,800 excluidos</td>
+            <td><span class="lbl-n3 section-label">⚠ Pendiente</span></td>
+          </tr>
+          <tr>
+            <td><span class="es">Pasajeros cubiertos / excluidos</span><span class="en">Covered / excluded passengers</span></td>
+            <td class="num" style="color:var(--green)">464,800 / 0</td>
+            <td class="num" style="color:var(--red)">306,000 / 158,800</td>
+            <td><span class="lbl-n1 section-label">✅ N1</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <hr class="rule">
+
+  <!-- §M3 SIMULACIÓN 2030-2045 -->
+  <div class="sec">
+    <div class="sec-hdr"><span class="sec-num">M3 ·</span><span class="sec-title"><span class="es">Simulación Financiera Comparativa 2030–2045</span><span class="en">Comparative Financial Simulation 2030–2045</span></span><span class="lbl-n3 section-label" style="margin-left:8px;">N3</span></div>
+    <p><span class="es">CAGR 1.39% anual (METI). Todos los valores en USD. El Metro cubre el 100% de la demanda. El Monorriel topa en 306,000 pax/día — los excluidos pagan tarifa informal USD 1.50/viaje (pendiente de verificación).</span><span class="en">CAGR 1.39% annual (METI). All values in USD. The Metro covers 100% of demand. The Monorail caps at 306,000 pax/day — excluded passengers pay informal fare USD 1.50/trip (pending verification).</span></p>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th><span class="es">Año</span><span class="en">Year</span></th>
+            <th><span class="es">Demanda (pax/día)</span><span class="en">Demand (pax/day)</span></th>
+            <th style="color:var(--green)"><span class="es">Metro — Subsidio total</span><span class="en">Metro — Total subsidy</span></th>
+            <th style="color:var(--red)"><span class="es">Monorriel — Subsidio fiscal</span><span class="en">Monorail — Fiscal subsidy</span></th>
+            <th style="color:var(--red)"><span class="es">Pérdida social</span><span class="en">Social loss</span></th>
+            <th style="color:var(--red); font-weight:700"><span class="es">Costo total Monorriel</span><span class="en">Total Monorail cost</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>2030</td><td class="num">464,800</td><td class="num" style="color:var(--green)">$68,991,522</td><td class="num">$47,654,208</td><td class="num" style="color:var(--red)">$86,943,000</td><td class="num" style="color:var(--red); font-weight:700">$134,597,208</td></tr>
+          <tr><td>2033</td><td class="num">484,453</td><td class="num" style="color:var(--green)">$71,908,443</td><td class="num">$47,654,208</td><td class="num" style="color:var(--red)">$97,698,018</td><td class="num" style="color:var(--red); font-weight:700">$145,352,226</td></tr>
+          <tr><td>2036</td><td class="num">504,937</td><td class="num" style="color:var(--green)">$74,949,271</td><td class="num">$47,654,208</td><td class="num" style="color:var(--red)">$108,917,958</td><td class="num" style="color:var(--red); font-weight:700">$156,572,166</td></tr>
+          <tr><td>2039</td><td class="num">526,286</td><td class="num" style="color:var(--green)">$78,119,743</td><td class="num">$47,654,208</td><td class="num" style="color:var(--red)">$120,606,585</td><td class="num" style="color:var(--red); font-weight:700">$168,260,793</td></tr>
+          <tr><td>2042</td><td class="num">548,539</td><td class="num" style="color:var(--green)">$81,422,965</td><td class="num">$47,654,208</td><td class="num" style="color:var(--red)">$132,790,103</td><td class="num" style="color:var(--red); font-weight:700">$180,444,311</td></tr>
+          <tr><td>2045 <span style="font-size:10px; color:var(--muted)">(topado)</span></td><td class="num">571,733</td><td class="num" style="color:var(--green)">$72,732,027</td><td class="num">$47,654,208</td><td class="num" style="color:var(--red)">$145,488,818</td><td class="num" style="color:var(--red); font-weight:700">$193,143,026</td></tr>
+          <tr style="background:var(--ink); color:#fff;">
+            <td colspan="2" style="color:#fff; font-weight:700;"><span class="es">TOTAL 15 años</span><span class="en">TOTAL 15 years</span></td>
+            <td class="num" style="color:#6ee89a; font-weight:700;">$1,154,557,805</td>
+            <td class="num" style="color:#fff;">$762,467,334</td>
+            <td class="num" style="color:#ff8080;">$1,751,782,428</td>
+            <td class="num" style="color:#ff8080; font-weight:700;">$2,514,249,762</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- VEREDICTO -->
+    <div class="question-final" style="text-align:left; padding:32px 36px;">
+      <div style="font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:rgba(255,255,255,.5); margin-bottom:10px;"><span class="es">Veredicto macroeconómico · N3</span><span class="en">Macroeconomic verdict · N3</span></div>
+      <div style="font-size:15px; font-weight:600; margin-bottom:16px; line-height:1.5; color:#fff;"><span class="es">El Monorriel genera un sobrecosto y desperdicio económico neto de:</span><span class="en">The Monorail generates a net cost overrun and economic waste of:</span></div>
+      <div style="font-family:var(--mono,'monospace'); font-size:36px; font-weight:700; color:#ff8080; line-height:1; margin-bottom:10px;">USD 1,359.6M</div>
+      <div style="font-size:12px; color:rgba(255,255,255,.65); line-height:1.7;"><span class="es">$2,514.2M Monorriel − $1,154.5M Metro · En el horizonte comparativo de referencia de este análisis a los primeros 15 años (2030–2045) · Supera el costo total del proyecto (USD 932.8M) · Sujeto a validación de tarifa informal y tipo de cambio</span><span class="en">$2,514.2M Monorail − $1,154.5M Metro · In the reference comparative horizon of this analysis over the first 15 years (2030–2045) · Exceeds total project cost (USD 932.8M) · Subject to validation of informal fare and exchange rate</span></div>
+    </div>
+  </div>
+
+  <hr class="rule">
+
+  <!-- §M4 TABLA 6 CONFIGURACIONES -->
+  <div class="sec">
+    <div class="sec-hdr"><span class="sec-num">M4 ·</span><span class="sec-title"><span class="es">Panorama Completo — 6 Configuraciones Analizadas</span><span class="en">Full Picture — 6 Configurations Analyzed</span></span><span class="lbl-n2 section-label" style="margin-left:8px;">N2 · R-04-V</span></div>
+    <p><span class="es">Análisis multi-escenario con supuestos pro-Monorriel (capacidad 170 pax/vagón vs. real 140; factor costo 0.67 vs. real 1.00). Aún favoreciendo al Monorriel, el Metro 6V gana todas las métricas. Fuente: <a href="https://www.youtube.com/watch?v=2McmoesyY4o" target="_blank" style="color:var(--blue);">Video V3 LCOT Ajustado</a> · R-04-V · SafeCreative 251118-Z395Y6.</span><span class="en">Multi-scenario analysis with pro-Monorail assumptions (capacity 170 pax/car vs. actual 140; cost factor 0.67 vs. actual 1.00). Even favoring the Monorail, the 6V Metro wins all metrics. Source: <a href="https://www.youtube.com/watch?v=2McmoesyY4o" target="_blank" style="color:var(--blue);">Video V3 Adjusted LCOT</a> · R-04-V · SafeCreative 251118-Z395Y6.</span></p>
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th><span class="es">Parámetro</span><span class="en">Parameter</span></th>
+            <th style="color:var(--red)">M-4V ❌</th>
+            <th>M-5V</th>
+            <th>M-6V</th>
+            <th>M-7V</th>
+            <th>M-8V</th>
+            <th style="color:var(--green)"><span class="es">Metro 6V ✅</span><span class="en">Metro 6V ✅</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>LCOT Ajustado (USD)</td><td class="num" style="color:var(--red)">$1.14</td><td class="num">$1.06</td><td class="num">$1.07</td><td class="num">$1.12</td><td class="num">$1.21</td><td class="num" style="color:var(--green); font-weight:700;">$1.05</td></tr>
+          <tr><td><span class="es">Factor carga 2060</span><span class="en">Load factor 2060</span></td><td class="num" style="color:var(--red)">126.2% ❌</td><td class="num" style="color:var(--red)">101.0% ❌</td><td class="num">84.2%</td><td class="num">72.1%</td><td class="num">63.1%</td><td class="num" style="color:var(--green); font-weight:700;">55.7% ✅</td></tr>
+          <tr><td><span class="es">Año saturación >75%</span><span class="en">Saturation year >75%</span></td><td class="num" style="color:var(--red)">2030 ❌</td><td class="num">2038</td><td class="num">2047</td><td class="num">2056</td><td class="num">2065</td><td class="num" style="color:var(--green); font-weight:700;">2080+ ✅</td></tr>
+          <tr><td>VAN 30 años (M USD)</td><td class="num" style="color:var(--red)">N/A</td><td class="num">$273.4</td><td class="num">$282.9</td><td class="num">$299</td><td class="num">$328</td><td class="num" style="color:var(--green); font-weight:700;">$366.8</td></tr>
+          <tr><td><span class="es">Evaluación</span><span class="en">Assessment</span></td><td style="color:var(--red)"><strong><span class="es">Inviable</span><span class="en">Inviable</span></strong></td><td><span class="es">Limitado</span><span class="en">Limited</span></td><td><span class="es">Aceptable</span><span class="en">Acceptable</span></td><td><span class="es">Bueno</span><span class="en">Good</span></td><td><span class="es">Muy bueno</span><span class="en">Very good</span></td><td style="color:var(--green)"><strong><span class="es">Óptimo</span><span class="en">Optimal</span></strong></td></tr>
+          <tr><td><span class="es">Puntuación multicriterio</span><span class="en">Multicriteria score</span></td><td class="num" style="color:var(--red)">4.1/10</td><td class="num">5.4/10</td><td class="num">6.1/10</td><td class="num">6.8/10</td><td class="num">7.2/10</td><td class="num" style="color:var(--green); font-weight:700;">8.9/10</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="box box-inf" style="margin-top:16px;">
+      <div class="box-label"><span class="es">Inferencia · N3</span><span class="en">Inference · N3</span></div>
+      <p><span class="es">El análisis multi-escenario confirma que el Metro 6V es la única opción óptima. La configuración M-4V del expediente original era inviable desde el Día 1 (saturación 126.2% en 2060). El anuncio de 6 vagones desde el inicio (M-6V) reduce el LCOT de $1.14 a $1.07 pero no resuelve el déficit estructural de capacidad (65.8% cobertura 2030). Contradicción METI 2024: recomendado Metro (42 pts, 1er lugar) — decidido Monorriel (24 pts, último de 5 opciones).</span><span class="en">Multi-scenario analysis confirms that Metro 6V is the only optimal option. The M-4V configuration in the original file was inviable from Day 1 (126.2% saturation in 2060). The announcement of 6 cars from day one (M-6V) reduces LCOT from $1.14 to $1.07 but does not resolve the structural capacity deficit (65.8% 2030 coverage). METI 2024 contradiction: recommended Metro (42 pts, 1st place) — decided Monorail (24 pts, last of 5 options).</span></p>
+    </div>
+  </div>
+
+  <div class="tab-footer">
+    <div>
+      <div class="tf-author">Ing. Piter J. Bonilla D. · CODIA #17378 · visualcrp.com/embudo.html</div>
+      <div class="tf-original"><span class="es">Modelos de capacidad, LCOT ajustado, escenarios financieros y proyecciones macroeconómicas: análisis original del autor. Metodología BID/CAF/BM · Newton-Raphson + Monte Carlo 123,456 iteraciones · R-04-V (SafeCreative 251118-Z395Y6) · <a href="https://www.youtube.com/watch?v=2McmoesyY4o" target="_blank" style="color:var(--blue);">Video V3 LCOT Ajustado, dic. 2025</a></span><span class="en">Capacity models, adjusted LCOT, financial scenarios and macroeconomic projections: original analysis by the author. Methodology BID/CAF/BM · Newton-Raphson + Monte Carlo 123,456 iterations · R-04-V (SafeCreative 251118-Z395Y6) · <a href="https://www.youtube.com/watch?v=2McmoesyY4o" target="_blank" style="color:var(--blue);">Video V3 Adjusted LCOT, Dec. 2025</a></span></div>
+    </div>
   </div>
 </div>
 
