@@ -591,7 +591,36 @@ hr.rule { border: none; border-top: 1px solid var(--rule); margin: 24px 0; }
 
   <div class="chart-box">
     <div class="chart-title"><span class="es">Proyección de demanda METI vs. capacidad por sistema (2030–2060)</span><span class="en">METI demand projection vs. system capacity (2030–2060)</span></div>
-    <canvas id="chartProyeccion" height="260"></canvas>
+    <canvas id="chartProyeccion" height="220"></canvas>
+  </div>
+
+  <!-- Nota de supuestos del gráfico de proyección -->
+  <div class="box box-note" style="margin: -8px 0 20px;">
+    <div class="box-label"><span class="es">Supuesto del modelo · Nivel 2</span><span class="en">Model assumption · Level 2</span></div>
+    <p style="margin:0; font-size:12.5px;">
+      <span class="es">
+        El gráfico asume <strong>misma flota (17 trenes) y mismo headway (3.53 min)</strong> para Metro y Monorriel.
+        La ventaja del Metro es exclusivamente de <strong>capacidad física por tren</strong> (1,200 vs 750 pax).
+        <br>
+        <strong>Escalabilidad operativa adicional:</strong> reducir el headway de 3.53 min a <strong>2.5 min</strong>
+        equivale a un <strong>+41% de capacidad</strong> (490,000 → 691,200 pax/día),
+        llevando al Metro 6 vagones a cubrir el <strong>98% de la demanda proyectada para 2060</strong>
+        — sin necesidad de cambiar la infraestructura ni la flota de vagones.
+        El Monorriel, con el mismo ajuste de headway, alcanzaría solo 432,000 pax/día
+        (61% de la demanda 2060).
+      </span>
+      <span class="en">
+        The chart assumes <strong>same fleet (17 trains) and same headway (3.53 min)</strong> for Metro and Monorail.
+        The Metro advantage is exclusively <strong>physical capacity per train</strong> (1,200 vs 750 pax).
+        <br>
+        <strong>Additional operational scalability:</strong> reducing headway from 3.53 min to <strong>2.5 min</strong>
+        equals <strong>+41% capacity</strong> (490,000 → 691,200 pax/day),
+        bringing the Metro 6-car to cover <strong>98% of projected 2060 demand</strong>
+        — without changing infrastructure or car fleet.
+        The Monorail, with the same headway adjustment, would reach only 432,000 pax/day
+        (61% of 2060 demand).
+      </span>
+    </p>
   </div>
 
   <div class="grid2">
@@ -792,6 +821,7 @@ function buildCharts() {
     },
     options: {
       responsive: true,
+      aspectRatio: 2.2,
       plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => `${ctx.raw.toLocaleString()} pax/día` }}},
       scales: {
         y: { grid: { color: GC }, ticks: { color: TC, callback: v => `${(v/1000).toFixed(0)}k` }},
@@ -833,13 +863,15 @@ function buildCharts() {
     },
     options: {
       responsive: true,
-      plugins: { legend: { position: 'top', labels: { color: TC }}},
+      aspectRatio: 2.8,
+      plugins: { legend: { position: 'top', labels: { color: TC, boxWidth: 10, padding: 8 }}},
       scales: {
-        y: { grid: { color: GC }, ticks: { color: TC, callback: v => `${(v/1000).toFixed(0)}k` }},
+        y: { grid: { color: GC }, ticks: { color: TC, callback: v => `${(v/1000).toFixed(0)}k`, maxTicksLimit: 6 }},
         x: { grid: { display: false }, ticks: { color: TC }}
       }
     }
   });
+
 
   // ── GRÁFICO 4: Headway vs. capacidad
   _charts.hw = new Chart(document.getElementById('chartHeadway'), {
