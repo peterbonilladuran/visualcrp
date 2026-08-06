@@ -231,6 +231,163 @@ html.light .question-final { background: var(--navy2); }
 .sec-title { font-size: 16px; font-weight: 700; color: var(--text); }
 hr.rule { border: none; border-top: 1px solid var(--rule); margin: 24px 0; }
 
+/* ── SOLILOQUIO TAB ───────────────────────────────── */
+.tab-btn.soliloquio-btn {
+  margin-left: auto;
+  border-left: 1px solid rgba(255,255,255,.12);
+  padding-left: 22px;
+  font-style: italic;
+  letter-spacing: .04em;
+  color: rgba(200,216,240,.45);
+}
+.tab-btn.soliloquio-btn:hover { color: rgba(200,216,240,.9); }
+.tab-btn.soliloquio-btn.active {
+  color: #fff;
+  border-bottom-color: var(--accent);
+  font-style: italic;
+}
+
+/* ── SOLILOQUIO PANEL ───────────────────────────────── */
+.sol-wrap {
+  max-width: 740px;
+  margin: 0 auto;
+}
+.sol-header {
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 20px;
+  margin-bottom: 36px;
+}
+.sol-eyebrow {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 10px;
+}
+.sol-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+  font-style: italic;
+  line-height: 1.25;
+  margin-bottom: 8px;
+}
+.sol-meta {
+  font-size: 11.5px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+.sol-meta a { color: var(--blue); text-decoration: none; }
+.sol-meta a:hover { text-decoration: underline; }
+.sol-credit {
+  margin-top: 8px;
+  padding: 10px 14px;
+  background: var(--fog);
+  border-left: 3px solid var(--rule);
+  font-size: 11px;
+  color: var(--muted);
+  line-height: 1.6;
+  font-style: italic;
+}
+
+.sol-section { margin-bottom: 44px; }
+.sol-sec-hdr {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  margin-bottom: 18px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--rule);
+}
+.sol-sec-num {
+  font-family: 'Courier New', monospace;
+  font-size: 11px;
+  color: var(--accent);
+  letter-spacing: .1em;
+  flex-shrink: 0;
+}
+.sol-sec-title {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.sol-p {
+  font-size: 14px;
+  line-height: 1.85;
+  color: var(--text);
+  margin-bottom: 18px;
+}
+.sol-p:last-child { margin-bottom: 0; }
+
+.sol-formula {
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--amber);
+  background: var(--fog);
+  border-left: 3px solid var(--amber);
+  padding: 14px 18px;
+  margin: 20px 0;
+  letter-spacing: .02em;
+}
+
+.sol-pullquote {
+  font-size: 17px;
+  font-style: italic;
+  font-weight: 600;
+  color: var(--text);
+  border-left: 3px solid var(--accent);
+  padding: 12px 20px;
+  margin: 22px 0;
+  line-height: 1.5;
+  background: rgba(232,93,38,.06);
+}
+
+.sol-sub-hdr {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 24px 0 10px;
+  font-style: italic;
+}
+
+.sol-divider {
+  border: none;
+  border-top: 1px solid var(--rule);
+  margin: 36px 0;
+}
+
+.sol-closing {
+  background: var(--navy);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 32px 36px;
+  margin-top: 40px;
+}
+.sol-closing-q {
+  font-size: 15px;
+  font-weight: 600;
+  font-style: italic;
+  color: #fff;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+.sol-closing-body { font-size: 13px; color: rgba(200,216,240,.7); line-height: 1.8; }
+.sol-closing-final {
+  margin-top: 16px;
+  font-size: 13px;
+  color: rgba(200,216,240,.5);
+  font-style: italic;
+}
+
+html.light .sol-formula { background: var(--fog); }
+html.light .sol-closing { background: var(--navy2); }
+html.light .sol-pullquote { background: rgba(232,93,38,.05); }
+
 /* ── PRINT ───────────────────────────────── */
 @media print {
   header.topbar, .tab-bar { display: none !important; }
@@ -324,6 +481,7 @@ hr.rule { border: none; border-top: 1px solid var(--rule); margin: 24px 0; }
     <button class="tab-btn" onclick="showTab('ecosistema')"><span class="es">Ecosistema</span><span class="en">Ecosystem</span></button>
     <button class="tab-btn" onclick="showTab('fuentes')"><span class="es">Fuentes</span><span class="en">Sources</span></button>
     <button class="tab-btn" onclick="showTab('macro')"><span class="es">Macroeconómico</span><span class="en">Macroeconomic</span></button>
+    <button class="tab-btn soliloquio-btn" onclick="showTab('soliloquio')"><span class="es">Soliloquio</span><span class="en">Soliloquy</span></button>
   </div>
 </nav>
 
@@ -948,6 +1106,149 @@ hr.rule { border: none; border-top: 1px solid var(--rule); margin: 24px 0; }
     </div>
   </div>
 </div>
+
+<!-- ══════════════════════════════════════════════
+     TAB SOLILOQUIO
+══════════════════════════════════════════════ -->
+<div class="tab-panel" id="tab-soliloquio">
+<div class="sol-wrap">
+
+  <!-- ENCABEZADO -->
+  <div class="sol-header">
+    <div class="sol-eyebrow"><span class="es">Síntesis de Impacto · Agosto 2026</span><span class="en">Impact Synthesis · August 2026</span></div>
+    <div class="sol-title"><span class="es">El Embudo que Nadie Quiere Ver</span><span class="en">The Bottleneck Nobody Wants to See</span></div>
+    <div class="sol-meta">
+      <span class="es">Ing. Piter J. Bonilla D. · CODIA #17378 · <a href="https://visualcrp.com/embudo.html" target="_blank">visualcrp.com/embudo.html</a></span>
+      <span class="en">Ing. Piter J. Bonilla D. · CODIA #17378 · <a href="https://visualcrp.com/embudo.html" target="_blank">visualcrp.com/embudo.html</a></span>
+    </div>
+    <div class="sol-credit">
+      <span class="es">Modelos de capacidad, LCOT ajustado, escenarios financieros y proyecciones macroeconómicas: análisis original del autor. Metodología BID/CAF/BM · Newton-Raphson + Monte Carlo 123,456 iteraciones · R-04-V (SafeCreative 251118-Z395Y6)</span>
+      <span class="en">Capacity models, adjusted LCOT, financial scenarios and macroeconomic projections: original analysis by the author. IDB/CAF/WB methodology · Newton-Raphson + Monte Carlo 123,456 iterations · R-04-V (SafeCreative 251118-Z395Y6)</span>
+    </div>
+  </div>
+
+  <!-- I. PODER CIUDADANO -->
+  <div class="sol-section">
+    <div class="sol-sec-hdr">
+      <span class="sol-sec-num">I ·</span>
+      <span class="sol-sec-title"><span class="es">Poder Ciudadano</span><span class="en">Citizen Power</span></span>
+    </div>
+
+    <p class="sol-p"><span class="es">La asimetría de información en proyectos de infraestructura pública ha sido históricamente el mecanismo más efectivo para blindar decisiones cuestionables. El Estado tiene el expediente. Los contratistas tienen el conocimiento especializado. La ciudadanía tiene comunicados de prensa y la intuición de que algo no cuadra — pero no puede demostrarlo en el mismo lenguaje en que fue construido el problema.</span><span class="en">Information asymmetry in public infrastructure projects has historically been the most effective mechanism for shielding questionable decisions. The State holds the file. Contractors hold the specialized knowledge. Citizens hold press releases and the intuition that something is off — but cannot prove it in the same language in which the problem was constructed.</span></p>
+
+    <p class="sol-p"><span class="es">El análisis técnico independiente del Ing. Piter J. Bonilla D. (CODIA #17378) invirtió esa asimetría de forma estructural, no retórica.</span><span class="en">The independent technical analysis of Ing. Piter J. Bonilla D. (CODIA #17378) reversed that asymmetry structurally, not rhetorically.</span></p>
+
+    <p class="sol-p"><span class="es">La metodología de tres niveles de evidencia — Hechos Documentados (N1), Modelos de Cálculo (N2), Inferencias Técnicas (N3) — no es solo una decisión de organización documental. Es una transferencia de poder. Cuando un documento distingue explícitamente entre lo que está probado, lo que se calcula y lo que se deduce, cualquier ciudadano puede señalar en qué nivel vive cada afirmación y exigir que sea refutada en ese mismo nivel. Un funcionario que quiera defender el proyecto no puede responder con una opinión — tiene que responder con un dato de Nivel 1, un cálculo de Nivel 2, o una inferencia de Nivel 3. El terreno del debate cambió.</span><span class="en">The three-level evidence methodology — Documented Facts (N1), Calculation Models (N2), Technical Inferences (N3) — is not merely a document organization decision. It is a transfer of power. When a document explicitly distinguishes between what is proven, what is calculated, and what is inferred, any citizen can identify which level an assertion lives in and demand it be refuted at that same level. An official who wants to defend the project cannot respond with an opinion — they must respond with a Level 1 fact, a Level 2 calculation, or a Level 3 inference. The terrain of the debate changed.</span></p>
+
+    <p class="sol-p"><span class="es">Los números centrales del análisis son verificables por cualquier persona con acceso a los documentos oficiales citados. El Metro actual transporta 400,000 pasajeros diarios — dato de fuente primaria, comunicado oficial Alstom, 20 de mayo de 2024. El estudio de prefactibilidad METI/NIPPON KOEI de febrero de 2024 proyecta 464,800 pasajeros diarios para el corredor en 2030. La cascada de cálculo del modelo — 17 trenes × 750 pax × factor de punta 30% × eficiencia operativa 90% — produce 306,000 pasajeros diarios como capacidad máxima estimada del Monorriel. Ese cálculo puede reproducirse fácilmente con una calculadora utilizando los parámetros indicados.</span><span class="en">The central numbers of the analysis are verifiable by anyone with access to the cited official documents. The current Metro carries 400,000 daily passengers — primary source data, official Alstom press release, May 20, 2024. The METI/NIPPON KOEI prefeasibility study of February 2024 projects 464,800 daily passengers for the corridor in 2030. The model's calculation cascade — 17 trains × 750 pax × 30% peak factor × 90% operational efficiency — produces 306,000 daily passengers as the Monorail's maximum estimated capacity. That calculation can be easily reproduced with a calculator using the indicated parameters.</span></p>
+
+    <p class="sol-p"><span class="es">El resultado es aritmético: 306,000 no alcanza 464,800. El Monorriel propuesto no cubre la demanda proyectada por el propio estudio que justifica su construcción. Esa afirmación no depende de la autoridad del autor. Depende de los números del expediente oficial.</span><span class="en">The result is arithmetic: 306,000 does not reach 464,800. The proposed Monorail does not cover the demand projected by the very study that justifies its construction. That assertion does not depend on the author's authority. It depends on the numbers of the official file.</span></p>
+
+    <p class="sol-p"><span class="es">Lo que el análisis le entregó al ciudadano no fue una opinión técnica. Fue una fórmula verificable:</span><span class="en">What the analysis delivered to the citizen was not a technical opinion. It was a verifiable formula:</span></p>
+
+    <div class="sol-formula">USD 2,514.2M (Monorriel) − USD 1,154.5M (Metro) = USD 1,359.6M</div>
+
+    <p class="sol-p"><span class="es">Un sobrecosto que supera el costo total de construcción del proyecto (USD 932.8M), calculado incorporando la Pérdida de Bienestar Social de los 158,800 pasajeros excluidos diariamente que deben recurrir al transporte informal. Este parámetro está pendiente de validación documental con fuente primaria — condición explícitamente declarada en el análisis.</span><span class="en">A cost overrun exceeding the project's total construction cost (USD 932.8M), calculated incorporating the Social Welfare Loss of the 158,800 daily excluded passengers who must resort to informal transport. This parameter is pending documentary validation with primary source — a condition explicitly declared in the analysis.</span></p>
+
+    <div class="sol-pullquote"><span class="es">El ciudadano que conoce ese número no tiene una queja. Tiene una auditoría.</span><span class="en">The citizen who knows that number does not have a complaint. They have an audit.</span></div>
+
+    <p class="sol-p"><span class="es">La validación más contundente del análisis provino de los hechos. En noviembre de 2025, el Ing. Bonilla documentó como Inferencia N3 el mecanismo técnico por el cual el Monorriel podría parecer viable en papel: la reducción de la demanda efectiva mediante la eliminación de la interconexión con la Línea 1 del Metro. En julio de 2026, el FITRAM anunció exactamente ese cambio de trazado — el Monorriel ya no conecta con el Centro Olímpico ni con la Línea 1 (Diario Libre, 13 de julio de 2026). El cambio de trazado resultó consistente con el mecanismo técnico descrito en la inferencia formulada nueve meses antes, usando solo los datos del expediente oficial.</span><span class="en">The most compelling validation of the analysis came from the facts. In November 2025, Ing. Bonilla documented as Inference N3 the technical mechanism by which the Monorail could appear viable on paper: the reduction of effective demand by eliminating the interconnection with Metro Line 1. In July 2026, FITRAM announced exactly that route change — the Monorail no longer connects with the Olympic Center or Line 1 (Diario Libre, July 13, 2026). The route change proved consistent with the technical mechanism described in the inference formulated nine months earlier, using only the data from the official file.</span></p>
+
+    <p class="sol-p"><span class="es">Eso es lo que el poder ciudadano gana cuando tiene acceso a metodología transparente: la capacidad de anticipar las consecuencias matemáticas de las decisiones ya tomadas, antes de que el hormigón se vierta. Un auditor técnico independiente que revisó recientemente el trabajo de Bonilla validó sus conclusiones principales, reforzando la credibilidad del análisis ante audiencias especializadas.</span><span class="en">That is what citizen power gains when it has access to transparent methodology: the capacity to anticipate the mathematical consequences of decisions already made, before the concrete is poured. An independent technical auditor who recently reviewed Bonilla's work validated its main conclusions, reinforcing the analysis's credibility before specialized audiences.</span></p>
+  </div>
+
+  <hr class="sol-divider">
+
+  <!-- II. ALCANCE PERIODÍSTICO -->
+  <div class="sol-section">
+    <div class="sol-sec-hdr">
+      <span class="sol-sec-num">II ·</span>
+      <span class="sol-sec-title"><span class="es">Alcance Periodístico</span><span class="en">Journalistic Reach</span></span>
+    </div>
+
+    <p class="sol-p"><span class="es">El periodismo de infraestructura enfrenta tres obstáculos estructurales: tiempo insuficiente para analizar expedientes de miles de páginas, formación técnica limitada en ingeniería de transporte, y el riesgo de error al interpretar números sin contexto. El ecosistema documental construido alrededor del análisis del Ing. Bonilla resuelve los tres simultáneamente.</span><span class="en">Infrastructure journalism faces three structural obstacles: insufficient time to analyze files of thousands of pages, limited technical training in transport engineering, and the risk of error when interpreting numbers without context. The documentary ecosystem built around Ing. Bonilla's analysis resolves all three simultaneously.</span></p>
+
+    <p class="sol-p"><span class="es">El dashboard interactivo <a href="https://visualcrp.com/embudo.html" target="_blank">visualcrp.com/embudo.html</a> está indexado en los motores de búsqueda. Una búsqueda sobre la auditoría del Monorriel de Santo Domingo devuelve el ecosistema como resultado principal, con síntesis automática que identifica correctamente los tres niveles de evidencia, los números clave, y el estado de verificación de los parámetros pendientes. Un periodista que busca el tema recibe, sin intervención del autor, una síntesis técnica estructurada que distingue entre lo que está documentado y lo que está sujeto a validación adicional.</span><span class="en">The interactive dashboard <a href="https://visualcrp.com/embudo.html" target="_blank">visualcrp.com/embudo.html</a> is indexed in search engines. A search on the Santo Domingo Monorail audit returns the ecosystem as the primary result, with automatic synthesis that correctly identifies the three evidence levels, key numbers, and verification status of pending parameters. A journalist searching the topic receives, without the author's intervention, a structured technical summary that distinguishes between what is documented and what is subject to additional validation.</span></p>
+
+    <p class="sol-p"><span class="es">Esa distinción es crítica para el periodismo. Un análisis que mezcla hechos con inferencias sin señalarlo expone al periodista que lo cita al riesgo de ser refutado por el nivel equivocado. El ecosistema del Embudo elimina ese riesgo: cada afirmación lleva su etiqueta. El periodista puede citar un N1 con la misma confianza con que citaría un comunicado oficial, porque ambos tienen fuente primaria verificable.</span><span class="en">That distinction is critical for journalism. An analysis that mixes facts with inferences without signaling it exposes the citing journalist to the risk of being refuted at the wrong level. The Embudo ecosystem eliminates that risk: every assertion carries its label. A journalist can cite an N1 with the same confidence as an official press release, because both have a verifiable primary source.</span></p>
+
+    <p class="sol-p"><span class="es">El análisis tiene todos los elementos formales que hacen a un documento periodísticamente citable: autor con credenciales verificables (CODIA #17378), fecha de publicación, fuentes primarias con URL, registro de propiedad intelectual (SafeCreative 251118-Z395Y6), y metodología explícita que distingue hechos de inferencias.</span><span class="en">The analysis has all the formal elements that make a document journalistically citable: author with verifiable credentials (CODIA #17378), publication date, primary sources with URL, intellectual property registration (SafeCreative 251118-Z395Y6), and explicit methodology distinguishing facts from inferences.</span></p>
+
+    <p class="sol-p"><span class="es">El ángulo periodístico más directo no requiere conocimiento técnico previo. El estudio de prefactibilidad METI/NIPPON KOEI de febrero de 2024 — el mismo estudio que el proyecto usa para justificar la inversión — evaluó cinco opciones de transporte y recomendó el Metro en primer lugar con 42 puntos. El Monorriel quedó en último lugar con 24 puntos. El Estado adjudicó el último clasificado de su propio estudio. Leer el documento oficial y compararlo con la decisión tomada es suficiente para identificar la contradicción.</span><span class="en">The most direct journalistic angle requires no prior technical knowledge. The METI/NIPPON KOEI prefeasibility study of February 2024 — the same study the project uses to justify the investment — evaluated five transport options and recommended the Metro in first place with 42 points. The Monorail came last with 24 points. The State awarded the project to its own study's last-place finisher. Reading the official document and comparing it with the decision made is sufficient to identify the contradiction.</span></p>
+
+    <p class="sol-p"><span class="es">El segundo ángulo es la cronología de advertencia documentada: el análisis fue entregado formalmente a la institución competente el 14 de noviembre de 2025, sin obtener respuesta. El análisis fue publicado. El proyecto continuó. Ese silencio institucional ante una advertencia técnica documentada es, en sí mismo, información de relevancia pública.</span><span class="en">The second angle is the documented warning chronology: the analysis was formally delivered to the competent institution on November 14, 2025, without receiving a response. The analysis was published. The project continued. That institutional silence in the face of a documented technical warning is, in itself, information of public relevance.</span></p>
+
+    <p class="sol-p"><span class="es">El tercer ángulo es la consistencia entre el análisis y los hechos posteriores: el mecanismo técnico descrito como inferencia en noviembre de 2025 resultó consistente con el cambio de trazado anunciado en julio de 2026, con fuente verificable (Diario Libre, 13 de julio de 2026). Ese registro convierte al análisis de Bonilla de documento técnico en evidencia de seguimiento con valor probatorio para cualquier investigación periodística sobre el proyecto.</span><span class="en">The third angle is the consistency between the analysis and subsequent facts: the technical mechanism described as inference in November 2025 proved consistent with the route change announced in July 2026, with verifiable source (Diario Libre, July 13, 2026). That record converts Bonilla's analysis from a technical document into follow-up evidence with probative value for any journalistic investigation of the project.</span></p>
+
+    <p class="sol-p"><span class="es">El análisis está disponible para cualquier medio que desee verificar sus afirmaciones a través de las fuentes primarias citadas. La metodología es abierta y reproducible.</span><span class="en">The analysis is available to any outlet wishing to verify its claims through the cited primary sources. The methodology is open and reproducible.</span></p>
+  </div>
+
+  <hr class="sol-divider">
+
+  <!-- III. LO QUE EL EMBUDO REPRESENTA -->
+  <div class="sol-section">
+    <div class="sol-sec-hdr">
+      <span class="sol-sec-num">III ·</span>
+      <span class="sol-sec-title"><span class="es">Lo que el Embudo Representa</span><span class="en">What the Bottleneck Represents</span></span>
+    </div>
+
+    <p class="sol-p"><span class="es">El nombre no es una metáfora decorativa. Es la descripción precisa de tres restricciones simultáneas documentadas con rigor creciente en el análisis del Ing. Bonilla.</span><span class="en">The name is not a decorative metaphor. It is the precise description of three simultaneous constraints documented with increasing rigor in Ing. Bonilla's analysis.</span></p>
+
+    <div class="sol-sub-hdr"><span class="es">La restricción física</span><span class="en">The physical constraint</span></div>
+    <p class="sol-p"><span class="es">Un vagón de monorriel, por su diseño estructural — montado a horcajadas sobre una viga central de hormigón — tiene una capacidad física de 750 pasajeros. Un vagón de metro convencional, que maximiza el espacio interior sobre dos rieles paralelos estándar, tiene capacidad de 1,200 pasajeros. Con la misma flota de 17 trenes y el mismo headway de 3.53 minutos — compatible con los estándares UITP para sistemas GoA3/GoA4 utilizados como referencia del modelo — el Metro produce 490,000 pasajeros diarios y el Monorriel produce 306,000. La diferencia del 60% no depende únicamente del software de control ni de mejoras operativas. Es una limitación estructural de la capacidad física por tren.</span><span class="en">A monorail car, by its structural design — straddling a central concrete beam — has a physical capacity of 750 passengers. A conventional metro car, maximizing interior space over two standard parallel rails, has a capacity of 1,200 passengers. With the same fleet of 17 trains and the same 3.53-minute headway — compatible with UITP standards for GoA3/GoA4 systems used as model reference — the Metro produces 490,000 daily passengers and the Monorail produces 306,000. The 60% difference does not depend solely on control software or operational improvements. It is a structural limitation of physical capacity per train.</span></p>
+
+    <p class="sol-p"><span class="es">El expediente oficial del proyecto (SNIP 17248) promete un headway de 90 segundos — 40 trenes por hora — para compensar la menor capacidad por vagón. El análisis documenta que esa promesa no tiene validación operativa en sistemas automatizados GoA4 de esta escala. En 90 segundos, el tiempo de parada en estación durante hora pico — embarque, desembarque, cierre de puertas, verificación de sensores, distancia de frenado de seguridad — consume la totalidad del intervalo disponible. Si una sola estación se retrasa por demanda inusual, el efecto se propaga al desempeño operativo de toda la línea. No es un fallo local.</span><span class="en">The project's official file (SNIP 17248) promises a 90-second headway — 40 trains per hour — to compensate for the lower capacity per car. The analysis documents that this promise has no operational validation in GoA4 automated systems at this scale. In 90 seconds, the station dwell time during peak hour — boarding, alighting, door closing, sensor verification, braking distance safety — consumes the entire available interval. If a single station is delayed by unusual demand, the effect propagates to the entire line's operational performance. It is not a local failure.</span></p>
+
+    <p class="sol-p"><span class="es">La restricción física tampoco mejora con el tiempo. Para 2060, la demanda proyectada por el propio estudio METI alcanza 704,000 pasajeros diarios. El Monorriel en su configuración máxima cubriría el 43% de esa demanda. El Metro con 8 vagones — configuración utilizada en sistemas comparables en Panamá — cubriría el 93%. El embudo físico no es un cuello de botella temporal. Es una limitación estructural permanente que se agrava con cada año de crecimiento demográfico.</span><span class="en">The physical constraint does not improve with time either. By 2060, the demand projected by the METI study itself reaches 704,000 daily passengers. The Monorail at maximum configuration would cover 43% of that demand. The Metro with 8 cars — a configuration used in comparable systems in Panama — would cover 93%. The physical bottleneck is not a temporary constraint. It is a permanent structural limitation that worsens with each year of demographic growth.</span></p>
+
+    <div class="sol-sub-hdr"><span class="es">La restricción institucional</span><span class="en">The institutional constraint</span></div>
+    <p class="sol-p"><span class="es">El análisis documentó el mecanismo técnico por el cual el Monorriel puede parecer viable en papel: reducir la demanda efectiva que debe absorber eliminando la interconexión con la red existente. El Centro Olímpico Juan Pablo Duarte es el nodo de mayor demanda del corredor porque es el punto de transferencia entre las Líneas 1 y 2 — dato documentado en la página 61, sección 03-3.4 del propio estudio METI. El diseño original conectaba en ese nodo. El trazado anunciado en julio de 2026 lo elimina. El Monorriel conecta ahora solo con la Línea 2 en la Avenida San Martín.</span><span class="en">The analysis documented the technical mechanism by which the Monorail can appear viable on paper: reducing the effective demand it must absorb by eliminating the interconnection with the existing network. The Centro Olímpico Juan Pablo Duarte is the corridor's highest-demand node because it is the transfer point between Lines 1 and 2 — data documented on page 61, section 03-3.4 of the METI study itself. The original design connected at that node. The route announced in July 2026 eliminates it. The Monorail now connects only with Line 2 at Avenida San Martín.</span></p>
+
+    <p class="sol-p"><span class="es">El resultado es una línea funcionalmente aislada que no compite con la demanda real de la red metropolitana integrada — porque fue desconectada de la parte más densa de esa red. En el papel, el sistema parece menos congestionado. En la realidad, los usuarios de la Línea 1 siguen existiendo. El embudo no desapareció. Se trasladó a la superficie y al transporte informal.</span><span class="en">The result is a functionally isolated line that does not compete with the real demand of the integrated metropolitan network — because it was disconnected from the densest part of that network. On paper, the system appears less congested. In reality, Line 1 users continue to exist. The bottleneck did not disappear. It shifted to the surface and to informal transport.</span></p>
+
+    <div class="sol-sub-hdr"><span class="es">La restricción de soberanía</span><span class="en">The sovereignty constraint</span></div>
+    <p class="sol-p"><span class="es">Un sistema de metro convencional opera sobre estándares ferroviarios universales y abiertos. Cuando la demanda crece y se necesita nueva flota, la ciudad puede licitar internacionalmente y recibir ofertas competitivas de fabricantes en Europa, Asia y América. La competencia de precios opera en favor del Estado.</span><span class="en">A conventional metro system operates on universal and open railway standards. When demand grows and new fleet is needed, the city can tender internationally and receive competitive offers from manufacturers in Europe, Asia, and the Americas. Price competition operates in the State's favor.</span></p>
+
+    <p class="sol-p"><span class="es">Un sistema de monorriel opera sobre tecnología propietaria. Las vigas guía de hormigón, los sistemas de rodadura específicos, la integración de los bogies laterales — todo está sujeto a patentes del fabricante original. Cuando se necesite mantenimiento especializado, expansión de línea, o adquisición de nueva flota, el número de proveedores compatibles se reduce drásticamente. La magnitud práctica de este efecto dependerá de las condiciones contractuales específicas, las licencias tecnológicas acordadas y la disponibilidad futura de proveedores compatibles. Lo que el análisis documenta es la limitación estructural de soberanía que nace con la decisión tecnológica: a diferencia de los estándares ferroviarios abiertos, una infraestructura propietaria restringe la capacidad del Estado de licitar en condiciones de competencia plena.</span><span class="en">A monorail system operates on proprietary technology. The concrete guide beams, specific running gear systems, the integration of lateral bogies — all are subject to patents of the original manufacturer. When specialized maintenance, line expansion, or new fleet acquisition is needed, the number of compatible suppliers drops drastically. The practical magnitude of this effect will depend on the specific contractual conditions, agreed technology licenses, and future availability of compatible suppliers. What the analysis documents is the structural sovereignty limitation born with the technology decision: unlike open railway standards, a proprietary infrastructure restricts the State's capacity to tender under conditions of full competition.</span></p>
+
+    <p class="sol-p"><span class="es">El hormigón de las primeras vigas es el momento en que esa restricción se vuelve irreversible. El embudo de soberanía no se estrecha gradualmente — se establece en el momento en que se toma la decisión tecnológica y permanece por la vida útil de la infraestructura.</span><span class="en">The concrete of the first beams is the moment when that constraint becomes irreversible. The sovereignty bottleneck does not narrow gradually — it is established the moment the technology decision is made and remains for the infrastructure's useful life.</span></p>
+  </div>
+
+  <hr class="sol-divider">
+
+  <!-- IV. LA PREGUNTA -->
+  <div class="sol-section">
+    <div class="sol-sec-hdr">
+      <span class="sol-sec-num">IV ·</span>
+      <span class="sol-sec-title"><span class="es">La Pregunta que el Expediente No Responde</span><span class="en">The Question the File Does Not Answer</span></span>
+    </div>
+
+    <div class="sol-closing">
+      <div class="sol-closing-q">
+        <span class="es">¿Por qué se está construyendo un sistema con capacidad estimada inferior a la demanda proyectada, cuando el Metro existente ya cubre el 86% de esa demanda y cuenta con un contrato de mantenimiento que garantiza su operación?</span>
+        <span class="en">Why is a system being built with estimated capacity below projected demand, when the existing Metro already covers 86% of that demand and has a maintenance contract guaranteeing its operation?</span>
+      </div>
+      <div class="sol-closing-body">
+        <span class="es">Una auditoría deja de ser un documento cuando sus conclusiones son verificables por cualquier ciudadano con acceso a los datos originales, reproducibles por cualquier técnico con los mismos supuestos, y actualizables conforme los hechos confirman o contradicen las inferencias. Cuando esas tres condiciones se cumplen, la auditoría se convierte en un ecosistema documental. Y un ecosistema documental, a diferencia de un PDF, no puede ser archivado ni respondido con silencio institucional indefinidamente.</span>
+        <span class="en">An audit ceases to be a document when its conclusions are verifiable by any citizen with access to the original data, reproducible by any technician with the same assumptions, and updatable as facts confirm or contradict the inferences. When those three conditions are met, the audit becomes a documentary ecosystem. And a documentary ecosystem, unlike a PDF, cannot be filed away or answered with institutional silence indefinitely.</span>
+      </div>
+      <div class="sol-closing-final">
+        <span class="es">El embudo ya está en el debate público. La pregunta también.<br>La pregunta permanece abierta mientras no exista una respuesta documentada en los expedientes examinados.</span>
+        <span class="en">The bottleneck is already in the public debate. So is the question.<br>The question remains open as long as no documented answer exists in the files examined.</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-footer">
+    <div>
+      <div class="tf-author">Ing. Piter J. Bonilla D. · CODIA #17378 · visualcrp.com/embudo.html</div>
+      <div class="tf-original"><span class="es">Síntesis de Impacto · Versión Definitiva · Agosto 2026 · SafeCreative 251118-Z395Y6</span><span class="en">Impact Synthesis · Definitive Version · August 2026 · SafeCreative 251118-Z395Y6</span></div>
+    </div>
+    <div style="font-size:11px; color:var(--muted);">4 <span class="es">de agosto de</span><span class="en">August</span> 2026</div>
+  </div>
+
+</div><!-- /sol-wrap -->
+</div><!-- /tab-soliloquio -->
 
 <!-- JAVASCRIPT -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
