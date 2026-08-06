@@ -233,18 +233,18 @@ hr.rule { border: none; border-top: 1px solid var(--rule); margin: 24px 0; }
 
 /* ── SOLILOQUIO TAB ───────────────────────────────── */
 .tab-btn.soliloquio-btn {
-  margin-left: auto;
-  border-left: 1px solid rgba(255,255,255,.12);
-  padding-left: 22px;
+  border-left: 1px solid rgba(255,255,255,.18);
+  margin-left: 8px;
   font-style: italic;
   letter-spacing: .04em;
-  color: rgba(200,216,240,.45);
+  color: rgba(200,216,240,.6);
 }
-.tab-btn.soliloquio-btn:hover { color: rgba(200,216,240,.9); }
+.tab-btn.soliloquio-btn:hover { color: rgba(200,216,240,.95) !important; }
 .tab-btn.soliloquio-btn.active {
-  color: #fff;
-  border-bottom-color: var(--accent);
+  color: #fff !important;
+  border-bottom-color: var(--accent) !important;
   font-style: italic;
+  font-weight: 600;
 }
 
 /* ── SOLILOQUIO PANEL ───────────────────────────────── */
@@ -473,15 +473,15 @@ html.light .sol-pullquote { background: rgba(232,93,38,.05); }
 <!-- TAB BAR -->
 <nav class="tab-bar">
   <div class="tab-bar-inner">
-    <button class="tab-btn active" onclick="showTab('sintesis')"><span class="es">Síntesis</span><span class="en">Synopsis</span></button>
-    <button class="tab-btn" onclick="showTab('hechos')"><span class="es">Nivel 1 · Hechos</span><span class="en">Level 1 · Facts</span></button>
-    <button class="tab-btn" onclick="showTab('modelos')"><span class="es">Nivel 2 · Modelos</span><span class="en">Level 2 · Models</span></button>
-    <button class="tab-btn" onclick="showTab('inferencias')"><span class="es">Nivel 3 · Inferencias</span><span class="en">Level 3 · Inferences</span></button>
-    <button class="tab-btn" onclick="showTab('graficos')"><span class="es">Gráficos</span><span class="en">Charts</span></button>
-    <button class="tab-btn" onclick="showTab('ecosistema')"><span class="es">Ecosistema</span><span class="en">Ecosystem</span></button>
-    <button class="tab-btn" onclick="showTab('fuentes')"><span class="es">Fuentes</span><span class="en">Sources</span></button>
-    <button class="tab-btn" onclick="showTab('macro')"><span class="es">Macroeconómico</span><span class="en">Macroeconomic</span></button>
-    <button class="tab-btn soliloquio-btn" onclick="showTab('soliloquio')"><span class="es">Soliloquio</span><span class="en">Soliloquy</span></button>
+    <button class="tab-btn active" onclick="showTab('sintesis', this)"><span class="es">Síntesis</span><span class="en">Synopsis</span></button>
+    <button class="tab-btn" onclick="showTab('hechos', this)"><span class="es">Nivel 1 · Hechos</span><span class="en">Level 1 · Facts</span></button>
+    <button class="tab-btn" onclick="showTab('modelos', this)"><span class="es">Nivel 2 · Modelos</span><span class="en">Level 2 · Models</span></button>
+    <button class="tab-btn" onclick="showTab('inferencias', this)"><span class="es">Nivel 3 · Inferencias</span><span class="en">Level 3 · Inferences</span></button>
+    <button class="tab-btn" onclick="showTab('graficos', this)"><span class="es">Gráficos</span><span class="en">Charts</span></button>
+    <button class="tab-btn" onclick="showTab('ecosistema', this)"><span class="es">Ecosistema</span><span class="en">Ecosystem</span></button>
+    <button class="tab-btn" onclick="showTab('fuentes', this)"><span class="es">Fuentes</span><span class="en">Sources</span></button>
+    <button class="tab-btn" onclick="showTab('macro', this)"><span class="es">Macroeconómico</span><span class="en">Macroeconomic</span></button>
+    <button class="tab-btn soliloquio-btn" onclick="showTab('soliloquio', this)"><span class="es">Soliloquio</span><span class="en">Soliloquy</span></button>
   </div>
 </nav>
 
@@ -1254,11 +1254,13 @@ html.light .sol-pullquote { background: rgba(232,93,38,.05); }
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <script>
 // ── TABS ──────────────────────────────────
-function showTab(id) {
+function showTab(id, btn) {
   document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-  document.getElementById('tab-' + id).classList.add('active');
-  if (event && event.currentTarget) event.currentTarget.classList.add('active');
+  var panel = document.getElementById('tab-' + id);
+  if (panel) panel.classList.add('active');
+  var activeBtn = btn || (typeof event !== 'undefined' && event && event.currentTarget) || null;
+  if (activeBtn) activeBtn.classList.add('active');
   if (id === 'graficos' || id === 'ecosistema') setTimeout(buildCharts, 50);
 }
 
