@@ -40,6 +40,7 @@ html.light {
   --text:    #1e293b;
   --muted:   #475569;
   --red:     #b91c1c;
+  --accent:  #9a3412;
   --amber:   #b45309;
   --green:   #166534;
   --blue:    #1d4ed8;
@@ -409,6 +410,19 @@ html.light #tab-yqp [style*="color: #fff"] { color: var(--navy) !important; }
 html.light #tab-yqp [style*="background:linear-gradient(135deg,#1a0a00"] {
   background: rgba(185,28,28,.06) !important;
   border-color: rgba(185,28,28,.3) !important;
+}
+/* Fix: rgba white text invisible on near-white bg in light mode */
+html.light #tab-yqp [style*="background:linear-gradient(135deg,#1a0a00"] [style*="color:rgba(255,255,255"] {
+  color: var(--navy) !important;
+}
+/* Fix: accent color in matriz header needs darker value in light mode for contrast */
+html.light #tab-yqp [style*="background:rgba(0,0,0,.25)"] {
+  background: rgba(185,28,28,.10) !important;
+}
+html.light #tab-yqp [style*="background:rgba(0,0,0,.25)"] [style*="color:var(--accent)"],
+html.light #tab-yqp [style*="background:rgba(0,0,0,.25)"] span {
+  color: var(--red) !important;
+  font-weight: 700;
 }
 html.light #tab-yqp [style*="background:var(--navy2)"] {
   background: var(--navy) !important;
