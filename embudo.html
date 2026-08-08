@@ -402,6 +402,23 @@ html.light .sol-pullquote { background: rgba(232,93,38,.05); }
   @page { margin: 14mm 14mm 22mm; size: A4; }
   * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 }
+/* ── TAB ¿Y QUÉ PASA SI? · MODO CLARO ───────────────────────────────── */
+html.light #tab-yqp h2 { color: var(--navy); }
+html.light #tab-yqp [style*="color:#fff"],
+html.light #tab-yqp [style*="color: #fff"] { color: var(--navy) !important; }
+html.light #tab-yqp [style*="background:linear-gradient(135deg,#1a0a00"] {
+  background: rgba(185,28,28,.06) !important;
+  border-color: rgba(185,28,28,.3) !important;
+}
+html.light #tab-yqp [style*="background:var(--navy2)"] {
+  background: var(--navy) !important;
+}
+html.light #tab-yqp [style*="background:var(--navy2)"] p,
+html.light #tab-yqp [style*="background:var(--navy2)"] div {
+  color: rgba(255,255,255,.9) !important;
+}
+html.light #tab-yqp .tf-author { color: var(--text); }
+html.light #tab-yqp .tf-original { color: var(--muted); }
 </style>
 </head>
 <body>
@@ -481,6 +498,7 @@ html.light .sol-pullquote { background: rgba(232,93,38,.05); }
     <button class="tab-btn" onclick="showTab('ecosistema', this)"><span class="es">Ecosistema</span><span class="en">Ecosystem</span></button>
     <button class="tab-btn" onclick="showTab('fuentes', this)"><span class="es">Fuentes</span><span class="en">Sources</span></button>
     <button class="tab-btn" onclick="showTab('macro', this)"><span class="es">Macroeconómico</span><span class="en">Macroeconomic</span></button>
+    <button class="tab-btn" onclick="showTab('yqp', this)"><span class="es">¿Y qué pasa si…?</span><span class="en">What if…?</span></button>
     <button class="tab-btn soliloquio-btn" onclick="showTab('soliloquio', this)"><span class="es">Soliloquio</span><span class="en">Soliloquy</span></button>
   </div>
 </nav>
@@ -760,6 +778,159 @@ html.light .sol-pullquote { background: rgba(232,93,38,.05); }
     <div class="box box-note"><div class="box-label"><span class="es">Fuentes · N1</span><span class="en">Sources · N1</span></div><p><span class="es">Diseño original: Listín Diario, 28 ago. 2025 · fitram.gob.do (sep. 2025) · Diario Libre, 26 mar. 2026. Trazado anunciado: Diario Libre, 13 jul. 2026 (<a href="https://www.diariolibre.com/actualidad/ciudad/2026/07/13/fitram-modifica-el-trazado-del-monorriel-de-santo-domingo/3598605" target="_blank" style="color:var(--blue);">diariolibre.com/3598605</a>) · El Caribe, jul. 2026.</span><span class="en">Original design: Listín Diario, Aug. 28, 2025 · fitram.gob.do (Sep. 2025) · Diario Libre, Mar. 26, 2026. Announced route: Diario Libre, Jul. 13, 2026 (<a href="https://www.diariolibre.com/actualidad/ciudad/2026/07/13/fitram-modifica-el-trazado-del-monorriel-de-santo-domingo/3598605" target="_blank" style="color:var(--blue);">diariolibre.com/3598605</a>) · El Caribe, Jul. 2026.</span></p></div>
     <div class="box box-inf"><div class="box-label"><span class="es">Inferencia · N3</span><span class="en">Inference · N3</span></div><p><span class="es">El estudio METI (pág. 61, sección 03-3.4) identifica el Centro Olímpico como la estación de mayor demanda del corredor por ser el punto de transferencia con la Línea 1. El trazado anunciado elimina precisamente ese nodo. La motivación declarada por el FITRAM es ambiental y comunitaria. Este análisis documenta la consistencia entre el mecanismo inferido en noviembre 2025 y el cambio anunciado en julio 2026 — sin afirmar causalidad.</span><span class="en">The METI study (p. 61, section 03-3.4) identifies the Olympic Center as the highest-demand station in the corridor because it is the Line 1 transfer point. The announced route eliminates precisely that node. FITRAM's stated motivation is environmental and community-based. This analysis documents the consistency between the mechanism inferred in November 2025 and the change announced in July 2026 — without asserting causality.</span></p></div>
   </div>
+
+  <!-- ============================================================
+       BLOQUE: EVALUACIÓN METI Y CONTROL DE CONSISTENCIA
+       ============================================================ -->
+  <div class="sec" style="margin-top:40px; padding-top:20px; border-top:2px solid var(--rule);">
+    <div class="sec-hdr">
+      <span class="sec-num">●</span>
+      <span class="sec-title" style="color:var(--accent);">
+        <span class="es">Evaluación METI — Control de consistencia</span>
+        <span class="en">METI Evaluation — Consistency Control</span>
+      </span>
+      <span class="lbl-n1 section-label" style="margin-left:8px;">N1 · METI 2024</span>
+    </div>
+
+    <p>
+      <span class="es">
+        <strong>El estudio METI/Nippon Koei de febrero de 2024</strong> evaluó cinco opciones para el corredor L3.
+        El Monorriel obtuvo <strong>24/50 —equivalente a 48/100—</strong> y ocupó el <strong>último lugar</strong>,
+        en una evaluación que contemplaba el nodo <strong>Centro Olímpico</strong> como punto de integración con las Líneas 1 y 2.
+        La documentación pública inicial de FITRAM también presentaba Centro Olímpico como terminal de la primera etapa y conexión con ambas líneas del Metro.
+        <sup><a href="https://fitram.gob.do/proyecto/monorriel-santo-domingo-linea-1/" target="_blank" style="color:var(--blue);">[FITRAM]</a></sup>
+      </span>
+      <span class="en">
+        <strong>The METI/Nippon Koei study of February 2024</strong> evaluated five options for the L3 corridor.
+        The Monorail received <strong>24/50 —equivalent to 48/100—</strong> and ranked <strong>last</strong>,
+        in an evaluation that considered the <strong>Olympic Center</strong> node as an integration point with Lines 1 and 2.
+        FITRAM's initial public documentation also presented the Olympic Center as the first-stage terminal and connection to both Metro lines.
+        <sup><a href="https://fitram.gob.do/proyecto/monorriel-santo-domingo-linea-1/" target="_blank" style="color:var(--blue);">[FITRAM]</a></sup>
+      </span>
+    </p>
+
+    <p>
+      <span class="es">
+        <strong>En julio de 2026, FITRAM anunció una modificación del trazado que elimina ese nodo de integración</strong>
+        <sup><a href="https://www.diariolibre.com/actualidad/ciudad/2026/07/13/fitram-modifica-el-trazado-del-monorriel-de-santo-domingo/3598605" target="_blank" style="color:var(--blue);">[Diario Libre, 13 jul 2026]</a></sup>.
+        Dado que la puntuación original dependía de variables como demanda, conectividad, transferencias y beneficio de red,
+        <strong>la nota de 24/50 no puede trasladarse automáticamente al trazado modificado</strong> sin una reevaluación formal bajo la matriz y los pesos originales de METI.
+      </span>
+      <span class="en">
+        <strong>In July 2026, FITRAM announced a route modification that eliminates that integration node</strong>
+        <sup><a href="https://www.diariolibre.com/actualidad/ciudad/2026/07/13/fitram-modifica-el-trazado-del-monorriel-de-santo-domingo/3598605" target="_blank" style="color:var(--blue);">[Diario Libre, Jul 13, 2026]</a></sup>.
+        Since the original score depended on variables such as demand, connectivity, transfers, and network benefit,
+        <strong>the 24/50 score cannot be automatically transferred to the modified route</strong> without a formal reevaluation under METI's original matrix and weights.
+      </span>
+    </p>
+
+    <p>
+      <span class="es">
+        <strong>Una puntuación inferior a 48/100 constituye una hipótesis técnicamente razonable</strong> si la pérdida de integración no queda compensada por beneficios verificables en otros criterios.
+        Al momento de esta revisión, <strong>no se ha identificado públicamente una reevaluación METI actualizada del trazado modificado</strong>.
+      </span>
+      <span class="en">
+        <strong>A score below 48/100 constitutes a technically reasonable hypothesis</strong> if the loss of integration is not compensated by verifiable benefits in other criteria.
+        As of this review, <strong>no updated METI reevaluation of the modified route has been publicly identified</strong>.
+      </span>
+    </p>
+
+    <div class="box box-note" style="border-left-color:var(--amber);">
+      <div class="box-label" style="color:var(--amber);">
+        <span class="es">Nota metodológica</span>
+        <span class="en">Methodological note</span>
+      </div>
+      <p style="font-size:13px; margin:0;">
+        <span class="es">
+          <strong>La hipótesis de una puntuación inferior a 48/100 no constituye una nueva evaluación METI.</strong>
+          Expresa la <strong>necesidad de recalcular la matriz original</strong> con los parámetros, demanda, conectividad y criterios aplicables al trazado modificado.
+        </span>
+        <span class="en">
+          <strong>The hypothesis of a score below 48/100 does not constitute a new METI evaluation.</strong>
+          It expresses the <strong>need to recalculate the original matrix</strong> with the parameters, demand, connectivity, and criteria applicable to the modified route.
+        </span>
+      </p>
+    </div>
+
+    <!-- CONTROL DE CONSISTENCIA -->
+    <div style="background:var(--fog); border-left:4px solid var(--accent); padding:18px 22px; margin:24px 0; border-radius:4px;">
+      <div style="font-size:12px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--accent); margin-bottom:10px;">
+        <span class="es">Control de consistencia de la evaluación METI</span>
+        <span class="en">METI Evaluation Consistency Control</span>
+      </div>
+
+      <p style="font-size:13.5px; margin-bottom:12px;">
+        <span class="es">
+          <strong>24/50 no debe interpretarse como la puntuación del trazado actualmente anunciado.</strong>
+          Es la puntuación obtenida por el Monorriel dentro de la configuración evaluada por METI en 2024.
+        </span>
+        <span class="en">
+          <strong>24/50 should not be interpreted as the score for the currently announced route.</strong>
+          It is the score obtained by the Monorail within the configuration evaluated by METI in 2024.
+        </span>
+      </p>
+
+      <p style="font-size:13.5px; margin-bottom:12px;">
+        <span class="es">
+          El cambio posterior de trazado modificó, entre otros elementos, el nodo de integración con la red existente.
+          Por ello, existen <strong>dos posibilidades</strong>:
+        </span>
+        <span class="en">
+          The subsequent route change modified, among other elements, the integration node with the existing network.
+          Therefore, there are <strong>two possibilities</strong>:
+        </span>
+      </p>
+
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:12px 0; font-size:13.5px;">
+        <div style="background:var(--white); padding:14px 16px; border-radius:4px; border:1px solid var(--rule);">
+          <strong style="color:var(--green);">A.</strong>
+          <span class="es">FITRAM realizó una reevaluación utilizando la matriz METI original, con los nuevos parámetros.</span>
+          <span class="en">FITRAM conducted a reevaluation using the original METI matrix, with the new parameters.</span>
+        </div>
+        <div style="background:var(--white); padding:14px 16px; border-radius:4px; border:1px solid var(--rule);">
+          <strong style="color:var(--red);">B.</strong>
+          <span class="es">El proyecto actualmente propuesto no ha sido sometido a una reevaluación equivalente.</span>
+          <span class="en">The currently proposed project has not been subjected to an equivalent reevaluation.</span>
+        </div>
+      </div>
+
+      <p style="font-size:13.5px; margin-bottom:0; font-weight:600;">
+        <span class="es">
+          <strong>La cuestión verificable es determinar cuál de las dos ocurrió.</strong>
+        </span>
+        <span class="en">
+          <strong>The verifiable question is to determine which of the two occurred.</strong>
+        </span>
+      </p>
+
+      <p style="font-size:13px; margin-top:10px; margin-bottom:0; color:var(--muted);">
+        <span class="es">
+          Si existe la reevaluación, debe poder identificarse el documento, sus parámetros, pesos y resultados.
+          Si no existe, permanece abierta la cuestión de la comparabilidad entre la evaluación METI de 2024 y el trazado actualmente propuesto.
+        </span>
+        <span class="en">
+          If the reevaluation exists, the document, its parameters, weights, and results must be identifiable.
+          If it does not exist, the question of comparability between the 2024 METI evaluation and the currently proposed route remains open.
+        </span>
+      </p>
+    </div>
+
+    <div style="font-size:11px; color:var(--muted); padding-top:10px; border-top:1px dashed var(--rule);">
+      <span class="es">
+        <strong>Fuentes:</strong>
+        <a href="https://fitram.gob.do/proyecto/monorriel-santo-domingo-linea-1/" target="_blank" style="color:var(--blue);">FITRAM</a> ·
+        <a href="https://www.diariolibre.com/actualidad/ciudad/2026/06/24/inician-estudio-de-suelo-para-monorriel-de-santo-domingo/3576960" target="_blank" style="color:var(--blue);">Diario Libre (24 jun 2026)</a> ·
+        <a href="https://www.diariolibre.com/actualidad/ciudad/2026/07/13/fitram-modifica-el-trazado-del-monorriel-de-santo-domingo/3598605" target="_blank" style="color:var(--blue);">Diario Libre (13 jul 2026)</a>
+      </span>
+      <span class="en">
+        <strong>Sources:</strong>
+        <a href="https://fitram.gob.do/proyecto/monorriel-santo-domingo-linea-1/" target="_blank" style="color:var(--blue);">FITRAM</a> ·
+        <a href="https://www.diariolibre.com/actualidad/ciudad/2026/06/24/inician-estudio-de-suelo-para-monorriel-de-santo-domingo/3576960" target="_blank" style="color:var(--blue);">Diario Libre (Jun 24, 2026)</a> ·
+        <a href="https://www.diariolibre.com/actualidad/ciudad/2026/07/13/fitram-modifica-el-trazado-del-monorriel-de-santo-domingo/3598605" target="_blank" style="color:var(--blue);">Diario Libre (Jul 13, 2026)</a>
+      </span>
+    </div>
+  </div>
+  <!-- FIN BLOQUE EVALUACIÓN METI -->
 
   <div class="tab-footer">
     <div><div class="tf-author">Ing. Piter J. Bonilla D. · CODIA #17378</div><div class="tf-original"><span class="es">Inferencias técnicas formuladas como hipótesis fundamentadas, no como hechos probados</span><span class="en">Technical inferences framed as grounded hypotheses, not proven facts</span></div></div>
@@ -1324,6 +1495,361 @@ html.light .sol-pullquote { background: rgba(232,93,38,.05); }
 
 </div><!-- /sol-wrap -->
 </div><!-- /tab-soliloquio -->
+
+<!-- ══════════════════════════════════════════════
+     TAB ¿Y QUÉ PASA SI…?
+══════════════════════════════════════════════ -->
+<div class="tab-panel" id="tab-yqp">
+<div style="max-width:860px; margin:0 auto; padding:40px 24px 64px;">
+
+  <!-- ENCABEZADO -->
+  <div style="margin-bottom:36px;">
+    <div style="font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:var(--accent); margin-bottom:10px; font-family:monospace;">
+      <span class="es">Ejercicio de auditoría independiente · Hipotético · Replicable por cualquier usuario</span>
+      <span class="en">Independent audit exercise · Hypothetical · Replicable by any user</span>
+    </div>
+    <h2 style="font-size:clamp(20px,3.5vw,32px); font-weight:800; color:var(--text); line-height:1.15; margin-bottom:14px;">
+      <span class="es">¿Y qué pasa si el proyecto se evalúa como consultor UITP, BID y Banco Mundial?</span>
+      <span class="en">What if the project is evaluated as a UITP, IDB and World Bank consultant?</span>
+    </h2>
+    <p style="font-size:14px; color:var(--text); line-height:1.7; max-width:720px; margin-bottom:20px;">
+      <span class="es">Este análisis técnico diagnostica las consecuencias matemáticas de las decisiones ya tomadas. Cualquier usuario puede ir un paso más allá ejecutando los dos prompts siguientes en Google Modo IA o cualquier sistema de análisis:</span>
+      <span class="en">This technical analysis diagnoses the mathematical consequences of decisions already made. Any user can go one step further by running the following two prompts in Google AI Mode or any analysis system:</span>
+    </p>
+
+    <!-- PROMPTS -->
+    <div style="background:var(--fog); border:1px solid var(--rule); border-radius:6px; padding:18px 22px; margin-bottom:8px;">
+      <div style="font-size:10px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--accent); margin-bottom:8px; font-family:monospace;">Prompt 1</div>
+      <p style="font-family:monospace; font-size:13px; color:var(--amber); margin:0; line-height:1.6;">
+        <span class="es">Analiza exhaustivamente https://visualcrp.com/embudo.html</span>
+        <span class="en">Analyze exhaustively https://visualcrp.com/embudo.html</span>
+      </p>
+    </div>
+    <div style="background:var(--fog); border:1px solid var(--rule); border-radius:6px; padding:18px 22px; margin-bottom:20px;">
+      <div style="font-size:10px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--accent); margin-bottom:8px; font-family:monospace;">Prompt 2</div>
+      <p style="font-family:monospace; font-size:13px; color:var(--amber); margin:0; line-height:1.6;">
+        <span class="es">Puntuación exhaustiva en escala 1-100 del proyecto Monorriel como consultor tipo UITP, BID y Banco Mundial</span>
+        <span class="en">Exhaustive score on a 1-100 scale of the Monorail project as a UITP, IDB and World Bank type consultant</span>
+      </p>
+    </div>
+
+    <!-- CONVERGENCIA -->
+    <div style="background:rgba(34,197,94,.07); border:1px solid rgba(34,197,94,.2); border-radius:6px; padding:14px 18px; margin-bottom:0;">
+      <p style="font-size:12px; color:var(--text); margin:0; line-height:1.6;">
+        <span class="es"><strong style="color:var(--green);">Convergencia verificada:</strong> Google Modo IA aplicando esos dos prompts al corpus produjo <strong>41/100</strong>. La rúbrica independiente desarrollada a continuación produce el mismo resultado. La aritmética confirma: 13+9+5+14 = <strong>41</strong>. No es una evaluación oficial de ninguna institución — es el escenario que produce la evidencia disponible cuando se aplica una rúbrica de consultor independiente informada por criterios de la práctica internacional de transporte.</span>
+        <span class="en"><strong style="color:var(--green);">Verified convergence:</strong> Google AI Mode applying those two prompts to the corpus produced <strong>41/100</strong>. The independent rubric developed below produces the same result. Arithmetic confirms: 13+9+5+14 = <strong>41</strong>. It is not an official evaluation by any institution — it is the scenario produced by available evidence when an independent consultant rubric informed by international transport practice criteria is applied.</span>
+      </p>
+    </div>
+  </div>
+
+  <!-- VEREDICTO CENTRAL -->
+  <div style="background:linear-gradient(135deg,#1a0a00,#2d1000); border:1px solid rgba(224,82,82,.35); border-left:4px solid var(--red); border-radius:6px; padding:28px 32px; margin-bottom:40px; text-align:center;">
+    <div style="font-size:11px; letter-spacing:.15em; text-transform:uppercase; color:var(--red); margin-bottom:12px; font-family:monospace;">
+      <span class="es">Dictamen técnico consolidado · Análisis Multicriterio (AMC) · Escala 0–100</span>
+      <span class="en">Consolidated technical verdict · Multi-Criteria Analysis (MCA) · Scale 0–100</span>
+    </div>
+    <div style="font-size:72px; font-weight:900; color:var(--red); line-height:1; margin-bottom:8px; font-family:monospace;">41</div>
+    <div style="font-size:13px; font-weight:700; color:rgba(224,82,82,.85); letter-spacing:.08em; margin-bottom:16px;">
+      <span class="es">PROYECTO DE ALTO RIESGO · FINANCIAMIENTO CONDICIONADO A REDISEÑO</span>
+      <span class="en">HIGH RISK PROJECT · FINANCING CONDITIONED ON REDESIGN</span>
+    </div>
+    <div style="font-size:12px; color:rgba(200,216,240,.6); line-height:1.6; max-width:600px; margin:0 auto;">
+      <span class="es">Financiamiento sujeto a rediseño hacia tecnología de estándar ferroviario abierto que garantice cobertura de la demanda proyectada, reevaluación multicriterio con el trazado modificado, y publicación del modelo financiero completo con OPEX verificable.</span>
+      <span class="en">Financing subject to redesign toward open railway standard technology guaranteeing coverage of projected demand, multi-criteria reevaluation with the modified route, and publication of the complete financial model with verifiable OPEX.</span>
+    </div>
+  </div>
+
+  <!-- DIMENSIONES -->
+  <div style="margin-bottom:40px;">
+    <div style="font-size:12px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:var(--accent); margin-bottom:20px; font-family:monospace;">
+      <span class="es">Desglose por dimensión · Análisis Multicriterio</span>
+      <span class="en">Breakdown by dimension · Multi-Criteria Analysis</span>
+    </div>
+
+    <!-- D1 -->
+    <div style="background:var(--white); border:1px solid var(--rule); border-radius:6px; padding:22px 24px; margin-bottom:16px;">
+      <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:16px; margin-bottom:14px; flex-wrap:wrap;">
+        <div>
+          <div style="font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); margin-bottom:4px; font-family:monospace;"><span class="es">Dimensión 1 · Peso 30%</span><span class="en">Dimension 1 · Weight 30%</span></div>
+          <div style="font-size:15px; font-weight:700; color:var(--text);"><span class="es">Capacidad y Gestión de Demanda</span><span class="en">Capacity and Demand Management</span></div>
+        </div>
+        <div style="text-align:right; flex-shrink:0;">
+          <div style="font-size:32px; font-weight:900; color:var(--red); font-family:monospace; line-height:1;">13</div>
+          <div style="font-size:10px; color:var(--muted);">/ 30</div>
+        </div>
+      </div>
+      <div style="background:var(--fog); border-radius:3px; overflow:hidden; height:6px; margin-bottom:14px;">
+        <div style="background:var(--red); height:6px; width:43%;"></div>
+      </div>
+      <div style="font-size:13px; color:var(--text); line-height:1.75;">
+        <div style="margin-bottom:9px; padding-left:12px; border-left:2px solid var(--red-lt);">
+          <strong style="color:var(--red);">−12 pts</strong>
+          <span class="es"> — Brecha oferta-demanda estructural desde el Día 1. Capacidad estimada 306,000 pax/día vs. demanda proyectada 464,800 para 2030 (65.8% cobertura). Ninguna institución multilateral financia sistemas con déficit de capacidad estructural desde la inauguración.</span>
+          <span class="en"> — Structural supply-demand gap from Day 1. Estimated capacity 306,000 pax/day vs. projected demand 464,800 for 2030 (65.8% coverage). No multilateral institution finances systems with structural capacity deficit from inauguration.</span>
+        </div>
+        <div style="margin-bottom:9px; padding-left:12px; border-left:2px solid var(--red-lt);">
+          <strong style="color:var(--red);">−8 pts</strong>
+          <span class="es"> — Headway de 90 segundos sin validación operativa documentada en sistemas GoA4 a esta escala. El expediente promete 40 trenes/hora sin evidencia de que ese parámetro sea alcanzable de forma sostenida.</span>
+          <span class="en"> — 90-second headway without documented operational validation in GoA4 systems at this scale. The file promises 40 trains/hour without evidence that this parameter is sustainably achievable.</span>
+        </div>
+        <div style="margin-bottom:9px; padding-left:12px; border-left:2px solid var(--red-lt);">
+          <strong style="color:var(--red);">−5 pts</strong>
+          <span class="es"> — Modificación de trazado julio 2026 elimina el nodo de mayor demanda (Centro Olímpico, L1+L2) sin reevaluación documentada de la matriz multicriterio con los nuevos parámetros.</span>
+          <span class="en"> — July 2026 route modification eliminates the highest-demand node (Olympic Center, L1+L2) without documented reevaluation of the multi-criteria matrix with new parameters.</span>
+        </div>
+        <div style="margin-bottom:9px; padding-left:12px; border-left:2px solid var(--green-lt);">
+          <strong style="color:var(--green);">+8 pts</strong>
+          <span class="es"> — Configuración de 6 vagones desde el inicio corrige parcialmente el error original de 4 vagones, mejorando el LCOT de $1.14 a $1.07.</span>
+          <span class="en"> — 6-car configuration from day one partially corrects the original 4-car design error, improving LCOT from $1.14 to $1.07.</span>
+        </div>
+        <div style="margin-bottom:9px; padding-left:12px; border-left:2px solid var(--green-lt);">
+          <strong style="color:var(--green);">+5 pts</strong>
+          <span class="es"> — Flota de 17 trenes contratada con ciclo operativo definido. Parámetros de operación básica especificados en el expediente.</span>
+          <span class="en"> — Fleet of 17 contracted trains with defined operational cycle. Basic operation parameters specified in the file.</span>
+        </div>
+        <div style="padding-left:12px; border-left:2px solid var(--green-lt);">
+          <strong style="color:var(--green);">+5 pts</strong>
+          <span class="es"> — Sistema de automatización GoA3/GoA4 proyectado, consistente con estándares internacionales para sistemas de este tipo.</span>
+          <span class="en"> — Projected GoA3/GoA4 automation system, consistent with international standards for this type of system.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- D2 -->
+    <div style="background:var(--white); border:1px solid var(--rule); border-radius:6px; padding:22px 24px; margin-bottom:16px;">
+      <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:16px; margin-bottom:14px; flex-wrap:wrap;">
+        <div>
+          <div style="font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); margin-bottom:4px; font-family:monospace;"><span class="es">Dimensión 2 · Peso 25%</span><span class="en">Dimension 2 · Weight 25%</span></div>
+          <div style="font-size:15px; font-weight:700; color:var(--text);"><span class="es">Viabilidad Económica, Financiera y Social</span><span class="en">Economic, Financial and Social Viability</span></div>
+        </div>
+        <div style="text-align:right; flex-shrink:0;">
+          <div style="font-size:32px; font-weight:900; color:var(--red); font-family:monospace; line-height:1;">9</div>
+          <div style="font-size:10px; color:var(--muted);">/ 25</div>
+        </div>
+      </div>
+      <div style="background:var(--fog); border-radius:3px; overflow:hidden; height:6px; margin-bottom:14px;">
+        <div style="background:var(--red); height:6px; width:36%;"></div>
+      </div>
+      <div style="font-size:13px; color:var(--text); line-height:1.75;">
+        <div style="margin-bottom:9px; padding-left:12px; border-left:2px solid var(--red-lt);">
+          <strong style="color:var(--red);">−10 pts</strong>
+          <span class="es"> — Pérdida de Bienestar Social no contabilizada. Los 158,800 pasajeros excluidos diariamente transfieren su costo de movilidad al transporte informal. La diferencia acumulada referencial bajo el modelo comparativo supera en USD 1,359.6M al costo total del Metro en 15 años.</span>
+          <span class="en"> — Unaccounted Social Welfare Loss. The 158,800 daily excluded passengers transfer their mobility cost to informal transport. The reference accumulated difference under the comparative model exceeds Metro's total cost by USD 1,359.6M over 15 years.</span>
+        </div>
+        <div style="margin-bottom:9px; padding-left:12px; border-left:2px solid var(--red-lt);">
+          <strong style="color:var(--red);">−6 pts</strong>
+          <span class="es"> — LCOT USD 1.07/pax (Monorriel) vs. USD 1.05/pax (Metro 6V). El menor subsidio fiscal aparente no refleja eficiencia real — refleja que el sistema no transporta al 34% de la demanda proyectada.</span>
+          <span class="en"> — LCOT USD 1.07/pax (Monorail) vs. USD 1.05/pax (Metro 6V). The apparently lower fiscal subsidy does not reflect real efficiency — it reflects that the system does not serve 34% of projected demand.</span>
+        </div>
+        <div style="padding-left:12px; border-left:2px solid var(--green-lt);">
+          <strong style="color:var(--green);">+9 pts</strong>
+          <span class="es"> — Tarifa social indexada (RD$37.50), presupuesto inicial definido (USD 932.8M), contrapartes institucionales establecidas (FITRAM/OPRET) y estructura de financiamiento con respaldo de contrato adjudicado.</span>
+          <span class="en"> — Indexed social fare (RD$37.50), defined initial budget (USD 932.8M), established institutional counterparts (FITRAM/OPRET) and financing structure backed by awarded contract.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- D3 -->
+    <div style="background:var(--white); border:1px solid var(--rule); border-radius:6px; padding:22px 24px; margin-bottom:16px;">
+      <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:16px; margin-bottom:14px; flex-wrap:wrap;">
+        <div>
+          <div style="font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); margin-bottom:4px; font-family:monospace;"><span class="es">Dimensión 3 · Peso 20%</span><span class="en">Dimension 3 · Weight 20%</span></div>
+          <div style="font-size:15px; font-weight:700; color:var(--text);"><span class="es">Escalabilidad, Resiliencia Demográfica y Ciclo de Vida</span><span class="en">Scalability, Demographic Resilience and Lifecycle</span></div>
+        </div>
+        <div style="text-align:right; flex-shrink:0;">
+          <div style="font-size:32px; font-weight:900; color:var(--red); font-family:monospace; line-height:1;">5</div>
+          <div style="font-size:10px; color:var(--muted);">/ 20</div>
+        </div>
+      </div>
+      <div style="background:var(--fog); border-radius:3px; overflow:hidden; height:6px; margin-bottom:14px;">
+        <div style="background:var(--red); height:6px; width:25%;"></div>
+      </div>
+      <div style="font-size:13px; color:var(--text); line-height:1.75;">
+        <div style="margin-bottom:9px; padding-left:12px; border-left:2px solid var(--red-lt);">
+          <strong style="color:var(--red);">−10 pts</strong>
+          <span class="es"> — Cobertura proyectada al 2060 del 43% bajo los parámetros actuales (704,000 demanda vs. 306,000 capacidad estimada). Sistema comparable de Metro 8 vagones (Panamá) alcanzaría el 93% en el mismo corredor.</span>
+          <span class="en"> — Projected 2060 coverage of 43% under current parameters (704,000 demand vs. 306,000 estimated capacity). Comparable 8-car Metro system (Panama) would reach 93% in the same corridor.</span>
+        </div>
+        <div style="margin-bottom:9px; padding-left:12px; border-left:2px solid var(--red-lt);">
+          <strong style="color:var(--red);">−5 pts</strong>
+          <span class="es"> — Saturación estimada en 2047 para la configuración M-6V, antes de amortizar la obra civil en un horizonte de 50 años de vida útil de la infraestructura.</span>
+          <span class="en"> — Estimated saturation in 2047 for M-6V configuration, before amortizing civil works over a 50-year infrastructure useful life horizon.</span>
+        </div>
+        <div style="padding-left:12px; border-left:2px solid var(--green-lt);">
+          <strong style="color:var(--green);">+5 pts</strong>
+          <span class="es"> — Automatización GoA3/GoA4 extiende marginalmente el ciclo operativo y reduce costos de personal a largo plazo.</span>
+          <span class="en"> — GoA3/GoA4 automation marginally extends the operational cycle and reduces long-term personnel costs.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- D4 -->
+    <div style="background:var(--white); border:1px solid var(--rule); border-radius:6px; padding:22px 24px; margin-bottom:24px;">
+      <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:16px; margin-bottom:14px; flex-wrap:wrap;">
+        <div>
+          <div style="font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); margin-bottom:4px; font-family:monospace;"><span class="es">Dimensión 4 · Peso 25%</span><span class="en">Dimension 4 · Weight 25%</span></div>
+          <div style="font-size:15px; font-weight:700; color:var(--text);"><span class="es">Gobernanza, Soberanía Tecnológica y Adjudicación</span><span class="en">Governance, Technological Sovereignty and Award</span></div>
+        </div>
+        <div style="text-align:right; flex-shrink:0;">
+          <div style="font-size:32px; font-weight:900; color:var(--amber); font-family:monospace; line-height:1;">14</div>
+          <div style="font-size:10px; color:var(--muted);">/ 25</div>
+        </div>
+      </div>
+      <div style="background:var(--fog); border-radius:3px; overflow:hidden; height:6px; margin-bottom:14px;">
+        <div style="background:var(--amber); height:6px; width:56%;"></div>
+      </div>
+      <div style="font-size:13px; color:var(--text); line-height:1.75;">
+        <div style="margin-bottom:9px; padding-left:12px; border-left:2px solid var(--amber-lt);">
+          <strong style="color:var(--amber);">−7 pts</strong>
+          <span class="es"> — Tecnología propietaria que puede crear dependencia del fabricante original para mantenimiento especializado, repuestos y expansiones, reduciendo la capacidad del Estado de licitar en condiciones de competencia plena durante la vida útil de la infraestructura.</span>
+          <span class="en"> — Proprietary technology that may create dependency on the original manufacturer for specialized maintenance, spare parts and expansions, reducing the State's capacity to tender under full competition conditions during the infrastructure's useful life.</span>
+        </div>
+        <div style="margin-bottom:9px; padding-left:12px; border-left:2px solid var(--amber-lt);">
+          <strong style="color:var(--amber);">−4 pts</strong>
+          <span class="es"> — La decisión seleccionó la tecnología que el propio estudio METI 2024 clasificó en último lugar (24/50 = 48/100), cuando el Metro obtuvo el primer lugar (42/50 = 84/100) entre cinco alternativas evaluadas.</span>
+          <span class="en"> — The decision selected the technology that the METI 2024 study itself ranked last (24/50 = 48/100), when the Metro ranked first (42/50 = 84/100) among five evaluated alternatives.</span>
+        </div>
+        <div style="margin-bottom:9px; padding-left:12px; border-left:2px solid var(--green-lt);">
+          <strong style="color:var(--green);">+10 pts</strong>
+          <span class="es"> — Documentación formal básica cumplida: SNIP 17248, registros de impacto ambiental iniciales, proceso de licitación con publicación y evaluación técnica documentada.</span>
+          <span class="en"> — Basic formal documentation fulfilled: SNIP 17248, initial environmental impact records, tender process with publication and documented technical evaluation.</span>
+        </div>
+        <div style="padding-left:12px; border-left:2px solid var(--green-lt);">
+          <strong style="color:var(--green);">+4 pts</strong>
+          <span class="es"> — Advertencia técnica documentada entregada a la institución competente (R-04-F, 14 nov 2025), sin respuesta. Establece un registro de control independiente ante los organismos competentes.</span>
+          <span class="en"> — Documented technical warning delivered to the competent institution (R-04-F, Nov 14, 2025), without response. Establishes an independent control record before competent bodies.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TABLA RESUMEN -->
+  <div style="background:var(--fog); border:1px solid var(--rule); border-radius:6px; overflow:hidden; margin-bottom:40px;">
+    <div style="padding:14px 20px; background:rgba(0,0,0,.25); font-size:11px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--accent); font-family:monospace;">
+      <span class="es">Matriz de calificación consolidada</span>
+      <span class="en">Consolidated rating matrix</span>
+    </div>
+    <div style="overflow-x:auto;">
+      <table style="width:100%; border-collapse:collapse; font-size:13px;">
+        <thead>
+          <tr style="background:rgba(0,0,0,.2);">
+            <th style="padding:10px 16px; text-align:left; color:var(--muted); font-weight:600; font-size:11px; text-transform:uppercase; letter-spacing:.06em;"><span class="es">Dimensión</span><span class="en">Dimension</span></th>
+            <th style="padding:10px 16px; text-align:center; color:var(--muted); font-weight:600; font-size:11px; text-transform:uppercase; letter-spacing:.06em;"><span class="es">Peso</span><span class="en">Weight</span></th>
+            <th style="padding:10px 16px; text-align:center; color:var(--muted); font-weight:600; font-size:11px; text-transform:uppercase; letter-spacing:.06em;"><span class="es">Máximo</span><span class="en">Max</span></th>
+            <th style="padding:10px 16px; text-align:right; color:var(--muted); font-weight:600; font-size:11px; text-transform:uppercase; letter-spacing:.06em;"><span class="es">Obtenido</span><span class="en">Score</span></th>
+            <th style="padding:10px 16px; text-align:left; color:var(--muted); font-weight:600; font-size:11px; text-transform:uppercase; letter-spacing:.06em;"><span class="es">Estado</span><span class="en">Status</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-top:1px solid var(--rule);">
+            <td style="padding:10px 16px; color:var(--text);"><span class="es">Capacidad y Gestión de Demanda</span><span class="en">Capacity and Demand Management</span></td>
+            <td style="padding:10px 16px; text-align:center; color:var(--muted);">30%</td>
+            <td style="padding:10px 16px; text-align:center; color:var(--muted);">30</td>
+            <td style="padding:10px 16px; text-align:right; color:var(--red); font-weight:700; font-family:monospace;">13</td>
+            <td style="padding:10px 16px; color:var(--red); font-size:12px;"><span class="es">Crítico</span><span class="en">Critical</span></td>
+          </tr>
+          <tr style="border-top:1px solid var(--rule); background:rgba(0,0,0,.08);">
+            <td style="padding:10px 16px; color:var(--text);"><span class="es">Viabilidad Económica y Social</span><span class="en">Economic and Social Viability</span></td>
+            <td style="padding:10px 16px; text-align:center; color:var(--muted);">25%</td>
+            <td style="padding:10px 16px; text-align:center; color:var(--muted);">25</td>
+            <td style="padding:10px 16px; text-align:right; color:var(--red); font-weight:700; font-family:monospace;">9</td>
+            <td style="padding:10px 16px; color:var(--red); font-size:12px;"><span class="es">Deficiente</span><span class="en">Deficient</span></td>
+          </tr>
+          <tr style="border-top:1px solid var(--rule);">
+            <td style="padding:10px 16px; color:var(--text);"><span class="es">Escalabilidad y Ciclo de Vida</span><span class="en">Scalability and Lifecycle</span></td>
+            <td style="padding:10px 16px; text-align:center; color:var(--muted);">20%</td>
+            <td style="padding:10px 16px; text-align:center; color:var(--muted);">20</td>
+            <td style="padding:10px 16px; text-align:right; color:var(--red); font-weight:700; font-family:monospace;">5</td>
+            <td style="padding:10px 16px; color:var(--red); font-size:12px;"><span class="es">Inaceptable</span><span class="en">Unacceptable</span></td>
+          </tr>
+          <tr style="border-top:1px solid var(--rule); background:rgba(0,0,0,.08);">
+            <td style="padding:10px 16px; color:var(--text);"><span class="es">Gobernanza y Soberanía Tecnológica</span><span class="en">Governance and Technological Sovereignty</span></td>
+            <td style="padding:10px 16px; text-align:center; color:var(--muted);">25%</td>
+            <td style="padding:10px 16px; text-align:center; color:var(--muted);">25</td>
+            <td style="padding:10px 16px; text-align:right; color:var(--amber); font-weight:700; font-family:monospace;">14</td>
+            <td style="padding:10px 16px; color:var(--amber); font-size:12px;"><span class="es">Deficiente</span><span class="en">Deficient</span></td>
+          </tr>
+          <tr style="border-top:2px solid var(--accent); background:rgba(232,93,38,.08);">
+            <td style="padding:12px 16px; color:var(--accent); font-weight:700;"><span class="es">CALIFICACIÓN TOTAL</span><span class="en">TOTAL SCORE</span></td>
+            <td style="padding:12px 16px; text-align:center; color:var(--accent); font-weight:700;">100%</td>
+            <td style="padding:12px 16px; text-align:center; color:var(--accent); font-weight:700;">100</td>
+            <td style="padding:12px 16px; text-align:right; color:var(--red); font-weight:900; font-family:monospace; font-size:20px;">41</td>
+            <td style="padding:12px 16px; color:var(--red); font-size:12px; font-weight:700;"><span class="es">RECHAZADO</span><span class="en">REJECTED</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div style="padding:12px 20px; font-size:12px; color:var(--muted); border-top:1px solid var(--rule); font-family:monospace;">
+      <span class="es">Verificación aritmética: 13 + 9 + 5 + 14 = 41 ✓ · Google Modo IA aplicando los mismos prompts al corpus: 41 / 100 ✓</span>
+      <span class="en">Arithmetic verification: 13 + 9 + 5 + 14 = 41 ✓ · Google AI Mode applying same prompts to corpus: 41 / 100 ✓</span>
+    </div>
+  </div>
+
+  <!-- CONTRADICCIÓN METI -->
+  <div style="background:rgba(224,82,82,.07); border:1px solid rgba(224,82,82,.25); border-radius:6px; padding:24px 28px; margin-bottom:40px;">
+    <div style="font-size:11px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:var(--red); margin-bottom:12px; font-family:monospace;">
+      <span class="es">Contradicción fundamental del proceso de adjudicación</span>
+      <span class="en">Fundamental contradiction of the award process</span>
+    </div>
+    <p style="font-size:14px; color:var(--text); line-height:1.7; margin:0 0 16px;">
+      <span class="es">En una escala de 50 puntos, el estudio de prefactibilidad METI/NIPPON KOEI de febrero de 2024 evaluó cinco alternativas tecnológicas de transporte y clasificó al <strong style="color:var(--green);">Metro en primer lugar con 42 puntos (84/100)</strong>. El <strong style="color:var(--red);">Monorriel quedó en último lugar con 24 puntos (48/100)</strong>. La decisión seleccionó la tecnología que, según la propia evaluación oficial, obtuvo la puntuación más baja.</span>
+      <span class="en">On a 50-point scale, the METI/NIPPON KOEI prefeasibility study of February 2024 evaluated five technological transport alternatives and ranked the <strong style="color:var(--green);">Metro first with 42 points (84/100)</strong>. The <strong style="color:var(--red);">Monorail came last with 24 points (48/100)</strong>. The decision selected the technology that, according to the official evaluation itself, obtained the lowest score.</span>
+    </p>
+    <div style="border-top:1px solid rgba(224,82,82,.2); padding-top:14px;">
+      <div style="font-size:11px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:var(--amber); margin-bottom:8px; font-family:monospace;">
+        <span class="es">Pregunta</span><span class="en">Question</span>
+      </div>
+      <p style="font-size:14px; color:var(--text); font-weight:700; font-style:italic; margin:0; line-height:1.6;">
+        <span class="es">¿Qué resultado produciría METI si reevaluara el proyecto con el trazado modificado de julio 2026 y los parámetros actuales?</span>
+        <span class="en">What result would METI produce if it reevaluated the project with the modified July 2026 route and current parameters?</span>
+      </p>
+    </div>
+  </div>
+
+  <!-- NOTA -->
+  <div style="background:var(--fog); border-left:3px solid var(--amber); border-radius:0 4px 4px 0; padding:18px 22px; margin-bottom:40px;">
+    <div style="font-size:10px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--amber); margin-bottom:8px; font-family:monospace;">
+      <span class="es">Nota sobre la naturaleza de este ejercicio</span>
+      <span class="en">Note on the nature of this exercise</span>
+    </div>
+    <p style="font-size:13px; color:var(--text); line-height:1.7; margin:0;">
+      <span class="es">La puntuación de 41/100 es el resultado de aplicar los dos prompts al corpus técnico publicado en visualcrp.com/embudo.html. <strong>No es una evaluación oficial de METI, UITP, BID ni Banco Mundial.</strong> Es un escenario exploratorio basado en evidencia N1, N2 y N3 del expediente, con una rúbrica informada por criterios de capacidad, operación, ciclo de vida, integración de red y gestión de riesgos propios de la práctica internacional de transporte. Los parámetros pendientes de verificación primaria (B-01, B-02, B-03) afectan la precisión del resultado.</span>
+      <span class="en">The score of 41/100 is the result of applying the two prompts to the technical corpus published at visualcrp.com/embudo.html. <strong>It is not an official evaluation by METI, UITP, IDB or World Bank.</strong> It is an exploratory scenario based on N1, N2 and N3 evidence from the file, with a rubric informed by capacity, operation, lifecycle, network integration and risk management criteria from international transport practice. Parameters pending primary verification (B-01, B-02, B-03) affect the result's precision.</span>
+    </p>
+  </div>
+
+  <!-- PREGUNTA FINAL -->
+  <div style="background:var(--navy2); border-radius:6px; padding:28px 32px; text-align:center;">
+    <div style="font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:rgba(200,216,240,.5); margin-bottom:14px; font-family:monospace;">
+      <span class="es">La pregunta que el expediente no responde</span>
+      <span class="en">The question the file doesn't answer</span>
+    </div>
+    <p style="font-size:15px; font-weight:700; color:rgba(255,255,255,.95); line-height:1.6; max-width:640px; margin:0 auto 16px; font-style:italic;">
+      <span class="es">"¿Por qué se está construyendo un sistema con capacidad estimada inferior a la demanda proyectada, cuando el Metro existente ya cubre el 86% de esa demanda y cuenta con un contrato de mantenimiento que garantiza su operación?"</span>
+      <span class="en">"Why is a system being built with estimated capacity below projected demand, when the existing Metro already covers 86% of that demand and has a maintenance contract guaranteeing its operation?"</span>
+    </p>
+    <div style="font-size:12px; color:rgba(200,216,240,.5); font-style:italic;">
+      <span class="es">La respuesta no se encuentra en los documentos examinados.</span>
+      <span class="en">The answer is not found in the documents examined.</span>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="tab-footer" style="margin-top:48px;">
+    <div>
+      <div class="tf-author">Ing. Piter J. Bonilla D. · CODIA #17378 · visualcrp.com/embudo.html</div>
+      <div class="tf-original">
+        <span class="es">Ejercicio de auditoría independiente · Rúbrica informada por criterios de la práctica internacional de transporte · v1.0</span>
+        <span class="en">Independent audit exercise · Rubric informed by international transport practice criteria · v1.0</span>
+      </div>
+    </div>
+    <div style="font-size:11px; color:var(--muted);">v1.0 · <span class="es">agosto</span><span class="en">August</span> 2026</div>
+  </div>
+
+</div><!-- /inner -->
+</div><!-- /tab-yqp -->
+
+
 
 <!-- JAVASCRIPT -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
