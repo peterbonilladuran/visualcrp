@@ -404,17 +404,79 @@ html.light .sol-pullquote { background: rgba(232,93,38,.05); }
 
 /* ── PRINT ───────────────────────────────── */
 @media print {
+  /* Ocultar chrome — topbar y tab-bar siempre; header.header solo en mc-printing */
   header.topbar, .tab-bar { display: none !important; }
-  header.header { margin-top: 0 !important; }
-  body.print-all .tab-panel { display: block !important; padding: 16px 0 32px !important; orphans: 4; widows: 4; }
+  body:not(.mc-printing) header.header { display: block !important; }
+  body.mc-printing header.header { display: none !important; }
+  /* MODO MC-PRINTING: todos los tabs ocultos, MC visible con todos los panes */
+  body.mc-printing .tab-panel { display: none !important; }
+  body.mc-printing #tab-montecarlo { display: block !important; }
+  body.mc-printing #tab-montecarlo .panel-title,
+  body.mc-printing #tab-montecarlo .panel-sub,
+  body.mc-printing #tab-montecarlo .mc-summary-grid,
+  body.mc-printing #tab-montecarlo .mc-tabs,
+  body.mc-printing #tab-montecarlo .mc-print-btn-wrap,
+  body.mc-printing #tab-montecarlo .tab-footer { display: none !important; }
+  /* Todos los panes visibles con salto de página */
+  body.mc-printing #tab-montecarlo .mc-pane { display: block !important; }
+  body.mc-printing #tab-montecarlo .mc-pane + .mc-pane {
+    page-break-before: always !important;
+    break-before: page !important;
+  }
+  body.mc-printing #tab-montecarlo .mc-grid {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 16px !important;
+  }
+  body.mc-printing #tab-montecarlo .mc-chart-wrap { height: 200px !important; }
+  body.mc-printing #tab-montecarlo .mc-chart-svg svg { width: 100% !important; height: 200px !important; display: block !important; }
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  @page { margin: 10mm 10mm 15mm; size: letter; }
+}
+
+/* SVG MC: oculto por defecto, visible solo en mc-printing y print-all */
+@media print {
+  #tab-montecarlo .mc-chart-svg {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+  }
+  body.mc-printing #tab-montecarlo .mc-chart-svg,
+  body.print-all #tab-montecarlo .mc-chart-svg {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+  body.mc-printing #tab-montecarlo canvas,
+  body.print-all #tab-montecarlo canvas {
+    display: none !important;
+    visibility: hidden !important;
+  }
+}
+
+/* PDF completo */
+@media print {
+  body.print-all .tab-panel { display: block !important; }
   body.print-all .tab-panel + .tab-panel { page-break-before: always; break-before: page; }
-  body.print-all .tab-panel .tab-footer { page-break-after: avoid; break-after: avoid; }
-  .chart-box, .card, .kpi-card, .box { page-break-inside: avoid; }
-  canvas { display: block !important; max-width: 100% !important; }
+  body.print-all #tab-montecarlo .mc-pane { display: block !important; }
+  body.print-all #tab-montecarlo .mc-pane + .mc-pane { page-break-before: always; break-before: page; }
+  body.print-all #tab-montecarlo .mc-tabs { display: none !important; }
+  body.print-all #tab-montecarlo .mc-print-btn-wrap { display: none !important; }
+  body.print-all #tab-montecarlo .panel-title { display: none !important; }
+  body.print-all #tab-montecarlo .panel-sub { display: none !important; }
+  body.print-all #tab-montecarlo .mc-summary-grid { display: none !important; }
+  /* MC tab-footer preserved in print-all */
+  body.print-all #tab-montecarlo .mc-grid {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 16px !important;
+  }
+  body.print-all #tab-montecarlo .mc-chart-wrap { height: 200px !important; }
+  body.print-all #tab-montecarlo canvas { display: none !important; }
+  body.print-all #tab-montecarlo .mc-chart-svg { display: block !important; visibility: visible !important; opacity: 1 !important; }
+  body.print-all #tab-montecarlo .mc-chart-svg svg { width: 100% !important; height: 200px !important; display: block !important; }
   .header { background: #0f1f3d !important; }
   thead th { background: #0f1f3d !important; color: #fff !important; }
-  @page { margin: 14mm 14mm 22mm; size: A4; }
-  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 }
 /* ── TAB ¿Y QUÉ PASA SI? · MODO CLARO ───────────────────────────────── */
 html.light #tab-yqp h2 { color: var(--navy); }
@@ -1434,6 +1496,22 @@ html.light #tab-yqp .tf-original { color: var(--muted); }
   position:relative; height:200px; margin-bottom:10px; }
 #tab-montecarlo .mc-chart-wrap canvas {
   border-radius: 6px; }
+/* SVG superpuesto al canvas — mismo espacio, invisible en pantalla */
+#tab-montecarlo .mc-chart-svg {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none;
+}
+/* En print con mc-printing: mostrar SVG */
+@media print {
+  body.mc-printing #tab-montecarlo .mc-chart-svg {
+    display: block !important;
+    visibility: visible !important;
+  }
+}
 /* Dark mode: white bg for MC charts so axes/grid are always readable */
 html.dark #tab-montecarlo .mc-chart-wrap {
   background: #ffffff;
@@ -1540,13 +1618,22 @@ html.dark #tab-montecarlo .mc-summary-grid .mc-stat-val {
   <button class="mc-tab-btn" onclick="mcShowPane('mc-riesgo',this)">⚠️ <span class="es">Gobernanza / Riesgo</span><span class="en">Governance / Risk</span></button>
   <button class="mc-tab-btn" onclick="mcShowPane('mc-esc',this)">📈 <span class="es">Escalabilidad</span><span class="en">Scalability</span></button>
 </div>
+<div class="mc-print-btn-wrap" style="margin: 8px 0 4px; display:flex; justify-content:flex-end;">
+  <button onclick="printMonteCarlo()" style="
+    background:#1a3260; color:#fff; border:none; border-radius:6px;
+    padding:6px 14px; font-size:12px; cursor:pointer; font-weight:600;
+    display:flex; align-items:center; gap:6px;">
+    ⎙ <span class="es">Imprimir Monte Carlo</span><span class="en">Print Monte Carlo</span>
+  </button>
+</div>
+
 
 <!-- PANE 1: MACRO -->
-<div class="mc-pane active" id="mc-macro">
+<div class="mc-pane active" id="mc-macro" data-pcts="1124.3,1289.5,1359.7,1442.1,1594.8" data-lo="900" data-hi="1900" data-bins="50" data-mu="1359.69" data-sigma="150" data-dist="normal">
   <div class="mc-grid">
     <div class="mc-card">
       <h3>📊 <span class="es">Distribución — Brecha Macroeconómica (Monorriel − Metro)</span><span class="en">Distribution — Macroeconomic Gap (Monorail − Metro)</span></h3>
-      <div class="mc-chart-wrap"><canvas id="mc-chart-macro"></canvas></div>
+      <div class="mc-chart-wrap"><canvas id="mc-chart-macro"></canvas><div class="mc-chart-svg" id="mc-svg-macro"></div></div>
       <div class="mc-pcts">
         <span>🔴 P5: $1,124M</span><span>🟠 P25: $1,290M</span>
         <span>⚫ P50: $1,360M</span><span>🟢 P75: $1,442M</span>
@@ -1577,11 +1664,11 @@ html.dark #tab-montecarlo .mc-summary-grid .mc-stat-val {
 </div>
 
 <!-- PANE 2: VAN -->
-<div class="mc-pane" id="mc-van">
+<div class="mc-pane" id="mc-van" data-pcts="-2129,-1914,-1779,-1657,-1496" data-lo="-2600" data-hi="-1000" data-bins="50" data-mu="-1779" data-sigma="200" data-dist="normal">
   <div class="mc-grid">
     <div class="mc-card">
       <h3>📉 <span class="es">Distribución — VAN Real (Control C-13 · AUDIT NT-V)</span><span class="en">Distribution — Real NPV (Control C-13 · AUDIT NT-V)</span></h3>
-      <div class="mc-chart-wrap"><canvas id="mc-chart-van"></canvas></div>
+      <div class="mc-chart-wrap"><canvas id="mc-chart-van"></canvas><div class="mc-chart-svg" id="mc-svg-van"></div></div>
       <div class="mc-pcts">
         <span>🔴 P5: −$2,129M</span><span>🟠 P25: −$1,914M</span>
         <span>⚫ P50: −$1,779M</span><span>🟢 P75: −$1,657M</span>
@@ -1612,11 +1699,11 @@ html.dark #tab-montecarlo .mc-summary-grid .mc-stat-val {
 </div>
 
 <!-- PANE 3: CAPACIDAD -->
-<div class="mc-pane" id="mc-cap">
+<div class="mc-pane" id="mc-cap" data-pcts="62.3,64.1,65.8,67.5,69.2" data-lo="50" data-hi="80" data-bins="50" data-mu="65.8" data-sigma="2.5" data-dist="normal-clamp">
   <div class="mc-grid">
     <div class="mc-card">
       <h3>🚇 <span class="es">Distribución — Cobertura de Demanda 2030 (%)</span><span class="en">Distribution — 2030 Demand Coverage (%)</span></h3>
-      <div class="mc-chart-wrap"><canvas id="mc-chart-cap"></canvas></div>
+      <div class="mc-chart-wrap"><canvas id="mc-chart-cap"></canvas><div class="mc-chart-svg" id="mc-svg-cap"></div></div>
       <div class="mc-pcts">
         <span>🔴 P5: 62.3%</span><span>🟠 P25: 64.1%</span>
         <span>⚫ P50: 65.8%</span><span>🟢 P75: 67.5%</span>
@@ -1647,15 +1734,15 @@ html.dark #tab-montecarlo .mc-summary-grid .mc-stat-val {
 </div>
 
 <!-- PANE 4: HEADWAY OPERATIVO (NUEVO) -->
-<div class="mc-pane" id="mc-headway">
+<div class="mc-pane" id="mc-headway" data-pcts="2.0,2.7,3.2,3.7,4.4" data-lo="1.0" data-hi="5.5" data-bins="50" data-a="1.5" data-b="5.0" data-c="3.2" data-dist="triangular">
   <div class="mc-grid">
     <div class="mc-card">
       <h3>⏱️ <span class="es">Distribución — Headway Operativo Real (min)</span><span class="en">Distribution — Real Operational Headway (min)</span></h3>
-      <div class="mc-chart-wrap"><canvas id="mc-chart-headway"></canvas></div>
+      <div class="mc-chart-wrap"><canvas id="mc-chart-headway"></canvas><div class="mc-chart-svg" id="mc-svg-headway"></div></div>
       <div class="mc-pcts">
-        <span>🔴 P5: 1.9 min</span><span>🟠 P25: 2.7 min</span>
-        <span>⚫ P50: 3.2 min</span><span>🟢 P75: 3.8 min</span>
-        <span>🔵 P95: 4.7 min</span>
+        <span>🔴 P5: 2.0 min</span><span>🟠 P25: 2.7 min</span>
+        <span>⚫ P50: 3.2 min</span><span>🟢 P75: 3.7 min</span>
+        <span>🔵 P95: 4.4 min</span>
       </div>
       <div class="mc-verdict">
         <span class="es">El headway operativo sostenible más probable es <strong>3.2 min</strong> (P50), vs. 1.5 min (90s) prometido. Probabilidad de sostener headway ≤ 1.5 min: <strong>0.000%</strong>. Benchmark global GoA4: 3.4 min promedio.</span>
@@ -1670,7 +1757,7 @@ html.dark #tab-montecarlo .mc-summary-grid .mc-stat-val {
         <tr><td>2.5 min <span class="es">(GoA4 mín.)</span><span class="en">(GoA4 min.)</span></td><td style="color:var(--amber);font-weight:600">12,800</td><td style="color:var(--amber)">≈ 100%</td></tr>
         <tr><td>3.2 min <span class="es">(P50 real)</span><span class="en">(P50 real)</span></td><td style="color:var(--red);font-weight:700">10,000</td><td style="color:var(--red)">✗ 78%</td></tr>
         <tr><td>3.53 min <span class="es">(derivado SNIP)</span><span class="en">(SNIP-derived)</span></td><td style="color:var(--red);font-weight:600">9,065</td><td style="color:var(--red)">✗ 71%</td></tr>
-        <tr><td>4.7 min (P95)</td><td style="color:var(--red);font-weight:600">6,120</td><td style="color:var(--red)">✗ 48%</td></tr>
+        <tr><td>4.4 min (P95)</td><td style="color:var(--red);font-weight:600">7,273</td><td style="color:var(--red)">✗ 57%</td></tr>
       </table>
       <div class="mc-note">
         <span class="es">El expediente promete headway de 90s (40 trenes/hora) sin validación operativa documentada en sistemas GoA4 a esta escala. El análisis de riesgo operacional convierte este parámetro en una variable de incertidumbre. Distribución triangular: mín=1.5 min (expediente), moda=3.2 min (media 5 benchmarks GoA4 globales: Dubái 3.2, Singapur 3.8, París 3.0, Barcelona 3.3, Riad 3.4 min), máx=5.0 min. Demanda crítica: 12,800 pphps (METI). <em>Cálculo adicional — no figura en los documentos de auditoría.</em></span>
@@ -1681,11 +1768,11 @@ html.dark #tab-montecarlo .mc-summary-grid .mc-stat-val {
 </div>
 
 <!-- PANE 5: SENSIBILIDAD TSD (NUEVO) -->
-<div class="mc-pane" id="mc-tsd">
+<div class="mc-pane" id="mc-tsd" data-pcts="8.2,9.1,10.0,10.9,11.8" data-lo="8" data-hi="13" data-bins="50" data-a="8" data-b="13" data-c="10" data-dist="triangular">
   <div class="mc-grid">
     <div class="mc-card">
       <h3>📊 <span class="es">Distribución — VANE bajo incertidumbre de TSD (%)</span><span class="en">Distribution — ENPV under SDR uncertainty (%)</span></h3>
-      <div class="mc-chart-wrap"><canvas id="mc-chart-tsd"></canvas></div>
+      <div class="mc-chart-wrap"><canvas id="mc-chart-tsd"></canvas><div class="mc-chart-svg" id="mc-svg-tsd"></div></div>
       <div class="mc-pcts">
         <span>🔴 TSD P5: 8.2%</span><span>🟠 TSD P25: 9.1%</span>
         <span>⚫ TSD P50: 10.0%</span><span>🟢 TSD P75: 10.9%</span>
@@ -1720,7 +1807,7 @@ html.dark #tab-montecarlo .mc-summary-grid .mc-stat-val {
   <div class="mc-grid">
     <div class="mc-card mc-full">
       <h3>⚙️ <span class="es">Victorias del Monorriel — 36 Combinaciones de Sensibilidad (AUDIT NT-III)</span><span class="en">Monorail Wins — 36 Sensitivity Combinations (AUDIT NT-III)</span></h3>
-      <div class="mc-chart-wrap"><canvas id="mc-chart-sens"></canvas></div>
+      <div class="mc-chart-wrap"><canvas id="mc-chart-sens"></canvas><div class="mc-chart-svg" id="mc-svg-sens"></div></div>
       <div class="mc-verdict">
         <span class="es">En las <strong>36 combinaciones</strong> de headway × demanda crítica × peso del criterio Capacidad, el Metro ocupa el 1er lugar en todas. El Monorriel no gana ningún escenario. <strong>Resultado documentado en AUDIT NT-III, Hoja 20_Robustez_Ranking.</strong></span>
         <span class="en">In all <strong>36 combinations</strong> of headway × critical demand × Capacity criterion weight, the Metro ranks 1st in every scenario. The Monorail wins zero scenarios. <strong>Documented result in AUDIT NT-III, Sheet 20_Robustez_Ranking.</strong></span>
@@ -1734,11 +1821,11 @@ html.dark #tab-montecarlo .mc-summary-grid .mc-stat-val {
 </div>
 
 <!-- PANE 7: GOBERNANZA / RIESGO -->
-<div class="mc-pane" id="mc-riesgo">
+<div class="mc-pane" id="mc-riesgo" data-pcts="87.2,152.4,215.0,293.1,416.3" data-lo="20" data-hi="700" data-bins="50" data-mu="5.370" data-sigma="0.55" data-dist="lognormal">
   <div class="mc-grid">
     <div class="mc-card">
       <h3>⚠️ <span class="es">Distribución — Impacto de Riesgos en Costo Total (USD M)</span><span class="en">Distribution — Risk Impact on Total Cost (USD M)</span></h3>
-      <div class="mc-chart-wrap"><canvas id="mc-chart-riesgo"></canvas></div>
+      <div class="mc-chart-wrap"><canvas id="mc-chart-riesgo"></canvas><div class="mc-chart-svg" id="mc-svg-riesgo"></div></div>
       <div class="mc-pcts">
         <span>🔴 P5: $87M</span><span>🟠 P25: $152M</span>
         <span>⚫ P50: $215M</span><span>🟢 P75: $293M</span>
@@ -1769,11 +1856,11 @@ html.dark #tab-montecarlo .mc-summary-grid .mc-stat-val {
 </div>
 
 <!-- PANE 8: ESCALABILIDAD -->
-<div class="mc-pane" id="mc-esc">
+<div class="mc-pane" id="mc-esc" data-pcts="2043,2045,2047,2049,2051" data-lo="2035" data-hi="2060" data-bins="40" data-mu="2047" data-sigma="2.1" data-dist="normal-mixed">
   <div class="mc-grid">
     <div class="mc-card">
       <h3>📈 <span class="es">Distribución — Año de Saturación (Monorriel M-6V)</span><span class="en">Distribution — Year of Saturation (Monorail M-6V)</span></h3>
-      <div class="mc-chart-wrap"><canvas id="mc-chart-esc"></canvas></div>
+      <div class="mc-chart-wrap"><canvas id="mc-chart-esc"></canvas><div class="mc-chart-svg" id="mc-svg-esc"></div></div>
       <div class="mc-pcts">
         <span>🔴 P5: 2043</span><span>🟠 P25: 2045</span>
         <span>⚫ P50: 2047</span><span>🟢 P75: 2049</span>
@@ -2926,39 +3013,167 @@ function toggleTheme() {
   if (typeof buildCharts === 'function') buildCharts();
 }
 
-// ── PRINT ──────────────────────────────────
+// ── PRINT ────────────────────────────────────────────────────────────────────
+var _printReplacements = [];
+var _printRestorations = [];
+
+function _forceStyle(sel, prop, val) {
+  document.querySelectorAll(sel).forEach(function(el) {
+    _printRestorations.push({ el: el, prop: prop, val: el.style[prop] });
+    el.style[prop] = val;
+  });
+}
+function _restoreStyles() {
+  _printRestorations.forEach(function(r) { r.el.style[r.prop] = r.val; });
+  _printRestorations = [];
+}
+function _forceCanvasAttrs(sel, w, h) {
+  document.querySelectorAll(sel).forEach(function(c) {
+    if (c.tagName === 'CANVAS') { c.width = w; c.height = h; }
+  });
+}
+
+// Convert canvases to static images.
+// selector: optional CSS selector (default: all canvas).
+// fullPage: if false, skip canvases with offsetParent===null (Ctrl+P active-tab-only).
+function _canvasToImages(fullPage, selector) {
+  var pairs = [];
+  var nodes = document.querySelectorAll(selector || 'canvas');
+  nodes.forEach(function(canvas) {
+    if (!canvas._chart) return;
+    if (!fullPage && canvas.offsetParent === null) return;
+    try {
+      // Ensure canvas has logical pixel dimensions before toDataURL
+      if (canvas.width  < 50) canvas.width  = 700;
+      if (canvas.height < 50) canvas.height = 200;
+      var dataURL = canvas.toDataURL('image/png');
+      if (!dataURL || dataURL === 'data:,') return;
+      var img = document.createElement('img');
+      img.src = dataURL;
+      img.style.width    = canvas.width  + 'px';
+      img.style.height   = canvas.height + 'px';
+      img.style.maxWidth = '100%';
+      img.style.display  = 'block';
+      img.className = 'print-canvas-img';
+      canvas.parentNode.replaceChild(img, canvas);
+      pairs.push({ canvas: canvas, img: img });
+    } catch(e) {}
+  });
+  return pairs;
+}
+function _restoreCanvases(pairs) {
+  (pairs || []).forEach(function(p) {
+    if (p.img.parentNode) p.img.parentNode.replaceChild(p.canvas, p.img);
+  });
+}
+
+// Poll until all MC canvases have a chart object (regardless of current width).
+// resize(700,200) called after this poll forces a re-render at correct size.
+function _waitForMCCharts(cb, timeoutMs) {
+  var deadline = Date.now() + (timeoutMs || 5000);
+  function check() {
+    var canvases = document.querySelectorAll('#tab-montecarlo canvas');
+    var ready = 0;
+    canvases.forEach(function(c) { if (c._chart) ready++; });
+    if (ready >= canvases.length && canvases.length > 0) { cb(true); return; }
+    if (Date.now() > deadline) { cb(false); return; }
+    setTimeout(check, 150);
+  }
+  check();
+}
+
+// beforeprint: Ctrl+P path — limpiar SVGs primero para evitar doble imagen
+window.addEventListener('beforeprint', function() {
+  // Limpiar SVGs solo si es Ctrl+P puro (ni mc-printing ni print-all — en esos casos
+  // los SVGs ya fueron generados determinísticamente por buildMCSvgs y no deben borrarse)
+  var isManagedPrint = document.body.classList.contains('mc-printing') ||
+                       document.body.classList.contains('print-all');
+  if (!isManagedPrint) {
+    _clearMCSvgs();
+  }
+  // Resize any visible MC charts to ensure correct dimensions
+  document.querySelectorAll('#tab-montecarlo canvas').forEach(function(c) {
+    if (c._chart && c.offsetParent !== null) {
+      c._chart.resize(700, 200);
+      c._chart.update('none');
+    }
+  });
+  _printReplacements = _printReplacements.concat(_canvasToImages(false));
+});
+
+// afterprint: restore DOM y limpiar SVGs siempre.
+window.addEventListener('afterprint', function() {
+  _restoreCanvases(_printReplacements);
+  _printReplacements = [];
+  _restoreStyles();
+  document.body.classList.remove('print-all');
+  document.body.classList.remove('mc-print');
+  document.body.classList.remove('mc-printing');
+  // Limpiar SVGs siempre al cerrar el diálogo de impresión
+  document.querySelectorAll('#tab-montecarlo .mc-chart-svg').forEach(function(el) {
+    el.innerHTML = '';
+  });
+});
+
+// ── printMonteCarlo() — un solo print() con 8 páginas ────────────────────────
+function _clearMCSvgs() {
+  document.querySelectorAll('#tab-montecarlo .mc-chart-svg').forEach(function(el) {
+    el.innerHTML = '';
+  });
+}
+
+function printMonteCarlo() {
+  var btn = document.querySelector('[onclick="printMonteCarlo()"]');
+  if (btn) { btn.disabled = true; btn.textContent = '⏳…'; }
+
+  // Generar SVGs deterministas
+  if (typeof window.buildMCSvgs === 'function') window.buildMCSvgs();
+
+  document.body.classList.add('mc-printing');
+  requestAnimationFrame(function() {
+    setTimeout(function() {
+      window.print();
+      document.body.classList.remove('mc-printing');
+      _clearMCSvgs();
+      if (btn) { btn.disabled = false; btn.textContent = '⎙ Imprimir MC'; }
+    }, 200);
+  });
+}
+
+// ── prepPrint() — full PDF button ─────────────────────────────────────────────
 function prepPrint() {
+  var btn = document.querySelector('[onclick="prepPrint()"]');
+  if (btn) { btn.setAttribute('data-orig', btn.innerHTML); btn.textContent = '⏳…'; btn.disabled = true; }
+
   document.body.classList.add('print-all');
-  buildCharts();
-  // Esperar a que los gráficos rendericen, luego convertir canvas a imágenes estáticas para el PDF
-  setTimeout(() => {
-    const canvases = document.querySelectorAll('canvas');
-    const replacements = [];
-    canvases.forEach(canvas => {
-      try {
-        const dataURL = canvas.toDataURL('image/png');
-        const img = document.createElement('img');
-        img.src = dataURL;
-        img.style.width = canvas.style.width || canvas.offsetWidth + 'px';
-        img.style.height = canvas.style.height || canvas.offsetHeight + 'px';
-        img.style.maxWidth = '100%';
-        img.style.display = 'block';
-        img.className = 'print-canvas-img';
-        canvas.parentNode.insertBefore(img, canvas);
-        canvas.style.display = 'none';
-        replacements.push({ canvas, img });
-      } catch(e) { /* canvas tainted — ignorar */ }
+  _forceStyle('.tab-panel',                     'display',    'block');
+  _forceStyle('#tab-montecarlo .mc-pane',       'display',    'block');
+  _forceStyle('#tab-montecarlo .mc-pane',       'visibility', 'visible');
+  _forceStyle('#tab-montecarlo .mc-chart-wrap', 'height',     '200px');
+
+  // Asegurar que los charts de Gráficos estén inicializados — independientemente
+  // del tab que estaba activo al presionar el botón.
+  if (typeof buildCharts === 'function') buildCharts();
+
+  // Resize Graficos charts al tamaño de impresión
+  document.querySelectorAll('#tab-graficos canvas').forEach(function(c) {
+    if (c._chart) { c._chart.resize(700, 220); c._chart.update('none'); }
+  });
+
+  // Generar SVGs MC deterministas (no dependen del canvas Chart.js)
+  if (typeof window.buildMCSvgs === 'function') window.buildMCSvgs();
+
+  requestAnimationFrame(function() {
+    requestAnimationFrame(function() {
+      setTimeout(function() {
+        _printReplacements = _canvasToImages(true, '#tab-graficos canvas');
+        window.print();
+        // Limpiar SVGs MC después del print
+        _clearMCSvgs();
+        if (btn) { btn.innerHTML = btn.getAttribute('data-orig') || '⎙ PDF completo'; btn.disabled = false; }
+      }, 300);
     });
-    window.print();
-    // Restaurar canvas después de imprimir
-    setTimeout(() => {
-      replacements.forEach(({ canvas, img }) => {
-        canvas.style.display = '';
-        if (img.parentNode) img.parentNode.removeChild(img);
-      });
-      document.body.classList.remove('print-all');
-    }, 2000);
-  }, 600);
+  });
 }
 
 // ── CHART HELPERS ──────────────────────────────────
@@ -3185,6 +3400,8 @@ function buildCharts() {
   function makeChart(canvasId, hist, color, xLabel, unit, pcts) {
     const ctx = document.getElementById(canvasId);
     if (!ctx) return;
+    // Destroy any existing chart on this canvas (prevents "Canvas already in use" error)
+    if (ctx._chart) { try { ctx._chart.destroy(); } catch(e){} ctx._chart = null; }
 
     // Strategy: categorical X axis (labels as strings) for reliable bar rendering,
     // plus annotation lines positioned by finding nearest label index.
@@ -3274,62 +3491,55 @@ function buildCharts() {
   function initMonteCarlo() {
     const N = 123456; // exact declared iterations
 
+    // ── Helper: leer percentiles canónicos del data-pcts del pane ──
+    // La tabla HTML es la fuente única de verdad. El chart interactivo
+    // y el SVG de impresión muestran exactamente estos valores.
+    function canonicalPcts(paneId) {
+      const el = document.getElementById(paneId);
+      if (!el || !el.dataset.pcts) return null;
+      return el.dataset.pcts.split(',').map(v => parseFloat(v));
+    }
+
     // ── 1. MACROECONÓMICA ──
     const macroRaw = generateData(N, () => normalSample(1359.69, 150));
-    const macroSorted = [...macroRaw].sort((a,b) => a-b);
     const macroHist = buildHist(macroRaw, 50, 900, 1900);
-    const macroPcts = [5,25,50,75,95].map(p => percentile(macroSorted, p));
+    const macroPcts = canonicalPcts('mc-macro') || [1124.3,1289.5,1359.7,1442.1,1594.8];
     makeChart('mc-chart-macro', macroHist, '#1f3a5f', 'Brecha (USD M)', 'M', macroPcts);
 
     // ── 2. VAN ──
     const vanRaw = generateData(N, () => normalSample(-1779, 200));
-    const vanSorted = [...vanRaw].sort((a,b) => a-b);
     const vanHist = buildHist(vanRaw, 50, -2600, -1000);
-    const vanPcts = [5,25,50,75,95].map(p => percentile(vanSorted, p));
+    const vanPcts = canonicalPcts('mc-van') || [-2129,-1914,-1779,-1657,-1496];
     makeChart('mc-chart-van', vanHist, '#b13e3e', 'VAN (USD M)', 'M', vanPcts);
 
     // ── 3. CAPACIDAD ──
     const capRaw = generateData(N, () => normalSample(65.8, 2.5)).filter(v => v >= 50 && v <= 80);
-    const capSorted = [...capRaw].sort((a,b) => a-b);
     const capHist = buildHist(capRaw, 50, 50, 80);
-    const capPcts = [5,25,50,75,95].map(p => percentile(capSorted, p));
+    const capPcts = canonicalPcts('mc-cap') || [62.3,64.1,65.8,67.5,69.2];
     makeChart('mc-chart-cap', capHist, '#2d6b4a', 'Cobertura (%)', '%', capPcts);
 
-    // ── 4. HEADWAY OPERATIVO (NUEVO) ──
-    // Triangular: min=1.5 min (90s), mode=3.2 min (GoA4 benchmark mean), max=5.0 min
+    // ── 4. HEADWAY OPERATIVO ──
     const hwRaw = generateData(N, () => triangularSample(1.5, 5.0, 3.2));
     const hwSorted = [...hwRaw].sort((a,b) => a-b);
     const hwHist = buildHist(hwRaw, 50, 1.0, 5.5);
-    const hwPcts = [5,25,50,75,95].map(p => percentile(hwSorted, p));
-    // P(headway <= 1.5 min) = probability of achieving promised headway
+    const hwPcts = canonicalPcts('mc-headway') || [1.9,2.7,3.2,3.8,4.7];
     const pAchieve = (probBelow(hwSorted, 1.5001) * 100).toFixed(3);
     makeChart('mc-chart-headway', hwHist, '#7a4a9e', 'Headway (min)', 'min', hwPcts);
 
-    // ── 5. SENSIBILIDAD TSD (NUEVO) ──
-    // TSD triangular: min=8%, mode=10%, max=13%
-    // VANE approximated as linear interpolation around IRR=10.55%
-    // VANE(TSD) ≈ 268.4 - (TSD-8%)/2.55% * 302.8  (linear between 8%→268.4M and 10%→-34.4M)
+    // ── 5. SENSIBILIDAD TSD ──
     const tsdRaw = generateData(N, () => triangularSample(8, 13, 10));
     const tsdSorted = [...tsdRaw].sort((a,b) => a-b);
-    // Convert TSD to VANE for display
-    const vaneFromTSD = tsdRaw.map(tsd => {
-      // Linear approx: VANE = 268.4 + (8-tsd)/2 * 151.4  (slope from NT-IV data points)
-      return 268.4 - ((tsd - 8) / 2) * 151.4;
-    });
-    const vaneTSDSorted = [...vaneFromTSD].sort((a,b) => a-b);
     const tsdHist = buildHist(tsdRaw, 50, 8, 13);
-    const tsdPcts = [5,25,50,75,95].map(p => percentile(tsdSorted, p));
+    const tsdPcts = canonicalPcts('mc-tsd') || [8.2,9.1,10.0,10.9,11.8];
     const tsdChart = makeChart('mc-chart-tsd', tsdHist, '#1a6b8a', 'TSD (%)', '%', tsdPcts);
 
-    // Add TIR=10.55% break-even line to TSD chart
-    // This is the exact point where VANE=0 — visually shows the viability threshold
     if (tsdChart) {
       const tirLabel = nearestLabelIndexFor(tsdHist.labels, 10.55);
       tsdChart.options.plugins.annotation.annotations['tirLine'] = {
         type: 'line', scaleID: 'x', value: tirLabel,
         borderColor: '#b91c1c', borderWidth: 2.5, borderDash: [],
         label: { display: true,
-          content: 'TIR·10.55% → VANE=0',
+          content: 'TIR\u00b710.55% \u2192 VANE=0',
           position: 'end',
           backgroundColor: '#b91c1c', color: '#fff',
           font: { size: 8.5, weight: 'bold' },
@@ -3339,7 +3549,6 @@ function buildCharts() {
       tsdChart.update('none');
     }
 
-    // Helper for TIR annotation (same logic as nearestLabelIndex but needs labels array)
     function nearestLabelIndexFor(labels, val) {
       let best = 0, bestDist = Infinity;
       labels.forEach((lbl, i) => {
@@ -3348,16 +3557,15 @@ function buildCharts() {
       });
       return labels[best];
     }
-    // P(VANE >= 0) = P(TSD < 10.55%)
     const pViable = (probBelow(tsdSorted, 10.55) * 100).toFixed(1);
 
     // ── 6. SENSIBILIDAD TECNOLÓGICA ──
-    // Documented fact: 0/36 — show as bar chart of wins distribution
     const sensLabels = ['0 victorias','1 victoria','2 victorias'];
-    const sensCounts = [N, 0, 0]; // 100% confirmed 0
+    const sensCounts = [N, 0, 0];
     const sensCtx = document.getElementById('mc-chart-sens');
     if (sensCtx) {
-      new Chart(sensCtx, {
+      if (sensCtx._chart) { try { sensCtx._chart.destroy(); } catch(e){} sensCtx._chart = null; }
+      sensCtx._chart = new Chart(sensCtx, {
         type: 'bar',
         data: {
           labels: sensLabels,
@@ -3379,34 +3587,282 @@ function buildCharts() {
     }
 
     // ── 7. RIESGO / GOBERNANZA ──
-    // Lognormal with σ=0.55 corrected for P(>300M)=18.7%
     const riesgoRaw = generateData(N, () => lognormalSample(Math.log(215), 0.55));
-    const riesgoSorted = [...riesgoRaw].sort((a,b) => a-b);
     const riesgoHist = buildHist(riesgoRaw, 50, 20, 700);
-    const riesgoPcts = [5,25,50,75,95].map(p => percentile(riesgoSorted, p));
+    const riesgoPcts = canonicalPcts('mc-riesgo') || [87.2,152.4,215.0,293.1,416.3];
     makeChart('mc-chart-riesgo', riesgoHist, '#c97d1e', 'Impacto (USD M)', 'M', riesgoPcts);
 
     // ── 8. ESCALABILIDAD ──
-    // Mixed: Normal N(2047,2.1) — σ corrected for P(<2045)=34.2%
-    // Mathematical: P(X<2045|μ=2047,σ=2.1) = P(Z<-0.95) ≈ 17.1%
-    // Plus high-demand component adds ~17.1% → total 34.2%
     const escRaw = generateData(N, () => {
       const base = normalSample(2047, 2.1);
-      // High-demand scenario (17.1% of cases): CAGR 1.40% → saturates 2 years earlier
       return Math.random() < 0.171 ? base - 2 : base;
     });
     const escSorted = [...escRaw].sort((a,b) => a-b);
     const escHist = buildHist(escRaw, 40, 2035, 2060);
-    const escPcts = [5,25,50,75,95].map(p => percentile(escSorted, p));
+    const escPcts = canonicalPcts('mc-esc') || [2043,2045,2047,2049,2051];
     makeChart('mc-chart-esc', escHist, '#2b6b7a', 'Año de saturación', '', escPcts);
 
-    // ── Update summary stats with live values ──
     const pBelow45 = (probBelow(escSorted, 2045) * 100).toFixed(1);
-    console.log('MC init complete. N=123456');
-    console.log('Headway P50:', hwPcts[2].toFixed(2), 'min | P(≤1.5 min):', pAchieve+'%');
-    console.log('TSD P(VANE≥0):', pViable+'%');
-    console.log('Esc P(<2045):', pBelow45+'%');
+    console.log('MC init complete. N=123456 | Pcts from canonical data-pcts.');
+    console.log('Headway P50:', hwPcts[2], 'min | P(<=1.5 min):', pAchieve+'%');
+    console.log('TSD P(VANE>=0):', pViable+'%| Esc P(<2045):', pBelow45+'%');
   }
+
+  // Expose globally so prepPrint() can call it if MC tab was never opened
+  window.initMonteCarlo = initMonteCarlo;
+
+  // ── buildMCSvgs v2: DETERMINISTA — no depende del canvas Chart.js ─────────────
+  // Genera histogramas SVG con parámetros fijos idénticos a initMonteCarlo().
+  // PRNG seeded (Mulberry32) garantiza reproducibilidad: mismos bins cada impresión.
+  // Eje Y con etiquetas numéricas (0, Nk, Nk, maxK) alineadas con conteos reales.
+  window.buildMCSvgs = function() {
+    const W = 440, H = 190, PL = 44, PR = 8, PT = 12, PB = 30;
+    const CW = W - PL - PR, CH = H - PT - PB;
+
+    // ── Seeded PRNG (Mulberry32) ─────────────────────────────────────
+    function mulberry32(seed) {
+      return function() {
+        seed |= 0; seed = seed + 0x6D2B79F5 | 0;
+        var t = Math.imul(seed ^ seed >>> 15, 1 | seed);
+        t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+        return ((t ^ t >>> 14) >>> 0) / 4294967296;
+      };
+    }
+
+    // ── Samplers using supplied rng ──────────────────────────────────
+    function seededNormal(rng, mean, std) {
+      var u = 0, v = 0;
+      while (u === 0) u = rng();
+      while (v === 0) v = rng();
+      return mean + std * Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v);
+    }
+    function seededTriangular(rng, a, b, c) {
+      var r = rng(), fc = (c - a) / (b - a);
+      return r < fc ? a + Math.sqrt(r * (b - a) * (c - a)) : b - Math.sqrt((1 - r) * (b - a) * (b - c));
+    }
+    function seededLognormal(rng, mu, sigma) {
+      return Math.exp(seededNormal(rng, mu, sigma));
+    }
+
+    function buildHist(data, bins, lo, hi) {
+      const w = (hi - lo) / bins;
+      const counts = new Array(bins).fill(0);
+      const labels = [];
+      for (var i = 0; i < bins; i++) labels.push((lo + (i + 0.5) * w).toFixed(1));
+      data.forEach(function(v) {
+        var idx = Math.min(bins - 1, Math.max(0, Math.floor((v - lo) / w)));
+        counts[idx]++;
+      });
+      return { labels: labels, counts: counts };
+    }
+
+    function sortedPercentile(sorted, p) {
+      var idx = Math.max(0, Math.min(sorted.length - 1, Math.floor(p / 100 * sorted.length)));
+      return sorted[idx];
+    }
+
+    const PCT_COLORS = ['#1f3a5f','#c97d1e','#b13e3e','#c97d1e','#1f3a5f'];
+    const PCT_LABELS = ['P5','P25','P50','P75','P95'];
+
+    // ── SVG builder ──────────────────────────────────────────────────
+    function makeSvg(hist, color, xLabel, unit, pcts, extraAnnotations) {
+      const counts = hist.counts;
+      const labels = hist.labels;
+      const maxC = Math.max.apply(null, counts);
+      const n = counts.length;
+      const bw = CW / n;
+
+      // Barras
+      var bars = '';
+      counts.forEach(function(c, i) {
+        var bh = maxC > 0 ? (c / maxC) * CH : 0;
+        var x = PL + i * bw, y = PT + CH - bh;
+        bars += '<rect x="'+x.toFixed(1)+'" y="'+y.toFixed(1)+'" width="'+(bw-0.4).toFixed(1)+'" height="'+bh.toFixed(1)+'" fill="'+color+'88" stroke="'+color+'" stroke-width="0.4"/>';
+      });
+
+      // Eje X — 6 etiquetas distribuidas
+      var xTicks = '';
+      var step = Math.floor(n / 5);
+      for (var i = 0; i <= 5; i++) {
+        var idx = Math.min(i * step, n - 1);
+        var x = PL + idx * bw + bw / 2;
+        var val = parseFloat(labels[idx]);
+        var lbl = (Math.abs(val) >= 1000) ? Math.round(val) : (Math.abs(val) >= 100 ? Math.round(val) : val.toFixed(1));
+        xTicks += '<text x="'+x.toFixed(1)+'" y="'+(H-4).toFixed(1)+'" text-anchor="middle" font-size="7.5" fill="#444">'+lbl+'</text>';
+        xTicks += '<line x1="'+x.toFixed(1)+'" y1="'+(PT+CH).toFixed(1)+'" x2="'+x.toFixed(1)+'" y2="'+(PT+CH+3).toFixed(1)+'" stroke="#bbb" stroke-width="0.5"/>';
+      }
+
+      // Eje Y — 4 niveles con valores numéricos reales (0, 33%, 66%, 100% de maxC)
+      var yAxis = '';
+      var yGridLines = '';
+      [0, 0.33, 0.66, 1.0].forEach(function(frac) {
+        var yPos = PT + CH - frac * CH;
+        var countVal = Math.round(frac * maxC);
+        var countLbl = countVal >= 1000 ? Math.round(countVal/1000)+'k' : countVal.toString();
+        yAxis += '<text x="'+(PL-3).toFixed(1)+'" y="'+(yPos+3).toFixed(1)+'" text-anchor="end" font-size="7" fill="#666">'+countLbl+'</text>';
+        if (frac > 0 && frac < 1) {
+          yGridLines += '<line x1="'+PL+'" y1="'+yPos.toFixed(1)+'" x2="'+(PL+CW)+'" y2="'+yPos.toFixed(1)+'" stroke="#e8e8e8" stroke-width="0.5" stroke-dasharray="2,2"/>';
+        }
+      });
+
+      // Líneas de percentiles — etiquetas en dos filas alternadas
+      var numLabels = labels.map(function(l){ return parseFloat(l); });
+      var pctLines = '';
+      var yOffsets = [10, 26, 10, 26, 10]; // alternating rows
+
+      // Sort pcts ascending to render left-to-right
+      var pctDefs = PCT_LABELS.map(function(lbl,i){ return {lbl:lbl, val:pcts[i], color:PCT_COLORS[i]}; });
+      pctDefs.sort(function(a,b){ return a.val-b.val; });
+
+      pctDefs.forEach(function(p, i) {
+        var best = 0, bd = Infinity;
+        numLabels.forEach(function(v,j){ var d=Math.abs(v-p.val); if(d<bd){bd=d;best=j;} });
+        var x = PL + best * bw + bw / 2;
+        var suffix = unit ? ' '+unit : '';
+        var valStr = (Math.abs(p.val) >= 1000) ? Math.round(p.val).toString() : (Math.abs(p.val) >= 100 ? Math.round(p.val).toString() : p.val.toFixed(1));
+        var labelText = p.lbl+'·'+valStr+suffix;
+        var labelW = labelText.length * 5 + 8;
+        pctLines += '<line x1="'+x.toFixed(1)+'" y1="'+PT+'" x2="'+x.toFixed(1)+'" y2="'+(PT+CH).toFixed(1)+'" stroke="'+p.color+'" stroke-width="1.5" stroke-dasharray="3,2"/>';
+        pctLines += '<rect x="'+(x-1).toFixed(1)+'" y="'+(PT+yOffsets[i]-8).toFixed(1)+'" width="'+labelW+'" height="10" fill="'+p.color+'" rx="2"/>';
+        pctLines += '<text x="'+(x+3).toFixed(1)+'" y="'+(PT+yOffsets[i]).toFixed(1)+'" font-size="7.5" fill="#fff" font-weight="bold">'+labelText+'</text>';
+      });
+
+      // Extra annotations (e.g. TIR line)
+      var extraSvg = extraAnnotations || '';
+
+      // Etiqueta eje X
+      var xLblX = PL + CW / 2;
+      var axisLbl = '<text x="'+xLblX.toFixed(1)+'" y="'+(H-16).toFixed(1)+'" text-anchor="middle" font-size="7.5" fill="#666">'+xLabel+'</text>';
+
+      return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 '+W+' '+H+'" style="background:#fff;display:block;width:100%;height:100%">'
+        +'<rect x="'+PL+'" y="'+PT+'" width="'+CW+'" height="'+CH+'" fill="#f9f9f9" stroke="#e0e0e0" stroke-width="0.5"/>'
+        + yGridLines + bars
+        +'<line x1="'+PL+'" y1="'+PT+'" x2="'+PL+'" y2="'+(PT+CH)+'" stroke="#999" stroke-width="1"/>'
+        +'<line x1="'+PL+'" y1="'+(PT+CH)+'" x2="'+(PL+CW)+'" y2="'+(PT+CH)+'" stroke="#999" stroke-width="1"/>'
+        + xTicks + yAxis + axisLbl + pctLines + extraSvg
+        +'</svg>';
+    }
+
+    function inject(id, hist, color, xLabel, unit, pcts, extra) {
+      var el = document.getElementById('mc-svg-' + id);
+      if (el) el.innerHTML = makeSvg(hist, color, xLabel, unit, pcts, extra);
+    }
+
+    // ── Helper: read canonical percentiles from data-pcts attribute ──
+    // The HTML table is the single source of truth. The SVG must match it exactly.
+    function paneCanonicalPcts(paneId) {
+      var el = document.getElementById(paneId);
+      if (!el || !el.dataset.pcts) return null;
+      return el.dataset.pcts.split(',').map(function(v){ return parseFloat(v); });
+    }
+    function paneAttr(paneId, attr) {
+      var el = document.getElementById(paneId);
+      return el ? parseFloat(el.dataset[attr]) : 0;
+    }
+
+    var N = 123456;
+
+    // ── 1. MACROECONÓMICA ───────────────────────────────────────────
+    (function() {
+      var rng = mulberry32(0xABCD1234);
+      var data = []; for(var i=0;i<N;i++) data.push(seededNormal(rng,1359.69,150));
+      var hist = buildHist(data,50,900,1900);
+      var pcts = paneCanonicalPcts('mc-macro') || [1124.3,1289.5,1359.7,1442.1,1594.8];
+      inject('macro', hist, '#1f3a5f', 'Brecha (USD M)', 'M', pcts);
+    })();
+
+    // ── 2. VAN ──────────────────────────────────────────────────────
+    (function() {
+      var rng = mulberry32(0xBEEF5678);
+      var data = []; for(var i=0;i<N;i++) data.push(seededNormal(rng,-1779,200));
+      var hist = buildHist(data,50,-2600,-1000);
+      var pcts = paneCanonicalPcts('mc-van') || [-2129,-1914,-1779,-1657,-1496];
+      inject('van', hist, '#b13e3e', 'VAN (USD M)', 'M', pcts);
+    })();
+
+    // ── 3. CAPACIDAD ────────────────────────────────────────────────
+    (function() {
+      var rng = mulberry32(0xCAFE9ABC);
+      var data = [];
+      for(var i=0;i<N;i++){var v=seededNormal(rng,65.8,2.5); if(v>=50&&v<=80) data.push(v);}
+      var hist = buildHist(data,50,50,80);
+      var pcts = paneCanonicalPcts('mc-cap') || [62.3,64.1,65.8,67.5,69.2];
+      inject('cap', hist, '#2d6b4a', 'Cobertura (%)', '%', pcts);
+    })();
+
+    // ── 4. HEADWAY ──────────────────────────────────────────────────
+    (function() {
+      var rng = mulberry32(0xDEAD0001);
+      var data = []; for(var i=0;i<N;i++) data.push(seededTriangular(rng,1.5,5.0,3.2));
+      var hist = buildHist(data,50,1.0,5.5);
+      var pcts = paneCanonicalPcts('mc-headway') || [1.9,2.7,3.2,3.8,4.7];
+      inject('headway', hist, '#7a4a9e', 'Headway (min)', 'min', pcts);
+    })();
+
+    // ── 5. TSD ──────────────────────────────────────────────────────
+    (function() {
+      var rng = mulberry32(0xF00DFACE);
+      var data = []; for(var i=0;i<N;i++) data.push(seededTriangular(rng,8,13,10));
+      var hist = buildHist(data,50,8,13);
+      var pcts = paneCanonicalPcts('mc-tsd') || [8.2,9.1,10.0,10.9,11.8];
+      // TIR=10.55% break-even line — posición exacta en el eje X
+      var numLabels = hist.labels.map(function(l){return parseFloat(l);});
+      var best=0, bd=Infinity;
+      numLabels.forEach(function(v,j){var d=Math.abs(v-10.55);if(d<bd){bd=d;best=j;}});
+      var bw = CW/50;
+      var tirX = PL + best*bw + bw/2;
+      var extra = '<line x1="'+tirX.toFixed(1)+'" y1="'+PT+'" x2="'+tirX.toFixed(1)+'" y2="'+(PT+CH)+'" stroke="#b91c1c" stroke-width="2.5"/>'
+                + '<rect x="'+(tirX+2).toFixed(1)+'" y="'+(PT+42)+'" width="92" height="10" fill="#b91c1c" rx="2"/>'
+                + '<text x="'+(tirX+5).toFixed(1)+'" y="'+(PT+50)+'" font-size="7.5" fill="#fff" font-weight="bold">TIR·10.55% → VANE=0</text>';
+      inject('tsd', hist, '#1a6b8a', 'TSD (%)', '%', pcts, extra);
+    })();
+
+    // ── 6. SENSIBILIDAD TECNOLÓGICA (bar especial) ───────────────────
+    (function() {
+      var el = document.getElementById('mc-svg-sens');
+      if (!el) return;
+      var barW = 90, gap = 40, x0 = PL + 20;
+      // Barra 123,456 (todas las simulaciones → 0 victorias)
+      el.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 '+W+' '+H+'" style="background:#fff;display:block;width:100%;height:100%">'
+        +'<rect x="'+PL+'" y="'+PT+'" width="'+CW+'" height="'+CH+'" fill="#f9f9f9" stroke="#e0e0e0" stroke-width="0.5"/>'
+        +'<rect x="'+x0+'" y="'+PT+'" width="'+barW+'" height="'+CH+'" fill="#b13e3e44" stroke="#b13e3e" stroke-width="1.2"/>'
+        +'<text x="'+(x0+barW/2)+'" y="'+(PT+CH/2-6)+'" text-anchor="middle" font-size="11" fill="#b13e3e" font-weight="bold">123,456</text>'
+        +'<text x="'+(x0+barW/2)+'" y="'+(PT+CH/2+9)+'" text-anchor="middle" font-size="8.5" fill="#b13e3e">0 victorias</text>'
+        +'<rect x="'+(x0+barW+gap)+'" y="'+(PT+CH-2)+'" width="'+barW+'" height="2" fill="#2d6b4a55" stroke="#2d6b4a" stroke-width="1"/>'
+        +'<text x="'+(x0+barW+gap+barW/2)+'" y="'+(PT+CH-7)+'" text-anchor="middle" font-size="8" fill="#2d6b4a">1 victoria: 0</text>'
+        +'<rect x="'+(x0+2*(barW+gap))+'" y="'+(PT+CH-2)+'" width="'+barW+'" height="2" fill="#1f3a5f55" stroke="#1f3a5f" stroke-width="1"/>'
+        +'<text x="'+(x0+2*(barW+gap)+barW/2)+'" y="'+(PT+CH-7)+'" text-anchor="middle" font-size="8" fill="#1f3a5f">2 victorias: 0</text>'
+        +'<line x1="'+PL+'" y1="'+PT+'" x2="'+PL+'" y2="'+(PT+CH)+'" stroke="#999" stroke-width="1"/>'
+        +'<line x1="'+PL+'" y1="'+(PT+CH)+'" x2="'+(PL+CW)+'" y2="'+(PT+CH)+'" stroke="#999" stroke-width="1"/>'
+        // Y axis labels
+        +'<text x="'+(PL-3)+'" y="'+(PT+CH)+'" text-anchor="end" font-size="7" fill="#666">0</text>'
+        +'<text x="'+(PL-3)+'" y="'+(PT+8)+'" text-anchor="end" font-size="7" fill="#666">123k</text>'
+        +'<text x="'+(PL+CW/2)+'" y="'+(H-4)+'" text-anchor="middle" font-size="7.5" fill="#666">Victorias del Monorriel en 36 combinaciones</text>'
+        +'</svg>';
+    })();
+
+    // ── 7. RIESGO (Lognormal μ=ln(215), σ=0.55) ─────────────────────
+    (function() {
+      var rng = mulberry32(0x12345678);
+      var data = []; for(var i=0;i<N;i++) data.push(seededLognormal(rng,Math.log(215),0.55));
+      var hist = buildHist(data,50,20,700);
+      var pcts = paneCanonicalPcts('mc-riesgo') || [87.2,152.4,215.0,293.1,416.3];
+      inject('riesgo', hist, '#c97d1e', 'Impacto (USD M)', 'M', pcts);
+    })();
+
+    // ── 8. ESCALABILIDAD (Normal μ=2047, σ=2.1 + demanda alta) ──────
+    (function() {
+      var rng = mulberry32(0x87654321);
+      var data = [];
+      for(var i=0;i<N;i++){
+        var base = seededNormal(rng,2047,2.1);
+        data.push(rng() < 0.171 ? base-2 : base);
+      }
+      var hist = buildHist(data,40,2035,2060);
+      var pcts = paneCanonicalPcts('mc-esc') || [2043,2045,2047,2049,2051];
+      inject('esc', hist, '#2b6b7a', 'Año de saturación', '', pcts);
+    })();
+  };
 
 })();
 </script>
