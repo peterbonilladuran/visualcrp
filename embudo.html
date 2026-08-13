@@ -529,6 +529,14 @@ html.light #tab-yqp .tf-original { color: var(--muted); }
     <button class="btn-ctrl" onclick="prepPrint()">
       <span class="es">⎙ PDF completo</span><span class="en">⎙ Full PDF</span>
     </button>
+    <a class="btn-ctrl" href="https://tinyurl.com/ycyyjj9j" target="_blank" download
+       style="text-decoration:none; display:inline-flex; align-items:center; gap:4px;">
+      <span class="es">📄 ES</span><span class="en">📄 ES</span>
+    </a>
+    <a class="btn-ctrl" href="https://tinyurl.com/843attc5" target="_blank" download
+       style="text-decoration:none; display:inline-flex; align-items:center; gap:4px;">
+      <span class="es">📄 EN</span><span class="en">📄 EN</span>
+    </a>
   </div>
 </header>
 
@@ -3427,19 +3435,16 @@ function buildCharts() {
     const numLabels = labels.map(l => parseFloat(l));
 
     // For each percentile, find the label index closest to the pct value.
-    // Returns INTEGER INDEX — Chart.js categorical axis positions annotations
-    // unambiguously by index. Returning a label string causes problems when
-    // two bins share the same rounded label (e.g. bins 29 and 30 both "3.7"):
-    // Chart.js falls back to treating the string as a numeric index, placing
-    // P75 at position ~3.7 in the array (bin 3-4, ~1.3 min) instead of ~3.7 min.
-    // On tie, prefer the higher index (right bin): P75=3.745 → bin 30, not bin 29.
+    // On tie (two bins share the same rounded label), prefer the higher index
+    // (right bin) so that e.g. P75=3.745 lands on bin 30 (midpoint 3.745)
+    // rather than bin 29 (midpoint 3.655), both of which round to "3.7".
     function nearestLabelIndex(val) {
       let best = 0, bestDist = Infinity;
       numLabels.forEach((v, i) => {
         const d = Math.abs(v - val);
         if (d < bestDist || (d === bestDist && i > best)) { bestDist = d; best = i; }
       });
-      return best; // INTEGER INDEX — unambiguous on categorical x-axis
+      return labels[best]; // return the label string for scaleID:'x' categorical
     }
 
     const pctColors = ['#1f3a5f','#c97d1e','#b13e3e','#c97d1e','#1f3a5f'];
@@ -3577,9 +3582,9 @@ function buildCharts() {
       let best = 0, bestDist = Infinity;
       labels.forEach((lbl, i) => {
         const d = Math.abs(parseFloat(lbl) - val);
-        if (d < bestDist || (d === bestDist && i > best)) { bestDist = d; best = i; }
+        if (d < bestDist) { bestDist = d; best = i; }
       });
-      return best; // INTEGER INDEX — avoids duplicate-label ambiguity (TSD has 11 dupes)
+      return labels[best];
     }
     const pViable = (probBelow(tsdSorted, 10.55) * 100).toFixed(1);
 
