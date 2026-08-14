@@ -1612,7 +1612,7 @@ html.dark #tab-montecarlo .mc-summary-grid .mc-stat-val {
   <div class="mc-stat"><div class="mc-stat-val">0.000%</div><div class="mc-stat-lbl"><span class="es">Prob. cobertura ≥ 100%</span><span class="en">Prob. coverage ≥ 100%</span></div></div>
   <div class="mc-stat"><div class="mc-stat-val">0.000%</div><div class="mc-stat-lbl"><span class="es">Prob. headway 90s sostenible</span><span class="en">Prob. 90s headway sustainable</span></div></div>
   <div class="mc-stat"><div class="mc-stat-val">18.7%</div><div class="mc-stat-lbl"><span class="es">Prob. riesgo &gt; USD 300M</span><span class="en">Prob. risk &gt; USD 300M</span></div></div>
-  <div class="mc-stat"><div class="mc-stat-val">34.2%</div><div class="mc-stat-lbl"><span class="es">Prob. saturación antes 2045</span><span class="en">Prob. saturation before 2045</span></div></div>
+  <div class="mc-stat"><div class="mc-stat-val" id="kpi-esc-prob">22.7%</div><div class="mc-stat-lbl"><span class="es">Prob. saturación antes 2045</span><span class="en">Prob. saturation before 2045</span></div></div>
 </div>
 
 <!-- Internal sub-tabs -->
@@ -1753,19 +1753,19 @@ html.dark #tab-montecarlo .mc-summary-grid .mc-stat-val {
         <span>🔵 P95: 4.4 min</span>
       </div>
       <div class="mc-verdict">
-        <span class="es">El headway operativo sostenible más probable es <strong><span id="vd-hw-p50">3.2</span> min</strong> (P50), vs. 1.5 min (90s) prometido. Probabilidad de sostener headway ≤ 1.5 min: <strong><span id="vd-hw-prob">0.000%</span></strong>. Benchmark global GoA4: 3.4 min promedio.</span>
-        <span class="en">Most likely sustainable headway is <strong><span id="vd-hw-p50-en">3.2</span> min</strong> (P50) vs. promised 1.5 min (90s). Probability of sustaining ≤1.5 min headway: <strong><span id="vd-hw-prob-en">0.000%</span></strong>. Global GoA4 benchmark: 3.4 min average.</span>
+        <span class="es">El headway operativo sostenible más probable es <strong><span id="vd-hw-p50">3.2</span> min</strong> (P50), vs. 1.5 min (90s) prometido. Probabilidad de alcanzar headway ≤ 2.5 min (mínimo GoA4): <strong><span id="vd-hw-prob">16.8%</span></strong>. Benchmark global GoA4: 3.4 min promedio.</span>
+        <span class="en">Most likely sustainable headway is <strong><span id="vd-hw-p50-en">3.2</span> min</strong> (P50) vs. promised 1.5 min (90s). Probability of achieving headway ≤ 2.5 min (GoA4 minimum): <strong><span id="vd-hw-prob-en">16.8%</span></strong>. Global GoA4 benchmark: 3.4 min average.</span>
       </div>
     </div>
     <div class="mc-card">
       <h3>📌 <span class="es">Capacidad resultante por headway</span><span class="en">Resulting capacity by headway</span></h3>
-      <table class="mc-pct-tbl">
-        <tr><th><span class="es">Headway</span><span class="en">Headway</span></th><th>PPHPS</th><th><span class="es">vs Demanda</span><span class="en">vs Demand</span></th></tr>
-        <tr><td>1.5 min <span class="es">(prometido)</span><span class="en">(promised)</span></td><td style="color:var(--green);font-weight:600">21,333</td><td style="color:var(--green)">✓ 167%</td></tr>
-        <tr><td>2.5 min <span class="es">(GoA4 mín.)</span><span class="en">(GoA4 min.)</span></td><td style="color:var(--amber);font-weight:600">12,800</td><td style="color:var(--amber)">≈ 100%</td></tr>
-        <tr><td>3.2 min <span class="es">(P50 real)</span><span class="en">(P50 real)</span></td><td style="color:var(--red);font-weight:700">10,000</td><td style="color:var(--red)">✗ 78%</td></tr>
-        <tr><td>3.53 min <span class="es">(derivado SNIP)</span><span class="en">(SNIP-derived)</span></td><td style="color:var(--red);font-weight:600">9,065</td><td style="color:var(--red)">✗ 71%</td></tr>
-        <tr><td>4.4 min (P95)</td><td style="color:var(--red);font-weight:600">7,273</td><td style="color:var(--red)">✗ 57%</td></tr>
+      <table class="mc-pct-tbl mc-fixed-table">
+        <tr><th><span class="es">Headway</span><span class="en">Headway</span></th><th>PPHPS</th><th><span class="es">Cap. pax/día</span><span class="en">Cap. pax/day</span></th><th><span class="es">vs Demanda</span><span class="en">vs Demand</span></th></tr>
+        <tr><td>1.5 min <span class="es">(prometido)</span><span class="en">(promised)</span></td><td style="color:var(--green);font-weight:600">21,333</td><td style="color:var(--green);font-weight:600">~512,000</td><td style="color:var(--green)">✓ 167%</td></tr>
+        <tr><td>2.5 min <span class="es">(GoA4 mín.)</span><span class="en">(GoA4 min.)</span></td><td style="color:var(--amber);font-weight:600">12,800</td><td style="color:var(--amber);font-weight:600">~307,000</td><td style="color:var(--amber)">≈ 100%</td></tr>
+        <tr><td>3.2 min <span class="es">(P50 real)</span><span class="en">(P50 real)</span></td><td style="color:var(--red);font-weight:700">10,000</td><td style="color:var(--red);font-weight:700">~240,000</td><td style="color:var(--red)">✗ 78%</td></tr>
+        <tr><td>3.53 min <span class="es">(derivado SNIP)</span><span class="en">(SNIP-derived)</span></td><td style="color:var(--red);font-weight:600">9,065</td><td style="color:var(--red);font-weight:600">~218,000</td><td style="color:var(--red)">✗ 71%</td></tr>
+        <tr><td>4.4 min (P95)</td><td style="color:var(--red);font-weight:600">7,273</td><td style="color:var(--red);font-weight:600">~175,000</td><td style="color:var(--red)">✗ 57%</td></tr>
       </table>
       <div class="mc-note">
         <span class="es">El expediente promete headway de 90s (40 trenes/hora) sin validación operativa documentada en sistemas GoA4 a esta escala. El análisis de riesgo operacional convierte este parámetro en una variable de incertidumbre. Distribución triangular: mín=1.5 min (expediente), moda=3.2 min (media 5 benchmarks GoA4 globales: Dubái 3.2, Singapur 3.8, París 3.0, Barcelona 3.3, Riad 3.4 min), máx=5.0 min. Demanda crítica: 12,800 pphps (METI). <em>Cálculo adicional — no figura en los documentos de auditoría.</em></span>
@@ -1787,8 +1787,8 @@ html.dark #tab-montecarlo .mc-summary-grid .mc-stat-val {
         <span>🔵 TSD P95: 11.8%</span>
       </div>
       <div class="mc-verdict">
-        <span class="es">Con TSD P50=10% (estándar regional BID/BM), el VANE es <strong>negativo</strong>. TIR publicada = 10.55%. Solo con TSD &lt; 10.55% el VANE es positivo. Probabilidad de TSD &lt; 10.55% en la distribución aplicable: <strong>~30%</strong>. Fragilidad estructural documentada en AUDIT NT-IV.</span>
-        <span class="en">With SDR P50=10% (BID/WB regional standard), ENPV is <strong>negative</strong>. Published IRR = 10.55%. ENPV is positive only with SDR &lt; 10.55%. Probability of SDR &lt; 10.55% in applicable distribution: <strong>~30%</strong>. Structural fragility documented in AUDIT NT-IV.</span>
+        <span class="es">Con TSD P50=10% (estándar regional BID/BM), el VANE es <strong>negativo</strong>. TIR publicada = 10.55%. Solo con TSD &lt; 10.55% el VANE es positivo. Probabilidad de TSD &lt; 10.55% en la distribución Triangular(8%,13%,10%): <strong><span id="vd-tsd-prob">~60%</span></strong>. Fragilidad estructural documentada en AUDIT NT-IV.</span>
+        <span class="en">With SDR P50=10% (BID/WB regional standard), ENPV is <strong>negative</strong>. Published IRR = 10.55%. ENPV is positive only with SDR &lt; 10.55%. Probability of SDR &lt; 10.55% in Triangular(8%,13%,10%) distribution: <strong><span id="vd-tsd-prob-en">~60%</span></strong>. Structural fragility documented in AUDIT NT-IV.</span>
       </div>
     </div>
     <div class="mc-card">
@@ -1856,8 +1856,8 @@ html.dark #tab-montecarlo .mc-summary-grid .mc-stat-val {
         <tr><td><strong><span class="es">Media</span><span class="en">Mean</span></strong></td><td style="color:var(--amber);font-weight:700">221.5</td></tr>
       </table>
       <div class="mc-note">
-        <span class="es">La auditoría documenta riesgos procesales e institucionales: 197 días de secuencia normativa invertida (H3, NT-I/II), posible conflicto de interés sin declaración formal (H14, NT-II), consultas técnicas sin respuesta (NT-II). El modelo probabilístico cuantifica su impacto financiero esperado. Distribución log-normal: μ=ln(215), σ=0.55 (corregido de 0.6 para consistencia con P(&gt;300M)=18.7%). Parámetros estimados.</span>
-        <span class="en">The audit documents procedural and institutional risks: 197-day normative sequence inversion (H3, NT-I/II), possible undeclared conflict of interest (H14, NT-II), unanswered technical queries (NT-II). The probabilistic model quantifies their expected financial impact. Log-normal distribution: μ=ln(215), σ=0.55 (corrected from 0.6 for consistency with P(&gt;300M)=18.7%). Estimated parameters.</span>
+        <span class="es">La auditoría documenta riesgos procesales e institucionales: 197 días de secuencia normativa invertida (H3, NT-I/II), posible conflicto de interés sin declaración formal (H14, NT-II), consultas técnicas sin respuesta (NT-II). El modelo probabilístico cuantifica su impacto financiero esperado. Distribución log-normal: μ=ln(215), σ=0.375. Parametrización corregida: σ=0.375 es el valor que produce matemáticamente P(&gt;300M)=18.7% con μ=ln(215). Media ≈ 230.7M. Parámetros estimados.</span>
+        <span class="en">The audit documents procedural and institutional risks: 197-day normative sequence inversion (H3, NT-I/II), possible undeclared conflict of interest (H14, NT-II), unanswered technical queries (NT-II). The probabilistic model quantifies their expected financial impact. Log-normal distribution: μ=ln(215), σ=0.375. Corrected parametrization: σ=0.375 is the value that mathematically produces P(&gt;300M)=18.7% with μ=ln(215). Mean ≈ 230.7M. Estimated parameters.</span>
       </div>
     </div>
   </div>
@@ -1875,8 +1875,8 @@ html.dark #tab-montecarlo .mc-summary-grid .mc-stat-val {
         <span>🔵 P95: 2051</span>
       </div>
       <div class="mc-verdict">
-        <span class="es">El Monorriel se satura en promedio en <strong><span id="vd-esc-mean">2047</span></strong>, antes de amortizar la obra civil (horizonte 50 años = 2077). Probabilidad de saturación antes de 2045: <strong><span id="vd-esc-prob">34.2%</span></strong> (incluyendo escenario de demanda alta).</span>
-        <span class="en">The Monorail saturates on average in <strong><span id="vd-esc-mean-en">2047</span></strong>, before amortizing the civil works (50-year horizon = 2077). Probability of saturation before 2045: <strong><span id="vd-esc-prob-en">34.2%</span></strong> (including high-demand scenario).</span>
+        <span class="es">El Monorriel se satura en promedio en <strong><span id="vd-esc-mean">2047</span></strong>, antes de amortizar la obra civil (horizonte 50 años = 2077). Probabilidad de saturación antes de 2045: <strong><span id="vd-esc-prob">22.7%</span></strong> (distribución mixta: 82.9% escenario base + 17.1% escenario alta demanda).</span>
+        <span class="en">The Monorail saturates on average in <strong><span id="vd-esc-mean-en">2047</span></strong>, before amortizing the civil works (50-year horizon = 2077). Probability of saturation before 2045: <strong><span id="vd-esc-prob-en">22.7%</span></strong> (mixed distribution: 82.9% base scenario + 17.1% high-demand scenario).</span>
       </div>
     </div>
     <div class="mc-card">
@@ -1891,8 +1891,8 @@ html.dark #tab-montecarlo .mc-summary-grid .mc-stat-val {
         <tr><td><strong><span class="es">Media</span><span class="en">Mean</span></strong></td><td style="color:var(--red);font-weight:700">2047.2</td></tr>
       </table>
       <div class="mc-note">
-        <span class="es">La auditoría señala la ausencia de un ACB con contrafactual completo (NT-IV). El análisis estima la saturación del sistema bajo incertidumbre de demanda. Distribución mixta: Normal N(2047, 2.1) + componente de demanda alta (CAGR 1.40% vs. 1.39%). σ=2.1 ajustado para consistencia con P(&lt;2045)=34.2%: z=−0.95 → 17.1% + 17.1% escenario alta demanda. Horizonte útil obra civil: 2076. Fuente: Tab M4, R-04-V · AUDIT NT-IV.</span>
-        <span class="en">The audit notes the absence of a CBA with complete counterfactual (NT-IV). The analysis estimates system saturation under demand uncertainty. Mixed distribution: Normal N(2047, 2.1) + high-demand component (CAGR 1.40% vs 1.39%). σ=2.1 adjusted for P(&lt;2045)=34.2% consistency: z=−0.95 → 17.1% + 17.1% high-demand. Civil works useful life: 2076. Source: Tab M4, R-04-V · AUDIT NT-IV.</span>
+        <span class="es">La auditoría señala la ausencia de un ACB con contrafactual completo (NT-IV). El análisis estima la saturación del sistema bajo incertidumbre de demanda. Distribución mixta: 82.9% × Normal N(2047, 2.1) + 17.1% × Normal N(2045, 2.1) (escenario alta demanda, CAGR 1.40% vs. 1.39%). P(sat&lt;2045) = 0.829 × 17.1% + 0.171 × 50.0% = 22.7%. σ=2.1 derivado de z=−0.95 para la componente base. Horizonte útil obra civil: 2076. Fuente: Tab M4, R-04-V · AUDIT NT-IV.</span>
+        <span class="en">The audit notes the absence of a CBA with complete counterfactual (NT-IV). The analysis estimates system saturation under demand uncertainty. Mixed distribution: 82.9% × Normal N(2047, 2.1) + 17.1% × Normal N(2045, 2.1) (high-demand scenario, CAGR 1.40% vs 1.39%). P(sat&lt;2045) = 0.829 × 17.1% + 0.171 × 50.0% = 22.7%. σ=2.1 derived from z=−0.95 for base component. Civil works useful life: 2076. Source: Tab M4, R-04-V · AUDIT NT-IV.</span>
       </div>
     </div>
   </div>
@@ -3436,7 +3436,8 @@ function buildCharts() {
     }
 
     // Update .mc-pct-tbl value cells (rows 1–5 = P5..P95; row 6 = Media)
-    const tbl = pane.querySelector('.mc-pct-tbl');
+    // Skip tables marked mc-fixed-table — those contain fixed reference data, not calculated percentiles
+    const tbl = pane.querySelector('.mc-pct-tbl:not(.mc-fixed-table)');
     if (tbl) {
       const rows = tbl.querySelectorAll('tr');
       // rows[0] = header, rows[1..5] = P5..P95, rows[6] = Media (if present)
@@ -3595,7 +3596,7 @@ function buildCharts() {
     makeChart('mc-chart-macro', macroHist, '#1f3a5f', 'Brecha (USD M)', 'M', macroPcts);
     updatePctDisplay('mc-macro', macroPcts, v => v.toFixed(1), macroMean);
     setSpan('vd-macro-p50', macroPcts[2].toFixed(1));
-    setSpan('vd-macro-prob', (probAbove(macroSorted, 0) * 100).toFixed(3) + '%');
+    setSpan('vd-macro-prob', (probBelow(macroSorted, 0) * 100).toFixed(3) + '%');
 
     // ── 2. VAN ──
     const vanRaw = generateData(N, () => normalSample(-1779, 200));
@@ -3624,7 +3625,7 @@ function buildCharts() {
     const hwSorted = [...hwRaw].sort((a,b) => a-b);
     const hwHist = buildHist(hwRaw, 50, 1.0, 5.5);
     const hwPcts = pctFromSorted(hwSorted);
-    const pAchieve = (probBelow(hwSorted, 1.5001) * 100).toFixed(3);
+    const pAchieve = (probBelow(hwSorted, 2.5) * 100).toFixed(1); // P(hw≤2.5 min) — GoA4 minimum; 1.5 min is the distribution's lower bound, making P(≤1.5)=0 tautological
     makeChart('mc-chart-headway', hwHist, '#7a4a9e', 'Headway (min)', 'min', hwPcts);
     updatePctDisplay('mc-headway', hwPcts, v => v.toFixed(1));
     setSpan('vd-hw-p50', hwPcts[2].toFixed(1));
@@ -3674,6 +3675,7 @@ function buildCharts() {
       return best; // INTEGER INDEX — avoids duplicate-label ambiguity
     }
     const pViable = (probBelow(tsdSorted, 10.55) * 100).toFixed(1);
+    setSpan('vd-tsd-prob', '~' + pViable + '%');
 
     // ── 6. SENSIBILIDAD TECNOLÓGICA ──
     const sensLabels = ['0 victorias','1 victoria','2 victorias'];
@@ -3703,7 +3705,7 @@ function buildCharts() {
     }
 
     // ── 7. RIESGO / GOBERNANZA ──
-    const riesgoRaw = generateData(N, () => lognormalSample(Math.log(215), 0.55));
+    const riesgoRaw = generateData(N, () => lognormalSample(Math.log(215), 0.375)); // σ=0.375 → P(>300M)=18.7% exacto
     const riesgoSorted = [...riesgoRaw].sort((a,b) => a-b);
     const riesgoHist = buildHist(riesgoRaw, 50, 20, 700);
     const riesgoPcts = pctFromSorted(riesgoSorted);
@@ -3722,12 +3724,14 @@ function buildCharts() {
     const escHist = buildHist(escRaw, 40, 2035, 2060);
     const escPcts = pctFromSorted(escSorted);
     const escMean = escRaw.reduce((s,v)=>s+v,0)/escRaw.length;
+    const pBelow45 = (probBelow(escSorted, 2045) * 100).toFixed(1);
     makeChart('mc-chart-esc', escHist, '#2b6b7a', 'Año de saturación', '', escPcts);
     updatePctDisplay('mc-esc', escPcts, v => Math.round(v).toString(), escMean);
     setSpan('vd-esc-mean', Math.round(escMean).toString());
     setSpan('vd-esc-prob', pBelow45 + '%');
+    const kpiEsc = document.getElementById('kpi-esc-prob');
+    if (kpiEsc) kpiEsc.textContent = pBelow45 + '%';
 
-    const pBelow45 = (probBelow(escSorted, 2045) * 100).toFixed(1);
     console.log('MC init complete. N=123456 | Pcts calculated from sorted simulation arrays.');
     console.log('Headway P50:', hwPcts[2], 'min | P(<=1.5 min):', pAchieve+'%');
     console.log('TSD P(VANE>=0):', pViable+'%| Esc P(<2045):', pBelow45+'%');
@@ -3982,7 +3986,7 @@ function buildCharts() {
     // ── 7. RIESGO (Lognormal μ=ln(215), σ=0.55) ─────────────────────
     (function() {
       var rng = mulberry32(0x12345678);
-      var data = []; for(var i=0;i<N;i++) data.push(seededLognormal(rng,Math.log(215),0.55));
+      var data = []; for(var i=0;i<N;i++) data.push(seededLognormal(rng,Math.log(215),0.375)); // σ=0.375 → P(>300M)=18.7%
       data.sort(function(a,b){return a-b;});
       var hist = buildHist(data,50,20,700);
       var pcts = pctFromSortedS(data);
