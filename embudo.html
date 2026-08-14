@@ -3399,6 +3399,55 @@ function buildCharts() {
     const idx = Math.max(0, Math.min(sorted.length - 1, Math.floor(p / 100 * sorted.length)));
     return sorted[idx];
   }
+  // Calculate [P5,P25,P50,P75,P95] directly from a sorted array.
+  // This closes the statistical chain: simulation → sort → percentiles → chart/table/SVG.
+  function pctFromSorted(sorted) {
+    return [5,25,50,75,95].map(p => percentile(sorted, p));
+  }
+
+  // Update the .mc-pcts legend and .mc-pct-tbl value cells in a given pane
+  // with the freshly-calculated percentiles.
+  // fmt(v): formatting function that returns a display string for each value.
+  // meanVal: optional mean override (e.g. from raw array mean); if null uses P50.
+  function updatePctDisplay(paneId, pcts, fmt, meanVal) {
+    const pane = document.getElementById(paneId);
+    if (!pane) return;
+    const emojis = ['🔴','🟠','⚫','🟢','🔵'];
+    const labels = ['P5','P25','P50','P75','P95'];
+    const units  = { 'mc-macro':'M', 'mc-van':'M', 'mc-cap':'%', 'mc-headway':'min',
+                     'mc-tsd':'%', 'mc-riesgo':'M', 'mc-esc':'' };
+    const unit = units[paneId] || '';
+
+    // Update .mc-pcts legend spans
+    const pctDiv = pane.querySelector('.mc-pcts');
+    if (pctDiv) {
+      const spans = pctDiv.querySelectorAll('span');
+      labels.forEach((lbl, i) => {
+        if (spans[i]) spans[i].textContent = emojis[i] + ' ' + lbl + ': ' + fmt(pcts[i]) + unit;
+      });
+    }
+
+    // Update .mc-pct-tbl value cells (rows 1–5 = P5..P95; row 6 = Media)
+    const tbl = pane.querySelector('.mc-pct-tbl');
+    if (tbl) {
+      const rows = tbl.querySelectorAll('tr');
+      // rows[0] = header, rows[1..5] = P5..P95, rows[6] = Media (if present)
+      labels.forEach((lbl, i) => {
+        if (rows[i+1]) {
+          const td = rows[i+1].querySelectorAll('td')[1];
+          if (td) td.textContent = fmt(pcts[i]);
+        }
+      });
+      // Media row (index 6)
+      if (rows[6]) {
+        const tdMean = rows[6].querySelectorAll('td')[1];
+        if (tdMean) {
+          const mean = meanVal !== undefined && meanVal !== null ? meanVal : pcts[2];
+          tdMean.textContent = '≈ ' + fmt(mean);
+        }
+      }
+    }
+  }
 
   function buildHist(data, bins, lo, hi) {
     const w = (hi - lo) / bins;
@@ -3444,7 +3493,7 @@ function buildCharts() {
         const d = Math.abs(v - val);
         if (d < bestDist || (d === bestDist && i > best)) { bestDist = d; best = i; }
       });
-      return labels[best]; // return the label string for scaleID:'x' categorical
+      return best; // INTEGER INDEX — avoids duplicate-label ambiguity (e.g. two bins "3.7")
     }
 
     const pctColors = ['#1f3a5f','#c97d1e','#b13e3e','#c97d1e','#1f3a5f'];
@@ -3531,35 +3580,57 @@ function buildCharts() {
 
     // ── 1. MACROECONÓMICA ──
     const macroRaw = generateData(N, () => normalSample(1359.69, 150));
+    const macroSorted = [...macroRaw].sort((a,b) => a-b);
     const macroHist = buildHist(macroRaw, 50, 900, 1900);
-    const macroPcts = canonicalPcts('mc-macro') || [1124.3,1289.5,1359.7,1442.1,1594.8];
+    const macroPcts = pctFromSorted(macroSorted);
+    const macroMean = macroRaw.reduce((s,v)=>s+v,0)/macroRaw.length;
     makeChart('mc-chart-macro', macroHist, '#1f3a5f', 'Brecha (USD M)', 'M', macroPcts);
+    updatePctDisplay('mc-macro', macroPcts, v => v.toFixed(1), macroMean);
 
     // ── 2. VAN ──
     const vanRaw = generateData(N, () => normalSample(-1779, 200));
+    const vanSorted = [...vanRaw].sort((a,b) => a-b);
     const vanHist = buildHist(vanRaw, 50, -2600, -1000);
-    const vanPcts = canonicalPcts('mc-van') || [-2129,-1914,-1779,-1657,-1496];
+    const vanPcts = pctFromSorted(vanSorted);
+    const vanMean = vanRaw.reduce((s,v)=>s+v,0)/vanRaw.length;
     makeChart('mc-chart-van', vanHist, '#b13e3e', 'VAN (USD M)', 'M', vanPcts);
+    updatePctDisplay('mc-van', vanPcts, v => v.toFixed(0), vanMean);
 
     // ── 3. CAPACIDAD ──
     const capRaw = generateData(N, () => normalSample(65.8, 2.5)).filter(v => v >= 50 && v <= 80);
+    const capSorted = [...capRaw].sort((a,b) => a-b);
     const capHist = buildHist(capRaw, 50, 50, 80);
-    const capPcts = canonicalPcts('mc-cap') || [62.3,64.1,65.8,67.5,69.2];
+    const capPcts = pctFromSorted(capSorted);
+    const capMean = capRaw.reduce((s,v)=>s+v,0)/capRaw.length;
     makeChart('mc-chart-cap', capHist, '#2d6b4a', 'Cobertura (%)', '%', capPcts);
+    updatePctDisplay('mc-cap', capPcts, v => v.toFixed(1)+'%', capMean);
 
     // ── 4. HEADWAY OPERATIVO ──
     const hwRaw = generateData(N, () => triangularSample(1.5, 5.0, 3.2));
     const hwSorted = [...hwRaw].sort((a,b) => a-b);
     const hwHist = buildHist(hwRaw, 50, 1.0, 5.5);
-    const hwPcts = canonicalPcts('mc-headway') || [1.9,2.7,3.2,3.8,4.7];
+    const hwPcts = pctFromSorted(hwSorted);
     const pAchieve = (probBelow(hwSorted, 1.5001) * 100).toFixed(3);
     makeChart('mc-chart-headway', hwHist, '#7a4a9e', 'Headway (min)', 'min', hwPcts);
+    updatePctDisplay('mc-headway', hwPcts, v => v.toFixed(1));
 
     // ── 5. SENSIBILIDAD TSD ──
     const tsdRaw = generateData(N, () => triangularSample(8, 13, 10));
     const tsdSorted = [...tsdRaw].sort((a,b) => a-b);
     const tsdHist = buildHist(tsdRaw, 50, 8, 13);
-    const tsdPcts = canonicalPcts('mc-tsd') || [8.2,9.1,10.0,10.9,11.8];
+    const tsdPcts = pctFromSorted(tsdSorted);
+    // TSD: only update the .mc-pcts legend — the second card table is VANE-by-TSD (fixed data, not percentiles)
+    (function() {
+      const pane = document.getElementById('mc-tsd');
+      if (!pane) return;
+      const emojis = ['🔴','🟠','⚫','🟢','🔵'];
+      const labels = ['TSD P5','TSD P25','TSD P50','TSD P75','TSD P95'];
+      const pctDiv = pane.querySelector('.mc-pcts');
+      if (pctDiv) {
+        const spans = pctDiv.querySelectorAll('span');
+        tsdPcts.forEach((v, i) => { if (spans[i]) spans[i].textContent = emojis[i] + ' ' + labels[i] + ': ' + v.toFixed(1) + '%'; });
+      }
+    })();
     const tsdChart = makeChart('mc-chart-tsd', tsdHist, '#1a6b8a', 'TSD (%)', '%', tsdPcts);
 
     if (tsdChart) {
@@ -3582,9 +3653,9 @@ function buildCharts() {
       let best = 0, bestDist = Infinity;
       labels.forEach((lbl, i) => {
         const d = Math.abs(parseFloat(lbl) - val);
-        if (d < bestDist) { bestDist = d; best = i; }
+        if (d < bestDist || (d === bestDist && i > best)) { bestDist = d; best = i; }
       });
-      return labels[best];
+      return best; // INTEGER INDEX — avoids duplicate-label ambiguity
     }
     const pViable = (probBelow(tsdSorted, 10.55) * 100).toFixed(1);
 
@@ -3617,9 +3688,12 @@ function buildCharts() {
 
     // ── 7. RIESGO / GOBERNANZA ──
     const riesgoRaw = generateData(N, () => lognormalSample(Math.log(215), 0.55));
+    const riesgoSorted = [...riesgoRaw].sort((a,b) => a-b);
     const riesgoHist = buildHist(riesgoRaw, 50, 20, 700);
-    const riesgoPcts = canonicalPcts('mc-riesgo') || [87.2,152.4,215.0,293.1,416.3];
+    const riesgoPcts = pctFromSorted(riesgoSorted);
+    const riesgoMean = riesgoRaw.reduce((s,v)=>s+v,0)/riesgoRaw.length;
     makeChart('mc-chart-riesgo', riesgoHist, '#c97d1e', 'Impacto (USD M)', 'M', riesgoPcts);
+    updatePctDisplay('mc-riesgo', riesgoPcts, v => v.toFixed(1), riesgoMean);
 
     // ── 8. ESCALABILIDAD ──
     const escRaw = generateData(N, () => {
@@ -3628,11 +3702,13 @@ function buildCharts() {
     });
     const escSorted = [...escRaw].sort((a,b) => a-b);
     const escHist = buildHist(escRaw, 40, 2035, 2060);
-    const escPcts = canonicalPcts('mc-esc') || [2043,2045,2047,2049,2051];
+    const escPcts = pctFromSorted(escSorted);
+    const escMean = escRaw.reduce((s,v)=>s+v,0)/escRaw.length;
     makeChart('mc-chart-esc', escHist, '#2b6b7a', 'Año de saturación', '', escPcts);
+    updatePctDisplay('mc-esc', escPcts, v => Math.round(v).toString(), escMean);
 
     const pBelow45 = (probBelow(escSorted, 2045) * 100).toFixed(1);
-    console.log('MC init complete. N=123456 | Pcts from canonical data-pcts.');
+    console.log('MC init complete. N=123456 | Pcts calculated from sorted simulation arrays.');
     console.log('Headway P50:', hwPcts[2], 'min | P(<=1.5 min):', pAchieve+'%');
     console.log('TSD P(VANE>=0):', pViable+'%| Esc P(<2045):', pBelow45+'%');
   }
@@ -3788,6 +3864,14 @@ function buildCharts() {
       var el = document.getElementById(paneId);
       return el ? parseFloat(el.dataset[attr]) : 0;
     }
+    // Calculate percentiles from a sorted array — closes the statistical chain.
+    function pctFromSortedS(sorted) {
+      var ps = [5,25,50,75,95];
+      return ps.map(function(p) {
+        var idx = Math.max(0, Math.min(sorted.length-1, Math.floor(p/100*sorted.length)));
+        return sorted[idx];
+      });
+    }
 
     var N = 123456;
 
@@ -3795,8 +3879,9 @@ function buildCharts() {
     (function() {
       var rng = mulberry32(0xABCD1234);
       var data = []; for(var i=0;i<N;i++) data.push(seededNormal(rng,1359.69,150));
+      data.sort(function(a,b){return a-b;});
       var hist = buildHist(data,50,900,1900);
-      var pcts = paneCanonicalPcts('mc-macro') || [1124.3,1289.5,1359.7,1442.1,1594.8];
+      var pcts = pctFromSortedS(data);
       inject('macro', hist, '#1f3a5f', 'Brecha (USD M)', 'M', pcts);
     })();
 
@@ -3804,8 +3889,9 @@ function buildCharts() {
     (function() {
       var rng = mulberry32(0xBEEF5678);
       var data = []; for(var i=0;i<N;i++) data.push(seededNormal(rng,-1779,200));
+      data.sort(function(a,b){return a-b;});
       var hist = buildHist(data,50,-2600,-1000);
-      var pcts = paneCanonicalPcts('mc-van') || [-2129,-1914,-1779,-1657,-1496];
+      var pcts = pctFromSortedS(data);
       inject('van', hist, '#b13e3e', 'VAN (USD M)', 'M', pcts);
     })();
 
@@ -3814,8 +3900,9 @@ function buildCharts() {
       var rng = mulberry32(0xCAFE9ABC);
       var data = [];
       for(var i=0;i<N;i++){var v=seededNormal(rng,65.8,2.5); if(v>=50&&v<=80) data.push(v);}
+      data.sort(function(a,b){return a-b;});
       var hist = buildHist(data,50,50,80);
-      var pcts = paneCanonicalPcts('mc-cap') || [62.3,64.1,65.8,67.5,69.2];
+      var pcts = pctFromSortedS(data);
       inject('cap', hist, '#2d6b4a', 'Cobertura (%)', '%', pcts);
     })();
 
@@ -3823,8 +3910,9 @@ function buildCharts() {
     (function() {
       var rng = mulberry32(0xDEAD0001);
       var data = []; for(var i=0;i<N;i++) data.push(seededTriangular(rng,1.5,5.0,3.2));
+      data.sort(function(a,b){return a-b;});
       var hist = buildHist(data,50,1.0,5.5);
-      var pcts = paneCanonicalPcts('mc-headway') || [1.9,2.7,3.2,3.8,4.7];
+      var pcts = pctFromSortedS(data);
       inject('headway', hist, '#7a4a9e', 'Headway (min)', 'min', pcts);
     })();
 
@@ -3832,8 +3920,9 @@ function buildCharts() {
     (function() {
       var rng = mulberry32(0xF00DFACE);
       var data = []; for(var i=0;i<N;i++) data.push(seededTriangular(rng,8,13,10));
+      data.sort(function(a,b){return a-b;});
       var hist = buildHist(data,50,8,13);
-      var pcts = paneCanonicalPcts('mc-tsd') || [8.2,9.1,10.0,10.9,11.8];
+      var pcts = pctFromSortedS(data);
       // TIR=10.55% break-even line — posición exacta en el eje X
       var numLabels = hist.labels.map(function(l){return parseFloat(l);});
       var best=0, bd=Infinity;
@@ -3874,8 +3963,9 @@ function buildCharts() {
     (function() {
       var rng = mulberry32(0x12345678);
       var data = []; for(var i=0;i<N;i++) data.push(seededLognormal(rng,Math.log(215),0.55));
+      data.sort(function(a,b){return a-b;});
       var hist = buildHist(data,50,20,700);
-      var pcts = paneCanonicalPcts('mc-riesgo') || [87.2,152.4,215.0,293.1,416.3];
+      var pcts = pctFromSortedS(data);
       inject('riesgo', hist, '#c97d1e', 'Impacto (USD M)', 'M', pcts);
     })();
 
@@ -3887,8 +3977,9 @@ function buildCharts() {
         var base = seededNormal(rng,2047,2.1);
         data.push(rng() < 0.171 ? base-2 : base);
       }
+      data.sort(function(a,b){return a-b;});
       var hist = buildHist(data,40,2035,2060);
-      var pcts = paneCanonicalPcts('mc-esc') || [2043,2045,2047,2049,2051];
+      var pcts = pctFromSortedS(data);
       inject('esc', hist, '#2b6b7a', 'Año de saturación', '', pcts);
     })();
   };
