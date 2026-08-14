@@ -1648,8 +1648,8 @@ html.dark #tab-montecarlo .mc-summary-grid .mc-stat-val {
         <span>🔵 P95: $1,595M</span>
       </div>
       <div class="mc-verdict">
-        <span class="es">El Monorriel es sistemáticamente más costoso que el Metro. Brecha P50: <strong>USD 1,359.7M</strong>. Probabilidad de que el Monorriel sea superior al Metro: <strong>0.000%</strong>.</span>
-        <span class="en">The Monorail is systematically more costly than the Metro. P50 gap: <strong>USD 1,359.7M</strong>. Probability Monorail outperforms Metro: <strong>0.000%</strong>.</span>
+        <span class="es">El Monorriel es sistemáticamente más costoso que el Metro. Brecha P50: <strong>USD <span id="vd-macro-p50">1,359.7</span>M</strong>. Probabilidad de que el Monorriel sea superior al Metro: <strong><span id="vd-macro-prob">0.000%</span></strong>.</span>
+        <span class="en">The Monorail is systematically more costly than the Metro. P50 gap: <strong>USD <span id="vd-macro-p50-en">1,359.7</span>M</strong>. Probability Monorail outperforms Metro: <strong><span id="vd-macro-prob-en">0.000%</span></strong>.</span>
       </div>
     </div>
     <div class="mc-card">
@@ -1683,8 +1683,8 @@ html.dark #tab-montecarlo .mc-summary-grid .mc-stat-val {
         <span>🔵 P95: −$1,496M</span>
       </div>
       <div class="mc-verdict">
-        <span class="es">El VAN real es negativo en el <strong>100%</strong> de los escenarios. Pérdida media esperada: <strong>USD 1,792M</strong>. Probabilidad VAN ≥ 0: <strong>0.000%</strong>.</span>
-        <span class="en">The real NPV is negative in <strong>100%</strong> of scenarios. Expected mean loss: <strong>USD 1,792M</strong>. Probability NPV ≥ 0: <strong>0.000%</strong>.</span>
+        <span class="es">El VAN real es negativo en el <strong>100%</strong> de los escenarios. Pérdida media esperada: <strong>USD <span id="vd-van-mean">1,792</span>M</strong>. Probabilidad VAN ≥ 0: <strong><span id="vd-van-prob">0.000%</span></strong>.</span>
+        <span class="en">The real NPV is negative in <strong>100%</strong> of scenarios. Expected mean loss: <strong>USD <span id="vd-van-mean-en">1,792</span>M</strong>. Probability NPV ≥ 0: <strong><span id="vd-van-prob-en">0.000%</span></strong>.</span>
       </div>
     </div>
     <div class="mc-card">
@@ -1718,8 +1718,8 @@ html.dark #tab-montecarlo .mc-summary-grid .mc-stat-val {
         <span>🔵 P95: 69.2%</span>
       </div>
       <div class="mc-verdict">
-        <span class="es">El Monorriel cubre en promedio <strong>65.8%</strong> de la demanda 2030. Probabilidad de alcanzar 100% de cobertura: <strong>0.000%</strong>. El sistema nace con déficit estructural.</span>
-        <span class="en">The Monorail covers on average <strong>65.8%</strong> of 2030 demand. Probability of reaching 100% coverage: <strong>0.000%</strong>. The system launches with a structural deficit.</span>
+        <span class="es">El Monorriel cubre en promedio <strong><span id="vd-cap-mean">65.8</span>%</strong> de la demanda 2030. Probabilidad de alcanzar 100% de cobertura: <strong><span id="vd-cap-prob">0.000%</span></strong>. El sistema nace con déficit estructural.</span>
+        <span class="en">The Monorail covers on average <strong><span id="vd-cap-mean-en">65.8</span>%</strong> of 2030 demand. Probability of reaching 100% coverage: <strong><span id="vd-cap-prob-en">0.000%</span></strong>. The system launches with a structural deficit.</span>
       </div>
     </div>
     <div class="mc-card">
@@ -1753,8 +1753,8 @@ html.dark #tab-montecarlo .mc-summary-grid .mc-stat-val {
         <span>🔵 P95: 4.4 min</span>
       </div>
       <div class="mc-verdict">
-        <span class="es">El headway operativo sostenible más probable es <strong>3.2 min</strong> (P50), vs. 1.5 min (90s) prometido. Probabilidad de sostener headway ≤ 1.5 min: <strong>0.000%</strong>. Benchmark global GoA4: 3.4 min promedio.</span>
-        <span class="en">Most likely sustainable headway is <strong>3.2 min</strong> (P50) vs. promised 1.5 min (90s). Probability of sustaining ≤1.5 min headway: <strong>0.000%</strong>. Global GoA4 benchmark: 3.4 min average.</span>
+        <span class="es">El headway operativo sostenible más probable es <strong><span id="vd-hw-p50">3.2</span> min</strong> (P50), vs. 1.5 min (90s) prometido. Probabilidad de sostener headway ≤ 1.5 min: <strong><span id="vd-hw-prob">0.000%</span></strong>. Benchmark global GoA4: 3.4 min promedio.</span>
+        <span class="en">Most likely sustainable headway is <strong><span id="vd-hw-p50-en">3.2</span> min</strong> (P50) vs. promised 1.5 min (90s). Probability of sustaining ≤1.5 min headway: <strong><span id="vd-hw-prob-en">0.000%</span></strong>. Global GoA4 benchmark: 3.4 min average.</span>
       </div>
     </div>
     <div class="mc-card">
@@ -1840,8 +1840,8 @@ html.dark #tab-montecarlo .mc-summary-grid .mc-stat-val {
         <span>🔵 P95: $416M</span>
       </div>
       <div class="mc-verdict mc-verdict amber">
-        <span class="es">Impacto esperado por riesgos (conflictos, sobrecostos, retrasos): <strong>USD 221.5M</strong> (media). Probabilidad de superar USD 300M: <strong>18.7%</strong>.</span>
-        <span class="en">Expected risk impact (conflicts, cost overruns, delays): <strong>USD 221.5M</strong> (mean). Probability of exceeding USD 300M: <strong>18.7%</strong>.</span>
+        <span class="es">Impacto esperado por riesgos (conflictos, sobrecostos, retrasos): <strong>USD <span id="vd-riesgo-mean">221.5</span>M</strong> (media). Probabilidad de superar USD 300M: <strong><span id="vd-riesgo-prob">18.7%</span></strong>.</span>
+        <span class="en">Expected risk impact (conflicts, cost overruns, delays): <strong>USD <span id="vd-riesgo-mean-en">221.5</span>M</strong> (mean). Probability of exceeding USD 300M: <strong><span id="vd-riesgo-prob-en">18.7%</span></strong>.</span>
       </div>
     </div>
     <div class="mc-card">
@@ -1875,8 +1875,8 @@ html.dark #tab-montecarlo .mc-summary-grid .mc-stat-val {
         <span>🔵 P95: 2051</span>
       </div>
       <div class="mc-verdict">
-        <span class="es">El Monorriel se satura en promedio en <strong>2047</strong>, antes de amortizar la obra civil (horizonte 50 años = 2077). Probabilidad de saturación antes de 2045: <strong>34.2%</strong> (incluyendo escenario de demanda alta).</span>
-        <span class="en">The Monorail saturates on average in <strong>2047</strong>, before amortizing the civil works (50-year horizon = 2077). Probability of saturation before 2045: <strong>34.2%</strong> (including high-demand scenario).</span>
+        <span class="es">El Monorriel se satura en promedio en <strong><span id="vd-esc-mean">2047</span></strong>, antes de amortizar la obra civil (horizonte 50 años = 2077). Probabilidad de saturación antes de 2045: <strong><span id="vd-esc-prob">34.2%</span></strong> (incluyendo escenario de demanda alta).</span>
+        <span class="en">The Monorail saturates on average in <strong><span id="vd-esc-mean-en">2047</span></strong>, before amortizing the civil works (50-year horizon = 2077). Probability of saturation before 2045: <strong><span id="vd-esc-prob-en">34.2%</span></strong> (including high-demand scenario).</span>
       </div>
     </div>
     <div class="mc-card">
@@ -3405,6 +3405,14 @@ function buildCharts() {
     return [5,25,50,75,95].map(p => percentile(sorted, p));
   }
 
+  // Update a span by ID (ES + EN twin), used to inject dynamic values into verdict messages.
+  function setSpan(idEs, val) {
+    const elEs = document.getElementById(idEs);
+    const elEn = document.getElementById(idEs + '-en');
+    if (elEs) elEs.textContent = val;
+    if (elEn) elEn.textContent = val;
+  }
+
   // Update the .mc-pcts legend and .mc-pct-tbl value cells in a given pane
   // with the freshly-calculated percentiles.
   // fmt(v): formatting function that returns a display string for each value.
@@ -3586,6 +3594,8 @@ function buildCharts() {
     const macroMean = macroRaw.reduce((s,v)=>s+v,0)/macroRaw.length;
     makeChart('mc-chart-macro', macroHist, '#1f3a5f', 'Brecha (USD M)', 'M', macroPcts);
     updatePctDisplay('mc-macro', macroPcts, v => v.toFixed(1), macroMean);
+    setSpan('vd-macro-p50', macroPcts[2].toFixed(1));
+    setSpan('vd-macro-prob', (probAbove(macroSorted, 0) * 100).toFixed(3) + '%');
 
     // ── 2. VAN ──
     const vanRaw = generateData(N, () => normalSample(-1779, 200));
@@ -3595,6 +3605,8 @@ function buildCharts() {
     const vanMean = vanRaw.reduce((s,v)=>s+v,0)/vanRaw.length;
     makeChart('mc-chart-van', vanHist, '#b13e3e', 'VAN (USD M)', 'M', vanPcts);
     updatePctDisplay('mc-van', vanPcts, v => v.toFixed(0), vanMean);
+    setSpan('vd-van-mean', Math.round(Math.abs(vanMean)).toLocaleString());
+    setSpan('vd-van-prob', (probAbove(vanSorted, 0) * 100).toFixed(3) + '%');
 
     // ── 3. CAPACIDAD ──
     const capRaw = generateData(N, () => normalSample(65.8, 2.5)).filter(v => v >= 50 && v <= 80);
@@ -3604,6 +3616,8 @@ function buildCharts() {
     const capMean = capRaw.reduce((s,v)=>s+v,0)/capRaw.length;
     makeChart('mc-chart-cap', capHist, '#2d6b4a', 'Cobertura (%)', '%', capPcts);
     updatePctDisplay('mc-cap', capPcts, v => v.toFixed(1)+'%', capMean);
+    setSpan('vd-cap-mean', capMean.toFixed(1));
+    setSpan('vd-cap-prob', (probAbove(capSorted, 99.999) * 100).toFixed(3) + '%');
 
     // ── 4. HEADWAY OPERATIVO ──
     const hwRaw = generateData(N, () => triangularSample(1.5, 5.0, 3.2));
@@ -3613,6 +3627,8 @@ function buildCharts() {
     const pAchieve = (probBelow(hwSorted, 1.5001) * 100).toFixed(3);
     makeChart('mc-chart-headway', hwHist, '#7a4a9e', 'Headway (min)', 'min', hwPcts);
     updatePctDisplay('mc-headway', hwPcts, v => v.toFixed(1));
+    setSpan('vd-hw-p50', hwPcts[2].toFixed(1));
+    setSpan('vd-hw-prob', pAchieve + '%');
 
     // ── 5. SENSIBILIDAD TSD ──
     const tsdRaw = generateData(N, () => triangularSample(8, 13, 10));
@@ -3694,6 +3710,8 @@ function buildCharts() {
     const riesgoMean = riesgoRaw.reduce((s,v)=>s+v,0)/riesgoRaw.length;
     makeChart('mc-chart-riesgo', riesgoHist, '#c97d1e', 'Impacto (USD M)', 'M', riesgoPcts);
     updatePctDisplay('mc-riesgo', riesgoPcts, v => v.toFixed(1), riesgoMean);
+    setSpan('vd-riesgo-mean', riesgoMean.toFixed(1));
+    setSpan('vd-riesgo-prob', (probAbove(riesgoSorted, 300) * 100).toFixed(1) + '%');
 
     // ── 8. ESCALABILIDAD ──
     const escRaw = generateData(N, () => {
@@ -3706,6 +3724,8 @@ function buildCharts() {
     const escMean = escRaw.reduce((s,v)=>s+v,0)/escRaw.length;
     makeChart('mc-chart-esc', escHist, '#2b6b7a', 'Año de saturación', '', escPcts);
     updatePctDisplay('mc-esc', escPcts, v => Math.round(v).toString(), escMean);
+    setSpan('vd-esc-mean', Math.round(escMean).toString());
+    setSpan('vd-esc-prob', pBelow45 + '%');
 
     const pBelow45 = (probBelow(escSorted, 2045) * 100).toFixed(1);
     console.log('MC init complete. N=123456 | Pcts calculated from sorted simulation arrays.');
