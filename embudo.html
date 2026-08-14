@@ -1637,7 +1637,7 @@ html.dark #tab-montecarlo .mc-summary-grid .mc-stat-val {
 
 
 <!-- PANE 1: MACRO -->
-<div class="mc-pane active" id="mc-macro" data-pcts="1124.3,1289.5,1359.7,1442.1,1594.8" data-lo="900" data-hi="1900" data-bins="50" data-mu="1359.69" data-sigma="150" data-dist="normal">
+<div class="mc-pane active" id="mc-macro" data-lo="900" data-hi="1900" data-bins="50" data-mu="1359.69" data-sigma="150" data-dist="normal">
   <div class="mc-grid">
     <div class="mc-card">
       <h3>📊 <span class="es">Distribución — Brecha Macroeconómica (Monorriel − Metro)</span><span class="en">Distribution — Macroeconomic Gap (Monorail − Metro)</span></h3>
@@ -1672,7 +1672,7 @@ html.dark #tab-montecarlo .mc-summary-grid .mc-stat-val {
 </div>
 
 <!-- PANE 2: VAN -->
-<div class="mc-pane" id="mc-van" data-pcts="-2129,-1914,-1779,-1657,-1496" data-lo="-2600" data-hi="-1000" data-bins="50" data-mu="-1779" data-sigma="200" data-dist="normal">
+<div class="mc-pane" id="mc-van" data-lo="-2600" data-hi="-1000" data-bins="50" data-mu="-1779" data-sigma="200" data-dist="normal">
   <div class="mc-grid">
     <div class="mc-card">
       <h3>📉 <span class="es">Distribución — VAN Real (Control C-13 · AUDIT NT-V)</span><span class="en">Distribution — Real NPV (Control C-13 · AUDIT NT-V)</span></h3>
@@ -1707,7 +1707,7 @@ html.dark #tab-montecarlo .mc-summary-grid .mc-stat-val {
 </div>
 
 <!-- PANE 3: CAPACIDAD -->
-<div class="mc-pane" id="mc-cap" data-pcts="62.3,64.1,65.8,67.5,69.2" data-lo="50" data-hi="80" data-bins="50" data-mu="65.8" data-sigma="2.5" data-dist="normal-clamp">
+<div class="mc-pane" id="mc-cap" data-lo="50" data-hi="80" data-bins="50" data-mu="65.8" data-sigma="2.5" data-dist="normal-clamp">
   <div class="mc-grid">
     <div class="mc-card">
       <h3>🚇 <span class="es">Distribución — Cobertura de Demanda 2030 (%)</span><span class="en">Distribution — 2030 Demand Coverage (%)</span></h3>
@@ -1742,7 +1742,7 @@ html.dark #tab-montecarlo .mc-summary-grid .mc-stat-val {
 </div>
 
 <!-- PANE 4: HEADWAY OPERATIVO (NUEVO) -->
-<div class="mc-pane" id="mc-headway" data-pcts="2.0,2.7,3.2,3.7,4.4" data-lo="1.0" data-hi="5.5" data-bins="50" data-a="1.5" data-b="5.0" data-c="3.2" data-dist="triangular">
+<div class="mc-pane" id="mc-headway" data-lo="1.0" data-hi="5.5" data-bins="50" data-a="1.5" data-b="5.0" data-c="3.2" data-dist="triangular">
   <div class="mc-grid">
     <div class="mc-card">
       <h3>⏱️ <span class="es">Distribución — Headway Operativo Real (min)</span><span class="en">Distribution — Real Operational Headway (min)</span></h3>
@@ -1776,7 +1776,7 @@ html.dark #tab-montecarlo .mc-summary-grid .mc-stat-val {
 </div>
 
 <!-- PANE 5: SENSIBILIDAD TSD (NUEVO) -->
-<div class="mc-pane" id="mc-tsd" data-pcts="8.2,9.1,10.0,10.9,11.8" data-lo="8" data-hi="13" data-bins="50" data-a="8" data-b="13" data-c="10" data-dist="triangular">
+<div class="mc-pane" id="mc-tsd" data-lo="8" data-hi="13" data-bins="50" data-a="8" data-b="13" data-c="10" data-dist="triangular">
   <div class="mc-grid">
     <div class="mc-card">
       <h3>📊 <span class="es">Distribución — VANE bajo incertidumbre de TSD (%)</span><span class="en">Distribution — ENPV under SDR uncertainty (%)</span></h3>
@@ -1829,7 +1829,7 @@ html.dark #tab-montecarlo .mc-summary-grid .mc-stat-val {
 </div>
 
 <!-- PANE 7: GOBERNANZA / RIESGO -->
-<div class="mc-pane" id="mc-riesgo" data-pcts="87.2,152.4,215.0,293.1,416.3" data-lo="20" data-hi="700" data-bins="50" data-mu="5.370" data-sigma="0.55" data-dist="lognormal">
+<div class="mc-pane" id="mc-riesgo" data-lo="20" data-hi="700" data-bins="50" data-mu="5.370" data-sigma="0.375" data-dist="lognormal">
   <div class="mc-grid">
     <div class="mc-card">
       <h3>⚠️ <span class="es">Distribución — Impacto de Riesgos en Costo Total (USD M)</span><span class="en">Distribution — Risk Impact on Total Cost (USD M)</span></h3>
@@ -1864,7 +1864,7 @@ html.dark #tab-montecarlo .mc-summary-grid .mc-stat-val {
 </div>
 
 <!-- PANE 8: ESCALABILIDAD -->
-<div class="mc-pane" id="mc-esc" data-pcts="2043,2045,2047,2049,2051" data-lo="2035" data-hi="2060" data-bins="40" data-mu="2047" data-sigma="2.1" data-dist="normal-mixed">
+<div class="mc-pane" id="mc-esc" data-lo="2035" data-hi="2060" data-bins="40" data-mu="2047" data-sigma="2.1" data-dist="normal-mixed">
   <div class="mc-grid">
     <div class="mc-card">
       <h3>📈 <span class="es">Distribución — Año de Saturación (Monorriel M-6V)</span><span class="en">Distribution — Year of Saturation (Monorail M-6V)</span></h3>
@@ -3578,14 +3578,7 @@ function buildCharts() {
   function initMonteCarlo() {
     const N = 123456; // exact declared iterations
 
-    // ── Helper: leer percentiles canónicos del data-pcts del pane ──
-    // La tabla HTML es la fuente única de verdad. El chart interactivo
-    // y el SVG de impresión muestran exactamente estos valores.
-    function canonicalPcts(paneId) {
-      const el = document.getElementById(paneId);
-      if (!el || !el.dataset.pcts) return null;
-      return el.dataset.pcts.split(',').map(v => parseFloat(v));
-    }
+    // canonicalPcts removed — percentiles calculated from sorted simulation arrays (pctFromSorted)
 
     // ── 1. MACROECONÓMICA ──
     const macroRaw = generateData(N, () => normalSample(1359.69, 150));
@@ -3879,11 +3872,7 @@ function buildCharts() {
 
     // ── Helper: read canonical percentiles from data-pcts attribute ──
     // The HTML table is the single source of truth. The SVG must match it exactly.
-    function paneCanonicalPcts(paneId) {
-      var el = document.getElementById(paneId);
-      if (!el || !el.dataset.pcts) return null;
-      return el.dataset.pcts.split(',').map(function(v){ return parseFloat(v); });
-    }
+    // paneCanonicalPcts removed — percentiles calculated from sorted simulation arrays (pctFromSortedS)
     function paneAttr(paneId, attr) {
       var el = document.getElementById(paneId);
       return el ? parseFloat(el.dataset[attr]) : 0;
