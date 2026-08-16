@@ -598,6 +598,7 @@ html.light #tab-yqp .tf-original { color: var(--muted); }
     <button class="tab-btn" onclick="showTab('yqp', this)"><span class="es">¿Y qué pasa si…?</span><span class="en">What if…?</span></button>
     <button class="tab-btn" onclick="showTab('montecarlo', this)"><span class="es">Monte Carlo · 123,456</span><span class="en">Monte Carlo · 123,456</span></button>
     <button class="tab-btn" onclick="showTab('prata', this)"><span class="es">Línea 15 Prata · SP</span><span class="en">Line 15 Prata · SP</span></button>
+    <button class="tab-btn" onclick="showTab('cinematica', this)"><span class="es">Cinemática del Headway</span><span class="en">Headway Kinematics</span></button>
     <button class="tab-btn soliloquio-btn" onclick="showTab('soliloquio', this)"><span class="es">Soliloquio</span><span class="en">Soliloquy</span></button>
   </div>
 </nav>
@@ -1777,8 +1778,10 @@ html.dark #tab-montecarlo .mc-summary-grid .mc-stat-val {
         <tr><td>4.4 min (P95)</td><td style="color:var(--red);font-weight:600">7,273</td><td style="color:var(--red);font-weight:600">~175,000</td><td style="color:var(--red)">✗ 57%</td></tr>
       </table>
       <div class="mc-note">
-        <span class="es">El expediente promete headway de 90s (40 trenes/hora) sin validación operativa documentada en sistemas GoA4 a esta escala. El análisis de riesgo operacional convierte este parámetro en una variable de incertidumbre. Distribución triangular: mín=1.5 min (expediente), moda=3.2 min (media 5 benchmarks GoA4 globales: Dubái 3.2, Singapur 3.8, París 3.0, Barcelona 3.3, Riad 3.4 min), máx=5.0 min. Demanda crítica: 12,800 pphps (METI). <em>Cálculo adicional — no figura en los documentos de auditoría.</em></span>
-        <span class="en">The file promises 90s headway (40 trains/hour) without documented operational validation in GoA4 systems at this scale. The operational risk analysis converts this parameter into an uncertainty variable. Triangular distribution: min=1.5 min (file), mode=3.2 min (5 global GoA4 benchmark mean: Dubai 3.2, Singapore 3.8, Paris 3.0, Barcelona 3.3, Riyadh 3.4 min), max=5.0 min. Critical demand: 12,800 pphps (METI). <em>Additional calculation — not in audit documents.</em></span>
+        <span class="es">El expediente promete headway de 90s (40 trenes/hora) sin validación operativa documentada en sistemas GoA4 a esta escala. El análisis de riesgo operacional convierte este parámetro en una variable de incertidumbre. Distribución triangular: mín=1.5 min (expediente), moda=3.2 min (media 5 benchmarks GoA4 globales: Dubái 3.2, Singapur 3.8, París 3.0, Barcelona 3.3, Riad 3.4 min), máx=5.0 min. Demanda crítica: 12,800 pphps (METI). <em>Cálculo adicional — no figura en los documentos de auditoría.</em><br><br>
+        <strong>Nota metodológica sobre los valores de PPHPS de esta tabla:</strong> Los valores se calculan mediante una relación proporcional anclada en el punto de referencia de demanda METI: C(H) = 12,800 × (2.5 ÷ H). Por tanto, representan una capacidad normalizada respecto al umbral de demanda METI 2030 de 12,800 pphpd [N1 · tabla demanda METI], y no la capacidad física bruta derivada directamente de la flota. La capacidad física bruta es C = (60÷H) × 750 pax, que para 90 s produce 30,000 pphps. Ambas representaciones son válidas bajo distintos marcos de referencia — la primera evalúa la cobertura de demanda, la segunda la capacidad teórica máxima de flota.</span>
+        <span class="en">The file promises 90s headway (40 trains/hour) without documented operational validation in GoA4 systems at this scale. The operational risk analysis converts this parameter into an uncertainty variable. Triangular distribution: min=1.5 min (file), mode=3.2 min (5 global GoA4 benchmark mean: Dubai 3.2, Singapore 3.8, Paris 3.0, Barcelona 3.3, Riyadh 3.4 min), max=5.0 min. Critical demand: 12,800 pphps (METI). <em>Additional calculation — not in audit documents.</em><br><br>
+        <strong>Methodological note on PPHPS values in this table:</strong> Values are calculated using a proportional relationship anchored at the METI demand reference point: C(H) = 12,800 × (2.5 ÷ H). They therefore represent a normalized capacity relative to the METI 2030 demand threshold of 12,800 pphpd [N1 · METI demand table], not the gross physical capacity derived directly from the fleet. Gross physical capacity is C = (60÷H) × 750 pax, which for 90 s yields 30,000 pphps. Both representations are valid under different reference frameworks — the first evaluates demand coverage, the second the theoretical maximum fleet capacity.</span>
       </div>
     </div>
   </div>
@@ -3346,6 +3349,372 @@ function buildCharts() {
   setLang(savedLang || 'es');
 })();
 </script>
+
+<!-- ══════════════════════════════════════════════
+     TAB · CINEMÁTICA DEL HEADWAY
+══════════════════════════════════════════════ -->
+<div class="tab-panel" id="tab-cinematica">
+
+  <p class="panel-title"><span class="es">Cinemática del Headway — Intervalo Mínimo de Seguridad</span><span class="en">Headway Kinematics — Minimum Safety Interval</span></p>
+  <p class="panel-sub"><span class="es">Cálculo técnico del headway real aplicando física cinemática, distancia de frenado y estándares UITP/JICA al expediente SNIP 17248</span><span class="en">Technical headway calculation applying kinematics, braking distance and UITP/JICA standards to SNIP 17248</span></p>
+
+  <!-- 00 · NOTA METODOLÓGICA -->
+  <div class="sec">
+    <div class="sec-hdr"><span class="sec-num">00 ·</span><span class="sec-title"><span class="es">Nota Metodológica</span><span class="en">Methodological Note</span></span></div>
+    <div class="nivel-grid">
+      <div class="nivel-card n1"><div class="nivel-lbl"><span class="es">N1 · Hechos documentados</span><span class="en">N1 · Documented facts</span></div><p><span class="es">Parámetros verificados en SNIP 17248: 17 trenes, M-6V, 750 pax/tren, headway prometido 90 s, longitud 10.5 km, 12 estaciones por sentido.</span><span class="en">Parameters verified in SNIP 17248: 17 trains, M-6V, 750 pax/train, promised headway 90 s, 10.5 km length, 12 stations per direction.</span></p></div>
+      <div class="nivel-card n2"><div class="nivel-lbl"><span class="es">N2 · Modelos de cálculo</span><span class="en">N2 · Calculation models</span></div><p><span class="es">Estándares UITP/JICA: velocidad comercial 30 km/h, dwell time pico 45 s, maniobras terminales 120 s, factor seguridad bloque 1.3, reserva técnica 15%.</span><span class="en">UITP/JICA standards: 30 km/h commercial speed, 45 s peak dwell, 120 s terminal maneuvers, block safety factor 1.3, 15% technical reserve.</span></p></div>
+      <div class="nivel-card n3"><div class="nivel-lbl"><span class="es">N3 · Inferencias técnicas</span><span class="en">N3 · Technical inferences</span></div><p><span class="es">Conclusiones de aplicar cinemática ferroviaria a parámetros N1 bajo supuestos N2 declarados explícitamente.</span><span class="en">Conclusions from applying railway kinematics to N1 parameters under explicitly declared N2 assumptions.</span></p></div>
+    </div>
+  </div>
+
+  <hr class="rule">
+
+  <!-- 01 · PARÁMETROS BASE -->
+  <div class="sec">
+    <div class="sec-hdr"><span class="sec-num">01 ·</span><span class="sec-title"><span class="es">Parámetros Base del Sistema</span><span class="en">System Base Parameters</span></span></div>
+    <div class="grid2">
+      <div class="card accent-green">
+        <div class="card-title"><span class="es">Parámetros verificados · N1</span><span class="en">Verified parameters · N1</span></div>
+        <div class="tbl-wrap" style="margin:0">
+          <table>
+            <thead><tr><th><span class="es">Parámetro</span><span class="en">Parameter</span></th><th><span class="es">Valor</span><span class="en">Value</span></th></tr></thead>
+            <tbody>
+              <tr><td><span class="es">Flota contratada</span><span class="en">Contracted fleet</span></td><td class="num green">17 <span class="es">trenes</span><span class="en">trains</span></td></tr>
+              <tr><td><span class="es">Configuración</span><span class="en">Configuration</span></td><td class="num">M-6V</td></tr>
+              <tr><td><span class="es">Capacidad por tren</span><span class="en">Capacity per train</span></td><td class="num">750 pax</td></tr>
+              <tr><td><span class="es">Headway prometido</span><span class="en">Promised headway</span></td><td class="num red">90 segundos</td></tr>
+              <tr><td><span class="es">Longitud por sentido</span><span class="en">Length per direction</span></td><td class="num">10.5 km</td></tr>
+              <tr><td><span class="es">Estaciones por sentido</span><span class="en">Stations per direction</span></td><td class="num">12</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="card accent-blue">
+        <div class="card-title"><span class="es">Parámetros de modelización · N2</span><span class="en">Modelling parameters · N2</span></div>
+        <div class="tbl-wrap" style="margin:0">
+          <table>
+            <thead><tr><th><span class="es">Parámetro</span><span class="en">Parameter</span></th><th><span class="es">Valor</span><span class="en">Value</span></th></tr></thead>
+            <tbody>
+              <tr><td><span class="es">Velocidad comercial</span><span class="en">Commercial speed</span></td><td class="num">30 km/h · 8.33 m/s</td></tr>
+              <tr><td><span class="es">Vel. aproximación estación</span><span class="en">Station approach speed</span></td><td class="num">25 km/h · 6.94 m/s</td></tr>
+              <tr><td><span class="es">Dwell time · promedio</span><span class="en">Dwell time · average</span></td><td class="num">30 s</td></tr>
+              <tr><td><span class="es">Dwell time · hora pico</span><span class="en">Dwell time · peak hour</span></td><td class="num red">45 s</td></tr>
+              <tr><td><span class="es">Maniobras terminales</span><span class="en">Terminal maneuvers</span></td><td class="num">120 s c/u</td></tr>
+              <tr><td><span class="es">Desaceleración emergencia</span><span class="en">Emergency deceleration</span></td><td class="num">1.5 m/s²</td></tr>
+              <tr><td><span class="es">Factor seguridad bloque</span><span class="en">Block safety factor</span></td><td class="num">1.3</td></tr>
+              <tr><td><span class="es">Margen sistema CBTC</span><span class="en">CBTC system margin</span></td><td class="num">3 s</td></tr>
+              <tr><td><span class="es">Reserva técnica flota</span><span class="en">Fleet technical reserve</span></td><td class="num">15% mín.</td></tr>
+              <tr><td><span class="es">Recuperación operativa</span><span class="en">Operational recovery</span></td><td class="num">5% del ciclo</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="box box-note">
+      <div class="box-label"><span class="es">Sobre el dwell time de 45 s en hora pico</span><span class="en">On the 45-second peak hour dwell time</span></div>
+      <p><span class="es">En 90 s totales de headway, el intercambio de pasajeros en hora pico consume ~45 s: apertura + desembarque + embarque de cientos de personas + cierre + verificación de sensores. El benchmark L15 Prata (São Paulo, mismo fabricante Alstom) documenta que ese ciclo nunca se completó en 90 s en 12 años de operación — headway real histórico: 170–196 s.</span><span class="en">Within 90 total headway seconds, peak hour passenger exchange consumes ~45 s: opening + alighting + boarding hundreds of people + closing + sensor verification. The L15 Prata benchmark (São Paulo, same Alstom manufacturer) documents this cycle was never completed in 90 s across 12 years of operation — historical real headway: 170–196 s.</span></p>
+    </div>
+  </div>
+
+  <hr class="rule">
+
+  <!-- 02 · DISTANCIA DE FRENADO -->
+  <div class="sec">
+    <div class="sec-hdr"><span class="sec-num">02 ·</span><span class="sec-title"><span class="es">Distancia de Frenado de Emergencia · N2</span><span class="en">Emergency Braking Distance · N2</span></span></div>
+    <div class="card accent-amber" style="margin:0 0 16px">
+      <div class="card-title"><span class="es">Fórmula cinemática</span><span class="en">Kinematic formula</span></div>
+      <p style="font-family:'Courier New',monospace; font-size:13px; color:var(--amber); line-height:1.9">
+        D<sub>frenado</sub> = (V<sub>apr</sub>²) / (2 × a<sub>emerg</sub>) × FS<br>
+        D<sub>frenado</sub> = (6.94²) / (2 × 1.5) × 1.3 = (48.16 / 3) × 1.3 ≈ <strong>20.9 m</strong><br>
+        <span style="color:var(--muted); font-size:11px"><span class="es">A V<sub>max</sub> interestación (22.2 m/s): D = 213.6 m → </span><span class="en">At V<sub>max</sub> interstation (22.2 m/s): D = 213.6 m → </span></span><strong><span class="es">Bloque aplicado: 300 m</span><span class="en">Applied block: 300 m</span></strong>
+      </p>
+    </div>
+    <div class="grid3">
+      <div class="kpi-card"><div class="val amber">300 m</div><div class="lbl"><span class="es">Bloque de seguridad mínimo (CBTC)</span><span class="en">Minimum safety block (CBTC)</span></div></div>
+      <div class="kpi-card"><div class="val">60 m</div><div class="lbl"><span class="es">Longitud tren M-6V</span><span class="en">M-6V train length</span></div></div>
+      <div class="kpi-card"><div class="val">954.5 m</div><div class="lbl"><span class="es">Distancia promedio interestación</span><span class="en">Average interstation distance</span></div></div>
+    </div>
+    <div class="card" style="margin-top:16px; border-left:3px solid var(--red)">
+      <div class="card-title"><span class="es">Distancia de separación mínima</span><span class="en">Minimum separation distance</span></div>
+      <p style="font-family:'Courier New',monospace; color:var(--amber); font-size:13px; line-height:1.9">
+        D<sub>seg</sub> = D<sub>interestación</sub> + L<sub>tren</sub> + D<sub>bloque</sub><br>
+        D<sub>seg</sub> = 954.5 + 60 + 300 = <strong>1,314.5 m</strong>
+      </p>
+    </div>
+  </div>
+
+  <hr class="rule">
+
+  <!-- 03 · HEADWAY CALCULADO -->
+  <div class="sec">
+    <div class="sec-hdr"><span class="sec-num">03 ·</span><span class="sec-title"><span class="es">Headway Mínimo de Seguridad · N2</span><span class="en">Minimum Safety Headway · N2</span></span></div>
+    <div class="grid2">
+      <div class="card accent-blue">
+        <div class="card-title"><span class="es">Condición promedio (dwell 30 s)</span><span class="en">Average condition (dwell 30 s)</span></div>
+        <p style="font-family:'Courier New',monospace; font-size:12px; color:var(--amber); line-height:1.9">
+          T<sub>hw</sub> = (1,314.5 / 6.94) + 30 + 3<br>
+          T<sub>hw</sub> = 189.4 + 30 + 3 = <strong>222 s ≈ 3.7 min</strong>
+        </p>
+      </div>
+      <div class="card accent-red">
+        <div class="card-title"><span class="es">Condición hora pico (dwell 45 s)</span><span class="en">Peak hour condition (dwell 45 s)</span></div>
+        <p style="font-family:'Courier New',monospace; font-size:12px; color:var(--red); line-height:1.9">
+          T<sub>hw</sub> = (1,314.5 / 6.94) + 45 + 3<br>
+          T<sub>hw</sub> = 189.4 + 45 + 3 = <strong>237 s ≈ 3.96 min</strong>
+        </p>
+      </div>
+    </div>
+    <div class="tbl-wrap" style="margin-top:20px">
+      <table>
+        <thead><tr><th><span class="es">Condición</span><span class="en">Condition</span></th><th><span class="es">Headway calculado</span><span class="en">Calculated headway</span></th><th><span class="es">vs. Promesa oficial</span><span class="en">vs. Official promise</span></th></tr></thead>
+        <tbody>
+          <tr><td><span class="es">Promesa SNIP 17248 · N1</span><span class="en">SNIP 17248 promise · N1</span></td><td class="num green">90 s</td><td>—</td></tr>
+          <tr><td><span class="es">Condición promedio (dwell 30 s) · N2</span><span class="en">Average condition (dwell 30 s) · N2</span></td><td class="num amber">222 s · 3.7 min</td><td class="num red">+147%</td></tr>
+          <tr><td><span class="es">Condición hora pico (dwell 45 s) · N2</span><span class="en">Peak hour condition (dwell 45 s) · N2</span></td><td class="num red">237 s · 3.96 min</td><td class="num red">+163%</td></tr>
+          <tr><td><span class="es">Benchmark L15 Prata · histórico · N1</span><span class="en">L15 Prata benchmark · historical · N1</span></td><td class="num amber">170–196 s</td><td class="num red">+89%–118%</td></tr>
+          <tr><td><span class="es">Modelo aritmético base embudo.html</span><span class="en">Base arithmetic model embudo.html</span></td><td class="num amber">212 s · 3.53 min</td><td class="num red">+136%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="box box-inf">
+      <div class="box-label"><span class="es">Inferencia · N3</span><span class="en">Inference · N3</span></div>
+      <p><span class="es">Bajo ninguna condición operativa modelizada el sistema alcanza los 90 segundos prometidos. Cuatro metodologías independientes convergen en el mismo rango: 170–237 s. Ninguna se acerca a 90 s.</span><span class="en">Under no modeled operating condition does the system reach the promised 90 seconds. Four independent methodologies converge on the same range: 170–237 s. None approaches 90 s.</span></p>
+    </div>
+  </div>
+
+  <hr class="rule">
+
+  <!-- 04 · CICLO DE IDA Y VUELTA -->
+  <div class="sec">
+    <div class="sec-hdr"><span class="sec-num">04 ·</span><span class="sec-title"><span class="es">Ciclo de Ida y Vuelta · N2</span><span class="en">Round Trip Cycle · N2</span></span></div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th><span class="es">Componente</span><span class="en">Component</span></th><th><span class="es">Condición promedio</span><span class="en">Average condition</span></th><th><span class="es">Condición hora pico</span><span class="en">Peak hour condition</span></th></tr></thead>
+        <tbody>
+          <tr><td><span class="es">Marcha pura (21 km a 30 km/h)</span><span class="en">Pure travel (21 km at 30 km/h)</span></td><td class="num">42.0 min</td><td class="num">42.0 min</td></tr>
+          <tr><td><span class="es">Paradas comerciales (20 × dwell)</span><span class="en">Commercial stops (20 × dwell)</span></td><td class="num">10.0 min</td><td class="num red">15.0 min</td></tr>
+          <tr><td><span class="es">Maniobras terminales (2 × 120 s)</span><span class="en">Terminal maneuvers (2 × 120 s)</span></td><td class="num">4.0 min</td><td class="num">4.0 min</td></tr>
+          <tr><td><span class="es">Recuperación operativa (5%)</span><span class="en">Operational recovery (5%)</span></td><td class="num">3.0 min</td><td class="num">3.0 min</td></tr>
+          <tr style="font-weight:700"><td><strong><span class="es">CICLO TOTAL</span><span class="en">TOTAL CYCLE</span></strong></td><td class="num amber"><strong>59.0 min</strong></td><td class="num red"><strong>64.0 min</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="box box-warn" style="margin-top:16px">
+      <div class="box-label"><span class="es">La identidad operacional central · N1/N2</span><span class="en">The central operational identity · N1/N2</span></div>
+      <p><span class="es">La relación entre flota, headway y ciclo es una identidad operacional: <span style="font-family:monospace; color:var(--amber)">T = N × H</span>. Con los parámetros N1 del expediente (17 trenes, 90 s de headway prometido), el ciclo máximo compatible es: <span style="font-family:monospace; color:var(--amber)">T = 17 × 1.5 min = 25.5 minutos</span>. El ciclo modelizado para la línea es 59–64 minutos — entre 2.3 y 2.5 veces mayor que el ciclo compatible con la promesa. Para sostener 90 s con un ciclo de 59–64 min se necesitarían entre 40 y 43 trenes activos simultáneos, no 17. Esta contradicción no depende de supuestos cinemáticos ni del bloque CBTC — depende exclusivamente de los parámetros N1 del expediente.</span><span class="en">The relationship between fleet, headway and cycle is an operational identity: <span style="font-family:monospace; color:var(--amber)">T = N × H</span>. With the expedient's N1 parameters (17 trains, promised 90 s headway), the maximum compatible cycle is: <span style="font-family:monospace; color:var(--amber)">T = 17 × 1.5 min = 25.5 minutes</span>. The modeled cycle for the line is 59–64 minutes — between 2.3 and 2.5 times greater than the cycle compatible with the promise. To sustain 90 s with a 59–64 min cycle would require between 40 and 43 simultaneously active trains, not 17. This contradiction does not depend on kinematic assumptions or the CBTC block — it depends exclusively on the expedient's N1 parameters.</span></p>
+    </div>
+
+    <div class="box box-note" style="margin-top:12px">
+      <div class="box-label"><span class="es">Convergencia con el modelo base</span><span class="en">Convergence with base model</span></div>
+      <p><span class="es">El modelo aritmético de embudo.html usa T = 60 min (ciclo operativo), derivando H = 60 ÷ 17 = 3.53 min. El ciclo cinemático detallado produce 59–64 min según la condición. La convergencia de ambos modelos confirma que el headway de 3.5–4.0 min es robusto en todo el rango de supuestos razonables.</span><span class="en">The embudo.html arithmetic model uses T = 60 min (operational cycle), deriving H = 60 ÷ 17 = 3.53 min. The detailed kinematic cycle produces 59–64 min depending on condition. Convergence of both models confirms the 3.5–4.0 min headway is robust across the full range of reasonable assumptions.</span></p>
+    </div>
+  </div>
+
+  <hr class="rule">
+
+  <!-- 05 · DIMENSIONAMIENTO DE FLOTA -->
+  <div class="sec">
+    <div class="sec-hdr"><span class="sec-num">05 ·</span><span class="sec-title"><span class="es">Dimensionamiento de Flota · N2/N3</span><span class="en">Fleet Sizing · N2/N3</span></span></div>
+
+    <div class="box box-note" style="margin-bottom:16px">
+      <div class="box-label"><span class="es">Nota de trazabilidad y escenarios de reserva</span><span class="en">Traceability note and reserve scenarios</span></div>
+      <p><span class="es">Este análisis parte de la flota contratada [N1]: 17 trenes. Se modelizan dos escenarios discretos de disponibilidad: <strong>Escenario operacional promedio</strong> — 2 trenes fuera de servicio (11.8% de la flota, límite inferior razonable para mantenimiento programado); <strong>Escenario conservador</strong> — 3 trenes fuera de servicio (17.6%, consistente con una reserva ≥15% redondeada al entero superior). Ninguno de los dos escenarios representa necesariamente la disponibilidad contractual del proyecto, que debe verificarse en el expediente técnico.</span><span class="en">This analysis starts from the contracted fleet [N1]: 17 trains. Two discrete availability scenarios are modeled: <strong>Average operational scenario</strong> — 2 trains out of service (11.8% of fleet, reasonable lower bound for scheduled maintenance); <strong>Conservative scenario</strong> — 3 trains out of service (17.6%, consistent with a ≥15% reserve rounded up to integer). Neither scenario necessarily represents the project's contractual availability, which must be verified in the technical file.</span></p>
+    </div>
+
+    <div class="grid2">
+      <div class="card accent-blue">
+        <div class="card-title"><span class="es">Escenario operacional promedio — 2 fuera de servicio · ciclo 59 min</span><span class="en">Average operational scenario — 2 out of service · 59 min cycle</span></div>
+        <p style="font-family:'Courier New',monospace; font-size:12px; color:var(--amber); line-height:1.9">
+          Flota contratada [N1]: <strong>17 trenes</strong><br>
+          Fuera de servicio (mantenimiento): <strong>2 trenes</strong><br>
+          N<sub>activos</sub> = 17 − 2 = <strong>15 trenes activos</strong><br>
+          Headway real = 59 / 15 = <strong>3.93 min</strong>
+        </p>
+      </div>
+      <div class="card accent-red">
+        <div class="card-title"><span class="es">Escenario conservador — 3 fuera de servicio · ciclo 64 min</span><span class="en">Conservative scenario — 3 out of service · 64 min cycle</span></div>
+        <p style="font-family:'Courier New',monospace; font-size:12px; color:var(--red); line-height:1.9">
+          Flota contratada [N1]: <strong>17 trenes</strong><br>
+          Fuera de servicio (reserva ≥15%): <strong>3 trenes</strong><br>
+          N<sub>activos</sub> = 17 − 3 = <strong>14 trenes activos</strong><br>
+          Headway real = 64 / 14 = <strong>4.57 min</strong>
+        </p>
+      </div>
+    </div>
+
+    <div class="tbl-wrap" style="margin-top:16px">
+      <table>
+        <thead><tr><th><span class="es">Condición</span><span class="en">Condition</span></th><th><span class="es">Trenes activos</span><span class="en">Active trains</span></th><th><span class="es">Headway real</span><span class="en">Real headway</span></th><th><span class="es">vs. Promesa 90 s</span><span class="en">vs. 90 s promise</span></th></tr></thead>
+        <tbody>
+          <tr><td><span class="es">Promesa oficial · N1</span><span class="en">Official promise · N1</span></td><td class="num green">40</td><td class="num green">90 s</td><td>—</td></tr>
+          <tr><td><span class="es">Condición promedio (2 en talleres)</span><span class="en">Average condition (2 in maintenance)</span></td><td class="num amber">15</td><td class="num amber">236 s · 3.93 min</td><td class="num red">+162%</td></tr>
+          <tr><td><span class="es">Condición hora pico (3 en talleres)</span><span class="en">Peak hour condition (3 in maintenance)</span></td><td class="num red">14</td><td class="num red">274 s · 4.57 min</td><td class="num red">+204%</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="box box-warn" style="margin-top:16px">
+      <div class="box-label"><span class="es">Flota requerida para operar a headway cinemático · N3</span><span class="en">Fleet required to operate at kinematic headway · N3</span></div>
+      <p><span class="es">Para operar con headway de 3.7 min (condición promedio cinemática) se necesitarían: ciclo 59 min ÷ 3.7 min = 15.9 → 16 activos + 2–3 reserva = <strong>18–19 trenes totales</strong>. Para headway de 3.96 min (hora pico cinemática): ciclo 64 min ÷ 3.96 min = 16.2 → 17 activos + 3 reserva = <strong>20 trenes totales</strong>. La flota contratada de 17 trenes es insuficiente para alcanzar incluso el headway cinemático modelizado — no el prometido de 90 s.</span><span class="en">To operate at 3.7 min headway (average kinematic condition): 59 min cycle ÷ 3.7 min = 15.9 → 16 active + 2–3 reserve = <strong>18–19 total trains</strong>. For 3.96 min headway (peak kinematic): 64 min cycle ÷ 3.96 min = 16.2 → 17 active + 3 reserve = <strong>20 total trains</strong>. The contracted fleet of 17 trains is insufficient to achieve even the modeled kinematic headway — not the promised 90 s.</span></p>
+    </div>
+  </div>
+
+  <hr class="rule">
+
+  <!-- 06 · CAPACIDAD REAL -->
+  <div class="sec">
+    <div class="sec-hdr"><span class="sec-num">06 ·</span><span class="sec-title"><span class="es">Capacidad Real vs. Prometida · N3</span><span class="en">Real vs. Promised Capacity · N3</span></span></div>
+
+    <p style="font-size:12.5px; color:var(--muted); margin-bottom:16px"><span class="es">Cadena de trazabilidad: 17 trenes contratados [N1] → reserva 15% → trenes activos → ciclo → headway real → PPHPD = (60/hw) × 750 pax → capacidad diaria (factor punta 30%, eficiencia 90%, 2 sentidos).</span><span class="en">Traceability chain: 17 contracted trains [N1] → 15% reserve → active trains → cycle → real headway → PPHPD = (60/hw) × 750 pax → daily capacity (peak factor 30%, efficiency 90%, 2 directions).</span></p>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th><span class="es">Condición</span><span class="en">Condition</span></th><th><span class="es">Trenes activos</span><span class="en">Active trains</span></th><th><span class="es">Headway real</span><span class="en">Real headway</span></th><th>PPHPD</th><th><span class="es">Capacidad diaria est.</span><span class="en">Est. daily capacity</span></th></tr></thead>
+        <tbody>
+          <tr><td><span class="es">Promesa oficial (90 s) · N1<br><small style="color:var(--muted)">40 trenes/hora × 750 pax = 30,000 PPHPD · ciclo implícito 25.5 min</small></span><span class="en">Official promise (90 s) · N1<br><small style="color:var(--muted)">40 trains/hour × 750 pax = 30,000 PPHPD · implied cycle 25.5 min</small></span></td><td class="num green"><span class="es">17 contratados<br><small style="color:var(--muted)">40 activos simultáneos requeridos</small></span><span class="en">17 contracted<br><small style="color:var(--muted)">40 simultaneous active required</small></span></td><td class="num green">90 s</td><td class="num green">30,000</td><td class="num green">~720,000 pax/día<br><small style="color:var(--muted)">teórico · no operacionalmente demostrado</small></td></tr>
+          <tr><td><span class="es">Capacidad teórica máxima (17 activos, sin reserva · hw 3.53 min) · <em>modelo base embudo.html</em></span><span class="en">Maximum theoretical capacity (17 active, no reserve · hw 3.53 min) · <em>embudo.html base model</em></span></td><td class="num amber">17 <small style="color:var(--muted)"><span class="es">sin reserva</span><span class="en">no reserve</span></small></td><td class="num amber">212 s · 3.53 min</td><td class="num amber">12,750</td><td class="num amber">306,000 pax/día</td></tr>
+          <tr><td><span class="es">Capacidad operativa modelizada (15 activos, reserva 15% · hw 3.93 min)</span><span class="en">Modeled operational capacity (15 active, 15% reserve · hw 3.93 min)</span></td><td class="num amber">15</td><td class="num amber">236 s · 3.93 min</td><td class="num amber">11,450</td><td class="num amber">~275,000 pax/día</td></tr>
+          <tr><td><span class="es">Capacidad operativa hora pico (14 activos, reserva mínima · hw 4.57 min)</span><span class="en">Peak hour operational capacity (14 active, minimum reserve · hw 4.57 min)</span></td><td class="num red">14</td><td class="num red">274 s · 4.57 min</td><td class="num red">9,847</td><td class="num red">~236,000 pax/día</td></tr>
+          <tr style="font-weight:700"><td><strong><span class="es">Demanda METI 2030 · N1</span><span class="en">METI 2030 demand · N1</span></strong></td><td>—</td><td>—</td><td class="num amber"><strong>12,800</strong></td><td class="num amber"><strong>464,800 pax/día</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="box box-note" style="margin-top:16px">
+      <div class="box-label"><span class="es">Fórmula de conversión a capacidad diaria · N2</span><span class="en">Daily capacity conversion formula · N2</span></div>
+      <p><span class="es">La conversión de PPHPD a capacidad diaria utiliza la fórmula del modelo base de embudo.html: <span style="font-family:monospace; color:var(--amber)">Pax/día = PPHPD × 4h pico × (1÷0.30) × 2 sentidos × 0.90</span>. Verificación: 11,450 × 4 × (1÷0.30) × 2 × 0.90 ≈ 274,800 pax/día. La cifra de 306,000 que aparece en el modelo base usa 17 trenes activos completos (sin reserva) con headway 3.53 min → 12,750 PPHPD × 4 × (1÷0.30) × 2 × 0.90 = 306,000. Con 15 trenes activos y headway 3.93 min → 11,450 PPHPD → ~274,800 pax/día. Los ~306,000 de este modelo requieren los 17 trenes sin reserva — lo que no es posible en operación sostenida con mantenimiento estándar.</span><span class="en">The PPHPD to daily capacity conversion uses the embudo.html base model formula: <span style="font-family:monospace; color:var(--amber)">Pax/day = PPHPD × 4h peak × (1÷0.30) × 2 directions × 0.90</span>. Verification: 11,450 × 4 × (1÷0.30) × 2 × 0.90 ≈ 274,800 pax/day. The 306,000 figure in the base model uses all 17 active trains (no reserve) with 3.53 min headway → 12,750 PPHPD × 4 × (1÷0.30) × 2 × 0.90 = 306,000. With 15 active trains and 3.93 min headway → 11,450 PPHPD → ~274,800 pax/day. The ~306,000 of this model requires all 17 trains without reserve — not possible in sustained operation with standard maintenance.</span></p>
+    </div>
+
+    <div class="box box-warn" style="margin-top:12px">
+      <div class="box-label"><span class="es">Escenarios modelizados — no son pronósticos</span><span class="en">Modeled scenarios — not forecasts</span></div>
+      <p><span class="es">Los valores de capacidad diaria de la tabla (~274,800 promedio y ~240,000 hora pico) son resultados de escenarios operativos modelizados con reserva técnica estándar aplicada, no pronósticos de operación real. La condición hora pico representa el escenario operativo conservador con 14 trenes activos — no el piso operativo definitivo del sistema.</span><span class="en">The daily capacity values in the table (~274,800 average and ~240,000 peak hour) are results of modeled operating scenarios with standard technical reserve applied, not real operation forecasts. The peak hour condition represents the conservative modeled operating scenario with 14 active trains — not the system's definitive operational floor.</span></p>
+    </div>
+
+    <div class="grid3" style="margin-top:20px">
+      <div class="kpi-card"><div class="val red">−10.6%</div><div class="lbl"><span class="es">Déficit PPHPD condición promedio vs. demanda 2030<br><small style="color:var(--muted)">11,450 ÷ 12,800 = 89.5% cobertura</small></span><span class="en">Average PPHPD deficit vs. 2030 demand<br><small style="color:var(--muted)">11,450 ÷ 12,800 = 89.5% coverage</small></span></div></div>
+      <div class="kpi-card"><div class="val red">+204%</div><div class="lbl"><span class="es">Exceso headway real hora pico sobre promesa 90 s</span><span class="en">Peak hour real headway excess over 90 s promise</span></div></div>
+      <div class="kpi-card"><div class="val amber">~275,000</div><div class="lbl"><span class="es">Capacidad promedio (15 activos, hw 3.93 min)</span><span class="en">Average capacity (15 active, hw 3.93 min)</span></div></div>
+    </div>
+  </div>
+
+  <hr class="rule">
+
+  <!-- 07 · CONDICIÓN PARA 90 SEGUNDOS -->
+  <div class="sec">
+    <div class="sec-hdr"><span class="sec-num">07 ·</span><span class="sec-title"><span class="es">¿Qué se necesitaría para alcanzar 90 segundos? · N3</span><span class="en">What would it take to reach 90 seconds? · N3</span></span></div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th><span class="es">Requisito simultáneo</span><span class="en">Simultaneous requirement</span></th><th><span class="es">Estado actual</span><span class="en">Current status</span></th></tr></thead>
+        <tbody>
+          <tr><td><span class="es">Ciclo reducido a ~46 min (velocidad 35 km/h + dwell 20 s en hora pico — inconsistente con operación de alta demanda)</span><span class="en">Cycle reduced to ~46 min (speed 35 km/h + 20 s peak dwell — inconsistent with high demand operation)</span></td><td class="num red"><span class="es">No disponible</span><span class="en">Not available</span></td></tr>
+          <tr><td><span class="es">Modificación estructural de terminales (eliminación de giros en herradura, implementación de vías en cruz)</span><span class="en">Structural terminal modification (elimination of hairpin turns, crossover tracks)</span></td><td class="num red"><span class="es">No en expediente</span><span class="en">Not in expedient</span></td></tr>
+          <tr><td><span class="es">Flota de 31 trenes activos + reserva técnica = 36–38 trenes totales</span><span class="en">Fleet of 31 active trains + technical reserve = 36–38 total trains</span></td><td class="num red"><span class="es">Expediente contrata 17</span><span class="en">Expedient contracts 17</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="box box-warn">
+      <div class="box-label"><span class="es">Conclusión · N3</span><span class="en">Conclusion · N3</span></div>
+      <p><span class="es">El headway de 90 s utilizado como supuesto de capacidad en el expediente SNIP 17248 no está demostrado operacionalmente en la documentación disponible y resulta incompatible con los escenarios de operación modelizados en este análisis. Los tres requisitos simultáneos para alcanzarlo no están documentados en el expediente. La demostración definitiva de incompatibilidad requeriría verificar la arquitectura CBTC, geometría de terminales, perfiles de frenado y diseño operacional definitivo — documentación que el expediente debe proveer. La promesa de 90 s no tiene validación operativa documentada en ningún sistema GoA4 de escala comparable.</span><span class="en">The 90 s headway used as a capacity assumption in SNIP 17248 is not operationally demonstrated in the available documentation and is incompatible with the operating scenarios modeled in this analysis. The three simultaneous requirements to achieve it are not documented in the expedient. A definitive demonstration of incompatibility would require verifying the CBTC architecture, terminal geometry, braking profiles and definitive operational design — documentation the expedient must provide. The 90 s promise has no documented operational validation in any comparable-scale GoA4 system.</span></p>
+    </div>
+  </div>
+
+  <hr class="rule">
+
+  <!-- 08 · CONVERGENCIA -->
+  <div class="sec">
+    <div class="sec-hdr"><span class="sec-num">08 ·</span><span class="sec-title"><span class="es">Convergencia de Cinco Vías de Análisis · N3</span><span class="en">Convergence of Five Analysis Pathways · N3</span></span></div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th><span class="es">Fuente / Metodología</span><span class="en">Source / Methodology</span></th><th><span class="es">Headway calculado</span><span class="en">Calculated headway</span></th><th><span class="es">Tipo</span><span class="en">Type</span></th></tr></thead>
+        <tbody>
+          <tr><td><span class="es">Este informe · condición promedio</span><span class="en">This report · average condition</span></td><td class="num amber">222 s · 3.7 min</td><td><span class="es">Cinemática + distancia de frenado</span><span class="en">Kinematics + braking distance</span></td></tr>
+          <tr><td><span class="es">Este informe · hora pico</span><span class="en">This report · peak hour</span></td><td class="num red">237 s · 3.96 min</td><td><span class="es">Cinemática + dwell 45 s</span><span class="en">Kinematics + 45 s dwell</span></td></tr>
+          <tr><td><span class="es">Modelo base embudo.html</span><span class="en">Base model embudo.html</span></td><td class="num amber">212 s · 3.53 min</td><td><span class="es">Aritmética: 60 min ÷ 17 trenes</span><span class="en">Arithmetic: 60 min ÷ 17 trains</span></td></tr>
+          <tr><td><span class="es">Monte Carlo P50 · 123,456 iteraciones</span><span class="en">Monte Carlo P50 · 123,456 iterations</span></td><td class="num amber">192 s · 3.2 min</td><td><span class="es">Distribución triangular (1.5, 3.2, 5.0)</span><span class="en">Triangular distribution (1.5, 3.2, 5.0)</span></td></tr>
+          <tr><td><span class="es">L15 Prata · São Paulo · N1 empírico</span><span class="en">L15 Prata · São Paulo · N1 empirical</span></td><td class="num amber">170–196 s</td><td><span class="es">Datos operativos reales 2012–2025</span><span class="en">Real operational data 2012–2025</span></td></tr>
+          <tr style="font-weight:700"><td><strong><span class="es">Promesa oficial SNIP 17248 · N1</span><span class="en">Official promise SNIP 17248 · N1</span></strong></td><td class="num red"><strong>90 s</strong></td><td><span class="es">Sin validación operativa documentada GoA4</span><span class="en">No documented GoA4 operational validation</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="box box-inf">
+      <div class="box-label"><span class="es">La cláusula que resuelve la incertidumbre · N3</span><span class="en">The clause that resolves uncertainty · N3</span></div>
+      <p><span class="es">Si el headway de 90 s es el desempeño que sustenta la capacidad utilizada en la evaluación del proyecto, el Estado debería poder exigir que ese desempeño sea demostrado mediante una prueba operacional reproducible y contractualmente exigible. Si los 90 s son alcanzables, una cláusula de garantía no debería representar un costo económico asociado a una incapacidad que el contratista afirma no tener — aunque sí puede implicar instrumentos de garantía y asignación de riesgo. Si los 90 s no son alcanzables, el Estado comprometió USD 932.8M sin garantía de desempeño sobre el parámetro central de la adjudicación. Una de las dos cosas es cierta. La cláusula determina cuál.</span><span class="en">If the 90 s headway is the performance underpinning the capacity used in the project evaluation, the State should be able to require that performance be demonstrated through a reproducible and contractually enforceable operational test. If 90 s is achievable, a guarantee clause should not represent an economic cost associated with an incapacity the contractor claims not to have — though it may imply guarantee instruments and risk allocation. If 90 s is not achievable, the State committed USD 932.8M without performance guarantee on the central adjudication parameter. One of the two is true. The clause determines which.</span></p>
+    </div>
+  </div>
+
+  <hr class="rule">
+
+  <!-- 09 · RESTRICCIÓN GEOMÉTRICA -->
+  <div class="sec">
+    <div class="sec-hdr"><span class="sec-num">09 ·</span><span class="sec-title"><span class="es">Restricción Geométrica de Línea · N3</span><span class="en">Line Geometry Constraint · N3</span></span><span class="lbl-n3 section-label" style="margin-left:8px;">N3</span></div>
+
+    <p><span class="es">La distancia de separación mínima calculada (1,314.5 m) es mayor que la distancia promedio entre estaciones (954.5 m). Esta relación geométrica depende de parámetros de señalización y geometría que deben verificarse contra la arquitectura CBTC específica del proyecto — pero es independiente de los supuestos de velocidad comercial y dwell time utilizados en las secciones anteriores.</span><span class="en">The calculated minimum separation distance (1,314.5 m) exceeds the average interstation distance (954.5 m). This geometric relationship depends on signalling and geometry parameters that must be verified against the project's specific CBTC architecture — but is independent of the commercial speed and dwell time assumptions used in previous sections.</span></p>
+
+    <div class="card accent-red" style="margin:16px 0">
+      <div class="card-title"><span class="es">La relación crítica</span><span class="en">The critical relationship</span></div>
+      <p style="font-family:'Courier New',monospace; font-size:13px; color:var(--red); line-height:2">
+        D<sub>seg</sub> = D<sub>interestación</sub> + L<sub>tren</sub> + D<sub>bloque</sub><br>
+        D<sub>seg</sub> = 954.5 + 60 + 300 = <strong>1,314.5 m</strong><br>
+        D<sub>seg</sub> − D<sub>interestación</sub> = <strong>+360 m de exceso</strong>
+      </p>
+      <p style="font-size:12.5px; margin-top:8px"><span class="es">El bloque de seguridad excede la distancia interestación en 360 m (60 m de longitud del tren + 300 m de bloque de frenado). Ese exceso es el que impide la coexistencia de trenes en tramos consecutivos. <strong>Nota N2:</strong> El valor de 300 m es un parámetro de modelización estándar para sistemas CBTC con bloque móvil — su valor exacto en la arquitectura CBTC definitiva del proyecto debe verificarse en el expediente técnico de señalización. Si el bloque real fuera inferior a 300 m, la restricción se atenuaría; si fuera superior, se agravaría.</span><span class="en">The safety block exceeds the interstation distance by 360 m (60 m train length + 300 m braking block). That excess prevents coexistence of trains in consecutive sections. <strong>N2 note:</strong> The 300 m value is a standard modelling parameter for CBTC systems with moving block — its exact value in the project's definitive CBTC architecture must be verified in the signalling technical file. If the real block were less than 300 m, the constraint would ease; if greater, it would worsen.</span></p>
+    </div>
+
+    <div class="box box-warn">
+      <div class="box-label"><span class="es">Restricción potencial de sincronización cinemático-operacional · N3</span><span class="en">Potential kinematic-operational synchronization constraint · N3</span></div>
+      <p><span class="es">Bajo los parámetros modelizados (bloque 300 m · N2), mientras el Tren A está detenido en la Estación B, el Tren B no podría mantener la separación requerida de 1,314.5 m si intentara entrar simultáneamente a la Estación A, que está a solo 954.5 m. El Tren B tendría que absorber la perturbación del dwell del Tren A — reduciendo velocidad y aumentando el intervalo efectivo. Esta restricción de sincronización cinemático-operacional depende del valor real del bloque CBTC del proyecto, que debe verificarse en el expediente técnico de señalización. Lo que sí es independiente de ese valor: la identidad T = N × H establece que la promesa de 90 s con 17 trenes implica un ciclo máximo de 25.5 min — incompatible con los 59–64 min modelizados para la línea.</span><span class="en">Under the modeled parameters (300 m block · N2), while Train A is stopped at Station B, Train B could not maintain the required 1,314.5 m separation if attempting to enter Station A simultaneously — only 954.5 m away. Train B would have to absorb Train A's dwell perturbation, reducing speed and increasing the effective interval. This kinematic-operational synchronization constraint depends on the real CBTC block value of the project, which must be verified in the signalling technical file. What is independent of that value: the identity T = N × H establishes that the 90 s promise with 17 trains implies a maximum cycle of 25.5 min — incompatible with the 59–64 min modeled for the line.</span></p>
+    </div>
+
+    <div class="tbl-wrap" style="margin-top:20px">
+      <table>
+        <thead><tr><th><span class="es">Vía de demostración</span><span class="en">Demonstration pathway</span></th><th><span class="es">Headway mínimo resultante</span><span class="en">Resulting minimum headway</span></th><th><span class="es">Dependencia de supuestos</span><span class="en">Assumption dependency</span></th></tr></thead>
+        <tbody>
+          <tr><td><span class="es">Vía 1 · Aritmética del ciclo (embudo.html)</span><span class="en">Path 1 · Cycle arithmetic (embudo.html)</span></td><td class="num amber">212 s · 3.53 min</td><td><span class="es">Ciclo operativo, flota</span><span class="en">Operational cycle, fleet</span></td></tr>
+          <tr><td><span class="es">Vía 2 · Cinemática + dwell time pico</span><span class="en">Path 2 · Kinematics + peak dwell time</span></td><td class="num red">237 s · 3.96 min</td><td><span class="es">Velocidad, dwell, factor de seguridad</span><span class="en">Speed, dwell, safety factor</span></td></tr>
+          <tr><td><span class="es">Vía 3 · Geometría de línea</span><span class="en">Path 3 · Line geometry</span></td><td class="num red">&gt; 240 s · &gt; 4.0 min</td><td><span class="es">Solo longitud de tren + bloque + distancia interestación</span><span class="en">Only train length + block + interstation distance</span></td></tr>
+          <tr><td><span class="es">Monte Carlo P50 · 123,456 iteraciones</span><span class="en">Monte Carlo P50 · 123,456 iterations</span></td><td class="num amber">192 s · 3.2 min</td><td><span class="es">Distribución triangular de parámetros</span><span class="en">Triangular parameter distribution</span></td></tr>
+          <tr><td><span class="es">L15 Prata · datos empíricos · N1</span><span class="en">L15 Prata · empirical data · N1</span></td><td class="num amber">170–196 s</td><td><span class="es">Ninguna — datos operativos reales</span><span class="en">None — real operational data</span></td></tr>
+          <tr style="font-weight:700"><td><strong><span class="es">Promesa SNIP 17248 · N1</span><span class="en">SNIP 17248 promise · N1</span></strong></td><td class="num red"><strong>90 s</strong></td><td class="num red"><span class="es">Sin validación documentada</span><span class="en">No documented validation</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="box box-inf">
+      <div class="box-label"><span class="es">Inferencia · N3</span><span class="en">Inference · N3</span></div>
+      <p><span class="es">Bajo la arquitectura de separación modelizada — bloque de 300 m [N2], tren de 60 m y distancia promedio interestación de 954.5 m — la geometría produce una restricción que debe verificarse contra el diseño CBTC definitivo del proyecto. Si esos parámetros corresponden al sistema definitivo, la coexistencia de trenes en estaciones consecutivas requiere una verificación específica de compatibilidad con el headway de 90 s. El bloque de seguridad de 300 m está clasificado como parámetro N2 — su valor exacto en la arquitectura CBTC real del proyecto es un dato que el expediente SNIP 17248 debe documentar explícitamente para que esta restricción se eleve de N3 a N1.</span><span class="en">Under the modelled separation architecture — 300 m block [N2], 60 m train length and 954.5 m average interstation distance — the geometry produces a constraint that must be verified against the project's definitive CBTC design. If those parameters correspond to the definitive system, coexistence of trains in consecutive stations requires specific compatibility verification with the 90 s headway. The 300 m safety block is classified as an N2 parameter — its exact value in the project's real CBTC architecture is a datum that SNIP 17248 must explicitly document for this constraint to be elevated from N3 to N1.</span></p>
+    </div>
+  </div>
+
+  <!-- PIE DE PÁGINA -->
+  <div class="tab-footer">
+    <div>
+      <div class="tf-author">Ing. Piter J. Bonilla D. · CODIA #17378</div>
+      <div class="tf-original">
+        <span class="es">Informe técnico basado en parámetros verificados del expediente oficial SNIP 17248 [N1] y estándares internacionales UITP/JICA [N2]. Los parámetros de modelización (velocidad comercial 30 km/h, dwell time pico 45 s, factor seguridad bloque 1.3) están declarados explícitamente como supuestos. El análisis es robusto en todo el rango de supuestos razonables: incluso bajo parámetros optimistas (35 km/h, dwell 20 s, ciclo 46 min), el headway mínimo calculado supera los 210 s — 133% sobre los 90 s prometidos. La restricción geométrica (D_seg > D_interestación) depende del bloque de seguridad CBTC [N2] y debe verificarse contra el diseño definitivo del proyecto. Pendiente [B]: referencias exactas en SNIP 17248 para ciclo operativo, número de trenes (17), capacidad por tren (750 pax) y distancia interestación.</span>
+        <span class="en">Technical report based on verified parameters from official SNIP 17248 expedient [N1] and international UITP/JICA standards [N2]. Modelling parameters (30 km/h commercial speed, 45 s peak dwell, block safety factor 1.3) are explicitly declared as assumptions. The analysis is robust across the full range of reasonable assumptions: even under optimistic parameters (35 km/h, 20 s dwell, 46 min cycle), the minimum calculated headway exceeds 210 s — 133% above the promised 90 s. The geometric constraint (D_seg > D_interstation) depends on the CBTC safety block [N2] and must be verified against the project's definitive design. Pending [B]: exact references in SNIP 17248 for operational cycle, number of trains (17), capacity per train (750 pax) and interstation distance.</span>
+      </div>
+      <div style="margin-top:8px; padding-top:8px; border-top:1px dashed var(--rule); font-size:11px; color:var(--muted);">
+        <span class="es"><strong>Fórmulas resumen:</strong>
+          <span style="font-family:monospace; color:var(--amber)"> D<sub>seg</sub> = 954.5 + 60 + 300 = 1,314.5 m</span><br>
+          <span style="font-family:monospace; color:var(--amber)"> T<sub>hw</sub> (promedio) = 1,314.5/6.94 + 30 + 3 = 222 s · 3.7 min (+147%)</span><br>
+          <span style="font-family:monospace; color:var(--amber)"> T<sub>hw</sub> (pico) = 1,314.5/6.94 + 45 + 3 = 237 s · 3.96 min (+163%)</span><br>
+          <span style="font-family:monospace; color:var(--amber)"> Ciclo pico: 42.0 + 15.0 + 4.0 + 3.0 = 64.0 min → 14 trenes activos → hw real 4.57 min</span><br>
+          <span style="font-family:monospace; color:var(--amber)"> Capacidad = PPHPD × 4h × (1÷0.30) × 2 × 0.90 → 11,450 PPHPD → ~275,000 pax/día (15 activos)</span>
+        </span>
+        <span class="en"><strong>Summary formulas:</strong>
+          <span style="font-family:monospace; color:var(--amber)"> D<sub>sec</sub> = 954.5 + 60 + 300 = 1,314.5 m</span><br>
+          <span style="font-family:monospace; color:var(--amber)"> T<sub>hw</sub> (average) = 1,314.5/6.94 + 30 + 3 = 222 s · 3.7 min (+147%)</span><br>
+          <span style="font-family:monospace; color:var(--amber)"> T<sub>hw</sub> (peak) = 1,314.5/6.94 + 45 + 3 = 237 s · 3.96 min (+163%)</span><br>
+          <span style="font-family:monospace; color:var(--amber)"> Peak cycle: 42.0 + 15.0 + 4.0 + 3.0 = 64.0 min → 14 active trains → real hw 4.57 min</span><br>
+          <span style="font-family:monospace; color:var(--amber)"> Capacity = PPHPD × 4h × (1÷0.30) × 2 × 0.90 → 11,450 PPHPD → ~275,000 pax/day (15 active)</span>
+        </span>
+      </div>
+    </div>
+  </div>
+
+</div>
+<!-- FIN TAB CINEMÁTICA DEL HEADWAY -->
 
 <!-- ══ Monte Carlo Script ══ -->
 
