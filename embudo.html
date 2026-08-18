@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>El Embudo que Nadie Quiere Ver · v1.0</title>
+<title>El Embudo que Nadie Quiere Ver · v15</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3.0.1/dist/chartjs-plugin-annotation.min.js"></script>
 <style>
@@ -28,7 +28,7 @@
   --rule:    rgba(200,216,240,.1);
   --text:    #c8d8f0;
   --muted:   #8898b8;
-  --topbar-h:44px;
+  --topbar-h:68px;
 }
 html.light {
   --navy:    #1a3260;
@@ -69,12 +69,17 @@ header.topbar {
   height: var(--topbar-h);
   background: rgba(7,14,28,.97);
   border-bottom: 1px solid var(--rule);
-  display: flex; align-items: center; justify-content: space-between;
+  display: flex; flex-direction: column; justify-content: center;
   padding: 0 20px; backdrop-filter: blur(8px);
 }
 html.light header.topbar { background: rgba(26,50,96,.97); }
+.tb-row1 { display: flex; align-items: center; justify-content: space-between; width: 100%; }
+.tb-row2 { display: flex; align-items: center; gap: 16px; padding-top: 3px; }
 .tb-brand { font-size: 11px; font-weight: 700; color: rgba(255,255,255,.7); letter-spacing: .08em; text-transform: uppercase; }
 .tb-right { display: flex; align-items: center; gap: 8px; }
+.tb-link { font-size: 11px; color: rgba(255,255,255,.55); text-decoration: none; letter-spacing: .02em; transition: color .15s; white-space: nowrap; }
+.tb-link:hover { color: #fff; }
+.tb-sep { color: rgba(255,255,255,.2); font-size: 11px; }
 .lang-toggle { display: flex; gap: 2px; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.15); border-radius: 20px; padding: 2px; }
 .lang-btn { background: none; border: none; padding: 2px 10px; border-radius: 16px; cursor: pointer; font-size: 11px; font-weight: 700; color: rgba(255,255,255,.5); transition: all .15s; }
 .lang-btn.active { background: var(--accent); color: #fff; }
@@ -514,29 +519,39 @@ html.light #tab-yqp .tf-original { color: var(--muted); }
 
 <!-- TOPBAR -->
 <header class="topbar">
-  <div class="tb-brand">
-    <span class="es">EL EMBUDO</span><span class="en">THE BOTTLENECK</span>
-    · <span class="es">Análisis Técnico Independiente</span><span class="en">Independent Technical Analysis</span>
-    · v1.0
-  </div>  <div class="tb-right">
-    <div class="lang-toggle">
-      <button class="lang-btn active" onclick="setLang('es')" id="top-lang-es">ES</button>
-      <button class="lang-btn" onclick="setLang('en')" id="top-lang-en">EN</button>
+  <div class="tb-row1">
+    <div class="tb-brand">
+      <span class="es">EL EMBUDO</span><span class="en">THE BOTTLENECK</span>
+      · <span class="es">Análisis Técnico Independiente</span><span class="en">Independent Technical Analysis</span>
+      · v1.0
     </div>
-    <button class="btn-ctrl" onclick="toggleTheme()" id="theme-btn">
-      <span class="es">☀︎ Claro</span><span class="en">☀︎ Light</span>
-    </button>
-    <button class="btn-ctrl" onclick="prepPrint()">
-      <span class="es">⎙ PDF completo</span><span class="en">⎙ Full PDF</span>
-    </button>
-    <a class="btn-ctrl" href="https://tinyurl.com/ycyyjj9j" target="_blank" download
-       style="text-decoration:none; display:inline-flex; align-items:center; gap:4px;">
-      <span class="es">📄 ES</span><span class="en">📄 ES</span>
-    </a>
-    <a class="btn-ctrl" href="https://tinyurl.com/843attc5" target="_blank" download
-       style="text-decoration:none; display:inline-flex; align-items:center; gap:4px;">
-      <span class="es">📄 EN</span><span class="en">📄 EN</span>
-    </a>
+    <div class="tb-right">
+      <div class="lang-toggle">
+        <button class="lang-btn active" onclick="setLang('es')" id="top-lang-es">ES</button>
+        <button class="lang-btn" onclick="setLang('en')" id="top-lang-en">EN</button>
+      </div>
+      <button class="btn-ctrl" onclick="toggleTheme()" id="theme-btn">
+        <span class="es">☀︎ Claro</span><span class="en">☀︎ Light</span>
+      </button>
+      <button class="btn-ctrl" onclick="prepPrint()">
+        <span class="es">⎙ PDF completo</span><span class="en">⎙ Full PDF</span>
+      </button>
+      <a class="btn-ctrl" href="https://tinyurl.com/ycyyjj9j" target="_blank" download
+         style="text-decoration:none; display:inline-flex; align-items:center; gap:4px;">
+        <span class="es">📄 ES</span><span class="en">📄 ES</span>
+      </a>
+      <a class="btn-ctrl" href="https://tinyurl.com/843attc5" target="_blank" download
+         style="text-decoration:none; display:inline-flex; align-items:center; gap:4px;">
+        <span class="es">📄 EN</span><span class="en">📄 EN</span>
+      </a>
+    </div>
+  </div>
+  <div class="tb-row2">
+    <a class="tb-link" href="https://tinyurl.com/3k558yck" target="_blank">🎧 <span class="es">Podcast · 22 min</span><span class="en">Podcast · 22 min</span></a>
+    <span class="tb-sep">·</span>
+    <a class="tb-link" href="https://tinyurl.com/7w8wk55z" target="_blank">🧠 <span class="es">Presentación</span><span class="en">Presentation</span></a>
+    <span class="tb-sep">·</span>
+    <a class="tb-link" href="https://tinyurl.com/3fc29x78" target="_blank">📊 <span class="es">Infografía</span><span class="en">Infographic</span></a>
   </div>
 </header>
 
@@ -599,6 +614,7 @@ html.light #tab-yqp .tf-original { color: var(--muted); }
     <button class="tab-btn" onclick="showTab('montecarlo', this)"><span class="es">Monte Carlo · 123,456</span><span class="en">Monte Carlo · 123,456</span></button>
     <button class="tab-btn" onclick="showTab('prata', this)"><span class="es">Línea 15 Prata · SP</span><span class="en">Line 15 Prata · SP</span></button>
     <button class="tab-btn" onclick="showTab('cinematica', this)"><span class="es">Cinemática del Headway</span><span class="en">Headway Kinematics</span></button>
+    <button class="tab-btn" onclick="showTab('capred', this)"><span class="es">Capacidad de Red</span><span class="en">Network Capacity</span></button>
     <button class="tab-btn soliloquio-btn" onclick="showTab('soliloquio', this)"><span class="es">Soliloquio</span><span class="en">Soliloquy</span></button>
   </div>
 </nav>
@@ -729,13 +745,13 @@ html.light #tab-yqp .tf-original { color: var(--muted); }
     <div class="sec-hdr"><span class="sec-num">03 ·</span><span class="sec-title"><span class="es">Modelo de Capacidad del Monorriel</span><span class="en">Monorail Capacity Model</span></span></div>
     <p><span class="es">El siguiente modelo estima la capacidad operativa de una configuración de 17 trenes de 750 pasajeros. Los parámetros de flota (17 trenes, 750 pax/tren) provienen del expediente oficial SNIP 17248. El headway resultante es una derivación matemática directa de esa flota, no un supuesto del modelo. La ingeniería inversa aplicada calcula las consecuencias operativas de los parámetros fijados por el Estado.</span><span class="en">This model estimates the operational capacity of a 17-train configuration of 750 passengers each. The fleet parameters (17 trains, 750 pax/train) come from the official SNIP 17248 file. The resulting headway is a direct mathematical derivation of that fleet, not a model assumption. The reverse engineering applied calculates the operational consequences of the parameters set by the State.</span></p>
     <div class="steps">
-      <div class="step"><span class="step-num">01</span><span><span class="es">17 trenes × 750 pax/tren</span><span class="en">17 trains × 750 pax/train</span></span><span class="step-val">12,750 pphps</span></div>
+      <div class="step"><span class="step-num">01</span><span><span class="es">17 trenes × 750 pax/tren</span><span class="en">17 trains × 750 pax/train</span></span><span class="step-val">12,750 pphpd</span></div>
       <div class="step"><span class="step-num">02</span><span><span class="es">12,750 × 4 horas pico</span><span class="en">12,750 × 4 peak hours</span></span><span class="step-val">51,000 pax</span></div>
       <div class="step"><span class="step-num">03</span><span><span class="es">51,000 ÷ 0.30 (factor de punta)</span><span class="en">51,000 ÷ 0.30 (peak factor)</span></span><span class="step-val">170,000 pax/sentido</span></div>
       <div class="step"><span class="step-num">04</span><span><span class="es">170,000 × 2 sentidos</span><span class="en">170,000 × 2 directions</span></span><span class="step-val">340,000 pax/día</span></div>
       <div class="step"><span class="step-num">05</span><span><span class="es">340,000 × 0.90 (eficiencia operativa)</span><span class="en">340,000 × 0.90 (operational efficiency)</span></span><span class="step-val">306,000 pax/día</span></div>
     </div>
-    <p style="font-size:12px; color:var(--muted);"><span class="es"><strong>Headway derivado del ciclo operativo:</strong> El expediente fija una flota de 17 trenes y un ciclo operativo de 60 minutos (recorrido ida + retorno + detenciones comerciales + giro en terminales + regulación + margen de recuperación). Bajo esos parámetros, el headway matemáticamente derivado es: H = T ÷ N = 60 min ÷ 17 trenes = 3.53 min. No es un supuesto elegido por el autor — es una consecuencia aritmética de los parámetros del expediente. Consistente con estándares UITP para sistemas automatizados GoA3/GoA4.</span><span class="en"><strong>Headway derived from the operational cycle:</strong> The file sets a fleet of 17 trains and an operational cycle of 60 minutes (outbound + return trip + commercial stops + terminal turns + regulation + recovery margin). Under those parameters, the mathematically derived headway is: H = T ÷ N = 60 min ÷ 17 trains = 3.53 min. It is not an assumption chosen by the author — it is an arithmetic consequence of the file's parameters. Consistent with UITP standards for GoA3/GoA4 automated systems.</span></p>
+    <p style="font-size:12px; color:var(--muted);"><span class="es"><strong>Headway derivado del ciclo operativo:</strong> El expediente fija una flota de 17 trenes y un ciclo operativo de 60 minutos (recorrido ida + retorno + detenciones comerciales + giro en terminales + regulación + margen de recuperación). Bajo esos parámetros, el headway matemáticamente derivado es: H = T ÷ N = 60 min ÷ 17 trenes = 3.53 min. No es un supuesto elegido por el autor — es una consecuencia aritmética de los parámetros del expediente. Compatible con benchmarks UITP de referencia para sistemas automatizados GoA3/GoA4.</span><span class="en"><strong>Headway derived from the operational cycle:</strong> The file sets a fleet of 17 trains and an operational cycle of 60 minutes (outbound + return trip + commercial stops + terminal turns + regulation + recovery margin). Under those parameters, the mathematically derived headway is: H = T ÷ N = 60 min ÷ 17 trains = 3.53 min. It is not an assumption chosen by the author — it is an arithmetic consequence of the file's parameters. Compatible with UITP reference benchmarks for GoA3/GoA4 automated systems.</span></p>
   </div>
 
   <hr class="rule">
@@ -743,7 +759,7 @@ html.light #tab-yqp .tf-original { color: var(--muted); }
   <div class="sec">
     <div class="sec-hdr"><span class="sec-num">04 ·</span><span class="sec-title"><span class="es">La Lógica del Factor de Punta (30%)</span><span class="en">The Peak Factor Logic (30%)</span></span></div>
     <p><span class="es">4 horas pico (2 mañana + 2 tarde) concentran el 30% de la demanda diaria total. Las otras 16–20 horas absorben el 70% restante con frecuencias menores. El modelo dimensiona para el pico sin sobredimensionar la jornada completa.</span><span class="en">4 peak hours (2 morning + 2 afternoon) concentrate 30% of total daily demand. The remaining 16–20 hours absorb 70% at lower frequencies. The model sizes for peak without over-dimensioning the full day.</span></p>
-    <div class="box box-note"><div class="box-label">UITP · IEC 62267</div><p><span class="es">Factor del 30% consistente con estándares UITP para corredores urbanos de alta densidad. Headway de 3.53 min alcanzable según IEC 62267 para sistemas GoA3/GoA4.</span><span class="en">30% factor consistent with UITP standards for high-density urban corridors. 3.53 min headway achievable per IEC 62267 for GoA3/GoA4 systems.</span></p></div>
+    <div class="box box-note"><div class="box-label">UITP · IEC 62267</div><p><span class="es">Factor del 30% compatible con benchmarks UITP para corredores urbanos de alta densidad. Headway de 3.53 min consistente con rangos operativos de referencia para sistemas GoA3/GoA4 según IEC 62267 — norma de automatización, no de headway operacional universal.</span><span class="en">30% factor compatible with UITP benchmarks for high-density urban corridors. 3.53 min headway consistent with reference operational ranges for GoA3/GoA4 systems per IEC 62267 — an automation standard, not a universal operational headway standard.</span></p></div>
     <div class="steps">
       <div class="step"><span class="step-num">✓</span><span><span class="es">170,000 × 0.30 = 51,000 pax en 4h pico</span><span class="en">170,000 × 0.30 = 51,000 pax in 4 peak hours</span></span><span class="step-val">✓</span></div>
       <div class="step"><span class="step-num">✓</span><span><span class="es">51,000 ÷ 4h = 12,750 pax/hora pico</span><span class="en">51,000 ÷ 4h = 12,750 pax/peak hour</span></span><span class="step-val">✓</span></div>
@@ -752,7 +768,7 @@ html.light #tab-yqp .tf-original { color: var(--muted); }
   </div>
 
   <div class="tab-footer">
-    <div><div class="tf-author">Ing. Piter J. Bonilla D. · CODIA #17378</div><div class="tf-original"><span class="es">Los parámetros de flota (17 trenes · 750 pax/tren) y el ciclo operativo (T = 60 min) son datos del expediente oficial SNIP 17248 auditado. El headway H = T ÷ N = 60 ÷ 17 = 3.53 min es su derivación aritmética directa — no es un supuesto del modelo. La capacidad de 306,000 pax/día es el resultado de aplicar ingeniería inversa a esos parámetros del Estado. El cambio de trazado (julio 2026) es un hecho N1 documentado; la Inferencia N3 del autor que lo anticipó permanece en N3. Pendiente [B]: referencias exactas en SNIP 17248 para ciclo operativo (T = 60 min), número de trenes (17) y capacidad por tren (750 pax) — número de página y sección.</span><span class="en">The fleet parameters (17 trains · 750 pax/train) and operational cycle (T = 60 min) are data from the audited official SNIP 17248 file. The headway H = T ÷ N = 60 ÷ 17 = 3.53 min is their direct arithmetic derivation — it is not a model assumption. The 306,000 pax/day capacity results from applying reverse engineering to those State-set parameters. The route change (July 2026) is a documented N1 fact; the author's N3 Inference that anticipated it remains at N3. Pending [B]: exact references in SNIP 17248 for operational cycle (T = 60 min), number of trains (17) and capacity per train (750 pax) — page number and section.</span></div>
+    <div><div class="tf-author">Ing. Piter J. Bonilla D. · CODIA #17378</div><div class="tf-original"><span class="es">Los parámetros de flota (17 trenes · 750 pax/tren) y el ciclo operativo (T = 60 min) son datos del expediente oficial SNIP 17248 auditado. El headway H = T ÷ N = 60 ÷ 17 = 3.53 min es su derivación aritmética directa — no es un supuesto del modelo. La capacidad de 306,000 pax/día es el resultado de aplicar ingeniería inversa a esos parámetros del Estado. El cambio de trazado (julio 2026) es un hecho N1 documentado; la Inferencia N3 del autor que lo anticipó permanece en N3. N=17 trenes verificado: Bonnelly, Diario Libre 3 ago. 2026 (expediente SNIP auditado). 750 pax/tren verificado: FITRAM.gob.do · Presidencia RD · SYSTRA, ene. 2026. Pendiente [B-01]: referencia exacta en SNIP 17248 para ciclo operativo (T = 60 min) — número de página y sección.</span><span class="en">The fleet parameters (17 trains · 750 pax/train) and operational cycle (T = 60 min) are data from the audited official SNIP 17248 file. The headway H = T ÷ N = 60 ÷ 17 = 3.53 min is their direct arithmetic derivation — it is not a model assumption. The 306,000 pax/day capacity results from applying reverse engineering to those State-set parameters. The route change (July 2026) is a documented N1 fact; the author's N3 Inference that anticipated it remains at N3. N=17 trains verified: Bonnelly, Diario Libre Aug. 3, 2026 (audited SNIP file). 750 pax/train verified: FITRAM.gob.do · Presidencia RD · SYSTRA, Jan. 2026. Pending [B-01]: exact reference in SNIP 17248 for operational cycle (T = 60 min) — page number and section.</span></div>
       <div style="margin-top:8px; padding-top:8px; border-top:1px dashed var(--rule); font-size:11px; color:var(--muted);">
         <span class="es"><strong>Fórmula resumen:</strong>
           <span style="font-family:monospace; color:var(--amber);"> T = 60 min (ciclo operativo) ÷ N = 17 trenes → H = 3.53 min</span><br>
@@ -833,7 +849,7 @@ html.light #tab-yqp .tf-original { color: var(--muted); }
       </div>
       <div class="card accent-red">
         <div class="card-title">B · <span class="es">Red Desconectada</span><span class="en">Disconnected Network</span></div>
-        <p><span class="es">Para hacer el sistema "viable" en papel, se requeriría reducir la demanda efectiva eliminando la interconexión con la Línea 1 — destruyendo el carácter integrado de la red metropolitana.</span><span class="en">To make the system "viable" on paper would require reducing effective demand by eliminating Line 1 interconnection — destroying the integrated nature of the metropolitan network.</span></p>
+        <p><span class="es">La eliminación de la interconexión con la Línea 1 modifica la demanda efectiva atribuible al corredor y, por tanto, puede alterar la comparación entre capacidad y demanda. La motivación declarada por FITRAM para esta modificación es ambiental y comunitaria — este análisis documenta el efecto funcional potencial sin afirmar causalidad.</span><span class="en">The elimination of the Line 1 interconnection modifies the effective demand attributable to the corridor and may therefore alter the comparison between capacity and demand. FITRAM's stated motivation for this modification is environmental and community-based — this analysis documents the potential functional effect without asserting causality.</span></p>
       </div>
     </div>
   </div>
@@ -851,7 +867,7 @@ html.light #tab-yqp .tf-original { color: var(--muted); }
       <div class="card accent-green">
         <div class="card-title"><span class="es">Modelo realista (UITP)</span><span class="en">Realistic model (UITP)</span></div>
         <div style="font-size:32px; font-weight:700; color:var(--green); margin:8px 0;">3.53 min</div>
-        <p><span class="es">17 trenes/hora. Alcanzable según estándares UITP. Cubre 12,750 pphps.</span><span class="en">17 trains/hour. Achievable per UITP standards. Covers 12,750 pphps.</span></p>
+        <p><span class="es">17 trenes/hora. Compatible con benchmarks UITP de referencia. Cubre 12,750 pphpd.</span><span class="en">17 trains/hour. Compatible with UITP reference benchmarks. Covers 12,750 pphpd.</span></p>
       </div>
     </div>
     <div class="box box-note"><div class="box-label"><span class="es">Análisis operativo · N3</span><span class="en">Operational analysis · N3</span></div><p><span class="es">En 90 segundos, un tren debe detenerse, abrir puertas, intercambiar cientos de pasajeros, cerrar puertas, verificar sensores, acelerar, despejar el bloque de seguridad, y el tren siguiente debe mantener distancia de frenado de emergencia. Solo el proceso de embarque y desembarque consume aproximadamente 45 segundos en hora pico, dejando ~40 segundos para todo lo demás.<br><br>Este ciclo debe ejecutarse sincronizadamente en cada una de las estaciones. Si una sola estación se desalinea — por demanda inusual, incidente menor o cualquier variación operativa — el headway se rompe para toda la red simultáneamente. No es un problema de una estación: es un problema de sistema.<br><br>La ausencia de validación operativa documentada en sistemas GoA4 de esta escala no es un detalle menor: es la diferencia entre una promesa contractual y un parámetro de ingeniería verificado.</span><span class="en">In 90 seconds, a train must stop, open doors, exchange hundreds of passengers, close doors, verify sensors, accelerate, clear the safety block, and the next train must maintain emergency braking distance. The boarding and alighting process alone consumes approximately 45 seconds during peak hours, leaving ~40 seconds for everything else.<br><br>This cycle must execute synchronously at every station simultaneously. If a single station falls out of alignment — due to unusual demand, a minor incident, or any operational variation — the headway breaks for the entire network at once. It is not a single-station problem: it is a system-wide problem.<br><br>The absence of documented operational validation in GoA4 systems at this scale is not a minor detail: it is the difference between a contractual promise and a verified engineering parameter.</span></p></div>
@@ -1091,7 +1107,7 @@ html.light #tab-yqp .tf-original { color: var(--muted); }
 
   <div class="grid2">
     <div class="chart-box">
-      <div class="chart-title"><span class="es">Degradación por headway (pphps)</span><span class="en">Capacity by headway (pphps)</span></div>
+      <div class="chart-title"><span class="es">Degradación por headway (pphpd)</span><span class="en">Capacity by headway (pphpd)</span></div>
       <canvas id="chartHeadway" height="220"></canvas>
     </div>
     <div class="chart-box">
@@ -1235,18 +1251,18 @@ html.light #tab-yqp .tf-original { color: var(--muted); }
               <td style="color:var(--amber)"><span class="es">⏳ Pendiente página/sección</span><span class="en">⏳ Pending page/section</span></td>
             </tr>
             <tr>
-              <td style="font-family:monospace;color:var(--amber)">B-02</td>
+              <td style="font-family:monospace;color:var(--green)">B-02</td>
               <td><span class="es">Flota</span><span class="en">Fleet</span></td>
               <td style="font-family:monospace">N = 17 trenes</td>
-              <td>SNIP 17248</td>
-              <td style="color:var(--amber)"><span class="es">⏳ Pendiente página/sección</span><span class="en">⏳ Pending page/section</span></td>
+              <td><span class="es">SNIP 17248 · Bonnelly, Diario Libre 3 ago. 2026</span><span class="en">SNIP 17248 · Bonnelly, Diario Libre Aug. 3, 2026</span></td>
+              <td style="color:var(--green)"><span class="es">✅ Resuelto · N1 verificado</span><span class="en">✅ Resolved · N1 verified</span></td>
             </tr>
             <tr>
-              <td style="font-family:monospace;color:var(--amber)">B-03</td>
+              <td style="font-family:monospace;color:var(--green)">B-03</td>
               <td><span class="es">Capacidad por tren</span><span class="en">Capacity per train</span></td>
               <td style="font-family:monospace">750 pax/tren</td>
-              <td>SNIP 17248</td>
-              <td style="color:var(--amber)"><span class="es">⏳ Pendiente página/sección</span><span class="en">⏳ Pending page/section</span></td>
+              <td><span class="es">FITRAM.gob.do · Presidencia RD · SYSTRA, ene. 2026</span><span class="en">FITRAM.gob.do · Presidencia RD · SYSTRA, Jan. 2026</span></td>
+              <td style="color:var(--green)"><span class="es">✅ Resuelto · N1 verificado</span><span class="en">✅ Resolved · N1 verified</span></td>
             </tr>
             <tr>
               <td style="font-family:monospace;color:var(--amber)">C-01</td>
@@ -1300,25 +1316,25 @@ html.light #tab-yqp .tf-original { color: var(--muted); }
 
   <hr class="rule">
 
-  <!-- §M1 METODOLOGÍA -->
+  <!-- M1 METODOLOGÍA -->
   <div class="sec">
     <div class="sec-hdr"><span class="sec-num">M1 ·</span><span class="sec-title"><span class="es">Fundamento Metodológico</span><span class="en">Methodological Basis</span></span></div>
     <p><span class="es">Este análisis aplica los mismos tres niveles de evidencia del dashboard. La Pérdida de Bienestar Social corrige la asimetría del modelo oficial: el Monorriel aparenta menor subsidio porque su incapacidad física le impide atender al 34% de la demanda. La comparación simétrica ("manzanas con manzanas") carga ese costo al Monorriel.</span><span class="en">This analysis applies the same three evidence levels as the dashboard. The Social Welfare Loss corrects the asymmetry in the official model: the Monorail appears to have a lower subsidy because its physical incapacity prevents it from serving 34% of demand. The symmetric comparison ("apples to apples") charges that cost to the Monorail.</span></p>
     <div class="box box-note" style="margin-top:16px;">
       <div class="box-label"><span class="es">Nota — Flota idéntica en ambos escenarios</span><span class="en">Note — Identical fleet in both scenarios</span></div>
-      <p><span class="es">Ambos escenarios asumen la <strong>misma flota base</strong> (17 trenes · headway 3.53 min). La diferencia de capacidad no es de frecuencia ni de número de trenes — es exclusivamente de <strong>capacidad física por tren</strong>: 1,200 pax en Metro 6V vs. 750 pax en Monorriel. El Metro 6V con 17 trenes cubre el 100% de la demanda proyectada hasta el punto en que la demanda supera su capacidad máxima (490,000 pax/día). A partir de ese umbral, el Metro también queda topado; la escalabilidad mediante reducción de headway a 2.5 min (→ 691,200 pax/día) está documentada en el Tab Gráficos. El valor "topado" del subsidio refleja que el sistema no tiene demanda insatisfecha dentro de su capacidad — no que la flota sea insuficiente.</span><span class="en">Both scenarios assume the <strong>same base fleet</strong> (17 trains · 3.53 min headway). The capacity difference is not in frequency or number of trains — it is exclusively in <strong>physical capacity per train</strong>: 1,200 pax in Metro 6V vs. 750 pax in Monorail. The 6V Metro with 17 trains covers 100% of projected demand up to the point where demand exceeds its maximum capacity (490,000 pax/day). Beyond that threshold, the Metro is also capped; scalability through headway reduction to 2.5 min (→ 691,200 pax/day) is documented in the Charts tab. The "capped" subsidy value reflects that the system has no unmet demand within its capacity — not that the fleet is insufficient.</span></p>
+      <p><span class="es">Ambos escenarios asumen la <strong>misma flota base</strong> (17 trenes · headway 3.53 min). La diferencia de capacidad no es de frecuencia ni de número de trenes — es exclusivamente de <strong>capacidad física por tren</strong>: 1,200 pax en Metro 6V vs. 750 pax en Monorriel. El Metro 6V con 17 trenes cubre el 100% de la demanda proyectada hasta el punto en que la demanda supera su capacidad máxima (490,000 pax/día). A partir de ese umbral, el Metro también queda topado; la escalabilidad mediante reducción de headway a 2.5 min (→ 691,200 pax/día) está documentada en este análisis (sección Gráficos). El valor "topado" del subsidio refleja que el sistema no tiene demanda insatisfecha dentro de su capacidad — no que la flota sea insuficiente.</span><span class="en">Both scenarios assume the <strong>same base fleet</strong> (17 trains · 3.53 min headway). The capacity difference is not in frequency or number of trains — it is exclusively in <strong>physical capacity per train</strong>: 1,200 pax in Metro 6V vs. 750 pax in Monorail. The 6V Metro with 17 trains covers 100% of projected demand up to the point where demand exceeds its maximum capacity (490,000 pax/day). Beyond that threshold, the Metro is also capped; scalability through headway reduction to 2.5 min (→ 691,200 pax/day) is documented in this analysis (Charts section). The "capped" subsidy value reflects that the system has no unmet demand within its capacity — not that the fleet is insufficient.</span></p>
     </div>
 
     <div class="box box-note" style="margin-top:12px; border-left-color:var(--amber);">
       <div class="box-label" style="color:var(--amber);"><span class="es">Nota metodológica — Alcance de la comparación</span><span class="en">Methodological note — Scope of the comparison</span></div>
       <p><span class="es">La comparación emplea <strong>15 intervalos anuales</strong> desde la base 2030 hasta el punto de referencia 2045. La demanda evoluciona mediante <strong>crecimiento compuesto anual de 1.39%</strong> (CAGR derivado de proyecciones METI 2030–2060), no crecimiento lineal. Dado que el expediente no contiene un valor oficial completo y comparable del costo del ciclo de vida, el <strong>LCOT utilizado es una estimación del autor (ver R-04-V · SafeCreative 251118-Z395Y6)</strong>. El modelo aplica tope de capacidad al Metro 6V en 490,000 pax/día; la demanda que supera ese umbral en 2045 (571,733 pax/día) no está atendida en el escenario fijo. Los resultados permiten comparar órdenes de magnitud, capacidad, subsidios y costos relativos, pero <strong>no deben interpretarse como valores absolutos, definitivos ni como una predicción exacta del comportamiento futuro</strong>.</span><span class="en">The comparison employs <strong>15 annual intervals</strong> from the 2030 base to the 2045 reference point. Demand evolves through <strong>compound annual growth of 1.39%</strong> (CAGR derived from METI 2030–2060 projections), not linear growth. Since the official file does not contain a complete and comparable lifecycle cost value, the <strong>LCOT used is the author's estimate (see R-04-V · SafeCreative 251118-Z395Y6)</strong>. The model applies a capacity cap to Metro 6V at 490,000 pax/day; demand exceeding that threshold in 2045 (571,733 pax/day) is not served in the fixed scenario. The results allow comparison of orders of magnitude, capacity, subsidies and relative costs, but <strong>should not be interpreted as absolute, definitive values or as an exact prediction of future behavior</strong>.</span></p>
-      <p style="margin-top:8px; font-size:12px; color:var(--muted);"><span class="es">Naturaleza de los parámetros: RD$37.50/pasajero = dato auditado · Demanda proyectada = referencia del expediente oficial · Flota (17 trenes · 750 pax/tren) = datos del Estado en SNIP 17248 · Ciclo operativo T = 60 min = dato del expediente (recorrido ida + retorno + detenciones + giro en terminales + regulación + margen de recuperación) · Headway H = T ÷ N = 60 ÷ 17 = 3.53 min = derivación aritmética del ciclo y la flota, no supuesto del modelo · Capacidad 306,000 pax/día = resultado de ingeniería inversa sobre parámetros del Estado · LCOT = estimación del autor (ver R-04-V · SafeCreative 251118-Z395Y6) · Horizonte = 15 intervalos anuales (2030–2045) · crecimiento CAGR 1.39%, no lineal · ventana comparativa, no ciclo de vida completo · Ausencia de saturación = supuesto explícito declarado · Cambio de trazado jul 2026 = consistente con Inferencia N3 del autor, fundamentada en saturación proyectada. Pendiente [B]: referencias exactas en SNIP 17248 para ciclo T, flota N y capacidad por tren.</span><span class="en">Nature of parameters: RD$37.50/passenger = audited data · Projected demand = official file reference · Fleet (17 trains · 750 pax/train) = State data in SNIP 17248 · Operational cycle T = 60 min = file data (outbound + return + stops + terminal turns + regulation + recovery margin) · Headway H = T ÷ N = 60 ÷ 17 = 3.53 min = arithmetic derivation of cycle and fleet, not model assumption · Capacity 306,000 pax/day = result of reverse engineering on State parameters · LCOT = author's estimate (see R-04-V · SafeCreative 251118-Z395Y6) · Horizon = 15 annual intervals (2030–2045) · CAGR 1.39% growth, not linear · comparative window, not full lifecycle · No saturation = explicit declared assumption · July 2026 route change = consistent with author's N3 Inference, grounded in projected saturation. Pending [B]: exact references in SNIP 17248 for cycle T, fleet N and capacity per train.</span></p>
+      <p style="margin-top:8px; font-size:12px; color:var(--muted);"><span class="es">Naturaleza de los parámetros: RD$37.50/pasajero = dato auditado · Demanda proyectada = referencia del expediente oficial · Flota (17 trenes · 750 pax/tren) = datos del Estado en SNIP 17248 · Ciclo operativo T = 60 min = dato del expediente (recorrido ida + retorno + detenciones + giro en terminales + regulación + margen de recuperación) · Headway H = T ÷ N = 60 ÷ 17 = 3.53 min = derivación aritmética del ciclo y la flota, no supuesto del modelo · Capacidad 306,000 pax/día = resultado de ingeniería inversa sobre parámetros del Estado · LCOT = estimación del autor (ver R-04-V · SafeCreative 251118-Z395Y6) · Horizonte = 15 intervalos anuales (2030–2045) · crecimiento CAGR 1.39%, no lineal · ventana comparativa, no ciclo de vida completo · Ausencia de saturación = supuesto explícito declarado · Cambio de trazado jul 2026 = consistente con Inferencia N3 del autor, fundamentada en saturación proyectada. Pendiente [B-01]: referencias exactas en SNIP 17248 para ciclo T. Flota N=17 trenes y capacidad 750 pax/tren verificados como N1 (Bonnelly, Diario Libre 3 ago. 2026 · FITRAM.gob.do · SYSTRA, ene. 2026).</span><span class="en">Nature of parameters: RD$37.50/passenger = audited data · Projected demand = official file reference · Fleet (17 trains · 750 pax/train) = State data in SNIP 17248 · Operational cycle T = 60 min = file data (outbound + return + stops + terminal turns + regulation + recovery margin) · Headway H = T ÷ N = 60 ÷ 17 = 3.53 min = arithmetic derivation of cycle and fleet, not model assumption · Capacity 306,000 pax/day = result of reverse engineering on State parameters · LCOT = author's estimate (see R-04-V · SafeCreative 251118-Z395Y6) · Horizon = 15 annual intervals (2030–2045) · CAGR 1.39% growth, not linear · comparative window, not full lifecycle · No saturation = explicit declared assumption · July 2026 route change = consistent with author's N3 Inference, grounded in projected saturation. Pending [B-01]: exact references in SNIP 17248 for cycle T. Fleet N=17 trains and capacity 750 pax/train verified as N1 (Bonnelly, Diario Libre Aug. 3, 2026 · FITRAM.gob.do · SYSTRA, Jan. 2026).</span></p>
     </div>
   </div>
 
   <hr class="rule">
 
-  <!-- §M2 PARÁMETROS VERIFICADOS -->
+  <!-- M2 PARÁMETROS VERIFICADOS -->
   <div class="sec">
     <div class="sec-hdr"><span class="sec-num">M2 ·</span><span class="sec-title"><span class="es">Parámetros Financieros — Estado de Verificación</span><span class="en">Financial Parameters — Verification Status</span></span><span class="lbl-n2 section-label" style="margin-left:8px;">N2</span></div>
 
@@ -1375,7 +1391,7 @@ html.light #tab-yqp .tf-original { color: var(--muted); }
 
   <hr class="rule">
 
-  <!-- §M3 SIMULACIÓN 2030-2045 -->
+  <!-- M3 SIMULACIÓN 2030-2045 -->
   <div class="sec">
     <div class="sec-hdr"><span class="sec-num">M3 ·</span><span class="sec-title"><span class="es">Simulación Financiera Comparativa 2030–2045</span><span class="en">Comparative Financial Simulation 2030–2045</span></span><span class="lbl-n3 section-label" style="margin-left:8px;">N3</span></div>
     <p><span class="es">CAGR 1.39% anual (METI). Todos los valores en USD. El Metro cubre el 100% de la demanda dentro de su capacidad máxima (490,000 pax/día con headway 3.53 min); demanda superior a ese umbral no está atendida en el escenario fijo. El Monorriel topa en 306,000 pax/día — los excluidos pagan tarifa informal USD 1.50/viaje (pendiente de verificación).</span><span class="en">CAGR 1.39% annual (METI). All values in USD. The Metro covers 100% of demand within its maximum capacity (490,000 pax/day at 3.53 min headway); demand above that threshold is not served in the fixed scenario. The Monorail caps at 306,000 pax/day — excluded passengers pay informal fare USD 1.50/trip (pending verification).</span></p>
@@ -1421,7 +1437,7 @@ html.light #tab-yqp .tf-original { color: var(--muted); }
 
   <hr class="rule">
 
-  <!-- §M4 TABLA 6 CONFIGURACIONES -->
+  <!-- M4 TABLA 6 CONFIGURACIONES -->
   <div class="sec">
     <div class="sec-hdr"><span class="sec-num">M4 ·</span><span class="sec-title"><span class="es">Panorama Completo — 6 Configuraciones Analizadas</span><span class="en">Full Picture — 6 Configurations Analyzed</span></span><span class="lbl-n2 section-label" style="margin-left:8px;">N2 · R-04-V</span></div>
     <p><span class="es">Análisis multi-escenario con supuestos pro-Monorriel (capacidad 170 pax/vagón vs. real 140; factor costo 0.67 vs. real 1.00). Aún favoreciendo al Monorriel, el Metro 6V gana todas las métricas. Fuente: <a href="https://www.youtube.com/watch?v=2McmoesyY4o" target="_blank" style="color:var(--blue);">Video V3 LCOT Ajustado</a> · R-04-V · SafeCreative 251118-Z395Y6.</span><span class="en">Multi-scenario analysis with pro-Monorail assumptions (capacity 170 pax/car vs. actual 140; cost factor 0.67 vs. actual 1.00). Even favoring the Monorail, the 6V Metro wins all metrics. Source: <a href="https://www.youtube.com/watch?v=2McmoesyY4o" target="_blank" style="color:var(--blue);">Video V3 Adjusted LCOT</a> · R-04-V · SafeCreative 251118-Z395Y6.</span></p>
@@ -1674,7 +1690,7 @@ html.dark #tab-montecarlo .mc-summary-grid .mc-stat-val {
         <tr><td><strong><span class="es">Media</span><span class="en">Mean</span></strong></td><td style="color:var(--red);font-weight:700">≈ 1,359.7</td></tr>
       </table>
       <div class="mc-note">
-        <span class="es">La auditoría documenta la ausencia de eficiencia comparativa; el LCOT aparente del Monorriel ($1.07) es menor porque el sistema no atiende al 34% de la demanda. El análisis de sensibilidad muestra que la brecha acumulada supera el costo total del proyecto en todos los escenarios evaluados. Fuente: Tab Macroeconómico · Modelo N3 · CAGR 1.39% METI · σ=150M estimado · Tarifa informal USD 1.50 (pendiente C-02).</span>
+        <span class="es">La auditoría documenta la ausencia de eficiencia comparativa; el LCOT aparente del Monorriel ($1.07) es menor porque el sistema no atiende al 34% de la demanda. El análisis de sensibilidad muestra que la brecha acumulada supera el costo total del proyecto en todos los escenarios evaluados. Fuente: este análisis, sección Macroeconómico · Modelo N3 · CAGR 1.39% METI · σ=150M estimado · Tarifa informal USD 1.50 (pendiente C-02).</span>
         <span class="en">The audit documents the absence of comparative efficiency; the Monorail's apparent LCOT ($1.07) is lower because the system does not serve 34% of demand. The sensitivity analysis shows that the cumulative gap exceeds total project cost in all evaluated scenarios. Source: Macroeconomic Tab · N3 Model · CAGR 1.39% METI · σ=150M estimated · Informal fare USD 1.50 (pending C-02).</span>
       </div>
     </div>
@@ -1744,8 +1760,8 @@ html.dark #tab-montecarlo .mc-summary-grid .mc-stat-val {
         <tr><td><strong><span class="es">Media</span><span class="en">Mean</span></strong></td><td style="color:var(--red);font-weight:700">65.7%</td></tr>
       </table>
       <div class="mc-note">
-        <span class="es">La auditoría documenta que el 93.2% de los registros de la matriz de evaluación no son trazables. La reconstrucción paramétrica (Modelo N2 · 306,000 pax/día ÷ 464,800 demanda METI 2030) muestra un déficit de capacidad que persiste bajo los escenarios analizados. σ=2.5% refleja los pendientes B-01/B-02/B-03 (T=60 min, N=17 trenes, 750 pax/tren sin página exacta en SNIP 17248).</span>
-        <span class="en">The audit documents that 93.2% of the evaluation matrix records are non-traceable. The parametric reconstruction (N2 Model · 306,000 pax/day ÷ 464,800 METI 2030 demand) shows a capacity deficit that persists across the analyzed scenarios. σ=2.5% reflects pending B-01/B-02/B-03 (T=60 min, N=17 trains, 750 pax/train without exact SNIP 17248 page).</span>
+        <span class="es">La auditoría documenta que el 93.2% de los registros de la matriz de evaluación no son trazables. La reconstrucción paramétrica (Modelo N2 · 306,000 pax/día ÷ 464,800 demanda METI 2030) muestra un déficit de capacidad que persiste bajo los escenarios analizados. σ=2.5% refleja el pendiente B-01 (T=60 min sin página exacta en SNIP 17248). B-02 (N=17 trenes) y B-03 (750 pax/tren) verificados como N1: Bonnelly, Diario Libre 3 ago. 2026 · FITRAM.gob.do · Presidencia RD · SYSTRA, ene. 2026.</span>
+        <span class="en">The audit documents that 93.2% of the evaluation matrix records are non-traceable. The parametric reconstruction (N2 Model · 306,000 pax/day ÷ 464,800 METI 2030 demand) shows a capacity deficit that persists across the analyzed scenarios. σ=2.5% reflects pending B-01 (T=60 min without exact SNIP 17248 page). B-02 (N=17 trains) and B-03 (750 pax/train) verified as N1: Bonnelly, Diario Libre Aug. 3, 2026 · FITRAM.gob.do · Presidencia RD · SYSTRA, Jan. 2026.</span>
       </div>
     </div>
   </div>
@@ -1770,18 +1786,18 @@ html.dark #tab-montecarlo .mc-summary-grid .mc-stat-val {
     <div class="mc-card">
       <h3>📌 <span class="es">Capacidad resultante por headway</span><span class="en">Resulting capacity by headway</span></h3>
       <table class="mc-pct-tbl mc-fixed-table">
-        <tr><th><span class="es">Headway</span><span class="en">Headway</span></th><th>PPHPS</th><th><span class="es">Cap. pax/día</span><span class="en">Cap. pax/day</span></th><th><span class="es">vs Demanda</span><span class="en">vs Demand</span></th></tr>
-        <tr><td>1.5 min <span class="es">(prometido)</span><span class="en">(promised)</span></td><td style="color:var(--green);font-weight:600">21,333</td><td style="color:var(--green);font-weight:600">~512,000</td><td style="color:var(--green)">✓ 167%</td></tr>
-        <tr><td>2.5 min <span class="es">(GoA4 mín.)</span><span class="en">(GoA4 min.)</span></td><td style="color:var(--amber);font-weight:600">12,800</td><td style="color:var(--amber);font-weight:600">~307,000</td><td style="color:var(--amber)">≈ 100%</td></tr>
-        <tr><td>3.2 min <span class="es">(P50 real)</span><span class="en">(P50 real)</span></td><td style="color:var(--red);font-weight:700">10,000</td><td style="color:var(--red);font-weight:700">~240,000</td><td style="color:var(--red)">✗ 78%</td></tr>
-        <tr><td>3.53 min <span class="es">(derivado SNIP)</span><span class="en">(SNIP-derived)</span></td><td style="color:var(--red);font-weight:600">9,065</td><td style="color:var(--red);font-weight:600">~218,000</td><td style="color:var(--red)">✗ 71%</td></tr>
-        <tr><td>4.4 min (P95)</td><td style="color:var(--red);font-weight:600">7,273</td><td style="color:var(--red);font-weight:600">~175,000</td><td style="color:var(--red)">✗ 57%</td></tr>
+        <tr><th><span class="es">Headway</span><span class="en">Headway</span></th><th>PPHPD</th><th><span class="es">Cap. pax/día</span><span class="en">Cap. pax/day</span></th><th><span class="es">vs Demanda 2030</span><span class="en">vs 2030 Demand</span></th></tr>
+        <tr><td>1.5 min <span class="es">(prometido)</span><span class="en">(promised)</span></td><td style="color:var(--green);font-weight:600">30,000</td><td style="color:var(--green);font-weight:600">~720,000</td><td style="color:var(--green)">✓ 155%</td></tr>
+        <tr><td>2.5 min <span class="es">(GoA4 mín.)</span><span class="en">(GoA4 min.)</span></td><td style="color:var(--amber);font-weight:600">18,000</td><td style="color:var(--amber);font-weight:600">~432,000</td><td style="color:var(--amber)">✓ 93%</td></tr>
+        <tr><td>3.2 min <span class="es">(P50 real)</span><span class="en">(P50 real)</span></td><td style="color:var(--red);font-weight:700">14,063</td><td style="color:var(--red);font-weight:700">~338,000</td><td style="color:var(--red)">✗ 73%</td></tr>
+        <tr><td>3.53 min <span class="es">(derivado SNIP)</span><span class="en">(SNIP-derived)</span></td><td style="color:var(--red);font-weight:600">12,750</td><td style="color:var(--red);font-weight:600">~306,000</td><td style="color:var(--red)">✗ 66%</td></tr>
+        <tr><td>4.4 min (P95)</td><td style="color:var(--red);font-weight:600">10,227</td><td style="color:var(--red);font-weight:600">~245,000</td><td style="color:var(--red)">✗ 53%</td></tr>
       </table>
       <div class="mc-note">
-        <span class="es">El expediente promete headway de 90s (40 trenes/hora) sin validación operativa documentada en sistemas GoA4 a esta escala. El análisis de riesgo operacional convierte este parámetro en una variable de incertidumbre. Distribución triangular: mín=1.5 min (expediente), moda=3.2 min (media 5 benchmarks GoA4 globales: Dubái 3.2, Singapur 3.8, París 3.0, Barcelona 3.3, Riad 3.4 min), máx=5.0 min. Demanda crítica: 12,800 pphps (METI). <em>Cálculo adicional — no figura en los documentos de auditoría.</em><br><br>
-        <strong>Nota metodológica sobre los valores de PPHPS de esta tabla:</strong> Los valores se calculan mediante una relación proporcional anclada en el punto de referencia de demanda METI: C(H) = 12,800 × (2.5 ÷ H). Por tanto, representan una capacidad normalizada respecto al umbral de demanda METI 2030 de 12,800 pphpd [N1 · tabla demanda METI], y no la capacidad física bruta derivada directamente de la flota. La capacidad física bruta es C = (60÷H) × 750 pax, que para 90 s produce 30,000 pphps. Ambas representaciones son válidas bajo distintos marcos de referencia — la primera evalúa la cobertura de demanda, la segunda la capacidad teórica máxima de flota.</span>
-        <span class="en">The file promises 90s headway (40 trains/hour) without documented operational validation in GoA4 systems at this scale. The operational risk analysis converts this parameter into an uncertainty variable. Triangular distribution: min=1.5 min (file), mode=3.2 min (5 global GoA4 benchmark mean: Dubai 3.2, Singapore 3.8, Paris 3.0, Barcelona 3.3, Riyadh 3.4 min), max=5.0 min. Critical demand: 12,800 pphps (METI). <em>Additional calculation — not in audit documents.</em><br><br>
-        <strong>Methodological note on PPHPS values in this table:</strong> Values are calculated using a proportional relationship anchored at the METI demand reference point: C(H) = 12,800 × (2.5 ÷ H). They therefore represent a normalized capacity relative to the METI 2030 demand threshold of 12,800 pphpd [N1 · METI demand table], not the gross physical capacity derived directly from the fleet. Gross physical capacity is C = (60÷H) × 750 pax, which for 90 s yields 30,000 pphps. Both representations are valid under different reference frameworks — the first evaluates demand coverage, the second the theoretical maximum fleet capacity.</span>
+        <span class="es">El expediente promete headway de 90 s (40 trenes/hora) sin validación operativa documentada en sistemas GoA4 a esta escala. Este análisis de riesgo operacional convierte este parámetro en una variable de incertidumbre. Distribución triangular: mín=1.5 min (expediente), moda=3.2 min (media 5 benchmarks GoA4 globales: Dubái 3.2, Singapur 3.8, París 3.0, Barcelona 3.3, Riad 3.4 min), máx=5.0 min. Demanda crítica: 12,800 pphpd (METI). <em>Cálculo adicional — no figura en los documentos de auditoría.</em><br><br>
+        <strong>Nota metodológica sobre los valores de esta tabla:</strong> Los valores de PPHPD y capacidad diaria se calculan mediante la fórmula física bruta del corpus: PPHPD = (60 ÷ H) × 750 pax/tren; Pax/día = PPHPD × 4h pico × (1 ÷ 0.30) × 2 sentidos × 0.90. Esta fórmula es idéntica a la utilizada en el Modelo N2 base, lo que garantiza la consistencia interna del corpus. Verificación del punto de referencia: headway 3.53 min → 12,750 PPHPD → 306,000 pax/día — coincide exactamente con el Modelo N2. El valor de 720,000 para 90 s representa la capacidad teórica matemática bajo los supuestos del modelo; no es capacidad operacional demostrada.</span>
+        <span class="en">The file promises 90 s headway (40 trains/hour) without documented operational validation in GoA4 systems at this scale. This operational risk analysis converts this parameter into an uncertainty variable. Triangular distribution: min=1.5 min (file), mode=3.2 min (5 global GoA4 benchmark mean: Dubai 3.2, Singapore 3.8, Paris 3.0, Barcelona 3.3, Riyadh 3.4 min), max=5.0 min. Critical demand: 12,800 pphpd (METI). <em>Additional calculation — not in audit documents.</em><br><br>
+        <strong>Methodological note on table values:</strong> PPHPD and daily capacity values are calculated using the corpus gross physical formula: PPHPD = (60 ÷ H) × 750 pax/train; Pax/day = PPHPD × 4h peak × (1 ÷ 0.30) × 2 directions × 0.90. This formula is identical to the one used in the N2 base Model, ensuring internal corpus consistency. Reference point verification: 3.53 min headway → 12,750 PPHPD → 306,000 pax/day — matches exactly with N2 Model. The value of 720,000 for 90 s represents the theoretical mathematical capacity under model assumptions; it is not demonstrated operational capacity.</span>
       </div>
     </div>
   </div>
@@ -1903,8 +1919,8 @@ html.dark #tab-montecarlo .mc-summary-grid .mc-stat-val {
         <tr><td><strong><span class="es">Media</span><span class="en">Mean</span></strong></td><td style="color:var(--red);font-weight:700">2047.2</td></tr>
       </table>
       <div class="mc-note">
-        <span class="es">La auditoría señala la ausencia de un ACB con contrafactual completo (NT-IV). El análisis estima la saturación del sistema bajo incertidumbre de demanda. Distribución mixta: 82.9% × Normal N(2047, 2.1) + 17.1% × Normal N(2045, 2.1) (escenario alta demanda, CAGR 1.40% vs. 1.39%). P(sat&lt;2045) = 0.829 × 17.1% + 0.171 × 50.0% = 22.7%. σ=2.1 derivado de z=−0.95 para la componente base. Horizonte útil obra civil: 2076. Fuente: Tab M4, R-04-V · AUDIT NT-IV.</span>
-        <span class="en">The audit notes the absence of a CBA with complete counterfactual (NT-IV). The analysis estimates system saturation under demand uncertainty. Mixed distribution: 82.9% × Normal N(2047, 2.1) + 17.1% × Normal N(2045, 2.1) (high-demand scenario, CAGR 1.40% vs 1.39%). P(sat&lt;2045) = 0.829 × 17.1% + 0.171 × 50.0% = 22.7%. σ=2.1 derived from z=−0.95 for base component. Civil works useful life: 2076. Source: Tab M4, R-04-V · AUDIT NT-IV.</span>
+        <span class="es">La auditoría señala la ausencia de un ACB con contrafactual completo (NT-IV). El análisis estima la saturación del sistema bajo incertidumbre de demanda. Distribución mixta: 82.9% × Normal N(2047, 2.1) + 17.1% × Normal N(2045, 2.1) (escenario alta demanda, CAGR 1.40% vs. 1.39%). P(sat&lt;2045) = 0.829 × 17.1% + 0.171 × 50.0% = 22.7%. σ=2.1 derivado de z=−0.95 para la componente base. Horizonte útil obra civil: 2076. Fuente: este análisis, sección M4 · R-04-V · AUDIT NT-IV.</span>
+        <span class="en">The audit notes the absence of a CBA with complete counterfactual (NT-IV). The analysis estimates system saturation under demand uncertainty. Mixed distribution: 82.9% × Normal N(2047, 2.1) + 17.1% × Normal N(2045, 2.1) (high-demand scenario, CAGR 1.40% vs 1.39%). P(sat&lt;2045) = 0.829 × 17.1% + 0.171 × 50.0% = 22.7%. σ=2.1 derived from z=−0.95 for base component. Civil works useful life: 2076. Source: this analysis, section M4 · R-04-V · AUDIT NT-IV.</span>
       </div>
     </div>
   </div>
@@ -2127,7 +2143,7 @@ html.dark #tab-prata .prata-info { background:rgba(29,78,216,.15); border-color:
 
 <div class="prata-card" style="margin-bottom:20px;">
   <div class="prata-warn">
-    <span class="es"><strong>Nota metodológica:</strong> Esta comparación identifica similitudes documentadas entre dos sistemas del mismo fabricante con la misma promesa contractual de headway. No implica que el resultado de SD será idéntico al de SP. Los factores diferenciales se detallan en la sección "Limitaciones de la analogía" al pie de este tab.</span>
+    <span class="es"><strong>Nota metodológica:</strong> Esta comparación identifica similitudes documentadas entre dos sistemas del mismo fabricante con la misma promesa contractual de headway. No implica que el resultado de SD será idéntico al de SP. Los factores diferenciales se detallan en la sección "Limitaciones de la analogía" al pie de este análisis.</span>
     <span class="en"><strong>Methodological note:</strong> This comparison identifies documented similarities between two systems from the same manufacturer with the same contractual headway promise. It does not imply that SD's outcome will be identical to SP's. Differential factors are detailed in the "Limitations of the analogy" section at the bottom of this tab.</span>
   </div>
   <table class="prata-tbl" style="margin-top:10px;">
@@ -2403,7 +2419,7 @@ html.dark #tab-prata .prata-info { background:rgba(29,78,216,.15); border-color:
     <span class="en">The L15 benchmark does not provide the probability distributions of the SD system. It does provide an empirical basis for a methodological principle:</span>
   </div>
   <div style="font-size:12.5px; color:var(--text); line-height:1.75; margin-top:10px; padding:0 4px;">
-    <span class="es"><strong>El headway, el dwell time y la disponibilidad de flota deben tratarse como variables de incertidumbre, no como constantes contractuales.</strong> El tab Monte Carlo · 123,456 aplica esta lógica: el análisis de Headway Operativo usa una distribución triangular (mín=1.5 min, moda=3.2 min, máx=5.0 min) como <em>hipótesis de modelización</em> — no como distribución empíricamente demostrada por L15. El precedente de L15 justifica que el headway no deba tratarse como constante determinística; no justifica por sí solo los parámetros específicos de la distribución. Los 123,456 escenarios simulados exploran qué porcentaje de esos escenarios satisface la demanda proyectada.</span>
+    <span class="es"><strong>El headway, el dwell time y la disponibilidad de flota deben tratarse como variables de incertidumbre, no como constantes contractuales.</strong> Este análisis (Monte Carlo · 123,456) aplica esta lógica: el análisis de Headway Operativo usa una distribución triangular (mín=1.5 min, moda=3.2 min, máx=5.0 min) como <em>hipótesis de modelización</em> — no como distribución empíricamente demostrada por L15. El precedente de L15 justifica que el headway no deba tratarse como constante determinística; no justifica por sí solo los parámetros específicos de la distribución. Los 123,456 escenarios simulados exploran qué porcentaje de esos escenarios satisface la demanda proyectada.</span>
     <span class="en"><strong>Headway, dwell time and fleet availability must be treated as uncertainty variables, not contractual constants.</strong> The Monte Carlo · 123,456 tab applies this logic: the Operational Headway analysis uses a triangular distribution (min=1.5 min, mode=3.2 min, max=5.0 min) as a <em>modeling hypothesis</em> — not as an empirically demonstrated distribution from L15. The L15 precedent justifies not treating headway as a deterministic constant; it does not by itself justify the specific distribution parameters. The 123,456 simulated scenarios explore what percentage satisfies projected demand.</span>
   </div>
   <div style="display:flex; gap:12px; margin-top:12px; flex-wrap:wrap;">
@@ -2500,6 +2516,329 @@ html.dark #tab-prata .prata-info { background:rgba(29,78,216,.15); border-color:
 </div>
 </div><!-- /tab-prata -->
 
+<!-- ══════════════════════════════════════════════
+     TAB · CAPACIDAD DE RED · v15
+══════════════════════════════════════════════ -->
+<div class="tab-panel" id="tab-capred">
+
+  <p class="panel-title">
+    <span class="es">Capacidad de Red</span>
+    <span class="en">Network Capacity</span>
+  </p>
+  <p class="panel-sub">
+    <span class="es">Capacidad de línea ≠ Capacidad de red · El elemento más restrictivo de la cadena determina la capacidad efectiva del sistema</span>
+    <span class="en">Line capacity ≠ Network capacity · The most restrictive element in the chain determines the system's effective capacity</span>
+  </p>
+
+  <!-- ── NOTA METODOLÓGICA ── -->
+  <div class="sec">
+    <div class="sec-hdr">
+      <span class="sec-num">00 ·</span>
+      <span class="sec-title">
+        <span class="es">Nota Metodológica</span>
+        <span class="en">Methodological Note</span>
+      </span>
+    </div>
+    <div class="nivel-grid">
+      <div class="nivel-card n1">
+        <div class="nivel-lbl"><span class="es">N1 · Hechos documentados</span><span class="en">N1 · Documented facts</span></div>
+        <p><span class="es">Infraestructura existente, cambio de trazado julio 2026 (Diario Libre, 13 jul. 2026) y función del Centro Olímpico verificada en METI/Nippon Koei (pág. 61, sección 03-3.4).</span><span class="en">Existing infrastructure, July 2026 route change (Diario Libre, Jul. 13, 2026) and Olympic Center function verified in METI/Nippon Koei (p. 61, section 03-3.4).</span></p>
+      </div>
+      <div class="nivel-card n2">
+        <div class="nivel-lbl"><span class="es">N2 · Modelos de cálculo</span><span class="en">N2 · Calculation models</span></div>
+        <p><span class="es">Capacidad de línea estimada: 306,000 pax/día (headway 3.53 min, 17 trenes, 750 pax/tren). Esta cifra representa la capacidad física de la línea bajo supuestos operativos declarados — no la capacidad efectiva de integración de red.</span><span class="en">Estimated line capacity: 306,000 pax/day (headway 3.53 min, 17 trains, 750 pax/train). This figure represents the physical line capacity under declared operating assumptions — not the effective network integration capacity.</span></p>
+      </div>
+      <div class="nivel-card n3">
+        <div class="nivel-lbl"><span class="es">N3 · Inferencias técnicas</span><span class="en">N3 · Technical inferences</span></div>
+        <p><span class="es">Conclusiones sobre el efecto funcional del cambio de trazado sobre la arquitectura de la red metropolitana. Este análisis no cuestiona la motivación declarada del cambio — documenta la ausencia de reevaluación de impacto de red.</span><span class="en">Conclusions about the functional effect of the route change on the metropolitan network architecture. This analysis does not question the stated motivation for the change — it documents the absence of a network impact reevaluation.</span></p>
+      </div>
+    </div>
+  </div>
+
+  <hr class="rule">
+
+  <!-- ── SECCIÓN 01 · DOS CAPACIDADES ── -->
+  <div class="sec">
+    <div class="sec-hdr">
+      <span class="sec-num">01 ·</span>
+      <span class="sec-title">
+        <span class="es">Dos Capacidades Distintas</span>
+        <span class="en">Two Distinct Capacities</span>
+      </span>
+    </div>
+    <p><span class="es">Una red de transporte masivo debe analizarse como un sistema jerárquico, no como una suma de vehículos y estaciones. Dentro de ese sistema existen dos capacidades que no deben confundirse:</span><span class="en">A mass transit network must be analyzed as a hierarchical system, not as a sum of vehicles and stations. Within that system there are two capacities that must not be confused:</span></p>
+    <div class="grid2">
+      <div class="card accent-blue">
+        <div class="card-title"><span class="es">Capacidad de Línea · N2</span><span class="en">Line Capacity · N2</span></div>
+        <div style="font-size:28px; font-weight:700; color:var(--blue); margin:8px 0;">306,000</div>
+        <div style="font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:.08em; margin-bottom:10px;"><span class="es">pax/día estimados · Modelo N2</span><span class="en">pax/day estimated · N2 Model</span></div>
+        <p><span class="es">Cuántos pasajeros puede transportar físicamente el Monorriel bajo los supuestos declarados: 17 trenes × 750 pax × headway 3.53 min × factor punta 30% × eficiencia 90% × 2 sentidos.</span><span class="en">How many passengers the Monorail can physically transport under declared assumptions: 17 trains × 750 pax × 3.53 min headway × 30% peak factor × 90% efficiency × 2 directions.</span></p>
+        <p style="font-size:12px; color:var(--muted); margin-top:8px;"><span class="es"><strong>Nota:</strong> Esta cifra no constituye por sí misma una estimación de la capacidad efectiva de integración del sistema metropolitano.</span><span class="en"><strong>Note:</strong> This figure does not by itself constitute an estimate of the effective integration capacity of the metropolitan system.</span></p>
+      </div>
+      <div class="card accent-amber">
+        <div class="card-title"><span class="es">Capacidad de Red · N3</span><span class="en">Network Capacity · N3</span></div>
+        <div style="font-size:28px; font-weight:700; color:var(--amber); margin:8px 0;">?</div>
+        <div style="font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:.08em; margin-bottom:10px;"><span class="es">No documentada en el expediente</span><span class="en">Not documented in the expedient</span></div>
+        <p><span class="es">Cuántos pasajeros puede el sistema completo transportar eficientemente hasta sus destinos, incluyendo las transferencias. Esta capacidad depende de la interacción entre líneas, estaciones y nodos de transferencia — y del elemento más restrictivo de la cadena.</span><span class="en">How many passengers the complete system can efficiently transport to their destinations, including transfers. This capacity depends on the interaction between lines, stations and transfer nodes — and on the most restrictive element in the chain.</span></p>
+      </div>
+    </div>
+    <div class="box box-inf">
+      <div class="box-label"><span class="es">Distinción central · N3</span><span class="en">Central distinction · N3</span></div>
+      <p><span class="es">La capacidad de línea no equivale necesariamente a capacidad efectiva de red. Un sistema de transporte no se mide por la capacidad de sus vehículos aislados. Se mide por la capacidad del sistema completo para llevar pasajeros desde su origen hasta su destino — incluyendo todas las transferencias intermedias.</span><span class="en">Line capacity does not necessarily equal effective network capacity. A transport system is not measured by the capacity of its isolated vehicles. It is measured by the complete system's capacity to carry passengers from origin to destination — including all intermediate transfers.</span></p>
+    </div>
+  </div>
+
+  <hr class="rule">
+
+  <!-- ── SECCIÓN 02 · JERARQUÍA DE RED ── -->
+  <div class="sec">
+    <div class="sec-hdr">
+      <span class="sec-num">02 ·</span>
+      <span class="sec-title">
+        <span class="es">Jerarquía Funcional de la Red Metropolitana</span>
+        <span class="en">Functional Hierarchy of the Metropolitan Network</span>
+      </span>
+    </div>
+    <div class="box box-note" style="margin-bottom:16px;">
+      <div class="box-label"><span class="es">Marco analítico propuesto · N3</span><span class="en">Proposed analytical framework · N3</span></div>
+      <p><span class="es">La clasificación jerárquica que sigue es un marco analítico propuesto en este análisis para evaluar la función del Monorriel dentro de la red. No constituye una clasificación oficial de la red de transporte de Santo Domingo.</span><span class="en">The hierarchical classification below is an analytical framework proposed in this analysis to evaluate the Monorail's function within the network. It does not constitute an official classification of Santo Domingo's transport network.</span></p>
+    </div>
+    <div class="grid3">
+      <div class="card accent-green">
+        <div class="card-title"><span class="es">Nivel 1 · Metro · Red primaria</span><span class="en">Level 1 · Metro · Primary network</span></div>
+        <p><span class="es">Constituye la estructura troncal. Transporta grandes volúmenes y los distribuye entre corredores. Su valor no reside únicamente en la capacidad de cada tren, sino en la red que forma: líneas que se conectan, distribuyen pasajeros y permiten múltiples trayectorias.</span><span class="en">Constitutes the trunk structure. Carries large volumes and distributes them across corridors. Its value lies not only in each train's capacity, but in the network it forms: lines that connect, distribute passengers and enable multiple routes.</span></p>
+        <p style="font-size:12px; color:var(--green); font-weight:700; margin-top:8px;"><span class="es">L1 + L2 · 52 trenes Alstom · 400,000 pax/día · N1</span><span class="en">L1 + L2 · 52 Alstom trains · 400,000 pax/day · N1</span></p>
+      </div>
+      <div class="card accent-amber">
+        <div class="card-title"><span class="es">Nivel 2 · Monorriel · Red secundaria</span><span class="en">Level 2 · Monorail · Secondary network</span></div>
+        <p><span class="es">Alimenta o extiende la red primaria. Su utilidad depende fundamentalmente de cómo se integra con ella. Un monorriel aislado no equivale funcionalmente a una nueva línea troncal de Metro — su valor es inseparable de la calidad de su conexión con el Nivel 1.</span><span class="en">Feeds or extends the primary network. Its utility depends fundamentally on how it integrates with it. An isolated monorail is not functionally equivalent to a new Metro trunk line — its value is inseparable from the quality of its connection to Level 1.</span></p>
+        <p style="font-size:12px; color:var(--amber); font-weight:700; margin-top:8px;"><span class="es">17 trenes · 750 pax/tren · Headway 3.53 min · N2</span><span class="en">17 trains · 750 pax/train · 3.53 min headway · N2</span></p>
+      </div>
+      <div class="card">
+        <div class="card-title"><span class="es">Nivel 3 · Alimentadores locales</span><span class="en">Level 3 · Local feeders</span></div>
+        <p><span class="es">Teleféricos, buses y otros modos captan pasajeros de áreas específicas y los entregan a los niveles superiores. No sustituyen la red primaria ni la secundaria — la complementan. Su eficiencia depende directamente de la calidad de los nodos de transferencia superiores.</span><span class="en">Cable cars, buses and other modes capture passengers from specific areas and deliver them to higher levels. They do not replace the primary or secondary network — they complement it. Their efficiency depends directly on the quality of the upper transfer nodes.</span></p>
+      </div>
+    </div>
+    <div class="box box-note">
+      <div class="box-label"><span class="es">Implicación para la evaluación</span><span class="en">Implication for evaluation</span></div>
+      <p><span class="es">Una línea de Nivel 2 no debe evaluarse únicamente por cuántos pasajeros puede transportar, sino por cuántos pasajeros puede incorporar eficientemente a la red completa. Cuanto mayor sea la demanda del corredor, más importante se vuelve esa integración.</span><span class="en">A Level 2 line must not be evaluated solely by how many passengers it can carry, but by how many passengers it can efficiently incorporate into the complete network. The higher the corridor demand, the more critical that integration becomes.</span></p>
+    </div>
+  </div>
+
+  <hr class="rule">
+
+  <!-- ── SECCIÓN 03 · NODO DE TRANSFERENCIA ── -->
+  <div class="sec">
+    <div class="sec-hdr">
+      <span class="sec-num">03 ·</span>
+      <span class="sec-title">
+        <span class="es">El Nodo de Transferencia como Variable de Capacidad</span>
+        <span class="en">The Transfer Node as a Capacity Variable</span>
+      </span>
+    </div>
+    <p><span class="es">Cuando el flujo de pasajeros sigue la cadena:</span><span class="en">When passenger flow follows the chain:</span></p>
+    <div style="background:var(--fog); border-radius:4px; padding:16px 20px; margin:16px 0; font-family:'Courier New',monospace; font-size:13px; color:var(--amber); text-align:center; letter-spacing:.04em;">
+      <span class="es">Monorriel → <strong>Nodo de transferencia</strong> → Metro → Red completa → Destino</span>
+      <span class="en">Monorail → <strong>Transfer node</strong> → Metro → Full network → Destination</span>
+    </div>
+    <p><span class="es">el nodo forma parte de la cadena de movilidad. Puede existir suficiente capacidad en los trenes y, aun así, existir un cuello de botella en la transferencia.</span><span class="en">the node is part of the mobility chain. There may be sufficient capacity in the trains and yet a bottleneck at the transfer point.</span></p>
+    <div class="grid2">
+      <div class="card">
+        <div class="card-title"><span class="es">Flujos de pasajeros en el nodo</span><span class="en">Passenger flows at the node</span></div>
+        <div class="steps">
+          <div class="step"><span class="step-num">→</span><span><span class="es">Pasajeros que llegan del Monorriel</span><span class="en">Passengers arriving from the Monorail</span></span></div>
+          <div class="step"><span class="step-num">→</span><span><span class="es">Pasajeros que acceden al Monorriel desde el Metro</span><span class="en">Passengers accessing the Monorail from the Metro</span></span></div>
+          <div class="step"><span class="step-num">→</span><span><span class="es">Movimientos internos de la estación</span><span class="en">Internal station movements</span></span></div>
+          <div class="step"><span class="step-num">→</span><span><span class="es">Distribución hacia las diferentes líneas de Metro</span><span class="en">Distribution to the different Metro lines</span></span></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title"><span class="es">Restricciones físicas del nodo</span><span class="en">Physical constraints of the node</span></div>
+        <div class="steps">
+          <div class="step"><span class="step-num">→</span><span><span class="es">Circulación peatonal y pasarelas</span><span class="en">Pedestrian circulation and walkways</span></span></div>
+          <div class="step"><span class="step-num">→</span><span><span class="es">Escaleras y ascensores</span><span class="en">Stairs and elevators</span></span></div>
+          <div class="step"><span class="step-num">→</span><span><span class="es">Andenes y capacidad de los vestíbulos</span><span class="en">Platforms and lobby capacity</span></span></div>
+          <div class="step"><span class="step-num">→</span><span><span class="es">Tiempo de transferencia efectivo</span><span class="en">Effective transfer time</span></span></div>
+        </div>
+      </div>
+    </div>
+    <div class="box box-warn">
+      <div class="box-label"><span class="es">Principio operacional · N3</span><span class="en">Operational principle · N3</span></div>
+      <p><span class="es">La capacidad efectiva de la cadena está condicionada por sus restricciones críticas e interdependientes. El nodo de transferencia puede constituir una de esas restricciones críticas — no es un detalle arquitectónico, sino una variable de capacidad de la red.</span><span class="en">The effective capacity of the chain is conditioned by its critical and interdependent constraints. The transfer node can constitute one of those critical constraints — it is not an architectural detail, but a network capacity variable.</span></p>
+    </div>
+  </div>
+
+  <hr class="rule">
+
+  <!-- ── SECCIÓN 04 · CENTRO OLÍMPICO ── -->
+  <div class="sec">
+    <div class="sec-hdr">
+      <span class="sec-num">04 ·</span>
+      <span class="sec-title">
+        <span class="es">Centro Olímpico: Configuración Original vs. Anunciada</span>
+        <span class="en">Olympic Center: Original vs. Announced Configuration</span>
+      </span>
+      <span class="lbl-n1 section-label" style="margin-left:8px;">N1 · JUL 2026</span>
+    </div>
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th><span class="es">Parámetro</span><span class="en">Parameter</span></th>
+            <th><span class="es">Diseño original (ago. 2025–ene. 2026)</span><span class="en">Original design (Aug. 2025–Jan. 2026)</span></th>
+            <th><span class="es">Trazado anunciado (jul. 2026)</span><span class="en">Announced route (Jul. 2026)</span></th>
+            <th><span class="es">Nivel</span><span class="en">Level</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="es">Punto de partida</span><span class="en">Starting point</span></td>
+            <td style="color:var(--green); font-weight:600;"><span class="es">Centro Olímpico Juan Pablo Duarte</span><span class="en">Juan Pablo Duarte Olympic Center</span></td>
+            <td style="color:var(--red); font-weight:600;"><span class="es">Estación Coronel Rafael Tomás Fernández Domínguez (Av. San Martín)</span><span class="en">Coronel Rafael T. Fernández Domínguez Station (San Martín Ave.)</span></td>
+            <td><span class="lbl-n1 section-label">N1</span></td>
+          </tr>
+          <tr>
+            <td><span class="es">Conexión con el Metro</span><span class="en">Metro connection</span></td>
+            <td style="color:var(--green); font-weight:600;"><span class="es">Líneas 1 y 2</span><span class="en">Lines 1 and 2</span></td>
+            <td style="color:var(--red); font-weight:600;"><span class="es">Solo Línea 2</span><span class="en">Line 2 only</span></td>
+            <td><span class="lbl-n1 section-label">N1</span></td>
+          </tr>
+          <tr>
+            <td><span class="es">Función del nodo en el diseño evaluado</span><span class="en">Node function in evaluated design</span></td>
+            <td style="color:var(--green); font-weight:600;"><span class="es">Punto de transferencia L1+L2 · Nodo identificado de alta demanda en el corredor (METI pág. 61, sección 03-3.4)</span><span class="en">L1+L2 transfer point · High-demand node identified in the corridor (METI p. 61, section 03-3.4)</span></td>
+            <td style="color:var(--red); font-weight:600;"><span class="es">Eliminado del trazado</span><span class="en">Eliminated from route</span></td>
+            <td><span class="lbl-n1 section-label">N1</span></td>
+          </tr>
+          <tr>
+            <td><span class="es">Reevaluación multicriterio documentada</span><span class="en">Documented multi-criteria reevaluation</span></td>
+            <td><span class="es">Evaluación METI 2024: Monorriel 24/50 (último lugar de 5 opciones)</span><span class="en">METI 2024 evaluation: Monorail 24/50 (last of 5 options)</span></td>
+            <td style="color:var(--red); font-weight:600;"><span class="es">No identificada públicamente</span><span class="en">Not publicly identified</span></td>
+            <td><span class="lbl-n1 section-label">N1</span></td>
+          </tr>
+          <tr>
+            <td><span class="es">Motivación declarada del cambio</span><span class="en">Stated motivation for change</span></td>
+            <td>—</td>
+            <td><span class="es">Ambiental y comunitaria (FITRAM, jul. 2026)</span><span class="en">Environmental and community-based (FITRAM, Jul. 2026)</span></td>
+            <td><span class="lbl-n1 section-label">N1</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="box box-fact">
+      <div class="box-label"><span class="es">Fuentes · N1 verificado</span><span class="en">Sources · N1 verified</span></div>
+      <p><span class="es">Diseño original: Listín Diario, 28 ago. 2025 · fitram.gob.do (sep. 2025) · Diario Libre, 26 mar. 2026. Trazado anunciado: Diario Libre, 13 jul. 2026 (<a href="https://www.diariolibre.com/actualidad/ciudad/2026/07/13/fitram-modifica-el-trazado-del-monorriel-de-santo-domingo/3598605" target="_blank" style="color:var(--blue);">diariolibre.com/3598605</a>) · El Caribe, jul. 2026. Función del nodo: METI/Nippon Koei, feb. 2024 (pág. 61, sección 03-3.4).</span><span class="en">Original design: Listín Diario, Aug. 28, 2025 · fitram.gob.do (Sep. 2025) · Diario Libre, Mar. 26, 2026. Announced route: Diario Libre, Jul. 13, 2026 (<a href="https://www.diariolibre.com/actualidad/ciudad/2026/07/13/fitram-modifica-el-trazado-del-monorriel-de-santo-domingo/3598605" target="_blank" style="color:var(--blue);">diariolibre.com/3598605</a>) · El Caribe, Jul. 2026. Node function: METI/Nippon Koei, Feb. 2024 (p. 61, section 03-3.4).</span></p>
+    </div>
+  </div>
+
+  <hr class="rule">
+
+  <!-- ── SECCIÓN 05 · INFERENCIA CENTRAL ── -->
+  <div class="sec">
+    <div class="sec-hdr">
+      <span class="sec-num">05 ·</span>
+      <span class="sec-title">
+        <span class="es">La Pregunta que el Expediente Debe Responder · N3</span>
+        <span class="en">The Question the Expedient Must Answer · N3</span>
+      </span>
+      <span class="lbl-n3 section-label" style="margin-left:8px;">N3</span>
+    </div>
+
+    <div class="box box-inf">
+      <div class="box-label"><span class="es">Inferencia · Capacidad de Línea vs. Capacidad de Red · N3</span><span class="en">Inference · Line Capacity vs. Network Capacity · N3</span></div>
+      <p><span class="es">El cambio de trazado anunciado en julio de 2026 no modifica únicamente la geometría del recorrido; modifica potencialmente la función del Monorriel dentro de la arquitectura de la red metropolitana.</span><span class="en">The route change announced in July 2026 does not modify only the geometry of the route; it potentially modifies the Monorail's function within the metropolitan network architecture.</span></p>
+      <p style="margin-top:12px;"><span class="es">El sistema presenta dos capacidades que no deben confundirse:</span><span class="en">The system presents two capacities that must not be confused:</span></p>
+      <div style="background:var(--fog); border-radius:4px; padding:14px 18px; margin:14px 0;">
+        <p style="margin-bottom:8px;"><span class="es"><strong>Capacidad de línea:</strong> cuántos pasajeros puede transportar físicamente el Monorriel. El modelo N2 estima 306,000 pax/día, bajo sus supuestos operativos y un headway de 3.53 minutos.</span><span class="en"><strong>Line capacity:</strong> how many passengers the Monorail can physically transport. The N2 model estimates 306,000 pax/day, under its operating assumptions and a 3.53 min headway.</span></p>
+        <p><span class="es"><strong>Capacidad de red:</strong> cuántos pasajeros puede el sistema completo transportar eficientemente hasta sus destinos, incluyendo las transferencias. Esta capacidad depende de la interacción entre líneas, estaciones y nodos de transferencia.</span><span class="en"><strong>Network capacity:</strong> how many passengers the complete system can efficiently transport to their destinations, including transfers. This capacity depends on the interaction between lines, stations and transfer nodes.</span></p>
+      </div>
+      <p><span class="es">Por tanto, <strong>la capacidad de línea no equivale necesariamente a capacidad efectiva de red.</strong></span><span class="en">Therefore, <strong>line capacity does not necessarily equal effective network capacity.</strong></span></p>
+      <p style="margin-top:12px;"><span class="es">El estudio METI/Nippon Koei (pág. 61, sección 03-3.4) identifica el Centro Olímpico — dentro de la configuración originalmente evaluada — como un punto relevante de transferencia entre las líneas L1 y L2.</span><span class="en">The METI/Nippon Koei study (p. 61, section 03-3.4) identifies the Olympic Center — within the originally evaluated configuration — as a relevant transfer point between Lines L1 and L2.</span></p>
+    </div>
+
+    <div class="card" style="margin:16px 0; border-left:3px solid var(--muted);">
+      <div class="card-title" style="color:var(--muted);">
+        <span class="es">❌ La pregunta insuficiente</span>
+        <span class="en">❌ The insufficient question</span>
+      </div>
+      <p style="font-style:italic; font-size:14px; color:var(--muted);">
+        <span class="es">"¿Puede seguir operando físicamente el Monorriel sin el Centro Olímpico?"</span>
+        <span class="en">"Can the Monorail continue operating physically without the Olympic Center?"</span>
+      </p>
+      <p style="font-size:12px; margin-top:8px;"><span class="es">La respuesta puede ser sí. Pero esa respuesta no evalúa la capacidad efectiva de red.</span><span class="en">The answer may be yes. But that answer does not evaluate effective network capacity.</span></p>
+    </div>
+
+    <div class="card accent-amber" style="margin:16px 0;">
+      <div class="card-title" style="color:var(--amber);">
+        <span class="es">✓ La pregunta técnicamente relevante</span>
+        <span class="en">✓ The technically relevant question</span>
+      </div>
+      <p style="font-style:italic; font-size:14px; font-weight:600;">
+        <span class="es">"¿La configuración anunciada en julio de 2026 conserva la misma calidad de integración, capacidad de transferencia y conectividad que la configuración originalmente evaluada por METI en 2024?"</span>
+        <span class="en">"Does the configuration announced in July 2026 preserve the same quality of integration, transfer capacity and connectivity as the configuration originally evaluated by METI in 2024?"</span>
+      </p>
+    </div>
+
+    <div class="box box-warn">
+      <div class="box-label"><span class="es">Hallazgo documental · N3</span><span class="en">Documentary finding · N3</span></div>
+      <p><span class="es">Si la respuesta es afirmativa, debe demostrarse mediante una reevaluación documentada de demanda, transferencias y conectividad. Si dicha reevaluación no existe en el expediente, el cambio no puede considerarse únicamente una modificación geométrica: existe un potencial impacto funcional sobre la red cuya magnitud no estaría documentada.</span><span class="en">If the answer is affirmative, it must be demonstrated through a documented reevaluation of demand, transfers and connectivity. If such a reevaluation does not exist in the expedient, the change cannot be considered solely a geometric modification: there is a potential functional impact on the network whose magnitude would not be documented.</span></p>
+    </div>
+
+    <div class="box box-note" style="margin-top:16px;">
+      <div class="box-label"><span class="es">Nota de precisión metodológica · N3</span><span class="en">Methodological precision note · N3</span></div>
+      <p><span class="es">La motivación declarada para el cambio es ambiental y comunitaria. Esta inferencia no cuestiona esa motivación ni establece causalidad. Documenta únicamente la necesidad de evaluar el efecto funcional del cambio de trazado sobre la arquitectura de la red — y la ausencia de esa evaluación en los documentos examinados.</span><span class="en">The stated motivation for the change is environmental and community-based. This inference does not question that motivation or establish causality. It documents only the need to evaluate the functional effect of the route change on the network architecture — and the absence of that evaluation in the documents examined.</span></p>
+    </div>
+  </div>
+
+  <hr class="rule">
+
+  <!-- ── PREGUNTA FINAL ── -->
+  <div class="question-final">
+    <p style="font-size:11px; color:rgba(255,255,255,.4); text-transform:uppercase; letter-spacing:.12em; margin-bottom:20px;">
+      <span class="es">La Pregunta que el Expediente No Responde</span>
+      <span class="en">The Question the Expedient Does Not Answer</span>
+    </p>
+    <blockquote>
+      <span class="es">"¿El Monorriel está siendo diseñado como una verdadera línea secundaria integrada eficientemente a la red primaria — o se está evaluando principalmente como una línea independiente?"</span>
+      <span class="en">"Is the Monorail being designed as a true secondary line efficiently integrated into the primary network — or is it being evaluated primarily as an independent line?"</span>
+    </blockquote>
+    <p class="qf-sub">
+      <span class="es">Si es Nivel 2, su valor depende de su integración con Nivel 1. La respuesta no se encuentra en los documentos examinados.</span>
+      <span class="en">If it is Level 2, its value depends on its integration with Level 1. The answer is not found in the documents examined.</span>
+    </p>
+  </div>
+
+  <!-- ── PUENTE DOCUMENTAL ── -->
+  <div class="box box-fact" style="margin-top:20px;">
+    <div class="box-label"><span class="es">Base documental complementaria · Corpus de Auditoría</span><span class="en">Complementary documentary base · Audit Corpus</span></div>
+    <p><span class="es">Este análisis complementa — sin sustituir — el corpus de auditoría del Dr. Ing. Carlos Bonnelly Ginebra (Notas Técnicas NT-I a NT-V, publicadas en Diario Libre y El Nuevo Diario). Las premisas de integración de red se vinculan directamente con los siguientes controles documentados en AUDIT.html:</span><span class="en">This analysis complements — without replacing — the audit corpus of Dr. Ing. Carlos Bonnelly Ginebra (Technical Notes NT-I through NT-V, published in Diario Libre and El Nuevo Diario). The network integration premises connect directly with the following controls documented in AUDIT.html:</span></p>
+    <div class="grid2" style="margin-top:12px; gap:10px;">
+      <div style="background:var(--fog); border-radius:4px; padding:12px 14px;">
+        <div style="font-size:10px; font-weight:700; color:var(--muted); text-transform:uppercase; letter-spacing:.08em; margin-bottom:6px;">AUDIT NT-III · <span class="es">Robustez multicriterio</span><span class="en">Multi-criteria robustness</span></div>
+        <p style="font-size:12px; margin:0;"><span class="es">Metro ocupa el 1er lugar en las 36 combinaciones de sensibilidad (headway × demanda × peso del criterio Capacidad). Hoja 20_Robustez_Ranking · N1.</span><span class="en">Metro ranks 1st in all 36 sensitivity combinations (headway × demand × Capacity criterion weight). Sheet 20_Robustez_Ranking · N1.</span></p>
+      </div>
+      <div style="background:var(--fog); border-radius:4px; padding:12px 14px;">
+        <div style="font-size:10px; font-weight:700; color:var(--muted); text-transform:uppercase; letter-spacing:.08em; margin-bottom:6px;">AUDIT NT-V · Control C-13</div>
+        <p style="font-size:12px; margin:0;"><span class="es">Discrepancia de USD 1,823.5M entre VAN publicado (+USD 1,099.7M) y VAN reconstruido (−USD 723.8M). La modificación de trazado no forma parte de la configuración evaluada por ese control.</span><span class="en">USD 1,823.5M discrepancy between published NPV (+USD 1,099.7M) and reconstructed NPV (−USD 723.8M). The route modification is not part of the configuration evaluated by that control.</span></p>
+      </div>
+    </div>
+    <p style="font-size:12px; color:var(--muted); margin-top:10px;"><span class="es">La pregunta sobre reevaluación de integración de red (Sección 05 de este análisis) es complementaria a los hallazgos H1–H17 documentados en el corpus de auditoría. Si existe una reevaluación formal del trazado modificado, sus parámetros y resultados deben ser públicamente identificables.</span><span class="en">The question about network integration reevaluation (Section 05 of this analysis) is complementary to findings H1–H17 documented in the audit corpus. If a formal reevaluation of the modified route exists, its parameters and results must be publicly identifiable.</span></p>
+  </div>
+
+  <!-- ── FOOTER ── -->
+  <div class="tab-footer">
+    <div>
+      <div class="tf-author">Ing. Piter J. Bonilla D. · CODIA #17378</div>
+      <div class="tf-original">
+        <span class="es">Análisis de capacidad de red · N3 · visualcrp.com/embudo.html · Agosto 2026. La capacidad de 306,000 pax/día (Modelo N2) representa la capacidad física de la línea bajo supuestos operativos declarados — no la capacidad efectiva de integración del sistema metropolitano. La motivación declarada por FITRAM para el cambio de trazado (julio 2026) es ambiental y comunitaria. Este análisis documenta la ausencia de reevaluación de impacto de red — sin afirmar causalidad. Fuente N1: METI/Nippon Koei feb. 2024 (pág. 61, sección 03-3.4) · Diario Libre 13 jul. 2026.</span>
+        <span class="en">Network capacity analysis · N3 · visualcrp.com/embudo.html · August 2026. The 306,000 pax/day capacity (N2 Model) represents the physical line capacity under declared operating assumptions — not the effective integration capacity of the metropolitan system. FITRAM's stated motivation for the route change (July 2026) is environmental and community-based. This analysis documents the absence of network impact reevaluation — without asserting causality. N1 source: METI/Nippon Koei Feb. 2024 (p. 61, section 03-3.4) · Diario Libre Jul. 13, 2026.</span>
+      </div>
+    </div>
+    <div style="font-size:11px; color:var(--muted);"><span class="es">Agosto 2026</span><span class="en">August 2026</span></div>
+  </div>
+
+</div>
+<!-- FIN · CAPACIDAD DE RED -->
+
 <div class="tab-panel" id="tab-soliloquio">
 <div class="sol-wrap">
 
@@ -2585,7 +2924,7 @@ html.dark #tab-prata .prata-info { background:rgba(29,78,216,.15); border-color:
     <p class="sol-p"><span class="es">El nombre no es una metáfora decorativa. Es la descripción precisa de tres restricciones simultáneas documentadas con rigor creciente en el análisis del Ing. Bonilla.</span><span class="en">The name is not a decorative metaphor. It is the precise description of three simultaneous constraints documented with increasing rigor in Ing. Bonilla's analysis.</span></p>
 
     <div class="sol-sub-hdr"><span class="es">La restricción física</span><span class="en">The physical constraint</span></div>
-    <p class="sol-p"><span class="es">Un vagón de monorriel, por su diseño estructural — montado a horcajadas sobre una viga central de hormigón — tiene una capacidad física de 750 pasajeros. Un vagón de metro convencional, que maximiza el espacio interior sobre dos rieles paralelos estándar, tiene capacidad de 1,200 pasajeros. Con la misma flota de 17 trenes y el mismo headway de 3.53 minutos — compatible con los estándares UITP para sistemas GoA3/GoA4 utilizados como referencia del modelo — el Metro produce 490,000 pasajeros diarios y el Monorriel produce 306,000. La diferencia del 60% no depende únicamente del software de control ni de mejoras operativas. Es una limitación estructural de la capacidad física por tren.</span><span class="en">A monorail car, by its structural design — straddling a central concrete beam — has a physical capacity of 750 passengers. A conventional metro car, maximizing interior space over two standard parallel rails, has a capacity of 1,200 passengers. With the same fleet of 17 trains and the same 3.53-minute headway — compatible with UITP standards for GoA3/GoA4 systems used as model reference — the Metro produces 490,000 daily passengers and the Monorail produces 306,000. The 60% difference does not depend solely on control software or operational improvements. It is a structural limitation of physical capacity per train.</span></p>
+    <p class="sol-p"><span class="es">Un vagón de monorriel, por su diseño estructural — montado a horcajadas sobre una viga central de hormigón — tiene una capacidad física de 750 pasajeros. Un vagón de metro convencional, que maximiza el espacio interior sobre dos rieles paralelos estándar, tiene capacidad de 1,200 pasajeros. Con la misma flota de 17 trenes y el mismo headway de 3.53 minutos — compatible con benchmarks UITP de referencia para sistemas GoA3/GoA4 utilizados como referencia del modelo — el Metro produce 490,000 pasajeros diarios y el Monorriel produce 306,000. La diferencia del 60% no depende únicamente del software de control ni de mejoras operativas. Es una limitación estructural de la capacidad física por tren.</span><span class="en">A monorail car, by its structural design — straddling a central concrete beam — has a physical capacity of 750 passengers. A conventional metro car, maximizing interior space over two standard parallel rails, has a capacity of 1,200 passengers. With the same fleet of 17 trains and the same 3.53-minute headway — compatible with UITP reference benchmarks for GoA3/GoA4 systems used as model reference — the Metro produces 490,000 daily passengers and the Monorail produces 306,000. The 60% difference does not depend solely on control software or operational improvements. It is a structural limitation of physical capacity per train.</span></p>
 
     <p class="sol-p"><span class="es">El expediente oficial del proyecto (SNIP 17248) promete un headway de 90 segundos — 40 trenes por hora — para compensar la menor capacidad por vagón. El análisis documenta que esa promesa no tiene validación operativa en sistemas automatizados GoA4 de esta escala. En 90 segundos, el tiempo de parada en estación durante hora pico — embarque, desembarque, cierre de puertas, verificación de sensores, distancia de frenado de seguridad — consume la totalidad del intervalo disponible. Si una sola estación se retrasa por demanda inusual, el efecto se propaga al desempeño operativo de toda la línea. No es un fallo local.</span><span class="en">The project's official file (SNIP 17248) promises a 90-second headway — 40 trains per hour — to compensate for the lower capacity per car. The analysis documents that this promise has no operational validation in GoA4 automated systems at this scale. In 90 seconds, the station dwell time during peak hour — boarding, alighting, door closing, sensor verification, braking distance safety — consumes the entire available interval. If a single station is delayed by unusual demand, the effect propagates to the entire line's operational performance. It is not a local failure.</span></p>
 
@@ -2594,7 +2933,7 @@ html.dark #tab-prata .prata-info { background:rgba(29,78,216,.15); border-color:
     <div class="sol-sub-hdr"><span class="es">La restricción institucional</span><span class="en">The institutional constraint</span></div>
     <p class="sol-p"><span class="es">El análisis documentó el mecanismo técnico por el cual el Monorriel puede parecer viable en papel: reducir la demanda efectiva que debe absorber eliminando la interconexión con la red existente. El Centro Olímpico Juan Pablo Duarte es el nodo de mayor demanda del corredor porque es el punto de transferencia entre las Líneas 1 y 2 — dato documentado en la página 61, sección 03-3.4 del propio estudio METI. El diseño original conectaba en ese nodo. El trazado anunciado en julio de 2026 lo elimina. El Monorriel conecta ahora solo con la Línea 2 en la Avenida San Martín.</span><span class="en">The analysis documented the technical mechanism by which the Monorail can appear viable on paper: reducing the effective demand it must absorb by eliminating the interconnection with the existing network. The Centro Olímpico Juan Pablo Duarte is the corridor's highest-demand node because it is the transfer point between Lines 1 and 2 — data documented on page 61, section 03-3.4 of the METI study itself. The original design connected at that node. The route announced in July 2026 eliminates it. The Monorail now connects only with Line 2 at Avenida San Martín.</span></p>
 
-    <p class="sol-p"><span class="es">El resultado es una línea funcionalmente aislada que no compite con la demanda real de la red metropolitana integrada — porque fue desconectada de la parte más densa de esa red. En el papel, el sistema parece menos congestionado. En la realidad, los usuarios de la Línea 1 siguen existiendo. El embudo no desapareció. Se trasladó a la superficie y al transporte informal.</span><span class="en">The result is a functionally isolated line that does not compete with the real demand of the integrated metropolitan network — because it was disconnected from the densest part of that network. On paper, the system appears less congested. In reality, Line 1 users continue to exist. The bottleneck did not disappear. It shifted to the surface and to informal transport.</span></p>
+    <p class="sol-p"><span class="es">El resultado es una línea que, bajo la nueva configuración, reduce su superficie de integración con la red metropolitana. En el papel, la demanda efectiva que el sistema debe absorber disminuye. Los usuarios que antes habrían accedido por el nodo L1+L2 siguen existiendo — y deben buscar alternativas de movilidad. La inferencia técnica es que parte de esa demanda se desplazaría hacia otros modos; la magnitud y distribución de ese desplazamiento requeriría un análisis de comportamiento modal que el expediente no documenta.</span><span class="en">The result is a line that, under the new configuration, reduces its integration surface with the metropolitan network. On paper, the effective demand the system must absorb decreases. Users who would previously have accessed via the L1+L2 node continue to exist — and must seek mobility alternatives. The technical inference is that part of that demand would shift to other modes; the magnitude and distribution of that shift would require a modal behavior analysis that the expedient does not document.</span></p>
 
     <div class="sol-sub-hdr"><span class="es">La restricción de soberanía</span><span class="en">The sovereignty constraint</span></div>
     <p class="sol-p"><span class="es">Un sistema de metro convencional opera sobre estándares ferroviarios universales y abiertos. Cuando la demanda crece y se necesita nueva flota, la ciudad puede licitar internacionalmente y recibir ofertas competitivas de fabricantes en Europa, Asia y América. La competencia de precios opera en favor del Estado.</span><span class="en">A conventional metro system operates on universal and open railway standards. When demand grows and new fleet is needed, the city can tender internationally and receive competitive offers from manufacturers in Europe, Asia, and the Americas. Price competition operates in the State's favor.</span></p>
@@ -2728,8 +3067,8 @@ html.dark #tab-prata .prata-info { background:rgba(29,78,216,.15); border-color:
       <div style="font-size:13px; color:var(--text); line-height:1.75;">
         <div style="margin-bottom:9px; padding-left:12px; border-left:2px solid var(--red-lt);">
           <strong style="color:var(--red);">−12 pts</strong>
-          <span class="es"> — Brecha oferta-demanda estructural desde el Día 1. Capacidad estimada 306,000 pax/día vs. demanda proyectada 464,800 para 2030 (65.8% cobertura). Ninguna institución multilateral financia sistemas con déficit de capacidad estructural desde la inauguración.</span>
-          <span class="en"> — Structural supply-demand gap from Day 1. Estimated capacity 306,000 pax/day vs. projected demand 464,800 for 2030 (65.8% coverage). No multilateral institution finances systems with structural capacity deficit from inauguration.</span>
+          <span class="es"> — Brecha oferta-demanda estructural desde el Día 1. Capacidad estimada 306,000 pax/día vs. demanda proyectada 464,800 para 2030 (65.8% cobertura). Un déficit estructural de capacidad desde la inauguración constituye una variable crítica que debería estar explícitamente justificada en la evaluación de demanda y alternativas del expediente.</span>
+          <span class="en"> — Structural supply-demand gap from Day 1. Estimated capacity 306,000 pax/day vs. projected demand 464,800 for 2030 (65.8% coverage). A structural capacity deficit from inauguration constitutes a critical variable that should be explicitly justified in the expedient's demand and alternatives evaluation.</span>
         </div>
         <div style="margin-bottom:9px; padding-left:12px; border-left:2px solid var(--red-lt);">
           <strong style="color:var(--red);">−8 pts</strong>
@@ -2918,7 +3257,7 @@ html.dark #tab-prata .prata-info { background:rgba(29,78,216,.15); border-color:
             <td style="padding:12px 16px; text-align:center; color:var(--accent); font-weight:700;">100%</td>
             <td style="padding:12px 16px; text-align:center; color:var(--accent); font-weight:700;">100</td>
             <td style="padding:12px 16px; text-align:right; color:var(--red); font-weight:900; font-family:monospace; font-size:20px;">41</td>
-            <td style="padding:12px 16px; color:var(--red); font-size:12px; font-weight:700;"><span class="es">RECHAZADO</span><span class="en">REJECTED</span></td>
+            <td style="padding:12px 16px; color:var(--red); font-size:12px; font-weight:700;"><span class="es">ALTO RIESGO · NO RECOMENDADO BAJO ESTA RÚBRICA</span><span class="en">HIGH RISK · NOT RECOMMENDED UNDER THIS RUBRIC</span></td>
           </tr>
         </tbody>
       </table>
@@ -2957,8 +3296,8 @@ html.dark #tab-prata .prata-info { background:rgba(29,78,216,.15); border-color:
       <span class="en">Note on the nature of this exercise</span>
     </div>
     <p style="font-size:13px; color:var(--text); line-height:1.7; margin:0;">
-      <span class="es">La puntuación de 41/100 es el resultado de aplicar los dos prompts al corpus técnico publicado en visualcrp.com/embudo.html. <strong>No es una evaluación oficial de METI, UITP, BID ni Banco Mundial.</strong> Es un escenario exploratorio basado en evidencia N1, N2 y N3 del expediente, con una rúbrica informada por criterios de capacidad, operación, ciclo de vida, integración de red y gestión de riesgos propios de la práctica internacional de transporte. Los parámetros pendientes de verificación primaria (B-01, B-02, B-03) afectan la precisión del resultado.</span>
-      <span class="en">The score of 41/100 is the result of applying the two prompts to the technical corpus published at visualcrp.com/embudo.html. <strong>It is not an official evaluation by METI, UITP, IDB or World Bank.</strong> It is an exploratory scenario based on N1, N2 and N3 evidence from the file, with a rubric informed by capacity, operation, lifecycle, network integration and risk management criteria from international transport practice. Parameters pending primary verification (B-01, B-02, B-03) affect the result's precision.</span>
+      <span class="es">La puntuación de 41/100 es el resultado de aplicar los dos prompts al corpus técnico publicado en visualcrp.com/embudo.html. <strong>No es una evaluación oficial de METI, UITP, BID ni Banco Mundial.</strong> Es un escenario exploratorio basado en evidencia N1, N2 y N3 del expediente, con una rúbrica informada por criterios de capacidad, operación, ciclo de vida, integración de red y gestión de riesgos propios de la práctica internacional de transporte. El parámetro pendiente de verificación primaria (B-01: T=60 min) afecta marginalmente la precisión del resultado. B-02 (N=17 trenes) y B-03 (750 pax/tren) han sido verificados como N1.</span>
+      <span class="en">The score of 41/100 is the result of applying the two prompts to the technical corpus published at visualcrp.com/embudo.html. <strong>It is not an official evaluation by METI, UITP, IDB or World Bank.</strong> It is an exploratory scenario based on N1, N2 and N3 evidence from the file, with a rubric informed by capacity, operation, lifecycle, network integration and risk management criteria from international transport practice. The parameter pending primary verification (B-01: T=60 min) marginally affects the result's precision. B-02 (N=17 trains) and B-03 (750 pax/train) have been verified as N1.</span>
     </p>
   </div>
 
@@ -3287,8 +3626,8 @@ function buildCharts() {
       labels: ['90s', '120s', '150s', '180s', '210s', '240s', '270s'],
       datasets: [
         {
-          label: t('Capacidad pphps','Capacity pphps'),
-          data: [22480, 16860, 13488, 11240, 9634, 8430, 7493],
+          label: t('Capacidad pphpd','Capacity pphpd'),
+          data: [30000, 22500, 18000, 15000, 12857, 11250, 10000],
           backgroundColor: [GREEN, BLUE, AMBER, RED, RED,
             D ? '#b91c1c' : '#991b1b',
             D ? '#7f1d1d' : '#7f1d1d'],
@@ -3297,7 +3636,7 @@ function buildCharts() {
         },
         {
           type: 'line',
-          label: t('Demanda crítica METI · 12,800 pphps','METI critical demand · 12,800 pphps'),
+          label: t('Demanda crítica METI · 12,800 pphpd','METI critical demand · 12,800 pphpd'),
           data: [12800, 12800, 12800, 12800, 12800, 12800, 12800],
           borderColor: AMBER,
           borderWidth: 1.5,
@@ -3312,7 +3651,7 @@ function buildCharts() {
       responsive: true,
       plugins: {
         legend: { display: true, labels: { color: TC, font: { size: 11 }, boxWidth: 24 }},
-        tooltip: { callbacks: { label: ctx => `${ctx.raw.toLocaleString()} pphps` }},
+        tooltip: { callbacks: { label: ctx => `${ctx.raw.toLocaleString()} pphpd` }},
         annotation: {}
       },
       scales: {
@@ -3564,7 +3903,7 @@ function buildCharts() {
 
   <!-- 06 · CAPACIDAD REAL -->
   <div class="sec">
-    <div class="sec-hdr"><span class="sec-num">06 ·</span><span class="sec-title"><span class="es">Capacidad Real vs. Prometida · N3</span><span class="en">Real vs. Promised Capacity · N3</span></span></div>
+    <div class="sec-hdr"><span class="sec-num">06 ·</span><span class="sec-title"><span class="es">Capacidad Operativa Modelizada vs. Prometida · N3</span><span class="en">Modeled Operational Capacity vs. Promised · N3</span></span></div>
 
     <p style="font-size:12.5px; color:var(--muted); margin-bottom:16px"><span class="es">Cadena de trazabilidad: 17 trenes contratados [N1] → reserva 15% → trenes activos → ciclo → headway real → PPHPD = (60/hw) × 750 pax → capacidad diaria (factor punta 30%, eficiencia 90%, 2 sentidos).</span><span class="en">Traceability chain: 17 contracted trains [N1] → 15% reserve → active trains → cycle → real headway → PPHPD = (60/hw) × 750 pax → daily capacity (peak factor 30%, efficiency 90%, 2 directions).</span></p>
 
@@ -3691,8 +4030,8 @@ function buildCharts() {
     <div>
       <div class="tf-author">Ing. Piter J. Bonilla D. · CODIA #17378</div>
       <div class="tf-original">
-        <span class="es">Informe técnico basado en parámetros verificados del expediente oficial SNIP 17248 [N1] y estándares internacionales UITP/JICA [N2]. Los parámetros de modelización (velocidad comercial 30 km/h, dwell time pico 45 s, factor seguridad bloque 1.3) están declarados explícitamente como supuestos. El análisis es robusto en todo el rango de supuestos razonables: incluso bajo parámetros optimistas (35 km/h, dwell 20 s, ciclo 46 min), el headway mínimo calculado supera los 210 s — 133% sobre los 90 s prometidos. La restricción geométrica (D_seg > D_interestación) depende del bloque de seguridad CBTC [N2] y debe verificarse contra el diseño definitivo del proyecto. Pendiente [B]: referencias exactas en SNIP 17248 para ciclo operativo, número de trenes (17), capacidad por tren (750 pax) y distancia interestación.</span>
-        <span class="en">Technical report based on verified parameters from official SNIP 17248 expedient [N1] and international UITP/JICA standards [N2]. Modelling parameters (30 km/h commercial speed, 45 s peak dwell, block safety factor 1.3) are explicitly declared as assumptions. The analysis is robust across the full range of reasonable assumptions: even under optimistic parameters (35 km/h, 20 s dwell, 46 min cycle), the minimum calculated headway exceeds 210 s — 133% above the promised 90 s. The geometric constraint (D_seg > D_interstation) depends on the CBTC safety block [N2] and must be verified against the project's definitive design. Pending [B]: exact references in SNIP 17248 for operational cycle, number of trains (17), capacity per train (750 pax) and interstation distance.</span>
+        <span class="es">Informe técnico basado en parámetros verificados del expediente oficial SNIP 17248 [N1] y estándares internacionales UITP/JICA [N2]. Los parámetros de modelización (velocidad comercial 30 km/h, dwell time pico 45 s, factor seguridad bloque 1.3) están declarados explícitamente como supuestos. El análisis es robusto en todo el rango de supuestos razonables: incluso bajo parámetros optimistas (35 km/h, dwell 20 s, ciclo 46 min), el headway mínimo calculado supera los 210 s — 133% sobre los 90 s prometidos. La restricción geométrica (D_seg > D_interestación) depende del bloque de seguridad CBTC [N2] y debe verificarse contra el diseño definitivo del proyecto. N=17 trenes y 750 pax/tren verificados como N1 (Bonnelly, Diario Libre 3 ago. 2026 · FITRAM.gob.do · SYSTRA, ene. 2026). Pendiente [B-01]: referencia exacta en SNIP 17248 para ciclo operativo T=60 min y distancia interestación.</span>
+        <span class="en">Technical report based on verified parameters from official SNIP 17248 expedient [N1] and international UITP/JICA standards [N2]. Modelling parameters (30 km/h commercial speed, 45 s peak dwell, block safety factor 1.3) are explicitly declared as assumptions. The analysis is robust across the full range of reasonable assumptions: even under optimistic parameters (35 km/h, 20 s dwell, 46 min cycle), the minimum calculated headway exceeds 210 s — 133% above the promised 90 s. The geometric constraint (D_seg > D_interstation) depends on the CBTC safety block [N2] and must be verified against the project's definitive design. N=17 trains and 750 pax/train verified as N1 (Bonnelly, Diario Libre Aug. 3, 2026 · FITRAM.gob.do · SYSTRA, Jan. 2026). Pending [B-01]: exact reference in SNIP 17248 for operational cycle T=60 min and interstation distance.</span>
       </div>
       <div style="margin-top:8px; padding-top:8px; border-top:1px dashed var(--rule); font-size:11px; color:var(--muted);">
         <span class="es"><strong>Fórmulas resumen:</strong>
