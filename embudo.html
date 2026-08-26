@@ -16,6 +16,7 @@
   --fog:     #1a2740;
   --page:    #070e1c;
   --white:   #0d1830;
+  --card-bg: rgba(255,255,255,0.06);
   --red:     #e05252;
   --red-lt:  rgba(224,82,82,.15);
   --amber:   #d4890a;
@@ -35,6 +36,7 @@ html.light {
   --navy2:   #1d4ed8;
   --slate:   #3b5ea6;
   --fog:     #e8edf5;
+  --card-bg: #ffffff;
   --page:    #f4f6fa;
   --white:   #ffffff;
   --rule:    #cbd5e1;
@@ -2009,6 +2011,29 @@ html.dark #tab-prata .prata-tbl td { color:rgba(220,235,255,.85); border-color:r
 html.dark #tab-prata .prata-note { background:rgba(255,255,255,.06); color:rgba(200,220,255,.7); }
 html.dark #tab-prata .prata-warn { background:rgba(180,83,9,.15); border-color:#c97d1e; }
 html.dark #tab-prata .prata-info { background:rgba(29,78,216,.15); border-color:#6090f0; }
+/* ── LIGHT MODE: convergence table thead ── */
+html.light #tab-prata .convergencia-thead th {
+  background: var(--navy) !important;
+  color: rgba(255,255,255,0.85) !important;
+}
+/* ── LIGHT MODE: question box (pregunta-expediente) ── */
+html.light #tab-prata .pregunta-expediente {
+  background: var(--navy) !important;
+  color: #fff !important;
+}
+html.light #tab-prata .pregunta-expediente .preg-label {
+  color: rgba(255,255,255,0.70) !important;
+}
+html.light #tab-prata .pregunta-expediente .preg-body {
+  color: rgba(255,255,255,0.95) !important;
+}
+html.light #tab-prata .pregunta-expediente .preg-footer {
+  color: rgba(255,255,255,0.65) !important;
+  border-top-color: rgba(255,255,255,0.20) !important;
+}
+html.light #tab-prata .pregunta-expediente .preg-bench {
+  color: rgba(255,255,255,0.80) !important;
+}
 </style>
 
 <p class="panel-title">
@@ -2489,22 +2514,24 @@ html.dark #tab-prata .prata-info { background:rgba(29,78,216,.15); border-color:
 </div>
 
 <!-- PREGUNTA QUE EL EXPEDIENTE NO RESPONDE -->
-<div style="background:var(--navy); color:#fff; border-radius:8px; padding:20px 24px; text-align:center;">
-  <div style="font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; opacity:.65; margin-bottom:10px;">
+<div class="pregunta-expediente" style="background:var(--navy); color:#fff; border-radius:8px; padding:20px 24px; text-align:center;">
+  <div class="preg-label" style="font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:rgba(255,255,255,.85); margin-bottom:10px;">
     <span class="es">La pregunta que el precedente genera y el expediente no responde</span>
     <span class="en">The question the precedent raises and the file does not answer</span>
   </div>
-  <div style="font-size:14px; font-style:italic; line-height:1.7; max-width:680px; margin:0 auto;">
+  <div class="preg-body" style="font-size:14px; font-style:italic; line-height:1.7; max-width:680px; margin:0 auto; color:rgba(255,255,255,.96);">
     <span class="es">"¿Por qué el expediente no contiene un análisis comparativo con la Línea 15 Prata de São Paulo, el precedente operativo más directamente comparable identificado para este análisis, con el mismo parámetro nominal de headway de 90 segundos y tecnología GoA4?"</span>
     <span class="en">"Why does the file not contain a comparative analysis with Line 15 Prata of São Paulo, the most directly comparable operational precedent identified for this analysis, sharing the same 90-second nominal headway parameter and GoA4 technology?"</span>
   </div>
-  <div style="font-size:11px; opacity:.65; margin-top:10px;">
+  <div class="preg-footer" style="font-size:11px; color:rgba(255,255,255,.75); margin-top:10px; border-top:1px solid rgba(255,255,255,.20); padding-top:10px;">
     <span class="es">La respuesta no se encuentra en los documentos examinados.</span>
     <span class="en">The answer is not found in the documents examined.</span>
   </div>
-  <div style="font-size:11.5px; color:rgba(255,255,255,.80); margin-top:14px; border-top:1px solid rgba(255,255,255,.15); padding-top:12px; font-style:italic; line-height:1.7;">
+  <div class="preg-bench" style="font-size:11.5px; color:rgba(255,255,255,.82); margin-top:14px; border-top:1px solid rgba(255,255,255,.15); padding-top:12px; font-style:italic; line-height:1.7;">
     <span class="es">El benchmark no cuestiona la tecnología por sí misma. Cuestiona la equivalencia entre capacidad nominal y capacidad operacional efectiva cuando los parámetros críticos se presentan como constantes en el expediente.</span>
     <span class="en">The benchmark does not question the technology itself. It questions the equivalence between nominal capacity and effective operational capacity when critical parameters are presented as constants in the file.</span>
+  </div>
+</div>
 <!-- ══ ANÁLISIS FORENSE DE VIDEO · VILA PRUDENTE · GEM ══ -->
 <div style="margin-top:32px; border-top:2px solid var(--rule); padding-top:28px;">
 
@@ -2606,7 +2633,7 @@ html.dark #tab-prata .prata-info { background:rgba(29,78,216,.15); border-color:
   <div style="overflow-x:auto; margin-bottom:20px;">
     <table style="width:100%; border-collapse:collapse; font-size:0.8rem;">
       <thead>
-        <tr style="background:var(--navy,#1a3260);">
+        <tr class="convergencia-thead" style="background:var(--navy,#1a3260);">
           <th style="padding:9px 12px; text-align:left; color:rgba(255,255,255,0.7); font-weight:500; font-size:0.65rem; letter-spacing:1px; text-transform:uppercase;"><span class="es">Fuente</span><span class="en">Source</span></th>
           <th style="padding:9px 12px; text-align:right; color:rgba(255,255,255,0.7); font-weight:500; font-size:0.65rem; letter-spacing:1px; text-transform:uppercase;">Headway</th>
           <th style="padding:9px 12px; text-align:right; color:rgba(255,255,255,0.7); font-weight:500; font-size:0.65rem; letter-spacing:1px; text-transform:uppercase;">vs. 90s</th>
@@ -2615,7 +2642,7 @@ html.dark #tab-prata .prata-info { background:rgba(29,78,216,.15); border-color:
       <tbody>
         <tr style="background:rgba(0,180,0,0.05); border-bottom:1px solid var(--rule);">
           <td style="padding:8px 12px; font-weight:600;"><span class="es">Promesa SNIP 17248</span><span class="en">SNIP 17248 Promise</span></td>
-          <td style="padding:8px 12px; text-align:right; font-family:monospace; color:#00b894; font-weight:700;">90 s</td>
+          <td style="padding:8px 12px; text-align:right; font-family:monospace; color:#059669; font-weight:700;">90 s</td>
           <td style="padding:8px 12px; text-align:right; color:var(--muted); font-family:monospace;">—</td>
         </tr>
         <tr style="border-bottom:1px solid var(--rule);">
@@ -2669,25 +2696,45 @@ html.dark #tab-prata .prata-info { background:rgba(29,78,216,.15); border-color:
     </p>
   </div>
 
+  <!-- PREGUNTA QUE EL PRECEDENTE GENERA Y EL EXPEDIENTE NO RESPONDE -->
+  <div class="pregunta-expediente" style="background:var(--navy); color:#fff; border-radius:8px; padding:20px 24px; text-align:center; margin-bottom:20px; margin-top:20px;">
+    <div class="preg-label" style="font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:rgba(255,255,255,.65); margin-bottom:10px;">
+      <span class="es">La pregunta que el precedente genera y el expediente no responde</span>
+      <span class="en">The question the precedent raises and the file does not answer</span>
+    </div>
+    <div class="preg-body" style="font-size:14px; font-style:italic; line-height:1.75; max-width:680px; margin:0 auto; color:rgba(255,255,255,.96);">
+      <span class="es">«¿Por qué el expediente no contiene un análisis comparativo con la Línea 15 Prata de São Paulo, el precedente operativo más directamente comparable identificado para este análisis, con el mismo parámetro nominal de headway de 90 segundos y tecnología GoA4?»</span>
+      <span class="en">«Why does the file not contain a comparative analysis with Line 15 Prata of São Paulo, the most directly comparable operational precedent identified for this analysis, sharing the same 90-second nominal headway parameter and GoA4 technology?»</span>
+    </div>
+    <div class="preg-footer" style="font-size:11px; color:rgba(255,255,255,.60); margin-top:10px; border-top:1px solid rgba(255,255,255,.15); padding-top:12px;">
+      <span class="es">La respuesta no se encuentra en los documentos examinados.</span>
+      <span class="en">The answer is not found in the documents examined.</span>
+    </div>
+    <div class="preg-bench" style="font-size:11.5px; color:rgba(255,255,255,.78); margin-top:12px; font-style:italic; line-height:1.7; max-width:620px; margin-left:auto; margin-right:auto;">
+      <span class="es">El benchmark no cuestiona la tecnología por sí misma. Cuestiona la equivalencia entre capacidad nominal y capacidad operacional efectiva cuando los parámetros críticos se presentan como constantes en el expediente.</span>
+      <span class="en">The benchmark does not question the technology itself. It questions the equivalence between nominal capacity and effective operational capacity when critical parameters are presented as constants in the file.</span>
+    </div>
+  </div>
+
   <!-- ACTIVOS MA -->
   <div style="margin-top:20px; padding:18px 20px; background:var(--fog,#f8f8f6); border:1px solid var(--rule); border-radius:6px;">
     <div style="font-family:monospace; font-size:0.65rem; color:var(--accent); letter-spacing:2px; text-transform:uppercase; margin-bottom:14px;"><span class="es">Activos del Análisis Forense · Ecosistema MA</span><span class="en">Forensic Analysis Assets · MA Ecosystem</span></div>
     <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:12px;">
-      <a href="https://tinyurl.com/mru2ejtt" target="_blank" style="text-decoration:none; display:flex; align-items:flex-start; gap:10px; padding:12px; background:var(--white,#fff); border:1px solid var(--rule); border-radius:4px; border-top:3px solid var(--accent);">
+      <a href="https://lnkd.in/gXH5p7r6" target="_blank" style="text-decoration:none; display:flex; align-items:flex-start; gap:10px; padding:12px; background:var(--card-bg,rgba(255,255,255,0.06)); border:1px solid var(--rule); border-radius:4px; border-top:3px solid var(--accent);">
         <span style="font-size:1.2rem;">🎧</span>
         <div>
           <div style="font-weight:600; font-size:0.8rem; color:var(--text); margin-bottom:2px;"><span class="es">Podcast · 14 min</span><span class="en">Podcast · 14 min</span></div>
           <div style="font-size:0.7rem; color:var(--muted); line-height:1.4;"><span class="es">Análisis forense en audio</span><span class="en">Forensic analysis in audio</span></div>
         </div>
       </a>
-      <a href="https://tinyurl.com/3bhpst4k" target="_blank" style="text-decoration:none; display:flex; align-items:flex-start; gap:10px; padding:12px; background:var(--white,#fff); border:1px solid var(--rule); border-radius:4px; border-top:3px solid var(--accent);">
+      <a href="https://lnkd.in/gVJ3bc7N" target="_blank" style="text-decoration:none; display:flex; align-items:flex-start; gap:10px; padding:12px; background:var(--card-bg,rgba(255,255,255,0.06)); border:1px solid var(--rule); border-radius:4px; border-top:3px solid var(--accent);">
         <span style="font-size:1.2rem;">🧠</span>
         <div>
           <div style="font-weight:600; font-size:0.8rem; color:var(--text); margin-bottom:2px;"><span class="es">Presentación PDF</span><span class="en">PDF Presentation</span></div>
           <div style="font-size:0.7rem; color:var(--muted); line-height:1.4;"><span class="es">Análisis forense operativo · 10 diapositivas</span><span class="en">Operational forensic analysis · 10 slides</span></div>
         </div>
       </a>
-      <a href="https://tinyurl.com/yv7awdwx" target="_blank" style="text-decoration:none; display:flex; align-items:flex-start; gap:10px; padding:12px; background:var(--white,#fff); border:1px solid var(--rule); border-radius:4px; border-top:3px solid var(--accent);">
+      <a href="https://lnkd.in/guPMnXPZ" target="_blank" style="text-decoration:none; display:flex; align-items:flex-start; gap:10px; padding:12px; background:var(--card-bg,rgba(255,255,255,0.06)); border:1px solid var(--rule); border-radius:4px; border-top:3px solid var(--accent);">
         <span style="font-size:1.2rem;">📊</span>
         <div>
           <div style="font-weight:600; font-size:0.8rem; color:var(--text); margin-bottom:2px;"><span class="es">Infografía</span><span class="en">Infographic</span></div>
