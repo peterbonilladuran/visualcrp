@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="es" id="html-root" class="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lecciones del benchmark L15 Prata · El Embudo</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+/* ── VARIABLES ── */
+:root {
+  --navy:    #0f1f3d;
+  --navy2:   #1a3260;
+  --slate:   #2c4a7c;
+  --fog:     #1a2740;
+  --page:    #070e1c;
+  --white:   #0d1830;
+  --red:     #e05252;
+  --red-lt:  rgba(224,82,82,.15);
+  --amber:   #d4890a;
+  --amber-lt:rgba(212,137,10,.15);
+  --green:   #22c55e;
+  --green-lt:rgba(34,197,94,.12);
+  --blue:    #3b82f6;
+  --blue-lt: rgba(59,130,246,.12);
+  --accent:  #e85d26;
+  --rule:    rgba(200,216,240,.1);
+  --text:    #c8d8f0;
+  --muted:   #8898b8;
+}
+html.light {
+  --navy:    #1a3260;
+  --navy2:   #1d4ed8;
+  --fog:     #e8edf5;
+  --page:    #f4f6fa;
+  --white:   #ffffff;
+  --rule:    #cbd5e1;
+  --text:    #1e293b;
+  --muted:   #475569;
+  --red:     #b91c1c;
+  --accent:  #9a3412;
+  --amber:   #b45309;
+  --green:   #166534;
+  --blue:    #1d4ed8;
+  --red-lt:  rgba(185,28,28,.08);
+  --amber-lt:rgba(180,83,9,.08);
+  --green-lt:rgba(22,101,52,.08);
+  --blue-lt: rgba(29,78,216,.08);
+}
+
+/* ── LANGUAGE ── */
+.en { display: none; }
+html[lang="en"] .es { display: none; }
+html[lang="en"] .en { display: inline; }
+.en-block { display: none; }
+html[lang="en"] .es-block { display: none; }
+html[lang="en"] .en-block { display: block; }
+
+/* ── BASE ── */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--page); color: var(--text); font-family: 'Segoe UI', system-ui, sans-serif; font-size: 14px; line-height: 1.6; padding-top: 56px; }
+
+/* ── TOPBAR ── */
+header.topbar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  height: 52px;
+  background: rgba(7,14,28,.97);
+  border-bottom: 1px solid var(--rule);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 20px; backdrop-filter: blur(8px);
+}
+html.light header.topbar { background: rgba(26,50,96,.97); }
+.tb-brand { font-size: 11px; font-weight: 700; color: rgba(255,255,255,.7); letter-spacing: .08em; text-transform: uppercase; }
+.tb-brand span { color: var(--accent); }
+.tb-right { display: flex; align-items: center; gap: 8px; }
+.lang-toggle { display: flex; gap: 2px; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.15); border-radius: 20px; padding: 2px; }
+.lang-btn { background: transparent; border: none; color: rgba(255,255,255,.5); font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 18px; cursor: pointer; letter-spacing: .04em; transition: all .15s; }
+.lang-btn.active { background: var(--accent); color: #fff; }
+.btn-ctrl { background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.15); border-radius: 20px; color: rgba(255,255,255,.7); font-size: 11px; font-weight: 600; padding: 4px 14px; cursor: pointer; transition: all .15s; white-space: nowrap; }
+.btn-ctrl:hover { background: rgba(255,255,255,.15); color: #fff; }
+
+/* ── CONTAINER ── */
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  background: var(--white);
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  padding: 40px 44px 50px;
+  box-shadow: 0 12px 40px rgba(0,0,0,.4);
+  margin-top: 24px;
+  margin-bottom: 40px;
+}
+@media(max-width:600px) { .container { padding: 20px; margin-top: 12px; } }
+
+/* ── DOC HEADER ── */
+.doc-header {
+  border-bottom: 2px solid var(--accent);
+  padding-bottom: 24px;
+  margin-bottom: 28px;
+  display: flex; flex-wrap: wrap;
+  justify-content: space-between; align-items: flex-end; gap: 12px;
+}
+.doc-header .brand { font-size: 11px; font-weight: 700; color: var(--accent); letter-spacing: .12em; text-transform: uppercase; }
+.doc-header h1 { font-size: 24px; font-weight: 700; color: var(--text); line-height: 1.2; margin-top: 4px; }
+.doc-header .sub { font-size: 13px; color: var(--muted); margin-top: 4px; }
+.doc-header .meta { font-size: 12px; color: var(--muted); text-align: right; white-space: nowrap; }
+.doc-header .meta strong { color: var(--text); }
+@media(max-width:600px) { .doc-header { flex-direction: column; } .doc-header .meta { text-align: left; white-space: normal; } }
+
+/* ── BADGES ── */
+.badge { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: 2px 10px; border-radius: 20px; margin-right: 4px; }
+.badge-n1 { background: var(--green-lt); color: var(--green); }
+.badge-n2 { background: var(--blue-lt); color: var(--blue); }
+.badge-n3 { background: var(--amber-lt); color: var(--amber); }
+.badge-accent { background: var(--accent); color: #fff; }
+
+/* ── SECTIONS ── */
+.section { margin-top: 36px; border-top: 1px solid var(--rule); padding-top: 28px; }
+.section-title { font-size: 17px; font-weight: 700; color: var(--text); margin-bottom: 14px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.section-title small { font-size: 13px; font-weight: 400; color: var(--muted); }
+
+/* ── GRID ── */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin: 16px 0; }
+@media(max-width:600px) { .grid-2 { grid-template-columns: 1fr; } }
+
+/* ── CARDS ── */
+.card { background: var(--fog); border: 1px solid var(--rule); border-radius: 8px; padding: 18px 20px; }
+.card.accent-green { border-left: 3px solid var(--green); }
+.card.accent-red   { border-left: 3px solid var(--red); }
+.card.accent-amber { border-left: 3px solid var(--amber); }
+.card-title { font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+.card .highlight { font-size: 28px; font-weight: 700; color: var(--text); line-height: 1.1; }
+.card .highlight.green { color: var(--green); }
+.card .highlight.red   { color: var(--red); }
+.card .highlight.amber { color: var(--amber); }
+.card .metric { font-size: 12.5px; color: var(--muted); margin-top: 4px; }
+.card .metric strong { color: var(--text); }
+
+/* ── BOXES ── */
+.box { border-radius: 6px; padding: 14px 18px; margin: 16px 0; font-size: 13.5px; }
+.box-fact { background: var(--green-lt); border-left: 3px solid var(--green); }
+.box-warn { background: var(--red-lt); border-left: 3px solid var(--red); }
+.box-note { background: var(--blue-lt); border-left: 3px solid var(--blue); }
+.box-inf  { background: var(--amber-lt); border-left: 3px solid var(--amber); }
+.box-label { font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 6px; color: var(--muted); }
+
+/* ── TABLE ── */
+.tbl-wrap { overflow-x: auto; margin: 16px 0; }
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+thead th { background: var(--navy); color: rgba(255,255,255,.75); font-weight: 600; font-size: 11px; letter-spacing: .05em; text-transform: uppercase; padding: 8px 12px; text-align: left; border-bottom: 2px solid var(--accent); }
+html.light thead th { color: rgba(255,255,255,.85); }
+tbody td { padding: 8px 12px; border-bottom: 1px solid var(--rule); color: var(--text); vertical-align: top; }
+.num { font-family: 'Courier New', monospace; font-weight: 700; }
+.num.green { color: var(--green); }
+.num.red   { color: var(--red); }
+.num.amber { color: var(--amber); }
+
+/* ── CHART ── */
+.chart-box { background: var(--fog); border: 1px solid var(--rule); border-radius: 8px; padding: 16px 18px; margin: 20px 0; }
+.chart-box h4 { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 12px; }
+
+/* ── QUESTION BOX ── */
+.question-box { background: var(--navy); border: 1px solid var(--rule); border-radius: 8px; padding: 24px 28px; text-align: center; margin: 28px 0 12px; }
+.question-box .q-label { font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.4); margin-bottom: 10px; }
+.question-box blockquote { font-size: 15px; font-style: italic; line-height: 1.65; color: #fff; max-width: 680px; margin: 0 auto; }
+html.light .question-box blockquote { color: #fff; }
+
+/* ── FOOTER ── */
+.doc-footer { margin-top: 40px; padding-top: 18px; border-top: 1px solid var(--rule); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; font-size: 12px; color: var(--muted); }
+.doc-footer a { color: var(--blue); text-decoration: none; }
+.doc-footer a:hover { text-decoration: underline; }
+.doc-footer .author { font-weight: 700; color: var(--text); }
+
+strong { color: inherit; }
+</style>
+</head>
+<body>
+
+<!-- ══ TOPBAR ══ -->
+<header class="topbar">
+  <div class="tb-brand">
+    <span>El Embudo</span> · <span class="es">Análisis Técnico Independiente</span><span class="en">Independent Technical Analysis</span>
+  </div>
+  <div class="tb-right">
+    <div class="lang-toggle">
+      <button class="lang-btn active" onclick="setLang('es')" id="top-lang-es">ES</button>
+      <button class="lang-btn" onclick="setLang('en')" id="top-lang-en">EN</button>
+    </div>
+    <button class="btn-ctrl" onclick="toggleTheme()" id="theme-btn">
+      <span class="es">☀︎ Claro</span><span class="en">☀︎ Light</span>
+    </button>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- ══ HEADER ══ -->
+  <div class="doc-header">
+    <div>
+      <div class="brand">El Embudo · <span class="es">Análisis Técnico Independiente</span><span class="en">Independent Technical Analysis</span></div>
+      <h1>
+        <span class="es">Lecciones del benchmark L15 Prata<br>y el Nodo Vila Prudente</span>
+        <span class="en">Lessons from the L15 Prata Benchmark<br>and the Vila Prudente Node</span>
+      </h1>
+      <div class="sub">
+        <span class="es">Qué enseña la operación real de São Paulo sobre el diseño de transporte masivo</span>
+        <span class="en">What São Paulo's real operation teaches about mass transit design</span>
+      </div>
+    </div>
+    <div class="meta">
+      <strong>Ing. Piter J. Bonilla D.</strong><br>
+      CODIA #17378 · <span class="es">4 de agosto de 2026</span><span class="en">August 4, 2026</span>
+    </div>
+  </div>
+
+  <!-- ══ RESUMEN EJECUTIVO ══ -->
+  <div class="box box-note" style="border-left-color:var(--accent); margin-bottom:24px;">
+    <div class="box-label">🔍 <span class="es">Resumen ejecutivo</span><span class="en">Executive summary</span></div>
+    <p style="font-size:14px; color:var(--text);">
+      <span class="es">La Línea 15 Prata de São Paulo demostró en 12 años que el headway de 90 s no es alcanzable (récord: <strong>170 s</strong>), que el sistema se satura con solo el <strong>30 %</strong> de su capacidad de diseño, y que el nodo de transferencia concentra tres restricciones simultáneas: las escaleras físicas, la asimetría de capacidad por tren (1,500 pax Metro vs. 1,002 Monorriel), y el déficit de frecuencia real (1.89 veces menos trenes bajo flujo pendular 90/10). Este documento extrae cinco lecciones documentadas y pregunta por qué el expediente SNIP 17248 no las incorporó al diseño.</span>
+      <span class="en">São Paulo's Line 15 Prata demonstrated over 12 years that a 90 s headway is unachievable (record: <strong>170 s</strong>), that the system saturates at only <strong>30 %</strong> of its design capacity, and that the transfer node concentrates three simultaneous constraints: the physical stairs, the per-train capacity gap (1,500 pax Metro vs. 1,002 Monorail), and the real frequency deficit (1.89 times fewer trains under 90/10 pendular flow). This document extracts five documented lessons and asks why the SNIP 17248 file did not incorporate them into the design.</span>
+    </p>
+  </div>
+
+  <!-- ══ NOTA METODOLÓGICA ══ -->
+  <div class="box box-note">
+    <div class="box-label">N3 · <span class="es">Alcance metodológico</span><span class="en">Methodological scope</span></div>
+    <p>
+      <span class="es">Este documento es un <strong>modelo de diseño alternativo basado en lecciones del benchmark</strong>. No es un análisis del expediente SNIP 17248. Deriva de los datos operacionales verificados de la Línea 15 Prata (São Paulo) y del nodo Vila Prudente, y los utiliza para preguntar: <em>¿cómo debería diseñarse un sistema similar si se incorporaran estas lecciones?</em></span>
+      <span class="en">This document is an <strong>alternative design model based on benchmark lessons</strong>. It is not an analysis of the SNIP 17248 file. It derives from verified operational data of Line 15 Prata (São Paulo) and the Vila Prudente node, and uses them to ask: <em>how should a similar system be designed if these lessons were incorporated?</em></span>
+    </p>
+    <p style="margin-top:8px;">
+      <span class="badge badge-n1">N1</span> <span class="es">Hechos documentados de SP</span><span class="en">Documented SP facts</span> ·
+      <span class="badge badge-n2">N2</span> <span class="es">Modelo de capacidad</span><span class="en">Capacity model</span> ·
+      <span class="badge badge-n3">N3</span> <span class="es">Propuesta de diseño alternativo</span><span class="en">Alternative design proposal</span>
+    </p>
+  </div>
+
+  <!-- ══ CONTEXTO ══ -->
+  <div class="box box-fact">
+    <div class="box-label">N1 · <span class="es">Hecho documentado</span><span class="en">Documented fact</span></div>
+    <p>
+      <span class="es">La Línea 15 Prata de São Paulo opera desde 2014. Tiene <strong>12 años de datos reales</strong>. Su sistema es el precedente operativo más directamente comparable al proyecto del Monorriel de Santo Domingo: mismo fabricante (Alstom/Bombardier Innovia), misma promesa contractual de headway de <strong>90 segundos</strong> y misma tecnología GoA4.</span>
+      <span class="en">São Paulo's Line 15 Prata has been operating since 2014. It has <strong>12 years of real data</strong>. Its system is the most directly comparable operational precedent to the Santo Domingo Monorail project: same manufacturer (Alstom/Bombardier Innovia), same contractual headway promise of <strong>90 seconds</strong> and same GoA4 technology.</span>
+    </p>
+  </div>
+
+  <!-- ══ LECCIÓN 1 ══ -->
+  <div class="section">
+    <div class="section-title">
+      <span class="badge badge-n1">N1</span>
+      <span class="es">1 · El headway nominal no es el headway real</span>
+      <span class="en">1 · Nominal headway is not real headway</span>
+    </div>
+    <div class="grid-2">
+      <div class="card accent-red">
+        <div class="card-title"><span class="es">Promesa contractual</span><span class="en">Contractual promise</span></div>
+        <div class="highlight red">90 s</div>
+        <div class="metric"><span class="es">Headway que el expediente SNIP 17248 promete para SD</span><span class="en">Headway the SNIP 17248 file promises for SD</span></div>
+      </div>
+      <div class="card accent-amber">
+        <div class="card-title"><span class="es">Récord operativo real (SP)</span><span class="en">Real operational record (SP)</span></div>
+        <div class="highlight amber">170 s</div>
+        <div class="metric"><span class="es">Mejor marca histórica tras <strong>12 años</strong> y <strong>23 trenes</strong> de optimización</span><span class="en">All-time record after <strong>12 years</strong> and <strong>23 trains</strong> of optimization</span></div>
+      </div>
+    </div>
+    <div class="box box-fact">
+      <div class="box-label">N1 · <span class="es">Fuente</span><span class="en">Source</span></div>
+      <p><span class="es">MetrôCPTM · CMSP · Trayectoria verificada: 196 s (2022) → 179 s (2024) → <strong>170 s (dic. 2025)</strong>.</span><span class="en">MetrôCPTM · CMSP · Verified trajectory: 196 s (2022) → 179 s (2024) → <strong>170 s (Dec. 2025)</strong>.</span></p>
+    </div>
+    <p style="color:var(--muted); font-size:13px;">
+      <strong><span class="es">Lección:</span><span class="en">Lesson:</span></strong> <span class="es">el headway de diseño debe partir del <strong>techo operativo demostrado</strong> (170 s), no de una promesa comercial sin validación documentada.</span><span class="en">the design headway must start from the <strong>demonstrated operational ceiling</strong> (170 s), not from a commercial promise without documented validation.</span>
+    </p>
+  </div>
+
+  <!-- ══ LECCIÓN 2 ══ -->
+  <div class="section">
+    <div class="section-title">
+      <span class="badge badge-n1">N1</span>
+      <span class="es">2 · La saturación ocurre con solo el 30 % del diseño</span>
+      <span class="en">2 · Saturation occurs at only 30 % of design capacity</span>
+    </div>
+    <div class="grid-2">
+      <div class="card accent-red">
+        <div class="card-title"><span class="es">Diseño nominal SP</span><span class="en">SP nominal design</span></div>
+        <div class="highlight red">550,000</div>
+        <div class="metric"><span class="es">pax/día para los que se diseñó L15 Prata</span><span class="en">pax/day for which L15 Prata was designed</span></div>
+      </div>
+      <div class="card accent-amber">
+        <div class="card-title"><span class="es">Récord real SP</span><span class="en">SP real record</span></div>
+        <div class="highlight amber">163,000</div>
+        <div class="metric"><span class="es">pax/día · <strong>30 %</strong> de la capacidad de diseño</span><span class="en">pax/day · <strong>30 %</strong> of design capacity</span></div>
+      </div>
+    </div>
+    <div class="box box-fact">
+      <div class="box-label">N1 · <span class="es">Fuente</span><span class="en">Source</span></div>
+      <p><span class="es">MetrôCPTM · ANPTrilhos · CMSP · Récord histórico documentado: <strong>dic. 2025</strong>.</span><span class="en">MetrôCPTM · ANPTrilhos · CMSP · Documented historical record: <strong>Dec. 2025</strong>.</span></p>
+    </div>
+    <p style="color:var(--muted); font-size:13px;">
+      <strong><span class="es">Lección:</span><span class="en">Lesson:</span></strong> <span class="es">el sistema se satura en el sentido dominante <strong>antes</strong> de alcanzar la capacidad nominal. La infraestructura fija (andenes, escaleras) define el techo real.</span><span class="en">the system saturates in the dominant direction <strong>before</strong> reaching nominal capacity. Fixed infrastructure (platforms, stairs) defines the real ceiling.</span>
+    </p>
+  </div>
+
+  <!-- ══ LECCIÓN 3 ══ -->
+  <div class="section">
+    <div class="section-title">
+      <span class="badge badge-n1">N1</span>
+      <span class="es">3 · El dwell time en hora punta consume casi todo el headway prometido</span>
+      <span class="en">3 · Peak dwell time consumes nearly all the promised headway</span>
+    </div>
+    <div class="grid-2">
+      <div class="card accent-red">
+        <div class="card-title"><span class="es">Headway prometido</span><span class="en">Promised headway</span></div>
+        <div class="highlight red">90 s</div>
+        <div class="metric"><span class="es">El intervalo total disponible</span><span class="en">Total available interval</span></div>
+      </div>
+      <div class="card accent-amber">
+        <div class="card-title"><span class="es">Dwell time real (hora pico)</span><span class="en">Real dwell time (peak hour)</span></div>
+        <div class="highlight amber">87 s</div>
+        <div class="metric"><strong>97 %</strong> <span class="es">del headway prometido · cronometrado en video</span><span class="en">of promised headway · timed frame by frame</span></div>
+      </div>
+    </div>
+    <div class="box box-fact">
+      <div class="box-label">N1 · <span class="es">Fuente</span><span class="en">Source</span></div>
+      <p><span class="es">Análisis forense frame‑a‑frame del video de Lucas Sousa (@LucasSousacls) · Vila Prudente.</span><span class="en">Frame-by-frame forensic analysis of Lucas Sousa's video (@LucasSousacls) · Vila Prudente.</span></p>
+    </div>
+    <p style="color:var(--muted); font-size:13px;">
+      <strong><span class="es">Lección:</span><span class="en">Lesson:</span></strong> <span class="es">el tiempo de parada en estación no es una variable controlable por el software. Es una consecuencia del <strong>flujo humano</strong> y la <strong>capacidad del andén</strong>.</span><span class="en">station dwell time is not a software-controllable variable. It is a consequence of <strong>human flow</strong> and <strong>platform capacity</strong>.</span>
+    </p>
+  </div>
+
+  <!-- ══ LECCIÓN 4 ══ -->
+  <div class="section">
+    <div class="section-title">
+      <span class="badge badge-n1">N1</span>
+      <span class="es">4 · El flujo pendular 90/10 colapsa el nodo de transferencia</span>
+      <span class="en">4 · The 90/10 pendular flow collapses the transfer node</span>
+    </div>
+    <div class="grid-2">
+      <div class="card accent-red">
+        <div class="card-title"><span class="es">Flujo en hora punta SP</span><span class="en">SP peak hour flow</span></div>
+        <div class="highlight red">90 / 10</div>
+        <div class="metric"><span class="es">90 % en un sentido · 10 % en el contrario</span><span class="en">90 % in one direction · 10 % in the other</span></div>
+      </div>
+      <div class="card accent-amber">
+        <div class="card-title"><span class="es">Consecuencia</span><span class="en">Consequence</span></div>
+        <div class="highlight amber"><span class="es">Colapso</span><span class="en">Collapse</span></div>
+        <div class="metric"><span class="es">Andenes de Vila Prudente saturados con el 30 % del diseño</span><span class="en">Vila Prudente platforms saturated at 30 % of design</span></div>
+      </div>
+    </div>
+    <div class="box box-fact">
+      <div class="box-label">N1 · <span class="es">Fuente</span><span class="en">Source</span></div>
+      <p><span class="es">MetrôCPTM · CMSP RI‑2025 · Observación directa del nodo Vila Prudente (L2 Verde + L15 Prata).</span><span class="en">MetrôCPTM · CMSP RI‑2025 · Direct observation of the Vila Prudente node (L2 Green + L15 Prata).</span></p>
+    </div>
+    <p style="color:var(--muted); font-size:13px;">
+      <strong><span class="es">Lección:</span><span class="en">Lesson:</span></strong> <span class="es">el flujo pendular extremo no es corregible con más trenes o mejor señalización. Es una <strong>restricción estructural de la red</strong> que debe diseñarse desde el origen.</span><span class="en">extreme pendular flow cannot be corrected with more trains or better signaling. It is a <strong>structural network constraint</strong> that must be designed from the outset.</span>
+    </p>
+  </div>
+
+  <!-- ══ LECCIÓN 5 ══ -->
+  <div class="section">
+    <div class="section-title">
+      <span class="badge badge-n1">N1</span>
+      <span class="es">5 · La infraestructura fija define la capacidad real, no la flota teórica para 90 s</span>
+      <span class="en">5 · Fixed infrastructure defines real capacity, not the theoretical fleet for 90 s</span>
+    </div>
+    <div class="grid-2">
+      <div class="card accent-red">
+        <div class="card-title">Vila Prudente · L2 Verde</div>
+        <div class="highlight red">75,000</div>
+        <div class="metric"><span class="es">pax/día que llegan por Metro al nodo</span><span class="en">pax/day arriving by Metro at the node</span></div>
+      </div>
+      <div class="card accent-amber">
+        <div class="card-title">Vila Prudente · L15 Prata</div>
+        <div class="highlight amber">57,000</div>
+        <div class="metric"><span class="es">pax/día que salen por Monorriel del nodo</span><span class="en">pax/day leaving by Monorail from the node</span></div>
+      </div>
+    </div>
+    <div class="box box-fact">
+      <div class="box-label">N1 · <span class="es">Fuente</span><span class="en">Source</span></div>
+      <p><span class="es">Datos operacionales de la estación Vila Prudente · CMSP · Wikipedia verificada.</span><span class="en">Operational data from Vila Prudente station · CMSP · Verified Wikipedia.</span></p>
+    </div>
+    <p style="color:var(--muted); font-size:13px;">
+      <strong><span class="es">Lección:</span><span class="en">Lesson:</span></strong> <span class="es">el cuello de botella no está en la vía. Está en las <strong>escaleras, andenes y pasarelas</strong>. La capacidad del nodo de transferencia es el elemento más restrictivo de la cadena.</span><span class="en">the bottleneck is not on the track. It is in the <strong>stairs, platforms and walkways</strong>. Transfer node capacity is the most restrictive element in the chain.</span>
+    </p>
+  </div>
+
+  <!-- ══ NOTA TÉCNICA TRACK SWITCH ══ -->
+  <div class="section">
+    <div class="section-title">
+      <span class="badge badge-n1">N1</span>
+      <span class="es">Nota técnica · La infraestructura que ganó 26 segundos</span>
+      <span class="en">Technical note · The infrastructure that gained 26 seconds</span>
+    </div>
+    <div class="box box-fact">
+      <div class="box-label"><span class="es">Hecho documentado · N1</span><span class="en">Documented fact · N1</span></div>
+      <p>
+        <span class="es">La mejora de headway documentada en São Paulo — de <strong>196 s (2022) a 170 s (dic. 2025)</strong> — representa una ganancia de <strong>26 segundos</strong> obtenida mediante el cambio de posición del Track Switch: de delante de la estación a detrás de la estación, permitiendo que el tren siguiente entre mientras el anterior completa la maniobra.</span>
+        <span class="en">The headway improvement documented in São Paulo — from <strong>196 s (2022) to 170 s (Dec. 2025)</strong> — represents a gain of <strong>26 seconds</strong> achieved by repositioning the Track Switch: from in front of the station to behind it, allowing the next train to enter while the previous one completes its maneuver.</span>
+      </p>
+      <p style="margin-top:8px;">
+        <span class="es">El Aparato de Cambio de Vía (AMV) es una obra de ingeniería de precisión milimétrica: vigas-guía elevadas, actuadores hidráulicos, sistemas de enclavamiento dedicados, señalización CBTC exclusiva y tolerancias de posicionamiento <strong>inferiores a 3 mm</strong> — un nivel de precisión que en montajes electromecánicos de infraestructura crítica solo se logra con mantenimiento constante y personal especializado.</span>
+        <span class="en">The Track Switch (AMV) is a work of millimetric precision engineering: elevated beam guides, hydraulic actuators, dedicated interlocking systems, exclusive CBTC signaling and positioning tolerances <strong>below 3 mm</strong> — a level of precision that in critical infrastructure electromechanical assemblies is only achieved through constant maintenance and specialized personnel.</span>
+      </p>
+    </div>
+    <div class="box box-inf" style="margin-top:12px;">
+      <div class="box-label">N2 · <span class="es">Comparativa estructural</span><span class="en">Structural comparison</span></div>
+      <p>
+        <span class="es">El Metro convencional resuelve la misma función terminal con un <strong>crossover de 40 a 60 metros</strong> — piezas de rieles de acero intercambiables, mantenidas por trabajadores con herramientas estándar, sin dependencia del fabricante original.</span>
+        <span class="en">The conventional Metro resolves the same terminal function with a <strong>40 to 60 meter crossover</strong> — interchangeable steel rail pieces, maintained by workers with standard tools, without dependence on the original manufacturer.</span>
+      </p>
+      <p style="margin-top:8px;">
+        <span class="es">El Track Switch del Monorriel, en cambio, exige una zona de maniobras de <strong>464 metros</strong> medidos en Google Earth Pro — más de <strong>10 veces</strong> la longitud de un crossover de Metro.</span>
+        <span class="en">The Monorail Track Switch, by contrast, requires a maneuver zone of <strong>464 meters</strong> measured in Google Earth Pro — more than <strong>10 times</strong> the length of a Metro crossover.</span>
+      </p>
+    </div>
+    <div class="box box-warn">
+      <div class="box-label">⚠ <span class="es">Pregunta de auditoría · N3</span><span class="en">Audit question · N3</span></div>
+      <p>
+        <span class="es">El diferencial de costos entre la zona de maniobras del Monorriel (~928 m × 2 terminales, con sus requerimientos de precisión y mantenimiento especializado) y el crossover de Metro equivalente (80–120 m total) es <strong>estructuralmente colosal</strong> — tanto en inversión inicial como en costo de operación y mantenimiento a 50 años.</span>
+        <span class="en">The cost differential between the Monorail maneuver zone (~928 m × 2 terminals, with its precision and specialized maintenance requirements) and the equivalent Metro crossover (80–120 m total) is <strong>structurally immense</strong> — both in initial investment and in 50-year operation and maintenance cost.</span>
+      </p>
+      <p style="margin-top:8px;">
+        <strong><span class="es">¿Dónde está ese diferencial correctamente presupuestado en el expediente SNIP 17248?</span><span class="en">Where is that differential correctly budgeted in the SNIP 17248 file?</span></strong>
+      </p>
+      <p style="margin-top:6px; font-size:12px; color:var(--muted);">
+        <span class="es">La respuesta no se encuentra en los documentos examinados.</span><span class="en">The answer is not found in the examined documents.</span> · Dr. Ing. Carlos Bonnelly Ginebra — NT-III
+      </p>
+    </div>
+  </div>
+
+  <!-- ══ FACTOR DE PUNTA ══ -->
+  <div class="section">
+    <div class="section-title">
+      <span class="badge badge-n2">N2</span>
+      <span class="es">Sobre el factor de punta del 35 %</span>
+      <span class="en">On the 35 % peak factor</span>
+    </div>
+    <div class="box box-note">
+      <div class="box-label"><span class="es">Consistencia metodológica</span><span class="en">Methodological consistency</span></div>
+      <p>
+        <span class="es">El video <strong>«Matemáticas de Colmado» (diciembre 2025)</strong> documentó que el video promocional del proyecto usaba un factor de punta irreal del <strong>8.2 %</strong>, mientras que los estándares internacionales (UITP) y la coherencia con el estudio METI apuntan al rango del <strong>30–35 %</strong>. El estudio METI, si se lleva a un bloque de 4 horas, implica un factor de punta de <strong>~32.8 %</strong> — dentro del rango UITP. El <strong>35 %</strong> utilizado en este ejercicio es un ajuste conservador dentro del mismo rango normativo.</span>
+        <span class="en">The video <strong>"Colmado Mathematics" (December 2025)</strong> documented that the project's promotional video used an unrealistic peak factor of <strong>8.2 %</strong>, while international standards (UITP) and consistency with the METI study point to the range of <strong>30–35 %</strong>. The METI study, when carried to a 4-hour block, implies a peak factor of <strong>~32.8 %</strong> — within the UITP range. The <strong>35 %</strong> used in this exercise is a conservative adjustment within the same normative range.</span>
+      </p>
+      <p style="margin-top:8px; font-size:12px; color:var(--muted);">
+        <span class="badge badge-n1">N1</span> METI/Nippon Koei 2024 · PPHPD 12,800 · <span class="es">Demanda</span><span class="en">Demand</span> 464,800<br>
+        <span class="badge badge-n2">N2</span> <span class="es">Factor de punta = (12,800 × 4 × 2) / 464,800 ≈ 22.0 % (sin corregir por asimetría) · ~32.8 % (corregido con asimetría)</span><span class="en">Peak factor = (12,800 × 4 × 2) / 464,800 ≈ 22.0 % (uncorrected for asymmetry) · ~32.8 % (corrected with asymmetry)</span>
+      </p>
+    </div>
+  </div>
+
+  <!-- ══ SÍNTESIS N3 ══ -->
+  <div class="section">
+    <div class="section-title">
+      <span class="badge badge-n3">N3</span>
+      <span class="es">¿Y si se diseña aprendiendo del benchmark?</span>
+      <span class="en">What if we design by learning from the benchmark?</span>
+    </div>
+    <div class="box box-inf">
+      <div class="box-label"><span class="es">Inferencia · Propuesta de diseño alternativo</span><span class="en">Inference · Alternative design proposal</span></div>
+      <ul style="margin:10px 0 0 20px; color:var(--text); font-size:13px;">
+        <li><strong><span class="es">Headway de diseño:</span><span class="en">Design headway:</span></strong> 170 s (<span class="es">techo real documentado</span><span class="en">documented real ceiling</span>)</li>
+        <li><strong><span class="es">Factor de punta:</span><span class="en">Peak factor:</span></strong> 35 % (<span class="es">rango UITP, conservador</span><span class="en">UITP range, conservative</span>)</li>
+        <li><strong><span class="es">Flota:</span><span class="en">Fleet:</span></strong> <span class="es">Metro escalable (6V → 10V) · <em>si la infraestructura lo permite</em></span><span class="en">Scalable Metro (6V → 10V) · <em>if infrastructure allows</em></span></li>
+        <li><strong><span class="es">Ciclo operativo:</span><span class="en">Operating cycle:</span></strong> 60 min (<span class="es">con márgenes de recuperación</span><span class="en">with recovery margins</span>)</li>
+      </ul>
+    </div>
+
+    <div class="box box-note" style="border-left-color:var(--amber);">
+      <div class="box-label" style="color:var(--amber);">N3 · <span class="es">Derivación de la capacidad efectiva del Monorriel SD (~170,000)</span><span class="en">Derivation of SD Monorail effective capacity (~170,000)</span></div>
+      <p>
+        <span class="es">El Monorriel SD modela una capacidad nominal de <strong>306,000</strong> pax/día. Aplicando la física pendular documentada en São Paulo — donde el sistema se satura al mover solo el <strong>30 %</strong> de su capacidad de diseño:</span>
+        <span class="en">SD Monorail models a nominal capacity of <strong>306,000</strong> pax/day. Applying the pendular physics documented in São Paulo — where the system saturates moving only <strong>30 %</strong> of its design capacity:</span>
+      </p>
+      <p style="margin-top:8px; font-family:monospace; color:var(--amber); font-size:15px;">
+        306,000 × 0.30 = <strong>~91,800</strong> pax/<span class="es">día (sentido dominante)</span><span class="en">day (dominant direction)</span>
+      </p>
+      <p style="margin-top:4px; font-family:monospace; color:var(--amber); font-size:15px;">
+        × 2 = <strong>~170,000</strong> pax/<span class="es">día (ambos sentidos)</span><span class="en">day (both directions)</span>
+      </p>
+      <p style="margin-top:8px; font-size:12px; color:var(--muted);">
+        <span class="badge badge-n1">N1</span> SP: 163,000 / 550,000 = 29.6 % · <span class="badge badge-n3">N3</span> <span class="es">Analogía aplicada al modelo SD — no es un dato del expediente</span><span class="en">Analogy applied to SD model — not a file data point</span>
+      </p>
+    </div>
+
+    <!-- ADVERTENCIA -->
+    <div class="box box-inf" style="margin-bottom:20px;">
+      <div class="box-label">⚠ <span class="es">Distinción metodológica — leer antes de la tabla</span><span class="en">Methodological distinction — read before the table</span></div>
+      <p style="color:var(--text); font-size:13px; margin-bottom:8px;">
+        <span class="es">La comparativa está organizada en <strong>dos escenarios distintos</strong> que no deben mezclarse:</span>
+        <span class="en">The comparison is organized in <strong>two distinct scenarios</strong> that must not be mixed:</span>
+      </p>
+      <p style="font-size:13px; color:var(--text); margin-bottom:6px;">
+        <span class="badge badge-n1">N1/N2</span> <strong><span class="es">Escenario A — Expediente oficial:</span><span class="en">Scenario A — Official file:</span></strong> <span class="es">usa la capacidad nominal del Monorriel (306,000 pax/día) tal como la modela el expediente SNIP 17248.</span><span class="en">uses the Monorail's nominal capacity (306,000 pax/day) as modeled by the SNIP 17248 file.</span>
+      </p>
+      <p style="font-size:13px; color:var(--text);">
+        <span class="badge badge-n3">N3</span> <strong><span class="es">Escenario B — Flujo pendular por analogía con SP:</span><span class="en">Scenario B — Pendular flow by analogy with SP:</span></strong> <span class="es">aplica el ratio observado en São Paulo a los 306,000 modelados. <strong>No es un dato del expediente.</strong></span><span class="en">applies the ratio observed in São Paulo to the 306,000 modeled. <strong>Not a file data point.</strong></span>
+      </p>
+    </div>
+
+    <!-- ESCENARIO A -->
+    <p style="font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--green); margin-bottom:6px;">
+      <span class="badge badge-n1">N1/N2</span> <span class="es">Escenario A · Capacidad nominal del expediente</span><span class="en">Scenario A · File nominal capacity</span>
+    </p>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr>
+          <th><span class="es">Indicador</span><span class="en">Indicator</span></th>
+          <th>Monorriel SD <span style="font-weight:400; font-size:10px;">(<span class="es">expediente</span><span class="en">file</span>)</span></th>
+          <th>Metro 6V (2030)</th>
+          <th>Metro 10V (2060)</th>
+        </tr></thead>
+        <tbody>
+          <tr><td><span class="es">Vagones / tren</span><span class="en">Cars / train</span></td><td>6</td><td>6</td><td>10</td></tr>
+          <tr><td><span class="es">Capacidad / tren</span><span class="en">Capacity / train</span></td><td>750 pax</td><td>1,200 pax</td><td>2,000 pax</td></tr>
+          <tr><td><span class="es">Trenes activos</span><span class="en">Active trains</span></td><td>17</td><td>19</td><td>18</td></tr>
+          <tr><td><span class="es">Flota total (c/reserva)</span><span class="en">Total fleet (w/reserve)</span></td><td>17</td><td>22</td><td>21</td></tr>
+          <tr><td><span class="es">Headway real</span><span class="en">Real headway</span></td><td class="num red">212 s (3.53 min)</td><td class="num green">189 s (3.16 min)</td><td class="num green">200 s (3.33 min)</td></tr>
+          <tr><td><span class="es">Capacidad diaria nominal</span><span class="en">Nominal daily capacity</span></td><td class="num amber">306,000 <span style="font-size:10px; color:var(--muted);">(N2)</span></td><td class="num green">469,000 <span style="font-size:10px; color:var(--muted);">(N2)</span></td><td class="num green">740,000 <span style="font-size:10px; color:var(--muted);">(N2)</span></td></tr>
+          <tr><td><span class="es">Cobertura 2030</span><span class="en">Coverage 2030</span></td><td class="num red">65.8 %</td><td class="num green">100.9 %</td><td>—</td></tr>
+          <tr><td><span class="es">Cobertura 2060</span><span class="en">Coverage 2060</span></td><td class="num red">43.4 %</td><td>—</td><td class="num green">105.1 %</td></tr>
+          <tr><td><span class="es">Escalabilidad</span><span class="en">Scalability</span></td><td class="num red">❌ <span class="es">Topado</span><span class="en">Capped</span></td><td class="num green">✅ <span class="es">Ampliable a 10V</span><span class="en">Expandable to 10V</span></td><td class="num green">✅ <span class="es">Ampliable a 21 trenes</span><span class="en">Expandable to 21 trains</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ESCENARIO B -->
+    <p style="font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--amber); margin:20px 0 6px;">
+      <span class="badge badge-n3">N3</span> <span class="es">Escenario B · Capacidad efectiva bajo flujo pendular (analogía con SP)</span><span class="en">Scenario B · Effective capacity under pendular flow (SP analogy)</span>
+    </p>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr>
+          <th><span class="es">Indicador</span><span class="en">Indicator</span></th>
+          <th>Monorriel SD <span style="font-weight:400; font-size:10px;">(N3)</span></th>
+          <th><span class="es">Referencia SP</span><span class="en">SP Reference</span></th>
+        </tr></thead>
+        <tbody>
+          <tr><td><span class="es">Capacidad nominal (expediente)</span><span class="en">Nominal capacity (file)</span></td><td class="num amber">306,000 pax/<span class="es">día</span><span class="en">day</span></td><td>550,000 pax/<span class="es">día (diseño)</span><span class="en">day (design)</span></td></tr>
+          <tr><td><span class="es">Ratio efectivo observado en SP</span><span class="en">Effective ratio observed in SP</span></td><td class="num amber">~30 %</td><td class="num amber">29.6 % (163,000 / 550,000)</td></tr>
+          <tr><td><span class="es">Capacidad efectiva sentido dominante</span><span class="en">Effective capacity dominant direction</span></td><td class="num red">~91,800 pax/<span class="es">día</span><span class="en">day</span></td><td>~163,000 pax/<span class="es">día (récord)</span><span class="en">day (record)</span></td></tr>
+          <tr><td><span class="es">Capacidad efectiva ambos sentidos</span><span class="en">Effective capacity both directions</span></td><td class="num red">~170,000 pax/<span class="es">día</span><span class="en">day</span></td><td>~163,000 pax/<span class="es">día (récord)</span><span class="en">day (record)</span></td></tr>
+          <tr><td><span class="es">Cobertura 2030 bajo este escenario</span><span class="en">Coverage 2030 under this scenario</span></td><td class="num red">~36.6 %</td><td style="color:var(--muted); font-size:12px;">vs. 65.8 % <span class="es">nominal</span><span class="en">nominal</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="box box-warn" style="margin-top:12px;">
+      <div class="box-label">N3 · <span class="es">Limitación de la inferencia</span><span class="en">Inference limitation</span></div>
+      <p style="font-size:12px; color:var(--text);">
+        <span class="es">El Escenario B <strong>no es un dato del expediente SNIP 17248</strong>. Es una inferencia por analogía con São Paulo. SD podría operar mejor o peor que SP dependiendo de variables no documentadas (geometría de terminales, perfil de demanda hora a hora, protocolo de recuperación de incidentes). La analogía identifica un riesgo — no lo cuantifica con precisión.</span>
+        <span class="en">Scenario B <strong>is not a SNIP 17248 file data point</strong>. It is an inference by analogy with São Paulo. SD could operate better or worse than SP depending on undocumented variables (terminal geometry, hourly demand profile, incident recovery protocol). The analogy identifies a risk — it does not quantify it precisely.</span>
+      </p>
+    </div>
+    <div style="font-size:12px; color:var(--muted); margin-top:16px;">
+      <span class="badge badge-n1">N1</span> <span class="es">Datos verificados: SP (MetrôCPTM · CMSP) · METI/Nippon Koei 2024 · Expediente SNIP 17248</span><span class="en">Verified data: SP (MetrôCPTM · CMSP) · METI/Nippon Koei 2024 · SNIP 17248 file</span><br>
+      <span class="badge badge-n2">N2</span> <span class="es">Modelo de capacidad Metro: asimetría 90/10, factor de punta 35 %, eficiencia 90 %, ciclo 60 min</span><span class="en">Metro capacity model: 90/10 asymmetry, 35 % peak factor, 90 % efficiency, 60 min cycle</span><br>
+      <span class="badge badge-n3">N3</span> <span class="es">Escenario B: inferencia por analogía con SP — no sustituye simulación operacional de SD</span><span class="en">Scenario B: inference by analogy with SP — does not substitute SD operational simulation</span>
+    </div>
+  </div>
+
+  <!-- ══ GRÁFICOS ══ -->
+  <div class="section">
+    <div class="section-title">📊 <span class="es">Visualización de resultados</span><span class="en">Results visualization</span></div>
+    <div class="chart-box">
+      <h4><span class="es">Capacidad diaria — Monorriel vs. Metro</span><span class="en">Daily capacity — Monorail vs. Metro</span></h4>
+      <canvas id="chartCapacidad" height="180"></canvas>
+      <div style="font-size:11px; color:var(--muted); margin-top:10px; padding:8px 12px; background:var(--navy); border-radius:4px;">
+        <span style="display:inline-block; width:10px; height:10px; background:#b45309; border-radius:2px; margin-right:4px;"></span> <span class="es">Monorriel nominal (N2 · expediente)</span><span class="en">Monorail nominal (N2 · file)</span> &nbsp;
+        <span style="display:inline-block; width:10px; height:10px; background:#e05252; border-radius:2px; margin-right:4px;"></span> <span class="es">Monorriel flujo pendular (N3)</span><span class="en">Monorail pendular flow (N3)</span> &nbsp;
+        <span style="display:inline-block; width:10px; height:10px; background:#22c55e; border-radius:2px; margin-right:4px;"></span> Metro 6V 2030 &nbsp;
+        <span style="display:inline-block; width:10px; height:10px; background:#3b82f6; border-radius:2px; margin-right:4px;"></span> Metro 10V 2060
+      </div>
+    </div>
+    <div class="chart-box">
+      <h4><span class="es">Cobertura de demanda 2030 y 2060</span><span class="en">Demand coverage 2030 and 2060</span></h4>
+      <canvas id="chartCobertura" height="180"></canvas>
+    </div>
+  </div>
+
+  <!-- ══ LA PREGUNTA ══ -->
+  <div class="question-box">
+    <div class="q-label"><span class="es">La pregunta que el expediente no responde</span><span class="en">The question the file does not answer</span></div>
+    <blockquote>
+      <span class="es">«¿Por qué se insiste en una tecnología cuyo precedente más cercano no alcanzó su promesa central en 12 años, se saturó con el 30 % de su diseño, tiene costos estructurales no cuantificados en el expediente, y cuya alternativa — el Metro — es escalable, demostrada y compatible con la red existente?»</span>
+      <span class="en">«Why insist on a technology whose closest precedent did not meet its central promise in 12 years, saturated at 30 % of its design, has structural costs unquantified in the file, and whose alternative — the Metro — is scalable, proven and compatible with the existing network?»</span>
+    </blockquote>
+  </div>
+
+  <!-- ══ FOOTER ══ -->
+  <div class="doc-footer">
+    <div>
+      <span class="author">Ing. Piter J. Bonilla D.</span> · CODIA #17378 · <span class="es">Análisis Técnico Independiente</span><span class="en">Independent Technical Analysis</span><br>
+      <span style="font-size:11px;"><span class="es">Documento complementario al ecosistema</span><span class="en">Supplementary document to the ecosystem</span> <a href="https://visualcrp.com/embudo.html" target="_blank">visualcrp.com/embudo.html</a></span>
+    </div>
+    <div>
+      <a href="https://tinyurl.com/5c2nzvsv" target="_blank">📄 Benchmark L15 Prata</a>
+      &nbsp;·&nbsp;
+      <a href="https://visualcrp.com/embudo.html" target="_blank">🌐 Dashboard</a>
+      &nbsp;·&nbsp;
+      <a href="https://visualcrp.com/AUDIT.html" target="_blank">⚖️ <span class="es">Auditoría</span><span class="en">Audit</span></a>
+    </div>
+  </div>
+
+</div>
+
+<script>
+/* ── LANG ── */
+function setLang(lang) {
+  const h = document.getElementById('html-root');
+  h.setAttribute('lang', lang);
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+  const btn = document.getElementById('top-lang-' + lang);
+  if (btn) btn.classList.add('active');
+  localStorage.setItem('lecciones-lang', lang);
+}
+
+/* ── THEME ── */
+function toggleTheme() {
+  const h = document.getElementById('html-root');
+  h.classList.toggle('light'); h.classList.toggle('dark');
+  const isLight = h.classList.contains('light');
+  localStorage.setItem('lecciones-theme', isLight ? 'light' : 'dark');
+  const btn = document.getElementById('theme-btn');
+  const lang = h.getAttribute('lang') || 'es';
+  if (btn) btn.innerHTML = isLight
+    ? (lang === 'es' ? '<span class="es">🌙 Oscuro</span><span class="en" style="display:none">🌙 Dark</span>' : '<span class="es" style="display:none">🌙 Oscuro</span><span class="en">🌙 Dark</span>')
+    : (lang === 'es' ? '<span class="es">☀︎ Claro</span><span class="en" style="display:none">☀︎ Light</span>' : '<span class="es" style="display:none">☀︎ Claro</span><span class="en">☀︎ Light</span>');
+}
+
+/* ── INIT ── */
+(function() {
+  const savedTheme = localStorage.getItem('lecciones-theme');
+  const savedLang  = localStorage.getItem('lecciones-lang');
+  const h = document.getElementById('html-root');
+  if (savedTheme === 'light') { h.classList.add('light'); h.classList.remove('dark'); }
+  if (savedLang) setLang(savedLang);
+})();
+
+/* ── CHARTS ── */
+document.addEventListener('DOMContentLoaded', function() {
+  function fmt(n) { return n.toLocaleString('es-DO', { minimumFractionDigits: 0 }); }
+
+  const ctx1 = document.getElementById('chartCapacidad').getContext('2d');
+  new Chart(ctx1, {
+    type: 'bar',
+    data: {
+      labels: ['Monorriel nominal (N2)', 'Monorriel pendular (N3)', 'Metro 6V 2030 (N2)', 'Metro 10V 2060 (N2)'],
+      datasets: [{ data: [306000, 170000, 469000, 740000], backgroundColor: ['#b45309','#e05252','#22c55e','#3b82f6'], borderRadius: 4 }]
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => fmt(c.raw) + ' pax/día' } } },
+      scales: {
+        y: { beginAtZero: true, ticks: { callback: v => (v/1000).toFixed(0)+'k', color: '#8898b8' }, grid: { color: 'rgba(200,216,240,.06)' } },
+        x: { ticks: { color: '#8898b8' }, grid: { display: false } }
+      }
+    }
+  });
+
+  const ctx2 = document.getElementById('chartCobertura').getContext('2d');
+  new Chart(ctx2, {
+    type: 'bar',
+    data: {
+      labels: ['2030 (Monorriel)', '2030 (Metro 6V)', '2060 (Monorriel)', '2060 (Metro 10V)'],
+      datasets: [{ data: [65.8, 100.9, 43.4, 105.1], backgroundColor: ['#e05252','#22c55e','#e05252','#3b82f6'], borderRadius: 4 }]
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => c.raw.toFixed(1)+'%' } } },
+      scales: {
+        y: { beginAtZero: true, max: 120, ticks: { callback: v => v+'%', color: '#8898b8' }, grid: { color: 'rgba(200,216,240,.06)' } },
+        x: { ticks: { color: '#8898b8' }, grid: { display: false } }
+      }
+    }
+  });
+});
+</script>
+</body>
+</html>
