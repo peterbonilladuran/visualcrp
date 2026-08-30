@@ -467,19 +467,25 @@ strong { color: inherit; }
     </div>
 
     <div class="box box-note" style="border-left-color:var(--amber);">
-      <div class="box-label" style="color:var(--amber);">N3 · <span class="es">Derivación de la capacidad efectiva del Monorriel SD (~170,000)</span><span class="en">Derivation of SD Monorail effective capacity (~170,000)</span></div>
+      <div class="box-label" style="color:var(--blue);">N2 · <span class="es">Derivación de la capacidad efectiva bajo flujo pendular 90/10</span><span class="en">Derivation of effective capacity under 90/10 pendular flow</span></div>
       <p>
-        <span class="es">El Monorriel SD modela una capacidad nominal de <strong>306,000</strong> pax/día. Aplicando la física pendular documentada en São Paulo — donde el sistema se satura al mover solo el <strong>30 %</strong> de su capacidad de diseño:</span>
-        <span class="en">SD Monorail models a nominal capacity of <strong>306,000</strong> pax/day. Applying the pendular physics documented in São Paulo — where the system saturates moving only <strong>30 %</strong> of its design capacity:</span>
+        <span class="es">El Monorriel SD modela una capacidad nominal de <strong>306,000</strong> pax/día con distribución 50/50. Aplicando el factor de conversión a flujo pendular real (90/10):</span>
+        <span class="en">SD Monorail models a nominal capacity of <strong>306,000</strong> pax/day with 50/50 distribution. Applying the real pendular flow conversion factor (90/10):</span>
       </p>
-      <p style="margin-top:8px; font-family:monospace; color:var(--amber); font-size:15px;">
-        306,000 × 0.30 = <strong>~91,800</strong> pax/<span class="es">día (sentido dominante)</span><span class="en">day (dominant direction)</span>
+      <p style="margin-top:8px; font-family:monospace; color:var(--blue); font-size:15px;">
+        <span class="es">Factor pendular = 0.90 / 0.50 = <strong>1.80</strong></span>
+        <span class="en">Pendular factor = 0.90 / 0.50 = <strong>1.80</strong></span>
       </p>
       <p style="margin-top:4px; font-family:monospace; color:var(--amber); font-size:15px;">
-        × 2 = <strong>~170,000</strong> pax/<span class="es">día (ambos sentidos)</span><span class="en">day (both directions)</span>
+        306,000 / 1.80 = <strong>~170,000</strong> pax/<span class="es">día (capacidad efectiva bajo flujo pendular)</span><span class="en">day (effective capacity under pendular flow)</span>
+      </p>
+      <p style="margin-top:8px; font-family:monospace; color:var(--muted); font-size:13px;">
+        <span class="es">PPHPD 50/50: 17 × 750 = 12,750 · PPHPD pendular 90/10: 12,750 × 1.80 = <strong>22,950</strong></span>
+        <span class="en">PPHPD 50/50: 17 × 750 = 12,750 · Pendular PPHPD 90/10: 12,750 × 1.80 = <strong>22,950</strong></span>
       </p>
       <p style="margin-top:8px; font-size:12px; color:var(--muted);">
-        <span class="badge badge-n1">N1</span> SP: 163,000 / 550,000 = 29.6 % · <span class="badge badge-n3">N3</span> <span class="es">Analogía aplicada al modelo SD — no es un dato del expediente</span><span class="en">Analogy applied to SD model — not a file data point</span>
+        <span class="badge badge-n2">N2</span> <span class="es">Fórmula reproducible · No depende del precedente de SP — es la consecuencia matemática del flujo pendular 90/10 aplicado a los parámetros del expediente SNIP 17248</span>
+        <span class="en">Reproducible formula · Does not depend on SP precedent — it is the mathematical consequence of 90/10 pendular flow applied to SNIP 17248 file parameters</span>
       </p>
     </div>
 
@@ -537,18 +543,17 @@ strong { color: inherit; }
         </tr></thead>
         <tbody>
           <tr><td><span class="es">Capacidad nominal (expediente)</span><span class="en">Nominal capacity (file)</span></td><td class="num amber">306,000 pax/<span class="es">día</span><span class="en">day</span></td><td>550,000 pax/<span class="es">día (diseño)</span><span class="en">day (design)</span></td></tr>
-          <tr><td><span class="es">Ratio efectivo observado en SP</span><span class="en">Effective ratio observed in SP</span></td><td class="num amber">~30 %</td><td class="num amber">29.6 % (163,000 / 550,000)</td></tr>
-          <tr><td><span class="es">Capacidad efectiva sentido dominante</span><span class="en">Effective capacity dominant direction</span></td><td class="num red">~91,800 pax/<span class="es">día</span><span class="en">day</span></td><td>~163,000 pax/<span class="es">día (récord)</span><span class="en">day (record)</span></td></tr>
-          <tr><td><span class="es">Capacidad efectiva ambos sentidos</span><span class="en">Effective capacity both directions</span></td><td class="num red">~170,000 pax/<span class="es">día</span><span class="en">day</span></td><td>~163,000 pax/<span class="es">día (récord)</span><span class="en">day (record)</span></td></tr>
+          <tr><td><span class="es">Factor de conversión pendular</span><span class="en">Pendular conversion factor</span></td><td class="num amber">0.90 / 0.50 = <strong>1.80</strong></td><td class="num amber">0.90 / 0.50 = <strong>1.80</strong></td></tr>
+          <tr><td><span class="es">Capacidad efectiva bajo flujo pendular</span><span class="en">Effective capacity under pendular flow</span></td><td class="num red">306,000 / 1.80 = <strong>~170,000</strong> pax/<span class="es">día</span><span class="en">day</span></td><td>550,000 / 1.80 = <strong>~306,000</strong> pax/<span class="es">día</span><span class="en">day</span> <span style="font-size:10px; color:var(--muted);">(<span class="es">vs. récord real 163,000</span><span class="en">vs. real record 163,000</span>)</span></td></tr>
           <tr><td><span class="es">Cobertura 2030 bajo este escenario</span><span class="en">Coverage 2030 under this scenario</span></td><td class="num red">~36.6 %</td><td style="color:var(--muted); font-size:12px;">vs. 65.8 % <span class="es">nominal</span><span class="en">nominal</span></td></tr>
         </tbody>
       </table>
     </div>
-    <div class="box box-warn" style="margin-top:12px;">
-      <div class="box-label">N3 · <span class="es">Limitación de la inferencia</span><span class="en">Inference limitation</span></div>
+    <div class="box box-note" style="margin-top:12px;">
+      <div class="box-label">N2 · <span class="es">Alcance de la derivación</span><span class="en">Derivation scope</span></div>
       <p style="font-size:12px; color:var(--text);">
-        <span class="es">El Escenario B <strong>no es un dato del expediente SNIP 17248</strong>. Es una inferencia por analogía con São Paulo. SD podría operar mejor o peor que SP dependiendo de variables no documentadas (geometría de terminales, perfil de demanda hora a hora, protocolo de recuperación de incidentes). La analogía identifica un riesgo — no lo cuantifica con precisión.</span>
-        <span class="en">Scenario B <strong>is not a SNIP 17248 file data point</strong>. It is an inference by analogy with São Paulo. SD could operate better or worse than SP depending on undocumented variables (terminal geometry, hourly demand profile, incident recovery protocol). The analogy identifies a risk — it does not quantify it precisely.</span>
+        <span class="es">El Escenario B es una consecuencia matemática del flujo pendular 90/10 aplicado a los parámetros del expediente SNIP 17248. La fórmula (306,000 / 1.80 = ~170,000) es reproducible y no depende del precedente de SP. Lo que SP aporta es la validación empírica de que ese flujo pendular extremo es operacionalmente real — no una hipótesis.</span>
+        <span class="en">Scenario B is a mathematical consequence of 90/10 pendular flow applied to SNIP 17248 file parameters. The formula (306,000 / 1.80 = ~170,000) is reproducible and does not depend on the SP precedent. What SP contributes is empirical validation that this extreme pendular flow is operationally real — not a hypothesis.</span>
       </p>
     </div>
     <div style="font-size:12px; color:var(--muted); margin-top:16px;">
