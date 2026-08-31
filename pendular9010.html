@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="es" id="html-root" class="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cómo resolver la saturación 90/10 · El Embudo</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+/* ── VARIABLES ── */
+:root {
+  --navy:    #0f1f3d;
+  --navy2:   #1a3260;
+  --slate:   #2c4a7c;
+  --fog:     #1a2740;
+  --page:    #070e1c;
+  --white:   #0d1830;
+  --red:     #e05252;
+  --red-lt:  rgba(224,82,82,.15);
+  --amber:   #d4890a;
+  --amber-lt:rgba(212,137,10,.15);
+  --green:   #22c55e;
+  --green-lt:rgba(34,197,94,.12);
+  --blue:    #3b82f6;
+  --blue-lt: rgba(59,130,246,.12);
+  --accent:  #e85d26;
+  --rule:    rgba(200,216,240,.1);
+  --text:    #c8d8f0;
+  --muted:   #8898b8;
+}
+html.light {
+  --navy:    #1a3260;
+  --navy2:   #1d4ed8;
+  --fog:     #e8edf5;
+  --page:    #f4f6fa;
+  --white:   #ffffff;
+  --rule:    #cbd5e1;
+  --text:    #1e293b;
+  --muted:   #475569;
+  --red:     #b91c1c;
+  --accent:  #9a3412;
+  --amber:   #b45309;
+  --green:   #166534;
+  --blue:    #1d4ed8;
+  --red-lt:  rgba(185,28,28,.08);
+  --amber-lt:rgba(180,83,9,.08);
+  --green-lt:rgba(22,101,52,.08);
+  --blue-lt: rgba(29,78,216,.08);
+}
+
+/* ── LANGUAGE ── */
+.en { display: none; }
+html[lang="en"] .es { display: none; }
+html[lang="en"] .en { display: inline; }
+.en-block { display: none; }
+html[lang="en"] .es-block { display: none; }
+html[lang="en"] .en-block { display: block; }
+
+/* ── BASE ── */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--page); color: var(--text); font-family: 'Segoe UI', system-ui, sans-serif; font-size: 14px; line-height: 1.6; padding-top: 56px; }
+
+/* ── TOPBAR ── */
+header.topbar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  height: 52px;
+  background: rgba(7,14,28,.97);
+  border-bottom: 1px solid var(--rule);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 20px; backdrop-filter: blur(8px);
+}
+html.light header.topbar { background: rgba(26,50,96,.97); }
+.tb-brand { font-size: 11px; font-weight: 700; color: rgba(255,255,255,.7); letter-spacing: .08em; text-transform: uppercase; }
+.tb-brand span { color: var(--accent); }
+.tb-right { display: flex; align-items: center; gap: 8px; }
+.lang-toggle { display: flex; gap: 2px; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.15); border-radius: 20px; padding: 2px; }
+.lang-btn { background: transparent; border: none; color: rgba(255,255,255,.5); font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 18px; cursor: pointer; letter-spacing: .04em; transition: all .15s; }
+.lang-btn.active { background: var(--accent); color: #fff; }
+.btn-ctrl { background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.15); border-radius: 20px; color: rgba(255,255,255,.7); font-size: 11px; font-weight: 600; padding: 4px 14px; cursor: pointer; transition: all .15s; white-space: nowrap; }
+.btn-ctrl:hover { background: rgba(255,255,255,.15); color: #fff; }
+
+/* ── CONTAINER ── */
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  background: var(--white);
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  padding: 40px 44px 50px;
+  box-shadow: 0 12px 40px rgba(0,0,0,.4);
+  margin-top: 24px;
+  margin-bottom: 40px;
+}
+@media(max-width:600px) { .container { padding: 20px; margin-top: 12px; } }
+
+/* ── DOC HEADER ── */
+.doc-header {
+  border-bottom: 2px solid var(--accent);
+  padding-bottom: 24px;
+  margin-bottom: 28px;
+  display: flex; flex-wrap: wrap;
+  justify-content: space-between; align-items: flex-end; gap: 12px;
+}
+.doc-header .brand { font-size: 11px; font-weight: 700; color: var(--accent); letter-spacing: .12em; text-transform: uppercase; }
+.doc-header h1 { font-size: 24px; font-weight: 700; color: var(--text); line-height: 1.2; margin-top: 4px; }
+.doc-header .sub { font-size: 13px; color: var(--muted); margin-top: 4px; }
+.doc-header .meta { font-size: 12px; color: var(--muted); text-align: right; white-space: nowrap; }
+.doc-header .meta strong { color: var(--text); }
+@media(max-width:600px) { .doc-header { flex-direction: column; } .doc-header .meta { text-align: left; white-space: normal; } }
+
+/* ── BADGES ── */
+.badge { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: 2px 10px; border-radius: 20px; margin-right: 4px; }
+.badge-n1 { background: var(--green-lt); color: var(--green); }
+.badge-n2 { background: var(--blue-lt); color: var(--blue); }
+.badge-n3 { background: var(--amber-lt); color: var(--amber); }
+.badge-accent { background: var(--accent); color: #fff; }
+
+/* ── SECTIONS ── */
+.section { margin-top: 36px; border-top: 1px solid var(--rule); padding-top: 28px; }
+.section-title { font-size: 17px; font-weight: 700; color: var(--text); margin-bottom: 14px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.section-title small { font-size: 13px; font-weight: 400; color: var(--muted); }
+
+/* ── GRID ── */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin: 16px 0; }
+@media(max-width:600px) { .grid-2 { grid-template-columns: 1fr; } }
+
+/* ── CARDS ── */
+.card { background: var(--fog); border: 1px solid var(--rule); border-radius: 8px; padding: 18px 20px; }
+.card.accent-green { border-left: 3px solid var(--green); }
+.card.accent-red   { border-left: 3px solid var(--red); }
+.card.accent-amber { border-left: 3px solid var(--amber); }
+.card-title { font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+.card .highlight { font-size: 28px; font-weight: 700; color: var(--text); line-height: 1.1; }
+.card .highlight.green { color: var(--green); }
+.card .highlight.red   { color: var(--red); }
+.card .highlight.amber { color: var(--amber); }
+.card .metric { font-size: 12.5px; color: var(--muted); margin-top: 4px; }
+.card .metric strong { color: var(--text); }
+
+/* ── BOXES ── */
+.box { border-radius: 6px; padding: 14px 18px; margin: 16px 0; font-size: 13.5px; }
+.box-fact { background: var(--green-lt); border-left: 3px solid var(--green); }
+.box-warn { background: var(--red-lt); border-left: 3px solid var(--red); }
+.box-note { background: var(--blue-lt); border-left: 3px solid var(--blue); }
+.box-inf  { background: var(--amber-lt); border-left: 3px solid var(--amber); }
+.box-label { font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 6px; color: var(--muted); }
+
+/* ── TABLE ── */
+.tbl-wrap { overflow-x: auto; margin: 16px 0; }
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+thead th { background: var(--navy); color: rgba(255,255,255,.75); font-weight: 600; font-size: 11px; letter-spacing: .05em; text-transform: uppercase; padding: 8px 12px; text-align: left; border-bottom: 2px solid var(--accent); }
+html.light thead th { color: rgba(255,255,255,.85); }
+tbody td { padding: 8px 12px; border-bottom: 1px solid var(--rule); color: var(--text); vertical-align: top; }
+.num { font-family: 'Courier New', monospace; font-weight: 700; }
+.num.green { color: var(--green); }
+.num.red   { color: var(--red); }
+.num.amber { color: var(--amber); }
+
+/* ── CHART ── */
+.chart-box { background: var(--fog); border: 1px solid var(--rule); border-radius: 8px; padding: 16px 18px; margin: 20px 0; }
+.chart-box h4 { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 12px; }
+
+/* ── QUESTION BOX ── */
+.question-box { background: var(--navy); border: 1px solid var(--rule); border-radius: 8px; padding: 24px 28px; text-align: center; margin: 28px 0 12px; }
+.question-box .q-label { font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.4); margin-bottom: 10px; }
+.question-box blockquote { font-size: 15px; font-style: italic; line-height: 1.65; color: #fff; max-width: 680px; margin: 0 auto; }
+html.light .question-box blockquote { color: #fff; }
+
+/* ── FOOTER ── */
+.doc-footer { margin-top: 40px; padding-top: 18px; border-top: 1px solid var(--rule); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; font-size: 12px; color: var(--muted); }
+.doc-footer a { color: var(--blue); text-decoration: none; }
+.doc-footer a:hover { text-decoration: underline; }
+.doc-footer .author { font-weight: 700; color: var(--text); }
+
+strong { color: inherit; }
+</style>
+</head>
+<body>
+
+<!-- ══ TOPBAR ══ -->
+<header class="topbar">
+  <div class="tb-brand">
+    <span>El Embudo</span> · <span class="es">Análisis Técnico Independiente</span><span class="en">Independent Technical Analysis</span>
+  </div>
+  <div class="tb-right">
+    <div class="lang-toggle">
+      <button class="lang-btn active" onclick="setLang('es')" id="top-lang-es">ES</button>
+      <button class="lang-btn" onclick="setLang('en')" id="top-lang-en">EN</button>
+    </div>
+    <button class="btn-ctrl" onclick="toggleTheme()" id="theme-btn">
+      <span class="es">☀︎ Claro</span><span class="en">☀︎ Light</span>
+    </button>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- ══ HEADER ══ -->
+  <div class="doc-header">
+    <div>
+      <div class="brand">El Embudo · <span class="es">Análisis Técnico Independiente</span><span class="en">Independent Technical Analysis</span></div>
+      <h1>
+        <span class="es">Cómo resolver la saturación de un flujo pendular 90/10</span>
+        <span class="en">How to resolve 90/10 pendular flow saturation</span>
+      </h1>
+      <div class="sub">
+        <span class="es">Inyección dinámica, patios satélite y rediseño de andenes — la solución técnica para sistemas con flujo pendular extremo</span>
+        <span class="en">Dynamic injection, satellite yards and platform redesign — the technical solution for systems with extreme pendular flow</span>
+      </div>
+    </div>
+    <div class="meta">
+      <strong>Ing. Piter J. Bonilla D.</strong><br>
+      CODIA #17378 · <span class="es">31 de agosto de 2026</span><span class="en">August 31, 2026</span>
+    </div>
+  </div>
+
+  <!-- ══ RESUMEN EJECUTIVO ══ -->
+  <div class="box box-note" style="border-left-color:var(--accent); margin-bottom:24px;">
+    <div class="box-label">🔍 <span class="es">Resumen ejecutivo</span><span class="en">Executive summary</span></div>
+    <p style="font-size:14px; color:var(--text);">
+      <span class="es">La saturación de un sistema con flujo pendular extremo (90/10) no se resuelve con autobuses, ni con trenes sin paradas en el sentido contrario. Requiere <strong>inyección dinámica de trenes vacíos</strong> con patios satélite de reserva, y un <strong>rediseño arquitectónico de andenes</strong> para reducir el dwell time. Este informe explica por qué las soluciones simples fallan, y detalla la solución técnica que los diseños que asumen condiciones ideales no contemplan. La solución existe. Pero requiere infraestructura adicional que no está presupuestada en los proyectos que confunden capacidad teórica con capacidad operacional.</span>
+      <span class="en">Saturation in a system with extreme pendular flow (90/10) cannot be solved with buses, nor with non-stop trains in the opposite direction. It requires <strong>dynamic injection of empty trains</strong> with satellite reserve yards, and an <strong>architectural platform redesign</strong> to reduce dwell time. This report explains why simple solutions fail, and details the technical solution that designs assuming ideal conditions do not contemplate. The solution exists. But it requires additional infrastructure that is not budgeted in projects that confuse theoretical capacity with operational capacity.</span>
+    </p>
+    <div style="margin-top:12px; display:flex; flex-wrap:wrap; gap:12px;">
+      <span class="badge badge-n1">N1</span> <span class="es">Datos de saturación y dwell time documentados</span><span class="en">Documented saturation and dwell time data</span>
+      <span class="badge badge-n2">N2</span> <span class="es">Modelo de inyección dinámica y patios satélite</span><span class="en">Dynamic injection and satellite yard model</span>
+      <span class="badge badge-n3">N3</span> <span class="es">Inferencia: los diseños de capacidad ideal no contemplan la solución</span><span class="en">Inference: ideal capacity designs do not contemplate the solution</span>
+    </div>
+  </div>
+
+  <!-- ══ 1. EL PROBLEMA ══ -->
+  <div class="section">
+    <div class="section-title">
+      <span class="badge badge-n1">N1</span>
+      <span class="es">1 · El problema: saturación en flujo pendular extremo</span>
+      <span class="en">1 · The problem: extreme pendular flow saturation</span>
+    </div>
+    <p>
+      <span class="es">En un sistema con flujo pendular 90/10, el 90% de la demanda se mueve en una sola dirección durante una ventana crítica de 1.5 horas. La estación terminal saturada recibe un volumen de pasajeros que excede su capacidad de evacuación. Este es el caso documentado de la Línea 15 Prata en São Paulo, donde el nodo de transferencia colapsa en hora punta a pesar de que la demanda diaria representa solo el 30% de la capacidad nominal de diseño.</span>
+      <span class="en">In a system with 90/10 pendular flow, 90% of demand moves in one direction during a critical 1.5-hour window. The saturated terminal station receives a volume of passengers that exceeds its evacuation capacity. This is the documented case of Line 15 Prata in São Paulo, where the transfer node collapses during peak hour even though daily demand represents only 30% of the nominal design capacity.</span>
+    </p>
+
+    <div class="grid-2" style="margin:16px 0;">
+      <div class="card accent-red">
+        <div class="card-title"><span class="es">Restricción 1 · Headway real</span><span class="en">Constraint 1 · Real headway</span></div>
+        <div class="highlight red">170 s</div>
+        <div class="metric"><span class="es">Récord histórico en L15 Prata · vs 90s prometidos</span><span class="en">Historic record in L15 Prata · vs 90s promised</span></div>
+      </div>
+      <div class="card accent-red">
+        <div class="card-title"><span class="es">Restricción 2 · Dwell time en hora pico</span><span class="en">Constraint 2 · Peak hour dwell time</span></div>
+        <div class="highlight red">87 s</div>
+        <div class="metric"><span class="es">97% del headway prometido · cronometrado en video</span><span class="en">97% of promised headway · timed on video</span></div>
+      </div>
+    </div>
+
+    <div class="box box-fact">
+      <div class="box-label">N1 · <span class="es">El factor compuesto 3.4</span><span class="en">The 3.4 compound factor</span></div>
+      <p>
+        <span class="es">La combinación de headway real (170s vs 90s) y flujo pendular (90/10 vs 50/50) produce un factor compuesto de <strong>3.4</strong> (1.89 × 1.80).</span>
+        <span class="en">The combination of real headway (170s vs 90s) and pendular flow (90/10 vs 50/50) produces a compound factor of <strong>3.4</strong> (1.89 × 1.80).</span>
+      </p>
+      <p style="font-family:monospace; font-size:15px; color:var(--amber); margin-top:8px;">
+        550,000 / 3.4 = <strong>161,764 ≈ 163,000</strong>
+      </p>
+      <p style="font-size:12px; color:var(--muted); margin-top:4px;">
+        <span class="es">El sistema no está al 30% de su capacidad. Está en su techo real.</span>
+        <span class="en">The system is not at 30% of its capacity. It is at its real ceiling.</span>
+      </p>
+    </div>
+  </div>
+
+  <!-- ══ 2. SOLUCIONES QUE NO FUNCIONAN ══ -->
+  <div class="section">
+    <div class="section-title">
+      <span class="badge badge-n2">N2</span>
+      <span class="es">2 · Por qué las soluciones simples no funcionan</span>
+      <span class="en">2 · Why simple solutions do not work</span>
+    </div>
+
+    <div class="grid-2" style="margin:16px 0;">
+      <div class="card accent-red">
+        <div class="card-title"><span class="es">❌ Trenes sin paradas en sentido contrario</span><span class="en">❌ Non-stop trains in opposite direction</span></div>
+        <p style="font-size:12px; color:var(--text);">
+          <span class="es">El tren vacío viaja rápido, pero al llegar a la terminal saturada, el <strong>AMV (Track Switch) de 464m</strong> es el cuello de botella. El tren rápido termina haciendo fila detrás del que está desembarcando. El tiempo ganado se pierde en la maniobra.</span>
+          <span class="en">The empty train travels fast, but at the saturated terminal, the <strong>AMV (Track Switch) of 464m</strong> is the bottleneck. The fast train ends up queuing behind the one that is disembarking. The gained time is lost in the maneuver.</span>
+        </p>
+      </div>
+      <div class="card accent-red">
+        <div class="card-title"><span class="es">❌ Autobuses en sentido no dominante</span><span class="en">❌ Buses in non-dominant direction</span></div>
+        <p style="font-size:12px; color:var(--text);">
+          <span class="es">No alivian la estación saturada (el problema está en la terminal, no en el sentido contrario). Un autobús lleva 80-160 pax; un monorriel, 1.002. Se necesitaría una flota irreal de autobuses bloqueando las avenidas.</span>
+          <span class="en">They do not relieve the saturated station (the problem is at the terminal, not in the opposite direction). A bus carries 80-160 pax; a monorail, 1,002. An unrealistic fleet of buses blocking avenues would be needed.</span>
+        </p>
+      </div>
+    </div>
+
+    <div class="box box-warn">
+      <div class="box-label">N2 · <span class="es">El error conceptual</span><span class="en">The conceptual error</span></div>
+      <p>
+        <span class="es">Ambas soluciones tratan el problema como si fuera de <strong>oferta en el sentido no dominante</strong>. El problema real es de <strong>capacidad de evacuación en la terminal saturada</strong>. La solución no está en el sentido contrario — está en cómo se maneja la demanda concentrada en el nodo crítico.</span>
+        <span class="en">Both solutions treat the problem as if it were about <strong>supply in the non-dominant direction</strong>. The real problem is <strong>evacuation capacity at the saturated terminal</strong>. The solution is not in the opposite direction — it is in how concentrated demand is managed at the critical node.</span>
+      </p>
+    </div>
+  </div>
+
+  <!-- ══ 3. LA VERDADERA SOLUCIÓN ══ -->
+  <div class="section">
+    <div class="section-title">
+      <span class="badge badge-n2">N2</span>
+      <span class="es">3 · La verdadera solución: inyección dinámica + patios satélite</span>
+      <span class="en">3 · The real solution: dynamic injection + satellite yards</span>
+    </div>
+
+    <div class="box box-inf" style="margin-bottom:16px;">
+      <div class="box-label" style="color:var(--amber);">N2 · <span class="es">Esquema de la solución</span><span class="en">Solution scheme</span></div>
+      <div style="font-family:monospace; font-size:13px; color:var(--text); line-height:2; text-align:center; padding:10px 0;">
+        <span style="color:var(--blue);">[Terminal Periferia]</span>  ===  <span style="color:var(--green);">(Patio 1)</span>  ===  <span style="color:var(--amber);">[Estación Intermedia]</span>  ===  <span style="color:var(--green);">(Patio 2)</span>  ===  <span style="color:var(--red);">[Terminal Centro Saturada]</span><br>
+        <span style="font-size:11px; color:var(--muted);">
+          <span class="es">Inyecta trenes vacíos en hora pico → Punto de bucle corto para retornar → Evacuación rápida y retorno por AMV</span>
+          <span class="en">Injects empty trains at peak → Short-turn point for return → Fast evacuation and return via AMV</span>
+        </span>
+      </div>
+    </div>
+
+    <h4 style="font-size:14px; font-weight:700; color:var(--text); margin:18px 0 10px;">
+      <span class="es">A · Bucles cortos (Short-Turning)</span>
+      <span class="en">A · Short-Turning</span>
+    </h4>
+    <p>
+      <span class="es">En lugar de que todos los trenes viajen de terminal a terminal, los trenes vacíos retornan en <strong>estaciones intermedias estratégicas</strong> con crossover rápido.</span>
+      <span class="en">Instead of all trains traveling end-to-end, empty trains return at <strong>strategic intermediate stations</strong> with fast crossovers.</span>
+    </p>
+    <ul style="margin:10px 0 0 20px; color:var(--text); font-size:13px;">
+      <li><span class="es"><strong>Ejemplo:</strong> Si la saturación está en los primeros 5 km desde el centro, los trenes descargan en el centro, viajan vacíos solo 5 km hacia la periferia, dan la vuelta en un AMV intermedio y regresan a la terminal saturada.</span><span class="en"><strong>Example:</strong> If saturation is in the first 5 km from the center, trains unload at the center, travel empty only 5 km toward the periphery, turn at an intermediate AMV, and return to the saturated terminal.</span></li>
+      <li><span class="es"><strong>Ventaja:</strong> Duplica la frecuencia en el tramo crítico sin desgastar la flota en los extremos vacíos de la línea.</span><span class="en"><strong>Advantage:</strong> Doubles frequency in the critical section without wearing the fleet on the empty line ends.</span></li>
+    </ul>
+
+    <h4 style="font-size:14px; font-weight:700; color:var(--text); margin:18px 0 10px;">
+      <span class="es">B · Patios satélite de reserva (Pocket Tracks)</span>
+      <span class="en">B · Satellite reserve yards (Pocket Tracks)</span>
+    </h4>
+    <p>
+      <span class="es">No se necesitan dos mega-patios comerciales que dupliquen la flota. Se necesitan <strong>vías de estacionamiento de cabecera</strong> justo antes de las estaciones críticas.</span>
+      <span class="en">Two mega-commercial yards that double the fleet are not needed. <strong>Pocket tracks</strong> just before the critical stations are what is needed.</span>
+    </p>
+    <ul style="margin:10px 0 0 20px; color:var(--text); font-size:13px;">
+      <li><span class="es"><strong>Fosa de Inyección de Cabecera:</strong> Al lado de la terminal saturada, 2-3 vías donde se almacenan 4-5 trenes listos antes de la hora pico.</span><span class="en"><strong>Head Injection Pocket:</strong> Next to the saturated terminal, 2-3 tracks where 4-5 ready trains are stored before peak hour.</span></li>
+      <li><span class="es"><strong>Operación:</strong> En el minuto exacto en que el andén se desborda, se inyecta un tren vacío directamente desde la vía de reserva, saltándose el AMV principal.</span><span class="en"><strong>Operation:</strong> At the exact minute the platform overflows, an empty train is injected directly from the reserve track, bypassing the main AMV.</span></li>
+      <li><span class="es"><strong>Ventaja:</strong> Evita el cuello de botella del Track Switch y permite absorber picos sin colapsar el sistema.</span><span class="en"><strong>Advantage:</strong> Avoids the Track Switch bottleneck and allows peak absorption without system collapse.</span></li>
+    </ul>
+
+    <h4 style="font-size:14px; font-weight:700; color:var(--text); margin:18px 0 10px;">
+      <span class="es">C · Rediseño arquitectónico de andenes (Solución Barcelona)</span>
+      <span class="en">C · Architectural platform redesign (Barcelona Solution)</span>
+    </h4>
+    <p>
+      <span class="es">Dado que el software GoA4 ya está al límite, la solución técnica final es <strong>reducir el dwell time de 87 segundos a menos de 40</strong> mediante el rediseño de andenes.</span>
+      <span class="en">Since the GoA4 software is already at its limit, the final technical solution is to <strong>reduce dwell time from 87 seconds to below 40</strong> through platform redesign.</span>
+    </p>
+    <ul style="margin:10px 0 0 20px; color:var(--text); font-size:13px;">
+      <li><span class="es"><strong>Andenes de Solución Barcelona:</strong> Estaciones con tres andenes para dos vías. El tren abre puertas de un lado para bajar (andén de descenso) y del otro para subir (andén de ascenso).</span><span class="en"><strong>Barcelona Solution Platforms:</strong> Stations with three platforms for two tracks. The train opens doors on one side for alighting and on the other for boarding.</span></li>
+      <li><span class="es"><strong>Efecto:</strong> Evita el choque de flujos humanos de frente y corta el dwell time a la mitad.</span><span class="en"><strong>Effect:</strong> Prevents head-on human flow collision and cuts dwell time in half.</span></li>
+      <li><span class="es"><strong>Resultado:</strong> Permite bajar el headway real de forma dramática, acercándose al rango de 90-120 segundos.</span><span class="en"><strong>Result:</strong> Allows dramatic reduction in real headway, approaching the 90-120 second range.</span></li>
+    </ul>
+  </div>
+
+  <!-- ══ 4. COMPARATIVA DE ESCENARIOS ══ -->
+  <div class="section">
+    <div class="section-title">
+      <span class="badge badge-n2">N2</span>
+      <span class="es">4 · Comparativa de escenarios</span>
+      <span class="en">4 · Scenario comparison</span>
+    </div>
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th><span class="es">Escenario</span><span class="en">Scenario</span></th>
+            <th>Dwell time</th>
+            <th>Headway efectivo</th>
+            <th>Capacidad real</th>
+            <th><span class="es">Evaluación</span><span class="en">Assessment</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="es">Sin solución (diseño actual)</span><span class="en">No solution (current design)</span></td>
+            <td class="num red">87 s</td>
+            <td class="num red">~170 s</td>
+            <td class="num red">~163,000 pax/día</td>
+            <td style="color:var(--red); font-weight:600;"><span class="es">Colapso en hora pico</span><span class="en">Peak hour collapse</span></td>
+          </tr>
+          <tr>
+            <td><span class="es">Con inyección dinámica (patios satélite)</span><span class="en">With dynamic injection (satellite yards)</span></td>
+            <td class="num amber">87 s</td>
+            <td class="num amber">~130 s</td>
+            <td class="num amber">~213,000 pax/día</td>
+            <td style="color:var(--amber); font-weight:600;"><span class="es">Mejora parcial</span><span class="en">Partial improvement</span></td>
+          </tr>
+          <tr>
+            <td><span class="es">Con Solución Barcelona (+ inyección)</span><span class="en">With Barcelona Solution (+ injection)</span></td>
+            <td class="num green">~35 s</td>
+            <td class="num green">~95 s</td>
+            <td class="num green">~291,000 pax/día</td>
+            <td style="color:var(--green); font-weight:600;"><span class="es">Resiliente · margen de seguridad</span><span class="en">Resilient · safety margin</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="box box-note" style="margin-top:12px;">
+      <div class="box-label">N2 · <span class="es">Interpretación</span><span class="en">Interpretation</span></div>
+      <p style="font-size:12px; color:var(--text);">
+        <span class="es">La solución Barcelona + inyección dinámica permite acercarse al headway prometido (95s) y multiplicar la capacidad real por 1.8. Sin embargo, <strong>requiere infraestructura adicional que los diseños que asumen condiciones ideales no contemplan</strong>: reconstrucción de andenes en estaciones críticas, construcción de patios satélite, y modificación de la geometría de terminales.</span>
+        <span class="en">The Barcelona Solution + dynamic injection allows approaching the promised headway (95s) and multiplying real capacity by 1.8. However, <strong>it requires additional infrastructure that designs assuming ideal conditions do not contemplate</strong>: reconstruction of platforms at critical stations, construction of satellite yards, and modification of terminal geometry.</span>
+      </p>
+    </div>
+  </div>
+
+  <!-- ══ GRÁFICO ── -->
+  <div class="section">
+    <div class="section-title">📊 <span class="es">Visualización comparativa</span><span class="en">Comparative visualization</span></div>
+    <div class="chart-box">
+      <h4><span class="es">Capacidad real por escenario · Línea 15 Prata (SP)</span><span class="en">Real capacity by scenario · Line 15 Prata (SP)</span></h4>
+      <canvas id="chartSolucion" height="200"></canvas>
+      <div style="font-size:11px; color:var(--muted); margin-top:10px; padding:8px 12px; background:var(--navy); border-radius:4px;">
+        <span style="display:inline-block; width:10px; height:10px; background:#e05252; border-radius:2px; margin-right:4px;"></span> <span class="es">Sin solución (actual)</span><span class="en">No solution (current)</span> &nbsp;
+        <span style="display:inline-block; width:10px; height:10px; background:#d4890a; border-radius:2px; margin-right:4px;"></span> <span class="es">Con inyección dinámica</span><span class="en">With dynamic injection</span> &nbsp;
+        <span style="display:inline-block; width:10px; height:10px; background:#22c55e; border-radius:2px; margin-right:4px;"></span> <span class="es">Con Solución Barcelona + inyección</span><span class="en">With Barcelona Solution + injection</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ 5. CONCLUSIÓN ══ -->
+  <div class="section">
+    <div class="section-title">
+      <span class="badge badge-n3">N3</span>
+      <span class="es">5 · Conclusión: la solución existe, pero no está presupuestada</span>
+      <span class="en">5 · Conclusion: the solution exists, but it is not budgeted</span>
+    </div>
+
+    <div class="box box-warn" style="border-left-color:var(--red);">
+      <div class="box-label" style="color:var(--red);">🔴 <span class="es">Hallazgo central</span><span class="en">Central finding</span></div>
+      <p style="font-size:14px; font-weight:600; color:var(--text);">
+        <span class="es">La solución técnica para la saturación 90/10 existe. Pero no es barata ni sencilla. Requiere infraestructura adicional — patios satélite, rediseño de andenes y bucles cortos — que los diseños basados en capacidades ideales no incluyen.</span>
+        <span class="en">The technical solution for 90/10 saturation exists. But it is neither cheap nor simple. It requires additional infrastructure — satellite yards, platform redesign and short-turning — that designs based on ideal capacities do not include.</span>
+      </p>
+    </div>
+
+    <div class="box box-note" style="margin-top:12px;">
+      <div class="box-label">N3 · <span class="es">Inferencia</span><span class="en">Inference</span></div>
+      <p style="font-size:13px; color:var(--text);">
+        <span class="es">Los diseños que asumen condiciones ideales — 90s de headway, flujo 50/50, dwell time de diseño — eliminan todo margen de seguridad. La solución para el mundo real requiere:</span>
+        <span class="en">Designs that assume ideal conditions — 90s headway, 50/50 flow, design dwell time — eliminate all safety margin. The real-world solution requires:</span>
+      </p>
+      <ul style="margin:12px 0 0 20px; color:var(--text); font-size:13px;">
+        <li><span class="es"><strong>Patios satélite</strong> en la terminal crítica (obras de infraestructura adicionales).</span><span class="en"><strong>Satellite yards</strong> at the critical terminal (additional infrastructure works).</span></li>
+        <li><span class="es"><strong>Rediseño de andenes</strong> (Solución Barcelona) en estaciones de alta demanda.</span><span class="en"><strong>Platform redesign</strong> (Barcelona Solution) at high-demand stations.</span></li>
+        <li><span class="es"><strong>Bucles cortos</strong> en estaciones intermedias con crossovers rápidos.</span><span class="en"><strong>Short-turning</strong> at intermediate stations with fast crossovers.</span></li>
+        <li><span class="es"><strong>Flota adicional</strong> para la inyección dinámica (aunque menor que la que se necesitaría sin la solución).</span><span class="en"><strong>Additional fleet</strong> for dynamic injection (though less than what would be needed without the solution).</span></li>
+      </ul>
+    </div>
+
+    <div style="font-size:12px; color:var(--muted); margin-top:16px;">
+      <span class="badge badge-n1">N1</span> <span class="es">Datos verificados: dwell time 87s, headway 170s, flujo 90/10, factor compuesto 3.4</span><span class="en">Verified data: dwell time 87s, headway 170s, 90/10 flow, compound factor 3.4</span><br>
+      <span class="badge badge-n2">N2</span> <span class="es">Modelo de solución: inyección dinámica, patios satélite, Solución Barcelona</span><span class="en">Solution model: dynamic injection, satellite yards, Barcelona Solution</span><br>
+      <span class="badge badge-n3">N3</span> <span class="es">Inferencia: los diseños de capacidad ideal no contemplan la solución — la fragilidad es estructural</span><span class="en">Inference: ideal capacity designs do not contemplate the solution — fragility is structural</span>
+    </div>
+  </div>
+
+  <!-- ══ LA PREGUNTA ══ -->
+  <div class="question-box">
+    <div class="q-label"><span class="es">La pregunta que los diseños ideales no responden</span><span class="en">The question that ideal designs do not answer</span></div>
+    <blockquote>
+      <span class="es">«La solución técnica para la saturación 90/10 existe — requiere patios satélite, rediseño de andenes y bucles cortos. ¿Por qué se diseña para condiciones ideales cuando el flujo real es 90/10?»</span>
+      <span class="en">«The technical solution for 90/10 saturation exists — it requires satellite yards, platform redesign and short-turning. Why design for ideal conditions when the real flow is 90/10?»</span>
+    </blockquote>
+    <p style="font-size:13px; color:rgba(255,255,255,.6); margin-top:14px; font-style:italic;">
+      <span class="es">La respuesta no se encuentra en los diseños que asumen condiciones ideales.</span>
+      <span class="en">The answer is not found in designs that assume ideal conditions.</span>
+    </p>
+  </div>
+
+  <!-- ══ FOOTER ══ -->
+  <div class="doc-footer">
+    <div>
+      <span class="author">Ing. Piter J. Bonilla D.</span> · CODIA #17378 · <span class="es">Análisis Técnico Independiente</span><span class="en">Independent Technical Analysis</span><br>
+      <span style="font-size:11px;"><span class="es">Documento complementario al ecosistema</span><span class="en">Supplementary document to the ecosystem</span> <a href="https://visualcrp.com/embudo.html" target="_blank">visualcrp.com/embudo.html</a></span>
+    </div>
+    <div>
+      <a href="https://visualcrp.com/L15Prata.html" target="_blank">📄 L15Prata</a>
+      &nbsp;·&nbsp;
+      <a href="https://visualcrp.com/embudo.html" target="_blank">🌐 Dashboard</a>
+      &nbsp;·&nbsp;
+      <a href="https://visualcrp.com/AUDIT.html" target="_blank">⚖️ <span class="es">Auditoría</span><span class="en">Audit</span></a>
+    </div>
+  </div>
+
+</div>
+
+<script>
+/* ── LANG ── */
+function setLang(lang) {
+  const h = document.getElementById('html-root');
+  h.setAttribute('lang', lang);
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+  const btn = document.getElementById('top-lang-' + lang);
+  if (btn) btn.classList.add('active');
+  localStorage.setItem('solucion-lang', lang);
+}
+
+/* ── THEME ── */
+function toggleTheme() {
+  const h = document.getElementById('html-root');
+  h.classList.toggle('light'); h.classList.toggle('dark');
+  const isLight = h.classList.contains('light');
+  localStorage.setItem('solucion-theme', isLight ? 'light' : 'dark');
+  const btn = document.getElementById('theme-btn');
+  const lang = h.getAttribute('lang') || 'es';
+  if (btn) btn.innerHTML = isLight
+    ? (lang === 'es' ? '<span class="es">🌙 Oscuro</span><span class="en" style="display:none">🌙 Dark</span>' : '<span class="es" style="display:none">🌙 Oscuro</span><span class="en">🌙 Dark</span>')
+    : (lang === 'es' ? '<span class="es">☀︎ Claro</span><span class="en" style="display:none">☀︎ Light</span>' : '<span class="es" style="display:none">☀︎ Claro</span><span class="en">☀︎ Light</span>');
+}
+
+/* ── INIT ── */
+(function() {
+  const savedTheme = localStorage.getItem('solucion-theme');
+  const savedLang  = localStorage.getItem('solucion-lang');
+  const h = document.getElementById('html-root');
+  if (savedTheme === 'light') { h.classList.add('light'); h.classList.remove('dark'); }
+  if (savedLang) setLang(savedLang);
+})();
+
+/* ── CHART ── */
+document.addEventListener('DOMContentLoaded', function() {
+  const ctx = document.getElementById('chartSolucion').getContext('2d');
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Sin solución', 'Inyección dinámica', 'Barcelona + inyección'],
+      datasets: [{
+        data: [163000, 213000, 291000],
+        backgroundColor: ['#e05252', '#d4890a', '#22c55e'],
+        borderRadius: 4
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { display: false },
+        tooltip: { callbacks: { label: c => c.raw.toLocaleString() + ' pax/día' } }
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          ticks: { callback: v => (v/1000).toFixed(0)+'k', color: '#8898b8' },
+          grid: { color: 'rgba(200,216,240,.06)' }
+        },
+        x: { ticks: { color: '#8898b8' }, grid: { display: false } }
+      }
+    }
+  });
+});
+</script>
+</body>
+</html>
