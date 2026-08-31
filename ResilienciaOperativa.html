@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="es" id="html-root" class="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Informe de Resiliencia Operativa · El Embudo</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+/* ── VARIABLES ── */
+:root {
+  --navy:    #0f1f3d;
+  --navy2:   #1a3260;
+  --slate:   #2c4a7c;
+  --fog:     #1a2740;
+  --page:    #070e1c;
+  --white:   #0d1830;
+  --red:     #e05252;
+  --red-lt:  rgba(224,82,82,.15);
+  --amber:   #d4890a;
+  --amber-lt:rgba(212,137,10,.15);
+  --green:   #22c55e;
+  --green-lt:rgba(34,197,94,.12);
+  --blue:    #3b82f6;
+  --blue-lt: rgba(59,130,246,.12);
+  --accent:  #e85d26;
+  --rule:    rgba(200,216,240,.1);
+  --text:    #c8d8f0;
+  --muted:   #8898b8;
+}
+html.light {
+  --navy:    #1a3260;
+  --navy2:   #1d4ed8;
+  --fog:     #e8edf5;
+  --page:    #f4f6fa;
+  --white:   #ffffff;
+  --rule:    #cbd5e1;
+  --text:    #1e293b;
+  --muted:   #475569;
+  --red:     #b91c1c;
+  --accent:  #9a3412;
+  --amber:   #b45309;
+  --green:   #166534;
+  --blue:    #1d4ed8;
+  --red-lt:  rgba(185,28,28,.08);
+  --amber-lt:rgba(180,83,9,.08);
+  --green-lt:rgba(22,101,52,.08);
+  --blue-lt: rgba(29,78,216,.08);
+}
+
+/* ── LANGUAGE ── */
+.en { display: none; }
+html[lang="en"] .es { display: none; }
+html[lang="en"] .en { display: inline; }
+.en-block { display: none; }
+html[lang="en"] .es-block { display: none; }
+html[lang="en"] .en-block { display: block; }
+
+/* ── BASE ── */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--page); color: var(--text); font-family: 'Segoe UI', system-ui, sans-serif; font-size: 14px; line-height: 1.6; padding-top: 56px; }
+
+/* ── TOPBAR ── */
+header.topbar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  height: 52px;
+  background: rgba(7,14,28,.97);
+  border-bottom: 1px solid var(--rule);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 20px; backdrop-filter: blur(8px);
+}
+html.light header.topbar { background: rgba(26,50,96,.97); }
+.tb-brand { font-size: 11px; font-weight: 700; color: rgba(255,255,255,.7); letter-spacing: .08em; text-transform: uppercase; }
+.tb-brand span { color: var(--accent); }
+.tb-right { display: flex; align-items: center; gap: 8px; }
+.lang-toggle { display: flex; gap: 2px; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.15); border-radius: 20px; padding: 2px; }
+.lang-btn { background: transparent; border: none; color: rgba(255,255,255,.5); font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 18px; cursor: pointer; letter-spacing: .04em; transition: all .15s; }
+.lang-btn.active { background: var(--accent); color: #fff; }
+.btn-ctrl { background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.15); border-radius: 20px; color: rgba(255,255,255,.7); font-size: 11px; font-weight: 600; padding: 4px 14px; cursor: pointer; transition: all .15s; white-space: nowrap; }
+.btn-ctrl:hover { background: rgba(255,255,255,.15); color: #fff; }
+
+/* ── CONTAINER ── */
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  background: var(--white);
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  padding: 40px 44px 50px;
+  box-shadow: 0 12px 40px rgba(0,0,0,.4);
+  margin-top: 24px;
+  margin-bottom: 40px;
+}
+@media(max-width:600px) { .container { padding: 20px; margin-top: 12px; } }
+
+/* ── DOC HEADER ── */
+.doc-header {
+  border-bottom: 2px solid var(--accent);
+  padding-bottom: 24px;
+  margin-bottom: 28px;
+  display: flex; flex-wrap: wrap;
+  justify-content: space-between; align-items: flex-end; gap: 12px;
+}
+.doc-header .brand { font-size: 11px; font-weight: 700; color: var(--accent); letter-spacing: .12em; text-transform: uppercase; }
+.doc-header h1 { font-size: 24px; font-weight: 700; color: var(--text); line-height: 1.2; margin-top: 4px; }
+.doc-header .sub { font-size: 13px; color: var(--muted); margin-top: 4px; }
+.doc-header .meta { font-size: 12px; color: var(--muted); text-align: right; white-space: nowrap; }
+.doc-header .meta strong { color: var(--text); }
+@media(max-width:600px) { .doc-header { flex-direction: column; } .doc-header .meta { text-align: left; white-space: normal; } }
+
+/* ── BADGES ── */
+.badge { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: 2px 10px; border-radius: 20px; margin-right: 4px; }
+.badge-n1 { background: var(--green-lt); color: var(--green); }
+.badge-n2 { background: var(--blue-lt); color: var(--blue); }
+.badge-n3 { background: var(--amber-lt); color: var(--amber); }
+.badge-accent { background: var(--accent); color: #fff; }
+
+/* ── SECTIONS ── */
+.section { margin-top: 36px; border-top: 1px solid var(--rule); padding-top: 28px; }
+.section-title { font-size: 17px; font-weight: 700; color: var(--text); margin-bottom: 14px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.section-title small { font-size: 13px; font-weight: 400; color: var(--muted); }
+
+/* ── GRID ── */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin: 16px 0; }
+@media(max-width:600px) { .grid-2 { grid-template-columns: 1fr; } }
+
+/* ── CARDS ── */
+.card { background: var(--fog); border: 1px solid var(--rule); border-radius: 8px; padding: 18px 20px; }
+.card.accent-green { border-left: 3px solid var(--green); }
+.card.accent-red   { border-left: 3px solid var(--red); }
+.card.accent-amber { border-left: 3px solid var(--amber); }
+.card-title { font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+.card .highlight { font-size: 28px; font-weight: 700; color: var(--text); line-height: 1.1; }
+.card .highlight.green { color: var(--green); }
+.card .highlight.red   { color: var(--red); }
+.card .highlight.amber { color: var(--amber); }
+.card .metric { font-size: 12.5px; color: var(--muted); margin-top: 4px; }
+.card .metric strong { color: var(--text); }
+
+/* ── BOXES ── */
+.box { border-radius: 6px; padding: 14px 18px; margin: 16px 0; font-size: 13.5px; }
+.box-fact { background: var(--green-lt); border-left: 3px solid var(--green); }
+.box-warn { background: var(--red-lt); border-left: 3px solid var(--red); }
+.box-note { background: var(--blue-lt); border-left: 3px solid var(--blue); }
+.box-inf  { background: var(--amber-lt); border-left: 3px solid var(--amber); }
+.box-label { font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 6px; color: var(--muted); }
+
+/* ── TABLE ── */
+.tbl-wrap { overflow-x: auto; margin: 16px 0; }
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+thead th { background: var(--navy); color: rgba(255,255,255,.75); font-weight: 600; font-size: 11px; letter-spacing: .05em; text-transform: uppercase; padding: 8px 12px; text-align: left; border-bottom: 2px solid var(--accent); }
+html.light thead th { color: rgba(255,255,255,.85); }
+tbody td { padding: 8px 12px; border-bottom: 1px solid var(--rule); color: var(--text); vertical-align: top; }
+.num { font-family: 'Courier New', monospace; font-weight: 700; }
+.num.green { color: var(--green); }
+.num.red   { color: var(--red); }
+.num.amber { color: var(--amber); }
+
+/* ── CHART ── */
+.chart-box { background: var(--fog); border: 1px solid var(--rule); border-radius: 8px; padding: 16px 18px; margin: 20px 0; }
+.chart-box h4 { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 12px; }
+
+/* ── QUESTION BOX ── */
+.question-box { background: var(--navy); border: 1px solid var(--rule); border-radius: 8px; padding: 24px 28px; text-align: center; margin: 28px 0 12px; }
+.question-box .q-label { font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.4); margin-bottom: 10px; }
+.question-box blockquote { font-size: 15px; font-style: italic; line-height: 1.65; color: #fff; max-width: 680px; margin: 0 auto; }
+html.light .question-box blockquote { color: #fff; }
+
+/* ── FOOTER ── */
+.doc-footer { margin-top: 40px; padding-top: 18px; border-top: 1px solid var(--rule); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; font-size: 12px; color: var(--muted); }
+.doc-footer a { color: var(--blue); text-decoration: none; }
+.doc-footer a:hover { text-decoration: underline; }
+.doc-footer .author { font-weight: 700; color: var(--text); }
+
+strong { color: inherit; }
+</style>
+</head>
+<body>
+
+<!-- ══ TOPBAR ══ -->
+<header class="topbar">
+  <div class="tb-brand">
+    <span>El Embudo</span> · <span class="es">Análisis Técnico Independiente</span><span class="en">Independent Technical Analysis</span>
+  </div>
+  <div class="tb-right">
+    <div class="lang-toggle">
+      <button class="lang-btn active" onclick="setLang('es')" id="top-lang-es">ES</button>
+      <button class="lang-btn" onclick="setLang('en')" id="top-lang-en">EN</button>
+    </div>
+    <button class="btn-ctrl" onclick="toggleTheme()" id="theme-btn">
+      <span class="es">☀︎ Claro</span><span class="en">☀︎ Light</span>
+    </button>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- ══ HEADER ══ -->
+  <div class="doc-header">
+    <div>
+      <div class="brand">El Embudo · <span class="es">Análisis Técnico Independiente</span><span class="en">Independent Technical Analysis</span></div>
+      <h1>
+        <span class="es">Informe Técnico de Resiliencia Operativa</span>
+        <span class="en">Operational Resilience Technical Report</span>
+      </h1>
+      <div class="sub">
+        <span class="es">El Margen de Seguridad como Criterio de Diseño: Monorriel vs. Metro Convencional</span>
+        <span class="en">Safety Margin as a Design Criterion: Monorail vs. Conventional Metro</span>
+      </div>
+    </div>
+    <div class="meta">
+      <strong>Ing. Piter J. Bonilla D.</strong><br>
+      CODIA #17378 · <span class="es">31 de agosto de 2026</span><span class="en">August 31, 2026</span>
+    </div>
+  </div>
+
+  <!-- ══ RESUMEN EJECUTIVO ══ -->
+  <div class="box box-note" style="border-left-color:var(--accent); margin-bottom:24px;">
+    <div class="box-label">🔍 <span class="es">Resumen ejecutivo</span><span class="en">Executive summary</span></div>
+    <p style="font-size:14px; color:var(--text);">
+      <span class="es">Este informe introduce el <strong>criterio de resiliencia operativa</strong> como un estándar fundamental en el diseño de sistemas de transporte masivo. Un sistema robusto debe poder absorber eventos extraordinarios — conciertos, partidos deportivos, fallas mecánicas menores — sin colapsar. El análisis demuestra que el expediente SNIP 17248 no incluye margen de seguridad: el Monorriel nace sin reserva operativa. La misma flota de 17 trenes, si hubiera sido de Metro, habría sido el dimensionamiento correcto. El error no es la cantidad de trenes; es la elección tecnológica.</span>
+      <span class="en">This report introduces <strong>operational resilience</strong> as a fundamental standard in mass transit design. A robust system must absorb extraordinary events — concerts, sports events, minor mechanical failures — without collapsing. The analysis shows that the SNIP 17248 file includes no safety margin: the Monorail launches without operational reserve. The same fleet of 17 trains, if they had been Metro trains, would have been the correct sizing. The error is not the number of trains; it is the technological choice.</span>
+    </p>
+    <div style="margin-top:12px; display:flex; flex-wrap:wrap; gap:12px;">
+      <span class="badge badge-n1">N1</span> <span class="es">Datos de flota y capacidad documentados</span><span class="en">Documented fleet and capacity data</span>
+      <span class="badge badge-n2">N2</span> <span class="es">Modelo de resiliencia y equivalencia de flota</span><span class="en">Resilience model and fleet equivalence</span>
+      <span class="badge badge-n3">N3</span> <span class="es">Inferencia: el Monorriel nace sin reserva operativa</span><span class="en">Inference: the Monorail launches without operational reserve</span>
+    </div>
+  </div>
+
+  <!-- ══ 1. PRINCIPIO DE RESILIENCIA ══ -->
+  <div class="section">
+    <div class="section-title">
+      <span class="badge badge-n2">N2</span>
+      <span class="es">1 · El principio de resiliencia operativa</span>
+      <span class="en">1 · The principle of operational resilience</span>
+    </div>
+    <p>
+      <span class="es">En la ingeniería de transporte masivo, un diseño correcto y estructuralmente sostenible nunca debe dimensionarse para operar al <strong>100% de su capacidad teórica</strong> en condiciones normales. Toda infraestructura de movilidad urbana requiere un <strong>Margen de Resiliencia del 30%</strong> disponible de forma permanente.</span>
+      <span class="en">In mass transit engineering, a correct and structurally sustainable design should never be sized to operate at <strong>100% of its theoretical capacity</strong> under normal conditions. Every urban mobility infrastructure requires a <strong>30% Resilience Margin</strong> permanently available.</span>
+    </p>
+    <p style="margin-top:12px;">
+      <span class="es">Este colchón operativo es indispensable para absorber:</span>
+      <span class="en">This operational buffer is essential to absorb:</span>
+    </p>
+    <ul style="margin:10px 0 0 20px; color:var(--text); font-size:13px;">
+      <li><span class="es"><strong>Eventos pico extraordinarios:</strong> concentraciones masivas (juegos de béisbol, conciertos, mítines políticos).</span><span class="en"><strong>Extraordinary peak events:</strong> mass gatherings (baseball games, concerts, political rallies).</span></li>
+      <li><span class="es"><strong>Errores de estimación:</strong> variaciones estadísticas en las proyecciones de demanda a largo plazo.</span><span class="en"><strong>Estimation errors:</strong> statistical variations in long-term demand projections.</span></li>
+      <li><span class="es"><strong>Distorsiones operacionales:</strong> cambios en el sentido dominante del flujo o retrasos en cadena por fallas menores.</span><span class="en"><strong>Operational disruptions:</strong> changes in dominant flow direction or chain delays from minor failures.</span></li>
+    </ul>
+    <div class="box box-fact" style="margin-top:16px;">
+      <div class="box-label">N1 · <span class="es">Hecho documentado</span><span class="en">Documented fact</span></div>
+      <p><span class="es">El pliego oficial del proyecto (FITRAM-CCC-LP-2025-0001) asume un flujo estático perfecto (50/50) y dimensiona el sistema al borde de la saturación teórica, eliminando toda capacidad de amortiguar la dinámica humana real.</span><span class="en">The official project tender (FITRAM-CCC-LP-2025-0001) assumes a perfect static flow (50/50) and sizes the system at the edge of theoretical saturation, eliminating any capacity to absorb real human dynamics.</span></p>
+    </div>
+  </div>
+
+  <!-- ══ 2. MODELADO MATEMÁTICO ══ -->
+  <div class="section">
+    <div class="section-title">
+      <span class="badge badge-n2">N2</span>
+      <span class="es">2 · Modelado matemático de la demanda crítica</span>
+      <span class="en">2 · Mathematical modeling of critical demand</span>
+    </div>
+    <p>
+      <span class="es">El expediente del Estado fijó una capacidad máxima de <strong>12,750 pasajeros por hora por sentido (PPHPD)</strong>, calculada bajo una distribución simétrica idealizada (50/50).</span>
+      <span class="en">The State's file set a maximum capacity of <strong>12,750 passengers per hour per direction (PPHPD)</strong>, calculated under an idealized symmetric distribution (50/50).</span>
+    </p>
+    <p style="margin-top:12px;">
+      <span class="es">Para introducir el Margen de Resiliencia del 30% sobre la base operacional, el flujo en el sentido dominante debe expandirse mediante un factor de escala:</span>
+      <span class="en">To introduce the 30% Resilience Margin on the operational base, the flow in the dominant direction must be expanded by a scale factor:</span>
+    </p>
+    <div class="box box-inf" style="margin:16px 0;">
+      <div class="box-label">N2 · <span class="es">Factor de expansión por resiliencia</span><span class="en">Resilience expansion factor</span></div>
+      <p style="font-family:monospace; font-size:15px; color:var(--amber);">
+        <span class="es">Factor = (50% base + 30% margen) / 50% = 80% / 50% = <strong>1.6</strong></span>
+        <span class="en">Factor = (50% base + 30% margin) / 50% = 80% / 50% = <strong>1.6</strong></span>
+      </p>
+    </div>
+    <p>
+      <span class="es">Aplicando este factor a la demanda de diseño:</span>
+      <span class="en">Applying this factor to the design demand:</span>
+    </p>
+    <div class="box box-inf" style="margin:12px 0;">
+      <div class="box-label">N2 · <span class="es">Demanda crítica real</span><span class="en">Real critical demand</span></div>
+      <p style="font-family:monospace; font-size:18px; color:var(--red); font-weight:700;">
+        12,750 × 1.6 = <strong>20,400 PPHPD</strong>
+      </p>
+      <p style="font-size:12px; color:var(--muted); margin-top:6px;">
+        <span class="es">Cualquier sistema tecnológico elegido debe ser capaz de mover <strong>20,400 pasajeros en una sola hora y en un solo sentido</strong> sin colapsar.</span>
+        <span class="en">Any chosen technological system must be able to move <strong>20,400 passengers in a single hour and direction</strong> without collapsing.</span>
+      </p>
+    </div>
+  </div>
+
+  <!-- ══ 3. LEY DE EQUIVALENCIA DE FLOTA ══ -->
+  <div class="section">
+    <div class="section-title">
+      <span class="badge badge-n1">N1/N2</span>
+      <span class="es">3 · Ley de equivalencia de flota y volumen útil</span>
+      <span class="en">3 · Fleet equivalence law and useful volume</span>
+    </div>
+    <p>
+      <span class="es">Dado que la flota máxima que puede circular simultáneamente está limitada por el ciclo físico de la vía y el headway real, la única variable para responder a un pico de demanda es la <strong>capacidad unitaria del material rodante</strong>.</span>
+      <span class="en">Since the maximum fleet that can run simultaneously is limited by the physical track cycle and real headway, the only variable to respond to a peak demand is the <strong>unit capacity of the rolling stock</strong>.</span>
+    </p>
+
+    <div class="grid-2" style="margin:16px 0;">
+      <div class="card accent-green">
+        <div class="card-title"><span class="es">Metro 6V (estándar)</span><span class="en">Metro 6V (standard)</span></div>
+        <div class="highlight green">1,200 pax</div>
+        <div class="metric"><span class="es">Capacidad por tren (6 vagones × 200 pax/vagón)</span><span class="en">Capacity per train (6 cars × 200 pax/car)</span></div>
+      </div>
+      <div class="card accent-red">
+        <div class="card-title"><span class="es">Monorriel (contratado)</span><span class="en">Monorail (contracted)</span></div>
+        <div class="highlight red">750 pax</div>
+        <div class="metric"><span class="es">Capacidad por tren (FITRAM/SYSTRA)</span><span class="en">Capacity per train (FITRAM/SYSTRA)</span></div>
+      </div>
+    </div>
+
+    <div class="box box-fact">
+      <div class="box-label">N1 · <span class="es">Ratio de capacidad</span><span class="en">Capacity ratio</span></div>
+      <p style="font-family:monospace; font-size:16px; color:var(--blue);">
+        1,200 / 750 = <strong>1.6</strong>
+      </p>
+      <p style="font-size:12px; color:var(--muted); margin-top:4px;">
+        <span class="es">El Metro ofrece un <strong>60% más de capacidad por tren</strong> que el Monorriel.</span>
+        <span class="en">The Metro offers <strong>60% more capacity per train</strong> than the Monorail.</span>
+      </p>
+    </div>
+
+    <p style="margin-top:16px;">
+      <span class="es">Resolviendo la ecuación de asignación de flota para cubrir la demanda crítica corregida (20,400 PPHPD):</span>
+      <span class="en">Solving the fleet allocation equation to cover the corrected critical demand (20,400 PPHPD):</span>
+    </p>
+
+    <div class="box box-inf" style="margin:12px 0; border-left-color:var(--green);">
+      <div class="box-label" style="color:var(--green);">N2 · <span class="es">Flota Metro requerida</span><span class="en">Required Metro fleet</span></div>
+      <p style="font-family:monospace; font-size:18px; color:var(--green); font-weight:700;">
+        20,400 / 1,200 = <strong>17 trenes</strong>
+      </p>
+      <p style="font-size:12px; color:var(--muted); margin-top:4px;">
+        <span class="es">Con 17 trenes de Metro, el sistema cubre la demanda crítica con <strong>margen de seguridad</strong>.</span>
+        <span class="en">With 17 Metro trains, the system covers critical demand with <strong>safety margin</strong>.</span>
+      </p>
+    </div>
+
+    <div class="box box-warn" style="margin:12px 0;">
+      <div class="box-label">N2 · <span class="es">Flota Monorriel requerida (para igualar resiliencia)</span><span class="en">Required Monorail fleet (to match resilience)</span></div>
+      <p style="font-family:monospace; font-size:18px; color:var(--red); font-weight:700;">
+        20,400 / 750 = <strong>27.2 trenes</strong>
+      </p>
+      <p style="font-size:12px; color:var(--muted); margin-top:4px;">
+        <span class="es">Para lograr la misma resiliencia, el Monorriel necesitaría <strong>27-28 trenes activos</strong> — físicamente imposible por las restricciones de headway real (170-220s).</span>
+        <span class="en">To achieve the same resilience, the Monorail would need <strong>27-28 active trains</strong> — physically impossible due to real headway constraints (170-220s).</span>
+      </p>
+    </div>
+  </div>
+
+  <!-- ══ 4. TABLA COMPARATIVA ══ -->
+  <div class="section">
+    <div class="section-title">
+      <span class="badge badge-n2">N2</span>
+      <span class="es">4 · Comparativa consolidada</span>
+      <span class="en">4 · Consolidated comparison</span>
+    </div>
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th><span class="es">Parámetro</span><span class="en">Parameter</span></th>
+            <th><span class="es">Metro 6V (17 trenes)</span><span class="en">Metro 6V (17 trains)</span></th>
+            <th><span class="es">Monorriel (17 trenes)</span><span class="en">Monorail (17 trains)</span></th>
+            <th><span class="es">Impacto</span><span class="en">Impact</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="es">Capacidad por tren</span><span class="en">Capacity per train</span></td>
+            <td class="num green">1,200 pax</td>
+            <td class="num red">750 pax</td>
+            <td><span class="es">Metro: <strong>+60%</strong> por tren</span><span class="en">Metro: <strong>+60%</strong> per train</span></td>
+          </tr>
+          <tr>
+            <td><span class="es">Capacidad máxima (80/20)</span><span class="en">Max capacity (80/20)</span></td>
+            <td class="num green">20,400 PPHPD</td>
+            <td class="num red">12,750 PPHPD</td>
+            <td><span class="es">Monorriel: <strong>-37.5%</strong> de capacidad</span><span class="en">Monorail: <strong>-37.5%</strong> capacity</span></td>
+          </tr>
+          <tr>
+            <td><span class="es">Margen ante eventos</span><span class="en">Event margin</span></td>
+            <td class="num green"><strong>30% disponible</strong></td>
+            <td class="num red"><strong>0% (saturación)</strong></td>
+            <td><span class="es">Monorriel colapsa ante cualquier evento pico</span><span class="en">Monorail collapses at any peak event</span></td>
+          </tr>
+          <tr>
+            <td><span class="es">Modo degradado (falla 1 tren)</span><span class="en">Degraded mode (1 train failure)</span></td>
+            <td class="num green">18,400 PPHPD (aún con margen)</td>
+            <td class="num red">12,000 PPHPD (por debajo de demanda base)</td>
+            <td><span class="es">Monorriel: colapsa ante cualquier falla</span><span class="en">Monorail: collapses at any failure</span></td>
+          </tr>
+          <tr>
+            <td><span class="es">Trenes necesarios para 20,400 PPHPD</span><span class="en">Trains needed for 20,400 PPHPD</span></td>
+            <td class="num green"><strong>17</strong></td>
+            <td class="num red"><strong>27.2</strong></td>
+            <td><span class="es">Monorriel requiere <strong>+60%</strong> más trenes</span><span class="en">Monorail requires <strong>+60%</strong> more trains</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ══ 5. CONCLUSIÓN FORENSE ══ -->
+  <div class="section">
+    <div class="section-title">
+      <span class="badge badge-n3">N3</span>
+      <span class="es">5 · Conclusión forense: el Monorriel nace sin reserva</span>
+      <span class="en">5 · Forensic conclusion: the Monorail launches without reserve</span>
+    </div>
+
+    <div class="box box-warn" style="border-left-color:var(--red);">
+      <div class="box-label" style="color:var(--red);">🔴 <span class="es">Dictamen técnico final</span><span class="en">Final technical verdict</span></div>
+      <p style="font-size:14px; font-weight:600; color:var(--text);">
+        <span class="es">El Estado diseñó y compró una cantidad de unidades (17 trenes) que numéricamente se corresponde con los estándares de una línea de alta capacidad.</span>
+        <span class="en">The State designed and purchased a number of units (17 trains) that numerically corresponds to the standards of a high-capacity line.</span>
+      </p>
+      <p style="font-size:14px; font-weight:600; color:var(--red); margin-top:8px;">
+        <span class="es">Sin embargo, al optar por la tecnología de Monorriel elevado en lugar de un Metro pesado tradicional, <strong>mutiló la capacidad física de transporte en un 37.5%</strong>.</span>
+        <span class="en">However, by choosing elevated Monorail technology over a traditional heavy Metro, it <strong>mutilated the physical transport capacity by 37.5%</strong>.</span>
+      </p>
+    </div>
+
+    <div class="box box-note" style="margin-top:16px;">
+      <div class="box-label">N3 · <span class="es">Inferencia</span><span class="en">Inference</span></div>
+      <p>
+        <span class="es">El Monorriel de Santo Domingo <strong>nace sin reserva operativa</strong>. Está condenado a la saturación crónica, al desborde de andenes y al traspaso inmediato del déficit financiero hacia subsidios estatales crónicos.</span>
+        <span class="en">The Santo Domingo Monorail <strong>launches without operational reserve</strong>. It is condemned to chronic saturation, platform overflow, and the immediate transfer of financial deficit to chronic state subsidies.</span>
+      </p>
+    </div>
+
+    <div style="font-size:12px; color:var(--muted); margin-top:16px;">
+      <span class="badge badge-n1">N1</span> <span class="es">Datos verificados: flota 17 trenes · capacidad 750 pax/tren (FITRAM) · capacidad Metro 1,200 pax (estándar internacional)</span><span class="en">Verified data: fleet 17 trains · capacity 750 pax/train (FITRAM) · Metro capacity 1,200 pax (international standard)</span><br>
+      <span class="badge badge-n2">N2</span> <span class="es">Modelo de resiliencia: factor 1.6 · demanda crítica 20,400 PPHPD · equivalencia de flota</span><span class="en">Resilience model: factor 1.6 · critical demand 20,400 PPHPD · fleet equivalence</span><br>
+      <span class="badge badge-n3">N3</span> <span class="es">Inferencia: el Monorriel no tiene margen de seguridad — es frágil por diseño</span><span class="en">Inference: the Monorail has no safety margin — it is fragile by design</span>
+    </div>
+  </div>
+
+  <!-- ══ GRÁFICO ── -->
+  <div class="section">
+    <div class="section-title">📊 <span class="es">Visualización comparativa</span><span class="en">Comparative visualization</span></div>
+    <div class="chart-box">
+      <h4><span class="es">Capacidad ante demanda crítica (20,400 PPHPD)</span><span class="en">Capacity vs. critical demand (20,400 PPHPD)</span></h4>
+      <canvas id="chartResiliencia" height="200"></canvas>
+      <div style="font-size:11px; color:var(--muted); margin-top:10px; padding:8px 12px; background:var(--navy); border-radius:4px;">
+        <span style="display:inline-block; width:10px; height:10px; background:#22c55e; border-radius:2px; margin-right:4px;"></span> <span class="es">Demanda crítica (20,400 PPHPD)</span><span class="en">Critical demand (20,400 PPHPD)</span> &nbsp;
+        <span style="display:inline-block; width:10px; height:10px; background:#3b82f6; border-radius:2px; margin-right:4px;"></span> <span class="es">Metro 6V (17 trenes)</span><span class="en">Metro 6V (17 trains)</span> &nbsp;
+        <span style="display:inline-block; width:10px; height:10px; background:#e05252; border-radius:2px; margin-right:4px;"></span> <span class="es">Monorriel (17 trenes)</span><span class="en">Monorail (17 trains)</span> &nbsp;
+        <span style="display:inline-block; width:10px; height:10px; background:#d4890a; border-radius:2px; margin-right:4px;"></span> <span class="es">Monorriel necesario (27.2 trenes)</span><span class="en">Monorail needed (27.2 trains)</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ LA PREGUNTA ══ -->
+  <div class="question-box">
+    <div class="q-label"><span class="es">La pregunta que el expediente no responde</span><span class="en">The question the file does not answer</span></div>
+    <blockquote>
+      <span class="es">«El Estado compró 17 trenes, una cantidad numéricamente correcta para una línea de alta capacidad. ¿Por qué eligió una tecnología que reduce la capacidad por tren en un 37.5% y elimina todo el margen de seguridad?»</span>
+      <span class="en">«The State purchased 17 trains, a numerically correct quantity for a high-capacity line. Why did it choose a technology that reduces capacity per train by 37.5% and eliminates all safety margin?»</span>
+    </blockquote>
+    <p style="font-size:13px; color:rgba(255,255,255,.6); margin-top:14px; font-style:italic;">
+      <span class="es">La respuesta no se encuentra en los documentos examinados.</span>
+      <span class="en">The answer is not found in the examined documents.</span>
+    </p>
+  </div>
+
+  <!-- ══ FOOTER ══ -->
+  <div class="doc-footer">
+    <div>
+      <span class="author">Ing. Piter J. Bonilla D.</span> · CODIA #17378 · <span class="es">Análisis Técnico Independiente</span><span class="en">Independent Technical Analysis</span><br>
+      <span style="font-size:11px;"><span class="es">Documento complementario al ecosistema</span><span class="en">Supplementary document to the ecosystem</span> <a href="https://visualcrp.com/embudo.html" target="_blank">visualcrp.com/embudo.html</a></span>
+    </div>
+    <div>
+      <a href="https://visualcrp.com/L15Prata.html" target="_blank">📄 L15Prata</a>
+      &nbsp;·&nbsp;
+      <a href="https://visualcrp.com/embudo.html" target="_blank">🌐 Dashboard</a>
+      &nbsp;·&nbsp;
+      <a href="https://visualcrp.com/AUDIT.html" target="_blank">⚖️ <span class="es">Auditoría</span><span class="en">Audit</span></a>
+    </div>
+  </div>
+
+</div>
+
+<script>
+/* ── LANG ── */
+function setLang(lang) {
+  const h = document.getElementById('html-root');
+  h.setAttribute('lang', lang);
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+  const btn = document.getElementById('top-lang-' + lang);
+  if (btn) btn.classList.add('active');
+  localStorage.setItem('resiliencia-lang', lang);
+}
+
+/* ── THEME ── */
+function toggleTheme() {
+  const h = document.getElementById('html-root');
+  h.classList.toggle('light'); h.classList.toggle('dark');
+  const isLight = h.classList.contains('light');
+  localStorage.setItem('resiliencia-theme', isLight ? 'light' : 'dark');
+  const btn = document.getElementById('theme-btn');
+  const lang = h.getAttribute('lang') || 'es';
+  if (btn) btn.innerHTML = isLight
+    ? (lang === 'es' ? '<span class="es">🌙 Oscuro</span><span class="en" style="display:none">🌙 Dark</span>' : '<span class="es" style="display:none">🌙 Oscuro</span><span class="en">🌙 Dark</span>')
+    : (lang === 'es' ? '<span class="es">☀︎ Claro</span><span class="en" style="display:none">☀︎ Light</span>' : '<span class="es" style="display:none">☀︎ Claro</span><span class="en">☀︎ Light</span>');
+}
+
+/* ── INIT ── */
+(function() {
+  const savedTheme = localStorage.getItem('resiliencia-theme');
+  const savedLang  = localStorage.getItem('resiliencia-lang');
+  const h = document.getElementById('html-root');
+  if (savedTheme === 'light') { h.classList.add('light'); h.classList.remove('dark'); }
+  if (savedLang) setLang(savedLang);
+})();
+
+/* ── CHART ── */
+document.addEventListener('DOMContentLoaded', function() {
+  const ctx = document.getElementById('chartResiliencia').getContext('2d');
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Demanda crítica', 'Metro 6V (17)', 'Monorriel (17)', 'Monorriel necesario'],
+      datasets: [{
+        data: [20400, 20400, 12750, 20400],
+        backgroundColor: ['#d4890a', '#22c55e', '#e05252', '#d4890a'],
+        borderRadius: 4
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { display: false },
+        tooltip: { callbacks: { label: c => c.raw.toLocaleString() + ' PPHPD' } }
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          ticks: { callback: v => (v/1000).toFixed(0)+'k', color: '#8898b8' },
+          grid: { color: 'rgba(200,216,240,.06)' }
+        },
+        x: { ticks: { color: '#8898b8' }, grid: { display: false } }
+      }
+    }
+  });
+});
+</script>
+</body>
+</html>
