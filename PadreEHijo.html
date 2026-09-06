@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="es" id="html-root" class="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Padre e Hijo · La Conexión SP → SD → Panamá · El Embudo</title>
+<style>
+:root {
+  --navy:#0f1f3d;--navy2:#1a3260;--fog:#1a2740;--page:#070e1c;--white:#0d1830;
+  --red:#e05252;--red-lt:rgba(224,82,82,.15);--amber:#d4890a;--amber-lt:rgba(212,137,10,.15);
+  --green:#22c55e;--green-lt:rgba(34,197,94,.12);--blue:#3b82f6;--blue-lt:rgba(59,130,246,.12);
+  --accent:#e85d26;--rule:rgba(200,216,240,.1);--text:#c8d8f0;--muted:#8898b8;
+}
+html.light {
+  --navy:#1a3260;--fog:#e8edf5;--page:#f4f6fa;--white:#ffffff;--rule:#cbd5e1;
+  --text:#1e293b;--muted:#475569;--red:#b91c1c;--accent:#9a3412;--amber:#b45309;
+  --green:#166534;--blue:#1d4ed8;
+  --red-lt:rgba(185,28,28,.08);--amber-lt:rgba(180,83,9,.08);
+  --green-lt:rgba(22,101,52,.08);--blue-lt:rgba(29,78,216,.08);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--page);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;font-size:14px;line-height:1.6;padding-top:56px;}
+header.topbar{position:fixed;top:0;left:0;right:0;z-index:200;height:52px;background:rgba(7,14,28,.97);border-bottom:1px solid var(--rule);display:flex;align-items:center;justify-content:space-between;padding:0 20px;backdrop-filter:blur(8px);}
+html.light header.topbar{background:rgba(26,50,96,.97);}
+.tb-brand{font-size:11px;font-weight:700;color:rgba(255,255,255,.7);letter-spacing:.08em;text-transform:uppercase;}
+.tb-brand span{color:var(--accent);}
+.tb-right{display:flex;align-items:center;gap:8px;}
+.lang-toggle{display:flex;gap:2px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:20px;padding:2px;}
+.lang-btn{background:transparent;border:none;color:rgba(255,255,255,.5);font-size:11px;font-weight:700;padding:3px 10px;border-radius:18px;cursor:pointer;letter-spacing:.04em;transition:all .15s;}
+.lang-btn.active{background:var(--accent);color:#fff;}
+.btn-ctrl{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:20px;color:rgba(255,255,255,.7);font-size:11px;font-weight:600;padding:4px 14px;cursor:pointer;transition:all .15s;}
+.btn-ctrl:hover{background:rgba(255,255,255,.15);color:#fff;}
+.en{display:none;}
+html[lang="en"] .es{display:none;}
+html[lang="en"] .en{display:inline;}
+.en-block{display:none;}
+html[lang="en"] .es-block{display:none;}
+html[lang="en"] .en-block{display:block;}
+.container{max-width:860px;margin:24px auto 40px;background:var(--white);border:1px solid var(--rule);border-radius:12px;padding:40px 44px 50px;box-shadow:0 12px 40px rgba(0,0,0,.4);}
+@media(max-width:600px){.container{padding:20px;margin-top:12px;}}
+.doc-header{border-bottom:2px solid var(--accent);padding-bottom:24px;margin-bottom:28px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:12px;}
+.doc-header .brand{font-size:11px;font-weight:700;color:var(--accent);letter-spacing:.12em;text-transform:uppercase;}
+.doc-header h1{font-size:24px;font-weight:700;color:var(--text);line-height:1.2;margin-top:4px;}
+.doc-header .sub{font-size:13px;color:var(--muted);margin-top:4px;}
+.doc-header .meta{font-size:12px;color:var(--muted);text-align:right;white-space:nowrap;}
+.doc-header .meta strong{color:var(--text);}
+@media(max-width:600px){.doc-header{flex-direction:column;}.doc-header .meta{text-align:left;white-space:normal;}}
+.badge{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:2px 10px;border-radius:20px;margin-right:4px;}
+.badge-n1{background:var(--green-lt);color:var(--green);}
+.badge-n2{background:var(--blue-lt);color:var(--blue);}
+.badge-n3{background:var(--amber-lt);color:var(--amber);}
+.badge-accent{background:var(--accent);color:#fff;}
+.section{margin-top:36px;border-top:1px solid var(--rule);padding-top:28px;}
+.section-title{font-size:17px;font-weight:700;color:var(--text);margin-bottom:14px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+.section-title small{font-size:13px;font-weight:400;color:var(--muted);}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:16px 0;}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin:16px 0;}
+@media(max-width:600px){.grid-2,.grid-3{grid-template-columns:1fr;}}
+.card{background:var(--fog);border:1px solid var(--rule);border-radius:8px;padding:18px 20px;}
+.card.accent-green{border-left:3px solid var(--green);}
+.card.accent-red{border-left:3px solid var(--red);}
+.card.accent-amber{border-left:3px solid var(--amber);}
+.card.accent-blue{border-left:3px solid var(--blue);}
+.card-title{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;}
+.card .highlight{font-size:28px;font-weight:700;color:var(--text);line-height:1.1;}
+.card .highlight.green{color:var(--green);}
+.card .highlight.red{color:var(--red);}
+.card .highlight.amber{color:var(--amber);}
+.card .metric{font-size:12.5px;color:var(--muted);margin-top:4px;}
+.card .metric strong{color:var(--text);}
+.box{border-radius:6px;padding:14px 18px;margin:16px 0;font-size:13.5px;}
+.box-fact{background:var(--green-lt);border-left:3px solid var(--green);}
+.box-warn{background:var(--red-lt);border-left:3px solid var(--red);}
+.box-note{background:var(--blue-lt);border-left:3px solid var(--blue);}
+.box-inf{background:var(--amber-lt);border-left:3px solid var(--amber);}
+.box-label{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px;color:var(--muted);}
+.tbl-wrap{overflow-x:auto;margin:16px 0;}
+table{width:100%;border-collapse:collapse;font-size:13px;}
+thead th{background:var(--navy);color:rgba(255,255,255,.75);font-weight:600;font-size:11px;letter-spacing:.05em;text-transform:uppercase;padding:8px 12px;text-align:left;border-bottom:2px solid var(--accent);}
+html.light thead th{color:rgba(255,255,255,.85);}
+tbody td{padding:8px 12px;border-bottom:1px solid var(--rule);color:var(--text);vertical-align:top;}
+.num{font-family:'Courier New',monospace;font-weight:700;}
+.num.green{color:var(--green);}
+.num.red{color:var(--red);}
+.num.amber{color:var(--amber);}
+.chain{background:var(--fog);border:1px solid var(--rule);border-radius:8px;padding:20px 24px;margin:16px 0;font-family:'Courier New',monospace;font-size:13px;line-height:2;}
+.chain-step{display:flex;align-items:center;gap:12px;padding:4px 0;border-bottom:1px solid var(--rule);}
+.chain-step:last-child{border-bottom:none;}
+.chain-op{color:var(--muted);width:24px;text-align:center;font-size:16px;}
+.chain-val{font-weight:700;color:var(--text);min-width:100px;}
+.chain-val.green{color:var(--green);}
+.chain-val.red{color:var(--red);}
+.chain-val.amber{color:var(--amber);}
+.chain-label{font-size:11px;color:var(--muted);font-family:'Segoe UI',sans-serif;}
+.convergence{display:grid;grid-template-columns:1fr auto 1fr;gap:16px;align-items:center;margin:24px 0;}
+@media(max-width:600px){.convergence{grid-template-columns:1fr;}}
+.conv-center{text-align:center;font-size:13px;color:var(--muted);}
+.conv-arrow{font-size:24px;color:var(--accent);}
+.question-box{background:var(--navy);border:1px solid var(--rule);border-radius:8px;padding:24px 28px;text-align:center;margin:28px 0 12px;}
+.question-box .q-label{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:10px;}
+.question-box blockquote{font-size:15px;font-style:italic;line-height:1.65;color:#fff;max-width:680px;margin:0 auto;}
+.doc-footer{margin-top:40px;padding-top:18px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:12px;color:var(--muted);}
+.doc-footer a{color:var(--blue);text-decoration:none;}
+.doc-footer a:hover{text-decoration:underline;}
+.doc-footer .author{font-weight:700;color:var(--text);}
+.note-meth{font-size:12px;color:var(--muted);padding:12px 16px;background:var(--fog);border-left:3px solid var(--amber);border-radius:0 6px 6px 0;margin-top:20px;}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="tb-brand"><span>El Embudo</span> · <span class="es">Análisis Técnico Independiente</span><span class="en">Independent Technical Analysis</span></div>
+  <div class="tb-right">
+    <div class="lang-toggle">
+      <button class="lang-btn active" onclick="setLang('es')" id="top-lang-es">ES</button>
+      <button class="lang-btn" onclick="setLang('en')" id="top-lang-en">EN</button>
+    </div>
+    <button class="btn-ctrl" onclick="toggleTheme()" id="theme-btn">
+      <span class="es">☀︎ Claro</span><span class="en">☀︎ Light</span>
+    </button>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- HEADER -->
+  <div class="doc-header">
+    <div>
+      <div class="brand">El Embudo · <span class="es">Análisis Técnico Independiente</span><span class="en">Independent Technical Analysis</span></div>
+      <h1 class="es">São Paulo y Santo Domingo · Padre e Hijo</h1>
+      <h1 class="en">São Paulo and Santo Domingo · Father and Son</h1>
+      <div class="sub es">La conexión matemática L15 SP → SD y la doble ingeniería inversa convergente con Panamá L3</div>
+      <div class="sub en">The mathematical connection L15 SP → SD and the double convergent reverse engineering with Panama L3</div>
+    </div>
+    <div class="meta">
+      <div><strong>Ing. Piter J. Bonilla D.</strong></div>
+      <div>CODIA #17378</div>
+      <div>5 de septiembre de 2026</div>
+    </div>
+  </div>
+
+
+  <!-- SECTION 0: EL VÍNCULO FÍSICO -->
+  <div class="section">
+    <div class="section-title">
+      <span class="es">⓪ El vínculo físico — misma tecnología, distinta densidad</span>
+      <span class="en">⓪ The physical link — same technology, different density</span>
+    </div>
+
+    <p class="es" style="color:var(--muted);margin-bottom:16px;">Los tres sistemas comparten tecnología GoA4 (conducción automática sin conductor). La diferencia no está en el software ni en la longitud del tren — está en la densidad de diseño por vagón.</p>
+    <p class="en" style="color:var(--muted);margin-bottom:16px;">All three systems share GoA4 technology (driverless automatic operation). The difference is not in the software or train length — it is in the design density per car.</p>
+
+    <div class="grid-3">
+      <div class="card accent-green">
+        <div class="card-title">L15 SP · N1</div>
+        <div class="highlight green">1,002</div>
+        <div class="metric">pax/tren · 7 vagones</div>
+        <div class="metric" style="margin-top:8px;">GoA4 · Alstom/Bombardier Innovia 300</div>
+        <div class="metric" style="margin-top:4px;"><strong>Referencia: 1.00×</strong></div>
+      </div>
+      <div class="card accent-green">
+        <div class="card-title">Panamá L3 · N1</div>
+        <div class="highlight green">~1,000</div>
+        <div class="metric">pax/tren · 6 vagones</div>
+        <div class="metric" style="margin-top:8px;">GoA4 · Hitachi Rail</div>
+        <div class="metric" style="margin-top:4px;"><strong>Ratio: ≈ 1.00× SP</strong></div>
+      </div>
+      <div class="card accent-red">
+        <div class="card-title">Santo Domingo · N2</div>
+        <div class="highlight red">750</div>
+        <div class="metric">pax/tren · 6 vagones</div>
+        <div class="metric" style="margin-top:8px;">GoA4 · SNIP 17248 / FITRAM</div>
+        <div class="metric" style="margin-top:4px;"><strong style="color:var(--red);">Ratio: 0.75× SP y Panamá</strong></div>
+      </div>
+    </div>
+
+    <div class="box box-warn">
+      <div class="box-label es">Implicación directa</div>
+      <div class="box-label en">Direct implication</div>
+      <span class="es">L15 SP tiene 7 vagones (1,002 pax/tren) y Panamá L3 tiene 6 vagones (~1,000 pax/tren) — capacidades unitarias prácticamente idénticas. SD elige también 6 vagones pero con especificación de 750 pax/tren: el <strong>75% de la capacidad de un convoy de 6 vagones en Panamá</strong>. La diferencia no es la longitud del tren: es la densidad de diseño. Con la misma flota de 17 trenes, un Metro convencional de 6 vagones movería <strong>1,200 pax/tren</strong> — el 1.6× que el ecosistema documenta.</span>
+      <span class="en">L15 SP has 7 cars (1,002 pax/train) and Panama L3 has 6 cars (~1,000 pax/train) — virtually identical unit capacities. SD also chooses 6 cars but with a specification of 750 pax/train: <strong>75% of the capacity of a 6-car convoy in Panama</strong>. The difference is not train length: it is design density. With the same fleet of 17 trains, a conventional 6-car Metro would move <strong>1,200 pax/train</strong> — the 1.6× the ecosystem documents.</span>
+    </div>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th class="es">Sistema</th>
+            <th class="es">Tecnología</th>
+            <th class="es">Vagones</th>
+            <th class="es">Pax/tren</th>
+            <th class="es">Ratio vs. SP</th>
+            <th class="es">Nivel</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>L15 SP</strong></td>
+            <td>Alstom/Bombardier Innovia 300</td>
+            <td class="num">7</td>
+            <td class="num green">1,002</td>
+            <td class="num green">1.00×</td>
+            <td><span class="badge badge-n1">N1</span></td>
+          </tr>
+          <tr>
+            <td><strong>Panamá L3</strong></td>
+            <td>Hitachi Rail</td>
+            <td class="num">6</td>
+            <td class="num green">~1,000</td>
+            <td class="num green">≈ 1.00×</td>
+            <td><span class="badge badge-n1">N1</span></td>
+          </tr>
+          <tr>
+            <td><strong>Santo Domingo</strong></td>
+            <td>GoA4 · SNIP 17248</td>
+            <td class="num">6</td>
+            <td class="num red">750</td>
+            <td class="num red">0.75×</td>
+            <td><span class="badge badge-n2">N2</span></td>
+          </tr>
+          <tr>
+            <td><strong>Metro convencional 6V</strong></td>
+            <td>Referencia SD</td>
+            <td class="num">6</td>
+            <td class="num amber">1,200</td>
+            <td class="num amber">1.60×</td>
+            <td><span class="badge badge-n2">N2</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="box box-note">
+      <div class="box-label es">El vínculo entre los tres sistemas</div>
+      <div class="box-label en">The link between the three systems</div>
+      <span class="es">SP y Panamá comparten capacidad por tren (~1,000 pax) con GoA4 en corredores con flujo pendular pronunciado. Sus sistemas convergen en ~160,000 (Panamá) y ~163,000 (SP) pax/día porque parten de parámetros similares de capacidad unitaria. SD elige la misma cantidad de vagones (6) pero con 25% menos capacidad — SD adopta como parámetro nominal 90s, mientras que L15 SP ha reportado un intervalo mínimo histórico de 170s en operación.</span>
+      <span class="en"><strong>L15 SP and SD promised from ideal 50/50 flow and minimum 90s headway</strong> — maximizing the sales figure. Panama promised from real 90/10 flow and achievable 225s headway. Result: L15 SP actually operates at ~163,000 pax/day under 90/10 flow and 170s headway — exactly what Panama projects from day one with honest design. The father's saturation is the son's design target.</span>
+    </div>
+  </div>
+
+  <!-- SECTION 1: LA PROMESA Y SU ESPEJO -->
+  <div class="section">
+    <div class="section-title">
+      <span class="es">① La promesa y su espejo</span>
+      <span class="en">① The promise and its mirror</span>
+      <span class="badge badge-n2">N2</span>
+    </div>
+
+    <div class="tbl-wrap" style="margin-bottom:20px;">
+      <table>
+        <thead>
+          <tr>
+            <th class="es">Sistema</th>
+            <th class="es">Promesa de venta</th>
+            <th class="es">Flujo diseño</th>
+            <th class="es">Headway prometido</th>
+            <th class="es">Realidad operacional</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>L15 SP</strong></td>
+            <td><span class="num amber">550,000</span> pax/día</td>
+            <td>50/50 <span style="color:var(--muted);font-size:11px;">(ideal)</span></td>
+            <td><span class="num red">90 s</span></td>
+            <td><span class="num red">163,000</span> <span style="color:var(--muted);font-size:11px;">· 90/10 real · 170s récord · N1</span></td>
+          </tr>
+          <tr>
+            <td><strong>SD SNIP 17248</strong></td>
+            <td><span class="num amber">306,000</span> pax/día</td>
+            <td>50/50 <span style="color:var(--muted);font-size:11px;">(ideal)</span></td>
+            <td><span class="num red">90 s</span></td>
+            <td><span class="num red">~90,000</span> <span style="color:var(--muted);font-size:11px;">· escenario N3 por analogía con L15 SP — no predicción operacional</span></td>
+          </tr>
+          <tr>
+            <td><strong>Panamá L3</strong></td>
+            <td><span class="num green">160,000</span> pax/día</td>
+            <td><strong style="color:var(--green);">90/10</strong> <span style="color:var(--muted);font-size:11px;">(real incorporado)</span></td>
+            <td><span class="num green">225 s</span> <span style="color:var(--muted);font-size:11px;">(&lt;4 min fase 1)</span></td>
+            <td><span class="num green">~160,000</span> <span style="color:var(--muted);font-size:11px;">· proyección oficial N1 — no dato operacional verificado</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="es" style="color:var(--muted);margin-bottom:16px;">Los 306,000 pax/día de Santo Domingo no son una capacidad operacional observada. Se derivan de una formulación de dimensionamiento bajo hipótesis de flujo simétrico 50/50:</p>
+    <p class="en" style="color:var(--muted);margin-bottom:16px;">Santo Domingo's 306,000 pax/day is not an observed operational capacity. It derives from a dimensioning formula under the hypothesis of symmetric 50/50 flow:</p>
+
+    <div class="chain">
+      <div class="chain-step">
+        <span class="chain-val amber">( 17 × 750 × 4 × 2 / 0.30 ) × 0.90</span>
+        <span class="chain-label">=</span>
+        <span class="chain-val green">306,000 pax/día</span>
+      </div>
+    </div>
+
+    <div class="grid-3">
+      <div class="card">
+        <div class="card-title">17 trenes</div>
+        <div class="highlight amber">Flota</div>
+        <div class="metric">SNIP 17248</div>
+      </div>
+      <div class="card">
+        <div class="card-title">750 pax/tren</div>
+        <div class="highlight amber">Capacidad</div>
+        <div class="metric">6 vagones · Monorriel SD</div>
+      </div>
+      <div class="card">
+        <div class="card-title">0.30 factor punta</div>
+        <div class="highlight amber">Sin margen</div>
+        <div class="metric">Extrae el máximo teórico</div>
+      </div>
+    </div>
+
+    <div class="box box-warn">
+      <div class="box-label es">Nota metodológica</div>
+      <div class="box-label en">Methodological note</div>
+      <span class="es">La fórmula es una <strong>reconstrucción matemática del autor</strong> que reproduce 306,000. Los 17 trenes son unidades de flota, no frecuencia en trenes/hora. La cifra debe conservarse como demanda de referencia del expediente, no como capacidad operacional demostrada.</span>
+      <span class="en">The formula is an <strong>author's mathematical reconstruction</strong> that reproduces 306,000. The 17 trains are fleet units, not frequency in trains/hour. The figure should be retained as the file's reference demand, not as demonstrated operational capacity.</span>
+    </div>
+  </div>
+
+  <!-- SECTION 2: LA CONEXIÓN PADRE-HIJO -->
+  <div class="section">
+    <div class="section-title">
+      <span class="es">② La conexión matemática L15 SP → SD</span>
+      <span class="en">② The mathematical connection L15 SP → SD</span>
+      <span class="badge badge-n2">N2</span>
+    </div>
+
+    <p class="es" style="color:var(--muted);margin-bottom:16px;">Construyendo un headway equivalente a partir de la relación entre el resultado observado en L15 SP y la demanda de referencia de SD:</p>
+    <p class="en" style="color:var(--muted);margin-bottom:16px;">Building an equivalent headway from the ratio between the observed result in L15 SP and SD's reference demand:</p>
+
+    <div class="chain">
+      <div class="chain-step">
+        <span class="chain-op">&nbsp;</span>
+        <span class="chain-val">90 / (163,000 / 306,000)</span>
+        <span class="chain-label">&nbsp;=&nbsp;</span>
+        <span class="chain-val red">168.96 s ≈ 170 s</span>
+      </div>
+    </div>
+
+    <div class="box box-note">
+      <div class="box-label es">¿Qué significa esto?</div>
+      <div class="box-label en">What does this mean?</div>
+      <span class="es">Este resultado es una <strong>métrica comparativa construida</strong>: el headway equivalente que resultaría si SD replicara la relación de rendimiento observada en L15 SP. No representa un headway físico calculado a partir de la capacidad ferroviaria — es un índice de comparación metodológica.</span>
+      <span class="en">This result is a <strong>constructed comparative metric</strong>: the equivalent headway that would result if SD replicated L15 SP's observed performance ratio. It does not represent a physically calculated headway from rail capacity — it is a methodological comparison index.</span>
+    </div>
+
+    <div class="grid-2" style="margin-top:20px;">
+      <div class="card accent-red">
+        <div class="card-title es">Cadena de rendimiento</div>
+        <div class="card-title en">Performance chain</div>
+        <div style="font-size:13px;line-height:2;font-family:'Courier New',monospace;">
+          90 s → promesa<br>
+          163,000 → observado SP<br>
+          306,000 → derivado SD<br>
+          <strong style="color:var(--red);">168.96 s ≈ 170 s</strong>
+        </div>
+      </div>
+      <div class="card accent-amber">
+        <div class="card-title es">La herencia operacional</div>
+        <div class="card-title en">Operational inheritance</div>
+        <div style="font-size:13px;line-height:2;font-family:'Courier New',monospace;">
+          306,000 pax/día<br>
+          ÷ 3.4 (índice derivado SP)<br>
+          <strong style="color:var(--amber);">≈ 90,000 pax/día</strong>
+        </div>
+        <div class="metric es" style="margin-top:8px;">El hijo hereda la misma brecha operacional del padre</div>
+        <div class="metric en" style="margin-top:8px;">The son inherits the same operational gap from the father</div>
+      </div>
+    </div>
+
+    <div class="box box-inf" style="margin-top:8px;">
+      <div class="box-label es">Nota sobre el factor 3.4</div>
+      <div class="box-label en">Note on factor 3.4</div>
+      <span class="es">El factor 3.4 es un <strong>índice compuesto de exigencia operacional derivado del benchmark de SP</strong> — no una ley física universal. Su estructura: F_H = 170/90 = 1.89 × F_D = 90/50 = 1.80. Los dos factores tienen correlación parcial. Ver <a href="https://visualcrp.com/pendular9010.html">visualcrp.com/pendular9010.html</a>.</span>
+      <span class="en">Factor 3.4 is a <strong>composite operational demand index derived from the SP benchmark</strong> — not a universal physical law. Its structure: F_H = 170/90 = 1.89 × F_D = 90/50 = 1.80. The two factors have partial correlation. See <a href="https://visualcrp.com/pendular9010.html">visualcrp.com/pendular9010.html</a>.</span>
+    </div>
+  </div>
+
+  <!-- SECTION 3: DOBLE INGENIERÍA INVERSA -->
+  <div class="section">
+    <div class="section-title">
+      <span class="es">③ Doble ingeniería inversa convergente</span>
+      <span class="en">③ Double convergent reverse engineering</span>
+    </div>
+
+    <p class="es" style="color:var(--muted);margin-bottom:20px;">Dos cadenas de ingeniería inversa independientes — una desde SP hacia abajo, otra desde Panamá hacia arriba — convergen en órdenes de magnitud compatibles con datos verificados.</p>
+    <p class="en" style="color:var(--muted);margin-bottom:20px;">Two independent reverse engineering chains — one from SP downward, another from Panama upward — converge on orders of magnitude compatible with verified data.</p>
+
+    <div class="grid-2">
+      <!-- SP chain -->
+      <div>
+        <div style="font-size:12px;font-weight:700;color:var(--red);letter-spacing:.08em;text-transform:uppercase;margin-bottom:12px;">
+          <span class="es">① L15 SP ↓ · observado N1 (récord · andenes saturados Vila Prudente)</span>
+          <span class="en">① L15 SP ↓ · observed N1 (record · saturated platforms Vila Prudente)</span>
+          <span class="badge badge-n1" style="margin-left:6px;">N1</span>
+        </div>
+        <div class="chain">
+          <div class="chain-step">
+            <span class="chain-op">&nbsp;</span>
+            <span class="chain-val amber">550,000</span>
+            <span class="chain-label es">Capacidad de diseño <span style="color:var(--muted);">(venta política · flujo 50/50 · 90s)</span></span>
+            <span class="chain-label en">Design capacity <span style="color:var(--muted);">(political sale · 50/50 flow · 90s)</span></span>
+          </div>
+          <div class="chain-step">
+            <span class="chain-op">÷</span>
+            <span class="chain-val red">3.40</span>
+            <span class="chain-label es">Índice compuesto SP <span style="color:var(--muted);">(convierte venta en realidad récord operativo)</span></span>
+            <span class="chain-label en">SP composite index <span style="color:var(--muted);">(converts sale to operational record reality)</span></span>
+          </div>
+          <div class="chain-step">
+            <span class="chain-op">=</span>
+            <span class="chain-val green">≈ 161,765</span>
+            <span class="chain-label es">↔ <strong>163,000 observado ✓</strong> <span style="color:var(--muted);">(realidad operativa récord · 170s)</span></span>
+            <span class="chain-label en">↔ <strong>163,000 observed ✓</strong> <span style="color:var(--muted);">(operational record reality · 170s)</span></span>
+          </div>
+        </div>
+        <div class="box box-inf" style="font-size:12px;">
+          <span class="es">Coherencia de orden de magnitud con el dato N1 verificado — no predicción exacta, ya que el tramo operativo actual es parcial respecto al proyecto completo.</span>
+          <span class="en">Order-of-magnitude coherence with the verified N1 figure — not an exact prediction, as the current operating section is partial relative to the full project.</span>
+        </div>
+      </div>
+
+      <!-- Panama chain -->
+      <div>
+        <div style="font-size:12px;font-weight:700;color:var(--green);letter-spacing:.08em;text-transform:uppercase;margin-bottom:12px;">
+          <span class="es">② Panamá → desde la realidad al diseño</span>
+          <span class="en">② Panama → from reality to design</span>
+          <span class="badge badge-n1" style="margin-left:6px;">N1→N1</span>
+        </div>
+        <div class="chain">
+          <div class="chain-step">
+            <span class="chain-op">&nbsp;</span>
+            <span class="chain-val green">10,200</span>
+            <span class="chain-label es">PHPD real documentado <span class="badge badge-n1" style="font-size:9px;">N1</span></span>
+            <span class="chain-label en">Documented actual PHPD <span class="badge badge-n1" style="font-size:9px;">N1</span></span>
+          </div>
+          <div class="chain-step">
+            <span class="chain-op">÷</span>
+            <span class="chain-val">0.80</span>
+            <span class="chain-label es">Carga de diseño 80% <span class="badge badge-n2" style="font-size:9px;">N2</span></span>
+            <span class="chain-label en">80% design load</span>
+          </div>
+          <div class="chain-step">
+            <span class="chain-op">=</span>
+            <span class="chain-val">12,750</span>
+            <span class="chain-label es">PHPD diseño · base 50/50</span>
+            <span class="chain-label en">Design PHPD · 50/50 base</span>
+          </div>
+          <div class="chain-step">
+            <span class="chain-op">×</span>
+            <span class="chain-val">1.80</span>
+            <span class="chain-label es">Factor pendular 90/10 · <strong>hipótesis de reconstrucción</strong> <span class="badge badge-n3" style="font-size:9px;">N3 hipótesis</span><br><span style="font-size:10px;color:var(--muted);">JICA documenta demanda diferenciada por secciones; 90/10 es hipótesis del análisis</span></span>
+            <span class="chain-label en">Pendular factor (90/10 base)</span>
+          </div>
+          <div class="chain-step">
+            <span class="chain-op">=</span>
+            <span class="chain-val red">22,950</span>
+            <span class="chain-label es">Exigencia crítica · flujo real 90/10</span>
+            <span class="chain-label en">Critical demand · actual 90/10 flow</span>
+          </div>
+          <div class="chain-step">
+            <span class="chain-op">÷</span>
+            <span class="chain-val">1,000</span>
+            <span class="chain-label es">Pax/tren Hitachi</span>
+            <span class="chain-label en">Hitachi pax/train</span>
+          </div>
+          <div class="chain-step">
+            <span class="chain-op">=</span>
+            <span class="chain-val">~23</span>
+            <span class="chain-label es">Trenes operación</span>
+            <span class="chain-label en">Operating trains</span>
+          </div>
+          <div class="chain-step">
+            <span class="chain-op">+3</span>
+            <span class="chain-val">reserva JICA</span>
+            <span class="chain-label">&nbsp;</span>
+          </div>
+          <div class="chain-step">
+            <span class="chain-op">=</span>
+            <span class="chain-val green">26 trenes ✓</span>
+            <span class="chain-label es">Flota verificada <span class="badge badge-n1" style="font-size:9px;">N1</span></span>
+            <span class="chain-label en">Verified fleet</span>
+          </div>
+        </div>
+        <div class="box box-fact" style="font-size:12px;">
+          <span class="es"><strong>La verdadera convergencia documental</strong> es: 23 trenes de operación + 3 de reserva = <strong>26 trenes ✓ N1</strong> (Metro de Panamá). Los 23 son trensets de flota — <strong>no 23 tph</strong>. La expresión (23 × 1,000 × 4 × 2) / 1.15 ≈ 160,000 es una <strong>reconstrucción algebraica calibrada del orden de magnitud</strong> — no una cadena de ingeniería dimensionalmente válida. El factor 1.15 es hipótesis del autor N2. La pregunta de auditabilidad va al expediente SD, no a Panamá.</span>
+          <span class="en">The chain starts from N1 data (10,200 PHPD official) and reaches N1 data (26 trains published by Metro de Panamá). The algebraic reconstruction <strong>(23 × 1,000 × 4 × 2) / 1.15 = 160,000</strong> reproduces official capacity — but 23 are operating trainsets, not tph frequency.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Convergence box -->
+    <div style="background:var(--navy);border:1px solid var(--accent);border-radius:8px;padding:20px 24px;margin:24px 0;text-align:center;">
+      <div style="font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:12px;">
+        <span class="es">CONVERGENCIA FORENSE</span>
+        <span class="en">FORENSIC CONVERGENCE</span>
+      </div>
+      <div style="display:flex;justify-content:center;align-items:center;gap:32px;flex-wrap:wrap;">
+        <div style="text-align:center;">
+          <div style="font-size:11px;color:rgba(255,255,255,.5);margin-bottom:4px;">L15 SP ↓</div>
+          <div style="font-size:22px;font-weight:700;color:var(--red);">163,000</div>
+          <div style="font-size:11px;color:rgba(255,255,255,.4);">observado N1</div>
+        </div>
+        <div style="font-size:28px;color:var(--accent);">⟷</div>
+        <div style="text-align:center;">
+          <div style="font-size:11px;color:rgba(255,255,255,.5);margin-bottom:4px;">Panamá ↑</div>
+          <div style="font-size:22px;font-weight:700;color:var(--green);">160,000</div>
+          <div style="font-size:11px;color:rgba(255,255,255,.4);">proyectado N1</div>
+        </div>
+      </div>
+      <div style="margin-top:12px;font-size:13px;color:rgba(255,255,255,.6);">
+        <span class="es">Dos rutas independientes. Misma tecnología GoA4. Órdenes de magnitud compatibles.</span>
+        <span class="en">Two independent routes. Same GoA4 technology. Compatible orders of magnitude.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 4: COMPARATIVA SP / SD / PANAMA -->
+  <div class="section">
+    <div class="section-title">
+      <span class="es">④ Comparativa consolidada</span>
+      <span class="en">④ Consolidated comparison</span>
+    </div>
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th class="es">Variable</th>
+            <th>L15 SP</th>
+            <th>Santo Domingo</th>
+            <th>Panamá L3</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="es">Headway nominal</td>
+            <td><span class="num red">90 s</span> <span style="color:var(--muted);font-size:11px;">(promesa)</span></td>
+            <td><span class="num red">90 s</span> <span style="color:var(--muted);font-size:11px;">(promesa)</span></td>
+            <td><span class="num green">&lt;4 min (225 s)</span> <span style="color:var(--muted);font-size:11px;">(fase 1)</span></td>
+          </tr>
+          <tr>
+            <td class="es">Headway real / referencia</td>
+            <td><span class="num red">170 s</span> <span style="color:var(--muted);font-size:11px;">(mínimo histórico)</span></td>
+            <td><span class="num amber">170 s</span> <span style="color:var(--muted);font-size:11px;">(por analogía N3)</span></td>
+            <td><span class="num green">150 s</span> <span style="color:var(--muted);font-size:11px;">(referencia hipotética · condición presente en tabla JICA · no headway oficial de diseño)</span></td>
+          </tr>
+          <tr>
+            <td class="es">Flujo de diseño</td>
+            <td>50/50 <span style="color:var(--muted);font-size:11px;">(ideal)</span></td>
+            <td>50/50 <span style="color:var(--muted);font-size:11px;">(ideal)</span></td>
+            <td>Asimetría documentada JICA <span style="color:var(--muted);font-size:11px;">· 90/10 = hipótesis del análisis <span class="badge badge-n3" style="font-size:9px;">N3</span></span></td>
+          </tr>
+          <tr>
+            <td class="es">Factor compuesto</td>
+            <td><span class="num red">3.40</span></td>
+            <td><span class="num red">3.40</span> <span style="color:var(--muted);font-size:11px;">(N3)</span></td>
+            <td><span class="num green">1.13</span> <span style="color:var(--muted);font-size:11px;">(N2)</span></td>
+          </tr>
+          <tr>
+            <td class="es">Margen de resiliencia</td>
+            <td><span class="num red">0%</span></td>
+            <td><span class="num red">0%</span></td>
+            <td><span class="num green">~12%</span></td>
+          </tr>
+          <tr>
+            <td class="es">Capacidad diaria</td>
+            <td><span class="num red">163,000</span> <span style="color:var(--muted);font-size:11px;">(máx. observado N1)<br>promedio días útiles: ~154,000</span></td>
+            <td><span class="num amber">~90,000</span> <span style="color:var(--muted);font-size:11px;">(estimado N3)</span></td>
+            <td><span class="num green">~160,000</span> <span style="color:var(--muted);font-size:11px;">(proyectado N1)</span></td>
+          </tr>
+          <tr>
+            <td class="es">Nivel de evidencia</td>
+            <td><span class="badge badge-n1">N1</span></td>
+            <td><span class="badge badge-n3">N3</span></td>
+            <td><span class="badge badge-n2">N2</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- SECTION 5: LA PREGUNTA DOCUMENTAL -->
+  <div class="section">
+    <div class="section-title">
+      <span class="es">⑤ La pregunta documental</span>
+      <span class="en">⑤ The documentary question</span>
+    </div>
+
+    <p class="es" style="color:var(--muted);margin-bottom:16px;">El estudio JICA para Panamá documenta la cadena completa de dimensionamiento:</p>
+    <p class="en" style="color:var(--muted);margin-bottom:16px;">The JICA study for Panama documents the complete dimensioning chain:</p>
+
+    <div class="box box-fact">
+      <div class="box-label">JICA · Panamá L3</div>
+      <span class="es"><strong>Demanda → pphpd → frecuencia → headway → ciclo → flota → reservas</strong><br>
+      23 trenes de operación + 3 de reserva = 26 · Verificado con flota publicada Metro de Panamá.</span>
+      <span class="en"><strong>Demand → pphpd → frequency → headway → cycle → fleet → reserves</strong><br>
+      23 operating trains + 3 reserve = 26 · Verified against Panama Metro's published fleet.</span>
+    </div>
+
+    <div class="question-box">
+      <div class="q-label es">Pregunta de auditabilidad · SNIP 17248</div>
+      <div class="q-label en">Auditability question · SNIP 17248</div>
+      <blockquote class="es">
+        Si Panamá puede reconstruir documentalmente la cadena demanda → pphpd → frecuencia → headway → ciclo → flota → reservas, ¿puede el expediente SNIP 17248 reconstruir con la misma trazabilidad los 306,000 pasajeros/día?
+      </blockquote>
+      <blockquote class="en">
+        If Panama can documentarily reconstruct the chain demand → pphpd → frequency → headway → cycle → fleet → reserves, can the SNIP 17248 file reconstruct 306,000 passengers/day with the same traceability?
+      </blockquote>
+    </div>
+
+    <div class="box box-note" style="margin-top:8px;">
+      <span class="es">Esta es una pregunta de <strong>auditabilidad</strong>, no una conclusión anticipada. Si el expediente puede demostrar la coexistencia operacional de sus parámetros con unidades consistentes y un modelo reproducible, la hipótesis de degradación debe revisarse.</span>
+      <span class="en">This is an <strong>auditability</strong> question, not an anticipated conclusion. If the file can demonstrate the operational coexistence of its parameters with consistent units and a reproducible model, the degradation hypothesis must be revised.</span>
+    </div>
+  </div>
+
+  <!-- NOTE METODOLOGICA -->
+  <div class="note-meth">
+    <strong class="es">Nota metodológica general:</strong>
+    <strong class="en">General methodological note:</strong>
+    <span class="es"> El factor 3.4 es un índice compuesto de auditoría derivado del benchmark de SP — no una constante física universal. São Paulo aporta el único dato N1 verificado del ecosistema. Los escenarios de Santo Domingo son N3 por analogía. Los datos de Panamá son N2 con fuentes primarias verificadas (JICA, Metro de Panamá). La correlación parcial entre F_H y F_D está declarada en <a href="https://visualcrp.com/pendular9010.html">visualcrp.com/pendular9010.html</a>.</span>
+    <span class="en"> Factor 3.4 is a composite audit index derived from the SP benchmark — not a universal physical constant. São Paulo provides the only verified N1 data point in the ecosystem. Santo Domingo scenarios are N3 by analogy. Panama data is N2 with verified primary sources (JICA, Metro de Panama). The partial correlation between F_H and F_D is declared at <a href="https://visualcrp.com/pendular9010.html">visualcrp.com/pendular9010.html</a>.</span>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="doc-footer">
+    <div>
+      <span class="author">Ing. Piter J. Bonilla D.</span> · CODIA #17378 · <span class="es">Análisis Técnico Independiente</span><span class="en">Independent Technical Analysis</span>
+    </div>
+    <div>
+      <a href="https://visualcrp.com/embudo.html">Dashboard</a> ·
+      <a href="https://visualcrp.com/pendular9010.html">Flujo pendular</a> ·
+      <a href="https://visualcrp.com/L15Prata.html">L15 Prata</a> ·
+      <a href="https://visualcrp.com/ResilienciaOperativa.html">Resiliencia</a> ·
+      <a href="https://visualcrp.com/AUDIT.html">Auditoría</a>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function toggleTheme() {
+  const h = document.getElementById('html-root');
+  h.classList.toggle('light'); h.classList.toggle('dark');
+  document.getElementById('theme-btn').innerHTML =
+    h.classList.contains('light')
+      ? '<span class="es">🌙 Oscuro</span><span class="en">🌙 Dark</span>'
+      : '<span class="es">☀︎ Claro</span><span class="en">☀︎ Light</span>';
+  if (document.documentElement.lang === 'en') {
+    document.querySelectorAll('.es').forEach(e => e.style.display = 'none');
+    document.querySelectorAll('.en').forEach(e => e.style.display = 'inline');
+  }
+}
+function setLang(lang) {
+  document.getElementById('html-root').setAttribute('lang', lang);
+  document.getElementById('top-lang-es').classList.toggle('active', lang === 'es');
+  document.getElementById('top-lang-en').classList.toggle('active', lang === 'en');
+}
+</script>
+</body>
+</html>
