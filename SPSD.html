@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="es" id="html-root" class="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Deconstrucción de la convergencia SP ↔ SD · El Embudo</title>
+<style>
+:root {
+  --navy:#0f1f3d;--navy2:#1a3260;--fog:#1a2740;--page:#070e1c;--white:#0d1830;
+  --red:#e05252;--red-lt:rgba(224,82,82,.15);--amber:#d4890a;--amber-lt:rgba(212,137,10,.15);
+  --green:#22c55e;--green-lt:rgba(34,197,94,.12);--blue:#3b82f6;--blue-lt:rgba(59,130,246,.12);
+  --accent:#e85d26;--rule:rgba(200,216,240,.1);--text:#c8d8f0;--muted:#8898b8;
+}
+html.light {
+  --navy:#1a3260;--fog:#e8edf5;--page:#f4f6fa;--white:#ffffff;--rule:#cbd5e1;
+  --text:#1e293b;--muted:#475569;--red:#b91c1c;--accent:#9a3412;--amber:#b45309;
+  --green:#166534;--blue:#1d4ed8;
+  --red-lt:rgba(185,28,28,.08);--amber-lt:rgba(180,83,9,.08);
+  --green-lt:rgba(22,101,52,.08);--blue-lt:rgba(29,78,216,.08);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--page);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;font-size:14px;line-height:1.6;padding-top:56px;}
+header.topbar{position:fixed;top:0;left:0;right:0;z-index:200;height:52px;background:rgba(7,14,28,.97);border-bottom:1px solid var(--rule);display:flex;align-items:center;justify-content:space-between;padding:0 20px;backdrop-filter:blur(8px);}
+html.light header.topbar{background:rgba(26,50,96,.97);}
+.tb-brand{font-size:11px;font-weight:700;color:rgba(255,255,255,.7);letter-spacing:.08em;text-transform:uppercase;}
+.tb-brand span{color:var(--accent);}
+.tb-right{display:flex;align-items:center;gap:8px;}
+.btn-ctrl{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:20px;color:rgba(255,255,255,.7);font-size:11px;font-weight:600;padding:4px 14px;cursor:pointer;transition:all .15s;}
+.btn-ctrl:hover{background:rgba(255,255,255,.15);color:#fff;}
+.container{max-width:860px;margin:24px auto 40px;background:var(--white);border:1px solid var(--rule);border-radius:12px;padding:40px 44px 50px;box-shadow:0 12px 40px rgba(0,0,0,.4);}
+@media(max-width:600px){.container{padding:20px;margin-top:12px;}}
+.doc-header{border-bottom:2px solid var(--accent);padding-bottom:24px;margin-bottom:28px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:12px;}
+.doc-header .brand{font-size:11px;font-weight:700;color:var(--accent);letter-spacing:.12em;text-transform:uppercase;}
+.doc-header h1{font-size:24px;font-weight:700;color:var(--text);line-height:1.2;margin-top:4px;}
+.doc-header .sub{font-size:13px;color:var(--muted);margin-top:4px;}
+.doc-header .meta{font-size:12px;color:var(--muted);text-align:right;white-space:nowrap;}
+.doc-header .meta strong{color:var(--text);}
+@media(max-width:600px){.doc-header{flex-direction:column;}.doc-header .meta{text-align:left;white-space:normal;}}
+.badge{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:2px 10px;border-radius:20px;margin-right:4px;}
+.badge-n1{background:var(--green-lt);color:var(--green);}
+.badge-n2{background:var(--blue-lt);color:var(--blue);}
+.badge-n3{background:var(--amber-lt);color:var(--amber);}
+.badge-accent{background:var(--accent);color:#fff;}
+.section{margin-top:36px;border-top:1px solid var(--rule);padding-top:28px;}
+.section-title{font-size:17px;font-weight:700;color:var(--text);margin-bottom:14px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+.section-title small{font-size:13px;font-weight:400;color:var(--muted);}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:16px 0;}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin:16px 0;}
+@media(max-width:600px){.grid-2,.grid-3{grid-template-columns:1fr;}}
+.card{background:var(--fog);border:1px solid var(--rule);border-radius:8px;padding:18px 20px;}
+.card.accent-green{border-left:3px solid var(--green);}
+.card.accent-red{border-left:3px solid var(--red);}
+.card.accent-amber{border-left:3px solid var(--amber);}
+.card.accent-blue{border-left:3px solid var(--blue);}
+.card-title{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;}
+.card .highlight{font-size:28px;font-weight:700;color:var(--text);line-height:1.1;}
+.card .highlight.green{color:var(--green);}
+.card .highlight.red{color:var(--red);}
+.card .highlight.amber{color:var(--amber);}
+.card .metric{font-size:12.5px;color:var(--muted);margin-top:4px;}
+.card .metric strong{color:var(--text);}
+.box{border-radius:6px;padding:14px 18px;margin:16px 0;font-size:13.5px;}
+.box-fact{background:var(--green-lt);border-left:3px solid var(--green);}
+.box-warn{background:var(--red-lt);border-left:3px solid var(--red);}
+.box-note{background:var(--blue-lt);border-left:3px solid var(--blue);}
+.box-inf{background:var(--amber-lt);border-left:3px solid var(--amber);}
+.box-label{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px;color:var(--muted);}
+.tbl-wrap{overflow-x:auto;margin:16px 0;}
+table{width:100%;border-collapse:collapse;font-size:13px;}
+thead th{background:var(--navy);color:rgba(255,255,255,.75);font-weight:600;font-size:11px;letter-spacing:.05em;text-transform:uppercase;padding:8px 12px;text-align:left;border-bottom:2px solid var(--accent);}
+html.light thead th{color:rgba(255,255,255,.85);}
+tbody td{padding:8px 12px;border-bottom:1px solid var(--rule);color:var(--text);vertical-align:top;}
+.num{font-family:'Courier New',monospace;font-weight:700;}
+.num.green{color:var(--green);}
+.num.red{color:var(--red);}
+.num.amber{color:var(--amber);}
+.chain{background:var(--fog);border:1px solid var(--rule);border-radius:8px;padding:20px 24px;margin:16px 0;font-family:'Courier New',monospace;font-size:13px;line-height:2;}
+.chain-step{display:flex;align-items:center;gap:12px;padding:4px 0;border-bottom:1px solid var(--rule);}
+.chain-step:last-child{border-bottom:none;}
+.chain-op{color:var(--muted);width:24px;text-align:center;font-size:16px;}
+.chain-val{font-weight:700;color:var(--text);min-width:100px;}
+.chain-val.green{color:var(--green);}
+.chain-val.red{color:var(--red);}
+.chain-val.amber{color:var(--amber);}
+.chain-label{font-size:11px;color:var(--muted);font-family:'Segoe UI',sans-serif;}
+.question-box{background:var(--navy);border:1px solid var(--rule);border-radius:8px;padding:24px 28px;text-align:center;margin:28px 0 12px;}
+.question-box .q-label{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:10px;}
+.question-box blockquote{font-size:15px;font-style:italic;line-height:1.65;color:#fff;max-width:680px;margin:0 auto;}
+.doc-footer{margin-top:40px;padding-top:18px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:12px;color:var(--muted);}
+.doc-footer a{color:var(--blue);text-decoration:none;}
+.doc-footer a:hover{text-decoration:underline;}
+.doc-footer .author{font-weight:700;color:var(--text);}
+.note-meth{font-size:12px;color:var(--muted);padding:12px 16px;background:var(--fog);border-left:3px solid var(--amber);border-radius:0 6px 6px 0;margin-top:20px;}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="tb-brand"><span>El Embudo</span> · <span>Análisis Técnico Independiente</span></div>
+  <div class="tb-right">
+    <button class="btn-ctrl" onclick="toggleTheme()" id="theme-btn">☀︎ Claro</button>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- HEADER -->
+  <div class="doc-header">
+    <div>
+      <div class="brand">El Embudo · Análisis Técnico Independiente</div>
+      <h1>Deconstrucción de la convergencia SP ↔ SD</h1>
+      <div class="sub">Benchmark operacional de São Paulo (L15 Prata) vs. referencia de planificación de Santo Domingo (FITRAM/SNIP 17248) · Contraste con la trazabilidad documental de Panamá L3</div>
+    </div>
+    <div class="meta">
+      <div><strong>Ing. Piter J. Bonilla D.</strong></div>
+      <div>CODIA #17378</div>
+      <div>7 de septiembre de 2026</div>
+    </div>
+  </div>
+
+  <!-- 1. INTRODUCCIÓN Y METODOLOGÍA -->
+  <div class="section">
+    <div class="section-title">① Introducción · Deconstrucción de la convergencia</div>
+    <p style="color:var(--muted);margin-bottom:16px;">
+      El presente informe descompone la convergencia numérica entre São Paulo (L15 Prata) y Santo Domingo (Monorriel Línea 1, FITRAM/SNIP 17248). Ambos sistemas comparten la tecnología <strong>Innovia 300 de Alstom con CBTC-GoA4</strong> y presentan una <strong>semejanza estructural</strong> en las cifras y parámetros publicados, cuya equivalencia metodológica se propone aquí como <strong>objeto de análisis</strong>.
+    </p>
+    <p style="color:var(--muted);margin-bottom:16px;">
+      La metáfora <strong>"Padre e Hijo"</strong> se utiliza como recurso editorial para visualizar el parentesco metodológico, <strong>no como una afirmación de causalidad operacional</strong>. El objetivo no es demostrar que SD tendrá necesariamente un rendimiento determinado, sino <strong>establecer un escenario condicional y explícitamente falsable</strong> que emerge de la deconstrucción de las cifras.
+    </p>
+    <div class="box box-note">
+      <div class="box-label">Estructura de la deconstrucción</div>
+      <ul style="margin:6px 0 0 18px;color:var(--text);font-size:13px;">
+        <li><strong>Dato:</strong> 306,000 pax/día — referencia de planificación publicada por FITRAM.</li>
+        <li><strong>Reconstrucción algebraica:</strong> Estructura que reproduce la cifra a partir de parámetros de flota y capacidad.</li>
+        <li><strong>Hipótesis:</strong> El benchmark operacional de SP (máximo observado ~163,000, headway mínimo histórico 170s, distribución direccional 90/10) es aplicable como referencia de rendimiento.</li>
+        <li><strong>Escenario condicional:</strong> Aplicación del índice compuesto 3.4 (construido a partir de los parámetros de SP) a la referencia de SD → ~90,000 pax/día.</li>
+        <li><strong>Falsabilidad:</strong> El escenario queda refutado si el expediente de SD demuestra documentalmente la coexistencia operacional de todos sus parámetros (90s + ciclo + dwell + flota + demanda direccional + reservas) con unidades consistentes y modelo reproducible.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 2. DATOS DE REFERENCIA -->
+  <div class="section">
+    <div class="section-title">② Datos de referencia</div>
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr><th>Variable</th><th>Valor</th><th>Origen</th><th>Nivel</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Referencia de planificación (SD)</td><td class="num amber">306,000</td><td>FITRAM / SNIP 17248</td><td><span class="badge badge-n1">N1</span></td></tr>
+          <tr><td>Referencia de planificación (SP) — línea completa</td><td class="num green">~550,000</td><td>MetrôCPTM</td><td><span class="badge badge-n1">N1</span></td></tr>
+          <tr><td>Proyección documentada (Panamá L3)</td><td class="num green">~160,000</td><td>JICA / Metro de Panamá</td><td><span class="badge badge-n2">N2</span></td></tr>
+          <tr><td>Headway nominal (SP y SD)</td><td class="num amber">90 s</td><td>Especificaciones de diseño</td><td><span class="badge badge-n1">N1</span></td></tr>
+          <tr><td>Headway mínimo histórico reportado (SP)</td><td class="num red">170 s</td><td>Diciembre 2025 — MetrôCPTM</td><td><span class="badge badge-n1">N1</span></td></tr>
+          <tr><td>Máximo diario observado (SP)</td><td class="num red">~163,000</td><td>Marzo 2026 — MetrôCPTM</td><td><span class="badge badge-n1">N1</span></td></tr>
+          <tr><td>Promedio laboral (SP)</td><td class="num red">~154,000</td><td>Datos operacionales</td><td><span class="badge badge-n1">N1</span></td></tr>
+          <tr><td>Flujo de diseño (SP y SD)</td><td class="num">50/50</td><td>Hipótesis simétrica</td><td><span class="badge badge-n2">N2</span></td></tr>
+          <tr><td>Distribución direccional observada en nodo (SP)</td><td class="num red">90/10</td><td>Nodo Vila Prudente</td><td><span class="badge badge-n1">N1</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="box box-inf" style="font-size:12px;margin-top:8px;">
+      <strong>Nota sobre SP:</strong> 550,000 corresponde a la <strong>demanda prevista de la línea completa</strong>, mientras que los 163,000 son el máximo observado en el tramo actualmente operativo (Vila Prudente–Jardim Colonial). La coexistencia temporal exacta de 170s + 163,000 + 90/10 <strong>no está documentada</strong> como un único estado operacional; son referencias separadas que se combinan en el análisis.
+    </div>
+  </div>
+
+  <!-- 3. RECONSTRUCCIÓN ALGEBRAICA DE LAS REFERENCIAS -->
+  <div class="section">
+    <div class="section-title">③ Reconstrucción algebraica de las referencias</div>
+    <p style="color:var(--muted);margin-bottom:16px;">
+      Las referencias de Santo Domingo y São Paulo pueden reproducirse mediante una estructura algebraica similar. <strong>Ambas son reconstrucciones algebraicas no dimensionales de cifras publicadas, no fórmulas operacionales que demuestren capacidad real.</strong> La diferencia clave es que 17 y 23 son <strong>unidades de flota, no trenes/hora</strong>.
+    </p>
+    <div class="grid-3">
+      <div class="card accent-amber">
+        <div class="card-title">Santo Domingo (FITRAM)</div>
+        <div style="font-family:'Courier New',monospace;font-size:14px;line-height:1.8;padding:8px 0;">
+          ( 17 × 750 × 4 × 2 / 0.30 ) × 0.90 = <strong class="num amber">306,000</strong>
+        </div>
+        <div class="metric" style="margin-top:6px;">Flota: 17 trenes · Capacidad: 750 pax/tren</div>
+        <div class="metric" style="font-size:11px;color:var(--muted);margin-top:4px;">
+          <span class="badge badge-n2">N2</span> Reconstrucción no dimensional · 17 = flota, <strong>no tph</strong>
+        </div>
+        <div class="metric" style="font-size:11px;color:var(--muted);margin-top:4px;">
+          <strong>No se presenta como ecuación operacional de capacidad.</strong>
+        </div>
+      </div>
+      <div class="card accent-green">
+        <div class="card-title">São Paulo (L15 Prata)</div>
+        <div style="font-family:'Courier New',monospace;font-size:14px;line-height:1.8;padding:8px 0;">
+          ( 23 × 1000 × 4 × 2 / 0.30 ) × 0.90 = <strong class="num green">~552,000</strong>
+        </div>
+        <div class="metric" style="margin-top:6px;">Flota: 23 trenes · Capacidad: 1,000 pax/tren</div>
+        <div class="metric" style="font-size:11px;color:var(--muted);margin-top:4px;">
+          <span class="badge badge-n2">N2</span> Reconstrucción no dimensional · 23 = flota, <strong>no tph</strong>
+        </div>
+        <div class="metric" style="font-size:11px;color:var(--muted);margin-top:4px;">
+          <strong>No se afirma que esta haya sido la fórmula empleada por Metrô São Paulo.</strong>
+        </div>
+      </div>
+      <div class="card accent-green">
+        <div class="card-title">Panamá L3 (JICA) — trazabilidad documental</div>
+        <div style="font-family:'Courier New',monospace;font-size:14px;line-height:1.8;padding:8px 0;">
+          Demanda → PHPD → frecuencia → headway → ciclo → flota
+        </div>
+        <div class="metric" style="margin-top:6px;">Flota: 26 trenes (23+3) · Capacidad: 1,000 pax/tren</div>
+        <div class="metric" style="font-size:11px;color:var(--muted);margin-top:4px;">
+          <span class="badge badge-n1">N1</span> Cadena documental JICA · 16+7+3 = 26 ✓
+        </div>
+      </div>
+    </div>
+    <div class="box box-note">
+      <div class="box-label">Diferencia metodológica</div>
+      <span style="font-size:13px;">
+        SD y SP presentan una <strong>semejanza estructural</strong> en sus reconstrucciones algebraicas no dimensionales. Panamá, en cambio, documenta una <strong>cadena completa</strong> desde la demanda hasta la flota (N1 → N2 → N3 → N2 → N1), lo que permite contrastar la <strong>ausencia de trazabilidad equivalente</strong> en los 306,000 de SD. La pregunta clave es: <strong>¿puede SD reconstruir su propia cadena con la misma claridad?</strong>
+      </span>
+    </div>
+  </div>
+
+  <!-- 4. RELACIÓN MATEMÁTICA CONSTRUIDA · PRUEBA DE COHERENCIA -->
+  <div class="section">
+    <div class="section-title">④ Relación matemática construida · Deconstrucción a 162,000</div>
+    <p style="color:var(--muted);margin-bottom:12px;">
+      La siguiente secuencia utiliza los parámetros documentados de SP para construir un <strong>índice compuesto de sensibilidad</strong>. Los números <strong>no son descubrimientos empíricos independientes</strong>; son el resultado de aplicar transformaciones algebraicas a las referencias publicadas. El objetivo es deconstruir la convergencia hasta el <strong>162,000</strong> —el orden de magnitud que conecta ambas referencias.
+    </p>
+
+    <h4 style="margin: 12px 0 6px; color:var(--text);">Paso 1: Corrección por headway mínimo histórico</h4>
+    <div class="chain">
+      <div class="chain-step">
+        <span class="chain-val amber">306,000</span>
+        <span class="chain-op">÷</span>
+        <span class="chain-val">(170 / 90)</span>
+        <span class="chain-label">=</span>
+        <span class="chain-val red">162,000</span>
+        <span class="chain-label" style="flex:1;text-align:right;">≈ orden de magnitud del máximo observado en SP</span>
+      </div>
+    </div>
+    <p style="color:var(--muted);margin: -4px 0 16px;">Al dividir la referencia de SD por el factor de headway (170/90 ≈ 1.89), se obtiene <strong>162,000</strong>, que reproduce con proximidad el máximo diario observado en SP (~163,000). <strong>Este es un cierre algebraico, no una validación independiente:</strong> 162,000 fue construido a partir de 306,000 y del factor 170/90.</p>
+
+    <h4 style="margin: 12px 0 6px; color:var(--text);">Paso 2: Expansión por factor de flujo</h4>
+    <div class="chain">
+      <div class="chain-step">
+        <span class="chain-val amber">306,000</span>
+        <span class="chain-op">×</span>
+        <span class="chain-val">(90 / 50)</span>
+        <span class="chain-label">=</span>
+        <span class="chain-val green">550,800</span>
+        <span class="chain-label" style="flex:1;text-align:right;">Reproduce con proximidad la referencia de planificación de SP</span>
+      </div>
+    </div>
+    <p style="color:var(--muted);margin: -4px 0 16px;">Al multiplicar la misma referencia por el factor de flujo (90/50 = 1.80), se obtiene <strong>550,800</strong>, que reproduce con alta proximidad la referencia publicada de demanda prevista de SP (~550,000). <strong>Esta es una coherencia numérica notable, pero no una validación empírica</strong> de que SP utilizó ese factor específico.</p>
+
+    <h4 style="margin: 12px 0 6px; color:var(--text);">Paso 3: Índice compuesto</h4>
+    <div class="chain">
+      <div class="chain-step">
+        <span class="chain-val">(170 / 90) × (90 / 50)</span>
+        <span class="chain-op">=</span>
+        <span class="chain-val red">3.4</span>
+        <span class="chain-label" style="flex:1;text-align:right;">Índice compuesto de sensibilidad</span>
+      </div>
+    </div>
+    <p style="color:var(--muted);margin: -4px 0 16px;">El producto de ambos factores <strong>se construye</strong> como <strong>3.4</strong> a partir de parámetros documentados de SP. Su interpretación <strong>no presupone independencia</strong> entre los factores; por ello no constituye una constante física ni una medición de pérdida de capacidad. Es un <strong>índice compuesto de sensibilidad</strong>.</p>
+
+    <h4 style="margin: 12px 0 6px; color:var(--text);">Paso 4: Cierre algebraico del índice</h4>
+    <div class="chain">
+      <div class="chain-step">
+        <span class="chain-val green">550,800</span>
+        <span class="chain-op">÷</span>
+        <span class="chain-val red">162,000</span>
+        <span class="chain-label">=</span>
+        <span class="chain-val red">3.4</span>
+        <span class="chain-label" style="flex:1;text-align:right;">Cierre algebraico</span>
+      </div>
+    </div>
+    <div class="box box-inf" style="margin: -4px 0 0;">
+      <span style="font-size:12px;">
+        <strong>Esta igualdad no constituye una validación independiente:</strong> 550,800 y 162,000 fueron construidos previamente a partir de 306,000 y de los mismos factores 170/90 y 90/50. Por tanto, el resultado demuestra <strong>consistencia algebraica interna</strong>, no confirmación empírica independiente. La verdadera prueba es si el expediente de SD puede reproducir sus 306,000 mediante una cadena operacional documentalmente trazable.
+      </span>
+    </div>
+  </div>
+
+  <!-- 5. INTERPRETACIÓN — ESCENARIO CONDICIONAL -->
+  <div class="section">
+    <div class="section-title">⑤ Interpretación — Escenario condicional</div>
+
+    <div class="grid-2">
+      <div class="card accent-red">
+        <div class="card-title">El vínculo numérico: 162,000</div>
+        <div class="highlight red">162,000</div>
+        <div class="metric">
+          <strong>Orden de magnitud</strong> que reproduce con proximidad el máximo diario observado en SP (~163,000). Es un <strong>resultado de la corrección algebraica</strong> de la referencia de SD (306,000 ÷ 1.89).
+        </div>
+        <div class="metric" style="margin-top:8px;font-size:12px;color:var(--muted);">
+          <strong>No es una validación empírica independiente:</strong> es un cierre algebraico que muestra coherencia entre las cifras.
+        </div>
+      </div>
+      <div class="card accent-amber">
+        <div class="card-title">Escenario condicional</div>
+        <div class="highlight amber">90,000</div>
+        <div class="metric">
+          <strong>Si se aplicara a SD la misma transformación algebraica utilizada para construir el índice 3.4</strong>, el resultado aritmético sería:
+        </div>
+        <div class="metric" style="margin-top:8px;font-family:'Courier New',monospace;font-size:15px;line-height:1.6;">
+          306,000 ÷ 3.4 = <strong>90,000</strong>
+        </div>
+        <div class="metric" style="margin-top:6px;font-size:12px;color:var(--muted);">
+          Donde <strong>3.4 = 1.89 × 1.80</strong> → (170s/90s) × (90%/50%) = 3.4
+        </div>
+        <div class="metric" style="margin-top:6px;font-size:12px;color:var(--muted);">
+          <strong>Nota:</strong> Este es un <strong>resultado de sensibilidad</strong>, no una predicción operacional. No demuestra que SD tendrá 90,000 pax/día; demuestra el <strong>orden de magnitud del escenario condicional</strong> si se aplican las mismas transformaciones algebraicas.
+        </div>
+      </div>
+    </div>
+
+    <div class="box box-warn">
+      <div class="box-label">Interpretación correcta</div>
+      <strong>306,000 es una referencia de planificación publicada por FITRAM, no una capacidad operacional demostrada.</strong> El índice 3.4 —construido a partir del benchmark de SP— muestra que, <strong>bajo el escenario condicional de aplicar la misma transformación algebraica</strong>, el resultado aritmético sería ~90,000 pax/día. <strong>La hipótesis es falsable</strong>: el expediente de SD debe demostrar documentalmente la coexistencia operacional de sus parámetros (90s + ciclo + dwell + flota + demanda direccional + reservas) con unidades consistentes y modelo reproducible.
+    </div>
+  </div>
+
+  <!-- 6. TABLA COMPARATIVA -->
+  <div class="section">
+    <div class="section-title">⑥ Comparativa consolidada</div>
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr><th>Sistema</th><th>Referencia de planificación</th><th>Benchmark / proyección</th><th>Headway / Flujo</th><th>Índice compuesto</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>L15 SP</strong></td>
+            <td class="num green">~550,000</td>
+            <td class="num red">~163,000 (máx. observado)</td>
+            <td>170s (mín. histórico) · 90/10</td>
+            <td class="num red">3.4</td>
+          </tr>
+          <tr>
+            <td><strong>Santo Domingo</strong></td>
+            <td class="num amber">306,000</td>
+            <td class="num amber">~90,000 (escenario condicional)</td>
+            <td>90s · 50/50</td>
+            <td class="num red">3.4</td>
+          </tr>
+          <tr>
+            <td><strong>Panamá L3</strong></td>
+            <td class="num green">~160,000</td>
+            <td class="num green">~160,000</td>
+            <td>Cadena JICA documentada</td>
+            <td class="num green">—</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="color:var(--muted);margin-top:12px;">
+      <strong>Nota sobre Panamá:</strong> Su valor documental no reside en un "factor compuesto" (que no se ha definido operacionalmente para Panamá), sino en la <strong>trazabilidad de su cadena JICA</strong>: 10,200 PHPD → /0.80 → ×1.80 → /1000 → 23+3 = 26 trenes verificados. Esa cadena contrasta con la ausencia de trazabilidad equivalente en los 306,000 de SD.
+    </p>
+  </div>
+
+  <!-- 7. PANAMÁ — TRAZABILIDAD DOCUMENTAL -->
+  <div class="section">
+    <div class="section-title">⑦ Panamá L3 — La cadena de dimensionamiento verificable (JICA)</div>
+    <p style="color:var(--muted);margin-bottom:16px;">
+      A continuación se desglosa paso a paso la trazabilidad documental de Panamá L3, desde el dato real de demanda hasta la flota verificada. Esta cadena, documentada por JICA y validada con la flota publicada por Metro de Panamá, constituye el <strong>referente de contraste</strong> frente a la ausencia de trazabilidad en los 306,000 de SD.
+    </p>
+
+    <div class="chain">
+      <div class="chain-step">
+        <span class="chain-val green">10,200</span>
+        <span class="chain-label">PHPD real documentado <span class="badge badge-n1">N1</span></span>
+      </div>
+      <div class="chain-step">
+        <span class="chain-op">÷</span>
+        <span class="chain-val">0.80</span>
+        <span class="chain-label">Carga de diseño 80% <span class="badge badge-n2">N2</span></span>
+      </div>
+      <div class="chain-step">
+        <span class="chain-op">=</span>
+        <span class="chain-val">12,750</span>
+        <span class="chain-label">PHPD diseño · base 50/50</span>
+      </div>
+      <div class="chain-step">
+        <span class="chain-op">×</span>
+        <span class="chain-val">1.80</span>
+        <span class="chain-label">Factor pendular 90/10 · <strong>hipótesis de reconstrucción</strong> <span class="badge badge-n3">N3 hipótesis</span><br><span style="font-size:10px;color:var(--muted);">JICA documenta demanda diferenciada por secciones; 90/10 es hipótesis del análisis</span></span>
+      </div>
+      <div class="chain-step">
+        <span class="chain-op">=</span>
+        <span class="chain-val red">22,950</span>
+        <span class="chain-label">Exigencia crítica · flujo real 90/10</span>
+      </div>
+      <div class="chain-step">
+        <span class="chain-op">÷</span>
+        <span class="chain-val">1,000</span>
+        <span class="chain-label">Pax/tren Hitachi</span>
+      </div>
+      <div class="chain-step">
+        <span class="chain-op">=</span>
+        <span class="chain-val amber">~23</span>
+        <span class="chain-label">Trenes operación (16+7)</span>
+      </div>
+      <div class="chain-step">
+        <span class="chain-op">+</span>
+        <span class="chain-val">3</span>
+        <span class="chain-label">Reserva JICA</span>
+      </div>
+      <div class="chain-step">
+        <span class="chain-op">=</span>
+        <span class="chain-val green">26 trenes ✓</span>
+        <span class="chain-label">Flota verificada <span class="badge badge-n1">N1</span></span>
+      </div>
+    </div>
+
+    <div class="box box-fact">
+      <div class="box-label">Convergencia documental</div>
+      <ul style="margin:6px 0 0 18px;color:var(--text);">
+        <li>✅ <strong>JICA:</strong> 16 trenes (ruta completa) + 7 (servicio oriental) = 23 operativos + 3 reservas = 26 trenes.</li>
+        <li>✅ <strong>Metro de Panamá:</strong> Flota publicada de 26 trenes (~1,000 pax/tren).</li>
+        <li>✅ <strong>La cadena conecta datos documentados mediante pasos de modelación explícitos, incluyendo una hipótesis N3 identificada.</strong></li>
+        <li>✅ <strong>La pregunta clave:</strong> ¿Puede el expediente de SD reconstruir una cadena similar desde la demanda hasta la flota?</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 8. LA PREGUNTA DE VERIFICABILIDAD — FALSABILIDAD -->
+  <div class="section">
+    <div class="section-title">⑧ La pregunta de verificabilidad · Falsabilidad</div>
+
+    <div class="question-box">
+      <div class="q-label">Pregunta clave · SNIP 17248 / FITRAM</div>
+      <blockquote>
+        ¿Puede el expediente de Santo Domingo demostrar, con <strong>unidades consistentes y un modelo reproducible</strong>, que los <strong>306,000 pasajeros/día</strong> son compatibles simultáneamente con <strong>17 trenes, el headway de 90 s, el tiempo de ciclo, el dwell time, la distribución direccional y la reserva operacional</strong>?
+      </blockquote>
+    </div>
+
+    <div class="box box-fact">
+      <div class="box-label">Condiciones que podrían refutar la transferencia del índice 3.4</div>
+      <p style="font-size:13px;color:var(--text);margin-bottom:8px;">
+        El escenario condicional (~90,000 pax/día) quedaría <strong>invalidado o materialmente debilitado</strong> si el expediente de SD demuestra <strong>que una o más de las transformaciones utilizadas para construir el índice 3.4 no son aplicables a SD</strong>, o si presenta un <strong>modelo operacional reproducible que cierre dimensionalmente la cadena hasta 306,000 pax/día</strong>.
+      </p>
+      <ul style="margin:0 0 0 18px;color:var(--text);font-size:13px;">
+        <li>✅ Headway sostenible <strong>≤ 90 s</strong> en todo el sistema, con evidencia operacional comparable.</li>
+        <li>✅ Dwell time compatible con el headway declarado.</li>
+        <li>✅ Tiempo de ciclo consistente con la flota y la frecuencia.</li>
+        <li>✅ Distribución direccional incorporada en el modelo (no asumir 50/50 sin evidencia).</li>
+        <li>✅ Capacidad por tren correctamente definida (750 pax/tren verificada operacionalmente).</li>
+        <li>✅ Reserva operacional suficiente (mantenimiento, contingencias).</li>
+        <li>✅ Modelo reproducible que parta de la demanda y llegue a 306,000 con unidades consistentes.</li>
+        <li>✅ Evidencia de que los 170 s de SP no son comparables al régimen operacional de SD.</li>
+        <li>✅ Demostración de que el 90/10 no es aplicable al escenario analizado.</li>
+        <li>✅ Existencia de una relación operacional distinta entre headway y throughput que invalide la multiplicación de factores.</li>
+      </ul>
+    </div>
+
+    <div class="box box-note">
+      <div class="box-label">Datos oficiales FITRAM</div>
+      <span style="font-size:13px;">
+        FITRAM publica oficialmente: <strong>306,000 pax/día</strong>; demanda inicial <strong>12,500 pphpd</strong>; trenes iniciales de <strong>4 coches</strong> (562 pax/combinación); capacidad de <strong>22,480 pphpd</strong> con 4 coches; headway <strong>90 s</strong>; ampliación futura a <strong>6 coches</strong> con hasta <strong>34,160 pphpd</strong>.
+        <br><br>
+        <strong>La pregunta persiste:</strong> ¿Cómo se pasa dimensionalmente de esos parámetros a 306,000 pax/día? ¿Con qué modelo y con qué supuestos operacionales?
+      </span>
+    </div>
+  </div>
+
+  <!-- 9. CONCLUSIÓN -->
+  <div class="section">
+    <div class="section-title">⑨ Conclusión · Deconstrucción de la convergencia</div>
+
+    <div class="box box-fact">
+      <div class="box-label">Síntesis de la deconstrucción</div>
+      <ul style="margin:6px 0 0 18px;color:var(--text);">
+        <li><strong>Convergencia a 162,000:</strong> La corrección de la referencia de SD (306,000) por el headway mínimo histórico de SP (170/90) produce 162,000, que reproduce con proximidad el máximo diario observado en SP (~163,000).</li>
+        <li><strong>Índice compuesto 3.4:</strong> Se construye a partir de parámetros documentados de SP: (170/90) × (90/50) = 3.4. Es un <strong>índice de sensibilidad</strong>, no una constante física ni una medición independiente de pérdida de capacidad.</li>
+        <li><strong>Escenario condicional:</strong> Si se aplica a SD la misma transformación algebraica utilizada para construir el índice 3.4, el resultado aritmético es ~90,000 pax/día. <strong>No es una predicción operacional,</strong> sino un <strong>resultado de sensibilidad</strong>.</li>
+        <li><strong>Falsabilidad:</strong> El escenario puede ser refutado si el expediente de SD demuestra documentalmente la coexistencia operacional de todos sus parámetros con unidades consistentes y modelo reproducible.</li>
+        <li><strong>Panamá:</strong> Demuestra que una cadena de dimensionamiento trazable (<em>demanda → PHPD → frecuencia → headway → ciclo → flota → reserva</em>) es posible, explícita y verificable.</li>
+      </ul>
+    </div>
+
+    <div class="question-box">
+      <div class="q-label">Cláusula de garantía operativa del headway</div>
+      <blockquote>
+        Si los 90 segundos de headway son reales, que el contratista lo firme en la cláusula de garantía operativa.<br>
+        <span style="font-size:14px;color:rgba(255,255,255,.6);">El hormigón sigue sin verterse. La cláusula sigue sin firmarse.</span>
+      </blockquote>
+    </div>
+
+    <div style="background:var(--navy);border:1px solid var(--accent);border-radius:8px;padding:16px 20px;margin:16px 0;text-align:center;">
+      <div style="font-size:16px;font-weight:700;color:var(--accent);margin-bottom:6px;">
+        Identidad algebraica ≠ correlación empírica ≠ causalidad operacional
+      </div>
+      <p style="font-size:13px;color:rgba(255,255,255,.7);margin:0;">
+        La primera está demostrada. La segunda está sugerida por el benchmark. La tercera es precisamente <strong>lo que el expediente de Santo Domingo debe demostrar o refutar</strong>.
+      </p>
+    </div>
+
+    <p style="color:var(--muted);margin-top:12px;text-align:center;font-size:13px;">
+      <em>El humo no está en la aritmética. Está en confundir el resultado de la ecuación con la realidad operacional.</em>
+    </p>
+  </div>
+
+  <!-- NOTA METODOLÓGICA -->
+  <div class="note-meth">
+    <strong>Nota metodológica:</strong> El índice 3.4 es un <strong>índice compuesto de sensibilidad</strong> construido a partir del benchmark de São Paulo, no una constante física universal. Todos los números utilizados provienen de fuentes documentadas (FITRAM/SNIP 17248, MetrôCPTM, JICA, registros históricos). La correlación parcial entre los factores de headway y flujo pendular está analizada en <a href="https://visualcrp.com/pendular9010.html" target="_blank">visualcrp.com/pendular9010.html</a>.
+    <br><br>
+    <strong>Niveles de evidencia:</strong> N1 = dato verificado con fuente primaria; N2 = reconstrucción o dato de fuente secundaria; N3 = hipótesis de trabajo.
+  </div>
+
+  <!-- FOOTER -->
+  <div class="doc-footer">
+    <div>
+      <span class="author">Ing. Piter J. Bonilla D.</span> · CODIA #17378 · Análisis Técnico Independiente
+    </div>
+    <div>
+      <a href="https://visualcrp.com/embudo.html">Dashboard</a> ·
+      <a href="https://visualcrp.com/pendular9010.html">Flujo pendular</a> ·
+      <a href="https://visualcrp.com/L15Prata.html">L15 Prata</a> ·
+      <a href="https://visualcrp.com/AUDIT.html">Auditoría</a>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function toggleTheme() {
+  const h = document.getElementById('html-root');
+  h.classList.toggle('light'); h.classList.toggle('dark');
+  document.getElementById('theme-btn').textContent =
+    h.classList.contains('light') ? '🌙 Oscuro' : '☀︎ Claro';
+}
+</script>
+</body>
+</html>
