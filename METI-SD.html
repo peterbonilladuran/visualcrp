@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="es" id="html-root" class="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Descomposición del PHPD METI · El Embudo</title>
+<style>
+:root {
+  --navy:#0f1f3d;--navy2:#1a3260;--fog:#1a2740;--page:#070e1c;--white:#0d1830;
+  --red:#e05252;--red-lt:rgba(224,82,82,.15);--amber:#d4890a;--amber-lt:rgba(212,137,10,.15);
+  --green:#22c55e;--green-lt:rgba(34,197,94,.12);--blue:#3b82f6;--blue-lt:rgba(59,130,246,.12);
+  --accent:#e85d26;--rule:rgba(200,216,240,.1);--text:#c8d8f0;--muted:#8898b8;
+}
+html.light {
+  --navy:#1a3260;--fog:#e8edf5;--page:#f4f6fa;--white:#ffffff;--rule:#cbd5e1;
+  --text:#1e293b;--muted:#475569;--red:#b91c1c;--accent:#9a3412;--amber:#b45309;
+  --green:#166534;--blue:#1d4ed8;
+  --red-lt:rgba(185,28,28,.08);--amber-lt:rgba(180,83,9,.08);
+  --green-lt:rgba(22,101,52,.08);--blue-lt:rgba(29,78,216,.08);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--page);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;font-size:14px;line-height:1.6;padding-top:56px;}
+header.topbar{position:fixed;top:0;left:0;right:0;z-index:200;height:52px;background:rgba(7,14,28,.97);border-bottom:1px solid var(--rule);display:flex;align-items:center;justify-content:space-between;padding:0 20px;backdrop-filter:blur(8px);}
+html.light header.topbar{background:rgba(26,50,96,.97);}
+.tb-brand{font-size:11px;font-weight:700;color:rgba(255,255,255,.7);letter-spacing:.08em;text-transform:uppercase;}
+.tb-brand span{color:var(--accent);}
+.btn-ctrl{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:20px;color:rgba(255,255,255,.7);font-size:11px;font-weight:600;padding:4px 14px;cursor:pointer;transition:all .15s;}
+.btn-ctrl:hover{background:rgba(255,255,255,.15);color:#fff;}
+.container{max-width:860px;margin:24px auto 40px;background:var(--white);border:1px solid var(--rule);border-radius:12px;padding:40px 44px 50px;box-shadow:0 12px 40px rgba(0,0,0,.4);}
+@media(max-width:600px){.container{padding:20px;margin-top:12px;}}
+.doc-header{border-bottom:2px solid var(--accent);padding-bottom:24px;margin-bottom:28px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:12px;}
+.doc-header .brand{font-size:11px;font-weight:700;color:var(--accent);letter-spacing:.12em;text-transform:uppercase;}
+.doc-header h1{font-size:24px;font-weight:700;color:var(--text);line-height:1.2;margin-top:4px;}
+.doc-header .sub{font-size:13px;color:var(--muted);margin-top:4px;}
+.doc-header .meta{font-size:12px;color:var(--muted);text-align:right;white-space:nowrap;}
+.doc-header .meta strong{color:var(--text);}
+@media(max-width:600px){.doc-header{flex-direction:column;}.doc-header .meta{text-align:left;white-space:normal;}}
+.badge{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:2px 10px;border-radius:20px;margin-right:4px;}
+.badge-n1{background:var(--green-lt);color:var(--green);}
+.badge-n2{background:var(--blue-lt);color:var(--blue);}
+.badge-n3{background:var(--amber-lt);color:var(--amber);}
+.section{margin-top:36px;border-top:1px solid var(--rule);padding-top:28px;}
+.section-title{font-size:17px;font-weight:700;color:var(--text);margin-bottom:14px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:16px 0;}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin:16px 0;}
+@media(max-width:600px){.grid-2,.grid-3{grid-template-columns:1fr;}}
+.card{background:var(--fog);border:1px solid var(--rule);border-radius:8px;padding:18px 20px;}
+.card.accent-green{border-left:3px solid var(--green);}
+.card.accent-red{border-left:3px solid var(--red);}
+.card.accent-amber{border-left:3px solid var(--amber);}
+.card.accent-blue{border-left:3px solid var(--blue);}
+.card-title{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;}
+.card .highlight{font-size:28px;font-weight:700;color:var(--text);line-height:1.1;}
+.card .highlight.green{color:var(--green);}
+.card .highlight.red{color:var(--red);}
+.card .highlight.amber{color:var(--amber);}
+.card .metric{font-size:12.5px;color:var(--muted);margin-top:4px;}
+.card .metric strong{color:var(--text);}
+.box{border-radius:6px;padding:14px 18px;margin:16px 0;font-size:13.5px;}
+.box-fact{background:var(--green-lt);border-left:3px solid var(--green);}
+.box-warn{background:var(--red-lt);border-left:3px solid var(--red);}
+.box-note{background:var(--blue-lt);border-left:3px solid var(--blue);}
+.box-inf{background:var(--amber-lt);border-left:3px solid var(--amber);}
+.box-label{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px;color:var(--muted);}
+.tbl-wrap{overflow-x:auto;margin:16px 0;}
+table{width:100%;border-collapse:collapse;font-size:13px;}
+thead th{background:var(--navy);color:rgba(255,255,255,.75);font-weight:600;font-size:11px;letter-spacing:.05em;text-transform:uppercase;padding:8px 12px;text-align:left;border-bottom:2px solid var(--accent);}
+html.light thead th{color:rgba(255,255,255,.85);}
+tbody td{padding:8px 12px;border-bottom:1px solid var(--rule);color:var(--text);vertical-align:top;}
+.num{font-family:'Courier New',monospace;font-weight:700;}
+.num.green{color:var(--green);}
+.num.red{color:var(--red);}
+.num.amber{color:var(--amber);}
+.chain{background:var(--fog);border:1px solid var(--rule);border-radius:8px;padding:20px 24px;margin:16px 0;font-family:'Courier New',monospace;font-size:13px;line-height:2;}
+.chain-step{display:flex;align-items:center;gap:12px;padding:4px 0;border-bottom:1px solid var(--rule);}
+.chain-step:last-child{border-bottom:none;}
+.chain-op{color:var(--muted);width:24px;text-align:center;font-size:16px;}
+.chain-val{font-weight:700;color:var(--text);min-width:110px;}
+.chain-val.green{color:var(--green);}
+.chain-val.red{color:var(--red);}
+.chain-val.amber{color:var(--amber);}
+.chain-label{font-size:11px;color:var(--muted);font-family:'Segoe UI',sans-serif;}
+.question-box{background:var(--navy);border:1px solid var(--rule);border-radius:8px;padding:24px 28px;text-align:center;margin:28px 0 12px;}
+.question-box .q-label{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:10px;}
+.question-box blockquote{font-size:15px;font-style:italic;line-height:1.65;color:#fff;max-width:680px;margin:0 auto;}
+.doc-footer{margin-top:40px;padding-top:18px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:12px;color:var(--muted);}
+.doc-footer a{color:var(--blue);text-decoration:none;}
+.doc-footer a:hover{text-decoration:underline;}
+.doc-footer .author{font-weight:700;color:var(--text);}
+.note-meth{font-size:12px;color:var(--muted);padding:12px 16px;background:var(--fog);border-left:3px solid var(--amber);border-radius:0 6px 6px 0;margin-top:20px;}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="tb-brand"><span>El Embudo</span> · <span>Análisis Técnico Independiente</span></div>
+  <div class="tb-right">
+    <button class="btn-ctrl" onclick="toggleTheme()" id="theme-btn">☀︎ Claro</button>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- HEADER -->
+  <div class="doc-header">
+    <div>
+      <div class="brand">El Embudo · Análisis Técnico Independiente</div>
+      <h1>Descomposición del PHPD del Estudio METI para SD</h1>
+      <div class="sub">Reconstrucción algebraica desde los 12,800 PHPD documentados · Hallazgo para el registro técnico independiente</div>
+    </div>
+    <div class="meta">
+      <div><strong>Ing. Piter J. Bonilla D.</strong></div>
+      <div>CODIA #17378</div>
+      <div>9 de septiembre de 2026</div>
+    </div>
+  </div>
+
+  <!-- SECTION 1: EL DATO DE PARTIDA -->
+  <div class="section">
+    <div class="section-title">
+      ① El dato de partida — PHPD del estudio METI
+      <span class="badge badge-n1">N1</span>
+    </div>
+
+    <p style="color:var(--muted);margin-bottom:16px;">El estudio METI/Nippon Koei (2024) documentó una demanda de 12,800 pasajeros por hora por dirección (PHPD) para el corredor de Santo Domingo Este. Este es el dato verificado de demanda real del corredor — el equivalente al 10,200 PHPD que JICA documentó para Panamá L3.</p>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Año</th>
+            <th>Demanda diaria</th>
+            <th>PPHPD</th>
+            <th>Demanda anual</th>
+            <th>CAGR</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>2030</strong></td>
+            <td><span class="num green">464,800</span></td>
+            <td><span class="num green">12,800</span></td>
+            <td>153 M</td>
+            <td>—</td>
+          </tr>
+          <tr>
+            <td><strong>2045</strong></td>
+            <td><span class="num">571,100</span></td>
+            <td><span class="num">16,200</span></td>
+            <td>188 M</td>
+            <td>1.38%</td>
+          </tr>
+          <tr>
+            <td><strong>2060</strong></td>
+            <td><span class="num">704,000</span></td>
+            <td><span class="num">20,600</span></td>
+            <td>232 M</td>
+            <td>1.40%</td>
+          </tr>
+          <tr>
+            <td colspan="4" style="color:var(--muted);font-size:12px;">Tasa ponderada 2030–2060: ~1.39% · Fuente: METI/Nippon Koei · Feb 2024</td>
+            <td><span class="num amber">~1.39%</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="color:var(--muted);font-size:12px;margin-bottom:16px;">Fuente: <a href="https://www.meti.go.jp/meti_lib/report/2023FY/000401.pdf" target="_blank" style="color:var(--blue);">NIPPON KOEI / METI · Febrero 2024 · PDF oficial</a> · Indexado en <a href="https://visualcrp.com/embudo.html" style="color:var(--blue);">visualcrp.com/embudo.html</a></p>
+
+    <div class="grid-3">
+      <div class="card accent-green">
+        <div class="card-title">PHPD METI · SD</div>
+        <div class="highlight green">12,800</div>
+        <div class="metric">Pasajeros/hora/dirección · <span class="badge badge-n1">N1</span></div>
+        <div class="metric" style="margin-top:6px;">METI/Nippon Koei · Febrero 2024<br>
+        <a href="https://www.meti.go.jp/meti_lib/report/2023FY/000401.pdf" target="_blank" style="color:var(--blue);font-size:11px;">PDF oficial · meti.go.jp</a></div>
+      </div>
+      <div class="card accent-blue">
+        <div class="card-title">Flujo direccional asumido</div>
+        <div class="highlight">75/25</div>
+        <div class="metric">Más conservador que el 90/10 documentado en SP</div>
+        <div class="metric" style="margin-top:6px;">Factor: 75/50 = 1.50</div>
+      </div>
+      <div class="card accent-amber">
+        <div class="card-title">Carga de diseño</div>
+        <div class="highlight amber">80%</div>
+        <div class="metric">Margen de resiliencia operacional</div>
+        <div class="metric" style="margin-top:6px;">Consistente con metodología JICA/Panamá</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2: LA CADENA DE DESCOMPOSICIÓN -->
+  <div class="section">
+    <div class="section-title">
+      ② La cadena de descomposición
+      <span class="badge badge-n2">N2</span>
+    </div>
+
+    <p style="color:var(--muted);margin-bottom:16px;">Aplicando los mismos parámetros metodológicos que JICA utilizó para Panamá L3, la cadena desde 12,800 PHPD produce los siguientes resultados:</p>
+
+    <div class="chain">
+      <div class="chain-step">
+        <span class="chain-op">&nbsp;</span>
+        <span class="chain-val green">12,800</span>
+        <span class="chain-label">PHPD real documentado · METI 2024 · N1</span>
+      </div>
+      <div class="chain-step">
+        <span class="chain-op">×</span>
+        <span class="chain-val">1.50</span>
+        <span class="chain-label">Factor direccional 75/50 (flujo 75/25) · N2</span>
+      </div>
+      <div class="chain-step">
+        <span class="chain-op">÷</span>
+        <span class="chain-val">0.80</span>
+        <span class="chain-label">Carga de diseño 80% · N2</span>
+      </div>
+      <div class="chain-step">
+        <span class="chain-op">=</span>
+        <span class="chain-val amber">24,000</span>
+        <span class="chain-label">PHPD de diseño ajustado · exigencia crítica</span>
+      </div>
+      <div class="chain-step">
+        <span class="chain-op">×</span>
+        <span class="chain-val">4</span>
+        <span class="chain-label">Horas pico</span>
+      </div>
+      <div class="chain-step">
+        <span class="chain-op">×</span>
+        <span class="chain-val">2</span>
+        <span class="chain-label">Sentidos</span>
+      </div>
+      <div class="chain-step">
+        <span class="chain-op">=</span>
+        <span class="chain-val">192,000</span>
+        <span class="chain-label">Capacidad bruta diaria</span>
+      </div>
+      <div class="chain-step">
+        <span class="chain-op">÷</span>
+        <span class="chain-val">1.15</span>
+        <span class="chain-label">Factor de punta operacional · N2 (consistente con Panamá)</span>
+      </div>
+      <div class="chain-step">
+        <span class="chain-op">=</span>
+        <span class="chain-val green">~167,000</span>
+        <span class="chain-label">Capacidad diaria operacional con Metro convencional</span>
+      </div>
+    </div>
+
+    <div class="box box-note">
+      <div class="box-label">Flota Metro necesaria</div>
+      24,000 PHPD ÷ 1,200 pax/tren = <strong>20 trenes de Metro convencional (6 vagones)</strong> para cubrir la exigencia crítica del corredor documentada por METI.
+    </div>
+  </div>
+
+  <!-- SECTION 3: EL HALLAZGO -->
+  <div class="section">
+    <div class="section-title">
+      ③ El hallazgo — convergencia y proporción
+    </div>
+
+    <div class="grid-2">
+      <div class="card accent-green">
+        <div class="card-title">Metro convencional desde METI</div>
+        <div class="highlight green">~167,000</div>
+        <div class="metric">pax/día · reconstrucción algebraica N2</div>
+        <div class="metric" style="margin-top:6px;">20 trenes · 1,200 pax/tren · 4h × 2 sentidos / 1.15</div>
+      </div>
+      <div class="card accent-blue">
+        <div class="card-title">Relación con demanda 2030</div>
+        <div class="highlight">36%</div>
+        <div class="metric">de los 464,800 pax/día proyectados por METI a 2030</div>
+        <div class="metric" style="margin-top:6px;">167,000 / 464,800 = 0.359</div>
+      </div>
+    </div>
+
+    <div class="box box-fact">
+      <div class="box-label">Convergencia con el ecosistema</div>
+      El resultado ~167,000 pax/día converge con el orden de magnitud del ecosistema:
+      <strong>SP L15 Prata récord: 163,000 · Panamá L3 proyectado: 160,000 · SD Metro desde METI: ~167,000</strong>
+      <br><br>
+      Los tres sistemas — con tecnología y parámetros distintos — convergen en el rango <strong>160,000–167,000 pax/día</strong> cuando se dimensionan desde la demanda real del corredor, no desde una promesa de headway.
+    </div>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Sistema</th>
+            <th>Capacidad real</th>
+            <th>Demanda referencia</th>
+            <th>Cobertura</th>
+            <th>Nivel</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>SP L15 Prata</strong></td>
+            <td><span class="num green">163,000</span> pax/día</td>
+            <td>550,800 (diseño)</td>
+            <td><span class="num">30%</span></td>
+            <td><span class="badge badge-n1">N1</span></td>
+          </tr>
+          <tr>
+            <td><strong>Panamá L3</strong></td>
+            <td><span class="num green">~160,000</span> pax/día</td>
+            <td>160,000 (diseño real)</td>
+            <td><span class="num green">100%</span></td>
+            <td><span class="badge badge-n1">N1</span></td>
+          </tr>
+          <tr>
+            <td><strong>SD · Metro desde METI</strong></td>
+            <td><span class="num green">~167,000</span> pax/día</td>
+            <td>464,800 (METI 2030)</td>
+            <td><span class="num amber">36%</span></td>
+            <td><span class="badge badge-n2">N2</span></td>
+          </tr>
+          <tr>
+            <td><strong>SD · Monorriel SNIP</strong></td>
+            <td><span class="num red">~90,000</span> pax/día</td>
+            <td>306,000 (FITRAM)</td>
+            <td><span class="num red">29%</span></td>
+            <td><span class="badge badge-n3">N3</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- SECTION 4: INTERPRETACIÓN -->
+  <div class="section">
+    <div class="section-title">
+      ④ Interpretación — el 36% como balance de red
+    </div>
+
+    <p style="color:var(--muted);margin-bottom:16px;">El 36% no representa una falla de capacidad del sistema propuesto. Representa la función correcta de un sistema de transporte masivo dentro de una red integrada.</p>
+
+    <div class="box box-inf">
+      <div class="box-label">Lógica de red</div>
+      Un sistema de transporte masivo no está diseñado para absorber el 100% de la demanda del corredor. Está diseñado para absorber la demanda que puede transportar con rigor operacional, mientras el resto de la red — Metro L1+L2, Teleférico, BRT, transporte formal — cubre la diferencia.
+      <br><br>
+      El Metro L1+L2 ya cubre 400,000 pax/día (Alstom, mayo 2024). Un sistema adicional de 167,000 pax/día desde el corredor Este es un complemento de red coherente con la demanda real del corredor.
+    </div>
+
+    <div class="box box-warn">
+      <div class="box-label">La diferencia con el Monorriel SNIP</div>
+      El Monorriel prometió 306,000 pax/día — el 66% de la demanda total de 2030 — con un sistema que la física operacional limita a ~90,000 pax/día bajo las condiciones documentadas en SP (escenario condicional N3).
+      <br><br>
+      Un Metro convencional dimensionado desde el PHPD real del METI produce ~167,000 — casi el doble — con 20 trenes y sin prometer headways que el benchmark documenta como inalcanzables.
+    </div>
+  </div>
+
+  <!-- SECTION 5: COMPARATIVA METI-JICA -->
+  <div class="section">
+    <div class="section-title">
+      ⑤ Comparativa metodológica METI (SD) ↔ JICA (Panamá)
+    </div>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Parámetro</th>
+            <th>JICA · Panamá L3</th>
+            <th>METI → SD (reconstrucción)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>PHPD real documentado</td>
+            <td><span class="num green">10,200</span> <span class="badge badge-n1">N1</span></td>
+            <td><span class="num green">12,800</span> <span class="badge badge-n1">N1</span></td>
+          </tr>
+          <tr>
+            <td>Factor flujo direccional</td>
+            <td>90/50 = 1.80 (hipótesis N3)</td>
+            <td>75/50 = 1.50 (hipótesis N2)</td>
+          </tr>
+          <tr>
+            <td>Carga de diseño</td>
+            <td>80% (N2)</td>
+            <td>80% (N2)</td>
+          </tr>
+          <tr>
+            <td>PHPD de diseño ajustado</td>
+            <td><span class="num">22,950</span></td>
+            <td><span class="num">24,000</span></td>
+          </tr>
+          <tr>
+            <td>Capacidad por tren</td>
+            <td>1,000 pax (Hitachi) N1</td>
+            <td>1,200 pax (Metro 6V) N2</td>
+          </tr>
+          <tr>
+            <td>Trenes necesarios</td>
+            <td>~23 operación + 3 reserva = 26 N1</td>
+            <td>20 trenes Metro</td>
+          </tr>
+          <tr>
+            <td>Capacidad diaria resultante</td>
+            <td><span class="num green">~160,000</span> N1</td>
+            <td><span class="num green">~167,000</span> N2</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="box box-fact">
+      <div class="box-label">Hallazgo central</div>
+      Dos estudios independientes — JICA para Panamá y METI para Santo Domingo — documentaron PHPD reales distintos (10,200 vs 12,800) para corredores distintos, con tecnologías distintas, y producen capacidades diarias que convergen en el mismo orden de magnitud operacional: <strong>~160,000–167,000 pax/día</strong>.
+      <br><br>
+      Esta convergencia no es coincidencia: es la física del corredor urbano con flujo pendular pronunciado operando con tecnología de transporte masivo dimensionada desde la demanda real.
+    </div>
+  </div>
+
+  <!-- SECTION 6: EL BALANCEADOR DE RED -->
+  <div class="section">
+    <div class="section-title">
+      ⑥ La interpretación correcta — balanceador de red, no línea principal
+    </div>
+
+    <p style="color:var(--muted);margin-bottom:16px;">El estudio METI no diseñó un sistema para absorber 464,800 pax/día. Diseñó un <strong>balanceador de red</strong> — un sistema que toma la presión del corredor Este y la redistribuye hacia la red existente de forma sostenible.</p>
+
+    <div class="grid-2">
+      <div class="card accent-green">
+        <div class="card-title">Lo que el METI pensó</div>
+        <div class="highlight green" style="font-size:20px;">Balanceador</div>
+        <div class="metric" style="margin-top:8px;">~167,000 pax/día desde el corredor Este → nodo de transferencia → distribución en red L1+L2+Teleférico</div>
+        <div class="metric" style="margin-top:6px;">Metro convencional · 20 trenes · headway real alcanzable · 1,200 pax/tren</div>
+      </div>
+      <div class="card accent-red">
+        <div class="card-title">Lo que el SNIP prometió</div>
+        <div class="highlight red" style="font-size:20px;">Línea principal</div>
+        <div class="metric" style="margin-top:8px;">306,000 pax/día como sistema autónomo de alta capacidad · headway 90s · operación independiente</div>
+        <div class="metric" style="margin-top:6px;">Monorriel · 17 trenes · 750 pax/tren · parámetros de línea principal sin margen de resiliencia</div>
+      </div>
+    </div>
+
+    <div class="box box-note">
+      <div class="box-label">La lógica del balanceador</div>
+      La red existente (Metro L1+L2 · 400,000 pax/día verificado · Alstom mayo 2024) ya opera. El corredor Este genera 12,800 PHPD que no tienen salida estructurada. Un sistema de ~167,000 pax/día desde ese corredor no compite con el Metro — lo alimenta. Los usuarios del corredor Este llegan al nodo de transferencia y se distribuyen en la red existente.
+      <br><br>
+      El 36% de la demanda 2030 que cubriría el Metro convencional no es insuficiencia — es la función correcta de un alimentador de red. El 64% restante lo absorben el Metro L1+L2, el Teleférico, el BRT y el transporte formal mejorado.
+    </div>
+
+    <div class="box box-warn">
+      <div class="box-label">Lo que el Monorriel SNIP rompió</div>
+      En lugar de diseñar un balanceador de 167,000 pax/día que alimenta la red, el SNIP prometió 306,000 pax/día como línea autónoma de alta capacidad con headway de 90 segundos. La física pendular extrema del corredor — documentada en Vila Prudente SP con el mismo sistema — convierte cualquier headway de 90 segundos en un cuello de botella estructural en los nodos terminales.
+      <br><br>
+      Un balanceador con headway real de 3-4 minutos y Metro de 1,200 pax/tren es exactamente lo que la demanda real del corredor puede sostener. Es lo que el METI pensó que funcionaría.
+    </div>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Posición</th>
+            <th>Tecnología</th>
+            <th>Puntuación</th>
+            <th>Brecha vs. Monorriel</th>
+            <th>Nota</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>①</strong></td>
+            <td><strong>Metro LIM (japonés)</strong></td>
+            <td><span class="num green">42/50</span></td>
+            <td><span class="num green">+18 pts</span></td>
+            <td style="font-size:11px;color:var(--muted);">Tecnología propietaria japonesa</td>
+          </tr>
+          <tr>
+            <td><strong>②</strong></td>
+            <td><strong>Metro Convencional</strong></td>
+            <td><span class="num green">36/50</span></td>
+            <td><span class="num green">+12 pts</span></td>
+            <td style="font-size:11px;color:var(--muted);">Alternativa universalmente disponible</td>
+          </tr>
+          <tr>
+            <td><strong>③</strong></td>
+            <td><strong>AGT</strong></td>
+            <td><span class="num amber">30/50</span></td>
+            <td><span class="num amber">+6 pts</span></td>
+            <td style="font-size:11px;color:var(--muted);">Tecnología guiada automática — supera al Monorriel incluso en su misma categoría</td>
+          </tr>
+          <tr>
+            <td><strong>④</strong></td>
+            <td><strong>Maglev (ferrocarril urbano)</strong></td>
+            <td><span class="num amber">26/50</span></td>
+            <td><span class="num amber">+2 pts</span></td>
+            <td style="font-size:11px;color:var(--muted);">Levitación magnética urbana</td>
+          </tr>
+          <tr style="background:var(--red-lt);">
+            <td><strong>⑤</strong></td>
+            <td><strong>Monorriel</strong></td>
+            <td><span class="num red">24/50</span></td>
+            <td><span class="num red">—</span></td>
+            <td style="font-size:11px;color:var(--muted);">Tecnología seleccionada por el SNIP</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="box box-inf">
+      <div class="box-label">Nota sobre el AGT</div>
+      El AGT obtuvo 30/50 — tercera posición, 6 puntos por encima del Monorriel. Es una tecnología de guiado automático con vía elevada conceptualmente similar al Monorriel, pero con mayor capacidad por vehículo y headway operacional más alcanzable. El hecho de que incluso el AGT superara al Monorriel indica que el problema no fue la categoría "tecnología guiada automatizada" — fue los parámetros específicos de capacidad y headway del Monorriel propuesto para el corredor.
+    </div>
+
+    <div class="box box-fact">
+      <div class="box-label">Coherencia interna del estudio METI · N1</div>
+      El METI no solo midió la demanda del corredor. En el mismo estudio evaluó cinco tecnologías con puntuación sobre 50 puntos:
+      <br><br>
+      <strong>① Metro LIM (japonés): 42/50 &nbsp;·&nbsp; ② Metro Convencional: 36/50 &nbsp;·&nbsp; ③ AGT: 30/50 &nbsp;·&nbsp; ④ Maglev (ferrocarril urbano): 26/50 &nbsp;·&nbsp; ⑤ Monorriel: 24/50</strong>
+      <br><br>
+      <em style="font-size:12px;color:var(--muted);">Nota: El Metro LIM (Linear Induction Motor) es una tecnología propietaria japonesa operada en líneas específicas del Metro de Osaka y Nagoya. Su primera posición en el ranking puede reflejar el contexto técnico japonés del estudio. El Metro Convencional (segunda posición, 36/50) es la alternativa universalmente disponible y comparable.</em>
+      <br><br>
+      El Monorriel quedó en último lugar — 18 puntos por debajo del sistema líder, 12 por debajo del Metro Convencional y solo 2 puntos por encima del penúltimo. La coherencia entre la demanda medida (12,800 PHPD) y las tecnologías recomendadas es interna al propio estudio — no es una inferencia del análisis técnico independiente. El organismo japonés que midió la demanda real del corredor descartó explícitamente el Monorriel como primera, segunda, tercera o cuarta opción.
+    </div>
+
+    <div class="question-box">
+      <div class="q-label">Hallazgo para el record</div>
+      <blockquote>
+        "El METI midió la demanda real del corredor y evaluó cinco tecnologías. Metro LIM primero (42/50). Metro Convencional segundo (36/50). Monorriel último (24/50). El SNIP eligió el último. La física del corredor solo puede sostener lo que el METI recomendó primero."
+      </blockquote>
+    </div>
+  </div>
+
+  <!-- SECTION 7: PROYECCIÓN 2060 -->
+  <div class="section">
+    <div class="section-title">
+      ⑦ Proyección 2060 — escalabilidad del balanceador
+      <span class="badge badge-n2">N2</span>
+    </div>
+
+    <p style="color:var(--muted);margin-bottom:16px;">El estudio METI proyecta 20,600 PHPD para 2060. Aplicando la misma metodología con trenes de 8 vagones (1,600 pax/tren), el balanceador escala sin cambiar la infraestructura base.</p>
+
+    <div class="chain">
+      <div class="chain-step">
+        <span class="chain-op">&nbsp;</span>
+        <span class="chain-val green">20,600</span>
+        <span class="chain-label">PHPD real documentado · METI 2060 · N1</span>
+      </div>
+      <div class="chain-step">
+        <span class="chain-op">÷</span>
+        <span class="chain-val">0.80</span>
+        <span class="chain-label">Factor de utilización adoptado para el horizonte de dimensionamiento · hipótesis N2</span>
+      </div>
+      <div class="chain-step">
+        <span class="chain-op">×</span>
+        <span class="chain-val">1.50</span>
+        <span class="chain-label">Factor direccional 75/50 (flujo 75/25) · hipótesis N2</span>
+      </div>
+      <div class="chain-step">
+        <span class="chain-op">=</span>
+        <span class="chain-val amber">38,625</span>
+        <span class="chain-label">PHPD de dimensionamiento 2060</span>
+      </div>
+      <div class="chain-step">
+        <span class="chain-op">÷</span>
+        <span class="chain-val">1,600</span>
+        <span class="chain-label">Capacidad por tren · Metro 8 vagones × 200 pax/vagón</span>
+      </div>
+      <div class="chain-step">
+        <span class="chain-op">=</span>
+        <span class="chain-val">~24.1</span>
+        <span class="chain-label">Trenes de flota necesaria (dimensionamiento) · <strong>≠ trenes/hora</strong></span>
+      </div>
+    </div>
+
+    <div class="box box-warn">
+      <div class="box-label">Los dos "24" — distinción crítica</div>
+      La cadena produce <strong>24.1 trenes de flota necesaria</strong> — unidades físicas para cubrir la exigencia crítica del corredor en 2060.
+      <br><br>
+      Simultáneamente, el METI establece un <strong>máximo de 24 trenes/hora</strong> como límite de frecuencia operacional:
+      <br><br>
+      <strong>24 trenes/hora = 60 min / 24 = 2.5 min = 150s de headway</strong>
+      <br><br>
+      Son dos variables independientes que convergen numéricamente en 24 pero representan conceptos distintos: una es flota física necesaria (24.1 unidades), la otra es frecuencia máxima operacional (24 trenes/hora). No deben conflactarse.
+    </div>
+
+    <div class="grid-2">
+      <div class="card accent-green">
+        <div class="card-title">Capacidad 2060</div>
+        <div class="highlight green">~267,000</div>
+        <div class="metric">pax/día · 24 × 1,600 × 4 × 2 / 1.15</div>
+        <div class="metric" style="margin-top:6px;"><strong>38%</strong> de la demanda total de 704,000</div>
+      </div>
+      <div class="card accent-blue">
+        <div class="card-title">Headway 2060</div>
+        <div class="highlight">150s</div>
+        <div class="metric">2.5 min · 24 trenes/hora · límite operacional</div>
+        <div class="metric" style="margin-top:6px;">vs 180s en 2030 — mejora progresiva</div>
+      </div>
+    </div>
+
+    <div class="box box-inf">
+      <div class="box-label">Sensibilidad del factor de utilización 2060</div>
+      El resultado de 2060 es sensible al factor de utilización adoptado — una hipótesis que se fija tres décadas antes. La tabla muestra cómo varía el PHPD de dimensionamiento según el factor elegido:
+      <br><br>
+      <table style="width:100%;font-size:12px;border-collapse:collapse;margin-top:8px;">
+        <thead>
+          <tr style="background:var(--navy);color:rgba(255,255,255,.7);">
+            <th style="padding:6px 10px;text-align:left;">Factor utilización</th>
+            <th style="padding:6px 10px;text-align:left;">PHPD dimensionamiento</th>
+            <th style="padding:6px 10px;text-align:left;">Trenes necesarios</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid var(--rule);">
+            <td style="padding:6px 10px;"><strong>80%</strong> (hipótesis base)</td>
+            <td style="padding:6px 10px;font-family:monospace;color:var(--amber);">38,625</td>
+            <td style="padding:6px 10px;font-family:monospace;">~24.1</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--rule);">
+            <td style="padding:6px 10px;">85%</td>
+            <td style="padding:6px 10px;font-family:monospace;">36,353</td>
+            <td style="padding:6px 10px;font-family:monospace;">~22.7</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--rule);">
+            <td style="padding:6px 10px;">90%</td>
+            <td style="padding:6px 10px;font-family:monospace;">34,333</td>
+            <td style="padding:6px 10px;font-family:monospace;">~21.5</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--rule);">
+            <td style="padding:6px 10px;">95%</td>
+            <td style="padding:6px 10px;font-family:monospace;">32,526</td>
+            <td style="padding:6px 10px;font-family:monospace;">~20.3</td>
+          </tr>
+          <tr>
+            <td style="padding:6px 10px;">100%</td>
+            <td style="padding:6px 10px;font-family:monospace;">30,900</td>
+            <td style="padding:6px 10px;font-family:monospace;">~19.3</td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      Si el factor de utilización real en 2060 es 90% en lugar de 80%, la flota necesaria baja de ~24 a ~21 trenes. El resultado es sensible a esta hipótesis — lo que convierte el análisis en una prueba de falsabilidad, no en una predicción inmutable.
+    </div>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Horizonte</th>
+            <th>PHPD METI</th>
+            <th>PHPD diseño</th>
+            <th>Vagones/tren</th>
+            <th>Trenes op.</th>
+            <th>Headway</th>
+            <th>Cap. diaria</th>
+            <th>Cobertura</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>2030</strong></td>
+            <td><span class="num">12,800</span> <span class="badge badge-n1">N1</span></td>
+            <td><span class="num">24,000</span></td>
+            <td>6V · 1,200 pax</td>
+            <td>20 + 3</td>
+            <td><span class="num green">180s</span></td>
+            <td><span class="num green">~167,000</span></td>
+            <td><span class="num amber">36%</span></td>
+          </tr>
+          <tr>
+            <td><strong>2060</strong></td>
+            <td><span class="num">20,600</span> <span class="badge badge-n1">N1</span></td>
+            <td><span class="num">38,625</span></td>
+            <td>8V · 1,600 pax</td>
+            <td>24 + 3</td>
+            <td><span class="num green">150s</span></td>
+            <td><span class="num green">~267,000</span></td>
+            <td><span class="num amber">38%</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="box box-fact">
+      <div class="box-label">Hallazgo final · El balanceador escala sin reconstruir</div>
+      El sistema crece escalando vagones (6→8) y añadiendo solo 4 trenes operativos en 30 años. El headway mejora de 180s a 150s conforme crece la demanda. La cobertura se mantiene estable en 36-38% — no como falla sino como función de red constante y sostenible.
+      <br><br>
+      <strong>Diseño de ingeniería. No promesa de venta.</strong>
+    </div>
+  </div>
+
+
+  <!-- SECTION 8: LAS DOS CADENAS -->
+  <div class="section">
+    <div class="section-title">
+      ⑧ Las dos cadenas — Metro vs. Monorriel bajo las mismas hipótesis
+    </div>
+
+    <p style="color:var(--muted);margin-bottom:16px;">Aplicando coherentemente la misma lógica de reconstrucción a los dos sistemas bajo las mismas hipótesis declaradas, aparece una distinción fundamental. Ninguna cadena afirma capacidad operacional verificada — ambas son reconstrucciones bajo hipótesis explícitas N2.</p>
+
+    <div class="grid-2">
+      <div class="card accent-green">
+        <div class="card-title">Metro — reconstrucción METI</div>
+        <div class="chain" style="margin:8px 0;padding:12px;">
+          <div class="chain-step">
+            <span class="chain-val green">12,800</span>
+            <span class="chain-label">PHPD METI · N1</span>
+          </div>
+          <div class="chain-step">
+            <span class="chain-op">→</span>
+            <span class="chain-val">24,000</span>
+            <span class="chain-label">× 1.50 / 0.80</span>
+          </div>
+          <div class="chain-step">
+            <span class="chain-op">→</span>
+            <span class="chain-val green">~167,000</span>
+            <span class="chain-label">× 4 × 2 / 1.15</span>
+          </div>
+          <div class="chain-step">
+            <span class="chain-op">→</span>
+            <span class="chain-val green">36%</span>
+            <span class="chain-label">de 464,800</span>
+          </div>
+        </div>
+      </div>
+      <div class="card accent-amber">
+        <div class="card-title">Monorriel — transformación comparativa desde SP</div>
+        <div class="chain" style="margin:8px 0;padding:12px;">
+          <div class="chain-step">
+            <span class="chain-val amber">162,000</span>
+            <span class="chain-label">benchmark SP · N1</span>
+          </div>
+          <div class="chain-step">
+            <span class="chain-op">×</span>
+            <span class="chain-val">0.75</span>
+            <span class="chain-label">ratio capacidad/tren SD/SP</span>
+          </div>
+          <div class="chain-step">
+            <span class="chain-op">÷</span>
+            <span class="chain-val">1.50</span>
+            <span class="chain-label">factor flujo 75/25</span>
+          </div>
+          <div class="chain-step">
+            <span class="chain-op">×</span>
+            <span class="chain-val">1.20</span>
+            <span class="chain-label">(90/75) · reescala de flujo 75/25 a 90/10 para comparabilidad con SP · hipótesis N3</span>
+          </div>
+          <div class="chain-step">
+            <span class="chain-op">→</span>
+            <span class="chain-val amber">~97,200</span>
+            <span class="chain-label">resultado comparativo · no capacidad operacional</span>
+          </div>
+          <div class="chain-step">
+            <span class="chain-op">→</span>
+            <span class="chain-val amber">21%</span>
+            <span class="chain-label">de 464,800</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Escenario</th>
+            <th>Cadena</th>
+            <th>Resultado</th>
+            <th>% de 464,800</th>
+            <th>Nivel</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Metro · reconstrucción METI</strong></td>
+            <td style="font-size:11px;">12,800 → 24,000 → 167,000</td>
+            <td><span class="num green">~167,000</span></td>
+            <td><span class="num green">36%</span></td>
+            <td><span class="badge badge-n2">N2</span></td>
+          </tr>
+          <tr>
+            <td><strong>Monorriel · cadena comparativa SP</strong></td>
+            <td style="font-size:11px;">162,000 × 0.75 ÷ 1.50 × (90/75) · reescala comparativa</td>
+            <td><span class="num amber">~97,200</span></td>
+            <td><span class="num amber">21%</span></td>
+            <td><span class="badge badge-n2">N2</span></td>
+          </tr>
+          <tr>
+            <td><strong>Monorriel · 17t headway nominal 90s</strong></td>
+            <td style="font-size:11px;">40 t/h × 750 × 4 × 2 / 1.15</td>
+            <td><span class="num red">~209,000</span></td>
+            <td><span class="num red">45%</span></td>
+            <td><span class="badge badge-n3">N3 promesa</span></td>
+          </tr>
+          <tr>
+            <td><strong>Monorriel · 17t headway real SP (170s)</strong></td>
+            <td style="font-size:11px;">21 t/h × 750 × 4 × 2 / 1.15</td>
+            <td><span class="num amber">~110,000</span></td>
+            <td><span class="num amber">24%</span></td>
+            <td><span class="badge badge-n3">N3 analogía</span></td>
+          </tr>
+          <tr>
+            <td><strong>Diferencia Metro vs. cadena Monorriel</strong></td>
+            <td style="font-size:11px;">167,000 − 97,200</td>
+            <td><span class="num red">~70,000</span></td>
+            <td><span class="num red">15 pp</span></td>
+            <td>—</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="box box-warn">
+      <div class="box-label">Advertencia metodológica — los 17 trenes no aparecen en la cadena comparativa</div>
+      La expresión 162,000 × 0.75 ÷ 1.50 × (90/75) = 97,200 <strong>no puede presentarse como la capacidad operacional de 17 trenes Monorriel</strong>. Es una transformación comparativa que reescala el benchmark SP sucesivamente por tres factores: capacidad por tren (0.75), flujo de red RD (÷1.50) y reescala a flujo SP para comparabilidad (×90/75).
+      <br><br>
+      El factor (90/75) no introduce el flujo pendular real de SD — introduce una reescala para mantener comparabilidad con el benchmark SP que opera en 90/10. Si el flujo real de SD es 75/25, ese factor no aplicaría y el resultado sería 81,000 (sin el ×1.20).
+      <br><br>
+      Para calcular qué aportan realmente <strong>17 trenes de 750 pax/tren</strong> se requiere introducir explícitamente el headway real, el ciclo completo, la frecuencia y la utilización de flota. El headway nominal de 90s produce ~209,000 (promesa no verificada · N3). El headway real de SP (170s) produce ~110,000 (analogía N3). <strong>Los 17 trenes no son automáticamente 17 trenes/hora.</strong>
+    </div>
+
+    <div class="box box-note">
+      <div class="box-label">La distinción que cierra el argumento</div>
+      El <strong>36%</strong> y el <strong>21%</strong> no se declaran como capacidades verdaderas. Son resultados de dos cadenas de reconstrucción bajo hipótesis explícitas. Lo que sí es verificable es la diferencia entre los dos sistemas bajo los mismos parámetros: el Metro convencional dimensionado desde el PHPD real produce aproximadamente <strong>15 puntos porcentuales más</strong> de cobertura que el Monorriel bajo la misma lógica comparativa.
+      <br><br>
+      Esa diferencia — no las cifras absolutas — es el hallazgo metodológicamente defendible.
+    </div>
+  </div>
+
+
+
+  <!-- NOTA METODOLÓGICA -->
+  <div class="note-meth">
+    <strong>Nota metodológica:</strong> Esta reconstrucción algebraica parte del dato N1 verificado del estudio METI (12,800 PHPD · <a href="https://www.meti.go.jp/meti_lib/report/2023FY/000401.pdf" target="_blank" style="color:var(--blue);">PDF oficial meti.go.jp</a>) y aplica parámetros N2 coherentes con la metodología JICA/Panamá. El resultado (~167,000 pax/día) es una estimación de orden de magnitud, no una proyección operacional validada. El factor de flujo 75/25 y el factor de punta 1.15 son hipótesis del autor. El dato METI de 12,800 PHPD a 2030 es el único elemento N1 de la cadena — verificable directamente en el informe oficial.
+    <br><br>
+    <strong>Sobre la proyección 2060:</strong> el PHPD de 20,600 es N1 (METI). El factor de utilización (80%), el factor direccional (75/50) y el factor de punta (1.15) son hipótesis del autor N2. La capacidad resultante (~267,000 pax/día) es una estimación de orden de magnitud sujeta a la sensibilidad mostrada en la tabla de la Sección 7.
+    <br><br>
+    <strong>Sobre la Sección 8 (Las dos cadenas):</strong> las dos cadenas comparativas (Metro ~167,000 vs. Monorriel ~97,200) son transformaciones bajo las mismas hipótesis N2. El factor (90/75) en la cadena del Monorriel es una reescala de flujo 75/25 a 90/10 para mantener comparabilidad con el benchmark SP — no una afirmación sobre el flujo pendular real de SD. Si el flujo real de SD es 75/25, el factor no aplica y el resultado comparativo sería 81,000. Los escenarios adicionales del Monorriel (209,000 con headway nominal 90s y 110,000 con headway real SP 170s) son N3. Los 17 trenes no equivalen automáticamente a 17 trenes/hora.
+    <br><br>
+    Este documento es un registro interno del análisis técnico independiente. No ha sido publicado como post de LinkedIn. El capítulo SP·SD·Panamá está cerrado — este hallazgo queda para el record.
+  </div>
+
+  <!-- FOOTER -->
+  <div class="doc-footer">
+    <div>
+      <span class="author">Ing. Piter J. Bonilla D.</span> · CODIA #17378 · Análisis Técnico Independiente
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:4px 12px;">
+      <a href="https://visualcrp.com/SPSD.html">Convergencia</a> ·
+      <a href="https://visualcrp.com/AUDIT.html">Auditoría Integral</a> ·
+      <a href="https://visualcrp.com/embudo.html">El Embudo</a> ·
+      <a href="https://visualcrp.com/L15Prata.html">L15-Prata</a> ·
+      <a href="https://visualcrp.com/pendular9010.html">Flujo Pendular 90/10</a> ·
+      <a href="https://visualcrp.com/ResilienciaOperativa.html">Resiliencia Operativa</a> ·
+      <a href="https://visualcrp.com/PadreEHijo.html">Padre e Hijo</a>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function toggleTheme() {
+  const h = document.getElementById('html-root');
+  h.classList.toggle('light'); h.classList.toggle('dark');
+  document.getElementById('theme-btn').innerHTML =
+    h.classList.contains('light') ? '🌙 Oscuro' : '☀︎ Claro';
+}
+</script>
+</body>
+</html>
