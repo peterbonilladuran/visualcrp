@@ -873,8 +873,8 @@ html[lang="en"] span.es { display: none; }
     <div class="series-title es">ICOD — Automatización LiDAR en Túneles</div>
     <div class="series-title en">ICOD — LiDAR Automation in Tunnels</div>
 
-    <div class="narrative es">Aplicación Excel VBA–AutoCAD Civil 3D DDE desarrollada en 2 semanas para automatizar la generación de secciones transversales de túnel desde datos de escáner láser de alta densidad. El problema: los datos del escáner producían nubes de puntos tan densas que ninguna herramienta comercial podía manejarlas en el contexto operacional del proyecto. La solución: ICOD procesó 4,000+ puntos por sección generando <strong>2,800 secciones en dos túneles de desvío paralelos</strong> con reducción del 75% en tiempo de drafting.</div>
-    <div class="narrative en">Excel VBA–AutoCAD Civil 3D DDE application developed in 2 weeks to automate the generation of tunnel cross-sections from high-density laser scanner data. The problem: scanner data produced point clouds so dense that no commercial tool could handle them in the project's operational context. The solution: ICOD processed 4,000+ points per section generating <strong>2,800 sections across two parallel diversion tunnels</strong> with a 75% reduction in drafting time.</div>
+    <div class="narrative es">Aplicación Excel VBA–AutoCAD Civil 3D DDE desarrollada en 2 semanas para automatizar la generación de secciones transversales de túnel desde datos de escáner láser de alta densidad. El problema: los datos del escáner producían nubes de puntos muy densas que había que convertir en secciones directamente en AutoCAD, en los plazos de la obra. La solución: ICOD procesó 4,000+ puntos por sección generando <strong>2,800 secciones en dos túneles de desvío paralelos</strong> con reducción del 75% en tiempo de drafting.</div>
+    <div class="narrative en">Excel VBA–AutoCAD Civil 3D DDE application developed in 2 weeks to automate the generation of tunnel cross-sections from high-density laser scanner data. The problem: scanner data produced very dense point clouds that had to be turned into sections directly in AutoCAD, on the construction schedule. The solution: ICOD processed 4,000+ points per section generating <strong>2,800 sections across two parallel diversion tunnels</strong> with a 75% reduction in drafting time.</div>
 
     <div class="hl es"><strong>Nota técnica importante:</strong> ICOD es exclusivo del Proyecto Montegrande. Los túneles de Palomino utilizan el Sistema de Secciones (Serie 501-517) para el control de excavación — una herramienta diferente para un contexto diferente.</div>
     <div class="hl en"><strong>Important technical note:</strong> ICOD is exclusive to the Montegrande Project. The Palomino tunnels use the Sections System (Series 501-517) for excavation control — a different tool for a different context.</div>
@@ -1079,7 +1079,7 @@ document.querySelectorAll('.qn-btn[data-section]').forEach(btn => {
 });
 
 // Set default
-document.getElementById('html-root').setAttribute('lang', 'es');
+setLang('en');
 </script>
 </body>
 </html>
