@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="AC&P – Sistema de Análisis de Costos y Presupuestos para construcción. Arquitectura bifile, factorización inversa, doble contabilidad. Por Ing. Piter J. Bonilla D.">
+<meta name="description" content="AC&P – Sistema de Análisis de Costos y Presupuestos para construcción. Arquitectura bifile, factorización inversa, doble contabilidad. Por Piter Bonilla, Ingeniero Civil Colegiado — CODIA #17378 (República Dominicana).">
 <title>AC&P · Análisis de Costos y Presupuestos</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@400;500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
@@ -366,7 +366,7 @@ a:hover { text-decoration: underline; }
 .hero-stats {
   margin-top: 4rem;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 1px;
   background: rgba(255,255,255,0.06);
   border: 1px solid rgba(255,255,255,0.06);
@@ -1480,11 +1480,11 @@ section:nth-child(even) {
       Un sistema que no compite con su ERP — lo completa.
     </p>
     <div class="hero-meta">
-      <span class="hero-meta-item">Ing. Piter J. Bonilla D.</span>
+      <span class="hero-meta-item">Piter Bonilla</span>
       <span class="hero-meta-sep">·</span>
-      <span class="hero-meta-item">CODIA 17378</span>
+      <span class="hero-meta-item">Ingeniero Civil Colegiado — CODIA #17378 (República Dominicana)</span>
       <span class="hero-meta-sep">·</span>
-      <span class="hero-meta-item">v2.0 · Febrero 2026</span>
+      <span class="hero-meta-item">v2.0 · Octubre 2026</span>
     </div>
     <div class="hero-badges">
       <span class="hero-badge hero-badge-outline">Excel VBA</span>
@@ -1493,10 +1493,6 @@ section:nth-child(even) {
       <span class="hero-badge hero-badge-fill">Doble Contabilidad</span>
     </div>
     <div class="hero-stats">
-      <div class="hero-stat">
-        <div class="hero-stat-num">92</div>
-        <div class="hero-stat-label">Puntuación global / 100</div>
-      </div>
       <div class="hero-stat">
         <div class="hero-stat-num">10</div>
         <div class="hero-stat-label">Reportes estratégicos automáticos</div>
@@ -1677,15 +1673,16 @@ section:nth-child(even) {
         <div class="inv-arrow">→</div>
         <div class="inv-box">
           <div class="inv-box-label">Motor de Cálculo</div>
-          <div class="inv-box-value" style="font-size:0.85rem;color:rgba(255,255,255,0.4)">f(x) = objetivo / base</div>
+          <div class="inv-box-value" style="font-size:0.85rem;color:rgba(255,255,255,0.4)">f<sub>mat</sub> = (objetivo − M.O. con cargas sociales − equipos) ÷ materiales base</div>
         </div>
         <div class="inv-arrow">→</div>
         <div class="inv-box result">
-          <div class="inv-box-label">Factor Calculado</div>
+          <div class="inv-box-label">Factor de Materiales</div>
           <div class="inv-box-value">1.07037…</div>
         </div>
       </div>
       <p class="inverse-demo-note">* Basado en Costos Directos base = 23,407,355.43 · Precisión 14 dígitos significativos · Validado en capturas SS 03 y SS 08</p>
+      <p class="inverse-demo-note" id="inv-method">Método: se parte de los análisis de precios unitarios base; a la mano de obra se aplica un factor variable (dinámico) de cargas sociales; luego el factor de materiales se despeja para que el total alcance el precio objetivo, y se generan los análisis factorizados para presentación. Por eso el factor de materiales no equivale a objetivo ÷ base.</p>
     </div>
 
     <div class="reveal" style="margin-top:1.5rem;padding:1.25rem 1.5rem;border:1px solid var(--rule);border-radius:var(--r-lg);background:var(--white);font-size:0.84rem;color:var(--steel)">
@@ -1849,7 +1846,7 @@ section:nth-child(even) {
     <div class="section-header reveal">
       <span class="label">05 · Casos de Uso</span>
       <h2 class="section-title">Situaciones reales. Soluciones concretas.</h2>
-      <p class="section-sub">Cinco escenarios que demuestran el valor operativo del sistema en condiciones de obra real.</p>
+      <p class="section-sub">Tres escenarios que demuestran el valor operativo del sistema en condiciones de obra real.</p>
     </div>
 
     <div class="cases-grid reveal">
@@ -1883,6 +1880,10 @@ section:nth-child(even) {
           <div class="case-result">Los analistas actualizan la base; cada presupuestista decide cuándo sincronizar. Cero conflictos.</div>
         </div>
       </div>
+    </div>
+
+    <div class="reveal" id="applied-on" style="margin-top:1.5rem;padding:1.25rem 1.5rem;border:1px solid var(--rule);border-radius:var(--r-lg);background:var(--white);font-size:0.84rem;color:var(--steel)">
+      <strong style="color:var(--ink)">Aplicado en:</strong> Hidroeléctrica Palomino — presupuesto de viviendas del campamento (sub-presupuestos mensuales de materiales y mano de obra) · Muestra EE. UU. — presupuesto eléctrico, Greensboro NC (<a href="https://visualcrp.com/SampleUS.pdf" target="_blank" rel="noopener" style="color:var(--teal);text-decoration:none;border-bottom:1px solid rgba(26,107,114,0.4)">Doc 503A, $508,500</a>)
     </div>
   </div>
 </section>
@@ -1957,25 +1958,6 @@ section:nth-child(even) {
           </tr>
         </tbody>
       </table>
-    </div>
-
-    <div class="nx-factors reveal">
-      <div class="nx-item">
-        <div class="nx-val">5×</div>
-        <div class="nx-label">Más potente en ingeniería de precios inversa</div>
-      </div>
-      <div class="nx-item">
-        <div class="nx-val">100×</div>
-        <div class="nx-label">Más rápido en actualización de presupuestos históricos</div>
-      </div>
-      <div class="nx-item">
-        <div class="nx-val">5×</div>
-        <div class="nx-label">Superior en protección de propiedad intelectual</div>
-      </div>
-      <div class="nx-item">
-        <div class="nx-val">92</div>
-        <div class="nx-label">Puntuación global en evaluación exhaustiva / 100</div>
-      </div>
     </div>
   </div>
 </section>
@@ -2123,8 +2105,8 @@ section:nth-child(even) {
   <div class="container footer-inner">
     <div class="footer-brand">AC<span class="brand-amp">&amp;</span>P · Sistema de Análisis de Costos y Presupuestos</div>
     <div class="footer-meta">
-      Ing. Piter J. Bonilla D. · CODIA 17378 · Elizabeth, NJ · <a href="https://visualcrp.com/PortfolioCompetencyEvidenceIndex.html" target="_blank" rel="noopener" style="color:var(--gold);text-decoration:none;">Competency Evidence Index</a> · <a href="https://visualcrp.com/portfolio.html" target="_blank" rel="noopener" style="color:var(--gold);text-decoration:none;">Portfolio</a> · <a href="https://visualcrp.com/resume.html" target="_blank" rel="noopener" style="color:var(--gold);text-decoration:none;">Resume</a><br>
-      v2.0 · Julio 2026 · <a href="https://visualcrp.com/Sample.pdf" target="_blank" rel="noopener" style="color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(200,168,75,0.4);transition:border-color 0.2s" onmouseover="this.style.borderBottomColor='var(--gold)'" onmouseout="this.style.borderBottomColor='rgba(200,168,75,0.4)'">Muestra RD</a> · <a href="https://visualcrp.com/SampleUS.pdf" target="_blank" rel="noopener" style="color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(200,168,75,0.4);transition:border-color 0.2s" onmouseover="this.style.borderBottomColor='var(--gold)'" onmouseout="this.style.borderBottomColor='rgba(200,168,75,0.4)'">Muestra US · Doc 503A</a>
+      Piter Bonilla · Ingeniero Civil Colegiado — CODIA #17378 (República Dominicana) · Elizabeth, NJ<br><a href="mailto:peterbonilla@hotmail.com" style="color:var(--gold);text-decoration:none;">peterbonilla@hotmail.com</a> · <a href="tel:+13362687426" style="color:var(--gold);text-decoration:none;">+1 (336) 268-7426</a><br><a href="https://visualcrp.com/PortfolioCompetencyEvidenceIndex.html" target="_blank" rel="noopener" style="color:var(--gold);text-decoration:none;">Competency Evidence Index</a> · <a href="https://visualcrp.com/portfolio.html" target="_blank" rel="noopener" style="color:var(--gold);text-decoration:none;">Portfolio</a> · <a href="https://visualcrp.com/resume.html" target="_blank" rel="noopener" style="color:var(--gold);text-decoration:none;">Resume</a><br>
+      v2.0 · Octubre 2026 · <a href="https://visualcrp.com/Sample.pdf" target="_blank" rel="noopener" style="color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(200,168,75,0.4);transition:border-color 0.2s" onmouseover="this.style.borderBottomColor='var(--gold)'" onmouseout="this.style.borderBottomColor='rgba(200,168,75,0.4)'">Muestra RD</a> · <a href="https://visualcrp.com/SampleUS.pdf" target="_blank" rel="noopener" style="color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(200,168,75,0.4);transition:border-color 0.2s" onmouseover="this.style.borderBottomColor='var(--gold)'" onmouseout="this.style.borderBottomColor='rgba(200,168,75,0.4)'">Muestra US · Doc 503A</a>
     </div>
   </div>
 </footer>
@@ -2137,7 +2119,7 @@ section:nth-child(even) {
 const i18n = {
   es: {
     /* META */
-    'meta.desc': 'AC&P – Sistema de Análisis de Costos y Presupuestos para construcción. Arquitectura bifile, factorización inversa, doble contabilidad. Por Ing. Piter J. Bonilla D.',
+    'meta.desc': 'AC&P – Sistema de Análisis de Costos y Presupuestos para construcción. Arquitectura bifile, factorización inversa, doble contabilidad. Por Piter Bonilla, Ingeniero Civil Colegiado — CODIA #17378 (República Dominicana).',
     'meta.title': 'AC&P · Análisis de Costos y Presupuestos',
     /* TOPBAR */
     'nav.filosofia': 'Filosofía',
@@ -2152,14 +2134,13 @@ const i18n = {
     'hero.eyebrow': 'Sistema de Inteligencia de Costos · Construcción',
     'hero.title': 'AC<span class="hero-amp">&amp;</span>P<br>Análisis de<br>Costos y<br>Presupuestos',
     'hero.tagline': '<strong>Potencia que resuelve · Claridad que transforma.</strong><br>Arquitectura bifile, doble contabilidad, factorización inversa y dimensión temporal. Un sistema que no compite con su ERP — lo completa.',
-    'hero.meta1': 'Ing. Piter J. Bonilla D.',
-    'hero.meta2': 'CODIA 17378',
-    'hero.meta3': 'v2.0 · Febrero 2026',
+    'hero.meta1': 'Piter Bonilla',
+    'hero.meta2': 'Ingeniero Civil Colegiado — CODIA #17378 (República Dominicana)',
+    'hero.meta3': 'v2.0 · Octubre 2026',
     'hero.badge1': 'Excel VBA',
     'hero.badge2': 'Factorización Inversa',
     'hero.badge3': '10 Reportes Automáticos',
     'hero.badge4': 'Doble Contabilidad',
-    'hero.stat1.lbl': 'Puntuación global / 100',
     'hero.stat2.lbl': 'Reportes estratégicos automáticos',
     'hero.stat3.lbl': 'Archivos. Arquitectura bifile',
     'hero.stat4.lbl': 'Curva de aprendizaje. Ya sabes Excel',
@@ -2215,7 +2196,9 @@ const i18n = {
     's2.inv.title': '🧮 Factorización Inversa · De precio objetivo a factor',
     's2.inv.lbl1': 'Precio Objetivo',
     's2.inv.lbl2': 'Motor de Cálculo',
-    's2.inv.lbl3': 'Factor Calculado',
+    's2.inv.lbl3': 'Factor de Materiales',
+    's2.inv.formula': 'f<sub>mat</sub> = (objetivo − M.O. con cargas sociales − equipos) ÷ materiales base',
+    's2.inv.method': 'Método: se parte de los análisis de precios unitarios base; a la mano de obra se aplica un factor variable (dinámico) de cargas sociales; luego el factor de materiales se despeja para que el total alcance el precio objetivo, y se generan los análisis factorizados para presentación. Por eso el factor de materiales no equivale a objetivo ÷ base.',
     's2.inv.note': '* Basado en Costos Directos base = 23,407,355.43 · Precisión 14 dígitos significativos · Validado en capturas SS 03 y SS 08',
     's2.itbis.note': '<strong>ITBIS transparente:</strong> Cada APU factorizado incluye un campo explícito de ITBIS (18%) o marca "No Aplica" si el APU no contiene materiales (solo M.O. o equipos). La lógica está en la composición del APU, no en marcas manuales.',
     's2.itbis.equiv': '* ITBIS = Impuesto dominicano a materiales. Equivalente a IVA (España/LATAM) · VAT (UK) · Sales Tax (USA) · GST (Canadá, Australia)',
@@ -2260,7 +2243,7 @@ const i18n = {
     /* S5 CASOS */
     's5.label': '05 · Casos de Uso',
     's5.title': 'Situaciones reales. Soluciones concretas.',
-    's5.sub': 'Cinco escenarios que demuestran el valor operativo del sistema en condiciones de obra real.',
+    's5.sub': 'Tres escenarios que demuestran el valor operativo del sistema en condiciones de obra real.',
     's5.c1.num': 'CASO 01', 's5.c1.title': 'Actualización de presupuesto histórico',
     's5.c1.scenario': 'Un cliente retoma un proyecto después de dos años. Los precios han cambiado. Con el método tradicional, rehacer el presupuesto toma días.',
     's5.c1.result': 'Cambiar base de datos + un clic = presupuesto actualizado en segundos.',
@@ -2269,6 +2252,7 @@ const i18n = {
     's5.c2.result': 'Reconectar la plantilla a la base regional. Precios reales, cero reingresos.',
     's5.c3.num': 'CASO 03', 's5.c3.title': 'Múltiples equipos en paralelo',
     's5.c3.scenario': '5 presupuestistas y 2 analistas de costos trabajando simultáneamente. Con hojas manuales, las versiones conflictivas son inevitables.',
+    's5.applied': '<strong style="color:var(--ink)">Aplicado en:</strong> Hidroeléctrica Palomino — presupuesto de viviendas del campamento (sub-presupuestos mensuales de materiales y mano de obra) · Muestra EE. UU. — presupuesto eléctrico, Greensboro NC (<a href="https://visualcrp.com/SampleUS.pdf" target="_blank" rel="noopener" style="color:var(--teal);text-decoration:none;border-bottom:1px solid rgba(26,107,114,0.4)">Doc 503A, $508,500</a>)',
     's5.c3.result': 'Los analistas actualizan la base; cada presupuestista decide cuándo sincronizar. Cero conflictos.',
     /* S6 VENTAJAS */
     's6.label': '06 · Ventajas Diferenciales',
@@ -2283,10 +2267,6 @@ const i18n = {
     's6.r6.asp': 'Trazabilidad', 's6.r6.bad': 'Casi nula', 's6.r6.med': 'Financiera, no técnica', 's6.r6.good': 'Del insumo al presupuesto',
     's6.r7.asp': 'Costo de implementación', 's6.r7.bad': 'Bajo pero ROI negativo', 's6.r7.med': 'Alto · Licencias + capacitación', 's6.r7.good': 'Bajo · Sin licencias adicionales',
     's6.r8.asp': 'Trabajo colaborativo', 's6.r8.bad': 'Versiones conflictivas', 's6.r8.med': 'Colaboración centralizada', 's6.r8.good': 'Arquitectura bifile · Sin conflictos',
-    's6.nx1.lbl': 'Más potente en ingeniería de precios inversa',
-    's6.nx2.lbl': 'Más rápido en actualización de presupuestos históricos',
-    's6.nx3.lbl': 'Superior en protección de propiedad intelectual',
-    's6.nx4.lbl': 'Puntuación global en evaluación exhaustiva / 100',
     /* S7 ENR */
     's7.label': '07 · Análisis Estratégico ENR',
     's7.title': 'La capa analítica transversal',
@@ -2332,11 +2312,11 @@ const i18n = {
     's7.itbis.b4': 'Conciliación con facturas del ERP. Diferencias = acopio documentado. Respuesta sólida.',
     /* FOOTER */
     'footer.brand': 'AC<span style="font-family:Georgia,serif;font-style:italic;font-weight:400;color:var(--gold)">&amp;</span>P · Sistema de Análisis de Costos y Presupuestos',
-    'footer.meta': 'Ing. Piter J. Bonilla D. · CODIA 17378 · Elizabeth, NJ · <a href="https://visualcrp.com/PortfolioCompetencyEvidenceIndex.html" target="_blank" style="color:var(--gold);text-decoration:none;">Competency Evidence Index</a> · <a href="https://visualcrp.com/portfolio.html" target="_blank" style="color:var(--gold);text-decoration:none;">Portfolio</a> · <a href="https://visualcrp.com/resume.html" target="_blank" style="color:var(--gold);text-decoration:none;">Resume</a><br>v2.0 · Julio 2026 · <a href="https://visualcrp.com/Sample.pdf" target="_blank" rel="noopener" style="color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(200,168,75,0.4)">Muestra RD</a> · <a href=\"https://visualcrp.com/SampleUS.pdf\" target=\"_blank\" style=\"color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(200,168,75,0.4)\">Muestra US · Doc 503A</a>',
+    'footer.meta': 'Piter Bonilla · Ingeniero Civil Colegiado — CODIA #17378 (República Dominicana) · Elizabeth, NJ<br><a href="mailto:peterbonilla@hotmail.com" style="color:var(--gold);text-decoration:none;">peterbonilla@hotmail.com</a> · <a href="tel:+13362687426" style="color:var(--gold);text-decoration:none;">+1 (336) 268-7426</a><br><a href="https://visualcrp.com/PortfolioCompetencyEvidenceIndex.html" target="_blank" style="color:var(--gold);text-decoration:none;">Competency Evidence Index</a> · <a href="https://visualcrp.com/portfolio.html" target="_blank" style="color:var(--gold);text-decoration:none;">Portfolio</a> · <a href="https://visualcrp.com/resume.html" target="_blank" style="color:var(--gold);text-decoration:none;">Resume</a><br>v2.0 · Octubre 2026 · <a href="https://visualcrp.com/Sample.pdf" target="_blank" rel="noopener" style="color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(200,168,75,0.4)">Muestra RD</a> · <a href=\"https://visualcrp.com/SampleUS.pdf\" target=\"_blank\" style=\"color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(200,168,75,0.4)\">Muestra US · Doc 503A</a>',
   },
 
   en: {
-    'meta.desc': 'AC&P – Construction Cost Analysis & Budgeting System. Bifile architecture, inverse factorization, dual accounting. By Eng. Piter J. Bonilla D.',
+    'meta.desc': 'AC&P – Construction Cost Analysis & Budgeting System. Bifile architecture, inverse factorization, dual accounting. By Piter Bonilla, Licensed Civil Engineer — CODIA #17378 (Dominican Republic).',
     'meta.title': 'AC&P · Cost Analysis & Budgeting System',
     'nav.filosofia': 'Philosophy',
     'nav.componentes': 'Components',
@@ -2349,14 +2329,13 @@ const i18n = {
     'hero.eyebrow': 'Cost Intelligence System · Construction',
     'hero.title': 'AC<span class="hero-amp">&amp;</span>P<br>Cost Analysis<br>Budgeting<br>System',
     'hero.tagline': '<strong>Power that solves · Clarity that transforms.</strong><br>Bifile architecture, dual accounting, inverse factorization and time dimension. A system that doesn\'t compete with your ERP — it completes it.',
-    'hero.meta1': 'Eng. Piter J. Bonilla D.',
-    'hero.meta2': 'CODIA 17378',
-    'hero.meta3': 'v2.0 · February 2026',
+    'hero.meta1': 'Piter Bonilla',
+    'hero.meta2': 'Licensed Civil Engineer — CODIA #17378 (Dominican Republic)',
+    'hero.meta3': 'v2.0 · October 2026',
     'hero.badge1': 'Excel VBA',
     'hero.badge2': 'Inverse Factorization',
     'hero.badge3': '10 Automatic Reports',
     'hero.badge4': 'Dual Accounting',
-    'hero.stat1.lbl': 'Global score / 100',
     'hero.stat2.lbl': 'Automatic strategic reports',
     'hero.stat3.lbl': 'Files. Bifile architecture',
     'hero.stat4.lbl': 'Learning curve. You already know Excel',
@@ -2410,7 +2389,9 @@ const i18n = {
     's2.inv.title': '🧮 Inverse Factorization · From target price to factor',
     's2.inv.lbl1': 'Target Price',
     's2.inv.lbl2': 'Calculation Engine',
-    's2.inv.lbl3': 'Calculated Factor',
+    's2.inv.lbl3': 'Materials Factor',
+    's2.inv.formula': 'f<sub>mat</sub> = (target − labor with social burden − equipment) ÷ base materials',
+    's2.inv.method': 'Method: start from the base unit price analyses; apply a variable (dynamic) social-burden factor to labor; then the materials factor is solved so the total reaches the target price, and the factored analyses are generated for submission. That is why the materials factor differs from target ÷ base.',
     's2.inv.note': '* Based on base Direct Costs = 23,407,355.43 · 14 significant digit precision · Validated in screenshots SS 03 and SS 08',
     's2.itbis.note': '<strong>Transparent tax:</strong> Each factorized APU includes an explicit tax field (18%) or marks "Not Applicable" if the APU contains no materials (labor or equipment only). The logic is in the APU composition, not manual flags.',
     's2.itbis.equiv': '* ITBIS = Dominican materials tax. Equivalent to IVA (Spain/LATAM) · VAT (UK) · Sales Tax (USA) · GST (Canada, Australia)',
@@ -2452,7 +2433,7 @@ const i18n = {
     's4.f4.text': 'Each client billing is backed by the executed month\'s budget. Total technical transparency.',
     's5.label': '05 · Use Cases',
     's5.title': 'Real situations. Concrete solutions.',
-    's5.sub': 'Five scenarios demonstrating the system\'s operational value under real project conditions.',
+    's5.sub': 'Three scenarios demonstrating the system\'s operational value under real project conditions.',
     's5.c1.num': 'CASE 01', 's5.c1.title': 'Historical budget update',
     's5.c1.scenario': 'A client resumes a project after two years. Prices have changed. With traditional methods, rebuilding the budget takes days.',
     's5.c1.result': 'Change database + one click = budget updated in seconds.',
@@ -2461,6 +2442,7 @@ const i18n = {
     's5.c2.result': 'Reconnect template to regional database. Real prices, zero re-entry.',
     's5.c3.num': 'CASE 03', 's5.c3.title': 'Multiple teams in parallel',
     's5.c3.scenario': '5 estimators and 2 cost analysts working simultaneously. With manual spreadsheets, conflicting versions are inevitable.',
+    's5.applied': '<strong style="color:var(--ink)">Applied on:</strong> Palomino Hydropower — camp housing budget (monthly material and labor sub-budgets) · U.S. sample — electrical budget, Greensboro NC (<a href="https://visualcrp.com/SampleUS.pdf" target="_blank" rel="noopener" style="color:var(--teal);text-decoration:none;border-bottom:1px solid rgba(26,107,114,0.4)">Doc 503A, $508,500</a>)',
     's5.c3.result': 'Analysts update the database; each estimator decides when to sync. Zero conflicts.',
     's6.label': '06 · Differential Advantages',
     's6.title': 'Doesn\'t compete. Solves.',
@@ -2474,10 +2456,6 @@ const i18n = {
     's6.r6.asp': 'Traceability', 's6.r6.bad': 'Near zero', 's6.r6.med': 'Financial, not technical', 's6.r6.good': 'From input to budget',
     's6.r7.asp': 'Implementation cost', 's6.r7.bad': 'Low but negative ROI', 's6.r7.med': 'High · Licenses + training', 's6.r7.good': 'Low · No additional licenses',
     's6.r8.asp': 'Collaborative work', 's6.r8.bad': 'Conflicting versions', 's6.r8.med': 'Centralized collaboration', 's6.r8.good': 'Bifile architecture · No conflicts',
-    's6.nx1.lbl': 'More powerful in inverse price engineering',
-    's6.nx2.lbl': 'Faster in historical budget updates',
-    's6.nx3.lbl': 'Superior in intellectual property protection',
-    's6.nx4.lbl': 'Global score in exhaustive evaluation / 100',
     's7.label': '07 · Strategic ENR Analysis',
     's7.title': 'The transversal analytical layer',
     's7.sub': 'AC&P doesn\'t replace a top-tier contractor\'s technology ecosystem. It completes it, filling the gap no tool natively covers.',
@@ -2521,7 +2499,7 @@ const i18n = {
     's7.itbis.b3': 'Calculates estimated tax per item. Generates report in minutes.',
     's7.itbis.b4': 'Reconciliation with ERP invoices. Differences = documented stockpiling. Solid answer.',
     'footer.brand': 'AC<span style="font-family:Georgia,serif;font-style:italic;font-weight:400;color:var(--gold)">&amp;</span>P · Cost Analysis & Budgeting System',
-    'footer.meta': 'Eng. Piter J. Bonilla D. · CODIA 17378 · Elizabeth, NJ · <a href="https://visualcrp.com/PortfolioCompetencyEvidenceIndex.html" target="_blank" style="color:var(--gold);text-decoration:none;">Competency Evidence Index</a> · <a href="https://visualcrp.com/portfolio.html" target="_blank" style="color:var(--gold);text-decoration:none;">Portfolio</a> · <a href="https://visualcrp.com/resume.html" target="_blank" style="color:var(--gold);text-decoration:none;">Resume</a><br>v2.0 · July 2026 · <a href="https://visualcrp.com/Sample.pdf" target="_blank" rel="noopener" style="color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(200,168,75,0.4)">Sample RD</a> · <a href=\"https://visualcrp.com/SampleUS.pdf\" target=\"_blank\" style=\"color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(200,168,75,0.4)\">US Sample · Doc 503A</a>',
+    'footer.meta': 'Piter Bonilla · Licensed Civil Engineer — CODIA #17378 (Dominican Republic) · Elizabeth, NJ<br><a href="mailto:peterbonilla@hotmail.com" style="color:var(--gold);text-decoration:none;">peterbonilla@hotmail.com</a> · <a href="tel:+13362687426" style="color:var(--gold);text-decoration:none;">+1 (336) 268-7426</a><br><a href="https://visualcrp.com/PortfolioCompetencyEvidenceIndex.html" target="_blank" style="color:var(--gold);text-decoration:none;">Competency Evidence Index</a> · <a href="https://visualcrp.com/portfolio.html" target="_blank" style="color:var(--gold);text-decoration:none;">Portfolio</a> · <a href="https://visualcrp.com/resume.html" target="_blank" style="color:var(--gold);text-decoration:none;">Resume</a><br>v2.0 · October 2026 · <a href="https://visualcrp.com/Sample.pdf" target="_blank" rel="noopener" style="color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(200,168,75,0.4)">Sample RD</a> · <a href=\"https://visualcrp.com/SampleUS.pdf\" target=\"_blank\" style=\"color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(200,168,75,0.4)\">US Sample · Doc 503A</a>',
   }
 };
 
@@ -2547,10 +2525,9 @@ const nodes = {
   'hero.badge2':   () => [document.querySelectorAll('.hero-badge')[1], 'textContent'],
   'hero.badge3':   () => [document.querySelectorAll('.hero-badge')[2], 'textContent'],
   'hero.badge4':   () => [document.querySelectorAll('.hero-badge')[3], 'textContent'],
-  'hero.stat1.lbl':() => [document.querySelectorAll('.hero-stat-label')[0], 'textContent'],
-  'hero.stat2.lbl':() => [document.querySelectorAll('.hero-stat-label')[1], 'textContent'],
-  'hero.stat3.lbl':() => [document.querySelectorAll('.hero-stat-label')[2], 'textContent'],
-  'hero.stat4.lbl':() => [document.querySelectorAll('.hero-stat-label')[3], 'textContent'],
+  'hero.stat2.lbl':() => [document.querySelectorAll('.hero-stat-label')[0], 'textContent'],
+  'hero.stat3.lbl':() => [document.querySelectorAll('.hero-stat-label')[1], 'textContent'],
+  'hero.stat4.lbl':() => [document.querySelectorAll('.hero-stat-label')[2], 'textContent'],
   's1.label':      () => [document.querySelector('#filosofia .label'), 'textContent'],
   's1.title':      () => [document.querySelectorAll('.section-title')[0], 'textContent'],
   's1.sub':        () => [document.querySelectorAll('.section-sub')[0], 'textContent'],
@@ -2603,6 +2580,8 @@ const nodes = {
   's2.inv.lbl2':   () => [document.querySelectorAll('.inv-box-label')[1], 'textContent'],
   's2.inv.lbl3':   () => [document.querySelectorAll('.inv-box-label')[2], 'textContent'],
   's2.inv.note':   () => [document.querySelector('.inverse-demo-note'), 'textContent'],
+  's2.inv.method': () => [document.getElementById('inv-method'), 'textContent'],
+  's2.inv.formula':() => [document.querySelectorAll('.inv-box-value')[1], 'innerHTML'],
   's3.label':      () => [document.querySelector('#reportes .label'), 'textContent'],
   's3.title':      () => [document.querySelectorAll('.section-title')[2], 'textContent'],
   's3.sub':        () => [document.querySelectorAll('.section-sub')[2], 'textContent'],
@@ -2638,16 +2617,13 @@ const nodes = {
   's5.c3.title':   () => [document.querySelectorAll('.case-title')[2], 'textContent'],
   's5.c3.scenario':() => [document.querySelectorAll('.case-scenario')[2], 'textContent'],
   's5.c3.result':  () => [document.querySelectorAll('.case-result')[2], 'textContent'],
+  's5.applied':    () => [document.getElementById('applied-on'), 'innerHTML'],
   's6.label':      () => [document.querySelector('#ventajas .label'), 'textContent'],
   's6.title':      () => [document.querySelectorAll('.section-title')[5], 'textContent'],
   's6.sub':        () => [document.querySelectorAll('.section-sub')[4], 'textContent'],
   's6.col1':       () => [document.querySelectorAll('.compare-table th')[1], 'textContent'],
   's6.col2':       () => [document.querySelectorAll('.compare-table th')[2], 'textContent'],
   's6.col3':       () => [document.querySelectorAll('.compare-table th')[3], 'textContent'],
-  's6.nx1.lbl':    () => [document.querySelectorAll('.nx-label')[0], 'textContent'],
-  's6.nx2.lbl':    () => [document.querySelectorAll('.nx-label')[1], 'textContent'],
-  's6.nx3.lbl':    () => [document.querySelectorAll('.nx-label')[2], 'textContent'],
-  's6.nx4.lbl':    () => [document.querySelectorAll('.nx-label')[3], 'textContent'],
   's7.label':      () => [document.querySelector('#estrategico .label'), 'textContent'],
   's7.title':      () => [document.querySelectorAll('.section-title')[6], 'textContent'],
   's7.sub':        () => [document.querySelectorAll('.section-sub')[5], 'textContent'],
