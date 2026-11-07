@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Estudio Pedernales v1.0</title>
+<title>Estudio Pedernales v1.1</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=Source+Sans+3:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
@@ -346,6 +346,7 @@ footer{border-top:1px solid var(--line);color:var(--muted);font-size:12.5px;padd
 .dl-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
 .dl-row a.btn{text-decoration:none}
 .st-in{border:1px solid var(--line);border-radius:999px;padding:6px 12px;font:inherit;font-size:13px;background:var(--surface-2);color:var(--ink);width:110px;margin-left:6px}
+.pchoose{position:fixed;z-index:3000;background:var(--card,#fff);border:1px solid var(--line);border-radius:10px;box-shadow:0 8px 28px rgba(0,0,0,.22);padding:10px 12px;font-size:13px;min-width:210px}.pchoose b{display:block;margin-bottom:8px}.pchoose .row{display:flex;gap:6px;align-items:center}.pchoose .x{margin-left:auto;background:none;border:0;font-size:18px;cursor:pointer;color:var(--muted);line-height:1}.pchoose .btn:focus{outline:2px solid var(--accent);outline-offset:2px}
 #sv .sv-bar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:10px}#sv .sv-wrap{overflow:auto;max-height:min(80vh,900px);border:1px solid var(--line);border-radius:var(--r);background:#fff}#sv canvas{display:block;margin:0 auto}
 .docview iframe{width:100%;height:min(80vh,900px);border:1px solid var(--line);border-radius:var(--r);background:#fff}
 .pres-hint{font-family:var(--f-mono);font-size:11px;color:var(--muted)}
@@ -359,7 +360,7 @@ footer{border-top:1px solid var(--line);color:var(--muted);font-size:12.5px;padd
   <svg class="contours" aria-hidden="true" preserveAspectRatio="none" viewBox="0 0 1200 220" id="contours"></svg>
   <div class="wrap mast-inner">
     <div>
-      <div class="eyebrow">Consorcio Avance del Sur · Gerencia de Ingeniería · Presentación técnica <span style="text-transform:none">v1.0</span></div>
+      <div class="eyebrow">Consorcio Avance del Sur · Gerencia de Ingeniería · Presentación técnica <span style="text-transform:none">v1.1</span></div>
       <h1>Carretera Pedernales – Puerto Escondido<br>Estudio y desarrollo de la ingeniería</h1>
       <div class="meta">
         <span><b class="mono">0+000 → 43+348</b> · 43.348 km</span>
@@ -414,7 +415,7 @@ footer{border-top:1px solid var(--line);color:var(--muted);font-size:12.5px;padd
 <!-- 03 PERFIL -->
 <section class="panel" id="p-per" role="tabpanel" hidden>
   <div class="phead"><div class="chap">Capítulo 03</div><h2>Perfil y pendientes</h2><p>Dónde se concentran las curvas cerradas y las pendientes fuertes. Es la base para decidir dónde importan más las alternativas, dónde se ensancha la franja de levantamiento y dónde se concentra el esfuerzo de diseño.</p></div>
-  <div class="card"><h3>Perfil longitudinal y pendiente</h3><p class="sub">Elevación de la rasante de referencia cada 20 m con escala vertical exagerada, y franja de pendiente. Pase el cursor para ver la estación; clic para ubicarla en el mapa.</p><div class="vebar" data-ch="ch-prof"></div><div class="chart" id="ch-prof"></div><div class="legend" id="lg-grade"></div></div>
+  <div class="card"><h3>Perfil longitudinal y pendiente</h3><p class="sub">Elevación de la rasante de referencia cada 20 m con escala vertical exagerada, y franja de pendiente. Pase el cursor para ver la estación; clic para verla en planta o en sección.</p><div class="vebar" data-ch="ch-prof"></div><div class="chart" id="ch-prof"></div><div class="legend" id="lg-grade"></div></div>
   <div class="card"><h3>Dónde importan más las alternativas</h3><p class="sub">Trazado de referencia del MOPC por tramos de 4 km. En rojo, los valores que concentran curvas cerradas o pendientes fuertes.</p>
     <div class="tbl-wrap"><table id="tb-sect"></table></div></div>
   <div class="grid2">
@@ -470,10 +471,10 @@ footer{border-top:1px solid var(--line);color:var(--muted);font-size:12.5px;padd
       <div class="dl-row"><label class="note">Estación <input type="text" id="sec-st" value="0+000" inputmode="numeric" class="st-in"></label><button type="button" class="btn primary" id="sec-go">Buscar</button><button type="button" class="btn" id="sec-prev">− 20 m</button><button type="button" class="btn" id="sec-next">+ 20 m</button><a class="btn" id="sec-open" target="_blank" rel="noopener">Abrir en pestaña</a></div>
       <p class="note" id="sec-pg"></p></div>
   </div>
-  <div class="card docview"><h3 id="dv-t">Eje en planta · diseño de referencia</h3><p class="sub" id="dv-s">15 páginas · también se puede descargar.</p><iframe id="dv" title="Visor de documentos" loading="lazy"></iframe><div id="sv" hidden><div class="sv-bar"><button type="button" class="btn" id="sv-prev">− 20 m</button><b id="sv-st">—</b><button type="button" class="btn" id="sv-next">+ 20 m</button><span class="note" id="sv-msg"></span><span style="flex:1"></span><button type="button" class="btn" id="sv-zo">−</button><button type="button" class="btn" id="sv-zi">+</button></div><div class="sv-wrap"><canvas id="sv-c"></canvas></div></div></div>
+  <div class="card docview"><h3 id="dv-t">Eje en planta · diseño de referencia</h3><p class="sub" id="dv-s">15 páginas · también se puede descargar.</p><iframe id="dv" title="Visor de documentos" loading="lazy"></iframe><div id="sv" hidden><div class="sv-bar"><button type="button" class="btn" id="sv-prev">− 20 m</button><b id="sv-st">—</b><button type="button" class="btn" id="sv-next">+ 20 m</button><span class="note" id="sv-msg"></span><span style="flex:1"></span><button type="button" class="btn primary" id="sv-pl">Ver en planta</button><button type="button" class="btn primary" id="sv-pf">Ver en perfil</button><button type="button" class="btn" id="sv-zo">−</button><button type="button" class="btn" id="sv-zi">+</button></div><div class="sv-wrap"><canvas id="sv-c"></canvas></div></div></div>
 </section>
 </main>
-<footer class="wrap foot">v1.0 · 06/11/2026 · Ing. Piter Bonilla, Gerencia de Ingeniería · Consorcio Avance del Sur</footer>
+<footer class="wrap foot">v1.1 · 07/11/2026 · Ing. Piter Bonilla, Gerencia de Ingeniería · Consorcio Avance del Sur</footer>
 <div class="tip" id="tip"></div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
@@ -534,12 +535,29 @@ function profile(el,VE,mini){
  if(!mini){const gy=P.t+ih+10;for(let i=0;i<W.length-1;i++)s+=`<rect x="${X(W[i][2]).toFixed(1)}" y="${gy}" width="${(X(W[i+1][2])-X(W[i][2])+.4).toFixed(2)}" height="12" fill="${gcol(W[i][5])}"/>`;s+=`<text x="${P.l-8}" y="${gy+10}" text-anchor="end" font-size="10.5" fill="${css("--muted")}">Pend.</text>`}
  const ay=H-(mini?10:14);for(let m=0;m<=43000;m+=5000)s+=`<text x="${X(m)}" y="${ay}" text-anchor="middle" font-size="11" fill="${css("--muted")}">Km ${m/1000}</text>`;
  s+=`<line id="${el}-cur" x1="0" x2="0" y1="${P.t}" y2="${P.t+ih}" stroke="${css("--accent")}" stroke-width="1.2" opacity="0"/><rect x="${P.l}" y="${P.t}" width="${iw}" height="${ih}" fill="transparent" style="cursor:crosshair" id="${el}-hit"/></svg>`;
- $("#"+el).innerHTML=s;
+ $("#"+el).innerHTML=s;PX[el]={X,Y,P,ih};if(PMARK!=null)profMark(el,PMARK);
  const svg=$("#"+el+" svg"),hit=$("#"+el+"-hit"),cl=$("#"+el+"-cur");
  const near=e=>{const r=svg.getBoundingClientRect();const x=(e.clientX-r.left)/r.width*Wd;const m=Math.max(0,Math.min(KM*1000,(x-P.l)/iw*KM*1000));let i=Math.round(m/20);i=Math.max(0,Math.min(W.length-1,i));let best=i;for(let j=Math.max(0,i-3);j<=Math.min(W.length-1,i+3);j++)if(Math.abs(W[j][2]-m)<Math.abs(W[best][2]-m))best=j;return best};
  hit.onmousemove=e=>{const w=W[near(e)];cl.setAttribute("x1",X(w[2]));cl.setAttribute("x2",X(w[2]));cl.setAttribute("opacity",1);tipShow(e,`${w[4]} · N ${fmt(w[7],1)} · E ${fmt(w[6],1)} · ${fmt(w[3],1)} m · ${w[5]>0?"+":""}${fmt(w[5],1)} %`)};
  hit.onmouseleave=()=>{cl.setAttribute("opacity",0);tipHide()};
- hit.onclick=e=>{const w=W[near(e)];tipHide();show("map");setTimeout(()=>goPoint(w),250)}}
+ hit.onclick=e=>{const w=W[near(e)];tipHide();elegir(e,w)}}
+const PX={};let PMARK=null;
+function wByM(m){let b=W[0];W.forEach(w=>{if(Math.abs(w[2]-m)<Math.abs(b[2]-m))b=w});return b}
+function profMark(el,m){const g=PX[el];if(!g)return;const svg=$("#"+el+" svg");if(!svg)return;const old=svg.querySelector(".pmk");if(old)old.remove();
+ const w=wByM(m),x=g.X(w[2]),y=g.Y(w[3]),NS="http://www.w3.org/2000/svg",G=document.createElementNS(NS,"g");G.setAttribute("class","pmk");G.style.pointerEvents="none";
+ const right=x>g.P.l+(1100-g.P.l-g.P.r)*.72;
+ G.innerHTML=`<line x1="${x}" x2="${x}" y1="${g.P.t}" y2="${g.P.t+g.ih}" stroke="#c8641b" stroke-width="2" stroke-dasharray="5 3"/><circle cx="${x}" cy="${y}" r="6" fill="#c8641b" stroke="#fff" stroke-width="2.5"/><text x="${x+(right?-9:9)}" y="${g.P.t+g.ih-30}" text-anchor="${right?"end":"start"}" font-size="13" font-weight="700" fill="#c8641b" paint-order="stroke" stroke="#fff" stroke-width="4">Est. ${w[4]} · ${fmt(w[3],1)} m</text>`;
+ svg.insertBefore(G,svg.querySelector('[id$="-hit"]'))}
+function irPlanta(m){const w=wByM(m);show("map");setTimeout(()=>goPoint(w),250)}
+function irPerfil(m){PMARK=wByM(m)[2];show("per");setTimeout(()=>{profMark("ch-prof",PMARK);profMark("ch-mini",PMARK);const c=$("#ch-prof");if(c)c.scrollIntoView({behavior:"smooth",block:"center"})},120)}
+function irSec(m){initDocs();verSec(m)}
+let chooser=null;function cierraEleg(){if(chooser){chooser.remove();chooser=null;document.removeEventListener("keydown",escEleg,true);document.removeEventListener("pointerdown",fueraEleg,true)}}
+function escEleg(e){if(e.key==="Escape")cierraEleg()}function fueraEleg(e){if(chooser&&!chooser.contains(e.target))cierraEleg()}
+function elegir(e,w){cierraEleg();const d=document.createElement("div");d.className="pchoose";d.setAttribute("role","dialog");d.setAttribute("aria-label","Ver estación");
+ d.innerHTML=`<b>Est. ${w[4]} · ${fmt(w[3],1)} m — ¿dónde verla?</b><div class="row"><button type="button" class="btn primary" data-a="pl">Planta</button><button type="button" class="btn" data-a="se">Sección</button><button type="button" class="x" aria-label="Cerrar">×</button></div>`;
+ document.body.appendChild(d);chooser=d;const x=Math.min(e.clientX+12,innerWidth-d.offsetWidth-8),y=Math.min(e.clientY+12,innerHeight-d.offsetHeight-8);d.style.left=Math.max(8,x)+"px";d.style.top=Math.max(8,y)+"px";
+ d.querySelector('[data-a="pl"]').onclick=()=>{cierraEleg();irPlanta(w[2])};d.querySelector('[data-a="se"]').onclick=()=>{cierraEleg();irSec(w[2])};d.querySelector(".x").onclick=cierraEleg;
+ setTimeout(()=>{d.querySelector('[data-a="pl"]').focus();document.addEventListener("keydown",escEleg,true);document.addEventListener("pointerdown",fueraEleg,true)},0)}
 /* ---------- tabla y barras por tramo ---------- */
 function sect(){const T=D.SECT;const red=(k,v)=>({r30:v>=15,r50:v>=25,g10:v>=2000,gmax:v>=15})[k];
  let h=`<thead><tr><th>Tramo (km)</th><th class="n">Curvas</th><th class="n">R &lt; 30 m</th><th class="n">R &lt; 50 m</th><th class="n">Longitud con pendiente &gt; 10 % (m)</th><th class="n">Pendiente máx.</th></tr></thead><tbody>`;
@@ -647,7 +665,7 @@ function initMap(){if(map){setTimeout(()=>map.invalidateSize(),50);return}
  $("#fit-btn").onclick=fit;$("#crit-btn").onclick=()=>map.fitBounds(L.latLngBounds(cr),{padding:[40,40]});
  $("#go-st").onkeydown=e=>{if(e.key!=="Enter")return;const v=e.target.value.trim();const m=v.includes("+")?(+v.split("+")[0])*1000+(+v.split("+")[1]):parseFloat(v)*1000;if(isNaN(m))return;let b=W[0];W.forEach(w=>{if(Math.abs(w[2]-m)<Math.abs(b[2]-m))b=w});goPoint(b)};
  $("#mleg").innerHTML=GC.map(c=>`<span><i style="background:${css(c[1])}"></i>${c[2]}</span>`).join("")+`<span><i style="background:${CONT_C}"></i>Curvas de nivel</span><span><i style="background:#ff2d55;opacity:.5;height:8px"></i>Km 37–40</span><span><i style="background:#2f8a5b"></i>PN Sierra de Bahoruco</span><span><i style="background:#4aa3ff"></i>Carreteras existentes</span>`}
-function pop(w){return `<b>Est. ${w[4]}</b><table class="ptab"><tr><td>Norte</td><td>${fmt(w[7],2)}</td></tr><tr><td>Este</td><td>${fmt(w[6],2)}</td></tr><tr><td>Elev.</td><td>${fmt(w[3],2)} m</td></tr><tr><td>Pend.</td><td>${w[5]>0?"+":""}${fmt(w[5],2)} %</td></tr></table><span style="color:#777;font-size:11.5px">UTM WGS84 · Zona 19N · Elev. EGM2008 (rasante de referencia)</span><br><a href="#" onclick="initDocs();verSec(${w[2]});return false">Ver sección de subrasante →</a>`}
+function pop(w){return `<b>Est. ${w[4]}</b><table class="ptab"><tr><td>Norte</td><td>${fmt(w[7],2)}</td></tr><tr><td>Este</td><td>${fmt(w[6],2)}</td></tr><tr><td>Elev.</td><td>${fmt(w[3],2)} m</td></tr><tr><td>Pend.</td><td>${w[5]>0?"+":""}${fmt(w[5],2)} %</td></tr></table><span style="color:#777;font-size:11.5px">UTM WGS84 · Zona 19N · Elev. EGM2008 (rasante de referencia)</span><br><a href="#" onclick="initDocs();verSec(${w[2]});return false">Ver sección de subrasante →</a><br><a href="#" onclick="irPerfil(${w[2]});return false">Ver en perfil →</a>`}
 function fit(){map.fitBounds(L.latLngBounds(W.map(w=>[w[0],w[1]])),{padding:[24,24]})}
 function goPoint(w){initMap();setTimeout(()=>{map.invalidateSize();map.setView([w[0],w[1]],17);if(mk)map.removeLayer(mk);mk=L.circleMarker([w[0],w[1]],{radius:9,color:"#fff",weight:3,fillColor:"#c8641b",fillOpacity:1,pane:"markerPane"}).addTo(map).bindPopup(pop(w)).openPopup()},120)}
 
@@ -689,7 +707,7 @@ function verSec(m,abrir){secM=Math.max(0,Math.min((SEC_N-1)*20,Math.round(m/20)*
  $("#dv").hidden=true;$("#sv").hidden=false;$("#sv-st").textContent="Est. "+st(secM);svRender(L_.url,pg,secM)}
 function initDocs(){if(!ejeURL){ejeURL=blobFrom64(D.EJE,"application/pdf");$("#dl-eje").href=ejeURL}
  $("#vw-eje").onclick=()=>{$("#sv").hidden=true;$("#dv").hidden=false;$("#dv-t").textContent="Eje en planta · diseño de referencia";$("#dv-s").textContent="15 páginas · también se puede descargar.";$("#dv").src=ejeURL};
- $("#sec-prev").onclick=$("#sv-prev").onclick=()=>verSec(secM-20);$("#sv-next").onclick=()=>verSec(secM+20);
+ $("#sec-prev").onclick=$("#sv-prev").onclick=()=>verSec(secM-20);$("#sv-next").onclick=()=>verSec(secM+20);$("#sv-pl").onclick=()=>irPlanta(secM);$("#sv-pf").onclick=()=>irPerfil(secM);
  $("#sv-zi").onclick=()=>{svZ=Math.min(4,svZ*1.25);verSec(secM)};$("#sv-zo").onclick=()=>{svZ=Math.max(.5,svZ/1.25);verSec(secM)};$("#sec-next").onclick=()=>verSec(secM+20);
  const irSt=()=>{const v=$("#sec-st").value.trim().replace(",",".");const n=parseFloat(v);const m=v.includes("+")?(+v.split("+")[0])*1000+(+v.split("+")[1]):(n>50?n:n*1000);if(!isNaN(m))verSec(m)};
  $("#sec-st").onkeydown=e=>{if(e.key==="Enter"){e.preventDefault();irSt()}};$("#sec-go").onclick=irSt;$("#sec-st").onfocus=e=>e.target.select();
