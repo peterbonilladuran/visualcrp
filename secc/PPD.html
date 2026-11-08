@@ -565,25 +565,25 @@ function kpis(){const k=D.K;
 /* ---------- perfil ---------- */
 function profile(el,VE,mini){
  // escala vertical exagerada VE veces respecto a la horizontal
- const Wd=1100,P={l:52,r:14,t:mini?14:40,b:mini?30:62};const iw=Wd-P.l-P.r;const mh=KM*1000/iw;const ih=Math.round((2100-300)/(mh/VE));const H=ih+P.t+P.b;
+ const Wd=1100,P={l:52,r:14,t:mini?14:104,b:mini?30:62};const iw=Wd-P.l-P.r;const mh=KM*1000/iw;const ih=Math.round((2100-300)/(mh/VE));const H=ih+P.t+P.b;
  const z0=300,z1=2100;const X=m=>P.l+m/1000/KM*iw,Y=z=>P.t+ih-(z-z0)/(z1-z0)*ih;
  let s=`<svg viewBox="0 0 ${Wd} ${H}" role="img" aria-label="Perfil longitudinal">`;
  for(let z=500;z<=2000;z+=500)s+=`<line x1="${P.l}" x2="${Wd-P.r}" y1="${Y(z)}" y2="${Y(z)}" stroke="${css("--line")}"/><text x="${P.l-8}" y="${Y(z)+4}" text-anchor="end" font-size="11" fill="${css("--muted")}">${fmt(z)} m</text>`;
  // tramo complejo
  s+=`<rect x="${X(37000)}" y="${P.t}" width="${X(40000)-X(37000)}" height="${ih}" fill="${css("--bad")}" opacity=".10"/><text x="${(X(37000)+X(40000))/2}" y="${P.t+12}" text-anchor="middle" font-size="11" font-weight="700" fill="${css("--bad")}">Km 37–40</text>`;
- if(!mini){D.PARK.forEach(([a,b])=>{s+=`<rect x="${X(a)}" y="${P.t-16}" width="${X(b)-X(a)}" height="6" fill="${css("--good")}" rx="2"/>`});s+=`<text x="${P.l}" y="${P.t-20}" font-size="11" fill="${css("--good")}" font-weight="600">Dentro del PN Sierra de Bahoruco (polígono del KMZ)</text>`}
+ if(!mini){D.PARK.forEach(([a,b])=>{s+=`<rect x="${X(a)}" y="${P.t-80}" width="${X(b)-X(a)}" height="6" fill="${css("--good")}" rx="2"/>`});s+=`<text x="${P.l}" y="${P.t-84}" font-size="11" fill="${css("--good")}" font-weight="600">Dentro del PN Sierra de Bahoruco (polígono del KMZ)</text>`}
  let d="M"+X(0)+","+Y(z0);W.forEach(w=>d+="L"+X(w[2]).toFixed(1)+","+Y(w[3]).toFixed(1));d+="L"+X(W[W.length-1][2])+","+Y(z0)+"Z";
  s+=`<path d="${d}" fill="${css("--b5")}" opacity=".55"/>`;
  let l="";W.forEach((w,i)=>l+=(i?"L":"M")+X(w[2]).toFixed(1)+","+Y(w[3]).toFixed(1));s+=`<path d="${l}" fill="none" stroke="${css("--b1")}" stroke-width="1.8"/>`;
  // max
  const k=D.K;s+=`<circle cx="${X(k.kmax)}" cy="${Y(k.zmax)}" r="4" fill="${css("--accent")}"/><text x="${X(k.kmax)+7}" y="${Y(k.zmax)-6}" font-size="11.5" font-weight="700" fill="${css("--ink")}">${fmt(k.zmax)} m · ${st(k.kmax)}</text>`;
- s+=`<text x="${P.l+8}" y="${P.t+ih-8}" text-anchor="start" font-size="11" fill="${css("--muted")}">Escala vertical exagerada ${VE}×</text>`;
+ s+=`<text x="${P.l+8}" y="${P.t+ih-(mini?8:26)}" text-anchor="start" font-size="11" fill="${css("--muted")}">Escala vertical exagerada ${VE}×</text>`;
  s+=`<text x="${X(0)+4}" y="${Y(W[0][3])-8}" font-size="11.5" fill="${css("--ink")}" font-weight="600">Aceitillar</text><text x="${X(W[W.length-1][2])-4}" y="${Y(W[W.length-1][3])-8}" text-anchor="end" font-size="11.5" font-weight="600" fill="${css("--ink")}">Puerto Escondido</text>`;
  // grade strip
  if(!mini){const gy=P.t+ih+10;for(let i=0;i<W.length-1;i++)s+=`<rect x="${X(W[i][2]).toFixed(1)}" y="${gy}" width="${(X(W[i+1][2])-X(W[i][2])+.4).toFixed(2)}" height="12" fill="${gcol(W[i][5])}"/>`;s+=`<text x="${P.l-8}" y="${gy+10}" text-anchor="end" font-size="10.5" fill="${css("--muted")}">Pend.</text>`}
  const ay=H-(mini?10:14);for(let m=0;m<=43000;m+=5000)s+=`<text x="${X(m)}" y="${ay}" text-anchor="middle" font-size="11" fill="${css("--muted")}">Km ${m/1000}</text>`;
  s+=`<line id="${el}-cur" x1="0" x2="0" y1="${P.t}" y2="${P.t+ih}" stroke="${css("--accent")}" stroke-width="1.2" opacity="0"/><rect x="${P.l}" y="${P.t}" width="${iw}" height="${ih}" fill="transparent" style="cursor:crosshair" id="${el}-hit"/></svg>`;
- if(!mini)D.CRZ.forEach(r=>{const x=X(r[0]);s=s.replace(/<line id="[^"]+-cur"/,`<line x1="${x}" x2="${x}" y1="${P.t+ih}" y2="${P.t+ih-(r[3]>1000?16:r[3]>100?11:r[3]>10?7:4)}" stroke="#1f6fd1" stroke-width="1.6" pointer-events="none"/>$&`)});
+ if(!mini){let cz=`<text x="${P.l}" y="${P.t-62}" font-size="11" font-weight="600" fill="#1f6fd1">Cruces de drenaje con el eje (altura según el área de la cuenca)</text><line x1="${P.l}" x2="${Wd-P.r}" y1="${P.t-6}" y2="${P.t-6}" stroke="${css("--line")}"/>`;D.CRZ.forEach(r=>{const x=X(r[0]);cz+=`<line x1="${x}" x2="${x}" y1="${P.t-6}" y2="${P.t-6-(5+45*Math.max(0,Math.log10(r[3]/0.3))/Math.log10(15000/0.3))}" stroke="#1f6fd1" stroke-width="2.4"><title>${st(r[0])} · ${fmt(r[3],1)} ha</title></line>`});s=s.replace("</svg>",cz+"</svg>")}
  if(!mini){let px=-1e9,lv=0;D.NOTAS.forEach((n,i)=>{const x=X(n[0]),w=wByM(n[0]),y0=Y(w[3]);lv=(x-px<18)?lv+1:0;px=x;const cy=y0-18-lv*17;s=s.replace(/<line id="[^"]+-cur"/,`<g pointer-events="none"><line x1="${x}" x2="${x}" y1="${y0}" y2="${cy}" stroke="#c8641b" stroke-width="1.2"/><circle cx="${x}" cy="${cy}" r="7.5" fill="${n[3]==="nav"?"#d12f2f":"#c8641b"}" stroke="#fff" stroke-width="1.5"/><text x="${x}" y="${cy+3.5}" text-anchor="middle" font-size="9.5" font-weight="700" fill="#fff">${i+1}</text></g>$&`)})}
  $("#"+el).innerHTML=s;PX[el]={X,Y,P,ih};if(PMARK!=null)profMark(el,PMARK);
  const svg=$("#"+el+" svg"),hit=$("#"+el+"-hit"),cl=$("#"+el+"-cur");
@@ -687,7 +687,7 @@ function sect(){const T=D.SECT;const red=(k,v)=>({r30:v>=15,r50:v>=25,g10:v>=200
  const tot=D.DIST.reduce((a,b)=>a+b,0);const Wd3=1100,H3=96;s=`<svg viewBox="0 0 ${Wd3} ${H3}">`;let x=0;
  D.DIST.forEach((v,i)=>{const w=v/tot*Wd3;s+=`<rect x="${x}" y="10" width="${w}" height="40" fill="${css(GC[i][1])}"/>`;if(w>60)s+=`<text x="${x+w/2}" y="35" text-anchor="middle" font-size="12.5" font-weight="700" fill="#fff">${fmt(v/1000,1)} km</text><text x="${x+w/2}" y="72" text-anchor="middle" font-size="11.5" fill="${css("--muted")}">${GC[i][2]} · ${fmt(v/tot*100,0)} %</text>`;x+=w});
  $("#ch-dist").innerHTML=s+"</svg>";
- const lg=GC.map(c=>`<span><i style="background:${css(c[1])}"></i>${c[2]}</span>`).join("");$("#lg-dist").innerHTML=lg;$("#lg-grade").innerHTML=lg+`<span><i style="background:${css("--bad")};opacity:.25"></i>Tramo complejo Km 37–40</span><span><i style="background:${css("--good")}"></i>PN Sierra de Bahoruco</span>`}
+ const lg=GC.map(c=>`<span><i style="background:${css(c[1])}"></i>${c[2]}</span>`).join("");$("#lg-dist").innerHTML=lg;$("#lg-grade").innerHTML=lg+`<span><i style="background:#1f6fd1;width:4px;height:12px"></i>Cruces de drenaje con el eje (altura según el área de la cuenca)</span><span><i style="background:${css("--bad")};opacity:.25"></i>Tramo complejo Km 37–40</span><span><i style="background:${css("--good")}"></i>PN Sierra de Bahoruco</span>`}
 /* ---------- metodología ---------- */
 function method(){
  $("#flow").innerHTML=D.STEPS.map((s,i)=>`<li class="${i===6?"geo":i===3?"walk":""}${s.done?" step-done":""}"><b>${esc(s.t)}</b><span>${esc(s.d)}</span></li>`).join("");
