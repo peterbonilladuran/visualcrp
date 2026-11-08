@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Estudio Pedernales v2.1</title>
+<title>Estudio Pedernales v2.2</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=Source+Sans+3:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
@@ -338,6 +338,12 @@ footer{border-top:1px solid var(--line);color:var(--muted);font-size:12.5px;padd
 .lb{position:fixed;inset:0;z-index:4000;background:rgba(8,12,18,.98);display:flex;flex-direction:column;align-items:center;justify-content:center;color:#eee}.lb img{max-width:96vw;max-height:78vh;object-fit:contain;border-radius:4px;background:#222}.lb .cap{max-width:900px;padding:10px 16px;text-align:center;font-size:14px;line-height:1.4}.lb .cap small{color:#9aa;display:block;margin-top:2px}.lb .nv{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.12);border:0;color:#fff;font-size:30px;width:48px;height:64px;border-radius:8px;cursor:pointer}.lb .nv.p{left:8px}.lb .nv.n{right:8px}.lb .cl{position:absolute;top:10px;right:12px;background:none;border:0;color:#fff;font-size:30px;cursor:pointer}
 .cz-n{position:absolute;right:100%;top:50%;transform:translate(-4px,-50%);font:700 11px/1 var(--f-mono,monospace);color:#fff;background:#1f6fd1;padding:1px 3px;border-radius:3px;white-space:nowrap;pointer-events:none}#map.czlo .cz-n{display:none}
 .cz-ic{display:block;border-radius:50%;background:#1f6fd1;border:2px solid #fff;box-shadow:0 1px 3px rgba(0,0,0,.4)}.cz-ic.rep{background:#7fb2ee}#tb-drn tr.dr{cursor:pointer}#tb-drn th:nth-child(1),#tb-drn td:nth-child(1){white-space:nowrap;min-width:80px}#tb-drn th:nth-child(2),#tb-drn td:nth-child(2){white-space:nowrap}#tb-drn td:nth-child(8){max-width:340px;min-width:200px}#tb-drn th:nth-child(9),#tb-drn td:nth-child(9){white-space:nowrap}#tb-drn .lk a{margin-right:10px;white-space:nowrap}
+.vebar{display:flex;align-items:center;gap:10px;flex-wrap:wrap}:root{--medbg:#0b2e59;--medfg:#ffffff}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--medbg:#ffd23f;--medfg:#111111}}
+:root[data-theme="dark"]{--medbg:#ffd23f;--medfg:#111111}
+.medmsg:not(:empty){background:var(--medbg);color:var(--medfg);padding:6px 12px;border-radius:6px;font-weight:600}
+.chart svg,.medmsg{-webkit-user-select:none;user-select:none}.medbtn[aria-pressed="true"]{background:var(--accent);color:#fff;border-color:var(--accent)}.medres{position:absolute;z-index:500;background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:8px 10px;font:500 12.5px/1.45 var(--f-mono,monospace);box-shadow:0 4px 16px rgba(0,0,0,.25)}
+.leaflet-bar a.medmap{width:auto;padding:0 8px;font-size:13px;white-space:nowrap}.leaflet-bar a.medmap.on{background:#c8641b;color:#fff}#map.medir{cursor:crosshair!important}#map.medir .leaflet-interactive,#map.medir .leaflet-marker-icon,#map.medir .leaflet-tooltip{pointer-events:none!important}#map.medir .leaflet-grab{cursor:crosshair}
 .cas-ic{display:flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:6px;background:#0b6e4f;color:#fff;border:2px solid #fff;font-size:16px;line-height:1;box-shadow:0 1px 4px rgba(0,0,0,.4)}
 .ptab{border-collapse:collapse;margin:4px 0 2px;font-size:12.5px;width:auto}.ptab td{padding:1px 10px 1px 0;border:0}.ptab td+td{font-family:var(--f-mono);text-align:right}
 .leaflet-control-layers{font-size:13px;line-height:1.6}
@@ -371,7 +377,7 @@ footer{border-top:1px solid var(--line);color:var(--muted);font-size:12.5px;padd
   <svg class="contours" aria-hidden="true" preserveAspectRatio="none" viewBox="0 0 1200 220" id="contours"></svg>
   <div class="wrap mast-inner">
     <div>
-      <div class="eyebrow">Consorcio Avance del Sur · Gerencia de Ingeniería · Presentación técnica <span style="text-transform:none">v2.1</span></div>
+      <div class="eyebrow">Consorcio Avance del Sur · Gerencia de Ingeniería · Presentación técnica <span style="text-transform:none">v2.2</span></div>
       <h1>Carretera Pedernales – Puerto Escondido<br>Estudio y desarrollo de la ingeniería</h1>
       <div class="meta">
         <span><b class="mono">0+000 → 43+348</b> · 43.348 km</span>
@@ -418,7 +424,7 @@ footer{border-top:1px solid var(--line);color:var(--muted);font-size:12.5px;padd
 
 <!-- 02 MAPA -->
 <section class="panel" id="p-map" role="tabpanel" hidden>
-  <div class="phead"><div class="chap">Capítulo 02</div><h2>Mapa del corredor</h2><p>Vista topográfica por defecto, con satélite y mapa como alternativas. El eje de referencia es una polilínea generada con sus coordenadas cada 20 m, con su estacionamiento por km, 100 m y 20 m según el acercamiento; las curvas de nivel (se encienden en el control de capas) y el relieve sombreado del MDE de 8 m, más las capas de contexto. Use el control de capas de la esquina superior derecha.</p></div>
+  <div class="phead"><div class="chap">Capítulo 02</div><h2>Mapa del corredor</h2><p>Vista topográfica por defecto, con satélite y mapa como alternativas. El eje de referencia es una polilínea generada con sus coordenadas cada 20 m, con su estacionamiento por km, 100 m y 20 m según el acercamiento; las curvas de nivel (se encienden en el control de capas) y el relieve sombreado del MDE de 8 m, más las capas de contexto. Use el control de capas de la esquina superior derecha y los botones 📏 Línea y 〰 Polilínea (arriba a la izquierda) para medir distancias.</p></div>
   <div class="card mapcard">
     <div id="map"></div>
     <div class="map-bar">
@@ -532,7 +538,7 @@ footer{border-top:1px solid var(--line);color:var(--muted);font-size:12.5px;padd
   <div class="card docview"><h3 id="dv-t">Eje en planta · diseño de referencia</h3><p class="sub" id="dv-s">15 páginas · también se puede descargar.</p><iframe id="dv" title="Visor de documentos" loading="lazy"></iframe><div id="ev" hidden><div class="sv-bar"><span class="note" id="ev-msg"></span><span style="flex:1"></span><button type="button" class="btn" id="ev-zo">−</button><button type="button" class="btn" id="ev-zi">+</button></div><div class="ev-wrap" id="ev-pages"></div></div><div id="sv" hidden><div class="sv-bar"><button type="button" class="btn" id="sv-prev">− 20 m</button><b id="sv-st">—</b><button type="button" class="btn" id="sv-next">+ 20 m</button><span class="note" id="sv-msg"></span><span style="flex:1"></span><button type="button" class="btn primary" id="sv-pl">Ver en planta</button><button type="button" class="btn primary" id="sv-pf">Ver en perfil</button><button type="button" class="btn" id="sv-zo">−</button><button type="button" class="btn" id="sv-zi">+</button></div><div class="sv-wrap"><canvas id="sv-c"></canvas></div></div></div>
 </section>
 </main>
-<footer class="wrap foot">v2.1 · 08/11/2026 · Ing. Piter Bonilla, Gerencia de Ingeniería · Consorcio Avance del Sur</footer>
+<footer class="wrap foot">v2.2 · 08/11/2026 · Ing. Piter Bonilla, Gerencia de Ingeniería · Consorcio Avance del Sur</footer>
 <div class="tip" id="tip"></div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
@@ -601,8 +607,17 @@ function profile(el,VE,mini){
  const near=e=>{const r=svg.getBoundingClientRect();const x=(e.clientX-r.left)/r.width*Wd;const m=Math.max(0,Math.min(KM*1000,(x-P.l)/iw*KM*1000));let i=Math.round(m/20);i=Math.max(0,Math.min(W.length-1,i));let best=i;for(let j=Math.max(0,i-3);j<=Math.min(W.length-1,i+3);j++)if(Math.abs(W[j][2]-m)<Math.abs(W[best][2]-m))best=j;return best};
  hit.onmousemove=e=>{const w=W[near(e)];cl.setAttribute("x1",X(w[2]));cl.setAttribute("x2",X(w[2]));cl.setAttribute("opacity",1);tipShow(e,`${w[4]} · N ${fmt(w[7],1)} · E ${fmt(w[6],1)} · ${fmt(w[3],1)} m · ${w[5]>0?"+":""}${fmt(w[5],1)} %`)};
  hit.onmouseleave=()=>{cl.setAttribute("opacity",0);tipHide()};
- hit.onclick=e=>{const w=W[near(e)];tipHide();elegir(e,w)}}
-const PX={};let PMARK=null;
+ hit.onclick=e=>{const w=W[near(e)];tipHide();if(MED[el])return medPerfil(el,w);elegir(e,w)}}
+const PX={};let PMARK=null;const MED={};
+function medPerfil(el,w){const m=MED[el],g=PX[el],svg=$("#"+el+" svg");if(!m.a||m.b){m.a=w;m.b=null}else m.b=w;
+ svg.querySelectorAll(".medg").forEach(x=>x.remove());const NS="http://www.w3.org/2000/svg",G=document.createElementNS(NS,"g");G.setAttribute("class","medg");G.style.pointerEvents="none";
+ const pt=v=>`<line x1="${g.X(v[2])}" x2="${g.X(v[2])}" y1="${g.P.t}" y2="${g.P.t+g.ih}" stroke="#c8641b" stroke-width="1.5"/><circle cx="${g.X(v[2])}" cy="${g.Y(v[3])}" r="5" fill="#c8641b" stroke="#fff" stroke-width="2"/>`;
+ let h=pt(m.a),txt=`A ${m.a[4]} · ${fmt(m.a[3],1)} m — clic en el segundo punto`;
+ if(m.b){const a=m.a[2]<=m.b[2]?m.a:m.b,b=m.a[2]<=m.b[2]?m.b:m.a,dx=b[2]-a[2],dz=b[3]-a[3],sl=Math.hypot(dx,dz);
+  h+=pt(m.b)+`<rect x="${g.X(a[2])}" y="${g.P.t}" width="${Math.max(1,g.X(b[2])-g.X(a[2]))}" height="${g.ih}" fill="#c8641b" opacity=".10"/><line x1="${g.X(a[2])}" y1="${g.Y(a[3])}" x2="${g.X(b[2])}" y2="${g.Y(b[3])}" stroke="#c8641b" stroke-width="2" stroke-dasharray="6 4"/>`;
+  txt=`${a[4]} → ${b[4]} · Dist. por el eje ${fmt(dx,0)} m · Desnivel ${dz>0?"+":""}${fmt(dz,1)} m · Pend. media ${dx?(dz>0?"+":"")+fmt(dz/dx*100,2):"0"} % · Long. inclinada ${fmt(sl,1)} m`}
+ G.innerHTML=h;svg.insertBefore(G,svg.querySelector('[id$="-hit"]'));const mm=$("#mm-"+el);if(mm)mm.textContent=txt}
+document.addEventListener("keydown",e=>{if(e.key!=="Escape")return;let ch=false;Object.keys(MED).forEach(k=>{if(MED[k]){MED[k]=null;ch=true}});if(ch)drawVE();if(window.medMapOff)medMapOff()});
 function wByM(m){let b=W[0];W.forEach(w=>{if(Math.abs(w[2]-m)<Math.abs(b[2]-m))b=w});return b}
 function profMark(el,m){const g=PX[el];if(!g)return;const svg=$("#"+el+" svg");if(!svg)return;const old=svg.querySelector(".pmk");if(old)old.remove();
  const w=wByM(m),x=g.X(w[2]),y=g.Y(w[3]),NS="http://www.w3.org/2000/svg",G=document.createElementNS(NS,"g");G.setAttribute("class","pmk");G.style.pointerEvents="none";
@@ -791,6 +806,34 @@ function initMap(){if(map){setTimeout(()=>map.invalidateSize(),50);return}
   "Estacionamiento (km · 100 m · 20 m)":est,"Elementos de curva (PC, PT…)":cvL,"Tramo complejo Km 37 – 40":crit,
   "PN Sierra de Bahoruco":pk,"Minas de bauxita Aceitillar":mn,"Carreteras existentes":rd,"Lugares":pl,"Casetas del sendero":cs,"Bitácora del recorrido":nt,"Cauces del MDE (≥ 3.2 ha)":caL,"Cruces cauce–eje":czL,"Cuencas de los cruces":cuL},{collapsed:innerWidth<700}).addTo(map);
  L.control.scale({imperial:false}).addTo(map);
+ // Medición en planta: línea (2 clics) y polilínea (varios clics; doble clic o Enter para terminar)
+ const mlay=L.layerGroup().addTo(map);let mMode=null,mPts=[],mDone=false,mLine=null,mTip=null;
+ const dot=ll=>L.circleMarker(ll,{radius:5,color:"#fff",weight:2,fillColor:"#c8641b",fillOpacity:1,pane:"markerPane",interactive:false}).addTo(mlay);
+ const MedC=L.Control.extend({options:{position:"topleft"},onAdd(){const d=L.DomUtil.create("div","leaflet-bar");
+  const mk=(t,ti,mode)=>{const a=L.DomUtil.create("a","medmap",d);a.href="#";a.title=ti;a.innerHTML=t;L.DomEvent.on(a,"click",e=>{L.DomEvent.stop(e);mMode===mode?medMapOff():medMapOn(mode)});return a};
+  this.l=mk("📏 Línea","Medir con 2 clics (Esc para salir)","l");this.p=mk("〰 Polilínea","Medir con varios clics; doble clic o Enter para terminar (Esc para salir)","p");
+  L.DomEvent.disableClickPropagation(d);return d}});
+ const medC=new MedC().addTo(map);
+ function medReset(){mPts=[];mDone=false;mLine=null;mlay.clearLayers();map.closePopup()}
+ function medMapOn(mode){mMode=mode;medReset();medC.l.classList.toggle("on",mode==="l");medC.p.classList.toggle("on",mode==="p");$("#map").classList.add("medir");map.doubleClickZoom.disable()}
+ window.medMapOff=function(){mMode=null;medReset();medC.l.classList.remove("on");medC.p.classList.remove("on");$("#map").classList.remove("medir");map.doubleClickZoom.enable()};
+ const nearW=ll=>{let b=null,bd=1e9;for(const w of W){const d=map.distance(ll,[w[0],w[1]]);if(d<bd){bd=d;b=w}}return [b,bd]};
+ const lenOf=P=>{let t=0;for(let i=1;i<P.length;i++)t+=map.distance(P[i-1],P[i]);return t};
+ const azOf=(a,b)=>(Math.atan2((b.lng-a.lng)*Math.cos(a.lat*Math.PI/180),b.lat-a.lat)*180/Math.PI+360)%360;
+ function medFin(){if(mPts.length<2)return;mDone=true;const P=mPts,tot=lenOf(P),last=P[P.length-1];
+  let rows=`<tr><td>${mMode==="l"?"Distancia en planta":"Longitud total"}</td><td>${fmt(tot,1)} m</td></tr>`;
+  if(mMode==="l")rows+=`<tr><td>Azimut A→B</td><td>${fmt(azOf(P[0],P[1]),1)}°</td></tr>`;
+  else rows+=`<tr><td>Tramos</td><td>${P.length-1}</td></tr><tr><td>Recta inicio → fin</td><td>${fmt(map.distance(P[0],last),1)} m</td></tr>`;
+  const [wa,da]=nearW(P[0]),[wb,db]=nearW(last);
+  if(da<60&&db<60){const q=wa[2]<=wb[2]?[wa,wb]:[wb,wa],dx=q[1][2]-q[0][2],dz=q[1][3]-q[0][3];rows+=`<tr><td>Sobre el eje</td><td>${q[0][4]} → ${q[1][4]}</td></tr><tr><td>Dist. por el eje</td><td>${fmt(dx,0)} m</td></tr><tr><td>Desnivel SR</td><td>${dz>0?"+":""}${fmt(dz,1)} m (${dx?(dz>0?"+":"")+fmt(dz/dx*100,2):"0"} %)</td></tr>`}
+  L.popup({closeButton:true}).setLatLng(last).setContent(`<b>Medición · ${mMode==="l"?"línea":"polilínea"}</b><table class="ptab">${rows}</table><span style="color:#777;font-size:11.5px">Clic para medir de nuevo · Esc o el botón para salir</span>`).openOn(map)}
+ map.on("click",e=>{if(!mMode)return;if(mDone)medReset();mPts.push(e.latlng);dot(e.latlng);
+  if(mLine)mLine.setLatLngs(mPts);else if(mPts.length>1)mLine=L.polyline(mPts,{color:"#c8641b",weight:3,dashArray:"8 6",interactive:false}).addTo(mlay);
+  if(mMode==="l"&&mPts.length===2)return medFin();
+  if(mMode==="p"&&mPts.length>1){if(mTip)mlay.removeLayer(mTip);mTip=L.tooltip({permanent:true,direction:"right",offset:[8,0]}).setLatLng(e.latlng).setContent(`${fmt(lenOf(mPts),1)} m · doble clic o Enter para terminar`);mlay.addLayer(mTip)}});
+ map.on("dblclick",e=>{if(mMode==="p"&&!mDone){const L2=mPts[mPts.length-1];if(!L2||map.latLngToContainerPoint(L2).distanceTo(e.containerPoint)>12){map.fire("click",{latlng:e.latlng,containerPoint:e.containerPoint});return}if(mPts.length>1&&mPts[mPts.length-1].equals(mPts[mPts.length-2]))mPts.pop();if(mTip){mlay.removeLayer(mTip);mTip=null}medFin()}});
+ document.addEventListener("keydown",e=>{if(e.key==="Enter"&&mMode==="p"&&!mDone&&mPts.length>1){if(mTip){mlay.removeLayer(mTip);mTip=null}medFin()}});
+
  map.on("zoomend overlayadd overlayremove",lod);lod();
  const czz=()=>$("#map").classList.toggle("czlo",map.getZoom()<14);map.on("zoomend",czz);czz();
  $("#sh-op").oninput=e=>{shade.setOpacity(e.target.value/100);$("#sh-v").textContent=e.target.value+" %"};
@@ -863,8 +906,8 @@ function initDocs(){if(!ejeURL){ejeURL=blobFrom64(D.EJE,"application/pdf");$("#d
  if(!$("#dv").getAttribute("src"))$("#vw-eje").click()}      // por defecto, el eje en planta en el visor
 /* ---------- render ---------- */
 const VE={"ch-mini":10,"ch-prof":10};
-function drawVE(){document.querySelectorAll(".vebar").forEach(b=>{const id=b.dataset.ch;b.innerHTML=`<span class="note">Escala vertical</span><div class="seg" role="group">${[1,5,10,20].map(v=>`<button type="button" aria-pressed="${VE[id]===v}" data-v="${v}">${v}×</button>`).join("")}</div>`;
- b.querySelectorAll("button").forEach(x=>x.onclick=()=>{VE[id]=+x.dataset.v;drawVE()})});profile("ch-mini",VE["ch-mini"],true);profile("ch-prof",VE["ch-prof"],false)}
+function drawVE(){document.querySelectorAll(".vebar").forEach(b=>{const id=b.dataset.ch;b.innerHTML=`<span class="note">Escala vertical</span><div class="seg" role="group">${[1,5,10,20].map(v=>`<button type="button" aria-pressed="${VE[id]===v}" data-v="${v}">${v}×</button>`).join("")}</div><button type="button" class="btn medbtn" data-med="${id}" aria-pressed="${!!MED[id]}">📏 Medir</button><span class="note medmsg" id="mm-${id}">${MED[id]?"Clic en dos puntos del perfil · Esc para salir":""}</span>`;b.querySelector(".medbtn").onclick=()=>{MED[id]=MED[id]?null:{a:null};drawVE()};
+ b.querySelectorAll("button[data-v]").forEach(x=>x.onclick=()=>{VE[id]=+x.dataset.v;drawVE()})});profile("ch-mini",VE["ch-mini"],true);profile("ch-prof",VE["ch-prof"],false)}
 function renderAll(){$("#theme-lbl").textContent=isDark()?"Claro":"Oscuro";kpis();drawVE();sect();notas();drenaje();riesgos();method();gantt();env()}
 renderTabs();renderAll();
 </script>
