@@ -722,7 +722,15 @@ function initMap(){if(map){setTimeout(()=>map.invalidateSize(),50);return}
  cs.addTo(map);
  const nt=L.layerGroup();D.NOTAS.forEach((n,i)=>{const w=wByM(n[0]);L.marker([w[0],w[1]],{icon:L.divIcon({className:"",html:`<span class="nt-ic${n[3]==="nav"?" nav":""}">${i+1}</span>`,iconSize:[22,22],iconAnchor:[11,11]}),zIndexOffset:500}).bindPopup(notaPop(n,i)).addTo(nt)});nt.addTo(map);
  const cuP=["#1f6fd1","#2fa36b","#c8641b","#8e5bd1","#d1a21f","#d14b7a"];
- const cuL=L.layerGroup();D.DRN.cu.forEach((c,k)=>{const col=cuP[k%cuP.length];c[2].forEach(r=>L.polygon(r,{renderer:rCtx,color:col,weight:1,opacity:.7,fillColor:col,fillOpacity:.10}).bindPopup(`<b>Cuenca hacia ${c[0].map(m=>st(m)).join(", ")}</b><br>Área propia (sin cuencas aguas arriba): ${fmt(c[1],1)} ha`).addTo(cuL))});
+ const cuL=L.layerGroup();let cuSel=null;
+ const cuOff=()=>{if(!cuSel)return;cuSel.forEach(p=>p.setStyle(p.options._st));cuSel=null};
+ D.DRN.cu.forEach((c,k)=>{const col=cuP[k%cuP.length],st0={color:col,weight:1,opacity:.7,fillColor:col,fillOpacity:.10},grp=[];
+  const nums=c[0].map(m=>{const r=D.CRZ.find(x=>x[0]===m);return r?cn(r):""}).filter(Boolean).join(", ");
+  c[2].forEach(r=>{const pg=L.polygon(r,{renderer:rCtx,...st0,_st:st0});grp.push(pg);
+   pg.on("click",e=>{L.DomEvent.stopPropagation(e);cuOff();cuSel=grp;grp.forEach(q=>{q.setStyle({color:"#e00000",weight:4.5,opacity:1,fillColor:"#ff3b30",fillOpacity:.18});q.bringToFront()});
+    L.popup().setLatLng(e.latlng).setContent(`<b>Cuenca hacia ${nums?nums+" · ":""}${c[0].map(m=>st(m)).join(", ")}</b><br>Área propia (sin cuencas aguas arriba): ${fmt(c[1],1)} ha`).openOn(map)});
+   pg.addTo(cuL)})});
+ map.on("click",cuOff);cuL.on("remove",cuOff);
  const caL=L.layerGroup();D.DRN.lines.forEach(([a,c])=>L.polyline(c,{renderer:rCtx,color:"#1a5fd0",weight:a>1000?3.2:a>100?2.2:a>10?1.4:.8,opacity:.85,interactive:false}).addTo(caL));caL.addTo(map);
  const czL=L.layerGroup();D.CRZ.forEach(r=>{const s=r[3]>1000?16:r[3]>100?13:r[3]>10?10:8;L.marker([r[1],r[2]],{icon:L.divIcon({className:"",html:`<span class="cz-ic${r[9]?" rep":""}" style="width:${s}px;height:${s}px"></span><span class="cz-n">C-${String(r[10]).padStart(3,"0")}</span>`,iconSize:[s,s],iconAnchor:[s/2,s/2]}),zIndexOffset:400,title:cn(r)+" · "+st(r[0])}).bindPopup(czPop(r)).addTo(czL)});czL.addTo(map);
  shade.addTo(map);pk.addTo(map);rd.addTo(map);axis.addTo(map);crit.addTo(map);est.addTo(map);pl.addTo(map);
