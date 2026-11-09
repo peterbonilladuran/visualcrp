@@ -912,7 +912,7 @@ function initMap(){if(map){setTimeout(()=>map.invalidateSize(),50);return}
  L.control.layers({"Topográfico":topo,"Satélite":satl,"Mapa":osm},{
   "Relieve sombreado MDE 8 m":shade,"Curvas de nivel 100 m (MDE)":ct,"Curvas de nivel 5 m (MDT, zona de drenaje)":c5,"Curvas de nivel 2.5 m (MDT, ±300 m)":c25,"Eje de referencia por pendiente":axis,"Eje de referencia (una línea)":plain,
   "Estacionamiento (km · 100 m · 20 m)":est,"Elementos de curva (PC, PT…)":cvL,"Tramo complejo Km 37 – 40":crit,
-  "PN Sierra de Bahoruco":pk,"Minas de bauxita Aceitillar":mn,"Carreteras existentes":rd,"Lugares":pl,"Casetas del sendero":cs,"Bitácora del recorrido":nt,"Cauces del MDE (≥ 3.2 ha)":caL,"Cruces cauce–eje":czL,"Cuencas de los cruces":cuL,"Variante A · ejemplo de estudio conceptual (7+000 – 9+300)":altL},{collapsed:innerWidth<700}).addTo(map);
+  "PN Sierra de Bahoruco":pk,"Minas de bauxita Aceitillar":mn,"Carreteras existentes":rd,"Lugares":pl,"Casetas del sendero":cs,"Bitácora del recorrido":nt,"Cauces del MDE (≥ 3.2 ha)":caL,"Cruces cauce–eje":czL,"Cuencas de los cruces":cuL,"Variante A · ejemplo de estudio conceptual (7+000 – 9+300)":altL},{collapsed:true}).addTo(map);{const t=document.querySelector(".leaflet-control-layers-toggle");if(t){t.title="Capas del mapa";t.setAttribute("aria-label","Capas del mapa")}}
  L.control.scale({imperial:false}).addTo(map);
  window.perfilTerreno=perfilTerreno;function perfilTerreno(P){map.closePopup();const lat0=P[0].lat,lon0=P[0].lng,kx=degLon(lat0),ky=degLat(lat0),xy=ll=>[(ll[1]-lon0)*kx,(ll[0]-lat0)*ky];
   // fuentes encendidas, de la más detallada a la menos: 2.5 m (±300 m), 5 m (corredor), 100 m (todo)
