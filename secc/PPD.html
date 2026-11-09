@@ -1029,7 +1029,9 @@ function initMap(){if(map){setTimeout(()=>map.invalidateSize(),50);return}
    tx("SEC_TEXTO",-w,zmax+base+3,3,`Seccion a ${d.toFixed(1)} m del inicio del trazo - TN ${zc.toFixed(2)} m - ancho +/-${w} m - escala 1:1 (Y = cota real + desplazamiento ${base.toFixed(0)})`);for(let z=zmin;z<=zmax;z+=10)tx("SEC_TEXTO",-w-14,z+base-.8,1.8,z.toFixed(0));
    yo+=zmax-zmin+20});g(0,"ENDSEC");g(0,"EOF");return o.join("\r\n")}
  const csvHead="dist_trazo_m;desplaz_m;Norte_UTM19N_WGS84;Este_UTM19N_WGS84;cota_m;fuente";
- const csvLines=(d,r)=>r.pts.map(p=>{const [e,n]=toUTM19(p[3],p[4]);return [d.toFixed(2),p[0].toFixed(2),n.toFixed(2),e.toFixed(2),p[1].toFixed(2),"curvas "+((r.SRC[p[2]]||{}).n||"")].join(";")});
+ const csvLines=(d,r)=>{const rows=r.pts.map(p=>{const [e,n]=toUTM19(p[3],p[4]);return [p[0],[d.toFixed(2),p[0].toFixed(2),n.toFixed(2),e.toFixed(2),p[1].toFixed(2),"curvas "+((r.SRC[p[2]]||{}).n||"")].join(";")]});
+  if(r.G&&r.pts.length>1&&r.pts[0][0]<=0&&r.pts[r.pts.length-1][0]>=0){const [e,n]=toUTM19(r.G.c.lat,r.G.c.lng);rows.push([0,[d.toFixed(2),"0.00",n.toFixed(2),e.toFixed(2),secZ(r.pts,0).toFixed(2),"interpolado (eje del trazo)"].join(";")])}
+  return rows.sort((x,y)=>x[0]-y[0]).map(x=>x[1])};
  $("#sec-dxf").onclick=()=>{if(SEC.res&&SEC.res.pts.length)dl(`Seccion PPD ${Math.round(SEC.d)} m.dxf`,secDXF([{d:SEC.d,w:SEC.w,pts:SEC.res.pts,G:SEC.res.G}]),"application/dxf")};
  $("#sec-csv").onclick=()=>{if(SEC.res&&SEC.res.pts.length)dl(`Seccion PPD ${Math.round(SEC.d)} m.csv`,"﻿"+csvHead+"\r\n"+csvLines(SEC.d,SEC.res).join("\r\n"),"text/csv")};
  const secAll=()=>{const g=window.PTG;if(!g)return [];const out=[];for(let d=0;d<=g.Ltot+1e-6;d+=SEC.int){const dd=Math.min(d,g.Ltot),r=secCalc(dd,SEC.w);if(r&&r.pts.length>1)out.push({d:dd,w:SEC.w,pts:r.pts,r,G:r.G})}return out};
