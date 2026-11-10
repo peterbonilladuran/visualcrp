@@ -331,7 +331,7 @@ body.tv-lock{overflow:hidden}
 #v3-c canvas{display:block;width:100%;height:100%;touch-action:none}
 .v3-msg{position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);background:rgba(22,33,42,.9);color:#fff;padding:10px 16px;border-radius:8px;font-size:14px;z-index:2;max-width:90%;text-align:center}
 .v3-msg[hidden]{display:none}
-.v3-note{position:absolute;left:8px;bottom:8px;right:8px;max-width:760px;font-size:11.5px;line-height:1.4;color:#fff;background:rgba(22,33,42,.72);padding:6px 9px;border-radius:6px;pointer-events:none}
+.v3-note{position:absolute;left:8px;bottom:8px;right:8px;max-width:760px;font-size:11.5px;line-height:1.4;color:#fff;background:rgba(22,33,42,.72);padding:6px 9px;border-radius:6px;pointer-events:none;z-index:2}
 .v3-lay{position:relative}
 .v3-lay summary{list-style:none}.v3-lay summary::-webkit-details-marker{display:none}
 .v3-lay>div{position:absolute;top:110%;left:0;z-index:5;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:8px 10px;display:grid;gap:5px;min-width:200px;box-shadow:0 6px 20px rgba(0,0,0,.18)}
@@ -1505,7 +1505,7 @@ function build(){if($("#v3"))return;const d=document.createElement("div");d.id="
  <div id="v3-c"><div class="v3-msg" id="v3-msg" hidden></div><div class="v3-note" id="v3-note"></div></div>`;
  document.body.appendChild(d);
  $("#v3-x").onclick=close3;$("#v3-z").onchange=e=>zone(e.target.value);$("#v3-t").onchange=e=>{V3.tex=e.target.value;applyTex()};
- $("#v3-e").oninput=e=>{V3.ve=+e.target.value;$("#v3-eo").textContent=V3.ve+"×";heights()};
+ $("#v3-e").oninput=e=>{V3.ve=+e.target.value;$("#v3-eo").textContent=V3.ve+"×";heights();veNote()};
  d.querySelectorAll(".v3-lay input").forEach(c=>c.onchange=()=>{V3.lay[c.dataset.k]=c.checked;if(c.dataset.k==="cv"||c.dataset.k==="cau"||c.dataset.k==="alt")composite();objs()});
  $("#v3-s").oninput=e=>{stopFly();setS(+e.target.value,true)};$("#v3-fly").onclick=toggleFly;$("#v3-v").onchange=e=>V3.spd=+e.target.value;$("#v3-home").onclick=()=>{stopFly();home()};
  document.addEventListener("keydown",e=>{if(V3.on&&e.key==="Escape")close3()});addEventListener("resize",()=>{if(V3.on)resize()})}
@@ -1527,7 +1527,8 @@ function mesh(bb){const G0=TVK.grid(bb,2,2),Wm=G0.Wm,Hm=G0.Hm,maxN=mob()?200:340
  $("#v3-s").min=Math.floor(V3.r0);$("#v3-s").max=Math.ceil(V3.r1);$("#v3-s").value=V3.s;
  if(V3.auto){const rel=(g.max-g.min)||1;V3.ve=Math.max(1,Math.min(5,Math.round(0.14*Math.max(g.Wm,g.Hm)/rel*2)/2));V3.auto=false;$("#v3-e").value=V3.ve;$("#v3-eo").textContent=V3.ve+"×"}
  V3.base={};heights();applyTex();home();msg(null);
- $("#v3-note").innerHTML=`Terreno interpolado de las curvas de nivel del MDT (2.5 m, 5 m y 100 m, la más detallada que cubre cada punto) en una malla de ${fmt(V3.cell,1)} m; ${fmt(g.Wm/1000,2)} × ${fmt(g.Hm/1000,2)} km. Representación para explicar el relieve: no sustituye la topografía del estudio (H5).<span id="v3-att"></span>`}
+ $("#v3-note").innerHTML=`Terreno interpolado de las curvas de nivel del MDT (2.5 m, 5 m y 100 m, la más detallada que cubre cada punto) en una malla de ${fmt(V3.cell,1)} m; ${fmt(g.Wm/1000,2)} × ${fmt(g.Hm/1000,2)} km. Representación para explicar el relieve: no sustituye la topografía del estudio (H5). <span id="v3-ven"></span><span id="v3-att"></span>`;veNote()}
+function veNote(){const e=$("#v3-ven");if(!e)return;e.innerHTML=`Exageración vertical <b>${V3.ve}×</b>${V3.ve>3?": las pendientes y desniveles se ven más fuertes que los reales.":V3.ve===1?" (escala real).":"."}`}
 const inBB=p=>{const b=V3.g.bb;return p[0]>=b[0]&&p[0]<=b[2]&&p[1]>=b[1]&&p[1]<=b[3]};
 const trTr=()=>TVtrace(V3.tr)||TVtrace("eje");
 const wx=(lat,lon)=>{const g=V3.g;return [(lon-g.bb[1])*g.kx-g.Wm/2,g.Hm/2-(lat-g.bb[0])*g.ky]};
@@ -1570,21 +1571,23 @@ function composite(){if(!V3.g||!V3.base||!V3.base[V3.tex])return;const g=V3.g,[T
 // ---------- objetos: estaciones, cruces, rótulos, cursor ----------
 function sprite(txt,col,bg,h,top){const cv=document.createElement("canvas"),c=cv.getContext("2d"),fs=44;c.font=`700 ${fs}px "IBM Plex Mono",Consolas,monospace`;const w=Math.ceil(c.measureText(txt).width)+28;cv.width=w;cv.height=64;
  c.font=`700 ${fs}px "IBM Plex Mono",Consolas,monospace`;c.fillStyle=bg||"rgba(22,33,42,.85)";c.fillRect(0,0,w,64);c.fillStyle=col||"#fff";c.textBaseline="middle";c.fillText(txt,14,34);
- const t=new THREE.CanvasTexture(cv),s=new THREE.Sprite(new THREE.SpriteMaterial({map:t,depthTest:!!top?false:true,transparent:true}));s.scale.set(h*w/64,h,1);s.center.set(.5,0);s.renderOrder=top?6:5;return s}
-function pin(lat,lon,hgt,col,label,lc,lbg,lh,top){const [x,z]=wx(lat,lon),y=H(zll(lat,lon)),r=V3.U*.0016,grp=new THREE.Group();const m=new THREE.Mesh(new THREE.CylinderGeometry(r,r,hgt,6),new THREE.MeshBasicMaterial({color:col}));m.position.set(x,y+hgt/2,z);grp.add(m);
- if(label){const s=sprite(label,lc,lbg,lh,top);s.position.set(x,y+hgt,z);grp.add(s)}return grp}
+ const t=new THREE.CanvasTexture(cv),s=new THREE.Sprite(new THREE.SpriteMaterial({map:t,depthTest:!!top?false:true,transparent:true,sizeAttenuation:false}));s.scale.set(h*w/64,h,1);s.center.set(.5,0);s.renderOrder=top?6:5;return s}
+function pin(lat,lon,hgt,col,label,lc,lbg,lh,top){const [x,z]=wx(lat,lon),y=H(zll(lat,lon)),r=V3.U*.0016,grp=new THREE.Group();const m=new THREE.Mesh(new THREE.CylinderGeometry(r,r,1,6),new THREE.MeshBasicMaterial({color:col}));grp.add(m);let sp=null;
+ if(label){sp=sprite(label,lc,lbg,lh,top);grp.add(sp)}const P={m,sp,x,y,z,h:hgt,f:-1};V3.pins.push(P);fitPin(P,1);return grp}
+function fitPin(P,f){if(Math.abs(f-P.f)<.01)return;P.f=f;const h=P.h*f;P.m.scale.set(Math.max(.35,f),h,Math.max(.35,f));P.m.position.set(P.x,P.y+h/2,P.z);if(P.sp)P.sp.position.set(P.x,P.y+h,P.z);if(P.ring)P.ring.scale.setScalar(Math.max(.15,f))}
+function fitPins(){if(!V3.pins||!V3.cam)return;const c=V3.cam.position;const L=V3.curP?V3.pins.concat([V3.curP]):V3.pins;for(const P of L){const d=Math.hypot(c.x-P.x,c.y-P.y,c.z-P.z);fitPin(P,Math.max(.06,Math.min(1,d*.07/P.h)))}}
 function objs(){if(!V3.terr)return;if(V3.og){V3.scene.remove(V3.og);V3.og.traverse(o=>{if(o.geometry)o.geometry.dispose();if(o.material){if(o.material.map)o.material.map.dispose();o.material.dispose()}})}
- const g=V3.g,U=V3.U=Math.max(g.Wm,g.Hm),og=V3.og=new THREE.Group(),lh=U*.017,ph=U*.035;
+ const g=V3.g,U=V3.U=Math.max(g.Wm,g.Hm),og=V3.og=new THREE.Group(),lh=mob()?.034:.026,ph=U*.035;V3.pins=[];
  V3.kmL=[];if(V3.lay.km){const iv=U<=1600?200:U<=4500?500:U<=12000?1000:5000;W.forEach(w=>{if(w[2]%iv===0&&inBB(w)){V3.kmL.push(wx(w[0],w[1]));og.add(pin(w[0],w[1],ph,0xc8641b,st(w[2]),"#fff","rgba(200,100,27,.92)",lh))}})}
  if(V3.lay.crz){const cz=D.CRZ.filter(r=>inBB([r[1],r[2]])).sort((a,b)=>b[3]-a[3]),lab=V3.kmL.slice(),gap=U*.05;cz.forEach(r=>{const [x,z]=wx(r[1],r[2]),free=lab.every(q=>Math.hypot(q[0]-x,q[1]-z)>gap);if(free)lab.push([x,z]);og.add(pin(r[1],r[2],ph*.7,0x1a5fd0,free?`C-${String(r[10]).padStart(3,"0")} · ${fmt(r[3],r[3]<10?1:0)} ha`:null,"#fff","rgba(26,95,208,.9)",lh*.85))})}
  if(V3.lay.alt)(D.ALT||[]).forEach(v=>{const m=v.ll[Math.floor(v.ll.length*.45)];if(inBB(m))og.add(pin(m[0],m[1],ph*1.3,0xffffff,"Borrador "+v.id,"#fff",v.col?"rgba(217,72,15,.92)":"rgba(123,44,191,.92)",lh*1.1,true))});
  {const nlat=g.bb[2],nlon=(g.bb[1]+g.bb[3])/2,[x,z]=wx(nlat,nlon),s=sprite("N ↑","#fff","rgba(22,33,42,.85)",lh*1.2,true);s.position.set(x,H(g.max)+U*.03,z);og.add(s)}
  V3.cur=new THREE.Group();og.add(V3.cur);V3.scene.add(og);cursor()}
 function cursor(){if(!V3.cur)return;V3.cur.children.slice().forEach(o=>{V3.cur.remove(o);if(o.geometry)o.geometry.dispose()});const T=trTr(),p=TVpos(T,V3.s),U=V3.U,[x,z]=wx(p.lat,p.lon),y=H(zll(p.lat,p.lon)),h=U*.06,r=U*.0022;
- const pole=new THREE.Mesh(new THREE.CylinderGeometry(r,r,h,10),new THREE.MeshBasicMaterial({color:0xd62828}));pole.position.set(x,y+h/2,z);V3.cur.add(pole);
- const ring=new THREE.Mesh(new THREE.TorusGeometry(r*5,r*1.2,8,28),new THREE.MeshBasicMaterial({color:0xff00aa}));ring.rotation.x=Math.PI/2;ring.position.set(x,y+r*2,z);V3.cur.add(ring);
+ const pole=new THREE.Mesh(new THREE.CylinderGeometry(r,r,1,10),new THREE.MeshBasicMaterial({color:0xd62828}));V3.cur.add(pole);V3.curP={m:pole,sp:null,x,y,z,h,f:-1};
+ const ring=new THREE.Mesh(new THREE.TorusGeometry(r*5,r*1.2,8,28),new THREE.MeshBasicMaterial({color:0xff00aa}));ring.rotation.x=Math.PI/2;ring.position.set(x,y+r*2,z);V3.cur.add(ring);V3.curP.ring=ring;fitPin(V3.curP,1);
  const w=(window.TV&&TV.w)||100,pts=[];for(let k=0;k<=40;k++){const t=-w+2*w*k/40,q=p.off(t);if(!inBB(q))continue;const [qx,qz]=wx(q[0],q[1]);pts.push(new THREE.Vector3(qx,H(zll(q[0],q[1]))+U*.0015,qz))}
- if(pts.length>1)V3.cur.add(new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts),60,U*.0011,6,false),new THREE.MeshBasicMaterial({color:0xff00aa})));
+ if(pts.length>1)V3.cur.add(new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts),60,U*.0006,6,false),new THREE.MeshBasicMaterial({color:0xff00aa})));
  $("#v3-so").textContent=st(V3.s)+(T.eje?"":" ("+T.id+")")}
 function setS(s,sync){const T=trTr();V3.s=Math.max(V3.r0,Math.min(V3.r1,s));$("#v3-s").value=V3.s;cursor();if(sync&&window.TV&&TV.on&&TV.tr===T.id)TV.setS(V3.s,"3d")}
 V3.sync=(id,s)=>{if(!V3.on||id!==V3.tr)return;if(s<V3.r0||s>V3.r1)return;V3.s=s;$("#v3-s").value=s;cursor()};
@@ -1605,7 +1608,7 @@ function home(){const g=V3.g,U=Math.max(g.Wm,g.Hm),T=trTr(),p=TVpos(T,V3.s),[x,z
 function loop(){if(!V3.on)return;requestAnimationFrame(loop);const t=performance.now();
  if(V3.fly){const dt=Math.min(.1,(t-V3.fly.t)/1000);V3.fly.t=t;const s=V3.s+dt*45*V3.spd;if(s>=V3.r1){stopFly()}else{V3.s=s;$("#v3-s").value=s;if(t-V3.fly.c>120){cursor();V3.fly.c=t;if(window.TV&&TV.on&&TV.tr===V3.tr)TV.setS(s,"3d")}}
   const T=trTr(),p=TVpos(T,V3.s),q=TVpos(T,Math.min(V3.r1,V3.s+160)),[x,z]=wx(p.lat,p.lon),[x2,z2]=wx(q.lat,q.lon),y=H(zll(p.lat,p.lon)),y2=H(zll(q.lat,q.lon)),eye=new THREE.Vector3(x-(x2-x)*.35,Math.max(y,y2)+Math.max(35,22*V3.ve),z-(z2-z)*.35);
-  V3.cam.position.lerp(eye,.12);V3.ctl.target.lerp(new THREE.Vector3(x2,y2,z2),.12);V3.cam.lookAt(V3.ctl.target)}else V3.ctl.update();
+  V3.cam.position.lerp(eye,.12);V3.ctl.target.lerp(new THREE.Vector3(x2,y2,z2),.12);V3.cam.lookAt(V3.ctl.target)}else V3.ctl.update();fitPins();
  V3.rend.render(V3.scene,V3.cam)}
 function toggleFly(){if(V3.fly){stopFly();return}if(V3.s>=V3.r1-5)V3.s=V3.r0;V3.fly={t:performance.now(),c:0};V3.ctl.enabled=false;$("#v3-fly").textContent="■ Detener vuelo"}
 function stopFly(){if(!V3.fly)return;V3.fly=null;V3.ctl.enabled=true;$("#v3-fly").textContent="▶ Vuelo por el trazo";cursor()}
