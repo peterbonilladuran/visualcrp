@@ -399,6 +399,10 @@ body.tv-lock{overflow:hidden}
 .v3.v3-max .v3-bar,.v3.v3-max .tv-bar{display:none!important}
 .v3.v3-max{position:fixed!important;inset:0!important;width:100vw!important;height:100vh!important;max-width:none!important;max-height:none!important;border-radius:0!important;margin:0!important;z-index:10000}
 .v3.v3-max #v3-c{min-height:0;flex:1}
+.v3-leg{position:absolute;left:10px;top:10px;z-index:4;background:rgba(255,255,255,.92);color:#16212a;border-radius:8px;padding:7px 10px;font-size:12px;line-height:1.25;display:flex;flex-direction:column;gap:3px;box-shadow:0 2px 10px rgba(0,0,0,.18);pointer-events:none}
+.v3-leg[hidden]{display:none}.v3-leg b{font-size:11.5px;margin-bottom:2px}
+.v3-leg span{display:flex;align-items:center;gap:7px;white-space:nowrap}.v3-leg i{display:inline-block;width:22px;height:6px;border-radius:3px;outline:1.5px solid #fff}
+@media (max-width:760px){.v3-leg{font-size:10.5px;padding:5px 7px;gap:2px;flex-direction:row;flex-wrap:wrap;right:10px;max-width:calc(100% - 20px);top:56px;bottom:auto}.v3-leg b{width:100%}.v3-leg i{width:14px}}
 
 /* ---------- presentación ---------- */
 .keym{border-top:3px solid var(--accent)}.keyl{margin:6px 0 0;padding-left:22px;display:grid;gap:8px;font-size:15px;line-height:1.5}.keyl li::marker{color:var(--accent);font-weight:700}
@@ -1566,15 +1570,15 @@ window.tvClose=tvClose;window.TVtrace=trace;window.TVpos=posAt;window.TVnear=nea
 })();
 /* ===== v5.1 · Vista 3D del corredor: malla armada con las mismas curvas del MDT ===== */
 (function(){
-const V3=window.V3={on:false,ve:2,tex:"sat",lay:{eje:true,tr:true,km:true,cur:true,alt:true,crit:false,cau:true,crz:true,cv:false,c25:false,pk:true,mn:false,rd:false,pl:false,cs:true},tr:"eje",s:0,fly:null,spd:1};
+const V3=window.V3={on:false,ve:2,tex:"sat",lay:{eje:true,ejp:true,tr:true,km:true,cur:true,alt:true,crit:false,cau:true,crz:true,cv:false,c25:false,pk:true,mn:false,rd:false,pl:false,cs:true},tr:"eje",s:0,fly:null,spd:1};
 const mob=()=>innerWidth<760;
 function need3(){if(window.THREE&&THREE.OrbitControls)return Promise.resolve();const ld=u=>new Promise((res,rej)=>{const a=document.createElement("script");a.src=u;a.onload=res;a.onerror=()=>rej(new Error(u));document.head.appendChild(a)});
  return (window.THREE?Promise.resolve():ld("https://cdn.jsdelivr.net/npm/three@0.147.0/build/three.min.js")).then(()=>ld("https://cdn.jsdelivr.net/npm/three@0.147.0/examples/js/controls/OrbitControls.js"))}
-const LAYG=[["Trazado",[["eje","Eje de referencia"],["tr","Trazo del perfil (pestaña Mapa)"],["km","Estaciones"],["cur","Cursor de estación y sección"],["alt","Variantes P1 y P2"],["crit","Tramo complejo Km 37 – 40"]]],
+const LAYG=[["Trazado",[["eje","Eje de referencia"],["ejp","Eje coloreado por pendiente"],["tr","Trazo del perfil (pestaña Mapa)"],["km","Estaciones"],["cur","Cursor de estación y sección"],["alt","Variantes P1 y P2"],["crit","Tramo complejo Km 37 – 40"]]],
  ["Drenaje",[["cau","Cauces"],["crz","Cruces cauce–eje"]]],
  ["Terreno",[["cv","Curvas de nivel 5 m"],["c25","Curvas de nivel 2.5 m (±300 m)"]]],
  ["Contexto",[["pk","PN Sierra de Bahoruco"],["mn","Minas de bauxita Aceitillar"],["rd","Carreteras existentes"],["pl","Lugares"],["cs","Casetas del sendero"]]]];
-const TEXK=new Set(["eje","tr","alt","crit","cau","cv","c25","pk","mn","rd"]),OBJK=new Set(["km","cur","alt","crz","pl","cs"]);
+const TEXK=new Set(["ejp","eje","tr","alt","crit","cau","cv","c25","pk","mn","rd"]),OBJK=new Set(["km","cur","alt","crz","pl","cs"]);
 const ZONES=[["st1","Alrededor de la estación · 1 km"],["st2","Alrededor de la estación · 2 km"],["st4","Alrededor de la estación · 4 km"],["valle","Valle 10+300 – 11+230"],["P1","Variante P1 y eje (7+050 – 9+438)"],["P2","Variante P2 y eje (10+000 – 15+500)"],["k37","Tramo complejo Km 37 – 40"],["cus","Tramo del eje definido (de … a …)"],["tr","Todo el trazo elegido"]];
 function build(){if($("#v3"))return;const d=document.createElement("div");d.id="v3";d.className="v3";d.hidden=true;d.setAttribute("role","dialog");d.setAttribute("aria-modal","true");d.setAttribute("aria-label","Vista 3D del terreno");
  d.innerHTML=`<div class="tv-bar"><b class="tv-tt">Vista 3D del terreno</b>
@@ -1588,7 +1592,7 @@ function build(){if($("#v3"))return;const d=document.createElement("div");d.id="
  <button type="button" class="btn" id="v3-home">Vista general</button><button type="button" class="btn v3-qb" id="v3-q" aria-pressed="false" title="Clic sobre un objeto del 3D para ver sus propiedades">⌖ Consultar</button>
  <button type="button" class="btn" id="v3-x">✕ Cerrar 3D</button></div>
  <div class="tv-info mono" id="v3-info" aria-live="polite">Pase el cursor sobre el terreno para leer coordenadas y cota; clic para llevar la estación a ese punto.</div>
- <div id="v3-c"><div class="v3-msg" id="v3-msg" hidden></div><div class="v3-note" id="v3-note" hidden></div><div class="v3-fab"><button type="button" class="v3-fb" id="v3-i" aria-pressed="false" aria-controls="v3-note" title="Información del modelo 3D">ⓘ Info</button><button type="button" class="v3-fb" id="v3-fs" aria-pressed="false" title="Pantalla completa">⛶ Pantalla completa</button></div></div>`;
+ <div id="v3-c"><div class="v3-msg" id="v3-msg" hidden></div><div class="v3-note" id="v3-note" hidden></div><div class="v3-leg" id="v3-leg" role="img" aria-label="Pendiente del eje de referencia"></div><div class="v3-fab"><button type="button" class="v3-fb" id="v3-i" aria-pressed="false" aria-controls="v3-note" title="Información del modelo 3D">ⓘ Info</button><button type="button" class="v3-fb" id="v3-fs" aria-pressed="false" title="Pantalla completa">⛶ Pantalla completa</button></div></div>`;
  document.body.appendChild(d);
  $("#v3-x").onclick=()=>{fsExit();close3()};
  $("#v3-i").onclick=()=>{const n=$("#v3-note"),on=n.hidden;n.hidden=!on;$("#v3-i").setAttribute("aria-pressed",on);$("#v3-i").classList.toggle("on",on)};
@@ -1670,7 +1674,8 @@ function composite(){if(!V3.g||!V3.base||!V3.base[V3.tex])return;const g=V3.g,[T
  if(V3.lay.cau)(D.CAU||[]).forEach(([o,a,ln])=>{if(vis(ln))line(ln,"#2f7bff",a>1000?7:a>100?5:a>30?3.5:2.4)});
  if(V3.lay.crit){const cr=W.filter(w=>w[2]>=37000&&w[2]<=40000).map(w=>[w[0],w[1]]);if(vis(cr))line(cr,"rgba(255,45,85,.45)",26)}
  if(V3.lay.alt)(D.ALT||[]).forEach(v=>{line(v.ll,"#ffffff",11,[24,14]);line(v.ll,v.col||"#7b2cbf",7,[24,14])});
- if(V3.lay.eje){const ax=W.map(w=>[w[0],w[1]]);line(ax,"#ffffff",11);line(ax,"#c8641b",6.5)}
+ if(V3.lay.eje){const ax=W.map(w=>[w[0],w[1]]),SP=V3.lay.ejp&&typeof gcol==="function";if(SP){line(ax,"rgba(22,33,42,.85)",19);line(ax,"#ffffff",15)}else line(ax,"#ffffff",11);if(SP){let seg=[ax[0]],col=gcol(W[0][5]);for(let i=1;i<W.length;i++){seg.push(ax[i]);const c_=i<W.length-1?gcol(W[i][5]):col;if(c_!==col||i===W.length-1){if(vis(seg))line(seg,col,11);seg=[ax[i]];col=c_}}}else line(ax,"#c8641b",6.5)}
+ legUpd();
  const T=trTr();if(V3.lay.tr&&T.id==="pt"){line(T.LL,"#ffffff",10);line(T.LL,T.col,6)}
  c.setLineDash([]);
  if(!V3.texT){V3.texT=new THREE.CanvasTexture(cv);V3.texT.anisotropy=V3.rend.capabilities.getMaxAnisotropy()}else{V3.texT.image=cv;V3.texT.needsUpdate=true}
@@ -1762,6 +1767,7 @@ function fsOn(){return $("#v3").classList.contains("v3-max")}
 function fsBtn(){const b=$("#v3-fs");if(!b)return;const on=fsOn();b.setAttribute("aria-pressed",on);b.textContent=on?"✕ Salir de pantalla completa":"⛶ Pantalla completa";b.classList.toggle("on",on)}
 function fsEnter(){const d=$("#v3");d.classList.add("v3-max");const rq=d.requestFullscreen||d.webkitRequestFullscreen;if(rq){try{const p=rq.call(d);if(p&&p.catch)p.catch(()=>{})}catch(e){}}fsBtn();setTimeout(resize,80)}
 function fsExit(){const d=$("#v3");if(!d)return;d.classList.remove("v3-max");const fe=document.fullscreenElement||document.webkitFullscreenElement;if(fe){const ex=document.exitFullscreen||document.webkitExitFullscreen;try{const p=ex.call(document);if(p&&p.catch)p.catch(()=>{})}catch(e){}}fsBtn();setTimeout(resize,80)}
+function legUpd(){const L=$("#v3-leg");if(!L)return;const on=V3.lay.eje&&V3.lay.ejp&&typeof GC!=="undefined";L.hidden=!on;if(!on||L.dataset.ok)return;L.dataset.ok=1;L.innerHTML=`<b>Pendiente del eje (SR MOPC)</b>`+GC.map(c=>`<span><i style="background:${css(c[1])}"></i>${c[2]}</span>`).join("")}
 function resize(){const c=$("#v3-c"),w=c.clientWidth,h=c.clientHeight;V3.rend.setSize(w,h);V3.cam.aspect=w/Math.max(1,h);V3.cam.updateProjectionMatrix()}
 function home(){const g=V3.g,U=Math.max(g.Wm,g.Hm),T=trTr(),p=TVpos(T,V3.s),[x,z]=wx(p.lat,p.lon),y=H(zll(p.lat,p.lon));V3.ctl.target.set(x*.35,y*.6+H((g.min+g.max)/2)*.4,z*.35);V3.cam.position.set(x*.35-U*.15,H(g.max)+U*.55,z*.35+U*.75);V3.cam.near=Math.max(.5,U/4000);V3.cam.far=U*20;V3.cam.updateProjectionMatrix();V3.ctl.update()}
 function loop(){if(!V3.on)return;requestAnimationFrame(loop);const t=performance.now();
