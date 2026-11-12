@@ -399,10 +399,8 @@ body.tv-lock{overflow:hidden}
 .v3.v3-max .v3-bar,.v3.v3-max .tv-bar{display:none!important}
 .v3.v3-max{position:fixed!important;inset:0!important;width:100vw!important;height:100vh!important;max-width:none!important;max-height:none!important;border-radius:0!important;margin:0!important;z-index:10000}
 .v3.v3-max #v3-c{min-height:0;flex:1}
-.v3-leg{position:absolute;left:10px;top:10px;z-index:4;background:rgba(255,255,255,.92);color:#16212a;border-radius:8px;padding:7px 10px;font-size:12px;line-height:1.25;display:flex;flex-direction:column;gap:3px;box-shadow:0 2px 10px rgba(0,0,0,.18);pointer-events:none}
-.v3-leg[hidden]{display:none}.v3-leg b{font-size:11.5px;margin-bottom:2px}
-.v3-leg span{display:flex;align-items:center;gap:7px;white-space:nowrap}.v3-leg i{display:inline-block;width:22px;height:6px;border-radius:3px;outline:1.5px solid #fff}
-@media (max-width:760px){.v3-leg{font-size:10.5px;padding:5px 7px;gap:2px;flex-direction:row;flex-wrap:wrap;right:10px;max-width:calc(100% - 20px);top:56px;bottom:auto}.v3-leg b{width:100%}.v3-leg i{width:14px}}
+.v3-leg{display:grid;grid-template-columns:repeat(3,auto);gap:3px 12px;margin:0 0 4px 24px;font-size:11.5px;color:var(--ink)}
+.v3-leg.off{opacity:.4}.v3-leg span{display:flex;align-items:center;gap:5px;white-space:nowrap}.v3-leg i{display:inline-block;width:18px;height:5px;border-radius:3px;outline:1px solid rgba(0,0,0,.25)}
 .q-btn{font:600 13px/1 inherit;font-family:inherit;padding:7px 10px;background:#fff;color:#16212a;cursor:pointer;border:2px solid rgba(0,0,0,.2)!important;border-radius:6px}
 .q-btn.on{background:#c8641b;color:#fff}.q-on,.q-on .leaflet-interactive,.q-on .leaflet-grab{cursor:help!important}
 .q-pop .leaflet-popup-content{font-size:12.5px;margin:10px 12px;min-width:220px}.q-pop b{display:block;margin-bottom:4px}
@@ -1576,11 +1574,11 @@ window.tvClose=tvClose;window.TVtrace=trace;window.TVpos=posAt;window.TVnear=nea
 })();
 /* ===== v5.1 · Vista 3D del corredor: malla armada con las mismas curvas del MDT ===== */
 (function(){
-const V3=window.V3={on:false,ve:2,tex:"sat",lay:{eje:true,ejp:true,tr:true,km:true,cur:true,alt:true,crit:false,cau:true,crz:true,cv:false,c25:false,pk:true,mn:false,rd:false,pl:false,cs:true},tr:"eje",s:0,fly:null,spd:1};
+const V3=window.V3={on:false,ve:2,tex:"sat",lay:{eje:false,ejp:true,tr:true,km:true,cur:true,alt:true,crit:false,cau:true,crz:true,cv:false,c25:false,pk:true,mn:false,rd:false,pl:false,cs:true},tr:"eje",s:0,fly:null,spd:1};
 const mob=()=>innerWidth<760;
 function need3(){if(window.THREE&&THREE.OrbitControls)return Promise.resolve();const ld=u=>new Promise((res,rej)=>{const a=document.createElement("script");a.src=u;a.onload=res;a.onerror=()=>rej(new Error(u));document.head.appendChild(a)});
  return (window.THREE?Promise.resolve():ld("https://cdn.jsdelivr.net/npm/three@0.147.0/build/three.min.js")).then(()=>ld("https://cdn.jsdelivr.net/npm/three@0.147.0/examples/js/controls/OrbitControls.js"))}
-const LAYG=[["Trazado",[["eje","Eje de referencia"],["ejp","Eje coloreado por pendiente"],["tr","Trazo del perfil (pestaña Mapa)"],["km","Estaciones"],["cur","Cursor de estación y sección"],["alt","Variantes P1 y P2"],["crit","Tramo complejo Km 37 – 40"]]],
+const LAYG=[["Trazado",[["ejp","Eje de referencia por pendiente"],["eje","Eje de referencia (una línea)"],["tr","Trazo del perfil (pestaña Mapa)"],["km","Estaciones"],["cur","Cursor de estación y sección"],["alt","Variantes P1 y P2"],["crit","Tramo complejo Km 37 – 40"]]],
  ["Drenaje",[["cau","Cauces"],["crz","Cruces cauce–eje"]]],
  ["Terreno",[["cv","Curvas de nivel 5 m"],["c25","Curvas de nivel 2.5 m (±300 m)"]]],
  ["Contexto",[["pk","PN Sierra de Bahoruco"],["mn","Minas de bauxita Aceitillar"],["rd","Carreteras existentes"],["pl","Lugares"],["cs","Casetas del sendero"]]]];
@@ -1591,14 +1589,14 @@ function build(){if($("#v3"))return;const d=document.createElement("div");d.id="
  <label>Zona <select id="v3-z">${ZONES.map(([v,t])=>`<option value="${v}">${t}</option>`).join("")}</select></label><span class="v3-cus" role="group" aria-label="Tramo del eje a modelar en 3D">Tramo del eje de <input id="v3-ca" inputmode="decimal" placeholder="5+000" aria-label="Estación inicial" size="7"> a <input id="v3-cb" inputmode="decimal" placeholder="7+000" aria-label="Estación final" size="7"> ancho ±<select id="v3-cm" aria-label="Ancho a cada lado del eje"><option value="150">150 m</option><option value="300" selected>300 m</option><option value="500">500 m</option><option value="1000">1,000 m</option></select> <button type="button" class="btn" id="v3-cg">⛰ Modelar tramo</button></span>
  <label>Textura <select id="v3-t"><option value="sat">Satélite</option><option value="topo">Topográfico</option><option value="hyp">Hipsométrica con sombreado</option></select></label>
  <label>Exageración vertical <input type="range" id="v3-e" min="1" max="20" step="0.5" value="2" aria-label="Exageración vertical"><output id="v3-eo" class="mono">2×</output></label>
- <details class="v3-lay"><summary class="btn">☰ Capas</summary><div><div class="v3-lay-all"><button type="button" class="btn" data-all="1">Todas</button><button type="button" class="btn" data-all="0">Ninguna</button></div>${LAYG.map(([gt,L])=>`<fieldset><legend>${gt}</legend>${L.map(([k,t])=>`<label><input type="checkbox" data-k="${k}"${V3.lay[k]?" checked":""}> ${t}</label>`).join("")}</fieldset>`).join("")}</div></details>
+ <details class="v3-lay"><summary class="btn">☰ Capas</summary><div><div class="v3-lay-all"><button type="button" class="btn" data-all="1">Todas</button><button type="button" class="btn" data-all="0">Ninguna</button></div>${LAYG.map(([gt,L])=>`<fieldset><legend>${gt}</legend>${L.map(([k,t])=>`<label><input type="checkbox" data-k="${k}"${V3.lay[k]?" checked":""}> ${t}</label>${k==="ejp"?`<div class="v3-leg" id="v3-leg" role="list" aria-label="Pendiente del eje de referencia (SR MOPC)"></div>`:""}`).join("")}</fieldset>`).join("")}</div></details>
  <label>Estación <input type="range" id="v3-s" min="0" max="1" step="1" value="0" aria-label="Estación en el trazo"><output id="v3-so" class="mono"></output></label>
  <button type="button" class="btn primary" id="v3-fly">▶ Vuelo por el trazo</button>
  <select id="v3-v" aria-label="Velocidad del vuelo"><option value="1">×1</option><option value="2">×2</option><option value="4">×4</option></select>
  <button type="button" class="btn" id="v3-home">Vista general</button><button type="button" class="btn v3-qb" id="v3-q" aria-pressed="false" title="Clic sobre un objeto del 3D para ver sus propiedades">⌖ Consultar</button>
  <button type="button" class="btn" id="v3-x">✕ Cerrar 3D</button></div>
  <div class="tv-info mono" id="v3-info" aria-live="polite">Pase el cursor sobre el terreno para leer coordenadas y cota; clic para llevar la estación a ese punto.</div>
- <div id="v3-c"><div class="v3-msg" id="v3-msg" hidden></div><div class="v3-note" id="v3-note" hidden></div><div class="v3-leg" id="v3-leg" role="img" aria-label="Pendiente del eje de referencia"></div><div class="v3-fab"><button type="button" class="v3-fb" id="v3-i" aria-pressed="false" aria-controls="v3-note" title="Información del modelo 3D">ⓘ Info</button><button type="button" class="v3-fb" id="v3-fs" aria-pressed="false" title="Pantalla completa">⛶ Pantalla completa</button></div></div>`;
+ <div id="v3-c"><div class="v3-msg" id="v3-msg" hidden></div><div class="v3-note" id="v3-note" hidden></div><div class="v3-fab"><button type="button" class="v3-fb" id="v3-i" aria-pressed="false" aria-controls="v3-note" title="Información del modelo 3D">ⓘ Info</button><button type="button" class="v3-fb" id="v3-fs" aria-pressed="false" title="Pantalla completa">⛶ Pantalla completa</button></div></div>`;
  document.body.appendChild(d);
  $("#v3-x").onclick=()=>{fsExit();close3()};
  $("#v3-i").onclick=()=>{const n=$("#v3-note"),on=n.hidden;n.hidden=!on;$("#v3-i").setAttribute("aria-pressed",on);$("#v3-i").classList.toggle("on",on)};
@@ -1680,9 +1678,13 @@ function composite(){if(!V3.g||!V3.base||!V3.base[V3.tex])return;const g=V3.g,[T
  if(V3.lay.cau)(D.CAU||[]).forEach(([o,a,ln])=>{if(vis(ln))line(ln,"#2f7bff",a>1000?7:a>100?5:a>30?3.5:2.4)});
  if(V3.lay.crit){const cr=W.filter(w=>w[2]>=37000&&w[2]<=40000).map(w=>[w[0],w[1]]);if(vis(cr))line(cr,"rgba(255,45,85,.45)",26)}
  if(V3.lay.alt)(D.ALT||[]).forEach(v=>{line(v.ll,"#ffffff",11,[24,14]);line(v.ll,v.col||"#7b2cbf",7,[24,14])});
- if(V3.lay.eje){const ax=W.map(w=>[w[0],w[1]]),SP=V3.lay.ejp&&typeof gcol==="function";if(SP){line(ax,"rgba(22,33,42,.85)",19);line(ax,"#ffffff",15)}else line(ax,"#ffffff",11);if(SP){let seg=[ax[0]],col=gcol(W[0][5]);for(let i=1;i<W.length;i++){seg.push(ax[i]);const c_=i<W.length-1?gcol(W[i][5]):col;if(c_!==col||i===W.length-1){if(vis(seg))line(seg,col,11);seg=[ax[i]];col=c_}}}else line(ax,"#c8641b",6.5)}
+ if(V3.lay.eje||V3.lay.ejp){const ax=W.map(w=>[w[0],w[1]]),SP=V3.lay.ejp&&typeof gcol==="function";const lwOf=w=>w*k*Math.max(.6,Math.min(2,2000/Math.max(g.Wm,g.Hm)))**.5,A=Math.max(lwOf(11),c.canvas.width/240),lineA=(ln,col,px)=>{c.beginPath();ln.forEach((p,i)=>{const q=P(p);i?c.lineTo(q[0],q[1]):c.moveTo(q[0],q[1])});c.strokeStyle=col;c.lineWidth=px;c.setLineDash([]);c.lineJoin="round";c.lineCap="round";c.stroke()};if(SP){lineA(ax,"rgba(22,33,42,.85)",A*1.75);lineA(ax,"#ffffff",A*1.4)}else line(ax,"#ffffff",11);if(SP){let seg=[ax[0]],col=gcol(W[0][5]);for(let i=1;i<W.length;i++){seg.push(ax[i]);const c_=i<W.length-1?gcol(W[i][5]):col;if(c_!==col||i===W.length-1){if(vis(seg))lineA(seg,col,A);seg=[ax[i]];col=c_}}}else line(ax,"#c8641b",6.5)}
  legUpd();
- const T=trTr();if(V3.lay.tr&&T.id==="pt"){line(T.LL,"#ffffff",10);line(T.LL,T.col,6)}
+ const T=trTr();if(V3.lay.tr&&T.id==="pt"){const tramo=window.PTNAME&&/^Tramo eje/.test(PTNAME);
+  if(tramo&&V3.lay.ejp&&typeof gcol==="function"){const E=TVtrace("eje"),slS=sv=>{let k=1;while(k<W.length-1&&W[k][2]<sv)k++;return W[k-1][5]};
+   const A=Math.max(11*k*Math.max(.6,Math.min(2,2000/Math.max(g.Wm,g.Hm)))**.5,c.canvas.width/240),LA=(ln,cl,px)=>{c.beginPath();ln.forEach((p,i)=>{const q=P(p);i?c.lineTo(q[0],q[1]):c.moveTo(q[0],q[1])});c.strokeStyle=cl;c.lineWidth=px;c.setLineDash([]);c.lineJoin="round";c.lineCap="round";c.stroke()};
+   LA(T.LL,"#ff00aa",A*1.95);LA(T.LL,"#ffffff",A*1.6);let seg=[T.LL[0]],col=null;for(let i=1;i<T.LL.length;i++){const a=T.LL[i-1],b=T.LL[i],n=TVnear(E,(a[0]+b[0])/2,(a[1]+b[1])/2),c_=gcol(slS(n.s));if(col===null)col=c_;if(c_!==col){LA(seg,col,A*1.38);seg=[a];col=c_}seg.push(b)}if(seg.length>1)LA(seg,col,A*1.38)}
+  else{line(T.LL,"#ffffff",6,[16,10]);line(T.LL,T.col,3.5,[16,10])}}
  c.setLineDash([]);
  if(!V3.texT){V3.texT=new THREE.CanvasTexture(cv);V3.texT.anisotropy=V3.rend.capabilities.getMaxAnisotropy()}else{V3.texT.image=cv;V3.texT.needsUpdate=true}
  if(THREE.sRGBEncoding)V3.texT.encoding=THREE.sRGBEncoding;const mt=V3.tex==="hyp"?(V3.matB||(V3.matB=new THREE.MeshBasicMaterial({color:0xffffff}))):V3.mat;mt.map=V3.texT;mt.needsUpdate=true;V3.terr.material=mt}
@@ -1759,7 +1761,7 @@ function qryCore(q,tol,L,trLL,obj){const lat0=q?q.lat:(obj&&obj.w?obj.w[0]:18),l
   else if(obj.t==="cs"){const c_=obj.c;items.push(`<b>⌂ ${esc3(c_.n)}</b>`+qT([["Ubicación",esc3(c_.d||"")],["Estación del eje",c_.st+" · a "+fmt(c_.off)+" m"],["Norte",fmt(c_.N,2)],["Este",fmt(c_.E,2)]]))}
   return {items,foot:""}}
  if(L.crz){let best=null;(D.CRZ||[]).forEach(r=>{const xy=XYo([r[1],r[2]],O),d=Math.hypot(xy[0],xy[1]);if(d<=tol*1.6&&(!best||d<best.d))best={r,d}});if(best)items.push(qCz(best.r))}
- if(L.eje){const r=near(W.map(w=>[w[0],w[1]]));if(r){const a=W[r.i-1],c_=W[r.i];items.push(ejeH(a[2]+r.t*(c_[2]-a[2]),r.d))}}
+ if(L.eje||L.ejp){const r=near(W.map(w=>[w[0],w[1]]));if(r){const a=W[r.i-1],c_=W[r.i];items.push(ejeH(a[2]+r.t*(c_[2]-a[2]),r.d))}}
  if(L.alt)(D.ALT||[]).forEach(v=>{const r=near(v.ll);if(r)items.push(`<b>${esc3(v.tt||v.n||v.id)}</b>`+qT([["Distancia desde su inicio",fmt(lenOf(v.ll,r.i,r.t),0)+" m"],["Longitud",fmt(lenOf(v.ll),0)+" m"],["Tramo del eje",st(v.s0)+" – "+st(v.s1)],q&&q.z!=null&&["Terreno (MDT)",fmt(q.z,1)+" m"]]))});
  if(trLL){const ll=trLL.map(p=>p.lat!=null?[p.lat,p.lng!=null?p.lng:p.lon]:p),r=near(ll);if(r)items.push(`<b>Trazo del perfil</b>`+qT([["Distancia desde su inicio",fmt(lenOf(ll,r.i,r.t),1)+" m"],["Longitud del trazo",fmt(lenOf(ll),1)+" m"],["Distancia al trazo",fmt(r.d,1)+" m"]]))}
  if(L.cau){let best=null;(D.CAU||[]).forEach(cu=>{const r=near(cu[2]);if(r&&(!best||r.d<best.r.d))best={cu,r}});if(best){const [o,a,ln]=best.cu,Lc=lenOf(ln);let zr=null;try{const pr=TVK.prof(ln).pts;if(pr&&pr.length>1){const zs=pr.map(p=>p[1]);zr=[Math.max(...zs),Math.min(...zs)]}}catch(e){}
@@ -1794,7 +1796,7 @@ function fsOn(){return $("#v3").classList.contains("v3-max")}
 function fsBtn(){const b=$("#v3-fs");if(!b)return;const on=fsOn();b.setAttribute("aria-pressed",on);b.textContent=on?"✕ Salir de pantalla completa":"⛶ Pantalla completa";b.classList.toggle("on",on)}
 function fsEnter(){const d=$("#v3");d.classList.add("v3-max");const rq=d.requestFullscreen||d.webkitRequestFullscreen;if(rq){try{const p=rq.call(d);if(p&&p.catch)p.catch(()=>{})}catch(e){}}fsBtn();setTimeout(resize,80)}
 function fsExit(){const d=$("#v3");if(!d)return;d.classList.remove("v3-max");const fe=document.fullscreenElement||document.webkitFullscreenElement;if(fe){const ex=document.exitFullscreen||document.webkitExitFullscreen;try{const p=ex.call(document);if(p&&p.catch)p.catch(()=>{})}catch(e){}}fsBtn();setTimeout(resize,80)}
-function legUpd(){const L=$("#v3-leg");if(!L)return;const on=V3.lay.eje&&V3.lay.ejp&&typeof GC!=="undefined";L.hidden=!on;if(!on||L.dataset.ok)return;L.dataset.ok=1;L.innerHTML=`<b>Pendiente del eje (SR MOPC)</b>`+GC.map(c=>`<span><i style="background:${css(c[1])}"></i>${c[2]}</span>`).join("")}
+function legUpd(){const L=$("#v3-leg");if(!L)return;L.classList.toggle("off",!V3.lay.ejp);if(L.dataset.ok||typeof GC==="undefined")return;L.dataset.ok=1;L.innerHTML=GC.map(c=>`<span role="listitem"><i style="background:${css(c[1])}"></i>${c[2]}</span>`).join("")}
 function resize(){const c=$("#v3-c"),w=c.clientWidth,h=c.clientHeight;V3.rend.setSize(w,h);V3.cam.aspect=w/Math.max(1,h);V3.cam.updateProjectionMatrix()}
 function home(){const g=V3.g,U=Math.max(g.Wm,g.Hm),T=trTr(),p=TVpos(T,V3.s),[x,z]=wx(p.lat,p.lon),y=H(zll(p.lat,p.lon));V3.ctl.target.set(x*.35,y*.6+H((g.min+g.max)/2)*.4,z*.35);V3.cam.position.set(x*.35-U*.15,H(g.max)+U*.55,z*.35+U*.75);V3.cam.near=Math.max(.5,U/4000);V3.cam.far=U*20;V3.cam.updateProjectionMatrix();V3.ctl.update()}
 function loop(){if(!V3.on)return;requestAnimationFrame(loop);const t=performance.now();
