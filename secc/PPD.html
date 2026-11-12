@@ -392,6 +392,13 @@ body.tv-lock{overflow:hidden}
 .v3-pop b{display:block;margin-bottom:4px}.v3-pop .ptab{border-collapse:collapse;width:100%}.v3-pop .ptab td{padding:2px 6px 2px 0;vertical-align:top}.v3-pop .ptab td:first-child{color:var(--muted)}
 .v3-pop hr{border:0;border-top:1px solid var(--line);margin:8px 0}.v3-pop-n{color:var(--muted);font-size:11.5px;margin-top:4px}.v3-pop-f{color:var(--muted);font-size:11px;margin-top:8px;font-family:ui-monospace,Menlo,monospace}
 .v3-pop-x{position:absolute;top:4px;right:6px;border:0;background:none;font-size:20px;line-height:1;cursor:pointer;color:var(--muted)}
+.v3-fab{position:absolute;right:10px;top:10px;z-index:5;display:flex;gap:6px}
+.v3-fb{font:600 12.5px/1 inherit;font-family:inherit;padding:7px 11px;border-radius:999px;border:1px solid rgba(255,255,255,.35);background:rgba(22,33,42,.78);color:#fff;cursor:pointer;backdrop-filter:blur(3px)}
+.v3-fb:hover,.v3-fb.on{background:rgba(200,100,27,.95)}
+.v3-fb:focus-visible{outline:2px solid #fff;outline-offset:2px}
+.v3.v3-max .v3-bar,.v3.v3-max .tv-bar{display:none!important}
+.v3.v3-max{position:fixed!important;inset:0!important;width:100vw!important;height:100vh!important;max-width:none!important;max-height:none!important;border-radius:0!important;margin:0!important;z-index:10000}
+.v3.v3-max #v3-c{min-height:0;flex:1}
 
 /* ---------- presentación ---------- */
 .keym{border-top:3px solid var(--accent)}.keyl{margin:6px 0 0;padding-left:22px;display:grid;gap:8px;font-size:15px;line-height:1.5}.keyl li::marker{color:var(--accent);font-weight:700}
@@ -1578,19 +1585,22 @@ function build(){if($("#v3"))return;const d=document.createElement("div");d.id="
  <label>Estación <input type="range" id="v3-s" min="0" max="1" step="1" value="0" aria-label="Estación en el trazo"><output id="v3-so" class="mono"></output></label>
  <button type="button" class="btn primary" id="v3-fly">▶ Vuelo por el trazo</button>
  <select id="v3-v" aria-label="Velocidad del vuelo"><option value="1">×1</option><option value="2">×2</option><option value="4">×4</option></select>
- <button type="button" class="btn" id="v3-home">Vista general</button><button type="button" class="btn v3-qb" id="v3-q" aria-pressed="false" title="Clic sobre un objeto del 3D para ver sus propiedades">ⓘ Consultar</button>
+ <button type="button" class="btn" id="v3-home">Vista general</button><button type="button" class="btn v3-qb" id="v3-q" aria-pressed="false" title="Clic sobre un objeto del 3D para ver sus propiedades">⌖ Consultar</button>
  <button type="button" class="btn" id="v3-x">✕ Cerrar 3D</button></div>
  <div class="tv-info mono" id="v3-info" aria-live="polite">Pase el cursor sobre el terreno para leer coordenadas y cota; clic para llevar la estación a ese punto.</div>
- <div id="v3-c"><div class="v3-msg" id="v3-msg" hidden></div><div class="v3-note" id="v3-note"></div></div>`;
+ <div id="v3-c"><div class="v3-msg" id="v3-msg" hidden></div><div class="v3-note" id="v3-note" hidden></div><div class="v3-fab"><button type="button" class="v3-fb" id="v3-i" aria-pressed="false" aria-controls="v3-note" title="Información del modelo 3D">ⓘ Info</button><button type="button" class="v3-fb" id="v3-fs" aria-pressed="false" title="Pantalla completa">⛶ Pantalla completa</button></div></div>`;
  document.body.appendChild(d);
- $("#v3-x").onclick=close3;$("#v3-z").onchange=e=>{if(e.target.value==="cus")cusGo();else zone(e.target.value)};$("#v3-cg").onclick=()=>cusGo();["#v3-ca","#v3-cb"].forEach(q=>$(q).onkeydown=e=>{if(e.key==="Enter")cusGo()});$("#v3-cm").onchange=()=>{if(V3.zone==="cus")cusGo()};$("#v3-t").onchange=e=>{V3.tex=e.target.value;applyTex()};
+ $("#v3-x").onclick=()=>{fsExit();close3()};
+ $("#v3-i").onclick=()=>{const n=$("#v3-note"),on=n.hidden;n.hidden=!on;$("#v3-i").setAttribute("aria-pressed",on);$("#v3-i").classList.toggle("on",on)};
+ $("#v3-fs").onclick=()=>{if(fsOn())fsExit();else fsEnter()};
+ ["fullscreenchange","webkitfullscreenchange"].forEach(ev=>document.addEventListener(ev,()=>{if(!(document.fullscreenElement||document.webkitFullscreenElement))d.classList.remove("v3-max");fsBtn();setTimeout(resize,60)}));$("#v3-z").onchange=e=>{if(e.target.value==="cus")cusGo();else zone(e.target.value)};$("#v3-cg").onclick=()=>cusGo();["#v3-ca","#v3-cb"].forEach(q=>$(q).onkeydown=e=>{if(e.key==="Enter")cusGo()});$("#v3-cm").onchange=()=>{if(V3.zone==="cus")cusGo()};$("#v3-t").onchange=e=>{V3.tex=e.target.value;applyTex()};
  $("#v3-e").oninput=e=>{V3.ve=+e.target.value;$("#v3-eo").textContent=V3.ve+"×";heights();veNote()};
  const layApply=ks=>{if(ks.some(k=>TEXK.has(k)))composite();if(ks.some(k=>OBJK.has(k)))objs()};
  d.querySelectorAll(".v3-lay input").forEach(c=>c.onchange=()=>{V3.lay[c.dataset.k]=c.checked;layApply([c.dataset.k])});
  d.querySelectorAll(".v3-lay [data-all]").forEach(b=>b.onclick=()=>{const on=b.dataset.all==="1",ks=[];d.querySelectorAll(".v3-lay input").forEach(c=>{c.checked=on;V3.lay[c.dataset.k]=on;ks.push(c.dataset.k)});layApply(ks)});
  document.addEventListener("pointerdown",e=>{const x=d.querySelector(".v3-lay");if(x&&x.open&&!x.contains(e.target))x.open=false});
  $("#v3-s").oninput=e=>{stopFly();setS(+e.target.value,true)};$("#v3-fly").onclick=toggleFly;$("#v3-v").onchange=e=>V3.spd=+e.target.value;$("#v3-home").onclick=()=>{stopFly();home()};$("#v3-q").onclick=()=>{V3.q=!V3.q;const b=$("#v3-q");b.setAttribute("aria-pressed",V3.q);b.classList.toggle("on",V3.q);$("#v3-c").classList.toggle("v3-qon",V3.q);if(!V3.q)qClose();else $("#v3-info").textContent="ⓘ Modo consulta: clic sobre un objeto (curva de nivel, cauce, cruce, eje, variante, estación…) para ver sus propiedades; vuelva a pulsar Consultar para salir."};
- document.addEventListener("keydown",e=>{if(V3.on&&e.key==="Escape")close3()});addEventListener("resize",()=>{if(V3.on)resize()})}
+ document.addEventListener("keydown",e=>{if(V3.on&&e.key==="Escape"){if(document.getElementById("v3-pop")){qClose();return}if(fsOn()){fsExit();return}close3()}});addEventListener("resize",()=>{if(V3.on)resize()})}
 function msg(t){const m=$("#v3-msg");if(!t){m.hidden=true;return}m.hidden=false;m.textContent=t}
 // ---------- zona y malla ----------
 function bbOf(list,m){let a=1e9,b=1e9,c=-1e9,d=-1e9;list.forEach(p=>{a=Math.min(a,p[0]);c=Math.max(c,p[0]);b=Math.min(b,p[1]);d=Math.max(d,p[1])});const ky=degLat((a+c)/2),kx=degLon((a+c)/2);return [a-m/ky,b-m/kx,c+m/ky,d+m/kx]}
@@ -1682,12 +1692,17 @@ if(V3.lay.pl)((D.L&&D.L.places)||[]).forEach(p=>{if(inBB([p[1],p[2]]))og.add(qa(
  if(V3.lay.cs)(D.CAS||[]).forEach(cc=>{if(inBB([cc.lat,cc.lon]))og.add(qa(pin(cc.lat,cc.lon,ph*.9,0x2f8a5b,"⌂ "+cc.n,"#fff","rgba(47,138,91,.92)",lh*.9),{t:"cs",c:cc}))});
  {const nlat=g.bb[2],nlon=(g.bb[1]+g.bb[3])/2,[x,z]=wx(nlat,nlon),s=sprite("N ↑","#fff","rgba(22,33,42,.85)",lh*1.2,true);s.position.set(x,H(g.max)+U*.03,z);og.add(s)}
  V3.cur=new THREE.Group();og.add(V3.cur);V3.scene.add(og);cursor()}
-function cursor(){if(!V3.cur)return;V3.cur.children.slice().forEach(o=>{V3.cur.remove(o);if(o.geometry)o.geometry.dispose()});if(!V3.lay.cur){V3.curP=null;$("#v3-so").textContent=st(V3.s);return}const T=trTr(),p=TVpos(T,V3.s),U=V3.U,[x,z]=wx(p.lat,p.lon),y=H(zll(p.lat,p.lon)),h=U*.06,r=U*.0022;
+function cursor(){if(!V3.cur)return;ejeInfoS();V3.cur.children.slice().forEach(o=>{V3.cur.remove(o);if(o.geometry)o.geometry.dispose()});if(!V3.lay.cur){V3.curP=null;$("#v3-so").textContent=st(V3.s);return}const T=trTr(),p=TVpos(T,V3.s),U=V3.U,[x,z]=wx(p.lat,p.lon),y=H(zll(p.lat,p.lon)),h=U*.06,r=U*.0022;
  const pole=new THREE.Mesh(new THREE.CylinderGeometry(r,r,1,10),new THREE.MeshBasicMaterial({color:0xd62828}));V3.cur.add(pole);V3.curP={m:pole,sp:null,x,y,z,h,f:-1};
  const ring=new THREE.Mesh(new THREE.TorusGeometry(r*5,r*1.2,8,28),new THREE.MeshBasicMaterial({color:0xff00aa}));ring.rotation.x=Math.PI/2;ring.position.set(x,y+r*2,z);V3.cur.add(ring);V3.curP.ring=ring;fitPin(V3.curP,1);
  const w=(window.TV&&TV.w)||100,pts=[];for(let k=0;k<=40;k++){const t=-w+2*w*k/40,q=p.off(t);if(!inBB(q))continue;const [qx,qz]=wx(q[0],q[1]);pts.push(new THREE.Vector3(qx,H(zll(q[0],q[1]))+U*.0015,qz))}
  if(pts.length>1)V3.cur.add(new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts),60,U*.0006,6,false),new THREE.MeshBasicMaterial({color:0xff00aa})));
  $("#v3-so").textContent=st(V3.s)+(T.eje?"":" ("+T.id+")")}
+function ejeAt(sv){let k=1;while(k<W.length-1&&W[k][2]<sv)k++;const a=W[k-1],b=W[k],t=Math.max(0,Math.min(1,(sv-a[2])/Math.max(1e-9,b[2]-a[2]))),L=(i)=>a[i]+(b[i]-a[i])*t;return {s:sv,lat:L(0),lon:L(1),sr:L(3),E:L(6),N:L(7)}}
+const stD3=m=>{const k=Math.floor(m/1000+1e-9),r=m-k*1000;return k+"+"+r.toFixed(3).padStart(7,"0")};
+function ejeInfo(sv,cur){if(!V3.g)return;const p=ejeAt(sv),g=V3.g,inb=p.lat>=g.bb[0]&&p.lat<=g.bb[2]&&p.lon>=g.bb[1]&&p.lon<=g.bb[3],tn=inb?zll(p.lat,p.lon):null;
+ $("#v3-info").innerHTML=`<b>Est. ${stD3(sv)}</b> · Norte ${fmt(p.N,2)} · Este ${fmt(p.E,2)} (eje, UTM 19N WGS84) · Terreno ${tn==null?"fuera del modelo":"<b>"+fmt(tn,2)+" m</b>"} · Subrasante SR <b>${fmt(p.sr,2)} m</b>${tn==null?"":` · SR − TN ${(p.sr-tn>=0?"+":"")+fmt(p.sr-tn,2)} m`}${cur?` <span class="v3-cur">· cursor a ${fmt(cur.d,0)} m del eje, terreno ${fmt(cur.z,1)} m</span>`:""}`}
+function ejeInfoS(){if(V3.q)return;const T=trTr();let sv=V3.s;if(!T.eje){const p=TVpos(T,V3.s),n=TVnear(TVtrace("eje"),p.lat,p.lon);sv=n.s}ejeInfo(sv)}
 function setS(s,sync){const T=trTr();V3.s=Math.max(V3.r0,Math.min(V3.r1,s));$("#v3-s").value=V3.s;cursor();if(sync&&window.TV&&TV.on&&TV.tr===T.id)TV.setS(V3.s,"3d")}
 V3.sync=(id,s)=>{if(!V3.on||id!==V3.tr)return;if(s<V3.r0||s>V3.r1)return;V3.s=s;$("#v3-s").value=s;cursor()};
 // ---------- escena ----------
@@ -1697,8 +1712,8 @@ function init(){if(V3.rend)return true;try{V3.rend=new THREE.WebGLRenderer({anti
  const ray=new THREE.Raycaster(),mv=new THREE.Vector2();let down=null,raf=0;
  const hit=e=>{const b=r.domElement.getBoundingClientRect();mv.set((e.clientX-b.left)/b.width*2-1,-(e.clientY-b.top)/b.height*2+1);ray.setFromCamera(mv,V3.cam);return V3.terr?ray.intersectObject(V3.terr)[0]:null};
  const geoOf=pt=>{const g=V3.g,e=pt.x+g.Wm/2,n=g.Hm/2-pt.z;return {lat:g.bb[0]+n/g.ky,lon:g.bb[1]+e/g.kx,z:gz(e,n)}};
- r.domElement.addEventListener("pointermove",e=>{if(raf)return;raf=requestAnimationFrame(()=>{raf=0;const h=hit(e);if(!h){return}const q=geoOf(h.point),u=toUTM19(q.lat,q.lon),T=trTr(),n=TVnear(T,q.lat,q.lon);
-  $("#v3-info").innerHTML=`E ${fmt(u[0],1)} · N ${fmt(u[1],1)} (UTM 19N WGS84) · cota del terreno <b>${fmt(q.z,1)} m</b> · a ${fmt(n.d,0)} m del ${T.eje?"eje":"trazo"}, frente a ${st(n.s)}${T.eje?"":" ("+T.id+")"}`})});
+ r.domElement.addEventListener("pointermove",e=>{if(raf)return;raf=requestAnimationFrame(()=>{raf=0;const h=hit(e);if(!h){return}const q=geoOf(h.point),n=TVnear(TVtrace("eje"),q.lat,q.lon);if(V3.q)return;ejeInfo(n.s,{d:n.d,z:q.z})})});
+ r.domElement.addEventListener("pointerleave",()=>ejeInfoS());
  r.domElement.addEventListener("pointerdown",e=>{down=[e.clientX,e.clientY]});
  r.domElement.addEventListener("pointerup",e=>{if(!down||Math.hypot(e.clientX-down[0],e.clientY-down[1])>5){down=null;return}down=null;if(V3.q){qClick(e,hit,geoOf,ray);return}const h=hit(e);if(!h)return;const q=geoOf(h.point),n=TVnear(trTr(),q.lat,q.lon);if(n.d<=400){stopFly();setS(n.s,true)}});
  return true}
@@ -1743,6 +1758,10 @@ function qClick(e,hit,geoOf,ray){qClose();const c=$("#v3-c"),b=c.getBoundingClie
 const esc3=t=>String(t).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const stD1=m=>{const k=Math.floor(m/1000+1e-9),r=m-k*1000;return k+"+"+r.toFixed(1).padStart(5,"0")};
 const slAt=sv=>{let k=1;while(k<W.length-1&&W[k][2]<sv)k++;const a=W[k-1],c_=W[k];return (c_[3]-a[3])/Math.max(1e-9,c_[2]-a[2])*100};
+function fsOn(){return $("#v3").classList.contains("v3-max")}
+function fsBtn(){const b=$("#v3-fs");if(!b)return;const on=fsOn();b.setAttribute("aria-pressed",on);b.textContent=on?"✕ Salir de pantalla completa":"⛶ Pantalla completa";b.classList.toggle("on",on)}
+function fsEnter(){const d=$("#v3");d.classList.add("v3-max");const rq=d.requestFullscreen||d.webkitRequestFullscreen;if(rq){try{const p=rq.call(d);if(p&&p.catch)p.catch(()=>{})}catch(e){}}fsBtn();setTimeout(resize,80)}
+function fsExit(){const d=$("#v3");if(!d)return;d.classList.remove("v3-max");const fe=document.fullscreenElement||document.webkitFullscreenElement;if(fe){const ex=document.exitFullscreen||document.webkitExitFullscreen;try{const p=ex.call(document);if(p&&p.catch)p.catch(()=>{})}catch(e){}}fsBtn();setTimeout(resize,80)}
 function resize(){const c=$("#v3-c"),w=c.clientWidth,h=c.clientHeight;V3.rend.setSize(w,h);V3.cam.aspect=w/Math.max(1,h);V3.cam.updateProjectionMatrix()}
 function home(){const g=V3.g,U=Math.max(g.Wm,g.Hm),T=trTr(),p=TVpos(T,V3.s),[x,z]=wx(p.lat,p.lon),y=H(zll(p.lat,p.lon));V3.ctl.target.set(x*.35,y*.6+H((g.min+g.max)/2)*.4,z*.35);V3.cam.position.set(x*.35-U*.15,H(g.max)+U*.55,z*.35+U*.75);V3.cam.near=Math.max(.5,U/4000);V3.cam.far=U*20;V3.cam.updateProjectionMatrix();V3.ctl.update()}
 function loop(){if(!V3.on)return;requestAnimationFrame(loop);const t=performance.now();
@@ -1759,7 +1778,7 @@ window.v3Open=async function(o){o=o||{};build();const d=$("#v3");d.hidden=false;
  V3.tr=o.tr&&TVtrace(o.tr)?o.tr:"eje";V3.s=o.s!=null?o.s:V3.s;V3.auto=true;resize();loop();
 if(o.zone==="cus"&&o.s0!=null&&o.s1!=null){V3.ca=null;$("#v3-ca").value=st(o.s0);$("#v3-cb").value=st(o.s1);if(o.m)$("#v3-cm").value=String(o.m);cusGo();return}cusFill();
  const z=o.zone==="st"?"st"+Math.round((o.size||2000)/1000):(o.zone||"st2");zone(z)};
-function close3(){stopFly();V3.on=false;$("#v3").hidden=true;if(!(window.TV&&TV.on))document.body.classList.remove("tv-lock")}
+function close3(){stopFly();if(fsOn())fsExit();V3.on=false;$("#v3").hidden=true;if(!(window.TV&&TV.on))document.body.classList.remove("tv-lock")}
 window.v3Close=close3;
 })();
 
