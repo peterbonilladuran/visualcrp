@@ -1083,7 +1083,7 @@ function initMap(){if(map){setTimeout(()=>map.invalidateSize(),50);return}
   map.on("click",()=>{if(sel!==null){g.eachLayer(l=>{if(l._z!==undefined)l.setStyle(stl(l._z))});sel=null}});g._paso=paso;return g}
  const c5=capaCurvas(D.C5,5,25,"MDT 8 m · intervalo 5 m · zona de drenaje y variantes"),c25=capaCurvas(D.C25,2.5,10,"MDT 8 m · intervalo 2.5 m · franja ±300 m del eje");
  // casetas del sendero (visibles por defecto)
- const cs=L.layerGroup();D.CAS.forEach(c=>L.marker([c.lat,c.lon],{icon:L.divIcon({className:"",html:`<span class="cas-ic">⌂</span>`,iconSize:[26,26],iconAnchor:[13,13]})}).bindTooltip(esc(c.n),{permanent:true,direction:"left",offset:[-12,0]}).bindPopup(`<b>${esc(c.n)}</b><br>${esc(c.d)}<table class="ptab"><tr><td>Norte</td><td>${fmt(c.N,1)}</td></tr><tr><td>Este</td><td>${fmt(c.E,1)}</td></tr><tr><td>Eje</td><td>Est. ${c.st} · a ${c.off} m</td></tr></table><span style="color:#777;font-size:11.5px">UTM WGS84 · Zona 19N · ubicación de ${esc(c.src)}</span>`).addTo(cs));
+ const cs=L.layerGroup();D.CAS.forEach(c=>L.marker([c.lat,c.lon],{icon:L.divIcon({className:"",html:`<span class="cas-ic">⌂</span>`,iconSize:[26,26],iconAnchor:[13,13]})}).bindTooltip(esc(c.n),{permanent:true,direction:"left",offset:[-12,0]}).bindPopup(`<b>${esc(c.n)}</b><br>${esc(c.d)}<table class="ptab"><tr><td>Norte</td><td>${fmt(c.N,2)}</td></tr><tr><td>Este</td><td>${fmt(c.E,2)}</td></tr><tr><td>Eje</td><td>Est. ${c.st} · a ${c.off} m</td></tr></table><span style="color:#777;font-size:11.5px">UTM WGS84 · Zona 19N · ubicación de ${esc(c.src)}</span>`).addTo(cs));
  cs.addTo(map);
  const nt=L.layerGroup();D.NOTAS.forEach((n,i)=>{const w=wByM(n[0]);L.marker([w[0],w[1]],{icon:L.divIcon({className:"",html:`<span class="nt-ic${n[3]==="nav"?" nav":""}">${i+1}</span>`,iconSize:[22,22],iconAnchor:[11,11]}),zIndexOffset:500}).bindPopup(notaPop(n,i)).addTo(nt)});nt.addTo(map);
  const cuP=["#1f6fd1","#2fa36b","#c8641b","#8e5bd1","#d1a21f","#d14b7a"];
@@ -1517,7 +1517,7 @@ function info(p){const s=TV.s,tn=zAt(T.pts,s),u=toUTM19(p.lat,p.lon);let h=`<b>$
  if(T.eje){const r=srAt(s);h+=` · SR ${fmt(r.z,2)} m · SR − TN ${isNaN(tn)?"—":(r.z-tn>=0?"+":"")+fmt(r.z-tn,1)+" m"} · pendiente SR ${(r.g>=0?"+":"")+fmt(r.g,1)} %`;
   let c=null,cd=1e9;D.CRZ.forEach(r=>{const d=Math.abs(r[0]-s);if(d<cd){cd=d;c=r}});if(c&&cd<=250)h+=` · cruce más cercano C-${String(c[10]).padStart(3,"0")} en ${st(c[0])} (${fmt(c[3],c[3]<10?1:0)} ha)`}
  else h+=" · terreno natural, sin rasante";
- h+=` · E ${fmt(u[0],1)} · N ${fmt(u[1],1)}`;$("#tv-info").innerHTML=h}
+ h+=` · N ${fmt(u[1],2)} · E ${fmt(u[0],2)}`;$("#tv-info").innerHTML=h}
 // ---------- dibujo ----------
 function svgBox(el){const w=Math.max(260,el.clientWidth),h=Math.max(170,el.clientHeight);return {w,h}}
 function draw(){if(!TV.on||!T)return;const L_=TV.lay;if(L_!=="lps")drawProf();if(L_!=="lpp"&&L_!=="lp")drawSec()}
@@ -1701,7 +1701,7 @@ function cursor(){if(!V3.cur)return;ejeInfoS();V3.cur.children.slice().forEach(o
 function ejeAt(sv){let k=1;while(k<W.length-1&&W[k][2]<sv)k++;const a=W[k-1],b=W[k],t=Math.max(0,Math.min(1,(sv-a[2])/Math.max(1e-9,b[2]-a[2]))),L=(i)=>a[i]+(b[i]-a[i])*t;return {s:sv,lat:L(0),lon:L(1),sr:L(3),E:L(6),N:L(7)}}
 const stD3=m=>{const k=Math.floor(m/1000+1e-9),r=m-k*1000;return k+"+"+r.toFixed(3).padStart(7,"0")};
 function ejeInfo(sv,cur){if(!V3.g)return;const p=ejeAt(sv),g=V3.g,inb=p.lat>=g.bb[0]&&p.lat<=g.bb[2]&&p.lon>=g.bb[1]&&p.lon<=g.bb[3],tn=inb?zll(p.lat,p.lon):null;
- $("#v3-info").innerHTML=`<b>Est. ${stD3(sv)}</b> · Norte ${fmt(p.N,2)} · Este ${fmt(p.E,2)} (eje, UTM 19N WGS84) · Terreno ${tn==null?"fuera del modelo":"<b>"+fmt(tn,2)+" m</b>"} · Subrasante SR <b>${fmt(p.sr,2)} m</b>${tn==null?"":` · SR − TN ${(p.sr-tn>=0?"+":"")+fmt(p.sr-tn,2)} m`}${cur?` <span class="v3-cur">· cursor a ${fmt(cur.d,0)} m del eje, terreno ${fmt(cur.z,1)} m</span>`:""}`}
+ $("#v3-info").innerHTML=`<b>Est. ${stD3(sv)}</b> · Norte ${fmt(p.N,2)} · Este ${fmt(p.E,2)} (eje, UTM 19N WGS84) · Terreno ${tn==null?"fuera del modelo":"<b>"+fmt(tn,2)+" m</b>"} · Elev. Subrasante SR (MOPC) <b>${fmt(p.sr,2)} m</b>${tn==null?"":` · SR − TN ${(p.sr-tn>=0?"+":"")+fmt(p.sr-tn,2)} m`}${cur?` <span class="v3-cur">· cursor a ${fmt(cur.d,0)} m del eje, terreno ${fmt(cur.z,1)} m</span>`:""}`}
 function ejeInfoS(){if(V3.q)return;const T=trTr();let sv=V3.s;if(!T.eje){const p=TVpos(T,V3.s),n=TVnear(TVtrace("eje"),p.lat,p.lon);sv=n.s}ejeInfo(sv)}
 function setS(s,sync){const T=trTr();V3.s=Math.max(V3.r0,Math.min(V3.r1,s));$("#v3-s").value=V3.s;cursor();if(sync&&window.TV&&TV.on&&TV.tr===T.id)TV.setS(V3.s,"3d")}
 V3.sync=(id,s)=>{if(!V3.on||id!==V3.tr)return;if(s<V3.r0||s>V3.r1)return;V3.s=s;$("#v3-s").value=s;cursor()};
@@ -1730,13 +1730,13 @@ function qClick(e,hit,geoOf,ray){qClose();const c=$("#v3-c"),b=c.getBoundingClie
  const T=(rows)=>`<table class="ptab">${rows.filter(Boolean).map(([a,v])=>`<tr><td>${a}</td><td>${v}</td></tr>`).join("")}</table>`;
  const srAt=sv=>{let k=1;while(k<W.length-1&&W[k][2]<sv)k++;const a=W[k-1],c_=W[k];return a[3]+(c_[3]-a[3])*(sv-a[2])/Math.max(1e-9,c_[2]-a[2])};
  const czH=r=>`<b>Cruce C-${String(r[10]).padStart(3,"0")} · Est. ${st(r[0])}</b>`+T([["Norte",fmt(r[11],2)],["Este",fmt(r[12],2)],["Área de aporte",fmt(r[3],1)+" ha"],["Cauce más largo",fmt(r[4],2)+" km"],["Desnivel",fmt(r[5])+" → "+fmt(r[6])+" m"],["Pend. media",fmt(r[7],1)+" %"],["Tc (Kirpich)",r[3]>1000?"no aplica (cuenca > 10 km²)":fmt(r[8],0)+" min"]])+(r[9]?'<span class="v3-pop-n">El mismo cauce cruza el eje otra vez a menos de 300 m.</span>':"");
- const ejeH=(sv,dd)=>{const sr=srAt(sv);return `<b>Eje de referencia · Est. ${stD1(sv)}</b>`+T([["Rasante SR (MOPC)",fmt(sr,1)+" m"],q&&["Terreno (MDT)",fmt(q.z,1)+" m"],q&&["SR − terreno",fmt(sr-q.z,1)+" m"],["Pendiente SR",fmt(slAt(sv),1)+" %"],dd!=null&&["Distancia al eje",fmt(dd,1)+" m"]])};
+ const ejeH=(sv,dd)=>{const sr=srAt(sv);return `<b>Eje de referencia · Est. ${stD1(sv)}</b>`+T([["Elev. Subrasante SR (MOPC)",fmt(sr,2)+" m"],q&&["Terreno (MDT)",fmt(q.z,1)+" m"],q&&["SR − terreno",fmt(sr-q.z,1)+" m"],["Pendiente SR",fmt(slAt(sv),1)+" %"],dd!=null&&["Distancia al eje",fmt(dd,1)+" m"]])};
  const items=[];
  if(obj){if(obj.t==="crz")items.push(czH(obj.r));
-  else if(obj.t==="km"){const sv=obj.w[2],sr=srAt(sv);items.push(`<b>Estación ${st(sv)} del eje</b>`+T([["Rasante SR (MOPC)",fmt(sr,1)+" m"],["Pendiente SR",fmt(slAt(sv),1)+" %"],["Este / Norte",(u=>fmt(u[0],1)+" / "+fmt(u[1],1))(toUTM19(obj.w[0],obj.w[1]))]]))}
+  else if(obj.t==="km"){const sv=obj.w[2],sr=srAt(sv);items.push(`<b>Estación ${st(sv)} del eje</b>`+T([["Elev. Subrasante SR (MOPC)",fmt(sr,2)+" m"],["Pendiente SR",fmt(slAt(sv),1)+" %"],["Norte / Este",fmt(obj.w[7],2)+" / "+fmt(obj.w[6],2)]]))}
   else if(obj.t==="alt"){const v=obj.v;items.push(`<b>${esc3(v.n||v.id)}</b>`+T([["Tramo del eje",st(v.s0)+" – "+st(v.s1)],["Longitud del eje",fmt(v.s1-v.s0)+" m"]])+(v.nota?`<div class="v3-pop-n">${esc3(v.nota)}</div>`:""))}
   else if(obj.t==="pl")items.push(`<b>${esc3(String(obj.p[0]).replace(/^[A-F] - /,""))}</b>`+T([["Tipo","Lugar del KMZ del proyecto"]]));
-  else if(obj.t==="cs"){const c_=obj.c;items.push(`<b>⌂ ${esc3(c_.n)}</b>`+T([["Ubicación",esc3(c_.d||"")],["Estación del eje",c_.st+" · a "+fmt(c_.off)+" m"],["Este",fmt(c_.E,1)],["Norte",fmt(c_.N,1)]]))}}
+  else if(obj.t==="cs"){const c_=obj.c;items.push(`<b>⌂ ${esc3(c_.n)}</b>`+T([["Ubicación",esc3(c_.d||"")],["Estación del eje",c_.st+" · a "+fmt(c_.off)+" m"],["Norte",fmt(c_.N,2)],["Este",fmt(c_.E,2)]]))}}
  else{
   const L=V3.lay;
   if(L.eje){const r=near(W.map(w=>[w[0],w[1]]));if(r){const a=W[r.i-1],c_=W[r.i];items.push(ejeH(a[2]+r.t*(c_[2]-a[2]),r.d))}}
@@ -1750,7 +1750,7 @@ function qClick(e,hit,geoOf,ray){qClose();const c=$("#v3-c"),b=c.getBoundingClie
   const LP=(D.L&&D.L.polys)||[];if(q){if(L.pk&&LP.some(p=>/Parque/.test(p[0])&&pip([q.lat,q.lon],p[1])))items.push(`<b>PN Sierra de Bahoruco</b><div class="v3-pop-n">Dentro del polígono del KMZ del proyecto (no certifica límites legales).</div>`);
    if(L.mn&&LP.some(p=>!/Parque/.test(p[0])&&pip([q.lat,q.lon],p[1])))items.push(`<b>Minas de bauxita Aceitillar</b><div class="v3-pop-n">Área de cantera del KMZ del proyecto.</div>`)}
  }
- let foot="";if(q&&!obj){const u=toUTM19(q.lat,q.lon),n=TVnear(TVtrace("eje"),q.lat,q.lon);foot=`<div class="v3-pop-f">E ${fmt(u[0],1)} · N ${fmt(u[1],1)} (UTM 19N WGS84) · terreno ${fmt(q.z,1)} m · a ${fmt(n.d,0)} m del eje, frente a ${st(n.s)}</div>`}
+ let foot="";if(q&&!obj){const u=toUTM19(q.lat,q.lon),n=TVnear(TVtrace("eje"),q.lat,q.lon);foot=`<div class="v3-pop-f">N ${fmt(u[1],2)} · E ${fmt(u[0],2)} (UTM 19N WGS84) · terreno ${fmt(q.z,1)} m · a ${fmt(n.d,0)} m del eje, frente a ${st(n.s)}</div>`}
  if(!items.length)items.push(`<b>Sin objetos en este punto</b><div class="v3-pop-n">Acérquese con el zoom o encienda la capa que busca en ☰ Capas.</div>`);
  const p=document.createElement("div");p.id="v3-pop";p.className="v3-pop";p.setAttribute("role","dialog");p.setAttribute("aria-label","Propiedades del objeto");
  p.innerHTML=`<button type="button" class="v3-pop-x" aria-label="Cerrar">×</button>${items.slice(0,4).join('<hr>')}${foot}`;c.appendChild(p);p.querySelector(".v3-pop-x").onclick=qClose;
