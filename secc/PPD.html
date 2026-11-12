@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Estudio Pedernales v5.3</title>
+<title>Estudio Pedernales v5.4</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=Source+Sans+3:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
@@ -403,6 +403,11 @@ body.tv-lock{overflow:hidden}
 .v3-leg[hidden]{display:none}.v3-leg b{font-size:11.5px;margin-bottom:2px}
 .v3-leg span{display:flex;align-items:center;gap:7px;white-space:nowrap}.v3-leg i{display:inline-block;width:22px;height:6px;border-radius:3px;outline:1.5px solid #fff}
 @media (max-width:760px){.v3-leg{font-size:10.5px;padding:5px 7px;gap:2px;flex-direction:row;flex-wrap:wrap;right:10px;max-width:calc(100% - 20px);top:56px;bottom:auto}.v3-leg b{width:100%}.v3-leg i{width:14px}}
+.q-btn{font:600 13px/1 inherit;font-family:inherit;padding:7px 10px;background:#fff;color:#16212a;cursor:pointer;border:2px solid rgba(0,0,0,.2)!important;border-radius:6px}
+.q-btn.on{background:#c8641b;color:#fff}.q-on,.q-on .leaflet-interactive,.q-on .leaflet-grab{cursor:help!important}
+.q-pop .leaflet-popup-content{font-size:12.5px;margin:10px 12px;min-width:220px}.q-pop b{display:block;margin-bottom:4px}
+.q-pop .ptab{border-collapse:collapse;width:100%}.q-pop .ptab td{padding:2px 6px 2px 0;vertical-align:top}.q-pop .ptab td:first-child{color:var(--muted)}
+.q-pop hr{border:0;border-top:1px solid var(--line);margin:8px 0}
 
 /* ---------- presentación ---------- */
 .keym{border-top:3px solid var(--accent)}.keyl{margin:6px 0 0;padding-left:22px;display:grid;gap:8px;font-size:15px;line-height:1.5}.keyl li::marker{color:var(--accent);font-weight:700}
@@ -483,7 +488,7 @@ body.tv-lock{overflow:hidden}
   <svg class="contours" aria-hidden="true" preserveAspectRatio="none" viewBox="0 0 1200 220" id="contours"></svg>
   <div class="wrap mast-inner">
     <div>
-      <div class="eyebrow">Consorcio Avance del Sur · Gerencia de Ingeniería · Presentación técnica <span style="text-transform:none">v5.3</span></div>
+      <div class="eyebrow">Consorcio Avance del Sur · Gerencia de Ingeniería · Presentación técnica <span style="text-transform:none">v5.4</span></div>
       <h1>Carretera Pedernales – Puerto Escondido<br>Estudio y desarrollo de la ingeniería</h1>
       <div class="meta">
         <span><b class="mono">0+000 → 43+348</b> · 43.348 km</span>
@@ -721,7 +726,7 @@ body.tv-lock{overflow:hidden}
   <div class="card docview"><h3 id="dv-t">Eje en planta · diseño de referencia</h3><p class="sub" id="dv-s">15 páginas · también se puede descargar.</p><iframe id="dv" title="Visor de documentos" loading="lazy"></iframe><div id="ev" hidden><div class="sv-bar"><span class="note" id="ev-msg"></span><span style="flex:1"></span><button type="button" class="btn" id="ev-zo">−</button><button type="button" class="btn" id="ev-zi">+</button></div><div class="ev-wrap" id="ev-pages"></div></div><div id="sv" hidden><div class="sv-bar"><button type="button" class="btn" id="sv-prev">− 20 m</button><b id="sv-st">—</b><button type="button" class="btn" id="sv-next">+ 20 m</button><span class="note" id="sv-msg"></span><span style="flex:1"></span><button type="button" class="btn primary" id="sv-pl">Ver en planta</button><button type="button" class="btn primary" id="sv-pf">Ver en perfil</button><button type="button" class="btn" id="sv-zo">−</button><button type="button" class="btn" id="sv-zi">+</button></div><div class="sv-wrap"><canvas id="sv-c"></canvas></div></div></div>
 </section>
 </main>
-<footer class="wrap foot">v5.3 · 10/11/2026 · Ing. Piter Bonilla, Gerencia de Ingeniería · Consorcio Avance del Sur</footer>
+<footer class="wrap foot">v5.4 · 10/11/2026 · Ing. Piter Bonilla, Gerencia de Ingeniería · Consorcio Avance del Sur</footer>
 <div class="tip" id="tip"></div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
@@ -1111,7 +1116,8 @@ function initMap(){if(map){setTimeout(()=>map.invalidateSize(),50);return}
   "Relieve sombreado MDE 8 m":shade,"Curvas de nivel 100 m (MDE)":ct,"Curvas de nivel 5 m (MDT, zona de drenaje)":c5,"Curvas de nivel 2.5 m (MDT, ±300 m)":c25,"Eje de referencia por pendiente":axis,"Eje de referencia (una línea)":plain,
   "Estacionamiento (km · 100 m · 20 m)":est,"Elementos de curva (PC, PT…)":cvL,"Tramo complejo Km 37 – 40":crit,
   "PN Sierra de Bahoruco":pk,"Minas de bauxita Aceitillar":mn,"Carreteras existentes":rd,"Lugares":pl,"Casetas del sendero":cs,"Bitácora del recorrido":nt,"Cauces · red completa (≥ 3.2 ha)":caL,"Cruces cauce–eje":czL,"Cuencas de los cruces":cuL,...altOv},{collapsed:true}).addTo(map);window.popScroll&&popScroll(map);{const t=document.querySelector(".leaflet-control-layers-toggle");if(t){t.title="Capas del mapa";t.setAttribute("aria-label","Capas del mapa")}}
- L.control.scale({imperial:false}).addTo(map);
+ L.control.scale({imperial:false}).addTo(map);window.PPDMAP=map;
+ (function qi(){if(!window.qryMap)return setTimeout(qi,200);qryMap(map,()=>({eje:map.hasLayer(axis)||map.hasLayer(plain),alt:Object.values(altOv).some(l=>map.hasLayer(l)),cau:map.hasLayer(caL),crz:map.hasLayer(czL),cv:map.hasLayer(c5),c25:map.hasLayer(c25),rd:map.hasLayer(rd),crit:map.hasLayer(crit),pk:map.hasLayer(pk),mn:map.hasLayer(mn)}),()=>window.PTX&&PTX.LL)})();
  window.perfilTerreno=perfilTerreno;function perfilTerreno(P){if(!window._ptRet)map.closePopup();const lat0=P[0].lat,lon0=P[0].lng,kx=degLon(lat0),ky=degLat(lat0),xy=ll=>[(ll[1]-lon0)*kx,(ll[0]-lat0)*ky];
   // fuentes encendidas, de la más detallada a la menos: 2.5 m (±300 m), 5 m (corredor), 100 m (todo)
   const SRC=[];if(map.hasLayer(c25))SRC.push({k:"2.5",n:"2.5 m",d:D.C25,cov:D.COV.c25,col:"#1f9d55"});if(map.hasLayer(c5))SRC.push({k:"5",n:"5 m",d:D.C5,cov:D.COV.c5,col:"#2b6cb0"});
@@ -1502,7 +1508,7 @@ function initMap2(){if(TV.map)return;const m=TV.map=L.map("tv-map",{zoomControl:
  W.forEach(w=>{if(w[2]%1000===0)L.marker([w[0],w[1]],{interactive:false,icon:L.divIcon({className:"",html:`<span class="tv-km">${st(w[2])}</span>`})}).addTo(km)});km.addTo(m);
  (D.ALT||[]).forEach(v=>L.polyline(v.ll,{color:v.col||"#7b2cbf",weight:4,opacity:.9,dashArray:"9 6",interactive:false}).bindTooltip(v.id,{permanent:true,direction:"center",className:"alt-tt"+(v.col?" alt-tt-"+v.id:"")}).addTo(al));al.addTo(m);
  D.CRZ.forEach(r=>L.circleMarker([r[1],r[2]],{radius:r[3]>1000?7:r[3]>100?5.5:4,color:"#fff",weight:1.5,fillColor:"#1a5fd0",fillOpacity:1}).bindTooltip(`C-${String(r[10]).padStart(3,"0")} · ${st(r[0])} · ${fmt(r[3],r[3]<10?1:0)} ha`).on("click",()=>{if(TV.tr!=="eje")useTrace("eje",r[0]);else setS(r[0],"click")}).addTo(cz));cz.addTo(m);
- L.control.layers({"Topográfico":topo,"Satélite":sat},{"Cauces":ca,"Cruces cauce–eje":cz,"Variantes P1 y P2":al,"Estaciones por km":km},{collapsed:true}).addTo(m);L.control.scale({imperial:false}).addTo(m);
+ L.control.layers({"Topográfico":topo,"Satélite":sat},{"Cauces":ca,"Cruces cauce–eje":cz,"Variantes P1 y P2":al,"Estaciones por km":km},{collapsed:true}).addTo(m);L.control.scale({imperial:false}).addTo(m);window.qryMap&&qryMap(m,()=>({eje:true,cau:m.hasLayer(ca),crz:m.hasLayer(cz),alt:m.hasLayer(al)}),()=>{try{const T=TVtrace(TV.tr);return T&&!T.eje?T.LL:null}catch(e){return null}});
  m.createPane("tvhl").style.zIndex=390;TV.hl=L.layerGroup().addTo(m);TV.sl=L.polyline([[0,0],[0,0]],{color:"#ff00aa",weight:3,dashArray:"6 4",interactive:false}).addTo(m);TV.cur=L.circleMarker([0,0],{radius:7,color:"#fff",weight:3,fillColor:"#d62828",fillOpacity:1,interactive:false}).addTo(m);
  m.on("move",()=>{if(TV.prog||!TV.follow||!TV.on||TV.play)return;if(TV._mt)return;TV._mt=setTimeout(()=>{TV._mt=null;const c=m.getCenter(),n=nearOn(T,c.lat,c.lng);setS(n.s,"map")},40)});
  m.on("moveend",()=>setTimeout(()=>{TV.prog=false},30));window.popScroll&&popScroll(m)}
@@ -1726,40 +1732,61 @@ const qa=(o,q)=>{o.userData.q=q;return o};
 function qClose(){const p=document.getElementById("v3-pop");if(p)p.remove()}
 function qClick(e,hit,geoOf,ray){qClose();const c=$("#v3-c"),b=c.getBoundingClientRect(),h=hit(e);let obj=null;
  if(V3.og){const hs=ray.intersectObjects(V3.og.children,true);for(const x of hs){if(h&&x.distance>h.distance+1)break;let o=x.object;while(o&&!o.userData.q)o=o.parent;if(o){obj=o.userData.q;break}}}
- if(!obj&&!h)return;const g=V3.g,q=h?geoOf(h.point):null;
- const mpx=h?h.distance*2*Math.tan(V3.cam.fov*Math.PI/360)/b.height*(V3.ex?1:1):10,tol=Math.max(4,9*mpx);
- const kx=g.kx,ky=g.ky,lat0=q?q.lat:0,lon0=q?q.lon:0,XY=p=>[(p[1]-lon0)*kx,(p[0]-lat0)*ky];
- const dSeg=(ln)=>{let bd=1e18,bi=0,bt=0;for(let i=1;i<ln.length;i++){const a=XY(ln[i-1]),c_=XY(ln[i]),vx=c_[0]-a[0],vy=c_[1]-a[1],L2=vx*vx+vy*vy||1e-9;let t=-(a[0]*vx+a[1]*vy)/L2;t=Math.max(0,Math.min(1,t));const d=Math.hypot(a[0]+t*vx,a[1]+t*vy);if(d<bd){bd=d;bi=i;bt=t}}return {d:bd,i:bi,t:bt}};
- const near=(ln)=>{if(!ln||ln.length<2)return null;const bb=ln._bb;if(bb&&(lat0<bb[0]-tol/ky||lat0>bb[2]+tol/ky||lon0<bb[1]-tol/kx||lon0>bb[3]+tol/kx))return null;const r=dSeg(ln);return r.d<=tol?r:null};
- const pip=(p,r)=>{let c_=false;for(let i=0,j=r.length-1;i<r.length;j=i++){const [yi,xi]=r[i],[yj,xj]=r[j];if((yi>p[0])!=(yj>p[0])&&p[1]<(xj-xi)*(p[0]-yi)/(yj-yi)+xi)c_=!c_}return c_};
- const T=(rows)=>`<table class="ptab">${rows.filter(Boolean).map(([a,v])=>`<tr><td>${a}</td><td>${v}</td></tr>`).join("")}</table>`;
- const srAt=sv=>{let k=1;while(k<W.length-1&&W[k][2]<sv)k++;const a=W[k-1],c_=W[k];return a[3]+(c_[3]-a[3])*(sv-a[2])/Math.max(1e-9,c_[2]-a[2])};
- const czH=r=>`<b>Cruce C-${String(r[10]).padStart(3,"0")} · Est. ${st(r[0])}</b>`+T([["Norte",fmt(r[11],2)],["Este",fmt(r[12],2)],["Área de aporte",fmt(r[3],1)+" ha"],["Cauce más largo",fmt(r[4],2)+" km"],["Desnivel",fmt(r[5])+" → "+fmt(r[6])+" m"],["Pend. media",fmt(r[7],1)+" %"],["Tc (Kirpich)",r[3]>1000?"no aplica (cuenca > 10 km²)":fmt(r[8],0)+" min"]])+(r[9]?'<span class="v3-pop-n">El mismo cauce cruza el eje otra vez a menos de 300 m.</span>':"");
- const ejeH=(sv,dd)=>{const sr=srAt(sv);return `<b>Eje de referencia · Est. ${stD1(sv)}</b>`+T([["Elev. Subrasante SR (MOPC)",fmt(sr,2)+" m"],q&&["Terreno (MDT)",fmt(q.z,1)+" m"],q&&["SR − terreno",fmt(sr-q.z,1)+" m"],["Pendiente SR",fmt(slAt(sv),1)+" %"],dd!=null&&["Distancia al eje",fmt(dd,1)+" m"]])};
- const items=[];
- if(obj){if(obj.t==="crz")items.push(czH(obj.r));
-  else if(obj.t==="km"){const sv=obj.w[2],sr=srAt(sv);items.push(`<b>Estación ${st(sv)} del eje</b>`+T([["Elev. Subrasante SR (MOPC)",fmt(sr,2)+" m"],["Pendiente SR",fmt(slAt(sv),1)+" %"],["Norte / Este",fmt(obj.w[7],2)+" / "+fmt(obj.w[6],2)]]))}
-  else if(obj.t==="alt"){const v=obj.v;items.push(`<b>${esc3(v.n||v.id)}</b>`+T([["Tramo del eje",st(v.s0)+" – "+st(v.s1)],["Longitud del eje",fmt(v.s1-v.s0)+" m"]])+(v.nota?`<div class="v3-pop-n">${esc3(v.nota)}</div>`:""))}
-  else if(obj.t==="pl")items.push(`<b>${esc3(String(obj.p[0]).replace(/^[A-F] - /,""))}</b>`+T([["Tipo","Lugar del KMZ del proyecto"]]));
-  else if(obj.t==="cs"){const c_=obj.c;items.push(`<b>⌂ ${esc3(c_.n)}</b>`+T([["Ubicación",esc3(c_.d||"")],["Estación del eje",c_.st+" · a "+fmt(c_.off)+" m"],["Norte",fmt(c_.N,2)],["Este",fmt(c_.E,2)]]))}}
- else{
-  const L=V3.lay;
-  if(L.eje){const r=near(W.map(w=>[w[0],w[1]]));if(r){const a=W[r.i-1],c_=W[r.i];items.push(ejeH(a[2]+r.t*(c_[2]-a[2]),r.d))}}
-  if(L.alt)(D.ALT||[]).forEach(v=>{const r=near(v.ll);if(r){let m=0;for(let i=1;i<r.i;i++)m+=Math.hypot(...[0,1].map(k_=>XY(v.ll[i])[k_]-XY(v.ll[i-1])[k_]));const a=XY(v.ll[r.i-1]),c_=XY(v.ll[r.i]);m+=r.t*Math.hypot(c_[0]-a[0],c_[1]-a[1]);items.push(`<b>${esc3(v.tt||v.n||v.id)}</b>`+T([["Distancia desde su inicio",fmt(m,0)+" m"],["Tramo del eje",st(v.s0)+" – "+st(v.s1)],q&&["Terreno (MDT)",fmt(q.z,1)+" m"]]))}});
-  if(L.tr){const Tt=trTr();if(Tt.id==="pt"){const r=near(Tt.LL);if(r)items.push(`<b>Trazo del perfil</b>`+T([["Distancia al trazo",fmt(r.d,1)+" m"]]))}}
-  if(L.cau){let best=null;(D.CAU||[]).forEach(cu=>{const r=near(cu[2]);if(r&&(!best||r.d<best.r.d))best={cu,r}});if(best){const [o,a]=best.cu;items.push(`<b>Cauce</b>`+T([["Orden (Strahler)",o],["Área de aporte al final del tramo",fmt(a,a<10?1:0)+" ha"],["Distancia al punto",fmt(best.r.d,1)+" m"]]))}}
-  const cvq=(arr,iv,nm)=>{let best=null;(arr||[]).forEach(([z,ln])=>{const r=near(ln);if(r&&(!best||r.d<best.d))best={z,d:r.d}});if(best)items.push(`<b>Curva de nivel ${fmt(best.z,best.z%1?1:0)} m</b>`+T([["Intervalo",nm],["Tipo",best.z%25===0?"maestra (cada 25 m)":"intermedia"],["Distancia al punto",fmt(best.d,1)+" m"],["Fuente","MDT 8 m"]]))};
-  if(L.cv)cvq(D.C5,5,"5 m");if(L.c25&&!items.some(x=>x.startsWith("<b>Curva")))cvq(D.C25,2.5,"2.5 m (franja ±300 m)");
-  if(L.rd)((D.L&&D.L.roads)||[]).forEach(r=>{const x=near(r[1]);if(x)items.push(`<b>Carretera existente</b>`+T([["Nombre",esc3(r[0].replace(/^[A-Z] - /,""))]]))});
-  if(L.crit&&q){const n=TVnear(TVtrace("eje"),q.lat,q.lon);if(n.s>=37000&&n.s<=40000&&n.d<=60)items.push(`<b>Tramo complejo Km 37 – 40</b>`+T([["Recorrido","05/11/2026"],["Frente a",st(n.s)]]))}
-  const LP=(D.L&&D.L.polys)||[];if(q){if(L.pk&&LP.some(p=>/Parque/.test(p[0])&&pip([q.lat,q.lon],p[1])))items.push(`<b>PN Sierra de Bahoruco</b><div class="v3-pop-n">Dentro del polígono del KMZ del proyecto (no certifica límites legales).</div>`);
-   if(L.mn&&LP.some(p=>!/Parque/.test(p[0])&&pip([q.lat,q.lon],p[1])))items.push(`<b>Minas de bauxita Aceitillar</b><div class="v3-pop-n">Área de cantera del KMZ del proyecto.</div>`)}
- }
- let foot="";if(q&&!obj){const u=toUTM19(q.lat,q.lon),n=TVnear(TVtrace("eje"),q.lat,q.lon);foot=`<div class="v3-pop-f">N ${fmt(u[1],2)} · E ${fmt(u[0],2)} (UTM 19N WGS84) · terreno ${fmt(q.z,1)} m · a ${fmt(n.d,0)} m del eje, frente a ${st(n.s)}</div>`}
- if(!items.length)items.push(`<b>Sin objetos en este punto</b><div class="v3-pop-n">Acérquese con el zoom o encienda la capa que busca en ☰ Capas.</div>`);
+ if(!obj&&!h)return;const q=h?geoOf(h.point):null;
+ const mpx=h?h.distance*2*Math.tan(V3.cam.fov*Math.PI/360)/b.height:10,tol=Math.max(4,9*mpx);
+ const Tt=trTr(),R=qryCore(q,tol,V3.lay,Tt.id==="pt"?Tt.LL:null,obj),items=R.items,foot=R.foot;
  const p=document.createElement("div");p.id="v3-pop";p.className="v3-pop";p.setAttribute("role","dialog");p.setAttribute("aria-label","Propiedades del objeto");
  p.innerHTML=`<button type="button" class="v3-pop-x" aria-label="Cerrar">×</button>${items.slice(0,4).join('<hr>')}${foot}`;c.appendChild(p);p.querySelector(".v3-pop-x").onclick=qClose;
  const x=e.clientX-b.left,y=e.clientY-b.top,pw=p.offsetWidth,phh=p.offsetHeight;p.style.left=Math.max(6,Math.min(b.width-pw-6,x+12))+"px";p.style.top=Math.max(6,Math.min(b.height-phh-6,y+12))+"px"}
+
+/* ---- consulta compartida (3D y plantas 2D) ---- */
+const qT=(rows)=>`<table class="ptab">${rows.filter(Boolean).map(([a,v])=>`<tr><td>${a}</td><td>${v}</td></tr>`).join("")}</table>`;
+const qSr=sv=>{let k=1;while(k<W.length-1&&W[k][2]<sv)k++;const a=W[k-1],c_=W[k];return a[3]+(c_[3]-a[3])*(sv-a[2])/Math.max(1e-9,c_[2]-a[2])};
+const qCz=r=>`<b>Cruce C-${String(r[10]).padStart(3,"0")} · Est. ${st(r[0])}</b>`+qT([["Norte",fmt(r[11],2)],["Este",fmt(r[12],2)],["Área de aporte",fmt(r[3],1)+" ha ("+fmt(r[3]/100,3)+" km²)"],["Cauce más largo",fmt(r[4],2)+" km"],["Desnivel",fmt(r[5])+" → "+fmt(r[6])+" m"],["Pend. media",fmt(r[7],1)+" %"],["Tc (Kirpich)",r[3]>1000?"no aplica (cuenca > 10 km²)":fmt(r[8],0)+" min"]])+(r[9]?'<span class="v3-pop-n">El mismo cauce cruza el eje otra vez a menos de 300 m.</span>':"");
+function qryCore(q,tol,L,trLL,obj){const lat0=q?q.lat:(obj&&obj.w?obj.w[0]:18),lon0=q?q.lon:-71.5,kx=degLon(lat0),ky=degLat(lat0);
+ const XYo=(p,o)=>[(p[1]-o[1])*kx,(p[0]-o[0])*ky];
+ const dSegP=(ln,o)=>{let bd=1e18,bi=0,bt=0;for(let i=1;i<ln.length;i++){const a=XYo(ln[i-1],o),c_=XYo(ln[i],o),vx=c_[0]-a[0],vy=c_[1]-a[1],L2=vx*vx+vy*vy||1e-9;let t=-(a[0]*vx+a[1]*vy)/L2;t=Math.max(0,Math.min(1,t));const d=Math.hypot(a[0]+t*vx,a[1]+t*vy);if(d<bd){bd=d;bi=i;bt=t}}return {d:bd,i:bi,t:bt}};
+ const bbOk=(ln,o,tl)=>{let bb=ln._bb;if(!bb){bb=[1e9,1e9,-1e9,-1e9];ln.forEach(p=>{bb[0]=Math.min(bb[0],p[0]);bb[1]=Math.min(bb[1],p[1]);bb[2]=Math.max(bb[2],p[0]);bb[3]=Math.max(bb[3],p[1])});ln._bb=bb}return !(o[0]<bb[0]-tl/ky||o[0]>bb[2]+tl/ky||o[1]<bb[1]-tl/kx||o[1]>bb[3]+tl/kx)};
+ const O=q?[q.lat,q.lon]:null,near=(ln)=>{if(!O||!ln||ln.length<2||!bbOk(ln,O,tol))return null;const r=dSegP(ln,O);return r.d<=tol?r:null};
+ const pip=(p,r)=>{let c_=false;for(let i=0,j=r.length-1;i<r.length;j=i++){const [yi,xi]=r[i],[yj,xj]=r[j];if((yi>p[0])!=(yj>p[0])&&p[1]<(xj-xi)*(p[0]-yi)/(yj-yi)+xi)c_=!c_}return c_};
+ const lenOf=(ln,i1,t1)=>{let m=0;for(let i=1;i<ln.length&&(i1==null||i<=i1);i++){const a=XYo(ln[i-1],ln[0]),c_=XYo(ln[i],ln[0]),dd=Math.hypot(c_[0]-a[0],c_[1]-a[1]);m+=(i1!=null&&i===i1)?dd*t1:dd}return m};
+ const ejeH=(sv,dd)=>{const sr=qSr(sv);return `<b>Eje de referencia · Est. ${stD1(sv)}</b>`+qT([["Elev. Subrasante SR (MOPC)",fmt(sr,2)+" m"],q&&q.z!=null&&["Terreno (MDT)",fmt(q.z,1)+" m"],q&&q.z!=null&&["SR − terreno",fmt(sr-q.z,1)+" m"],["Pendiente SR",fmt(slAt(sv),1)+" %"],dd!=null&&["Distancia al eje",fmt(dd,1)+" m"]])};
+ const items=[];
+ if(obj){if(obj.t==="crz")items.push(qCz(obj.r));
+  else if(obj.t==="km"){const sv=obj.w[2],sr=qSr(sv);items.push(`<b>Estación ${st(sv)} del eje</b>`+qT([["Elev. Subrasante SR (MOPC)",fmt(sr,2)+" m"],["Pendiente SR",fmt(slAt(sv),1)+" %"],["Norte / Este",fmt(obj.w[7],2)+" / "+fmt(obj.w[6],2)]]))}
+  else if(obj.t==="alt"){const v=obj.v;items.push(`<b>${esc3(v.n||v.id)}</b>`+qT([["Tramo del eje",st(v.s0)+" – "+st(v.s1)],["Longitud del eje",fmt(v.s1-v.s0)+" m"]])+(v.nota?`<div class="v3-pop-n">${esc3(v.nota)}</div>`:""))}
+  else if(obj.t==="pl")items.push(`<b>${esc3(String(obj.p[0]).replace(/^[A-F] - /,""))}</b>`+qT([["Tipo","Lugar del KMZ del proyecto"]]));
+  else if(obj.t==="cs"){const c_=obj.c;items.push(`<b>⌂ ${esc3(c_.n)}</b>`+qT([["Ubicación",esc3(c_.d||"")],["Estación del eje",c_.st+" · a "+fmt(c_.off)+" m"],["Norte",fmt(c_.N,2)],["Este",fmt(c_.E,2)]]))}
+  return {items,foot:""}}
+ if(L.crz){let best=null;(D.CRZ||[]).forEach(r=>{const xy=XYo([r[1],r[2]],O),d=Math.hypot(xy[0],xy[1]);if(d<=tol*1.6&&(!best||d<best.d))best={r,d}});if(best)items.push(qCz(best.r))}
+ if(L.eje){const r=near(W.map(w=>[w[0],w[1]]));if(r){const a=W[r.i-1],c_=W[r.i];items.push(ejeH(a[2]+r.t*(c_[2]-a[2]),r.d))}}
+ if(L.alt)(D.ALT||[]).forEach(v=>{const r=near(v.ll);if(r)items.push(`<b>${esc3(v.tt||v.n||v.id)}</b>`+qT([["Distancia desde su inicio",fmt(lenOf(v.ll,r.i,r.t),0)+" m"],["Longitud",fmt(lenOf(v.ll),0)+" m"],["Tramo del eje",st(v.s0)+" – "+st(v.s1)],q&&q.z!=null&&["Terreno (MDT)",fmt(q.z,1)+" m"]]))});
+ if(trLL){const ll=trLL.map(p=>p.lat!=null?[p.lat,p.lng!=null?p.lng:p.lon]:p),r=near(ll);if(r)items.push(`<b>Trazo del perfil</b>`+qT([["Distancia desde su inicio",fmt(lenOf(ll,r.i,r.t),1)+" m"],["Longitud del trazo",fmt(lenOf(ll),1)+" m"],["Distancia al trazo",fmt(r.d,1)+" m"]]))}
+ if(L.cau){let best=null;(D.CAU||[]).forEach(cu=>{const r=near(cu[2]);if(r&&(!best||r.d<best.r.d))best={cu,r}});if(best){const [o,a,ln]=best.cu,Lc=lenOf(ln);let zr=null;try{const pr=TVK.prof(ln).pts;if(pr&&pr.length>1){const zs=pr.map(p=>p[1]);zr=[Math.max(...zs),Math.min(...zs)]}}catch(e){}
+   const cz=(D.CRZ||[]).filter(r=>{const rr=dSegP(ln,[r[1],r[2]]);return rr.d<=25}).map(r=>"C-"+String(r[10]).padStart(3,"0")+" ("+st(r[0])+")");
+   items.push(`<b>Cauce</b>`+qT([["Orden (Strahler)",o],["Área de aporte al final del tramo",fmt(a,a<10?1:0)+" ha ("+fmt(a/100,3)+" km²)"],["Longitud del tramo dibujado",fmt(Lc,0)+" m"],zr&&["Cotas del tramo (curvas)",fmt(zr[0],1)+" → "+fmt(zr[1],1)+" m"],zr&&Lc>0&&["Pendiente media del tramo",fmt((zr[0]-zr[1])/Lc*100,1)+" %"],cz.length&&["Cruza el eje en",cz.join(", ")],["Distancia al punto",fmt(best.r.d,1)+" m"]])+`<div class="v3-pop-n">Para el caudal de diseño use el cruce con el eje (área, cauce más largo y Tc de la cuenca completa); las IDF siguen pendientes.</div>`)}}
+ const cvq=(arr,nm)=>{let best=null;(arr||[]).forEach(([z,ln])=>{const r=near(ln);if(r&&(!best||r.d<best.d))best={z,d:r.d}});if(best)items.push(`<b>Curva de nivel ${fmt(best.z,best.z%1?1:0)} m</b>`+qT([["Intervalo",nm],["Tipo",best.z%25===0?"maestra (cada 25 m)":"intermedia"],["Distancia al punto",fmt(best.d,1)+" m"],["Fuente","MDT 8 m"]]))};
+ if(L.cv)cvq(D.C5,"5 m");if(L.c25&&!items.some(x=>x.startsWith("<b>Curva")))cvq(D.C25,"2.5 m (franja ±300 m)");
+ if(L.rd)((D.L&&D.L.roads)||[]).forEach(r=>{const x=near(r[1]);if(x)items.push(`<b>Carretera existente</b>`+qT([["Nombre",esc3(r[0].replace(/^[A-Z] - /,""))]]))});
+ if(L.crit&&q){const n=TVnear(TVtrace("eje"),q.lat,q.lon);if(n.s>=37000&&n.s<=40000&&n.d<=60)items.push(`<b>Tramo complejo Km 37 – 40</b>`+qT([["Recorrido","05/11/2026"],["Frente a",st(n.s)]]))}
+ const LP=(D.L&&D.L.polys)||[];if(q){if(L.pk&&LP.some(p=>/Parque/.test(p[0])&&pip([q.lat,q.lon],p[1])))items.push(`<b>PN Sierra de Bahoruco</b><div class="v3-pop-n">Dentro del polígono del KMZ del proyecto (no certifica límites legales).</div>`);
+  if(L.mn&&LP.some(p=>!/Parque/.test(p[0])&&pip([q.lat,q.lon],p[1])))items.push(`<b>Minas de bauxita Aceitillar</b><div class="v3-pop-n">Área de cantera del KMZ del proyecto.</div>`)}
+ let foot="";if(q){const u=toUTM19(q.lat,q.lon),n=TVnear(TVtrace("eje"),q.lat,q.lon);foot=`<div class="v3-pop-f">N ${fmt(u[1],2)} · E ${fmt(u[0],2)} (UTM 19N WGS84)${q.z!=null?` · terreno ${fmt(q.z,1)} m`:""} · a ${fmt(n.d,0)} m del eje, frente a ${st(n.s)}</div>`}
+ if(!items.length)items.push(`<b>Sin objetos en este punto</b><div class="v3-pop-n">Acérquese con el zoom o encienda la capa que busca.</div>`);
+ return {items,foot}}
+
+/* ---- botón Consultar para plantas Leaflet ---- */
+function zPt(lat,lon){try{const e=4e-5,g=TVK.grid([lat-e,lon-e,lat+e,lon+e],3,3),z=g.Z[4];return isFinite(z)?z:null}catch(_){return null}}
+window.qryMap=function(map,flags,trLL){if(!map||map._qry)return;map._qry=1;let on=false,dn=null;
+ const C=L.Control.extend({options:{position:"topleft"},onAdd(){const b=L.DomUtil.create("button","q-btn leaflet-bar");b.type="button";b.innerHTML="⌖ Consultar";b.title="Clic sobre un objeto del mapa para ver sus propiedades";b.setAttribute("aria-pressed","false");L.DomEvent.disableClickPropagation(b);
+  b.onclick=()=>{on=!on;b.setAttribute("aria-pressed",on);b.classList.toggle("on",on);map.getContainer().classList.toggle("q-on",on);if(!on)map.closePopup()};return b}});
+ new C().addTo(map);const el=map.getContainer();
+ el.addEventListener("pointerdown",e=>{dn=[e.clientX,e.clientY]},true);
+ el.addEventListener("click",e=>{if(!on)return;if(e.target.closest(".leaflet-control,.leaflet-popup"))return;if(dn&&Math.hypot(e.clientX-dn[0],e.clientY-dn[1])>6)return;e.stopPropagation();e.preventDefault();
+  const ll=map.mouseEventToLatLng(e),mpp=40075016.686*Math.cos(ll.lat*Math.PI/180)/Math.pow(2,map.getZoom()+8),tol=Math.max(3,10*mpp);
+  const q={lat:ll.lat,lon:ll.lng,z:zPt(ll.lat,ll.lng)},R=qryCore(q,tol,flags(),trLL?trLL():null,null);
+  L.popup({maxWidth:360,className:"q-pop",autoPanPadding:[20,20]}).setLatLng(ll).setContent(R.items.slice(0,5).join("<hr>")+R.foot).openOn(map)},true)};
+window.QRY=qryCore;
 const esc3=t=>String(t).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const stD1=m=>{const k=Math.floor(m/1000+1e-9),r=m-k*1000;return k+"+"+r.toFixed(1).padStart(5,"0")};
 const slAt=sv=>{let k=1;while(k<W.length-1&&W[k][2]<sv)k++;const a=W[k-1],c_=W[k];return (c_[3]-a[3])/Math.max(1e-9,c_[2]-a[2])*100};
