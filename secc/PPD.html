@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Estudio Pedernales v5.5</title>
+<title>Estudio Pedernales v5.6</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=Source+Sans+3:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
@@ -486,7 +486,7 @@ body.tv-lock{overflow:hidden}
   <svg class="contours" aria-hidden="true" preserveAspectRatio="none" viewBox="0 0 1200 220" id="contours"></svg>
   <div class="wrap mast-inner">
     <div>
-      <div class="eyebrow">Consorcio Avance del Sur · Gerencia de Ingeniería · Presentación técnica <span style="text-transform:none">v5.5</span></div>
+      <div class="eyebrow">Consorcio Avance del Sur · Gerencia de Ingeniería · Presentación técnica <span style="text-transform:none">v5.6</span></div>
       <h1>Carretera Pedernales – Puerto Escondido<br>Estudio y desarrollo de la ingeniería</h1>
       <div class="meta">
         <span><b class="mono">0+000 → 43+348</b> · 43.348 km</span>
@@ -725,7 +725,7 @@ body.tv-lock{overflow:hidden}
   <div class="card docview"><h3 id="dv-t">Eje en planta · diseño de referencia</h3><p class="sub" id="dv-s">15 páginas · también se puede descargar.</p><iframe id="dv" title="Visor de documentos" loading="lazy"></iframe><div id="ev" hidden><div class="sv-bar"><span class="note" id="ev-msg"></span><span style="flex:1"></span><button type="button" class="btn" id="ev-zo">−</button><button type="button" class="btn" id="ev-zi">+</button></div><div class="ev-wrap" id="ev-pages"></div></div><div id="sv" hidden><div class="sv-bar"><button type="button" class="btn" id="sv-prev">− 20 m</button><b id="sv-st">—</b><button type="button" class="btn" id="sv-next">+ 20 m</button><span class="note" id="sv-msg"></span><span style="flex:1"></span><button type="button" class="btn primary" id="sv-pl">Ver en planta</button><button type="button" class="btn primary" id="sv-pf">Ver en perfil</button><button type="button" class="btn" id="sv-zo">−</button><button type="button" class="btn" id="sv-zi">+</button></div><div class="sv-wrap"><canvas id="sv-c"></canvas></div></div></div>
 </section>
 </main>
-<footer class="wrap foot">v5.5 · 12/11/2026 · Ing. Piter Bonilla, Gerencia de Ingeniería · Consorcio Avance del Sur</footer>
+<footer class="wrap foot">v5.6 · 13/11/2026 · Ing. Piter Bonilla, Gerencia de Ingeniería · Consorcio Avance del Sur</footer>
 <div class="tip" id="tip"></div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
@@ -766,7 +766,7 @@ const KM=W[W.length-1][2]/1000;
 /* KPIs */
 function kpis(){const k=D.K;
  $("#kpis").innerHTML=[["hl","43.348 km","Longitud del eje de referencia (0+000 → EOP 43+347.79); los datos cada 20 m llegan a 43+340"],["",`${fmt(k.zmin)} → ${fmt(k.zmax)} m`,`Rango de elevación de la subrasante; máximo en el Km ${fmt(k.kmax/1000,0)}`],["","99 · 185","Curvas con radio menor de 30 m · menor de 50 m"],["","13.9 km","Con pendiente mayor de 10 % según el perfil del plano (12.9 km en la subrasante cada 20 m); máxima 16.0 % en un intervalo de 20 m"],
- ["env",`${fmt(k.park,1)} km`,`Del eje dentro del polígono del PN Sierra de Bahoruco (${fmt(k.park/KM*100,0)} %)`],["","217 · 1","Alcantarillas · puente a ampliar (Las Damas) en el diseño de referencia"],["","26 · 154","Tramos con muro · caras de talud de más de 5 m"],["hl","Km 37 – 40","Único tramo complejo en el recorrido de campo"]]
+ ["env",`${fmt(k.park,1)} km`,`Del eje dentro del polígono del PN Sierra de Bahoruco (${fmt(k.park/KM*100,0)} %)`],["",`${D.CRZ.length} · ${D.CRZ.filter(r=>r[3]>=50).length}`,"Cruces cauce–eje · de 50 ha o más (análisis de cuencas del MDT)"],["","26 · 154","Tramos con muro · caras de talud de más de 5 m"],["hl","Km 37 – 40","Único tramo complejo en el recorrido de campo"]]
  .map(([c,b,s])=>`<div class="${c}"><b>${b}</b><span>${s}</span></div>`).join("");
  $("#env-call").innerHTML=`<b>Área protegida:</b> según el polígono del Parque Nacional Sierra de Bahoruco cargado en el KMZ del proyecto, <b>${fmt(k.park,1)} de los 43.3 km</b> del trazado de referencia están dentro del área protegida. El estudio está pensado para reducir la intervención: se decide el eje antes de volar, el levantamiento se limita a una franja acordada por tramo y el sendero existente es la base del trazado.`;
  $("#kpi-env").innerHTML=[["env",`${fmt(k.park,1)} km`,"Del eje dentro del PN Sierra de Bahoruco (polígono del KMZ)"],["","±100 m","Franja mínima de levantamiento; más ancha solo donde hace falta"],["","217 · 1","Cruces de drenaje: alcantarillas · puente a ampliar (referencia)"],["","6 · 2","Accesos · zonas pobladas (referencia)"]].map(([c,b,s])=>`<div class="${c}"><b>${b}</b><span>${s}</span></div>`).join("")}
