@@ -407,6 +407,8 @@ body.tv-lock{overflow:hidden}
 .q-pop .ptab{border-collapse:collapse;width:100%}.q-pop .ptab td{padding:2px 6px 2px 0;vertical-align:top}.q-pop .ptab td:first-child{color:var(--muted)}
 .q-pop hr{border:0;border-top:1px solid var(--line);margin:8px 0}
 
+.tv-gleg{background:rgba(255,255,255,.92);padding:4px 7px;border-radius:6px;box-shadow:0 1px 4px rgba(0,0,0,.3);font-size:11px;line-height:1.35;display:flex;flex-direction:column;gap:1px}.tv-gleg b{font-size:11px}.tv-gleg span{display:flex;align-items:center;gap:5px;white-space:nowrap}.tv-gleg i{display:inline-block;width:16px;height:5px;border-radius:2px}
+
 /* ---------- presentación ---------- */
 .keym{border-top:3px solid var(--accent)}.keyl{margin:6px 0 0;padding-left:22px;display:grid;gap:8px;font-size:15px;line-height:1.5}.keyl li::marker{color:var(--accent);font-weight:700}
 .rk td:first-child{font-weight:600}
@@ -742,7 +744,7 @@ body.tv-lock{overflow:hidden}
   <div class="card docview"><h3 id="dv-t">Eje en planta · diseño de referencia</h3><p class="sub" id="dv-s">15 páginas · también se puede descargar.</p><iframe id="dv" title="Visor de documentos" loading="lazy"></iframe><div id="ev" hidden><div class="sv-bar"><span class="note" id="ev-msg"></span><span style="flex:1"></span><button type="button" class="btn" id="ev-zo">−</button><button type="button" class="btn" id="ev-zi">+</button></div><div class="ev-wrap" id="ev-pages"></div></div><div id="sv" hidden><div class="sv-bar"><button type="button" class="btn" id="sv-prev">− 20 m</button><b id="sv-st">—</b><button type="button" class="btn" id="sv-next">+ 20 m</button><span class="note" id="sv-msg"></span><span style="flex:1"></span><button type="button" class="btn primary" id="sv-pl">Ver en planta</button><button type="button" class="btn primary" id="sv-pf">Ver en perfil</button><button type="button" class="btn" id="sv-zo">−</button><button type="button" class="btn" id="sv-zi">+</button></div><div class="sv-wrap"><canvas id="sv-c"></canvas></div></div></div>
 </section>
 </main>
-<footer class="wrap foot">v5.8 · 13/11/2026 · Ing. Piter Bonilla, Gerencia de Ingeniería · Consorcio Avance del Sur</footer>
+<footer class="wrap foot">v5.8 · 14/11/2026 · Ing. Piter Bonilla, Gerencia de Ingeniería · Consorcio Avance del Sur</footer>
 <div class="tip" id="tip"></div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
@@ -1530,20 +1532,26 @@ function build(){if($("#tv"))return;const d=document.createElement("div");d.id="
  addEventListener("resize",()=>{if(TV.on){clearTimeout(TV._rz);TV._rz=setTimeout(()=>{TV.map&&TV.map.invalidateSize();draw()},120)}})}
 function fillTr(){const o=[["eje","Eje de referencia (MOPC)"]];(D.ALT||[]).forEach(v=>o.push([v.id,`${v.tt||v.id} (${st(v.s0)} – ${st(v.s1)})`]));if(typeof PTX!=="undefined"&&PTX&&PTX.LL&&PTX.LL.length>1)o.push(["pt",window.PTNAME||"Trazo del perfil (pestaña Mapa)"]);
  $("#tv-tr").innerHTML=o.map(([v,t])=>`<option value="${v}"${v===TV.tr?" selected":""}>${esc(t)}</option>`).join("")}
-function initMap2(){if(TV.map)return;const m=TV.map=L.map("tv-map",{zoomControl:true,keyboard:false});
+function initMap2(){if(TV.map)return;const rS=L.svg({padding:.3}),m=TV.map=L.map("tv-map",{zoomControl:true,keyboard:false,renderer:rS});m.addLayer(rS);
  const topo=L.tileLayer("https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png",{maxNativeZoom:17,maxZoom:19,attribution:"© OpenTopoMap (CC-BY-SA)"}).addTo(m),sat=L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",{maxZoom:19,attribution:"Imágenes © Esri, Maxar, Earthstar Geographics"});
  const rc=L.canvas({padding:.3}),ca=L.layerGroup(),cz=L.layerGroup(),al=L.layerGroup(),km=L.layerGroup();
  (D.CAU||[]).forEach(([o,a,c])=>L.polyline(c,{renderer:rc,color:"#1a5fd0",weight:a>1000?3:a>100?2:a>30?1.4:1,opacity:.75,interactive:false}).addTo(ca));ca.addTo(m);
- L.polyline(W.map(w=>[w[0],w[1]]),{color:"#fff",weight:7,opacity:.9,interactive:false}).addTo(m);L.polyline(W.map(w=>[w[0],w[1]]),{color:"#c8641b",weight:3.5,interactive:false}).addTo(m);
+ const GCx=typeof GC!=="undefined"?GC:[[4,"--good","< 4 %"],[7,"--p2","4 – 7 %"],[10,"--warn","7 – 10 %"],[12,"--accent","10 – 12 %"],[14,"--bad","12 – 14 %"],[99,"--p5","> 14 %"]],gc_=g=>{g=Math.abs(g);for(const c of GCx)if(g<c[0])return css(c[1]);return css("--p5")};
+ const segCol=(LL,gr)=>{const g=L.layerGroup();let seg=[LL[0]],col=gc_(gr[0]);for(let i=1;i<LL.length;i++){seg.push(LL[i]);const c=i<LL.length-1?gc_(gr[i]):col;if(c!==col||i===LL.length-1){L.polyline(seg,{color:col,weight:5,opacity:.95,interactive:false,renderer:rS}).addTo(g);seg=[LL[i]];col=c}}return g};
+ const WL=W.map(w=>[w[0],w[1]]),ejp=L.layerGroup([L.polyline(WL,{color:"#000",weight:8,opacity:.45,interactive:false,renderer:rS}),segCol(WL,W.map(w=>w[5]))]).addTo(m),ej1=L.layerGroup([L.polyline(WL,{color:"#fff",weight:7,opacity:.9,interactive:false,renderer:rS}),L.polyline(WL,{color:"#c8641b",weight:3.5,interactive:false,renderer:rS})]);
+ TV.tg=L.layerGroup().addTo(m);TV.tgCol=(T)=>{if(!m._loaded){m.whenReady(()=>TV.tgCol(T));return}TV.tg.clearLayers();if(!T||T.eje||!T.pts||T.pts.length<2)return;const st_=10,LL=[],gr=[];for(let s=T.s0;s<=T.L+1e-6;s+=st_){const q=posAt(T,s);LL.push([q.lat,q.lon]);const s2=Math.min(T.L,s+st_),s1=Math.max(T.s0,s2-2*st_);gr.push((zAt(T.pts,s2)-zAt(T.pts,s1))/Math.max(1e-6,s2-s1)*100)}
+  if(LL.length<2)return;L.polyline(LL,{color:"#000",weight:8,opacity:.45,interactive:false,renderer:rS}).addTo(TV.tg);segCol(LL,gr).addTo(TV.tg)};
+ const lg=L.control({position:"bottomleft"});lg.onAdd=()=>{const d=L.DomUtil.create("div","tv-gleg");d.setAttribute("role","list");d.setAttribute("aria-label","Colores por pendiente");d.innerHTML=`<b>Pendiente</b>`+GCx.map(c=>`<span role="listitem"><i style="background:${css(c[1])}"></i>${c[2]}</span>`).join("");L.DomEvent.disableClickPropagation(d);return d};lg.addTo(m);
+ const legUpd=()=>{const d=m.getContainer().querySelector(".tv-gleg");if(d)d.style.display=(m.hasLayer(ejp)||m.hasLayer(TV.tg))?"":"none"};m.on("overlayadd overlayremove",legUpd);
  W.forEach(w=>{if(w[2]%1000===0)L.marker([w[0],w[1]],{interactive:false,icon:L.divIcon({className:"",html:`<span class="tv-km">${st(w[2])}</span>`})}).addTo(km)});km.addTo(m);
  (D.ALT||[]).forEach(v=>L.polyline(v.ll,{color:v.col||"#7b2cbf",weight:4,opacity:.9,dashArray:"9 6",interactive:false}).bindTooltip(v.id,{permanent:true,direction:"center",className:"alt-tt"+(v.col?" alt-tt-"+v.id:"")}).addTo(al));al.addTo(m);
  D.CRZ.forEach(r=>L.circleMarker([r[1],r[2]],{radius:r[3]>1000?7:r[3]>100?5.5:4,color:"#fff",weight:1.5,fillColor:"#1a5fd0",fillOpacity:1}).bindTooltip(`C-${String(r[10]).padStart(3,"0")} · ${st(r[0])} · ${fmt(r[3],r[3]<10?1:0)} ha`).on("click",()=>{if(TV.tr!=="eje")useTrace("eje",r[0]);else setS(r[0],"click")}).addTo(cz));cz.addTo(m);
- L.control.layers({"Topográfico":topo,"Satélite":sat},{"Cauces":ca,"Cruces cauce–eje":cz,"Variantes T1 – T6":al,"Estaciones por km":km},{collapsed:true}).addTo(m);L.control.scale({imperial:false}).addTo(m);window.qryMap&&qryMap(m,()=>({eje:true,cau:m.hasLayer(ca),crz:m.hasLayer(cz),alt:m.hasLayer(al)}),()=>{try{const T=TVtrace(TV.tr);return T&&!T.eje?T.LL:null}catch(e){return null}});
+ L.control.layers({"Topográfico":topo,"Satélite":sat},{"Eje de referencia por pendiente (subrasante)":ejp,"Eje de referencia (una línea)":ej1,"Trazo elegido por pendiente (terreno)":TV.tg,"Cauces":ca,"Cruces cauce–eje":cz,"Variantes T1 – T6":al,"Estaciones por km":km},{collapsed:true}).addTo(m);L.control.scale({imperial:false}).addTo(m);window.qryMap&&qryMap(m,()=>({eje:true,cau:m.hasLayer(ca),crz:m.hasLayer(cz),alt:m.hasLayer(al)}),()=>{try{const T=TVtrace(TV.tr);return T&&!T.eje?T.LL:null}catch(e){return null}});
  m.createPane("tvhl").style.zIndex=390;TV.hl=L.layerGroup().addTo(m);TV.sl=L.polyline([[0,0],[0,0]],{color:"#ff00aa",weight:3,dashArray:"6 4",interactive:false}).addTo(m);TV.cur=L.circleMarker([0,0],{radius:7,color:"#fff",weight:3,fillColor:"#d62828",fillOpacity:1,interactive:false}).addTo(m);
  m.on("move",()=>{if(TV.prog||!TV.follow||!TV.on||TV.play)return;if(TV._mt)return;TV._mt=setTimeout(()=>{TV._mt=null;const c=m.getCenter(),n=nearOn(T,c.lat,c.lng);setS(n.s,"map")},40)});
  m.on("moveend",()=>setTimeout(()=>{TV.prog=false},30));window.popScroll&&popScroll(m)}
 function useTrace(id,s){const T2=trace(id);if(!T2){id="eje"}if(s==null&&T&&T.id!==id){const q=posAt(T,TV.s),N=trace(id),n=nearOn(N,q.lat,q.lon);s=n.d<1500?n.s:N.s0}T=trace(id);TV.tr=id;secKey="";$("#tv-tr").value=id;
- $("#tv-sl").min=Math.floor(T.s0);$("#tv-sl").max=Math.ceil(T.L);TV.hl.clearLayers();L.polyline(T.LL,{color:"#ffd43b",weight:12,opacity:.5,interactive:false,pane:"tvhl"}).addTo(TV.hl);if(id==="pt")L.polyline(T.LL,{color:T.col,weight:3.5,interactive:false}).addTo(TV.hl);
+ $("#tv-sl").min=Math.floor(T.s0);$("#tv-sl").max=Math.ceil(T.L);TV.hl.clearLayers();L.polyline(T.LL,{color:"#ffd43b",weight:12,opacity:.5,interactive:false,pane:"tvhl"}).addTo(TV.hl);if(id==="pt")L.polyline(T.LL,{color:T.col,weight:3.5,interactive:false}).addTo(TV.hl);TV.tgCol&&TV.tgCol(T);
  if(s==null)s=Math.max(T.s0,Math.min(T.L,TV.s));TV.prog=true;TV.map.invalidateSize();setS(s,"init")}
 function stepBy(k){stopPlay();const p=TV.step;setS(k>0?Math.floor(TV.s/p+1e-6)*p+p:Math.ceil(TV.s/p-1e-6)*p-p,"btn")}
 function stopPlay(){if(TV.play){clearInterval(TV.play);TV.play=null;$("#tv-play").textContent="▶ Recorrer"}}
