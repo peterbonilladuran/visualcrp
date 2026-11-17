@@ -117,7 +117,7 @@ footer{max-width:1120px;margin:0 auto 0;padding:14px 16px 32px;color:var(--muted
 </section>
 
 <section id="s3"><h2><span class="n">03</span>Estaciones de referencia (CORS)</h2>
-<p>Se usan cinco estaciones permanentes, cada una con su papel. Las coordenadas de la tabla son aproximadas: las de RDPE, FCNB y FCSJ salen de la cabecera de sus archivos RINEX (15/11/2026), la de FCPE de su publicación con dos decimales y la de BARA de la tabla oficial de 2016. Para procesar se usan las coordenadas certificadas de cada estación, con su marco y su época.</p>
+<p>Se usan cinco estaciones permanentes, cada una con su papel. Las coordenadas de la tabla son aproximadas: las de RDPE, FCNB y FCSJ salen de la cabecera de sus archivos RINEX (15/11/2026), la de FCPE de su publicación con dos decimales y la de BARA de la tabla oficial de 2016. Para procesar se usan las coordenadas certificadas de cada estación, con su marco y su época. <b>Antes del ajuste definitivo</b> el proyectista entrega la certificación de BARA, RDPE y FCNB: coordenadas, marco, época, velocidades, elipsoide y parámetros de antena. Sin ella no se acepta la red.</p>
 <div class="tw"><table>
 <tr><th>CORS</th><th>Sitio · red</th><th class="num">Norte</th><th class="num">Este</th><th class="num">a B1</th><th class="num">a B3</th><th class="num">a B2</th><th>Datos</th><th>Papel</th></tr>
 <tr><td><b>BARA</b></td><td>Barahona · red oficial</td><td class="num">2,014,545.491</td><td class="num">278,098.723</td><td class="num">49.0 km</td><td class="num">49.2 km</td><td class="num">51.7 km</td><td>Antena de anillos TRM59800.00</td><td><span class="tag b">Ancla oficial</span></td></tr>
@@ -244,17 +244,18 @@ footer{max-width:1120px;margin:0 auto 0;padding:14px 16px 32px;color:var(--muted
 <section id="s8"><h2><span class="n">08</span>Fase 3 · Apoyo del LiDAR y la fotogrametría</h2>
 <ul>
 <li><b>Trayectoria del dron por PPK</b> desde la base más cercana, a menos de 8 km en todo el corredor. Las tres bases registran durante todo el vuelo.</li>
-<li><b>Vuelo</b> a 120 m sobre el terreno, en una sola malla, con objetivo de 3 a 5 cm, en la franja de 200 a 600 m definida por tramo.</li>
+<li><b>Vuelo</b> a 120 m sobre el terreno, en una sola malla, con un tamaño de píxel en el terreno (GSD) de 5 cm o menos y una densidad LiDAR de 97 pts/m² o más, en la franja de 200 a 600 m definida por tramo.</li>
+<li><b>Antes de producción</b>: simulación del plan de vuelo que demuestre la densidad con la configuración definitiva, y un <b>bloque piloto</b> volado y procesado con esa configuración, que cumpla los criterios del capítulo 10. Si no cumple, se ajusta la configuración antes de seguir.</li>
 <li><b>Puntos de apoyo</b> más densos que los de la Fase 2: en ambos bordes de la franja, alternados, en los cambios de pendiente y cerca de los cauces y estructuras, con la densidad que defina el plan de vuelo de cada tramo.</li>
-<li><b>Puntos de chequeo independientes</b>, que no entran en el ajuste: al menos el 20 % del total, repartidos en todo el corredor, para medir el error real del producto.</li>
-<li><b>Targets</b> visibles desde 120 m y medidos el mismo día del vuelo, o monumentados si el vuelo se repite.</li>
+<li><b>Puntos de chequeo independientes</b>, que no entran en el ajuste: al menos el 20 % del total de puntos (requisito del proyecto) y, como mínimo, 30 en superficies no vegetadas en cada bloque de vuelo que se acepte por separado (ASPRS 2024 fija 30 para evaluar la exactitud), más 30 en zonas vegetadas para el reporte de vegetación. Se reparten en todo el bloque y por tipo de superficie (dura, suelo desnudo y vegetación) según el plan de vuelo, para medir el error real del producto.</li>
+<li><b>Targets</b> visibles desde 120 m, de al menos 50 cm (10 veces el GSD especificado), con centro marcado y medidos el mismo día del vuelo, o monumentados si el vuelo se repite.</li>
 <li><b>Validación del LiDAR</b> en superficies duras y planas (trocha, losas, plataformas) y en zonas de vegetación, por separado.</li>
 </ul>
 </section>
 
 <section id="s9"><h2><span class="n">09</span>Control vertical</h2>
 <ul>
-<li><b>Referencia vertical: las CORS.</b> Las alturas elipsoidales certificadas de BARA, RDPE y FCNB, convertidas con EGM2008 en malla de 1′ × 1′, son los puntos de referencia oficiales de nivel del proyecto.</li>
+<li><b>Referencia vertical única: las CORS.</b> Las alturas elipsoidales certificadas de BARA, RDPE y FCNB, en el marco y la época del proyecto, son los puntos de referencia oficiales de nivel. Las alturas ortométricas se obtienen con la ondulación del geoide, H = h − N, del EGM2008 (1′ × 1′) o del modelo oficial más preciso que designe la autoridad competente. No se usan bancos de nivel como datum: cualquier referencia externa solo sirve para comprobar, sin cambiar la referencia del proyecto.</li>
 <li>Las alturas elipsoidales de las bases y los puntos de control se pasan a ortométricas con el mismo <b>EGM2008 (1′ × 1′)</b>, el modelo de las cotas del diseño de referencia del MOPC.</li>
 <li><b>Comparar el MDT de 8 m</b> con los puntos de control. El MDT no declara datum vertical ni precisión (capítulo 07 del PPD); esa comparación fija su desfase y su error vertical, y permite usarlo con confianza conocida fuera de la franja levantada.</li>
 </ul>
@@ -267,10 +268,11 @@ footer{max-width:1120px;margin:0 auto 0;padding:14px 16px 32px;color:var(--muted
 <tr><td>Repetibilidad de cada base entre días</td><td class="mono">≤ 10 mm horizontal · ≤ 20 mm vertical</td></tr>
 <tr><td>Base: red ajustada frente a OPUS</td><td class="mono">≤ 20 mm horizontal · ≤ 40 mm vertical</td></tr>
 <tr><td>Calidad de cada solución OPUS</td><td class="mono">≥ 90 % de observaciones usadas · ≥ 50 % de ambigüedades fijas · RMS ≤ 3 cm · pico a pico ≤ 5 cm</td></tr>
-<tr><td>Puntos de control (elipse 95 % del ajuste)</td><td class="mono">≤ 20 mm horizontal · ≤ 30 mm vertical</td></tr>
+<tr><td>Puntos de control (elipse 95 % del ajuste)</td><td class="mono">≤ 20 mm horizontal · ≤ 20 mm vertical</td></tr>
 <tr><td>Reocupaciones (10 % de los puntos)</td><td class="mono">≤ 20 mm horizontal · ≤ 30 mm vertical</td></tr>
-<tr><td>Puntos de apoyo del vuelo</td><td class="mono">≤ 20 mm horizontal · ≤ 30 mm vertical</td></tr>
-<tr><td>Producto LiDAR / fotogrametría en puntos de chequeo</td><td class="mono">RMSE vertical ≤ 5 cm en superficies duras</td></tr>
+<tr><td>Puntos de apoyo y de chequeo del vuelo (al menos 2 veces mejor que el producto, ASPRS 2024)</td><td class="mono">≤ 20 mm horizontal · ≤ 20 mm vertical</td></tr>
+<tr><td>Densidad LiDAR, por bloque</td><td class="mono">≥ 97 pts/m²</td></tr>
+<tr><td>Producto LiDAR / fotogrametría, por bloque, en puntos de chequeo independientes del ajuste (ASPRS 2024)</td><td class="mono">Aceptación: RMSE<sub>V</sub> ≤ 5 cm en superficies no vegetadas (NVA) · RMSE<sub>H</sub> ≤ 5 cm · zonas vegetadas (VVA): se evalúan y se reportan, no son causa de rechazo · el RMSE incluye el error de levantamiento de los puntos de chequeo</td></tr>
 </table></div>
 <div class="note ok">Toda observación que no cumpla se repite. Los reportes de ajuste incluyen residuos, observaciones rechazadas y la razón de cada rechazo.</div>
 </section>
@@ -284,6 +286,7 @@ footer{max-width:1120px;margin:0 auto 0;padding:14px 16px 32px;color:var(--muted
 <li><b>Fichas de monumentación</b> de las bases y los puntos, con fotos y croquis.</li>
 <li><b>Coordenadas finales</b> en CSV y KML: Norte, Este, altura elipsoidal, cota EGM2008, factor combinado y precisión.</li>
 <li><b>Informe de control vertical</b>: conversión con EGM2008 (1′ × 1′) desde las CORS y comparación con el MDT.</li>
+<li><b>Informe de validación del LiDAR y la fotogrametría</b> por bloque: densidad de la nube entregada (mapa y estadísticas), GSD real y RMSE<sub>V</sub> y RMSE<sub>H</sub> con los puntos de chequeo independientes, en superficies no vegetadas y vegetadas.</li>
 </ul>
 <p class="muted">La Gerencia revisa los archivos nativos y los ajustes, no solo los planos: se pide lo necesario para reprocesar y verificar.</p>
 </section>
