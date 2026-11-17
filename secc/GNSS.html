@@ -79,8 +79,8 @@ footer{max-width:1120px;margin:0 auto 0;padding:14px 16px 32px;color:var(--muted
  <button type="button" class="thm" id="theme-btn" aria-label="Cambiar a formato claro u oscuro"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><span id="theme-lbl">Oscuro</span></button>
  <div class="kick">Carretera Pedernales – Puerto Escondido · Gerencia de Ingeniería</div>
  <h1>Metodología de control geodésico GNSS</h1>
- <p class="sub">Marco de referencia, bases fijas y puntos de control para el levantamiento LiDAR y fotogramétrico del corredor de 43.348 km. Documento de trabajo para acordar el método con el proyectista antes de H5.</p>
- <div class="meta"><span>Versión 1.2 · 17/11/2026 · Coordenadas UTM 19N WGS84 (Norte, Este) · Elevaciones EGM2008</span><span class="by">Ing. Piter Bonilla · Gerente de Ingeniería</span></div>
+ <p class="sub">Marco de referencia, bases fijas y puntos de control para el levantamiento LiDAR y fotogramétrico del corredor de 43.348 km. Documento de trabajo para acordar el método con el proyectista antes de H5. Complementa el PPD v6.0; en geomática prevalece esta metodología.</p>
+ <div class="meta"><span>Versión 1.3 · 17/11/2026 · Coordenadas UTM 19N WGS84 (Norte, Este) · Elevaciones EGM2008</span><span class="by">Ing. Piter Bonilla · Gerente de Ingeniería</span></div>
 </div></header>
 <nav class="toc" aria-label="Contenido"><div class="w">
  <a href="#s1"><b>01</b>Resumen</a><a href="#s2"><b>02</b>Marco</a><a href="#s3"><b>03</b>CORS</a><a href="#s4"><b>04</b>Red</a><a href="#s5"><b>05</b>Bases</a><a href="#s6"><b>06</b>Fase 1</a><a href="#s7"><b>07</b>Fase 2</a><a href="#s8"><b>08</b>Fase 3</a><a href="#s9"><b>09</b>Vertical</a><a href="#s10"><b>10</b>Calidad</a><a href="#s11"><b>11</b>Entregables</a><a href="#s12"><b>12</b>Programa</a><a href="#s13"><b>13</b>A acordar</a><a href="#s14"><b>14</b>Riesgos</a>
@@ -92,7 +92,7 @@ footer{max-width:1120px;margin:0 auto 0;padding:14px 16px 32px;color:var(--muted
 <div class="kpis">
  <div class="kpi"><b>1 + 2</b><span>CORS: BARA ancla; RDPE y FCNB de apoyo (+ FCSJ de respaldo)</span></div>
  <div class="kpi"><b>3</b><span>Bases fijas: 0+000, Caseta 3 (15+060) y Puerto Escondido</span></div>
- <div class="kpi"><b>22 – 36 km</b><span>Línea de cada base a su CORS más cercana (BARA: 49 – 52 km)</span></div>
+ <div class="kpi"><b>22 – 26 km</b><span>Línea de cada base a su CORS más cercana (BARA: 49 – 52 km)</span></div>
  <div class="kpi"><b>44</b><span>Puntos de control sobre el eje, 1 por km</span></div>
  <div class="kpi"><b>≤ 7.5 km</b><span>Distancia máxima de cualquier punto a su base más cercana</span></div>
  <div class="kpi"><b>≤ 1 / 2 cm</b><span>Repetibilidad de las bases entre días (horizontal / vertical)</span></div>
@@ -107,7 +107,7 @@ footer{max-width:1120px;margin:0 auto 0;padding:14px 16px 32px;color:var(--muted
 <section id="s2"><h2><span class="n">02</span>Marco de referencia</h2>
 <div class="tw"><table>
 <tr><th>Elemento</th><th>Definición</th></tr>
-<tr><td>Sistema geodésico</td><td>WGS84, materializado en ITRF2020 (realización IGS20) a través de las coordenadas certificadas de las CORS, llevadas a la época del proyecto con sus velocidades oficiales y los parámetros oficiales de cambio de marco (no una velocidad genérica de la placa). Antes de fijarlo se pide al IGN confirmación escrita del marco nacional vigente, su realización, época y parámetros de transformación.</td></tr>
+<tr><td>Sistema geodésico</td><td>WGS84, materializado en ITRF2020 (realización IGS20) a través de las coordenadas certificadas de las CORS, llevadas a la época del proyecto con sus velocidades oficiales y los parámetros oficiales de cambio de marco (no una velocidad genérica de la placa). IGS20 queda congelada como realización del proyecto: las soluciones hechas con productos IGS posteriores (por ejemplo IGc20) se transforman a IGS20 en la época del proyecto, sin mezclar realizaciones. Los entregables declaran en sus metadatos la realización, la época, la proyección y la referencia vertical, no solo EPSG:32619. Antes de fijarlo se pide al IGN confirmación escrita del marco nacional vigente, su realización, época y parámetros de transformación.</td></tr>
 <tr><td>Época de referencia</td><td>Una sola época fija para todo el proyecto, con fecha concreta (la fecha media de la Fase 1), declarada en el informe geodésico. Toda coordenada entregada se refiere a esa época.</td></tr>
 <tr><td>Proyección</td><td>UTM zona 19N (EPSG 32619). Coordenadas en Norte y Este, con 3 decimales</td></tr>
 <tr><td>Altura</td><td>Elipsoidal en el procesamiento, referida a las alturas elipsoidales de las CORS; ortométrica con EGM2008 (malla de 1′ × 1′) en los entregables (capítulo 09)</td></tr>
@@ -137,7 +137,7 @@ footer{max-width:1120px;margin:0 auto 0;padding:14px 16px 32px;color:var(--muted
 <tr><th>Opción</th><th>Ventaja</th><th>Problema</th></tr>
 <tr><td>Solo BARA</td><td>Simple; una sola estación oficial</td><td>Sin redundancia, y todas las líneas de 49 – 52 km desde el este</td></tr>
 <tr><td>Las 4 CORS oficiales</td><td>Todas oficiales</td><td>SROD, LVEG y SPED a 130 – 262 km: más ruido, sesiones más largas y geometría solo al norte y al este</td></tr>
-<tr><td><b>BARA + RDPE + FCNB (+ FCSJ) + OPUS</b></td><td>Líneas de 22 – 36 km a la CORS más cercana, corredor rodeado y verificación independiente</td><td>RDPE y FCNB son de redes privadas: hay que compatibilizar sus coordenadas con el marco de BARA</td></tr>
+<tr><td><b>BARA + RDPE + FCNB (+ FCSJ) + OPUS</b></td><td>Líneas de 22 – 26 km a la CORS más cercana, corredor rodeado y verificación independiente</td><td>RDPE y FCNB son de redes privadas: hay que compatibilizar sus coordenadas con el marco de BARA</td></tr>
 </table></div>
 <div class="note ok"><b>Geometría.</b> Con RDPE al suroeste, FCNB al norte y BARA al este, el corredor queda rodeado. Era la debilidad del esquema con solo las CORS oficiales, todas al norte y al este. Las tres bases propias completan la red a escala local.</div>
 </section>
@@ -247,7 +247,7 @@ footer{max-width:1120px;margin:0 auto 0;padding:14px 16px 32px;color:var(--muted
 <li><b>Vuelo</b> a 120 m sobre el terreno, en una sola malla de pasadas paralelas, con un tamaño de píxel en el terreno (GSD) de 5 cm o menos y una densidad LiDAR de 97 pts/m² o más, en la franja de 200 a 600 m definida por tramo.</li>
 <li><b>Antes de producción</b>: simulación del plan de vuelo que demuestre la densidad con la configuración definitiva, y un <b>bloque piloto</b>, con terreno abierto, superficies duras y vegetación, volado y procesado con esa configuración, que cumpla los criterios del capítulo 10. Si no cumple, se ajusta la configuración antes de seguir.</li>
 <li><b>Puntos de apoyo</b> más densos que los de la Fase 2: en ambos bordes de la franja, alternados, en los cambios de pendiente y cerca de los cauces y estructuras, con la densidad que defina el plan de vuelo de cada tramo.</li>
-<li><b>Puntos de chequeo independientes</b>, que no entran en el ajuste: al menos el 20 % del total de puntos de apoyo y de chequeo de cada bloque (requisito del proyecto) y, como mínimo, 30 en superficies no vegetadas en cada bloque de vuelo que se acepte por separado (ASPRS 2024 fija 30 para evaluar la exactitud), más 30 en zonas vegetadas para el reporte de vegetación. Se reparten en todo el bloque y por tipo de superficie (dura, suelo desnudo y vegetación) según el plan de vuelo, para medir el error real del producto.</li>
+<li><b>Puntos de chequeo independientes</b>, que no entran en el ajuste: al menos el 20 % del total de puntos de apoyo y de chequeo de cada bloque (requisito del proyecto) y, como mínimo, 30 en superficies no vegetadas en cada bloque de vuelo que se acepte por separado (ASPRS 2024 fija 30 para evaluar la exactitud), más 30 en zonas vegetadas para el reporte de vegetación, y 30 horizontales para la ortofoto. Un mismo punto sirve para la evaluación vertical y la horizontal solo si es un target bien definido sobre superficie dura. Se reparten en todo el bloque y por tipo de superficie (dura, suelo desnudo y vegetación) según el plan de vuelo, para medir el error real del producto.</li>
 <li><b>Targets</b> visibles desde 120 m, de al menos 50 cm (10 veces el GSD especificado), con centro marcado y medidos el mismo día del vuelo, o monumentados si el vuelo se repite.</li>
 <li><b>Validación del LiDAR</b> en superficies duras y planas (trocha, losas, plataformas) y en zonas de vegetación, por separado. Los puntos de chequeo no intervienen en el ajuste fotogramétrico, la calibración del LiDAR ni el boresight.</li>
 </ul>
@@ -255,7 +255,7 @@ footer{max-width:1120px;margin:0 auto 0;padding:14px 16px 32px;color:var(--muted
 
 <section id="s9"><h2><span class="n">09</span>Control vertical</h2>
 <ul>
-<li><b>Referencia vertical única: alturas elipsoidales de las CORS + EGM2008.</b> Las CORS no son por sí solas un datum vertical: el control GNSS establece las alturas elipsoidales de referencia a partir de las alturas certificadas de BARA, RDPE y FCNB, en el marco y la época del proyecto. Las alturas ortométricas del proyecto se obtienen con la ondulación del geoide, H = h − N, del EGM2008 (1′ × 1′) o del modelo oficial más preciso que designe la autoridad competente. No se usan bancos de nivel como datum: cualquier referencia externa solo sirve para comprobar, sin cambiar la referencia del proyecto. EGM2008 es un modelo global: el informe de control vertical documenta su precisión en la zona y cualquier diferencia observada.</li>
+<li><b>Referencia vertical única: alturas elipsoidales de las CORS + EGM2008.</b> Las CORS no son por sí solas un datum vertical: el control GNSS establece las alturas elipsoidales de referencia a partir de las alturas certificadas de BARA, RDPE y FCNB, en el marco y la época del proyecto. Las alturas ortométricas del proyecto se obtienen con la ondulación del geoide, H = h − N, del EGM2008 (1′ × 1′) o del modelo oficial más preciso que designe la autoridad competente. No se usan bancos de nivel como datum: cualquier referencia externa solo sirve para comprobar, sin cambiar la referencia del proyecto. EGM2008 es un modelo global: el informe de control vertical documenta su precisión en la zona y cualquier diferencia observada. Las exactitudes verticales de esta metodología, incluidos los 5 cm del producto, se refieren a esta referencia del proyecto (CORS + EGM2008), no a una red de nivelación nacional.</li>
 <li>Las alturas elipsoidales de las bases y los puntos de control se pasan a ortométricas con el mismo <b>EGM2008 (1′ × 1′)</b>, el modelo de las cotas del diseño de referencia del MOPC.</li>
 <li><b>Comparar el MDT de 8 m</b> con los puntos de control. El MDT no declara datum vertical ni precisión (capítulo 07 del PPD); esa comparación fija su desfase y su error vertical, y permite usarlo con confianza conocida fuera de la franja levantada.</li>
 </ul>
@@ -270,8 +270,11 @@ footer{max-width:1120px;margin:0 auto 0;padding:14px 16px 32px;color:var(--muted
 <tr><td>Calidad de cada solución OPUS</td><td class="mono">≥ 90 % de observaciones usadas · ≥ 50 % de ambigüedades fijas · RMS ≤ 3 cm · pico a pico ≤ 5 cm</td></tr>
 <tr><td>Puntos de control (precisión del ajuste al 95 % de confianza)</td><td class="mono">Horizontal: semieje mayor de la elipse al 95 % ≤ 20 mm · vertical: semiamplitud del intervalo al 95 % ≤ 20 mm</td></tr>
 <tr><td>Reocupaciones (10 % de los puntos)</td><td class="mono">≤ 20 mm horizontal · ≤ 30 mm vertical</td></tr>
-<tr><td>Puntos de apoyo y de chequeo del vuelo (al menos 2 veces mejor que el producto, ASPRS 2024)</td><td class="mono">RMSE<sub>H</sub> ≤ 20 mm · RMSE<sub>V</sub> ≤ 20 mm, con observaciones independientes y ajuste de red</td></tr>
+<tr><td>Puntos de apoyo y de chequeo del vuelo (al menos 2 veces mejor que el producto, ASPRS 2024)</td><td class="mono">RMSE<sub>H</sub> ≤ 20 mm (radial: Este y Norte combinados) · RMSE<sub>V</sub> ≤ 20 mm, con observaciones independientes y ajuste de red</td></tr>
 <tr><td>Densidad LiDAR, por bloque</td><td class="mono">Media ≥ 97 pts/m² de la nube completa (todas las clases, excluidos ruido y duplicados), sin submuestreo · mapa de densidad y estadísticas por bloque: media, mínimo y percentiles</td></tr>
+<tr><td>Terreno bajo la vegetación, por bloque (se reporta, no es causa de rechazo)</td><td class="mono">Densidad de la clase terreno (clase 2), cobertura del terreno y zonas de baja confianza · levantamiento complementario donde la vegetación no permita obtener terreno suficiente para el MDT</td></tr>
+<tr><td>Precisión relativa del LiDAR, por bloque (ASPRS 2024, clase de 5 cm)</td><td class="mono">Dentro de cada pasada, superficie lisa y dura: diferencia máxima ≤ 3 cm (0.60 × 5) · entre pasadas, superficies no vegetadas: RMSD<sub>Z</sub> ≤ 4 cm (0.80 × 5) y diferencia máxima ≤ 8 cm (1.60 × 5), en los solapes de la malla única</td></tr>
+<tr><td>Trayectoria y calibración del sensor</td><td class="mono">Solución PPK fija en ≥ 95 % del tiempo de vuelo · calibración del boresight documentada para la configuración de vuelo</td></tr>
 <tr><td>Producto, por bloque, en puntos de chequeo independientes del ajuste (ASPRS 2024)</td><td class="mono">Aceptación: LiDAR y modelos de elevación: RMSE<sub>V</sub> ≤ 5 cm en superficies no vegetadas (NVA) · LiDAR y ortofoto, cada uno por separado: RMSE<sub>H</sub> ≤ 5 cm · zonas vegetadas (VVA): se reportan las diferencias individuales y sus estadísticos, no son causa de rechazo · el RMSE incluye el error de levantamiento de los puntos de chequeo, por componente (H y V): RMSE = √(RMSE₁² + RMSE₂²), con RMSE₁ entre producto y chequeo y RMSE₂ del levantamiento de los chequeos; con RMSE₂ = 2 cm, RMSE₁ ≤ 4.58 cm</td></tr>
 </table></div>
 <div class="note ok">Toda observación que no cumpla se repite. Todo bloque que incumpla cualquiera de los criterios de aceptación se reprocesa o se vuelve a levantar, según corresponda, por cuenta del proyectista, sin costo adicional ni ampliación del plazo; el bloque no se acepta hasta demostrar el cumplimiento con nuevos reportes de control independientes. Los reportes de ajuste incluyen residuos, observaciones rechazadas y la razón de cada rechazo.</div>
@@ -328,7 +331,7 @@ footer{max-width:1120px;margin:0 auto 0;padding:14px 16px 32px;color:var(--muted
 </table></div>
 </section>
 </main>
-<footer>v1.2 · 17/11/2026 · Ing. Piter Bonilla, Gerencia de Ingeniería · Consorcio Avance del Sur</footer>
+<footer>v1.3 · 17/11/2026 · Ing. Piter Bonilla, Gerencia de Ingeniería · Consorcio Avance del Sur</footer>
 <script>(()=>{const b=document.getElementById("theme-btn"),l=document.getElementById("theme-lbl");const dk=()=>{const a=document.documentElement.getAttribute("data-theme");return a?a==="dark":matchMedia("(prefers-color-scheme: dark)").matches};const s=()=>{l.textContent=dk()?"Claro":"Oscuro"};s();b.onclick=()=>{const n=dk()?"light":"dark";document.documentElement.setAttribute("data-theme",n);try{localStorage.setItem("pp-theme",n)}catch(e){}s()};try{matchMedia("(prefers-color-scheme: dark)").addEventListener("change",s)}catch(e){}})();</script>
 </body>
 </html>
