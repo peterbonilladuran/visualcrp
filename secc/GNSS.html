@@ -264,17 +264,17 @@ footer{max-width:1120px;margin:0 auto 0;padding:14px 16px 32px;color:var(--muted
 <section id="s10"><h2><span class="n">10</span>Control de calidad y tolerancias</h2>
 <div class="tw"><table>
 <tr><th>Control</th><th>Criterio de aceptación</th></tr>
-<tr><td>Coordenadas finales de las 3 bases (nivel de confianza 99 %)</td><td class="mono">≤ 15 mm horizontal · ≤ 25 mm vertical</td></tr>
+<tr><td>Coordenadas finales de las 3 bases (nivel de confianza 99 %)</td><td class="mono">Horizontal: semieje mayor de la elipse al 99 % ≤ 15 mm · vertical: intervalo al 99 % ≤ 25 mm</td></tr>
 <tr><td>Repetibilidad de cada base entre días</td><td class="mono">≤ 10 mm horizontal · ≤ 20 mm vertical</td></tr>
 <tr><td>Base: red ajustada frente a OPUS</td><td class="mono">≤ 20 mm horizontal · ≤ 40 mm vertical</td></tr>
 <tr><td>Calidad de cada solución OPUS</td><td class="mono">≥ 90 % de observaciones usadas · ≥ 50 % de ambigüedades fijas · RMS ≤ 3 cm · pico a pico ≤ 5 cm</td></tr>
-<tr><td>Puntos de control (elipse 95 % del ajuste)</td><td class="mono">≤ 20 mm horizontal · ≤ 20 mm vertical</td></tr>
+<tr><td>Puntos de control (precisión del ajuste al 95 % de confianza)</td><td class="mono">Horizontal: semieje mayor de la elipse al 95 % ≤ 20 mm · vertical: intervalo al 95 % ≤ 20 mm</td></tr>
 <tr><td>Reocupaciones (10 % de los puntos)</td><td class="mono">≤ 20 mm horizontal · ≤ 30 mm vertical</td></tr>
-<tr><td>Puntos de apoyo y de chequeo del vuelo (al menos 2 veces mejor que el producto, ASPRS 2024)</td><td class="mono">≤ 20 mm horizontal · ≤ 20 mm vertical</td></tr>
-<tr><td>Densidad LiDAR, por bloque</td><td class="mono">≥ 97 pts/m²</td></tr>
+<tr><td>Puntos de apoyo y de chequeo del vuelo (al menos 2 veces mejor que el producto, ASPRS 2024)</td><td class="mono">RMSE<sub>H</sub> ≤ 20 mm · RMSE<sub>V</sub> ≤ 20 mm, con observaciones independientes y ajuste de red</td></tr>
+<tr><td>Densidad LiDAR, por bloque</td><td class="mono">Promedio ≥ 97 puntos válidos/m², después de depurar el ruido y sin submuestreo · con mapa de densidad, estadísticas y distribución espacial</td></tr>
 <tr><td>Producto LiDAR / fotogrametría, por bloque, en puntos de chequeo independientes del ajuste (ASPRS 2024)</td><td class="mono">Aceptación: RMSE<sub>V</sub> ≤ 5 cm en superficies no vegetadas (NVA) · RMSE<sub>H</sub> ≤ 5 cm · zonas vegetadas (VVA): se evalúan y se reportan, no son causa de rechazo · el RMSE incluye el error de levantamiento de los puntos de chequeo</td></tr>
 </table></div>
-<div class="note ok">Toda observación que no cumpla se repite. Los reportes de ajuste incluyen residuos, observaciones rechazadas y la razón de cada rechazo.</div>
+<div class="note ok">Toda observación que no cumpla se repite. Todo bloque que incumpla cualquiera de los criterios de aceptación se reprocesa o se vuelve a levantar, según corresponda, por cuenta del proyectista, sin costo adicional ni ampliación del plazo; el bloque no se acepta hasta demostrar el cumplimiento con nuevos reportes de control independientes. Los reportes de ajuste incluyen residuos, observaciones rechazadas y la razón de cada rechazo.</div>
 </section>
 
 <section id="s11"><h2><span class="n">11</span>Entregables</h2>
