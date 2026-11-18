@@ -1170,7 +1170,7 @@ function initMap(){if(map){setTimeout(()=>map.invalidateSize(),50);return}
  const LC=L.control.layers({"Topográfico":topo,"Satélite":satl,"Mapa":osm},{
   "Relieve sombreado MDE 8 m":shade,"Curvas de nivel 100 m (MDE)":ct,"Curvas de nivel 10 m (MDT, ±1.7 km)":c10,"Curvas de nivel 5 m (MDT, zona de drenaje)":c5,"Curvas de nivel 2.5 m (MDT, ±300 m)":c25,"Eje de referencia por pendiente":axis,"Eje de referencia (una línea)":plain,
   "Estacionamiento (km · 100 m · 20 m)":est,"Elementos de curva (PC, PT…)":cvL,"Tramo complejo Km 37 – 40":crit,
-  "PN Sierra de Bahoruco":pk,"Minas de bauxita Aceitillar":mn,"Carreteras existentes":rd,"Lugares":pl,"Casetas del sendero":cs,"Bitácora del recorrido":nt,"Cauces · red completa (≥ 3.2 ha)":caL,"Cruces cauce–eje":czL,"Cuencas de los cruces":cuL,"Depresión kárstica cerrada 20+100 – 20+960":dkL,...altOv},{collapsed:true}).addTo(map);{let gOpen=false;const AN=Object.keys(altOv),AL=Object.values(altOv);
+  "PN Sierra de Bahoruco":pk,"Minas de bauxita Aceitillar":mn,"Carreteras existentes":rd,"Lugares":pl,"Casetas del sendero":cs,"Bitácora del recorrido":nt,"Cauces · red completa (≥ 3.2 ha)":caL,"Cruces cauce–eje":czL,"Cuencas de los cruces":cuL,"Depresión kárstica cerrada 20+100 – 20+960":dkL,...altOv},{collapsed:true}).addTo(map);window.MAPLC=LC;window.MAPOSM=osm;{let gOpen=false;const AN=Object.keys(altOv),AL=Object.values(altOv);
   const grp=()=>{const box=LC._overlaysList;if(!box||!AN.length)return;const labs=[...box.querySelectorAll("label")].filter(l=>AN.includes(l.textContent.trim()));if(!labs.length)return;
    const on=AL.filter(l=>map.hasLayer(l)).length,d=document.createElement("details");d.className="alt-grp";d.open=gOpen;
    d.innerHTML=`<summary><input type="checkbox" class="alt-all" aria-label="Encender o apagar todas las variantes"${on===AL.length?" checked":""}> <span>Variantes <b>(${on}/${AL.length})</b></span><span class="alt-car" aria-hidden="true">▸</span></summary><div class="alt-list"></div>`;
@@ -1593,7 +1593,20 @@ function initMap2(){if(TV.map)return;const rS=L.svg({padding:.3}),m=TV.map=L.map
  W.forEach(w=>{if(w[2]%1000===0)L.marker([w[0],w[1]],{interactive:false,icon:L.divIcon({className:"",html:`<span class="tv-km">${st(w[2])}</span>`})}).addTo(km)});km.addTo(m);
  (D.ALT||[]).forEach(v=>L.polyline(v.ll,{color:v.col||"#7b2cbf",weight:4,opacity:.9,dashArray:"9 6",interactive:false}).bindTooltip(v.id,{permanent:true,direction:"center",className:"alt-tt"+(v.col?" alt-tt-"+v.id:"")}).addTo(al));al.addTo(m);
  D.CRZ.forEach(r=>L.circleMarker([r[1],r[2]],{radius:r[3]>1000?7:r[3]>100?5.5:4,color:"#fff",weight:1.5,fillColor:"#1a5fd0",fillOpacity:1}).bindTooltip(`C-${String(r[10]).padStart(3,"0")} · ${st(r[0])} · ${fmt(r[3],r[3]<10?1:0)} ha`).on("click",()=>{if(TV.tr!=="eje")useTrace("eje",r[0]);else setS(r[0],"click")}).addTo(cz));cz.addTo(m);
- L.control.layers({"Topográfico":topo,"Satélite":sat},{"Eje de referencia por pendiente (subrasante)":ejp,"Eje de referencia (una línea)":ej1,"Trazo elegido por pendiente (terreno)":TV.tg,"Cauces":ca,"Cruces cauce–eje":cz,[("Variantes T1 – "+(((window.D||{}).ALT||[]).length?D.ALT[D.ALT.length-1].id:"T8"))]:al,"Estaciones por km":km},{collapsed:true}).addTo(m);L.control.scale({imperial:false}).addTo(m);window.qryMap&&qryMap(m,()=>({eje:true,cau:m.hasLayer(ca),crz:m.hasLayer(cz),alt:m.hasLayer(al)}),()=>{try{const T=TVtrace(TV.tr);return T&&!T.eje?T.LL:null}catch(e){return null}});
+ const XO={};{const SK=/^(Eje de referencia|Estacionamiento|Cauces · red|Cruces cauce|Variante )/;
+  if(!m.getPane("tvsh")){m.createPane("tvsh").style.zIndex=250}
+  const cl=l=>{let n=null;const o=Object.assign({},l.options);delete o.renderer;delete o.pane;
+   if(l instanceof L.ImageOverlay)n=L.imageOverlay(l._url,l.getBounds(),{opacity:l.options.opacity,interactive:false,pane:"tvsh"});
+   else if(l instanceof L.TileLayer)return null;
+   else if(l instanceof L.LayerGroup){n=L.layerGroup();l.eachLayer(c=>{const k=cl(c);if(k)k.addTo(n)})}
+   else if(l instanceof L.Polygon)n=L.polygon(l.getLatLngs(),o);
+   else if(l instanceof L.Polyline){if(o.opacity===0)return null;n=L.polyline(l.getLatLngs(),o)}
+   else if(l instanceof L.CircleMarker)n=L.circleMarker(l.getLatLng(),o);
+   else if(l instanceof L.Marker)n=L.marker(l.getLatLng(),{icon:l.options.icon,interactive:l.options.interactive!==false});
+   if(!n)return null;const tt=l.getTooltip&&l.getTooltip();if(tt)n.bindTooltip(tt.getContent(),Object.assign({},tt.options));const pp=l.getPopup&&l.getPopup();if(pp&&typeof pp.getContent()==="string")n.bindPopup(pp.getContent());return n};
+  ((window.MAPLC&&MAPLC._layers)||[]).filter(o=>o.overlay&&!SK.test(o.name)).forEach(o=>{const g=L.layerGroup();g.on("add",()=>{if(!g._f){g._f=1;try{const k=cl(o.layer);if(k)g.addLayer(k)}catch(e){console.warn(e)}}});XO[o.name]=g})}
+ const BO={"Topográfico":topo,"Satélite":sat};if(window.MAPOSM)BO["Mapa"]=L.tileLayer(MAPOSM._url,Object.assign({},MAPOSM.options));
+ L.control.layers(BO,{"Eje de referencia por pendiente (subrasante)":ejp,"Eje de referencia (una línea)":ej1,"Trazo elegido por pendiente (terreno)":TV.tg,"Cauces":ca,"Cruces cauce–eje":cz,[("Variantes T1 – "+(((window.D||{}).ALT||[]).length?D.ALT[D.ALT.length-1].id:"T8"))]:al,"Estaciones por km":km,...XO},{collapsed:true}).addTo(m);L.control.scale({imperial:false}).addTo(m);window.qryMap&&qryMap(m,()=>({eje:true,cau:m.hasLayer(ca),crz:m.hasLayer(cz),alt:m.hasLayer(al)}),()=>{try{const T=TVtrace(TV.tr);return T&&!T.eje?T.LL:null}catch(e){return null}});
  m.createPane("tvhl").style.zIndex=390;TV.hl=L.layerGroup().addTo(m);TV.sl=L.polyline([[0,0],[0,0]],{color:"#ff00aa",weight:3,dashArray:"6 4",interactive:false}).addTo(m);TV.cur=L.circleMarker([0,0],{radius:7,color:"#fff",weight:3,fillColor:"#d62828",fillOpacity:1,interactive:false}).addTo(m);
  m.on("move",()=>{if(TV.prog||!TV.follow||!TV.on||TV.play)return;if(TV._mt)return;TV._mt=setTimeout(()=>{TV._mt=null;const c=m.getCenter(),n=nearOn(T,c.lat,c.lng);setS(n.s,"map")},40)});
  m.on("moveend",()=>setTimeout(()=>{TV.prog=false},30));window.popScroll&&popScroll(m)}
@@ -1661,15 +1674,15 @@ window.tvClose=tvClose;window.TVtrace=trace;window.TVpos=posAt;window.TVnear=nea
 })();
 /* ===== v5.1 · Vista 3D del corredor: malla armada con las mismas curvas del MDT ===== */
 (function(){
-const V3=window.V3={on:false,ve:2,tex:"sat",lay:{eje:false,ejp:true,tr:true,km:true,cur:true,alt:true,crit:false,cau:true,crz:true,cv:false,c25:false,pk:true,mn:false,rd:false,pl:false,cs:true},tr:"eje",s:0,fly:null,spd:1};
+const V3=window.V3={on:false,ve:2,tex:"sat",lay:{dk:true,eje:false,ejp:true,tr:true,km:true,cur:true,alt:true,crit:false,cau:true,crz:true,cv:false,c25:false,pk:true,mn:false,rd:false,pl:false,cs:true},tr:"eje",s:0,fly:null,spd:1};
 const mob=()=>innerWidth<760;
 function need3(){if(window.THREE&&THREE.OrbitControls)return Promise.resolve();const ld=u=>new Promise((res,rej)=>{const a=document.createElement("script");a.src=u;a.onload=res;a.onerror=()=>rej(new Error(u));document.head.appendChild(a)});
  return (window.THREE?Promise.resolve():ld("https://cdn.jsdelivr.net/npm/three@0.147.0/build/three.min.js")).then(()=>ld("https://cdn.jsdelivr.net/npm/three@0.147.0/examples/js/controls/OrbitControls.js"))}
 const LAYG=[["Trazado",[["ejp","Eje de referencia por pendiente"],["eje","Eje de referencia (una línea)"],["tr","Trazo del perfil (pestaña Mapa)"],["km","Estaciones"],["cur","Cursor de estación y sección"],["alt",("Variantes T1 – "+(((window.D||{}).ALT||[]).length?D.ALT[D.ALT.length-1].id:"T8"))],["crit","Tramo complejo Km 37 – 40"]]],
- ["Drenaje",[["cau","Cauces"],["crz","Cruces cauce–eje"]]],
+ ["Drenaje",[["cau","Cauces"],["crz","Cruces cauce–eje"],["dk","Depresión kárstica cerrada 20+100 – 20+960"]]],
  ["Terreno",[["cv","Curvas de nivel 5 m"],["c25","Curvas de nivel 2.5 m (±300 m)"]]],
  ["Contexto",[["pk","PN Sierra de Bahoruco"],["mn","Minas de bauxita Aceitillar"],["rd","Carreteras existentes"],["pl","Lugares"],["cs","Casetas del sendero"]]]];
-const TEXK=new Set(["ejp","eje","tr","alt","crit","cau","cv","c25","pk","mn","rd"]),OBJK=new Set(["km","cur","alt","crz","pl","cs"]);
+const TEXK=new Set(["dk","ejp","eje","tr","alt","crit","cau","cv","c25","pk","mn","rd"]),OBJK=new Set(["km","cur","alt","crz","pl","cs"]);
 const ZONES=[["st1","Alrededor de la estación · 1 km"],["st2","Alrededor de la estación · 2 km"],["st4","Alrededor de la estación · 4 km"],["valle","Valle 10+300 – 11+230"],["T1","Variante T1 y eje (2+300 – 2+700)"],["T2","Variante T2 y eje (3+200 – 3+900)"],["T3","Variante T3 y eje (5+100 – 5+800)"],["T4","Variante T4 y eje (6+100 – 6+800)"],["T5","Variante T5 y eje (7+050 – 9+438)"],["T6","Variante T6 y eje (10+000 – 15+500)"],["T7","Variante T7 y eje (15+500 – 16+440)"],["T8","Variante T8 y eje (17+600 – 18+481)"],["k37","Tramo complejo Km 37 – 40"],["cus","Tramo del eje definido (de … a …)"],["tr","Todo el trazo elegido"]];
 function build(){if($("#v3"))return;const d=document.createElement("div");d.id="v3";d.className="v3";d.hidden=true;d.setAttribute("role","dialog");d.setAttribute("aria-modal","true");d.setAttribute("aria-label","Vista 3D del terreno");
  d.innerHTML=`<div class="tv-bar"><b class="tv-tt">Vista 3D del terreno</b>
@@ -1759,6 +1772,7 @@ function composite(){if(!V3.g||!V3.base||!V3.base[V3.tex])return;const g=V3.g,[T
  if(V3.lay.cv){const dark=V3.tex==="sat"?"rgba(255,255,255,.55)":"rgba(60,40,20,.55)";D.C5.forEach(([z,ln])=>{if(vis(ln))line(ln,dark,z%25===0?2.2:1)})}
  const poly=(ln,st_,fill,w,dash)=>{c.beginPath();ln.forEach((p,i)=>{const q=P(p);i?c.lineTo(q[0],q[1]):c.moveTo(q[0],q[1])});c.closePath();if(fill){c.fillStyle=fill;c.fill()}c.strokeStyle=st_;c.lineWidth=w*k;c.setLineDash(dash?dash.map(v=>v*k):[]);c.stroke()};
  const LP=(D.L&&D.L.polys)||[];
+ if(V3.lay.dk&&D.DEPK&&vis(D.DEPK))poly(D.DEPK,"#0c8599","rgba(12,133,153,.22)",4,[12,8]);
  if(V3.lay.pk)LP.forEach(p=>{if(/Parque/.test(p[0])&&vis(p[1]))poly(p[1],"#2f8a5b","rgba(47,138,91,.10)",5,[18,10])});
  if(V3.lay.mn)LP.forEach(p=>{if(!/Parque/.test(p[0])&&vis(p[1]))poly(p[1],"#c8641b","rgba(200,100,27,.28)",3)});
  if(V3.lay.rd)((D.L&&D.L.roads)||[]).forEach(r=>{if(vis(r[1])){line(r[1],"#ffffff",8,[16,10]);line(r[1],"#4aa3ff",5,[16,10])}});
