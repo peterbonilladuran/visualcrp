@@ -1877,7 +1877,7 @@ function qryCore(q,tol,L,trLL,obj){const lat0=q?q.lat:(obj&&obj.w?obj.w[0]:18),l
  if(L.cv)cvq(D.C5,"5 m");if(L.c25&&!items.some(x=>x.startsWith("<b>Curva")))cvq(D.C25,"2.5 m (franja ±300 m)");if(L.c10&&D.C10&&!items.some(x=>x.startsWith("<b>Curva")))cvq(D.C10,"10 m (banda ±1.7 km)");
  if(L.rd)((D.L&&D.L.roads)||[]).forEach(r=>{const x=near(r[1]);if(x)items.push(`<b>Carretera existente</b>`+qT([["Nombre",esc3(r[0].replace(/^[A-Z] - /,""))]]))});
  if(L.crit&&q){const n=TVnear(TVtrace("eje"),q.lat,q.lon);if(n.s>=37000&&n.s<=40000&&n.d<=60)items.push(`<b>Tramo complejo Km 37 – 40</b>`+qT([["Recorrido","05/11/2026"],["Frente a",st(n.s)]]))}
- const LP=(D.L&&D.L.polys)||[];if(q){if(L.pk&&LP.some(p=>/Parque/.test(p[0])&&pip([q.lat,q.lon],p[1])))items.push(`<b>PN Sierra de Bahoruco</b><div class="v3-pop-n">Dentro del polígono del KMZ del proyecto (no certifica límites legales).</div>`);
+ const LP=(D.L&&D.L.polys)||[];if(q){
   if(L.mn&&LP.some(p=>!/Parque/.test(p[0])&&pip([q.lat,q.lon],p[1])))items.push(`<b>Minas de bauxita Aceitillar</b><div class="v3-pop-n">Área de cantera del KMZ del proyecto.</div>`)}
  let foot="";if(q){const u=toUTM19(q.lat,q.lon),n=TVnear(TVtrace("eje"),q.lat,q.lon);foot=`<div class="v3-pop-f">N ${fmt(u[1],2)} · E ${fmt(u[0],2)} (UTM 19N WGS84)${q.z!=null?` · terreno ${fmt(q.z,1)} m`:""} · a ${fmt(n.d,0)} m del eje, frente a ${st(n.s)}</div>`}
  if(!items.length)items.push(`<b>Sin objetos en este punto</b><div class="v3-pop-n">Acérquese con el zoom o encienda la capa que busca.</div>`);
