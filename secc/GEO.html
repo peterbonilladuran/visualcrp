@@ -208,8 +208,8 @@ footer{max-width:1120px;margin:0 auto 0;padding:14px 16px 32px;color:var(--muted
 <tr><td>Compresión simple en roca</td><td class="mono">ASTM D7012</td><td>Resistencia de la roca intacta</td></tr>
 <tr><td>Resistividad eléctrica</td><td class="mono">ASTM D6431</td><td>Detección de cavidades y contactos en el karst</td></tr>
 </table></div>
-<div class="note"><b>Factor volumétrico:</b> se obtiene de tres densidades del mismo material: la natural en el terreno (densidad en sitio o en núcleo), la suelta tras la excavación y la compactada en el terraplén (Proctor y control de campo). Se confirma en un tramo de prueba durante la obra.</div>
-<div class="note">El <b>CBR saturado</b> exige preparar la muestra con su Proctor y sumergirla 96 horas antes de penetrarla: cada CBR toma alrededor de una semana. Se ensaya por lotes en paralelo, y por eso E2 empieza en cuanto E1 entrega las primeras unidades.</div>
+<div class="note"><b>Factor volumétrico:</b> se obtiene de tres densidades secas del mismo material: la natural en el terreno (densidad en sitio o en núcleo), la suelta tras la excavación y la compactada en el terraplén (Proctor y control de campo). Factor de abundamiento <span class="mono">Fa = γd natural / γd suelta</span> (volumen suelto por volumen natural); factor de contracción <span class="mono">Fc = γd natural / γd compactada</span> (volumen compactado por volumen natural). Se confirma en un tramo de prueba durante la obra.</div>
+<div class="note">El <b>CBR sumergido</b> exige preparar la muestra con su Proctor y sumergirla, por lo general 96 horas (AASHTO T 193 admite menos en materiales de drenaje rápido y más en algunas arcillas), antes de penetrarla. En cada informe se declaran la densidad, la humedad de moldeo, la sobrecarga y el tiempo de inmersión: cada CBR toma alrededor de una semana. Se ensaya por lotes en paralelo, y por eso E2 empieza en cuanto E1 entrega las primeras unidades.</div>
 </section>
 
 <section id="s7"><h2><span class="n">07</span>Política de CBR, DCP y correlaciones</h2>
@@ -217,7 +217,7 @@ footer{max-width:1120px;margin:0 auto 0;padding:14px 16px 32px;color:var(--muted
 <div class="tw"><table>
 <tr><th>Valor</th><th>Origen</th><th>Uso</th></tr>
 <tr><td><b>CBR estimado</b></td><td>DCP o ensayos índice, con las correlaciones de este capítulo</td><td>Segmentar el corredor y elegir qué muestras van a CBR. Nunca es valor de aceptación</td></tr>
-<tr><td><b>CBR de laboratorio</b></td><td>AASHTO T 193, saturado, a la densidad y la humedad especificadas</td><td>Valor medido de cada muestra</td></tr>
+<tr><td><b>CBR de laboratorio</b></td><td>AASHTO T 193, sumergido, a la densidad y la humedad especificadas</td><td>Valor medido de cada muestra</td></tr>
 <tr><td><b>CBR de diseño</b></td><td>Adoptado por unidad a partir de los CBR de laboratorio</td><td>Dimensionar el pavimento; lo justifica y lo adopta el proyectista</td></tr>
 </table></div>
 
@@ -234,7 +234,7 @@ footer{max-width:1120px;margin:0 auto 0;padding:14px 16px 32px;color:var(--muted
 </table></div>
 
 <h3>Correlaciones de partida</h3>
-<p>Son fórmulas publicadas, útiles para ordenar y no para aceptar. El DCP mide el <b>índice de penetración dinámica (DPI)</b>; el CBR en sitio se estima con las correlaciones de la ASTM D6951 según el tipo de suelo, con la humedad del día, y en general no coincide con el CBR de laboratorio saturado. Si se usan extensiones de varilla, las correlaciones se revisan, porque cambia la fricción lateral.</p>
+<p>Son fórmulas publicadas, útiles para ordenar y no para aceptar. El DCP mide el <b>índice de penetración dinámica (DPI)</b>; el CBR en sitio se estima con las correlaciones de la ASTM D6951 según el tipo de suelo, con la humedad del día, y en general no coincide con el CBR de laboratorio sumergido. Si se usan extensiones de varilla, las correlaciones se revisan, porque cambia la fricción lateral.</p>
 <div class="tw"><table>
 <tr><th>Fuente</th><th>Fórmula</th><th>Aplica a</th></tr>
 <tr><td>DCP · ASTM D6951</td><td class="mono">CBR = 292 / DPI<sup>1.12</sup></td><td>Gravas, arenas y limos; DPI en mm por golpe</td></tr>
@@ -255,9 +255,9 @@ footer{max-width:1120px;margin:0 auto 0;padding:14px 16px 32px;color:var(--muted
 <h3>Del CBR al diseño</h3>
 <p>Regla estadística propuesta para el CBR de diseño de cada unidad:</p>
 <ol class="steps">
-<li><b>Homogeneidad:</b> los límites de las unidades se fijan con el método de las diferencias acumuladas (AASHTO 1993, apéndice J) sobre el DPI y los índices a lo largo del corredor.</li>
-<li><b>Representatividad:</b> al menos 3 CBR de laboratorio por unidad. Si el coeficiente de variación pasa de 30 %, la unidad se divide o se miden más CBR.</li>
-<li><b>Valores atípicos:</b> un valor se revisa si se aparta más de dos desviaciones estándar de la media de su unidad; solo se excluye con causa documentada (muestra, ensayo o estrato distinto).</li>
+<li><b>Homogeneidad:</b> los límites de las unidades se fijan con el método de las diferencias acumuladas (AASHTO 1993, apéndice J), aplicado como adaptación al perfil longitudinal del DPI. La clasificación AASHTO y SUCS, la granulometría y la geología validan cada cambio, sin sumarse al cálculo. Cada punto de cambio se documenta con su justificación.</li>
+<li><b>Representatividad:</b> 3 CBR de laboratorio por unidad como mínimo para caracterizarla, y de 6 a 8 como objetivo para fijar el valor de diseño. Con menos de 6, se declara la incertidumbre y se adopta un valor conservador justificado. Como criterio interno de esta metodología, no normativo, si el coeficiente de variación pasa de 30 % la unidad se divide o se miden más CBR.</li>
+<li><b>Valores atípicos:</b> un valor se revisa si se aparta más de dos desviaciones estándar de la media de su unidad, sin eliminarlo de forma automática; solo se excluye con causa documentada (muestra, ensayo o estrato distinto).</li>
 <li><b>Valor de diseño:</b> el percentil se fija con el tránsito de diseño (criterio del Instituto del Asfalto: 60 % para menos de 10⁴ ejes equivalentes, 75 % entre 10⁴ y 10⁶, 87.5 % para más de 10⁶). Lo justifica y adopta el proyectista con la Gerencia.</li>
 </ol>
 <p> En AASHTO 1993 el parámetro de diseño de la subrasante es el <b>módulo resiliente</b>; si se obtiene del CBR, la relación usada se declara como estimación empírica. El enfoque mecanicista – empírico (NCHRP 1-37A) es otro método y no se mezcla con el de 1993.</p>
@@ -320,8 +320,8 @@ footer{max-width:1120px;margin:0 auto 0;padding:14px 16px 32px;color:var(--muted
 <h3>Aseguramiento de calidad</h3>
 <ul>
 <li><b>Trazabilidad:</b> cada muestra lleva código, punto, profundidad y fecha, con cadena de custodia del campo al laboratorio.</li>
-<li><b>Calibración:</b> certificados vigentes del DCP, la prensa de CBR, los moldes, las balanzas y los hornos.</li>
-<li><b>Duplicados:</b> una de cada diez muestras de laboratorio se ensaya dos veces, sin que el técnico sepa cuál.</li>
+<li><b>Calibración y verificación:</b> calibración vigente de la prensa de CBR, los anillos o celdas de carga y las balanzas; verificación de las dimensiones de moldes y accesorios, de la temperatura de los hornos y, en el DCP, de la masa del martillo (8 kg), la altura de caída (575 mm) y la geometría del cono (ASTM D6951).</li>
+<li><b>Repetición:</b> en una de cada diez muestras, el laboratorio divide la muestra y repite el ensayo sobre la segunda parte, sin que el técnico sepa cuál es; no se trata de una segunda muestra de campo.</li>
 <li><b>Revisión:</b> la Gerencia de Ingeniería revisa los registros de cada lote antes de que pasen al proyectista.</li>
 </ul>
 <p class="muted">Los puntos y unidades se cargan en el PPD como capa propia, consultable en planta, perfil y 3D.</p>
@@ -361,6 +361,8 @@ footer{max-width:1120px;margin:0 auto 0;padding:14px 16px 32px;color:var(--muted
 <li>Condiciones del CBR de laboratorio: densidad de ensayo, inmersión y sobrecarga.</li>
 <li>Regla estadística del CBR de diseño (capítulo 07) y relación con el módulo resiliente.</li>
 <li>Factores de seguridad mínimos para la estabilidad de cortes y rellenos, estáticos y sísmicos.</li>
+<li>Asentamientos admisibles en rellenos altos y obras: total, diferencial y durante la construcción, compatibles con el pavimento y las estructuras.</li>
+<li>Seguimiento del nivel freático: nivel al perforar, lecturas posteriores en puntos elegidos (en particular en el karst), comparación entre época seca y lluviosa, y registro de niveles colgados y zonas de infiltración.</li>
 <li>Número de brigadas y capacidad del laboratorio para cumplir E1 en tres semanas.</li>
 <li>Uso de las correlaciones locales y su presentación al MOPC.</li>
 <li>Formato de la base de datos y de los registros, y frecuencia de entregas parciales.</li>
@@ -373,13 +375,13 @@ footer{max-width:1120px;margin:0 auto 0;padding:14px 16px 32px;color:var(--muted
 <tr><td>Permiso del parque tardío</td><td>E1 no empieza a tiempo</td><td>Solicitud al inicio; empezar por la vía existente y por las fuentes fuera del parque</td></tr>
 <tr><td>Roca a poca profundidad</td><td>Rechazo del DCP y del sondeo manual</td><td>Registrar el rechazo como dato; calicata con equipo; la sección pasa a «roca»</td></tr>
 <tr><td>Brigadas o laboratorio insuficientes</td><td>E1 no cierra en la semana 3</td><td>Capacidad acordada antes de empezar (capítulo 12); prioridad a las unidades que gobiernan el pavimento</td></tr>
-<tr><td>Plazo del CBR saturado</td><td>CBR de diseño tarde para el pavimento</td><td>Lotes en paralelo; E2 empieza con las primeras unidades de E1</td></tr>
+<tr><td>Plazo del CBR sumergido</td><td>CBR de diseño tarde para el pavimento</td><td>Lotes en paralelo; E2 empieza con las primeras unidades de E1</td></tr>
 <tr><td>Dispersión alta en una unidad</td><td>CBR de diseño poco confiable</td><td>Dividir la unidad y medir más CBR</td></tr>
 <tr><td>Correlación tomada como valor de aceptación</td><td>Pavimento con soporte sobreestimado</td><td>Tres valores siempre separados (capítulo 07)</td></tr>
 <tr><td>Caliza de corte no apta</td><td>Faltante de material y más acarreo</td><td>Ensayos por uso en E2; fuentes externas identificadas desde E1</td></tr>
 <tr><td>Cavidades no detectadas en el karst</td><td>Hundimientos de la plataforma</td><td>Geofísica más perforaciones de comprobación; tratamiento definido por el proyectista</td></tr>
 <tr><td>Arcillas expansivas</td><td>Deformación del pavimento</td><td>Expansión en E2; mejoramiento o sustitución de la subrasante</td></tr>
-<tr><td>Lluvias</td><td>Humedad de campo fuera de lo representativo</td><td>Registrar la humedad natural con cada DCP; calibrar con CBR saturado</td></tr>
+<tr><td>Lluvias</td><td>Humedad de campo fuera de lo representativo</td><td>Registrar la humedad natural con cada DCP; calibrar con CBR sumergido</td></tr>
 </table></div>
 </section>
 
