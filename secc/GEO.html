@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PPD · Metodología de investigación geotécnica</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=Source+Sans+3:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f3f5f4;--surface:#fff;--ink:#16212a;--muted:#5a6873;--line:#d8dfe0;--accent:#c8641b;--soft:#fbf3ec;--good:#2f8a5b;--bad:#b4483b;--blue:#1f5f99;
+--f-body:"Source Sans 3","Segoe UI",Helvetica,Arial,sans-serif;--f-display:"Archivo","Arial Narrow",Arial,sans-serif;--f-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1418;--surface:#151d23;--ink:#e4eaee;--muted:#93a2ad;--line:#28343c;--accent:#ef8a3c;--soft:#2a1f17;--good:#4cc08a;--bad:#e2756a;--blue:#7fb3e6}}
+:root[data-theme="dark"]{--bg:#0e1418;--surface:#151d23;--ink:#e4eaee;--muted:#93a2ad;--line:#28343c;--accent:#ef8a3c;--soft:#2a1f17;--good:#4cc08a;--bad:#e2756a;--blue:#7fb3e6}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:64px}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 var(--f-body)}
+header.top{background:#0b2e59;color:#fff;padding:28px 16px 22px}
+header.top .w{max-width:1120px;margin:0 auto;position:relative}
+.meta span{display:block}.meta .by{margin-top:4px;font-family:var(--f-body);font-weight:600;font-size:14px;opacity:1}
+.thm{position:absolute;top:0;right:0;display:inline-flex;align-items:center;gap:6px;font:600 13px/1 var(--f-body);color:#fff;background:transparent;border:1px solid rgba(255,255,255,.55);border-radius:20px;padding:7px 12px;cursor:pointer}
+.thm:hover{background:rgba(255,255,255,.12)}.thm svg{width:15px;height:15px}
+@media (max-width:640px){.thm{position:static;margin-bottom:10px}}
+@media print{.thm{display:none}}
+.kick{font:600 12px/1 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;opacity:.8}
+h1{font:800 clamp(26px,4.4vw,40px)/1.08 var(--f-display);font-stretch:85%;margin:10px 0 8px}
+.sub{opacity:.88;max-width:none;margin:0;padding-right:130px}
+@media (max-width:640px){.sub{padding-right:0}}
+.meta{margin-top:14px;font:13px/1.4 var(--f-mono);opacity:.8}
+nav.toc{position:sticky;top:0;z-index:5;background:var(--surface);border-bottom:1px solid var(--line)}
+nav.toc .w{max-width:1120px;margin:0 auto;display:flex;gap:4px;overflow-x:auto;padding:0 12px;scrollbar-width:thin}
+nav.toc a{flex:none;padding:12px 10px;color:var(--muted);text-decoration:none;font:600 14px/1 var(--f-body);border-bottom:3px solid transparent;white-space:nowrap}
+nav.toc a:hover{color:var(--ink);border-color:var(--accent)}
+nav.toc b{font-family:var(--f-mono);font-weight:500;margin-right:5px;color:var(--accent)}
+main{max-width:1120px;margin:0 auto;padding:8px 16px 60px}
+section{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:22px 24px;margin:18px 0}
+h2{font:800 24px/1.15 var(--f-display);font-stretch:90%;margin:0 0 12px;display:flex;gap:10px;align-items:baseline}
+h2 .n{font:500 14px/1 var(--f-mono);color:var(--accent)}
+h3{font:700 18px/1.25 var(--f-display);margin:20px 0 8px}
+p{margin:8px 0}
+.lead{font-size:17px}
+.muted{color:var(--muted)}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:14px 0 4px}
+.kpi{border:1px solid var(--line);border-radius:8px;padding:12px 14px;background:var(--bg)}
+.kpi b{display:block;font:800 26px/1.1 var(--f-display);color:var(--accent)}
+.kpi span{font-size:14px;color:var(--muted)}
+.tw{overflow-x:auto;margin:10px 0;border:1px solid var(--line);border-radius:8px}
+table{border-collapse:collapse;width:100%;font-size:14.5px}
+th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{background:var(--bg);font-weight:700;white-space:nowrap}
+tr:last-child td{border-bottom:0}
+td.num,th.num{text-align:right;font-family:var(--f-mono);white-space:nowrap}
+.mono{font-family:var(--f-mono)}
+.note{background:var(--soft);border-left:4px solid var(--accent);border-radius:6px;padding:10px 14px;margin:12px 0}
+.warn{border-left-color:var(--bad)}
+.ok{border-left-color:var(--good)}
+figure{margin:12px 0}
+figure img{width:100%;height:auto;border:1px solid var(--line);border-radius:8px;background:#fff}
+figcaption{font-size:14px;color:var(--muted);margin-top:6px}
+.phases{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px;margin:12px 0}
+.ph{border:1px solid var(--line);border-radius:8px;padding:14px;background:var(--bg)}
+.ph .t{font:700 13px/1 var(--f-mono);color:var(--accent);letter-spacing:.06em;text-transform:uppercase}
+.ph h4{margin:6px 0 6px;font:700 17px/1.2 var(--f-display)}
+.ph p{font-size:14.5px;margin:4px 0}
+ol.steps{padding-left:22px}ol.steps li{margin:6px 0}
+ul{padding-left:22px}li{margin:4px 0}
+details{border:1px solid var(--line);border-radius:8px;margin:10px 0;background:var(--bg)}
+summary{cursor:pointer;padding:10px 14px;font-weight:700}
+details .tw{margin:0 10px 10px;background:var(--surface)}
+.tag{display:inline-block;white-space:nowrap;font:600 12px/1 var(--f-mono);padding:3px 7px;border-radius:20px;background:var(--bg);border:1px solid var(--line)}
+.tag.b{color:#c92a2a}.tag.s{color:#1971c2}.tag.l{color:#6741d9}
+footer{max-width:1120px;margin:0 auto 0;padding:14px 16px 32px;color:var(--muted);font-size:12.5px;border-top:1px solid var(--line)}
+@media (max-width:640px){section{padding:16px 14px}th,td{padding:7px 8px}table{font-size:13.5px}}
+@media print{nav.toc{display:none}section{break-inside:avoid-page;border:0;padding:8px 0}body{background:#fff}}
+</style>
+<script>try{const t=localStorage.getItem("pp-theme");if(t)document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+</head>
+<body>
+<header class="top"><div class="w">
+ <button type="button" class="thm" id="theme-btn" aria-label="Cambiar a formato claro u oscuro"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><span id="theme-lbl">Oscuro</span></button>
+ <div class="kick">Carretera Pedernales – Puerto Escondido · Gerencia de Ingeniería</div>
+ <h1>Metodología de investigación geotécnica</h1>
+ <p class="sub">Programa de investigaciones, ensayos, fuentes de materiales y criterios de CBR para el corredor de 43.348 km, conforme al R-011 y al M-014 del MOPC. Documento base para acordar el programa con el laboratorio y el proyectista. Complementa el PPD v6.4 y la Metodología de control GNSS v1.4; en geotecnia prevalece esta metodología.</p>
+ <div class="meta"><span>Versión 1.0 · 19/11/2026 · Coordenadas UTM 19N WGS84 (Norte, Este) · Elevaciones EGM2008</span><span class="by">Ing. Piter Bonilla · Gerente de Ingeniería</span></div>
+</div></header>
+<nav class="toc" aria-label="Contenido"><div class="w">
+ <a href="#s1"><b>01</b>Resumen</a><a href="#s2"><b>02</b>Normativa</a><a href="#s3"><b>03</b>Geología</a><a href="#s4"><b>04</b>Zonificación</a><a href="#s5"><b>05</b>Programa</a><a href="#s6"><b>06</b>Ensayos</a><a href="#s7"><b>07</b>CBR</a><a href="#s8"><b>08</b>Materiales</a><a href="#s9"><b>09</b>Especiales</a><a href="#s10"><b>10</b>Entregables</a><a href="#s11"><b>11</b>Cumplimiento</a><a href="#s12"><b>12</b>A acordar</a><a href="#s13"><b>13</b>Riesgos</a><a href="#s14"><b>14</b>Documentos</a>
+</div></nav>
+<main>
+
+<section id="s1"><h2><span class="n">01</span>Resumen</h2>
+<p class="lead">La investigación se hace <b>por unidades geotécnicas homogéneas</b>: ensayos rápidos en todo el corredor para clasificar y segmentar, y <b>CBR de laboratorio donde la norma lo exige y donde hace falta calibrar</b>. El DCP es el ensayo rápido de la subrasante existente; el SPT y las perforaciones con núcleo quedan para fundaciones, karst y roca. Las fuentes de materiales se evalúan por uso, con el Parque Nacional Sierra de Bahoruco como condición previa.</p>
+<div class="kpis">
+ <div class="kpi"><b>250 / 50 m</b><span>Sondeos manuales en terreno uniforme / errático (R-011)</span></div>
+ <div class="kpi"><b>≤ 2 por km</b><span>Calicatas: 4 por formación geológica (R-011)</span></div>
+ <div class="kpi"><b>1.50 / 2.00 m</b><span>Profundidad bajo subrasante en cortes / bajo terreno en rellenos</span></div>
+ <div class="kpi"><b>4 + 5</b><span>CBR y Proctor por cada suelo típico de préstamo (R-011)</span></div>
+ <div class="kpi"><b>35 %</b><span>De las muestras representativas con ensayos de laboratorio (R-011)</span></div>
+ <div class="kpi"><b>Semana 3</b><span>Primera entrega al proyectista: tramos y CBR estimado, con cierre de la Fase 0</span></div>
+</div>
+<div class="phases">
+ <div class="ph"><div class="t">E1 · semanas 1 – 3</div><h4>Reconocimiento y caracterización</h4><p>Geólogo en el recorrido, unidades geotécnicas, DCP, sondeos manuales y calicatas según el R-011, ensayos índice y fuentes candidatas.</p></div>
+ <div class="ph"><div class="t">E2 · semanas 3 – 6</div><h4>Calibración y materiales</h4><p>CBR y Proctor representativos, correlaciones locales, calidad de fuentes y balance corte – relleno.</p></div>
+ <div class="ph"><div class="t">E3A · semanas 1 – 6</div><h4>Riesgos que pueden cambiar el trazado</h4><p>Karst, escalón de la T6, cortes mayores de 5 m, puente y obras de arte principales, zonas inestables.</p></div>
+ <div class="ph"><div class="t">E3B · con el eje definido</div><h4>Investigación especial de diseño</h4><p>Perforaciones con SPT y núcleo, geofísica con comprobación directa, estabilidad de taludes y parámetros de fundación.</p></div>
+</div>
+</section>
+
+<section id="s2"><h2><span class="n">02</span>Alcance, normativa y responsabilidades</h2>
+<div class="tw"><table>
+<tr><th>Elemento</th><th>Definición</th></tr>
+<tr><td>Norma de investigación</td><td><b>R-011</b> · Criterios Básicos para Estudios Geotécnicos de Carreteras: programa de exploración, muestreo, ensayos, taludes, fundaciones y fuentes de materiales.</td></tr>
+<tr><td>Norma de materiales</td><td><b>M-014</b> · Especificaciones Generales para la Construcción de Carreteras: requisitos de subrasante mejorada, subbase, base, agregados y mezclas.</td></tr>
+<tr><td>Normas complementarias</td><td>R-012 (diseño geométrico), R-019 (drenaje), R-020 (manual ambiental), R-013 y R-017 (presentación de estudios y proyectos). Los métodos de ensayo son los AASHTO y ASTM del capítulo 06.</td></tr>
+<tr><td>Prelación</td><td>Especificaciones particulares del contrato con el MOPC, luego M-014 y R-011, luego esta metodología. Toda reducción del programa del R-011 se justifica por escrito y se somete a la aprobación del MOPC; no se presenta como cumplimiento automático.</td></tr>
+<tr><td>Responsabilidades</td><td>El Consorcio contrata y entrega la investigación geotécnica, por medio del laboratorio que designe. El proyectista propone la ubicación de los puntos especiales, usa los resultados y adopta los parámetros de diseño. La Gerencia de Ingeniería revisa el programa, los registros y los informes.</td></tr>
+<tr><td>Coordenadas</td><td>UTM 19N WGS84 (Norte, Este) y elevación EGM2008, como en la metodología GNSS. Estacionamiento referido al eje del PPD.</td></tr>
+</table></div>
+<div class="note">El R-011 distingue los <b>estudios preliminares</b>, que abarcan las variantes y preceden a la fijación del eje, del <b>estudio del proyecto</b>, con el trazado definido. Las etapas E1, E2 y E3A son preliminares; E3B es del proyecto.</div>
+</section>
+
+<section id="s3"><h2><span class="n">03</span>Geología y restricciones ambientales</h2>
+<div class="tw"><table>
+<tr><th>Condición</th><th>Lo conocido</th><th>Lo que debe confirmar la investigación</th></tr>
+<tr><td>Calizas</td><td>Calizas de la Unidad Aceitillar (Eoceno – Oligoceno inferior), según la hoja geológica Puerto Escondido 5870-I del Servicio Geológico Nacional</td><td>Grado de meteorización, fracturación, profundidad de la roca sana y excavabilidad</td></tr>
+<tr><td>Karst</td><td>Depresión cerrada de 24.9 ha entre 20+100 y 20+960, sin salida superficial (capítulo 07 del PPD)</td><td>Dolinas, cavidades, sumideros, infiltración y espesor del relleno arcilloso</td></tr>
+<tr><td>Suelos residuales</td><td>Arcillas rojas de alteración de la caliza en las mesetas</td><td>Plasticidad y expansión. Material potencialmente problemático hasta caracterizarlo; no se descarta ni se aprueba de antemano</td></tr>
+<tr><td>Vía existente</td><td>La obra es una reconstrucción: la subrasante es en gran parte la plataforma actual</td><td>Espesor y calidad de las capas existentes, humedad y drenaje</td></tr>
+<tr><td>Parque nacional</td><td>Entre 0+000 y 41+880 el eje queda dentro del polígono del PN Sierra de Bahoruco del KMZ del proyecto (sin certificar límites legales). La Ley 202-04 clasifica los parques nacionales en categoría II y excluye las explotaciones que alteren sus ecosistemas</td><td>Superposición del eje y la franja con el polígono legal oficial y su zona de amortiguamiento; permisos de MMARN / SINAP para calicatas, perforaciones y geofísica</td></tr>
+</table></div>
+<div class="note warn"><b>Fuentes de materiales:</b> no se consideran disponibles canteras ni préstamos nuevos dentro del parque sin confirmación legal y ambiental escrita. El programa supone, por orden: material de los cortes que resulte apto, fuentes comerciales existentes fuera del parque y préstamos externos autorizados.</div>
+</section>
+
+<section id="s4"><h2><span class="n">04</span>Zonificación geotécnica</h2>
+<p>El corredor se divide en <b>unidades geotécnicas homogéneas</b>: tramos con el mismo origen geológico, la misma clasificación de la subrasante y un comportamiento parecido en el DCP. Cada unidad tiene un código, sus estaciones de inicio y fin, su descripción y su CBR en sus tres formas (capítulo 07).</p>
+<ol class="steps">
+<li><b>Hipótesis inicial:</b> unidades trazadas por el geólogo con la hoja geológica, el MDT de referencia y el recorrido.</li>
+<li><b>Ajuste con E1:</b> el perfil del DCP, la clasificación AASHTO y SUCS y las calicatas confirman o parten cada unidad.</li>
+<li><b>Cierre con E2:</b> el CBR de laboratorio fija el CBR de diseño de cada unidad; una unidad con dispersión excesiva se divide.</li>
+</ol>
+<p>Las secciones se clasifican además por su posición: <b>vía existente</b>, <b>corte</b> (subrasante en material natural), <b>relleno</b> (subrasante en material traído) y <b>roca</b> (subrasante sobre caliza sana, donde el CBR deja de gobernar).</p>
+</section>
+
+<section id="s5"><h2><span class="n">05</span>Programa de investigaciones</h2>
+<h3>E1 · Reconocimiento y caracterización (semanas 1 – 3)</h3>
+<div class="tw"><table>
+<tr><th>Actividad</th><th>Criterio</th><th>Para qué</th></tr>
+<tr><td>Recorrido del geólogo</td><td>Todo el corredor y las variantes, con las caminatas de la Fase 0</td><td>Unidades, afloramientos, zonas inestables, fuentes candidatas</td></tr>
+<tr><td>DCP (ASTM D6951)</td><td>Sobre la vía existente, junto a cada sondeo manual y entre ellos donde el terreno cambie</td><td>Perfil de resistencia hasta 0.8 – 1.0 m y límites de capas. No sustituye al sondeo manual</td></tr>
+<tr><td>Sondeos manuales</td><td>Cada 250 m en terreno uniforme y cada 50 m en terreno errático, a lo largo y ancho del derecho de vía</td><td>Estratigrafía y muestras (R-011)</td></tr>
+<tr><td>Calicatas</td><td>4 por formación geológica, sin pasar de 2 por km</td><td>Perfil, muestras de volumen para Proctor y CBR, densidad en sitio</td></tr>
+<tr><td>Profundidad</td><td>1.50 m bajo la subrasante en cortes; 2.00 m bajo el terreno natural en rellenos; más profundo en suelos blandos, sueltos o saturados</td><td>Fundación del pavimento y de los rellenos</td></tr>
+<tr><td>Muestreo</td><td>Una muestra por estrato y al menos una por metro de profundidad</td><td>Ensayos índice</td></tr>
+<tr><td>Ensayos índice</td><td>Humedad, granulometría, límites y clasificación de las muestras representativas (35 %)</td><td>Agrupar en unidades y estimar el CBR</td></tr>
+<tr><td>Fuentes candidatas</td><td>Fuentes comerciales fuera del parque y cortes con material posiblemente aprovechable</td><td>Lista para E2</td></tr>
+</table></div>
+<p class="muted">Entrega de E1: perfil geotécnico preliminar, unidades homogéneas y CBR estimado por unidad, con cada valor marcado como medido, estimado o pendiente.</p>
+
+<h3>E2 · Calibración y fuentes de materiales (semanas 3 – 6)</h3>
+<div class="tw"><table>
+<tr><th>Actividad</th><th>Criterio</th></tr>
+<tr><td>Proctor y CBR de la subrasante</td><td>Muestras representativas de cada unidad homogénea, ensayadas en las condiciones de diseño (capítulo 07)</td></tr>
+<tr><td>Préstamos</td><td>Exploración en cuadrícula de unos 30 m; 4 CBR y 5 Proctor por cada suelo típico</td></tr>
+<tr><td>Expansión</td><td>En arcillas residuales y en todo suelo con IP alto</td></tr>
+<tr><td>Calidad de fuentes</td><td>Ensayos por uso (capítulo 08)</td></tr>
+<tr><td>Correlaciones</td><td>Ajuste local DCP – índices – CBR por unidad (capítulo 07)</td></tr>
+<tr><td>Balance de materiales</td><td>Destino de los materiales de corte, volúmenes aprovechables, distancias de acarreo</td></tr>
+</table></div>
+<p class="muted">Entrega de E2: CBR de diseño por unidad, aptitud de cada material por uso y balance corte – relleno por tramo.</p>
+
+<h3>E3A · Riesgos que pueden cambiar el trazado (en paralelo con E1 – E2)</h3>
+<p>Reconocimiento del karst, inspección del puente y de las obras de arte principales, identificación de los cortes mayores de 5 m y de las zonas blandas o inestables. El R-011 pide al menos una perforación a máquina por obra de arte prevista en los estudios preliminares, con profundidad según su tipo y magnitud, y admite geofísica complementaria. Su objetivo es detectar a tiempo lo que pueda cambiar la elección del eje.</p>
+
+<h3>E3B · Investigación especial de diseño (con el eje definido)</h3>
+<p>Perforaciones con SPT y núcleo de roca en fundaciones, geofísica con perforaciones de comprobación en el karst, levantamiento de discontinuidades y estabilidad de los cortes, y parámetros para muros y estructuras (capítulo 09).</p>
+</section>
+
+<section id="s6"><h2><span class="n">06</span>Ensayos de campo y laboratorio</h2>
+<div class="tw"><table>
+<tr><th>Ensayo</th><th>Norma</th><th>Qué decide</th></tr>
+<tr><td>Penetrómetro dinámico de cono (DCP)</td><td class="mono">ASTM D6951</td><td>Resistencia in situ y límites de capas; segmentación del corredor</td></tr>
+<tr><td>Densidad en sitio (cono de arena)</td><td class="mono">AASHTO T 191</td><td>Estado de compactación de la plataforma existente</td></tr>
+<tr><td>Humedad natural</td><td class="mono">AASHTO T 265</td><td>Estado del suelo frente a la humedad óptima</td></tr>
+<tr><td>Granulometría de suelos</td><td class="mono">AASHTO T 88</td><td>Finos, gradación y D60</td></tr>
+<tr><td>Límite líquido y límite plástico</td><td class="mono">AASHTO T 89 · T 90</td><td>Plasticidad e IP</td></tr>
+<tr><td>Clasificación</td><td class="mono">AASHTO M 145 · ASTM D2487</td><td>Grupo AASHTO y SUCS de cada muestra</td></tr>
+<tr><td>Proctor modificado</td><td class="mono">AASHTO T 180</td><td>Densidad máxima y humedad óptima</td></tr>
+<tr><td>CBR de laboratorio</td><td class="mono">AASHTO T 193</td><td>Soporte en condiciones especificadas, con expansión</td></tr>
+<tr><td>Expansión y colapso</td><td class="mono">ASTM D4546</td><td>Riesgo de hinchamiento</td></tr>
+<tr><td>Peso unitario suelto</td><td class="mono">AASHTO T 19</td><td>Factor volumétrico natural – compactado</td></tr>
+<tr><td>Desgaste Los Ángeles</td><td class="mono">AASHTO T 96</td><td>Resistencia a la abrasión del agregado</td></tr>
+<tr><td>Sanidad en sulfato de sodio</td><td class="mono">AASHTO T 104</td><td>Durabilidad del agregado</td></tr>
+<tr><td>Densidad y absorción</td><td class="mono">AASHTO T 85 · T 84</td><td>Calidad de la caliza como agregado</td></tr>
+<tr><td>Caras fracturadas</td><td class="mono">ASTM D5821</td><td>Requisito de grava triturada</td></tr>
+<tr><td>Equivalente de arena</td><td class="mono">AASHTO T 176</td><td>Limpieza del agregado fino</td></tr>
+<tr><td>Daño por humedad en mezcla</td><td class="mono">AASHTO T 283</td><td>Adherencia del agregado al asfalto</td></tr>
+<tr><td>SPT</td><td class="mono">ASTM D1586</td><td>Resistencia en profundidad para fundaciones</td></tr>
+<tr><td>Perforación con núcleo y RQD</td><td class="mono">ASTM D2113 · D6032</td><td>Calidad de la roca</td></tr>
+<tr><td>Compresión simple en roca</td><td class="mono">ASTM D7012</td><td>Resistencia de la roca intacta</td></tr>
+<tr><td>Resistividad eléctrica</td><td class="mono">ASTM D6431</td><td>Detección de cavidades y contactos en el karst</td></tr>
+</table></div>
+<div class="note">El <b>CBR saturado</b> exige preparar la muestra con su Proctor y sumergirla 96 horas antes de penetrarla: cada CBR toma alrededor de una semana. Se ensaya por lotes en paralelo, y por eso E2 empieza en cuanto E1 entrega las primeras unidades.</div>
+</section>
+
+<section id="s7"><h2><span class="n">07</span>Política de CBR, DCP y correlaciones</h2>
+<h3>Tres valores distintos, siempre separados</h3>
+<div class="tw"><table>
+<tr><th>Valor</th><th>Origen</th><th>Uso</th></tr>
+<tr><td><b>CBR estimado</b></td><td>DCP o ensayos índice, con las correlaciones de este capítulo</td><td>Segmentar el corredor y elegir qué muestras van a CBR. Nunca es valor de aceptación</td></tr>
+<tr><td><b>CBR de laboratorio</b></td><td>AASHTO T 193, saturado, a la densidad y la humedad especificadas</td><td>Valor medido de cada muestra</td></tr>
+<tr><td><b>CBR de diseño</b></td><td>Adoptado por unidad a partir de los CBR de laboratorio</td><td>Dimensionar el pavimento; lo justifica y lo adopta el proyectista</td></tr>
+</table></div>
+
+<h3>Dónde se mide directo y dónde se estima</h3>
+<div class="tw"><table>
+<tr><th>Situación</th><th>Tratamiento</th></tr>
+<tr><td>Muestras de reconocimiento</td><td>Ensayos índice y clasificación</td></tr>
+<tr><td>Unidad homogénea de subrasante</td><td>CBR de laboratorio representativos de la unidad, en el 35 % de muestras del R-011</td></tr>
+<tr><td>Suelo típico de préstamo</td><td>4 CBR y 5 Proctor (R-011)</td></tr>
+<tr><td>Cambio de formación o de clasificación</td><td>Nueva unidad, nueva calibración</td></tr>
+<tr><td>Suelo blando, expansivo o saturado</td><td>CBR directo y ensayos específicos</td></tr>
+<tr><td>Subbase y base</td><td>CBR directo según el M-014; no se correlaciona</td></tr>
+<tr><td>Subrasante sobre caliza sana</td><td>Se registra como roca; el CBR no gobierna</td></tr>
+</table></div>
+
+<h3>Correlaciones de partida</h3>
+<p>Son fórmulas publicadas, útiles para ordenar y no para aceptar. El DCP mide el <b>CBR en sitio</b>, con la humedad del día, que en general no coincide con el CBR de laboratorio saturado.</p>
+<div class="tw"><table>
+<tr><th>Fuente</th><th>Fórmula</th><th>Aplica a</th></tr>
+<tr><td>DCP · ASTM D6951</td><td class="mono">CBR = 292 / DPI<sup>1.12</sup></td><td>Gravas, arenas y limos; DPI en mm por golpe</td></tr>
+<tr><td>DCP · ASTM D6951</td><td class="mono">CBR = 1 / (0.017019 · DPI)<sup>2</sup></td><td>Arcillas CL con CBR menor de 10</td></tr>
+<tr><td>DCP · ASTM D6951</td><td class="mono">CBR = 1 / (0.002871 · DPI)</td><td>Arcillas CH</td></tr>
+<tr><td>Índices · NCHRP 1-37A</td><td class="mono">CBR = 75 / (1 + 0.728 · wPI)<br>wPI = P200 (fracción) × IP</td><td>Suelos con más de 12 % de finos y plasticidad</td></tr>
+<tr><td>Índices · NCHRP 1-37A</td><td class="mono">CBR = 28.09 · D60<sup>0.358</sup></td><td>Granulares no plásticos; D60 en mm</td></tr>
+</table></div>
+
+<h3>Calibración local</h3>
+<ol class="steps">
+<li>En cada unidad, los puntos con CBR de laboratorio llevan también DCP, granulometría, límites, humedad y Proctor: forman pares comparables.</li>
+<li>Con esos pares se ajusta una relación propia por unidad o por grupo de suelos, y se declara su error.</li>
+<li>Los CBR de calibración se ensayan en las mismas condiciones de compactación, humedad, inmersión y sobrecarga; si no, los pares no son comparables.</li>
+<li>El CBR estimado de los demás puntos se usa para confirmar la homogeneidad de la unidad y elegir dónde medir más.</li>
+</ol>
+
+<h3>Del CBR al diseño</h3>
+<p>El CBR de diseño de cada unidad se toma sobre los CBR de laboratorio con un percentil acorde con el tránsito, criterio que acuerda el proyectista con la Gerencia. En AASHTO 1993 el parámetro de diseño de la subrasante es el <b>módulo resiliente</b>; si se obtiene del CBR, la relación usada se declara como estimación empírica. El enfoque mecanicista – empírico (NCHRP 1-37A) es otro método y no se mezcla con el de 1993.</p>
+</section>
+
+<section id="s8"><h2><span class="n">08</span>Canteras, préstamos y balance corte – relleno</h2>
+<p>Cada fuente se aprueba <b>por uso</b>: que sirva para terraplén no la hace apta para base, hormigón o asfalto.</p>
+<div class="tw"><table>
+<tr><th>Uso</th><th>Ensayos</th><th>Requisitos del M-014</th></tr>
+<tr><td>Terraplén</td><td>Granulometría, límites, clasificación, Proctor, CBR, expansión, densidad natural y factor volumétrico</td><td>Según la sección de terraplenes del M-014</td></tr>
+<tr><td>Subrasante mejorada</td><td>Los de terraplén</td><td>Todo pasa el tamiz de 3″; pasa No. 200 ≤ 15 %; IP ≤ 6; LL ≤ 30</td></tr>
+<tr><td>Subbase granular</td><td>Granulometría en su huso, límites, CBR, Los Ángeles</td><td>CBR ≥ 30 %; Los Ángeles ≤ 50 %; LL ≤ 27; IP ≤ 6</td></tr>
+<tr><td>Base granular</td><td>Los de subbase y caras fracturadas</td><td>CBR ≥ 80 %; Los Ángeles ≤ 45 %; LL ≤ 25; IP ≤ 4; con grava triturada, al menos 50 % del retenido en 3/8″ con una cara fracturada</td></tr>
+<tr><td>Agregado para hormigón</td><td>Granulometría, Los Ángeles, sanidad, densidad y absorción</td><td>Según el M-014 y las especificaciones particulares</td></tr>
+<tr><td>Agregado para asfalto</td><td>Los de hormigón, equivalente de arena y daño por humedad</td><td>Equivalente de arena del agregado fino ≥ 55 %</td></tr>
+</table></div>
+<div class="note"><b>Caliza de los cortes:</b> los cortes del eje y de las variantes (T9, T10 y T11 entre ellas) son material <b>potencial</b>, no aprobado. Su aprovechamiento se decide con cartografía litológica, grado de meteorización, muestras representativas, Los Ángeles, sanidad, absorción y densidad, y petrografía donde el uso lo pida. Una caliza blanda o absorbente puede servir para terraplén y no para base o agregado.</div>
+<h3>Ficha de cada fuente</h3>
+<p>Ubicación (Norte, Este), situación frente al parque y permisos, volumen explotable estimado, espesor de descapote, factor volumétrico, resultados por uso, aptitud aprobada por uso, distancia de acarreo al corredor y fotografías.</p>
+<h3>Balance corte – relleno</h3>
+<p>Por tramo: volumen de corte por tipo de material, fracción aprovechable por uso, volumen de relleno y de capas granulares requerido, faltante que debe venir de fuentes externas y sobrante que va a botadero autorizado. El R-011 pide identificar el destino de los materiales de corte, la disponibilidad de préstamos, la facilidad de explotación y las distancias de transporte.</p>
+</section>
+
+<section id="s9"><h2><span class="n">09</span>Investigaciones especiales</h2>
+<div class="tw"><table>
+<tr><th>Sitio</th><th>Condición</th><th>Investigación</th></tr>
+<tr><td>Depresión kárstica · 20+100 – 20+960</td><td>Cuenca cerrada sin salida superficial; el eje va dentro y la Variante T9 por el borde norte</td><td>Cartografía de dolinas y fracturas, resistividad eléctrica y perforaciones de comprobación en las anomalías. La geofísica sola no demuestra la ausencia de cavidades. Ensayos de infiltración</td></tr>
+<tr><td>Variante T6 · valle 10+300 – 11+230</td><td>Escalón de unos 50 m y estructura sobre una cuenca de unos 16.7 km²</td><td>Material del escalón, estrato competente para fundar, estabilidad de cortes y rellenos</td></tr>
+<tr><td>Cortes mayores de 5 m · T9, T10, T11 y eje</td><td>Cortes conceptuales de hasta 25 m sobre el MDT de referencia</td><td>Cartografía de detalle, discontinuidades (orientación, espaciamiento, relleno), meteorización, agua, perforación donde la roca no aflore; estabilidad según el capítulo del R-011 para cortes</td></tr>
+<tr><td>Rellenos altos · T5 y T8</td><td>Rellenos conceptuales de hasta 18 m y 14.7 m</td><td>Capacidad de apoyo, asentamiento y estabilidad del relleno y su fundación</td></tr>
+<tr><td>Puente a ampliar · Las Damas, cerca de 43+240</td><td>Estructura existente; cauce modelado C-127 en 43+205</td><td>Inspección de estribos y apoyos, perforaciones con SPT y núcleo en los puntos que fije el proyectista, socavación</td></tr>
+<tr><td>Alcantarillas de cajón mayores</td><td>Cruces con área de aporte grande</td><td>Capacidad de apoyo y asentamiento; perforación según su tipo y magnitud (R-011)</td></tr>
+<tr><td>Muros de contención</td><td>Según la geometría final</td><td>Parámetros de resistencia del suelo de fundación y del relleno</td></tr>
+</table></div>
+</section>
+
+<section id="s10"><h2><span class="n">10</span>Entregables</h2>
+<h3>Ficha por punto de investigación</h3>
+<div class="tw"><table>
+<tr><th>Campo</th><th>Contenido</th></tr>
+<tr><td>Código</td><td>Tipo y estación: <span class="mono">SM</span> sondeo manual, <span class="mono">CA</span> calicata, <span class="mono">DCP</span>, <span class="mono">PM</span> perforación a máquina, <span class="mono">GF</span> línea geofísica, <span class="mono">FM</span> fuente de material. Ejemplo: <span class="mono">CA-12+250</span></td></tr>
+<tr><td>Ubicación</td><td>Estación, desplazamiento del eje, Norte y Este UTM 19N WGS84, elevación EGM2008 y precisión del equipo con que se midió</td></tr>
+<tr><td>Investigación</td><td>Tipo, fecha, profundidad alcanzada, motivo de rechazo si lo hubo</td></tr>
+<tr><td>Estratigrafía</td><td>Espesor, descripción y clasificación de cada estrato; nivel freático</td></tr>
+<tr><td>Resultados</td><td>Campo y laboratorio, cada valor marcado como <b>medido</b>, <b>estimado</b> o <b>pendiente</b></td></tr>
+<tr><td>Interpretación</td><td>Unidad geotécnica asignada y grado de confiabilidad</td></tr>
+<tr><td>Fotografías</td><td>Georreferenciadas, con escala</td></tr>
+</table></div>
+<h3>Paquete de entrega</h3>
+<ul>
+<li>Base de datos de puntos y resultados en CSV, con los campos de la ficha, y KMZ para el mapa.</li>
+<li>Registros de campo e informes de laboratorio en PDF, con la firma del responsable.</li>
+<li>Perfil geotécnico longitudinal con las unidades homogéneas y el CBR estimado, de laboratorio y de diseño.</li>
+<li>Fichas de fuentes de materiales y matriz de aptitud por uso.</li>
+<li>Balance corte – relleno por tramo.</li>
+<li>Informes de las investigaciones especiales.</li>
+<li>Matriz de cumplimiento del capítulo 11, actualizada.</li>
+</ul>
+<p class="muted">Los puntos y unidades se cargan en el PPD como capa propia, consultable en planta, perfil y 3D.</p>
+</section>
+
+<section id="s11"><h2><span class="n">11</span>Matriz de cumplimiento MOPC</h2>
+<p>Requisito, referencia, actividad de esta metodología y estado. Las secciones se confirman contra el texto oficial antes de contratar el programa.</p>
+<div class="tw"><table>
+<tr><th>Requisito</th><th>Referencia</th><th>Actividad</th><th>Estado</th></tr>
+<tr><td>Estudios preliminares sobre las variantes, antes de fijar el eje</td><td>R-011</td><td>E1, E2 y E3A</td><td>Programado</td></tr>
+<tr><td>Al menos una perforación a máquina por obra de arte prevista en los estudios preliminares</td><td>R-011, 3.4.1.3</td><td>E3A</td><td>Programado</td></tr>
+<tr><td>Sondeos manuales cada 250 m (uniforme) y cada 50 m (errático)</td><td>R-011, 4.2.3.1.1</td><td>E1</td><td>Programado</td></tr>
+<tr><td>Calicatas: 4 por formación, máximo 2 por km</td><td>R-011, 4.2.3.1.1</td><td>E1</td><td>Programado</td></tr>
+<tr><td>Reconstrucción: exploración a lo largo y ancho del derecho de vía</td><td>R-011, capítulo 5</td><td>E1</td><td>Programado</td></tr>
+<tr><td>Una muestra por estrato y al menos una por metro</td><td>R-011, capítulo 5</td><td>E1</td><td>Programado</td></tr>
+<tr><td>Profundidad: 1.50 m bajo subrasante en cortes; 2.00 m bajo terreno en rellenos</td><td>R-011, capítulo 5</td><td>E1</td><td>Programado</td></tr>
+<tr><td>Ensayos sobre el 35 % de las muestras representativas: granulometría, límites, clasificación, humedad, compactación, CBR y capilaridad</td><td>R-011, 5.5.1</td><td>E1 y E2</td><td>Programado</td></tr>
+<tr><td>Préstamos: 4 CBR y 5 compactaciones por suelo típico</td><td>R-011, 4.2</td><td>E2</td><td>Programado</td></tr>
+<tr><td>Cortes mayores de 5 m: estudio específico</td><td>R-011</td><td>E3A y E3B</td><td>Programado</td></tr>
+<tr><td>Fundaciones de puentes y alcantarillas</td><td>R-011</td><td>E3A y E3B</td><td>Programado</td></tr>
+<tr><td>Destino de cortes, préstamos, explotación y acarreo</td><td>R-011</td><td>E2</td><td>Programado</td></tr>
+<tr><td>Requisitos de subrasante mejorada, subbase y base</td><td>M-014, 3.1.2.1</td><td>E2</td><td>Programado</td></tr>
+<tr><td>Equivalente de arena del agregado fino para asfalto ≥ 55 %</td><td>M-014</td><td>E2</td><td>Programado</td></tr>
+<tr><td>Modificaciones al programa aprobadas por el MOPC</td><td>R-011</td><td>Uso de correlaciones y cualquier ajuste de frecuencias</td><td>A someter</td></tr>
+<tr><td>Restricciones ambientales y manejo de materiales</td><td>R-020 · Ley 202-04</td><td>Capítulos 03 y 08</td><td>A confirmar con MMARN</td></tr>
+</table></div>
+</section>
+
+<section id="s12"><h2><span class="n">12</span>Puntos a acordar</h2>
+<p>Con el laboratorio y el proyectista, antes de iniciar E1.</p>
+<ol class="steps">
+<li>Laboratorio que ejecuta el programa, su capacidad de CBR en paralelo y los plazos de cada lote.</li>
+<li>Permisos de MMARN / SINAP para calicatas, perforaciones y geofísica dentro del parque, y la restitución de cada sitio.</li>
+<li>Ubicación de las perforaciones del puente, los cajones mayores y los cortes, propuesta por el proyectista.</li>
+<li>Criterio de terreno errático para pasar de 250 m a 50 m.</li>
+<li>Condiciones del CBR de laboratorio: densidad de ensayo, inmersión y sobrecarga.</li>
+<li>Percentil del CBR de diseño por unidad y relación con el módulo resiliente.</li>
+<li>Uso de las correlaciones locales y su presentación al MOPC.</li>
+<li>Formato de la base de datos y de los registros, y frecuencia de entregas parciales.</li>
+</ol>
+</section>
+
+<section id="s13"><h2><span class="n">13</span>Riesgos y mitigación</h2>
+<div class="tw"><table>
+<tr><th>Riesgo</th><th>Efecto</th><th>Mitigación</th></tr>
+<tr><td>Permiso del parque tardío</td><td>E1 no empieza a tiempo</td><td>Solicitud al inicio; empezar por la vía existente y por las fuentes fuera del parque</td></tr>
+<tr><td>Roca a poca profundidad</td><td>Rechazo del DCP y del sondeo manual</td><td>Registrar el rechazo como dato; calicata con equipo; la sección pasa a «roca»</td></tr>
+<tr><td>Plazo del CBR saturado</td><td>CBR de diseño tarde para el pavimento</td><td>Lotes en paralelo; E2 empieza con las primeras unidades de E1</td></tr>
+<tr><td>Dispersión alta en una unidad</td><td>CBR de diseño poco confiable</td><td>Dividir la unidad y medir más CBR</td></tr>
+<tr><td>Correlación tomada como valor de aceptación</td><td>Pavimento con soporte sobreestimado</td><td>Tres valores siempre separados (capítulo 07)</td></tr>
+<tr><td>Caliza de corte no apta</td><td>Faltante de material y más acarreo</td><td>Ensayos por uso en E2; fuentes externas identificadas desde E1</td></tr>
+<tr><td>Cavidades no detectadas en el karst</td><td>Hundimientos de la plataforma</td><td>Geofísica más perforaciones de comprobación; tratamiento definido por el proyectista</td></tr>
+<tr><td>Arcillas expansivas</td><td>Deformación del pavimento</td><td>Expansión en E2; mejoramiento o sustitución de la subrasante</td></tr>
+<tr><td>Lluvias</td><td>Humedad de campo fuera de lo representativo</td><td>Registrar la humedad natural con cada DCP; calibrar con CBR saturado</td></tr>
+</table></div>
+</section>
+
+<section id="s14"><h2><span class="n">14</span>Documentos de referencia</h2>
+<p>Reglamentos oficiales del MOPC para carreteras, caminos y puentes.</p>
+<div class="tw"><table>
+<tr><th>Código</th><th>Documento</th><th>Uso en esta metodología</th><th>Descarga</th></tr>
+<tr><td><b>R-011</b></td><td>Criterios Básicos para Estudios Geotécnicos de Carreteras</td><td>Norma central del programa</td><td><a href="https://portalweb.mopc.gob.do/media/1946/r-011.pdf" target="_blank" rel="noopener">PDF</a></td></tr>
+<tr><td><b>M-014</b></td><td>Especificaciones Generales para la Construcción de Carreteras</td><td>Requisitos de materiales</td><td><a href="https://portalweb.mopc.gob.do/media/1949/r-014.pdf" target="_blank" rel="noopener">PDF</a></td></tr>
+<tr><td>R-012</td><td>Diseño geométrico de carreteras</td><td>Coordinación de trazado y geotecnia</td><td rowspan="5"><a href="https://www.mopc.gob.do/servicios/adquisici%C3%B3n-y-descarga-de-los-reglamentos-para-carreteras-caminos-y-puentes" target="_blank" rel="noopener">Repositorio de reglamentos</a></td></tr>
+<tr><td>R-013</td><td>Presentación de propuestas de estudios y proyectos</td><td>Forma del informe</td></tr>
+<tr><td>R-017</td><td>Presentación de proyectos viales</td><td>Forma del informe</td></tr>
+<tr><td>R-019</td><td>Diseño de sistemas de drenaje en carreteras</td><td>Drenaje superficial y subterráneo</td></tr>
+<tr><td>R-020</td><td>Manual ambiental para diseño y construcción de proyectos viales</td><td>Restricciones ambientales y materiales</td></tr>
+</table></div>
+</section>
+</main>
+<footer>v1.0 · 19/11/2026 · Ing. Piter Bonilla, Gerencia de Ingeniería · Consorcio Avance del Sur</footer>
+<script>(()=>{const b=document.getElementById("theme-btn"),l=document.getElementById("theme-lbl");const dk=()=>{const a=document.documentElement.getAttribute("data-theme");return a?a==="dark":matchMedia("(prefers-color-scheme: dark)").matches};const s=()=>{l.textContent=dk()?"Claro":"Oscuro"};s();b.onclick=()=>{const n=dk()?"light":"dark";document.documentElement.setAttribute("data-theme",n);try{localStorage.setItem("pp-theme",n)}catch(e){}s()};try{matchMedia("(prefers-color-scheme: dark)").addEventListener("change",s)}catch(e){}})();</script>
+</body>
+</html>
