@@ -80,7 +80,7 @@ footer{max-width:1120px;margin:0 auto 0;padding:14px 16px 32px;color:var(--muted
  <div class="kick">Carretera Pedernales – Puerto Escondido · Gerencia de Ingeniería</div>
  <h1>Metodología de control geodésico GNSS</h1>
  <p class="sub">Marco de referencia, bases fijas y puntos de control para el levantamiento LiDAR y fotogramétrico del corredor de 43.348 km. Documento de trabajo para acordar el método con el proyectista antes de H5. Complementa la <a href="https://visualcrp.com/secc/PPD.html" target="_blank" rel="noopener">Plataforma Dinámica de Ingeniería (PPD)</a> y la <a href="https://visualcrp.com/secc/GEO.html" target="_blank" rel="noopener">Metodología de investigación geotécnica</a>, en su versión vigente publicada; en geomática prevalece esta metodología.</p>
- <div class="meta"><span>Versión 1.6 · 19/11/2026 · Coordenadas UTM 19N WGS84 (Norte, Este) · Elevaciones EGM2008</span><span class="by">Ing. Piter Bonilla · Gerente de Ingeniería</span></div>
+ <div class="meta"><span>Versión 1.6 · 20/11/2026 · Coordenadas UTM 19N WGS84 (Norte, Este) · Elevaciones EGM2008</span><span class="by">Ing. Piter Bonilla · Gerente de Ingeniería</span></div>
 </div></header>
 <nav class="toc" aria-label="Contenido"><div class="w">
  <a href="#s1"><b>01</b>Resumen</a><a href="#s2"><b>02</b>Marco</a><a href="#s3"><b>03</b>CORS</a><a href="#s4"><b>04</b>Red</a><a href="#s5"><b>05</b>Bases</a><a href="#s6"><b>06</b>Fase 1</a><a href="#s7"><b>07</b>Fase 2</a><a href="#s8"><b>08</b>Fase 3</a><a href="#s9"><b>09</b>Vertical</a><a href="#s10"><b>10</b>Calidad</a><a href="#s11"><b>11</b>Entregables</a><a href="#s12"><b>12</b>Programa</a><a href="#s13"><b>13</b>A acordar</a><a href="#s14"><b>14</b>Riesgos</a>
@@ -113,7 +113,7 @@ footer{max-width:1120px;margin:0 auto 0;padding:14px 16px 32px;color:var(--muted
 <tr><td>Altura</td><td>Elipsoidal en el procesamiento, referida a las alturas elipsoidales de las CORS; ortométrica con EGM2008 (malla de 1′ × 1′) en los entregables (capítulo 09)</td></tr>
 <tr><td>Factor de escala</td><td>Se reporta el factor combinado (cuadrícula y altura) por base y por punto, para pasar de cuadrícula a terreno cuando el diseño lo requiera</td></tr>
 </table></div>
-<div class="note warn"><b>Época de las CORS.</b> La tabla oficial disponible de las coordenadas de las CORS es del 31/03/2016, en IGS08. Con el movimiento de la placa del Caribe (del orden de 1 – 2 cm por año), las estaciones se han desplazado del orden de 10 – 20 cm desde entonces. El procesamiento debe usar las coordenadas y velocidades actuales de cada CORS y llevarlas a la época del proyecto. Si se usa la tabla de 2016 sin actualizar, todo el levantamiento hereda ese desfase.</div>
+<div class="note warn"><b>Época de las CORS.</b> La tabla oficial disponible de las coordenadas de las CORS es del 31/03/2016, en IGS08. Con el movimiento de la placa del Caribe (del orden de 1 – 2 cm por año), las estaciones se han desplazado del orden de 10 – 20 cm desde entonces. El procesamiento debe usar las coordenadas y velocidades actuales de cada CORS y llevarlas a la época del proyecto. Si se usa la tabla de 2016 sin actualizar, todo el levantamiento hereda ese desfase.</div><div class="note"><b>Nota · conversación con Trimble (20/11/2026).</b> Alexander Holsteinson, de Trimble, informó que el marco de referencia actual de las CORS de la República Dominicana es <b>ITRF2008, época 2016.4344</b>. Si se confirma, la tabla de 2016 en IGS08 corresponde al marco vigente de la red; el riesgo pasa a ser mezclar ese marco con soluciones a la época de observación (OPUS en ITRF2014 o ITRF2020, PPP o RTX en ITRF2020), que difieren del orden de 10 – 20 cm y se transforman a ITRF2008 en la época 2016.4344 antes de combinarse. Es información verbal: la certificación escrita de BARA, RDPE y FCNB, con su marco y su época, la confirma antes del ajuste definitivo.</div>
 </section>
 
 <section id="s3"><h2><span class="n">03</span>Estaciones de referencia (CORS)</h2>
@@ -332,7 +332,7 @@ footer{max-width:1120px;margin:0 auto 0;padding:14px 16px 32px;color:var(--muted
 </table></div>
 </section>
 </main>
-<footer>v1.6 · 19/11/2026 · Ing. Piter Bonilla, Gerencia de Ingeniería · Consorcio Avance del Sur</footer>
+<footer>v1.7 · 20/11/2026 · Ing. Piter Bonilla, Gerencia de Ingeniería · Consorcio Avance del Sur</footer>
 <script>(()=>{const b=document.getElementById("theme-btn"),l=document.getElementById("theme-lbl");const dk=()=>{const a=document.documentElement.getAttribute("data-theme");return a?a==="dark":matchMedia("(prefers-color-scheme: dark)").matches};const s=()=>{l.textContent=dk()?"Claro":"Oscuro"};s();b.onclick=()=>{const n=dk()?"light":"dark";document.documentElement.setAttribute("data-theme",n);try{localStorage.setItem("pp-theme",n)}catch(e){}s()};try{matchMedia("(prefers-color-scheme: dark)").addEventListener("change",s)}catch(e){}})();</script>
 </body>
 </html>
